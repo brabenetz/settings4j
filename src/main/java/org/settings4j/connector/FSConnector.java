@@ -18,6 +18,7 @@ package org.settings4j.connector;
 
 import java.io.UnsupportedEncodingException;
 
+import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.FSContentResolver;
 
 public class FSConnector extends AbstractConnector {
@@ -89,5 +90,10 @@ public class FSConnector extends AbstractConnector {
     public void setRootFolderPath(String rootFolderPath) {
         fsContentResolver.setRootFolderPath(rootFolderPath);
     }
+
+    public void setContentResolver(ContentResolver contentResolver) {
+        LOG.warn("A ContentResolver is not used by the FSConnector");
+    }
+    
     
 }
