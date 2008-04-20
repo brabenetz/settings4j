@@ -18,6 +18,7 @@ package org.settings4j.connector;
 
 import java.io.UnsupportedEncodingException;
 
+import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 
 public class ClasspathConnector extends AbstractConnector {
@@ -76,4 +77,7 @@ public class ClasspathConnector extends AbstractConnector {
         this.charset = charset;
     }
 
+    public void setContentResolver(ContentResolver contentResolver) {
+        LOG.warn("A ContentResolver is not used by the ClasspathConnector");
+    }
 }
