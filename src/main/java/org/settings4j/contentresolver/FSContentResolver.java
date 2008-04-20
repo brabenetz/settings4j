@@ -34,7 +34,7 @@ public class FSContentResolver implements ContentResolver {
     private File rootFolder;
 
     public void addContentResolver(ContentResolver contentResolver) {
-        throw new IllegalStateException("FSContentResolver cannot add other ContentResolvers");
+        throw new UnsupportedOperationException("FSContentResolver cannot add other ContentResolvers");
     }
 
     public byte[] getContent(String key) {

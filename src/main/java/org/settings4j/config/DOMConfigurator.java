@@ -742,7 +742,7 @@ public class DOMConfigurator {
                   return Boolean.FALSE;
                 }
             } else {
-                throw new IllegalArgumentException("Expected a value from Type " + clazz);
+                throw new UnsupportedOperationException("The following Type is not supported now: " + clazz + "; found value: " + value);
             }
         }
     }

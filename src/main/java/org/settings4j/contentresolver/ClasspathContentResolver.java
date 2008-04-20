@@ -34,7 +34,7 @@ public class ClasspathContentResolver implements ContentResolver {
     
     
     public void addContentResolver(ContentResolver contentResolver) {
-        throw new IllegalStateException("ClasspathContentResolver cannot add other ContentResolvers");
+        throw new UnsupportedOperationException("ClasspathContentResolver cannot add other ContentResolvers");
     }
 
     public byte[] getContent(String key) {
