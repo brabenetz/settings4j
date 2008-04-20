@@ -20,7 +20,6 @@
 
 	<connector name="FSConnector"
 		class="org.settings4j.connector.FSConnector">
-		<contentResolver-ref ref="DefaultContentResolver" />
 	</connector>
 
 	<settings name="com.mycompany.myapp" >
@@ -30,19 +29,5 @@
 	<root>
 		<connector-ref ref="FSConnector" readonly="true" />
 	</root>
-
-	<contentResolver name="DefaultContentResolver"
-		class="org.settings4j.contentresolver.UnionContentResolver">
-		<contentResolver-ref ref="FSContentResolver" />
-		<contentResolver-ref ref="ClasspathContentResolver" />
-	</contentResolver>
-
-	<contentResolver name="FSContentResolver"
-		class="org.settings4j.contentresolver.FSContentResolver">
-	</contentResolver>
-
-	<contentResolver name="ClasspathContentResolver"
-		class="org.settings4j.contentresolver.ClasspathContentResolver">
-	</contentResolver>
 
 </settings4j:configuration>
