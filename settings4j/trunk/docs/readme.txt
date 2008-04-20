@@ -1,5 +1,5 @@
-Weiter infos:
-https://sourceforge.net/projects/settings4j/
+More infos:
+http://settings4j.wiki.sourceforge.net/
 http://www.settings4j.org/
 
 When I make a Project, I must decide where the configuration settings will be stored.
