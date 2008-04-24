@@ -20,6 +20,12 @@
 
 	<connector name="FSConnector"
 		class="org.settings4j.connector.FSConnector">
+		<param name="rootFolderPath" value="${connectors.string['java.io.tmpdir']}Settings4j"/>
+		<connector-ref ref="SystemPropertyConnector"  />
+	</connector>
+	
+	<connector name="SystemPropertyConnector"
+		class="org.settings4j.connector.SystemPropertyConnector">
 	</connector>
 
 	<settings name="com.mycompany.myapp" >
