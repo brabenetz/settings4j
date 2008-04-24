@@ -39,8 +39,11 @@ public class TestSettings4jConfig extends TestCase{
     protected void setUp() throws Exception {
         File tmpFolder = getTmpFolder();
         LOG.info("Use temporary Folder: " + tmpFolder.getAbsolutePath());
+        FileUtils.deleteDirectory(tmpFolder);
+        
         File testFolder = getTestFolder();
         LOG.info("Use test Folder: " + testFolder.getAbsolutePath());
+        FileUtils.deleteDirectory(testFolder);
         super.setUp();
     }
 
@@ -144,6 +147,39 @@ public class TestSettings4jConfig extends TestCase{
         
     }
     
+    public void testFSConfigTestFolder(){
+        SettingsRepository settingsRepository = getConfiguredSettingsRepository("org/settings4j/config/testConfigFSTestfolder.xml");
+
+        Settings mycompanySeetings = settingsRepository.getSettings("com.mycompany");
+
+        // check if there is a Exception thrown:
+        // only com.mycompany.myapp and above can write
+        try {
+            mycompanySeetings.setString("xyz", "abc");
+            fail("must throw an IllegalStateException");
+        } catch (IllegalStateException e) {
+            assertEquals("Conntent 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
+        }
+        
+        // store values into the default java temporary directory with subfolder "Settings4j"
+        // String tmpdir = System.getProperty("java.io.tmpdir");
+        Settings settings1 = settingsRepository.getSettings("com.mycompany.myapp");
+        File testFolder = getTestFolder();
+        File fileXyz = new File(testFolder, "xyz");
+        assertFalse(fileXyz.exists());
+        settings1.setString("xyz", "abc");
+        assertTrue(fileXyz.exists());
+
+        Settings settings2 = settingsRepository.getSettings("com.mycompany.myapp.subcomponent");
+        settings2.setString("xyz2", "abc2");
+        
+        //every settings have read access to the same FSConnector.
+        assertEquals("abc", settings2.getString("xyz"));
+        assertEquals("abc2", settings1.getString("xyz2"));
+        assertEquals("abc2", mycompanySeetings.getString("xyz2"));
+        
+    }
+    
     public void testPropertyFileConfig(){
         SettingsRepository settingsRepository = getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFile.xml");
 
@@ -163,12 +199,12 @@ public class TestSettings4jConfig extends TestCase{
     }
     private static File getTmpFolder(){
         String tmpdir = System.getProperty("java.io.tmpdir");
-        File tmpFolder = new File(tmpdir + "Settings4j");
+        File tmpFolder = new File(tmpdir + "Settings4jUnittest");
         return tmpFolder;
     }
     
     private static File getTestFolder(){
-        File testFolder = new File("test/Settings4j");
+        File testFolder = new File("test/Settings4jUnittest");
         return testFolder;
     }
 }

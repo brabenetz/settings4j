@@ -16,6 +16,7 @@
  *****************************************************************************/
 package org.settings4j.config;
 
+import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -126,13 +127,15 @@ public class DOMConfigurator {
     private static void setParameter(final Element elem, final Object bean, Connector[] connectors) {
         String name = elem.getAttribute("name");
         String valueStr = (elem.getAttribute("value"));
-        Object value;
-        if(connectors != null){
-            value = subst(valueStr, connectors, Object.class);
-        } else {
-            value = valueStr;
-        }
         try {
+            PropertyDescriptor propertyDescriptor = PropertyUtils.getPropertyDescriptor(bean, name);
+            Method setter = PropertyUtils.getWriteMethod(propertyDescriptor);
+            Object value;
+            if(connectors != null){
+                value = subst(valueStr, connectors, setter.getParameterTypes()[0]);
+            } else {
+                value = subst(valueStr, null, setter.getParameterTypes()[0]);
+            }
             PropertyUtils.setProperty(bean, name, value);
         } catch (IllegalAccessException e) {
             LOG.warn("Cannnot set Property: " + name, e);
