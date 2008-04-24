@@ -24,6 +24,17 @@ import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.map.LazyMap;
 import org.settings4j.Connector;
 
+/**
+ * This Wrapper makes the Getter-Methodes of Connectors simply accessible
+ * by Expressionlanguages like JSP 2.0, Velocity or Freemarker.<BR />
+ * <BR />
+ * <B>Example:</B><BR />
+ * <code>${connectors.string['xyz']}</code> returns the first founded Value in all Connectors:
+ * <code>connector.getString("xyz");</code>
+ * 
+ * @author Harald.Brabenetz
+ *
+ */
 public class ELConnectorWrapper {
     
     private Connector[] connectors;

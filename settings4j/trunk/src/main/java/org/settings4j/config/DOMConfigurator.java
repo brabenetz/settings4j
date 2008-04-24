@@ -722,8 +722,12 @@ public class DOMConfigurator {
         if (value.contains("${")){
             try {
                 Map context = new HashMap();
-                context.put("connectors", new ELConnectorWrapper(connectors));
-                // Expression like "${true}" or  ${connectors.object['']}
+                if (connectors != null){
+                    // Expression like ${connectors.object['...']} or ${connectors.string['...']} 
+                    context.put("connectors", new ELConnectorWrapper(connectors));
+                }
+                // Expression like ${env['...']} e.g.:  ${env['TOMCAT_HOME']} or ${env.TOMCAT_HOME}
+                context.put("env", System.getenv());
                 Object result = ExpressionLanguageUtil.evaluateExpressionLanguage(value, context, clazz);
                 return result;
             } catch (ELException e) {

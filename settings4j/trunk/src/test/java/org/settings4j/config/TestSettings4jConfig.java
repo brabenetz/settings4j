@@ -17,10 +17,12 @@
 
 package org.settings4j.config;
 
+import java.io.File;
 import java.net.URL;
 
 import junit.framework.TestCase;
 
+import org.apache.commons.io.FileUtils;
 import org.settings4j.Settings;
 import org.settings4j.SettingsRepository;
 import org.settings4j.contentresolver.ClasspathContentResolver;
@@ -30,7 +32,26 @@ import org.settings4j.settings.SettingsManager;
 
 public class TestSettings4jConfig extends TestCase{
     
+    /** General Logger for this Class */
+    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
+        .getLog(TestSettings4jConfig.class);
     
+    protected void setUp() throws Exception {
+        File tmpFolder = getTmpFolder();
+        LOG.info("Use temporary Folder: " + tmpFolder.getAbsolutePath());
+        File testFolder = getTestFolder();
+        LOG.info("Use test Folder: " + testFolder.getAbsolutePath());
+        super.setUp();
+    }
+
+    protected void tearDown() throws Exception {
+        File tmpFolder = getTmpFolder();
+        FileUtils.deleteDirectory(tmpFolder);
+        File testFolder = getTestFolder();
+        FileUtils.deleteDirectory(testFolder);
+        super.tearDown();
+    }
+
     /**
      * Test parsing of defaultsettings4j.xml (FALLBACK-Configuration)
      */
@@ -90,8 +111,8 @@ public class TestSettings4jConfig extends TestCase{
     }
     
 
-    public void testFSConfig(){
-        SettingsRepository settingsRepository = getConfiguredSettingsRepository("org/settings4j/config/testConfigFS.xml");
+    public void testFSConfigTempFolder(){
+        SettingsRepository settingsRepository = getConfiguredSettingsRepository("org/settings4j/config/testConfigFSTempfolder.xml");
 
         Settings mycompanySeetings = settingsRepository.getSettings("com.mycompany");
 
@@ -107,7 +128,11 @@ public class TestSettings4jConfig extends TestCase{
         // store values into the default java temporary directory with subfolder "Settings4j"
         // String tmpdir = System.getProperty("java.io.tmpdir");
         Settings settings1 = settingsRepository.getSettings("com.mycompany.myapp");
+        File tmpFolder = getTmpFolder();
+        File fileXyz = new File(tmpFolder, "xyz");
+        assertFalse(fileXyz.exists());
         settings1.setString("xyz", "abc");
+        assertTrue(fileXyz.exists());
 
         Settings settings2 = settingsRepository.getSettings("com.mycompany.myapp.subcomponent");
         settings2.setString("xyz2", "abc2");
@@ -135,5 +160,15 @@ public class TestSettings4jConfig extends TestCase{
         SettingsRepository settingsRepository = new HierarchicalSettingsRepository(new DefaultSettings("root"));
         DOMConfigurator.configure(url, settingsRepository);
         return settingsRepository;
+    }
+    private static File getTmpFolder(){
+        String tmpdir = System.getProperty("java.io.tmpdir");
+        File tmpFolder = new File(tmpdir + "Settings4j");
+        return tmpFolder;
+    }
+    
+    private static File getTestFolder(){
+        File testFolder = new File("test/Settings4j");
+        return testFolder;
     }
 }

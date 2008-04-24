@@ -97,8 +97,7 @@ public class FSContentResolver implements ContentResolver {
         if (rootFolder == null) {
             LOG.info("FSContentResolver.rootFolder == null");
             // get the default java temporary directory
-            String tmpdir = System.getProperty("java.io.tmpdir");
-            tmpdir += "Settings4j";
+            String tmpdir = ".";
             if (tmpdir != null) {
                 LOG.info("The TEMP Folder will be used: " + tmpdir + "! ");
                 rootFolder = new File(tmpdir);
@@ -113,6 +112,7 @@ public class FSContentResolver implements ContentResolver {
             try {
                 FileUtils.forceMkdir(newRootFolder);
                 this.rootFolder = newRootFolder;
+                LOG.info("Set RootPath for FSConntentResolver: " + newRootFolder.getAbsolutePath());
             } catch (IOException e) {
                 LOG.warn("cannot create rootFolder: " + rootFolderPath + "! ");
             }
