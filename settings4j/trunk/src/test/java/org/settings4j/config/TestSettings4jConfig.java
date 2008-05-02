@@ -107,10 +107,14 @@ public class TestSettings4jConfig extends TestCase{
         } catch (IllegalStateException e) {
             assertEquals("Conntent 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
         }
+        
+        assertEquals(3, settingsRepository.getConnectorCount());
     }
     
     public void testCorruptConfig(){
-        getConfiguredSettingsRepository("org/settings4j/config/testConfigCorrupt.xml");
+        SettingsRepository settingsRepository = getConfiguredSettingsRepository("org/settings4j/config/testConfigCorrupt.xml");
+
+        assertEquals(0, settingsRepository.getConnectorCount());
     }
     
 
@@ -144,7 +148,8 @@ public class TestSettings4jConfig extends TestCase{
         assertEquals("abc", settings2.getString("xyz"));
         assertEquals("abc2", settings1.getString("xyz2"));
         assertEquals("abc2", mycompanySeetings.getString("xyz2"));
-        
+
+        assertEquals(2, settingsRepository.getConnectorCount());
     }
     
     public void testFSConfigTestFolder(){
@@ -177,7 +182,8 @@ public class TestSettings4jConfig extends TestCase{
         assertEquals("abc", settings2.getString("xyz"));
         assertEquals("abc2", settings1.getString("xyz2"));
         assertEquals("abc2", mycompanySeetings.getString("xyz2"));
-        
+
+        assertEquals(1, settingsRepository.getConnectorCount());
     }
     
     public void testPropertyFileConfig(){
@@ -187,7 +193,8 @@ public class TestSettings4jConfig extends TestCase{
 
         //every settings have read access to the same FSConnector.
         assertEquals("Value from Property-File", seetings.getString("xyz"));
-        
+
+        assertEquals(2, settingsRepository.getConnectorCount());
     }
     
     private SettingsRepository getConfiguredSettingsRepository(String classpathUrl){

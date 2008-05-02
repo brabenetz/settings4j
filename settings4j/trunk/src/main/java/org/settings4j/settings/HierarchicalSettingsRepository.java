@@ -35,14 +35,17 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
     
     private static final SettingsFactory DEFAULT_FACTORY = new DefaultSettingsFactory();
     
-    Map map = Collections.synchronizedMap(new HashMap());
+    private Map map = Collections.synchronizedMap(new HashMap());
     
-    Settings root;
+    private Settings root;
+    
+    private int connectorCount;
     
     
     public HierarchicalSettingsRepository(Settings root) {
         super();
         this.root = root;
+        root.setSettingsRepository(this);
     }
 
     public Settings exists(String name) {
@@ -90,6 +93,7 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
             Object o = map.get(key);
             if (o == null) {
                 settings = factory.makeNewSettingsInstance(name);
+                settings.setSettingsRepository(this);
                 map.put(key, settings);
                 updateParents(settings);
                 return settings;
@@ -98,6 +102,7 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
             } else if (o instanceof ProvisionNode) {
                 // System.out.println("("+name+") ht.get(this) returned ProvisionNode");
                 settings = factory.makeNewSettingsInstance(name);
+                settings.setSettingsRepository(this);
                 map.put(key, settings);
                 updateChildren((ProvisionNode) o, settings);
                 updateParents(settings);
@@ -189,5 +194,13 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
                 s.setParent(settings);
             }
         }
+    }
+
+    public int getConnectorCount() {
+        return connectorCount;
+    }
+
+    public void setConnectorCount(int connectorCount) {
+        this.connectorCount = connectorCount;
     }
 }

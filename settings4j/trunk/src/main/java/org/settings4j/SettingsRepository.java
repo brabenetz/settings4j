@@ -24,4 +24,17 @@ public interface SettingsRepository {
     Settings getSettings(String name, SettingsFactory factory);
     Settings exists(String name);
     List getCurrentSettingsList();
+    /**
+     * returns the Connectors Count who are in use.
+     * A Connector where no connector-ref exists will not be listed. 
+     * @return the Connectors Count who are in use
+     */
+    int getConnectorCount();
+    
+    /**
+     * Will be set after parsing all Settings & Root-Tags
+     * 
+     * @param connectorCount
+     */
+    void setConnectorCount(int connectorCount);
 }

@@ -22,10 +22,6 @@
 		class="org.settings4j.connector.FSConnector">
 		<param name="rootFolderPath" value="test/Settings4jUnittest"/>
 	</connector>
-	
-	<connector name="SystemPropertyConnector"
-		class="org.settings4j.connector.SystemPropertyConnector">
-	</connector>
 
 	<settings name="com.mycompany.myapp" >
 		<connector-ref ref="FSConnector" readonly="false" />

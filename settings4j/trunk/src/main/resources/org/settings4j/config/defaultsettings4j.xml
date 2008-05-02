@@ -23,57 +23,21 @@
 		class="org.settings4j.connector.SystemPropertyConnector">
 		<contentResolver-ref ref="DefaultContentResolver" />
 	</connector>
+	
 	<connector name="JNDIConnector"
 		class="org.settings4j.connector.JNDIConnector">
 		<contentResolver-ref ref="DefaultContentResolver" />
 	</connector>
-	<connector name="ClasspathConnector"
-		class="org.settings4j.connector.ClasspathConnector" />
-	<!-- Example DBConnectors
-		<connector name="DBConnector" class="org.settings4j.connector.DBHibernateJNDIConnector">
-			<param name="jndiName" value="jdbc/settings4j-db"/>
-			<param name="dialect" value="org.hibernate.dialect.MySQLInnoDBDialect"/>
-		</connector>
-		<connector name="DBConnector" class="org.settings4j.connector.DBHibernateJNDIConnector">
-			<param name="jndiName" value="jdbc/settings4j-db"/>
-			<param name="dialect" value="${connectors.string['jdbc/settings4j-db-dialect']}"/>
-			<connector-ref ref="JNDIConnectorNoResolver" readonly="true" />
-			<connector-ref ref="SystemPropertyConnectorNoResolver" readonly="true" />
-		</connector>
-		<connector name="DBConnector" class="org.settings4j.connector.DBHibernateConnector">
-			<param name="url" value="jdbc:postgresql://localhost/mydatabase"/>
-			<param name="username" value="myuser"/>
-			<param name="password" value="secret"/>
-			<param name="driverClass" value="org.postgresql.Driver"/>
-			<param name="dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-		</connector>
-		<connector name="DBConnector" class="org.settings4j.connector.DBJdbcConnector">
-			<param name="url" value="jdbc:postgresql://localhost/mydatabase"/>
-			<param name="username" value="myuser"/>
-			<param name="password" value="secret"/>
-			<param name="driverClass" value="org.postgresql.Driver"/>
-		</connector>
-	-->
-
-	<!-- Connectors without resolver (avoid recursive call) can be used to evaluate Resolver param-Values with Expression
-		like ${connectors.object['jdbc/your-data-source']} //from JNDI-Context
-		or  ${connectors.string['charsetParamForResolverXYZ']} //Mybe from JNDI or SystemProperties-->
-	<connector name="SystemPropertyConnectorNoResolver"
-		class="org.settings4j.connector.SystemPropertyConnector" />
-	<connector name="JNDIConnectorNoResolver"
-		class="org.settings4j.connector.JNDIConnector" />
-	<connector name="ClasspathConnectorNoResolver"
-		class="org.settings4j.connector.ClasspathConnector" />
-
-
+	
+	<connector name="ClasspathConnector" class="org.settings4j.connector.ClasspathConnector" />
+		
 	<root>
 		<connector-ref ref="SystemPropertyConnector" readonly="true" />
 		<connector-ref ref="JNDIConnector" readonly="true" />
 		<connector-ref ref="ClasspathConnector" readonly="true" />
 	</root>
 
-	<contentResolver name="DefaultContentResolver"
-		class="org.settings4j.contentresolver.UnionContentResolver">
+	<contentResolver name="DefaultContentResolver" class="org.settings4j.contentresolver.UnionContentResolver">
 		<contentResolver-ref ref="FSContentResolver" />
 		<contentResolver-ref ref="ClasspathContentResolver" />
 	</contentResolver>
