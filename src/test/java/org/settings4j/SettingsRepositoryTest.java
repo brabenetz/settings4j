@@ -65,6 +65,9 @@ public class SettingsRepositoryTest extends TestCase {
         connector = new ClasspathConnector();
         connector.setContentResolver(unionContentResolver);
         xyz.addConnector(connector);
+        // The connector Count must be greater 0
+        // otherwise the default-fallback-configuration will be used.
+        settingsRepository.setConnectorCount(2);
         
         /*
          * Now starts the Unittests
@@ -78,6 +81,8 @@ public class SettingsRepositoryTest extends TestCase {
         byte[] resultContent;
         Object resultObject;
 
+        // The RootSetting have only the SystemPropertyConnector with the FSContentResolver
+        // all result shoul return null
         resultString = rootSettings.getString("org/settings4j/connector/HelloWorld2.txt");
         assertNull(resultString);
         
@@ -97,7 +102,7 @@ public class SettingsRepositoryTest extends TestCase {
         resultObject = xy.getObject("org/settings4j/connector/HelloWorld2.txt");
         assertNull(resultObject);
 
-        // xyz from classpath:
+        // xyz have the classpath Connector:
         resultString = xyz.getString("org/settings4j/connector/HelloWorld2.txt");
         assertNotNull(resultString);
         assertEquals("Hello World 2", resultString);
