@@ -249,6 +249,7 @@ public class DOMConfigurator {
                 }
             }
         }
+        repository.setConnectorCount(connectorBag.values().size());
     }
 
     /**

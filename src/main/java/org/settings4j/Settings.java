@@ -52,6 +52,12 @@ public abstract class Settings {
      */
     public abstract void setParent(Settings parent);
 
+    /**
+     * For internal use only
+     */
+    public abstract void setSettingsRepository(SettingsRepository settingsRepository);
+
+    public abstract SettingsRepository getSettingsRepository();
     
     public static Settings getSettings(String name) {
         return SettingsManager.getSettings(name);

@@ -34,15 +34,22 @@ public class NOPSettingsRepository implements SettingsRepository {
     }
 
     public Settings getRootSettings() {
-        return new NOPSettings("root");
+        return new NOPSettings("root", this);
     }
 
     public Settings getSettings(String name) {
-        return new NOPSettings(name);
+        return new NOPSettings(name, this);
     }
 
     public Settings getSettings(String name, SettingsFactory factory) {
-        return new NOPSettings(name);
+        return new NOPSettings(name, this);
+    }
+
+    public int getConnectorCount() {
+        return 0;
+    }
+
+    public void setConnectorCount(int connectorCount) {
     }
 
 }

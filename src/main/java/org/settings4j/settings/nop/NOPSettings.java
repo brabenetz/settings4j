@@ -21,16 +21,19 @@ import java.util.List;
 
 import org.settings4j.Connector;
 import org.settings4j.Settings;
+import org.settings4j.SettingsRepository;
 
 /**
  * No-operation implementation of Settings used by NOPSettingsRepository.
  */
 public class NOPSettings extends Settings {
     String name;
+    SettingsRepository settingsRepository;
     
-    public NOPSettings(String name) {
+    public NOPSettings(String name, SettingsRepository settingsRepository) {
         super();
         this.name = name;
+        this.settingsRepository = settingsRepository;
     }
 
     public void addConnector(Connector connector) {
@@ -73,6 +76,14 @@ public class NOPSettings extends Settings {
     }
 
     public void setString(String key, String value) {
+    }
+
+    public SettingsRepository getSettingsRepository() {
+        return settingsRepository;
+    }
+
+    public void setSettingsRepository(SettingsRepository settingsRepository) {
+        this.settingsRepository = settingsRepository;
     }
 
 }

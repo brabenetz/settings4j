@@ -16,6 +16,7 @@
  *****************************************************************************/
 package org.settings4j.settings;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -23,13 +24,23 @@ import java.util.List;
 
 import org.settings4j.Connector;
 import org.settings4j.Settings;
+import org.settings4j.SettingsRepository;
+import org.settings4j.config.DOMConfigurator;
+import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.settings.helper.ConnectorIterator;
 
 public class DefaultSettings extends Settings {
     
+    /** General Logger for this Class */
+    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
+        .getLog(DefaultSettings.class);
+    
     String name;
     private List connectors = Collections.checkedList(Collections.synchronizedList(new ArrayList()), Connector.class);
     private Settings parent;
+
+    // Categories need to know what Hierarchy they are in
+    private SettingsRepository settingsRepository;
 
     public DefaultSettings(String name) {
         super();
@@ -49,6 +60,7 @@ public class DefaultSettings extends Settings {
     }
 
     public byte[] getContent(String key) {
+        checkConnectors();
         byte[] result = null;
         Iterator iterator;
         iterator = new ConnectorIterator(this);
@@ -63,6 +75,7 @@ public class DefaultSettings extends Settings {
     }
 
     public Object getObject(String key) {
+        checkConnectors();
         Object result = null;
         Iterator iterator;
         iterator = new ConnectorIterator(this);
@@ -77,6 +90,7 @@ public class DefaultSettings extends Settings {
     }
 
     public String getString(String key) {
+        checkConnectors();
         String result = null;
         Iterator iterator;
         iterator = new ConnectorIterator(this);
@@ -91,6 +105,7 @@ public class DefaultSettings extends Settings {
     }
 
     public void setContent(String key, byte[] value) {
+        checkConnectors();
         int status;
         Iterator iterator;
         iterator = new ConnectorIterator(this);
@@ -105,6 +120,7 @@ public class DefaultSettings extends Settings {
     }
 
     public void setObject(String key, Object value) {
+        checkConnectors();
         int status;
         Iterator iterator;
         iterator = new ConnectorIterator(this);
@@ -119,6 +135,7 @@ public class DefaultSettings extends Settings {
     }
 
     public void setString(String key, String value) {
+        checkConnectors();
         int status;
         Iterator iterator;
         iterator = new ConnectorIterator(this);
@@ -144,4 +161,34 @@ public class DefaultSettings extends Settings {
         return name;
     }
 
+    public SettingsRepository getSettingsRepository() {
+        return settingsRepository;
+    }
+
+    public void setSettingsRepository(SettingsRepository settingsRepository) {
+        this.settingsRepository = settingsRepository;
+    }
+    
+    private void checkConnectors(){
+        if (settingsRepository.getConnectorCount() == 0){
+            // No connectors in hierarchy, warn user and add default-configuration.
+            LOG.warn("No connectors could be found! For Setting '" + getName() + "'.");
+            LOG.warn("The settings4j will be configured with the default-fallback-config: " + SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
+            
+            URL url = ClasspathContentResolver.getResource(SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
+
+            // If we have a non-null url, then delegate the rest of the
+            // configuration to the DOMConfigurator.configure method.
+            if (url != null) {
+                LOG.debug("Using URL [" + url + "] for automatic settings4j fallback configuration.");
+                try {
+                    DOMConfigurator.configure(url, settingsRepository);
+                } catch (NoClassDefFoundError e) {
+                    LOG.warn("Error during default fallback initialization", e);
+                }
+            } else {
+                LOG.fatal("Could not find resource: [" + SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE + "].");
+            }
+        }
+    }
 }

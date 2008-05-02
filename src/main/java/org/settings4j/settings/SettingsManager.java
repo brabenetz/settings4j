@@ -16,11 +16,14 @@
  *****************************************************************************/
 package org.settings4j.settings;
 
+import java.net.URL;
 import java.util.List;
 
 import org.settings4j.Settings;
 import org.settings4j.SettingsFactory;
 import org.settings4j.SettingsRepository;
+import org.settings4j.config.DOMConfigurator;
+import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.settings.nop.NOPSettingsRepository;
 
 public class SettingsManager {
@@ -28,12 +31,10 @@ public class SettingsManager {
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(SettingsManager.class);
 
-
     public static final String DEFAULT_XML_CONFIGURATION_FILE = "settings4j.xml";
-    
-    public static final String DEFAULT_FALLBACK_CONFIGURATION_FILE = "org/settings4j/config/defaultsettings4j.xml";  
-    
-    
+
+    public static final String DEFAULT_FALLBACK_CONFIGURATION_FILE = "org/settings4j/config/defaultsettings4j.xml";
+
     private static SettingsRepository settingsRepository;
     static {
         /**
@@ -43,7 +44,20 @@ public class SettingsManager {
         settingsRepository = new HierarchicalSettingsRepository(new DefaultSettings("root"));
 
         // TODO hbrabenetz 29.03.2008 : read XML default Configuration to configure the repository
+        URL url = ClasspathContentResolver.getResource(DEFAULT_XML_CONFIGURATION_FILE);
 
+        // If we have a non-null url, then delegate the rest of the
+        // configuration to the DOMConfigurator.configure method.
+        if (url != null) {
+            LOG.debug("Using URL [" + url + "] for automatic settings4j configuration.");
+            try {
+                DOMConfigurator.configure(url, settingsRepository);
+            } catch (NoClassDefFoundError e) {
+                LOG.warn("Error during default initialization", e);
+            }
+        } else {
+            LOG.debug("Could not find resource: [" + DEFAULT_XML_CONFIGURATION_FILE + "].");
+        }
     }
 
     public static SettingsRepository getSettingsRepository() {
