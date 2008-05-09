@@ -58,6 +58,7 @@
 			<version>2.4</version>
 			<scope>compile</scope>
 		</dependency>
+		<!-- Needed to setting Bean-Properties (param-Tag in settings4j.xml) -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
@@ -70,6 +71,7 @@
 			<version>3.2.1</version>
 			<scope>compile</scope>
 		</dependency>
+		<!-- taglibs-standard is used to interprete Expression Language like ${...} -->
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
