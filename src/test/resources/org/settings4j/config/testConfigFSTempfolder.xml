@@ -17,7 +17,8 @@
 	limitations under the License.
 -->
 <settings4j:configuration xmlns:settings4j='http://settings4j.org/'>
-
+	
+	<!-- Store settings into the temorary folder -->
 	<connector name="FSConnector"
 		class="org.settings4j.connector.FSConnector">
 		<param name="rootFolderPath" value="${connectors.string['java.io.tmpdir']}Settings4jUnittest"/>
