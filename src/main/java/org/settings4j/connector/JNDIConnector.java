@@ -37,6 +37,8 @@ public class JNDIConnector extends AbstractConnector {
     private String initialContextFactory;
 
     private String urlPkgPrefixes;
+    
+    private String contextPathPrefix = "java:comp/env/";
 
     public byte[] getContent(String key) {
         Object obj = lookupInContext(key);
@@ -150,23 +152,24 @@ public class JNDIConnector extends AbstractConnector {
     }
 
     private Object lookupInContext(String key) {
+        String normalizedKey = normalizeKey(key);
         InitialContext ctx = null;
         try {
             Object result;
             ctx = getJNDIContext();
-            result = ctx.lookup(key);
+            result = ctx.lookup(normalizedKey);
             return result;
         } catch (NoInitialContextException e) {
             LOG.info("Maybe no JNDI-Context available.");
             LOG.debug(e.getMessage(), e);
         } catch (NamingException e) {
-            LOG.debug("cannot lookup key: " + key, e);
+            LOG.debug("cannot lookup key: " + key + " (" + normalizedKey + ")", e);
         } finally {
             if (ctx != null) {
                 try {
                     ctx.close();
                 } catch (NamingException e) {
-                    LOG.info("cannot close context: " + key, e);
+                    LOG.info("cannot close context: " + key + " (" + normalizedKey + ")", e);
                 }
             }
         }
@@ -174,24 +177,34 @@ public class JNDIConnector extends AbstractConnector {
     }
     
     private int rebindToContext(String key, Object value) {
+        String normalizedKey = normalizeKey(key);
+        if (LOG.isDebugEnabled()){
+            LOG.debug("Try to rebind Key '" + key + "' (" + normalizedKey + ")" + " with value: " + value);
+        }
         InitialContext ctx = null;
         int result = SETTING_NOT_POSSIBLE;
         try {
             ctx = getJNDIContext();
-            createParentContext(ctx, key);
-            ctx.rebind(key, value);
+            createParentContext(ctx, normalizedKey);
+            ctx.rebind(normalizedKey, value);
             result = SETTING_SUCCESS;
         } catch (NoInitialContextException e) {
             LOG.info("Maybe no JNDI-Context available.");
             LOG.debug(e.getMessage(), e);
         } catch (NamingException e) {
-            LOG.debug("cannot bind key: " + key, e);
+            // the JNDI-Context from TOMCAT is readonly
+            // if you try to write it, The following Exception will be thrown:
+            // javax.naming.NamingException: Context is read only
+            LOG.info("cannot bind key: " + key + " (" + normalizedKey + ")" + e.getMessage());
+            if (LOG.isDebugEnabled()){
+                LOG.debug("cannot bind key: " + key + " (" + normalizedKey + ")", e);
+            }
         } finally {
             if (ctx != null) {
                 try {
                     ctx.close();
                 } catch (NamingException e) {
-                    LOG.info("cannot close context: " + key, e);
+                    LOG.info("cannot close context: " + key + " (" + normalizedKey + ")", e);
                 }
             }
         }
@@ -237,5 +250,30 @@ public class JNDIConnector extends AbstractConnector {
             tmpCtx.destroySubcontext(path[lastIndex]);
             obj = null;
         }
+    }
+    
+    private String normalizeKey(String key){
+        if (key == null){
+            return null;
+        }
+        
+        if (key.startsWith(contextPathPrefix)){
+            return key;
+        }
+        
+        key = key.replace('\\', '/');
+        
+        if (key.startsWith("/")){
+            key = key.substring(1);
+        }
+        return contextPathPrefix + key;
+    }
+    
+    public String getContextPathPrefix() {
+        return contextPathPrefix;
+    }
+
+    public void setContextPathPrefix(String contextPathPrefix) {
+        this.contextPathPrefix = contextPathPrefix;
     }
 }
