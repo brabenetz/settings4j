@@ -13,8 +13,54 @@
 		The Programmer says he want the settings for Key 'xyz', and
 		should not care about where the Settings comes from.
 	</description>
+
+	<scm>
+		<connection>scm:svn:http://settings4j.svn.sourceforge.net/svnroot/settings4j/settings4j/trunk</connection>
+		<developerConnection>scm:svn:https://settings4j.svn.sourceforge.net/svnroot/settings4j/settings4j/trunk</developerConnection>
+		<url>http://settings4j.svn.sourceforge.net/viewcvs.cgi/settings4j/settings4j/trunk</url>
+	</scm>
 	<inceptionYear>2008</inceptionYear>
 
+	<mailingLists>
+		<mailingList>
+			<name>Settings4j library User Mailing list - How To, FAQ, etc</name>
+			<subscribe>
+				http://lists.sourceforge.net/lists/listinfo/settings4j-user
+			</subscribe>
+			<unsubscribe>
+				http://lists.sourceforge.net/lists/listinfo/settings4j-user
+			</unsubscribe>
+			<post />
+			<archive>
+				http://sourceforge.net/mailarchive/forum.php?forum=settings4j-user
+			</archive>
+		</mailingList>
+	</mailingLists>
+
+	<developers>
+		<developer>
+			<name>Harald Brabenetz</name>
+			<id>brabenetz</id>
+			<email>brabenetz(at)users.sourceforge.net</email>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
+	<contributors>
+	</contributors>
+	
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>
+				http://www.apache.org/licenses/LICENSE-2.0
+			</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<plugins>
@@ -119,27 +165,13 @@
 	</dependencies>
 
 
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>
-				http://www.apache.org/licenses/LICENSE-2.0
-			</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-	<developers>
-		<developer>
-			<name>Harald Brabenetz</name>
-			<id>brabenetz</id>
-			<email>brabenetz@users.sourceforge.net</email>
-			<roles>
-				<role>Developer</role>
-			</roles>
-		</developer>
-	</developers>
-	<contributors>
-	</contributors>
+	<repositories>
+		<repository>
+			<id>settings4j</id>
+			<url>http://settings4j.sourceforge.net/m2repo</url>
+		</repository>
+	</repositories>
+
 
 	<reporting>
 		<plugins>
@@ -173,4 +205,19 @@
 		</plugins>
 	</reporting>
 
+	<distributionManagement>
+		<repository>
+			<id>settings4j</id>
+			<url>
+				scp://shell.sourceforge.net/home/groups/s/se/settings4j/htdocs/m2repo
+			</url>
+		</repository>
+		<site>
+			<id>settings4j</id>
+			<name>settings4j</name>
+			<url>
+				scp://shell.sourceforge.net/home/groups/s/se/settings4j/htdocs/${project.version}/
+			</url>
+		</site>
+	</distributionManagement>
 </project>
