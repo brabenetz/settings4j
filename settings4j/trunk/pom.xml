@@ -176,9 +176,11 @@
 			<plugin>
 				<artifactId>maven-changes-plugin</artifactId>
 			</plugin>
+			<!-- 
 			<plugin>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 			</plugin>
+			 -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
@@ -214,7 +216,7 @@
 			<id>settings4j</id>
 			<name>settings4j</name>
 			<url>
-				scp://shell.sourceforge.net/home/groups/s/se/settings4j/htdocs/${project.version}/
+				scp://shell.sourceforge.net/home/groups/s/se/settings4j/htdocs/archiv/${project.version}/
 			</url>
 		</site>
 	</distributionManagement>
