@@ -1,0 +1,11 @@
+History of changes for this project.
+
+Changes are chronologically ordered from top (most recent) to bottom (least recent).
+
+Legend:
+! New Feature
+* Bug fixed
+- General comment
+
+settings4j 1.0 - 2008.06.31
+! Implement the first version of the settings4j library
