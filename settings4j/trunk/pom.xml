@@ -8,7 +8,7 @@
 	<url>http://settings4j.org</url>
 
 	<description>
-		The Programmer says he want the settings for Key 'xyz', and
+		The Programmer want the settings for Key 'xyz', and
 		should not care about where the Settings comes from.
 	</description>
 
