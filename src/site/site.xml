@@ -15,6 +15,7 @@
   <body>
     <menu name="Settings4j library">
       <item name="Overview" href="index.html"/>
+      <item name="Download" href="download.html"/>
       <item name="WIKI" href="http://settings4j.wiki.sourceforge.net/"/>
       <item name="Archiv" href="http://settings4j.sourceforge.net/archiv"/>
     </menu>
