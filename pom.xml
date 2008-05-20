@@ -173,14 +173,14 @@
 
 	<reporting>
 		<plugins>
-			<plugin>
-				<artifactId>maven-changes-plugin</artifactId>
-			</plugin>
 			<!-- 
 			<plugin>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 			</plugin>
 			 -->
+			<plugin>
+				<artifactId>maven-changes-plugin</artifactId>
+			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>

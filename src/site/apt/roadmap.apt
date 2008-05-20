@@ -1,0 +1,84 @@
+                                    ------------------
+                                    Roadmap
+                                    ------------------
+                                    Brabenetz Harald
+                                    ------------------
+                                    20-05-2008
+                                    ------------------
+
+Roadmap of changes for this project.
+
+  Changes are chronologically ordered from top (most recent) to bottom (least recent).
+
+* Legend:
+
+	! New Feature
+
+	\* Bug fixed
+
+	- General comment
+
+* Winter 2008/2009 1.1.0
+
+	! additional Object-resolver with digester (Use a digester-Rules-XML to convert a XML to an Object)
+
+	! additional Object-resolver with Spring (Use one or more springContext-XML to convert a XML to an Object)
+
+	! additional Content-resolver with VFSPath
+
+	! additional Connector to Windows registry:
+	
+		* {{http://www.rgagnon.com/javadetails/java-0480.html}}
+		
+		* {{http://www.trustice.com/java/jnireg/}}
+
+
+* September 2008 Final Version 1.0.0 - after few bug fixes
+
+
+
+* Juli 2008 1.0.0-rc - re factored release
+
+    - extended JavaDoc and UnitTests
+
+    - Maven-Site
+
+
+* Juny 2008 1.0.0-beta - release with additional features:
+
+    ! Object-Resolver implementations with java.beans.XMLEncoder and XMLDecoder
+
+    ! A DB-Connector implemented with Hibernate, configurable with Settings4j over SystemProperties or JNDI-Envirenment-Variables.
+
+    ! settings4j.xml: addictive="false" if no heredity of connectors are being requested.
+
+    ! settings4j.xml: cached="true" A Wrapper for Settings, Connectors and ObjectResolvers to cache all requests.
+
+    - Extend the Example-App to configure a DB-Connector. The Datasource-Object comes from JNDI-Context or with an ObjectResolver from FileSystemConnector.
+
+    ! mappings configured in settings4j.xml: map one key to an other Key.
+
+
+* 12. May 2008 1.0.0-alpha - release with following features:
+
+    ! Automatically read settings4j.xml from classpath if available
+
+    ! Simple Default fall back Configuration if no settings4j.xml is found.
+
+    ! Hirachical Structure in settings4j.xml like log4j
+
+    ! Main Connector-Implementations: for SystemProperties, Classpath, JNDI-Context, PropertyFile
+
+    - A Simple Example Module who can be use by a Commandline-Client or a web application. The module is configurable either with SystemProperties or JNDI-Envirenment-Variables depends on the settings4j.xml inside the two Client-Applications (jar or war)
+
+
+* 12. April 2008
+	- Project start
+
+	
+* March/April 2008
+
+	- {{{roadmapTheBeginning.html}The beginning}}
+	
+	
+	

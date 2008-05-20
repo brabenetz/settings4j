@@ -51,7 +51,7 @@ Settings4j library 1.0
 public class SettingsManager {
     private static final Settings SETTINGS = Settings.getSettings(SettingsManager.class);
 
-    public static String getMyFormular() {
+    public static String getMyFormula() {
         return SETTINGS.getString("com/mycompany/mycalculation/my-formula");
     }
 }
