@@ -12,10 +12,21 @@
 		should not care about where the Settings comes from.
 	</description>
 
+	<issueManagement>
+		<system>Sourceforge</system>
+		<url>http://sourceforge.net/tracker/?group_id=224313</url>
+	</issueManagement>
+	
 	<scm>
-		<connection>scm:svn:http://settings4j.svn.sourceforge.net/svnroot/settings4j/settings4j/trunk</connection>
-		<developerConnection>scm:svn:https://settings4j.svn.sourceforge.net/svnroot/settings4j/settings4j/trunk</developerConnection>
-		<url>http://settings4j.svn.sourceforge.net/viewcvs.cgi/settings4j/settings4j/trunk</url>
+		<connection>
+			scm:svn:http://settings4j.svn.sourceforge.net/svnroot/settings4j/settings4j/trunk
+		</connection>
+		<developerConnection>
+			scm:svn:https://settings4j.svn.sourceforge.net/svnroot/settings4j/settings4j/trunk
+		</developerConnection>
+		<url>
+			http://settings4j.svn.sourceforge.net/viewcvs.cgi/settings4j/settings4j/trunk
+		</url>
 	</scm>
 	<inceptionYear>2008</inceptionYear>
 
