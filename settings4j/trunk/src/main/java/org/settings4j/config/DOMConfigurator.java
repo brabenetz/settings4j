@@ -39,9 +39,13 @@ import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
 import org.settings4j.Settings;
 import org.settings4j.SettingsRepository;
+import org.settings4j.connector.AbstractConnector;
+import org.settings4j.connector.CachedConnectorWrapper;
+import org.settings4j.connector.ContentHasChangedNotifierConnectorWrapper;
 import org.settings4j.connector.ReadOnlyConnector;
 import org.settings4j.connector.SystemPropertyConnector;
 import org.settings4j.contentresolver.ReadOnlyContentResolverWrapper;
+import org.settings4j.objectresolver.AbstractObjectResolver;
 import org.settings4j.objectresolver.ReadOnlyObjectResolverWrapper;
 import org.settings4j.util.ELConnectorWrapper;
 import org.settings4j.util.ExpressionLanguageUtil;
@@ -85,6 +89,8 @@ public class DOMConfigurator {
     static final String NAME_ATTR = "name";
 
     static final String CLASS_ATTR = "class";
+
+    static final String CACHED_ATTR = "cached";
     
     static final String FACTORY_CLASS_ATTR = "factoryClass";
 
@@ -355,6 +361,15 @@ public class DOMConfigurator {
                     }
                 }
             }
+            
+            if (connector instanceof AbstractConnector){
+                connector = new ContentHasChangedNotifierConnectorWrapper((AbstractConnector)connector);
+            }
+
+            Boolean cached = (Boolean)subst(connectorElement.getAttribute(CACHED_ATTR), null, Boolean.class);
+            if (cached != null && cached.booleanValue()){
+                connector = new CachedConnectorWrapper(connector);
+            }
         }
         
         return connector;
@@ -529,6 +544,16 @@ public class DOMConfigurator {
                         // TODO Harald.Brabenetz Apr 17, 2008 :
                         //quietParseUnrecognizedElement(settings, currentElement, props);
                     }
+                }
+            }
+
+            Boolean cached = (Boolean)subst(objectResolverElement.getAttribute(CACHED_ATTR), null, Boolean.class);
+            if (cached != null && cached.booleanValue()){
+                if (objectResolver instanceof AbstractObjectResolver){
+                    ((AbstractObjectResolver)objectResolver).setCached(cached.booleanValue());
+                } else {
+                    LOG.warn("Only AbstractObjectResolver can use the attribute cached=\"true\" ");
+                    // TODO hbrabenetz 21.05.2008 : extract setCached into seperate Interface.
                 }
             }
         }

@@ -29,7 +29,7 @@ public abstract class AbstractConnector implements Connector{
     private ContentResolver contentResolver;
     private ObjectResolver objectResolver;
     private List connectors = Collections.checkedList(Collections.synchronizedList(new ArrayList()), Connector.class);
-
+    
     public List getConnectors() {
         return Collections.unmodifiableList(connectors);
     }

@@ -35,6 +35,12 @@ public class UnionObjectResolver implements ObjectResolver{
         objectResolvers = objectResolversNew;
     }
 
+    public void notifyContentHasChanged(String key) {
+        for (int i = 0; i < objectResolvers.length; i++) {
+            objectResolvers[i].notifyContentHasChanged(key);
+        }
+    }
+    
     public Object getObject(String key, ContentResolver contentResolver) {
         Object result = null;
         for (int i = 0; i < objectResolvers.length; i++) {
@@ -55,6 +61,11 @@ public class UnionObjectResolver implements ObjectResolver{
             }
         }
         return status;
+    }
+
+    public void setCached(boolean cached){
+        // The UnionObjectResolver cannot cache VAlues
+        // The UnionObjectResolver only delegate all requests to his objectResolvers
     }
 
 }
