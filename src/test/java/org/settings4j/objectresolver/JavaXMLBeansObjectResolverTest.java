@@ -17,11 +17,13 @@
 
 package org.settings4j.objectresolver;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.contentresolver.FSContentResolver;
@@ -30,11 +32,25 @@ import org.settings4j.contentresolver.UnionContentResolver;
 import junit.framework.TestCase;
 
 public class JavaXMLBeansObjectResolverTest extends TestCase {
+
+    private File testDir;
+    
+    protected void setUp() throws Exception {
+        super.setUp();
+        testDir = (new File("test/JavaXMLBeans/".toLowerCase())).getAbsoluteFile();
+        FileUtils.forceMkdir(testDir);
+    }
+    
+    protected void tearDown() throws Exception {
+        FileUtils.deleteDirectory(new File("test"));
+        super.tearDown();
+    }
+    
     public void test1(){
         JavaXMLBeansObjectResolver objectResolver = new JavaXMLBeansObjectResolver();
         
         FSContentResolver fsContentResolver = new FSContentResolver();
-        fsContentResolver.setRootFolderPath("./test/JavaXMLBeans");
+        fsContentResolver.setRootFolderPath(testDir.getAbsolutePath());
         ContentResolver contentResolver = new UnionContentResolver(fsContentResolver);
         contentResolver.addContentResolver(new ClasspathContentResolver());
         
