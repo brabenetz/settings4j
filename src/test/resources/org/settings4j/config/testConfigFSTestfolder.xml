@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE settings4j:configuration SYSTEM "settings4j.dtd">
+<!DOCTYPE settings4j:configuration SYSTEM "http://settings4j.org/archiv/1.0.0-alpha/XMLSchema/settings4j.dtd">
 <!--
 	Licensed to the Apache Software Foundation (ASF) under one or more
 	contributor license agreements.  See the NOTICE file distributed with

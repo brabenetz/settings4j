@@ -41,6 +41,12 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
     
     private Map cachedObjects = new HashMap();
     
+    private boolean cached = false;
+    
+    public void notifyContentHasChanged(String key) {
+        cachedObjects.remove(key);
+    }
+
     public void addObjectResolver(ObjectResolver objectResolver) {
         throw new UnsupportedOperationException(this.getClass().getName() + " cannot add other ObjectResolvers");
     }
@@ -68,7 +74,7 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
                 if (getObjectReolverKey().equals(objectResolverKey)){
                     result = contentToObject(key, properties, content);
                     if (result != null){
-                        if ("true".equalsIgnoreCase(cached)){
+                        if ("true".equalsIgnoreCase(cached) || (cached== null && isCached())){
                             cachedObjects.put(key, result);
                         }
                         return result;
@@ -101,8 +107,10 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
                 status = contentResolver.setContent(key, content);
             }
             
-            if (status == SETTING_SUCCESS && "true".equalsIgnoreCase(cached)){
-                cachedObjects.put(key, value);
+            if (status == SETTING_SUCCESS){
+                if ("true".equalsIgnoreCase(cached) || (cached== null && isCached())){
+                    cachedObjects.put(key, value);
+                }
             }
         }
         return 0;
@@ -138,4 +146,12 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
     protected abstract byte[] objectToContent(String key, Properties properties, Object value);
     
     protected abstract Object contentToObject(String key, Properties properties, byte[] content);
+
+    public boolean isCached() {
+        return cached;
+    }
+
+    public void setCached(boolean cached) {
+        this.cached = cached;
+    }
 }

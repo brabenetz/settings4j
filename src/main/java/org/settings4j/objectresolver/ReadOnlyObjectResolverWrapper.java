@@ -29,6 +29,11 @@ public class ReadOnlyObjectResolverWrapper implements ObjectResolver{
         this.targetObjectResolver = targetObjectResolver;
     }
 
+    
+    public void notifyContentHasChanged(String key) {
+        targetObjectResolver.notifyContentHasChanged(key);
+    }
+    
     public int setObject(String key, ContentResolver contentResolver, Object value) {
         return SETTING_NOT_POSSIBLE;
     }
@@ -42,5 +47,4 @@ public class ReadOnlyObjectResolverWrapper implements ObjectResolver{
     public Object getObject(String key, ContentResolver contentResolver) {
         return targetObjectResolver.getObject(key, contentResolver);
     }
-
 }

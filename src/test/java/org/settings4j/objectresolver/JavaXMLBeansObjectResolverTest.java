@@ -49,6 +49,8 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
     public void test1(){
         JavaXMLBeansObjectResolver objectResolver = new JavaXMLBeansObjectResolver();
         
+        // FileSystem is Writeable => the XML-Object
+        // Classpath is readonly => the XML-Object-Properties
         FSContentResolver fsContentResolver = new FSContentResolver();
         fsContentResolver.setRootFolderPath(testDir.getAbsolutePath());
         ContentResolver contentResolver = new UnionContentResolver(fsContentResolver);
@@ -64,7 +66,6 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
         testList.add(testValue2);
         testList.add(testValue3);
         testList.add(testValue4);
-        
         testData.put("irgendwas", "blablablablablabla");
         testData.put("liste", testList);
         
@@ -78,9 +79,32 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
         assertEquals(4, ((List)liste).size());
         
         Map result2 = (Map) objectResolver.getObject("org/settings4j/objectResolver/test1", contentResolver);
-        // difference Objects but same content.
+        // no caching by default => difference Objects but same content.
         assertTrue(result != result2);
         assertEquals(result2.get("irgendwas"), result.get("irgendwas"));
+        
+        
+    }
+    
+    public void test2Caching(){
+        JavaXMLBeansObjectResolver objectResolver = new JavaXMLBeansObjectResolver();
+        
+        ContentResolver contentResolver = new ClasspathContentResolver();
+        
+        
+        Map result = (Map) objectResolver.getObject("org/settings4j/objectResolver/test2", contentResolver);
+        assertEquals("blablablaNEUblablabla", result.get("irgendwasNeues"));
+        Object liste = result.get("liste");
+        assertNotNull(liste);
+        assertTrue(liste instanceof List);
+        assertEquals(1, ((List)liste).size());
+        assertEquals("testValue1", ((List)liste).get(0));
+        
+        Map result2 = (Map) objectResolver.getObject("org/settings4j/objectResolver/test2", contentResolver);
+        // this Object is cached! The two Objects must be the same.
+        assertTrue(result == result2);
+        assertEquals(result2.get("irgendwasNeues"), result.get("irgendwasNeues"));
+        
         
         
     }
