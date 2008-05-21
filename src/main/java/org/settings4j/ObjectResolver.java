@@ -17,6 +17,9 @@
 package org.settings4j;
 
 public interface ObjectResolver {
+    public static final int SETTING_NOT_POSSIBLE = 0;
+    public static final int SETTING_SUCCESS = 1;
+    
     Object getObject(String key, ContentResolver contentResolver);
     int setObject(String key, ContentResolver contentResolver, Object value);
     
