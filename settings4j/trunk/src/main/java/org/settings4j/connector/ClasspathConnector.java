@@ -20,6 +20,7 @@ import java.io.UnsupportedEncodingException;
 
 import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.ClasspathContentResolver;
+import org.settings4j.contentresolver.UnionContentResolver;
 
 public class ClasspathConnector extends AbstractConnector {
     
@@ -28,6 +29,7 @@ public class ClasspathConnector extends AbstractConnector {
         .getLog(ClasspathConnector.class);
     
     private ClasspathContentResolver classpathContentResolver = new ClasspathContentResolver();
+    private ContentResolver unionContentResolver = new UnionContentResolver(classpathContentResolver);
     private String charset = "UTF-8";
     
     public byte[] getContent(String key) {
@@ -36,7 +38,7 @@ public class ClasspathConnector extends AbstractConnector {
 
     public Object getObject(String key) {
         if (getObjectResolver() != null){
-            return getObjectResolver().getObject(key, classpathContentResolver);
+            return getObjectResolver().getObject(key, unionContentResolver);
         } else {
             return null;
         }
@@ -78,6 +80,7 @@ public class ClasspathConnector extends AbstractConnector {
     }
 
     public void setContentResolver(ContentResolver contentResolver) {
-        LOG.warn("A ContentResolver is not used by the ClasspathConnector");
+        unionContentResolver = new UnionContentResolver(classpathContentResolver);
+        unionContentResolver.addContentResolver(contentResolver);
     }
 }

@@ -20,14 +20,16 @@ import java.io.UnsupportedEncodingException;
 
 import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.FSContentResolver;
+import org.settings4j.contentresolver.UnionContentResolver;
 
 public class FSConnector extends AbstractConnector {
     
     /** General Logger for this Class */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(FSConnector.class);
-    
+
     private FSContentResolver fsContentResolver = new FSContentResolver();
+    private ContentResolver unionContentResolver = new UnionContentResolver(fsContentResolver);
     private String charset = "UTF-8";
     
     public byte[] getContent(String key) {
@@ -36,7 +38,7 @@ public class FSConnector extends AbstractConnector {
 
     public Object getObject(String key) {
         if (getObjectResolver() != null){
-            return getObjectResolver().getObject(key, fsContentResolver);
+            return getObjectResolver().getObject(key, unionContentResolver);
         } else {
             return null;
         }
@@ -63,7 +65,7 @@ public class FSConnector extends AbstractConnector {
 
     public int setObject(String key, Object value) {
         if (getObjectResolver() != null){
-            return getObjectResolver().setObject(key, fsContentResolver, value);
+            return getObjectResolver().setObject(key, unionContentResolver, value);
         } else {
             return SETTING_NOT_POSSIBLE;
         }
@@ -92,7 +94,8 @@ public class FSConnector extends AbstractConnector {
     }
 
     public void setContentResolver(ContentResolver contentResolver) {
-        LOG.warn("A ContentResolver is not used by the FSConnector");
+        unionContentResolver = new UnionContentResolver(fsContentResolver);
+        unionContentResolver.addContentResolver(contentResolver);
     }
     
     

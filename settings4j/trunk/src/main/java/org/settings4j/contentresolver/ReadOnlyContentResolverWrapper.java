@@ -20,16 +20,12 @@ import org.settings4j.ContentResolver;
 
 public class ReadOnlyContentResolverWrapper implements ContentResolver {
 
+    private ContentResolver targetContentResolver;
+
     public ReadOnlyContentResolverWrapper(ContentResolver targetContentResolver) {
         super();
         this.targetContentResolver = targetContentResolver;
     }
-
-    public ReadOnlyContentResolverWrapper() {
-        super();
-    }
-
-    private ContentResolver targetContentResolver = new UnionContentResolver();
     
     public synchronized void addContentResolver(ContentResolver contentResolver) {
         targetContentResolver.addContentResolver(contentResolver);

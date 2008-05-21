@@ -42,6 +42,7 @@ import org.settings4j.SettingsRepository;
 import org.settings4j.connector.ReadOnlyConnector;
 import org.settings4j.connector.SystemPropertyConnector;
 import org.settings4j.contentresolver.ReadOnlyContentResolverWrapper;
+import org.settings4j.objectresolver.ReadOnlyObjectResolverWrapper;
 import org.settings4j.util.ELConnectorWrapper;
 import org.settings4j.util.ExpressionLanguageUtil;
 import org.w3c.dom.Document;
@@ -647,8 +648,13 @@ public class DOMConfigurator {
      */
     protected ObjectResolver findObjectResolverByReference(Element objectResolverRef) {
         String objectResolverName = objectResolverRef.getAttribute(REF_ATTR);
+        Boolean readonly = (Boolean)subst(objectResolverRef.getAttribute(READONLY_ATTR), null, Boolean.class);
         Document doc = objectResolverRef.getOwnerDocument();
-        return findObjectResolverByName(doc, objectResolverName);
+        ObjectResolver objectResolver =  findObjectResolverByName(doc, objectResolverName);
+        if (readonly != null && readonly.booleanValue()){
+            return new ReadOnlyObjectResolverWrapper(objectResolver);
+        }
+        return objectResolver;
     }
 
     

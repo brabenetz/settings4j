@@ -21,6 +21,16 @@ import org.settings4j.ContentResolver;
 public class UnionContentResolver implements ContentResolver {
 
     private ContentResolver[] contentResolvers = new ContentResolver[0];
+
+
+    public UnionContentResolver() {
+        super();
+    }
+    
+    public UnionContentResolver(ContentResolver contentResolver) {
+        super();
+        addContentResolver(contentResolver);
+    }
     
     public synchronized void addContentResolver(ContentResolver contentResolver) {
         
