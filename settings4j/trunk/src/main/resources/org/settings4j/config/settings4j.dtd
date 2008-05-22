@@ -5,33 +5,43 @@
  this work for additional information regarding copyright ownership.
  The ASF licenses this file to You under the Apache License, Version 2.0
  (the "License"); you may not use this file except in compliance with
- the License.  You may obtain a copy of the License at<br />
-<br />
-      http://www.apache.org/licenses/LICENSE-2.0<br />
-<br />
+ the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
- limitations under the License.<br />
+ limitations under the License.
 -->
 
-<!-- Version: 1.2 -->
-
-<!-- A configuration element consists of optional renderer
-elements,appender elements, categories and an optional root
-element. -->
-
-<!ELEMENT settings4j:configuration (connector*,settings*,root?,
+<!-- A configuration element consists of following elements:
++ connector - The Implementation where the Settings could come from. A settings4j.xml without connector makes no sense.
+* settings - The Settings in a Hirachical Structure (Connectors are inherited). In most cases the root-element is enough
+* root - The root-"Settings" definition
+* contentResolver - The Implementation to resolve a Key to a byte[] - Content
+* objectResolver - The Implementation to converte the content from a ContentResolver to an Object.
+-->
+<!ELEMENT settings4j:configuration (connector+,settings*,root?,
                                contentResolver*, objectResolver*)>
-
 <!ATTLIST settings4j:configuration
   xmlns:settings4j              CDATA #FIXED "http://settings4j.org/"
 >
 
-<!-- Appenders must have a name and a class. -->
-<!-- Appenders may contain an error handler, a layout, optional parameters -->
-<!-- and filters. They may also reference (or include) other appenders. -->
+<!-- A connector element consists of following elements:
+* param - Use The Setter-Implementation of this connector-Bean to set a value
+* contentResolver-ref - The Reference to a contentResolver element
+* objectResolver-ref - The Reference to an objectResolver element
+* connector-ref - The Reference to a connector element
+
+And following Attributes:
+
+name - The name of this Connector (is used by the connector-ref element)
+class - The implementation class of this org.settings4j.Connector interface
+cached - default value is false; If true, then this connector will be wrapped
+     with the org.settings4j.connector.CachedConnectorWrapper implementation.
+-->
 <!ELEMENT connector (param*,
       contentResolver-ref*, objectResolver-ref*, connector-ref*)>
 <!ATTLIST connector
@@ -40,42 +50,75 @@ element. -->
   cached (true|false) "false"
 >
 
+<!-- A connector-ref element consists of following Attributes:
+ref - The refernece to a connector element
+readonly - default value is true; If true, then the connector will be wrapped
+     with the org.settings4j.connector.ReadOnlyConnectorWrapper implementation.
+-->
 <!ELEMENT connector-ref EMPTY>
 <!ATTLIST connector-ref
   ref CDATA #REQUIRED
-  readonly (true|false) "false"
+  readonly (true|false) "true"
 >
 
+<!-- A contentResolver-ref element consists of following Attributes:
+ref - The refernece to a contentResolver element
+-->
 <!ELEMENT contentResolver-ref EMPTY>
 <!ATTLIST contentResolver-ref
   ref CDATA #REQUIRED
 >
 
+<!-- A objectResolver-ref element consists of following Attributes:
+ref - The refernece to a objectResolver element
+-->
 <!ELEMENT objectResolver-ref EMPTY>
 <!ATTLIST objectResolver-ref
   ref CDATA #REQUIRED
 >
 
+<!-- A param element consists of following Attributes:
+name - the name off the Property. The Setter must be implemented. e.g.: "path" => public void setPath(String path);
+value - the value for the Setter
+
+Expression Language can also be used (required standard.jat)
+If you use the Expression Language, you have the following implicied Objects:
+"env" - The Envirenments
+-->
 <!ELEMENT param EMPTY>
 <!ATTLIST param
   name		CDATA   #REQUIRED
   value		CDATA	#REQUIRED
 >
 
-<!-- If no level element is specified, then the configurator MUST not -->
-<!-- touch the level of the named logger. -->
+
+<!-- A settings element consists of following elements:
+
+And following Attributes:
+
+-->
 <!ELEMENT settings (param*,connector-ref*)>
 <!ATTLIST settings
   name		CDATA	#REQUIRED
   additivity	(true|false) "true"  
 >
 
+<!-- A contentResolver element consists of following elements:
+
+And following Attributes:
+
+-->
 <!ELEMENT contentResolver (param*, contentResolver-ref*)>
 <!ATTLIST contentResolver
   name 		CDATA 	#REQUIRED
   class 	CDATA	#REQUIRED
 >
 
+<!-- A objectResolver element consists of following elements:
+
+And following Attributes:
+
+-->
 <!ELEMENT objectResolver (param*, objectResolver-ref*)>
 <!ATTLIST objectResolver
   name 		CDATA 	#REQUIRED
@@ -83,9 +126,6 @@ element. -->
   cached (true|false) "false"
 >
 
-
-<!-- If no priority element is specified, then the configurator MUST not -->
-<!-- touch the priority of root. -->
-<!-- The root category always exists and cannot be subclassed. -->
+<!-- The root settings always exists and cannot be subclassed. -->
 <!ELEMENT root (param*, connector-ref*)>
 

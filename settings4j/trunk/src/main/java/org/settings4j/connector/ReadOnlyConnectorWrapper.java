@@ -20,11 +20,11 @@ import org.settings4j.Connector;
 import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
 
-public class ReadOnlyConnector implements Connector {
+public class ReadOnlyConnectorWrapper implements Connector {
 
     private Connector targetConnector;
     
-    public ReadOnlyConnector(Connector delegateConnector) {
+    public ReadOnlyConnectorWrapper(Connector delegateConnector) {
         super();
         this.targetConnector = delegateConnector;
     }
