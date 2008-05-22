@@ -17,23 +17,26 @@
 	limitations under the License.
 -->
 <settings4j:configuration xmlns:settings4j='http://settings4j.org/'>
-	
-	<!-- Store settings into the temorary folder -->
-	<connector name="FSConnector" class="org.settings4j.connector.FSConnector" cached="true" >
-		<param name="rootFolderPath" value="${connectors.string['java.io.tmpdir']}Settings4jUnittest"/>
-		<connector-ref ref="SystemPropertyConnector"  />
-	</connector>
-	
-	<connector name="SystemPropertyConnector"
-		class="org.settings4j.connector.SystemPropertyConnector">
+
+	<connector name="FSConnector" class="org.settings4j.connector.FSConnector" cached="true">
+		<param name="rootFolderPath" value="test/Settings4jUnittest"/>
+		<contentResolver-ref ref="ClasspathContentResolver" />
+		<objectResolver-ref ref="JavaXMLBeansObjectResolver" />
 	</connector>
 
+	<connector name="ClasspathConnector" class="org.settings4j.connector.ClasspathConnector" />
+	
 	<settings name="com.mycompany.myapp" >
 		<connector-ref ref="FSConnector" readonly="false" />
 	</settings>
 	
 	<root>
-		<connector-ref ref="FSConnector" readonly="true" />
+		<connector-ref ref="ClasspathConnector" readonly="true" />
 	</root>
-
+	
+	<contentResolver name="ClasspathContentResolver" class="org.settings4j.contentresolver.ClasspathContentResolver">
+	</contentResolver>
+	
+	<objectResolver name="JavaXMLBeansObjectResolver" class="org.settings4j.objectresolver.JavaXMLBeansObjectResolver">
+	</objectResolver>
 </settings4j:configuration>

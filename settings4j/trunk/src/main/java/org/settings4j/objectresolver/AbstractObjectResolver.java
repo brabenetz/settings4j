@@ -72,7 +72,7 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
                 }
                 
                 if (getObjectReolverKey().equals(objectResolverKey)){
-                    result = contentToObject(key, properties, content);
+                    result = contentToObject(key, properties, content, contentResolver);
                     if (result != null){
                         if ("true".equalsIgnoreCase(cached) || (cached== null && isCached())){
                             cachedObjects.put(key, result);
@@ -87,6 +87,7 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
 
     public int setObject(String key, ContentResolver contentResolver, Object value) {
         Properties properties = getObjectProperties(key, contentResolver);
+        int status = SETTING_NOT_POSSIBLE;
         if (properties != null){
             String objectResolverKey = properties.getProperty(PROP_OBJECT_RESOLVER_KEY);
             String cached = properties.getProperty(PROP_CACHED);
@@ -101,10 +102,11 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
                 return SETTING_NOT_POSSIBLE;
             }
             
-            int status = SETTING_NOT_POSSIBLE;
             if (getObjectReolverKey().equals(objectResolverKey)){
                 byte[] content = objectToContent(key, properties, value);
-                status = contentResolver.setContent(key, content);
+                if (content != null){
+                    status = contentResolver.setContent(key, content);
+                }
             }
             
             if (status == SETTING_SUCCESS){
@@ -113,7 +115,7 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
                 }
             }
         }
-        return 0;
+        return status;
     }
     
     protected Properties getObjectProperties(String key, ContentResolver contentResolver){
@@ -140,12 +142,14 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
     public void setPropertySuffix(String propertySuffix) {
         this.propertySuffix = propertySuffix;
     }
-    
-    protected abstract String getObjectReolverKey();
+
+    protected String getObjectReolverKey() {
+        return this.getClass().getName();
+    }
     
     protected abstract byte[] objectToContent(String key, Properties properties, Object value);
     
-    protected abstract Object contentToObject(String key, Properties properties, byte[] content);
+    protected abstract Object contentToObject(String key, Properties properties, byte[] content, ContentResolver contentResolver);
 
     public boolean isCached() {
         return cached;
