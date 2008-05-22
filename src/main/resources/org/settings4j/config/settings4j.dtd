@@ -81,9 +81,13 @@ ref - The refernece to a objectResolver element
 name - the name off the Property. The Setter must be implemented. e.g.: "path" => public void setPath(String path);
 value - the value for the Setter
 
-Expression Language can also be used (required standard.jat)
+Expression Language can also be used (required standard.jar)
 If you use the Expression Language, you have the following implicied Objects:
-"env" - The Envirenments
+"env" - The Envirenments: System.getenv().
+    Usage ${env['...']} e.g.:  ${env['TOMCAT_HOME']} or ${env.TOMCAT_HOME}
+"connectors" - The connectors of the parent-Object.
+    Usage: ${connectors.object['...']} or ${connectors.string['...']}
+    See also: org.settings4j.util.ELConnectorWrapper
 -->
 <!ELEMENT param EMPTY>
 <!ATTLIST param
