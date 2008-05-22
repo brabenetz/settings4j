@@ -42,7 +42,7 @@ import org.settings4j.SettingsRepository;
 import org.settings4j.connector.AbstractConnector;
 import org.settings4j.connector.CachedConnectorWrapper;
 import org.settings4j.connector.ContentHasChangedNotifierConnectorWrapper;
-import org.settings4j.connector.ReadOnlyConnector;
+import org.settings4j.connector.ReadOnlyConnectorWrapper;
 import org.settings4j.connector.SystemPropertyConnector;
 import org.settings4j.contentresolver.ReadOnlyContentResolverWrapper;
 import org.settings4j.objectresolver.AbstractObjectResolver;
@@ -456,7 +456,7 @@ public class DOMConfigurator {
         Document doc = connectorRef.getOwnerDocument();
         Connector connector = findConnectorByName(doc, connectorName);
         if (readonly != null && readonly.booleanValue()){
-            return new ReadOnlyConnector(connector);
+            return new ReadOnlyConnectorWrapper(connector);
         }
         return connector;
     }
