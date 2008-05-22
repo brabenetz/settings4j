@@ -37,6 +37,7 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
     
     protected void setUp() throws Exception {
         super.setUp();
+        FileUtils.deleteDirectory(new File("test"));
         testDir = (new File("test/JavaXMLBeans/".toLowerCase())).getAbsoluteFile();
         FileUtils.forceMkdir(testDir);
     }
@@ -86,13 +87,53 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
         
     }
     
+    /**
+     * cached by propertyfile "org/settings4j/objectResolver/test2.properties"
+     */
     public void test2Caching(){
+        String key = "org/settings4j/objectResolver/test2";
+        
         JavaXMLBeansObjectResolver objectResolver = new JavaXMLBeansObjectResolver();
+
+        FSContentResolver fsContentResolver = new FSContentResolver();
+        fsContentResolver.setRootFolderPath(testDir.getAbsolutePath());
+        ContentResolver contentResolver = new UnionContentResolver(fsContentResolver);
+        contentResolver.addContentResolver(new ClasspathContentResolver());
         
-        ContentResolver contentResolver = new ClasspathContentResolver();
+        cachingTest(key, objectResolver, contentResolver);
         
+    }
+    
+    /**
+     * cached by {@link AbstractObjectResolver#setCached(boolean)}
+     */
+    public void test3Caching(){
+        String key = "org/settings4j/objectResolver/test3";
         
-        Map result = (Map) objectResolver.getObject("org/settings4j/objectResolver/test2", contentResolver);
+        JavaXMLBeansObjectResolver objectResolver = new JavaXMLBeansObjectResolver();
+        objectResolver.setCached(true);
+        
+        FSContentResolver fsContentResolver = new FSContentResolver();
+        fsContentResolver.setRootFolderPath(testDir.getAbsolutePath());
+        ContentResolver contentResolver = new UnionContentResolver(fsContentResolver);
+        contentResolver.addContentResolver(new ClasspathContentResolver());
+        
+        cachingTest(key, objectResolver, contentResolver);
+        
+        // The propertyfile "test4.properties" declare explicitly cached=false
+        key = "org/settings4j/objectResolver/test4";
+        Map result = (Map) objectResolver.getObject(key, contentResolver);
+        assertEquals("blablablaNEU4blablabla", result.get("irgendwasNeues"));
+        Map result2 = (Map) objectResolver.getObject(key, contentResolver);
+        // this Object is explicit NOT cached! The two Objects must be different.
+        assertTrue(result != result2);
+
+    
+    }
+
+    private void cachingTest(String key, JavaXMLBeansObjectResolver objectResolver, ContentResolver contentResolver) {
+        // read from classpath
+        Map result = (Map) objectResolver.getObject(key, contentResolver);
         assertEquals("blablablaNEUblablabla", result.get("irgendwasNeues"));
         Object liste = result.get("liste");
         assertNotNull(liste);
@@ -100,12 +141,54 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
         assertEquals(1, ((List)liste).size());
         assertEquals("testValue1", ((List)liste).get(0));
         
-        Map result2 = (Map) objectResolver.getObject("org/settings4j/objectResolver/test2", contentResolver);
+        Map result2 = (Map) objectResolver.getObject(key, contentResolver);
         // this Object is cached! The two Objects must be the same.
         assertTrue(result == result2);
         assertEquals(result2.get("irgendwasNeues"), result.get("irgendwasNeues"));
         
+        Map testData =  new HashMap();
+        List testList = new ArrayList();
+        String testValue1 = "testValue1";
+        String testValue2 = "testValue2";
+        String testValue3 = "testValue3";
+        String testValue4 = "testValue4";
+        testList.add(testValue1);
+        testList.add(testValue2);
+        testList.add(testValue3);
+        testList.add(testValue4);
+        testData.put("irgendwas", "blablablablablabla");
+        testData.put("liste", testList);
+
+        // copy properties for a Temp-Key. This is required for parsing (read/write) of Objects
+        byte[] content = contentResolver.getContent(key + ".properties");
+        contentResolver.setContent(key + "temp.properties", content);
+        
+        // save Object to a Temp-Key
+        objectResolver.setObject(key + "temp", contentResolver, testData);
+        
+        // Copy the writen Object without Objectreolver from Temp-Key to real Key
+        content = contentResolver.getContent(key + "temp");
+        contentResolver.setContent(key, content);
         
         
+        // this Object is cached, and the ObjectResolver doesn't know that the content was changed from contentResolver!
+        // The OLD Object must be returned.
+        result2 = (Map) objectResolver.getObject(key, contentResolver);
+        assertTrue(result2 == result);
+        assertEquals(result2.get("irgendwasNeues"), result.get("irgendwasNeues"));
+        
+        // clear cache:
+        // This is the work of ContentHasChangedNotifierConnectorWrapper in real live
+        objectResolver.notifyContentHasChanged(key);
+        
+        // Now the right Object must be returned.
+        result2 = (Map) objectResolver.getObject(key, contentResolver);
+        assertTrue(result2 != result);
+        assertNull(result2.get("irgendwasNeues"));
+        assertEquals("blablablablablabla", result2.get("irgendwas"));
+        liste = result2.get("liste");
+        assertNotNull(liste);
+        assertTrue(liste instanceof List);
+        assertEquals(4, ((List)liste).size());
     }
 }

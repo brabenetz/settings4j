@@ -17,29 +17,41 @@
 
 package org.settings4j.objectresolver;
 
-import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.util.Properties;
 
 import org.settings4j.ContentResolver;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.AbstractXmlApplicationContext;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 
-public class JavaXMLBeansObjectResolver extends AbstractObjectResolver{
+public class SpingConfigObjectResolver extends AbstractObjectResolver{
 
     protected Object contentToObject(String key, Properties properties, byte[] content, ContentResolver contentResolver) {
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(content);
-        XMLDecoder encoder = new XMLDecoder(byteArrayInputStream);
-        return encoder.readObject();
+        AbstractApplicationContext context = new ByteArrayXMLApplicationContext(content);
+        context.refresh();
+        Object result = context.getBean(key.replace('/', '.'));
+        context.close();
+        return result;
     }
 
     protected byte[] objectToContent(String key, Properties properties, Object value) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        XMLEncoder encoder = new XMLEncoder(byteArrayOutputStream);
-        encoder.writeObject(value);
-        encoder.flush();
-        encoder.close();
-        return byteArrayOutputStream.toByteArray();
+        return null;
     }
+    
+    private static class ByteArrayXMLApplicationContext extends AbstractXmlApplicationContext{
 
+        private Resource[] configResources;
+
+        public ByteArrayXMLApplicationContext(byte[] content) {
+            super();
+            this.configResources = new Resource[1];
+            this.configResources[0] = new ByteArrayResource(content);
+        }
+
+        protected Resource[] getConfigResources() {
+            return this.configResources;
+        }
+    };
+    
 }

@@ -116,7 +116,7 @@ public class DefaultSettings extends Settings {
                 return;
             }
         }
-        throw new IllegalStateException("Conntent '" + key + "' cannot be writen. No writeable Connector found");
+        throw new IllegalStateException("Content '" + key + "' cannot be writen. No writeable Connector found");
     }
 
     public void setObject(String key, Object value) {
@@ -131,7 +131,7 @@ public class DefaultSettings extends Settings {
                 return;
             }
         }
-        throw new IllegalStateException("Conntent '" + key + "' cannot be writen. No writeable Connector found");
+        throw new IllegalStateException("Content '" + key + "' cannot be writen. No writeable Connector found");
     }
 
     public void setString(String key, String value) {
@@ -146,7 +146,7 @@ public class DefaultSettings extends Settings {
                 return;
             }
         }
-        throw new IllegalStateException("Conntent '" + key + "' cannot be writen. No writeable Connector found");
+        throw new IllegalStateException("Content '" + key + "' cannot be writen. No writeable Connector found");
     }
 
     public Settings getParent() {
@@ -169,6 +169,9 @@ public class DefaultSettings extends Settings {
         this.settingsRepository = settingsRepository;
     }
     
+    /**
+     * Check if the repository must be configured with the defaul fallback settings4j.xml.
+     */
     private void checkConnectors(){
         if (settingsRepository.getConnectorCount() == 0){
             // No connectors in hierarchy, warn user and add default-configuration.

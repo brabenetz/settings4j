@@ -91,8 +91,6 @@ public class DOMConfigurator {
     static final String CLASS_ATTR = "class";
 
     static final String CACHED_ATTR = "cached";
-    
-    static final String FACTORY_CLASS_ATTR = "factoryClass";
 
     static final String VALUE_ATTR = "value";
 
@@ -216,19 +214,6 @@ public class DOMConfigurator {
             return;
         }
 
-//        //
-//        // reset repository before configuration if reset="true"
-//        // on configuration element.
-//        //
-//        String resetAttrib = subst(element.getAttribute(RESET_ATTR));
-//        LOG.debug("reset attribute= \"" + resetAttrib + "\".");
-//        if (!("".equals(resetAttrib))) {
-//            if (OptionConverter.toBoolean(resetAttrib, false)) {
-//                repository.resetConfiguration();
-//            }
-//        }
-
-
         /*
          * Building Appender objects, placing them in a local namespace for future reference
          */
@@ -268,24 +253,10 @@ public class DOMConfigurator {
 
         Settings settings;
 
-        String className = loggerElement.getAttribute(FACTORY_CLASS_ATTR);
-
-        if (StringUtils.isEmpty(className)) {
-            LOG.debug("Retreiving an instance of org.settings4j.Settings");
-            // settings = (catFactory == null) ? repository.getSettings(settingsName) :
-            // repository.getSettings(settingsName, catFactory);
-            settings = repository.getSettings(settingsName);
-        } else {
-            LOG.debug("Desired logger sub-class: [" + className + ']');
-            try {
-                Class clazz = loadClass(className);
-                Method getInstanceMethod = clazz.getMethod("getSettings", ONE_STRING_PARAM);
-                settings = (Settings) getInstanceMethod.invoke(null, new Object[] {settingsName });
-            } catch (Exception oops) {
-                LOG.error("Could not retrieve settings [" + settingsName + "]. Reported error follows.", oops);
-                return;
-            }
-        }
+        LOG.debug("Retreiving an instance of org.settings4j.Settings");
+        // settings = (catFactory == null) ? repository.getSettings(settingsName) :
+        // repository.getSettings(settingsName, catFactory);
+        settings = repository.getSettings(settingsName);
 
         // Setting up a category needs to be an atomic operation, in order
         // to protect potential log operations while category
@@ -533,7 +504,7 @@ public class DOMConfigurator {
                     Element currentElement = (Element) currentNode;
                     String tagName = currentElement.getTagName();
 
-                    if (tagName.equals(CONTENT_RESOLVER_REF_TAG)) {
+                    if (tagName.equals(OBJECT_RESOLVER_REF_TAG)) {
                         Element objectResolverRef = (Element) currentNode;
                         ObjectResolver subObjectResolver = findObjectResolverByReference(objectResolverRef);
                         objectResolver.addObjectResolver(subObjectResolver);

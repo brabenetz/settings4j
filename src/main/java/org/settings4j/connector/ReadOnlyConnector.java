@@ -17,27 +17,18 @@
 package org.settings4j.connector;
 
 import org.settings4j.Connector;
+import org.settings4j.ContentResolver;
+import org.settings4j.ObjectResolver;
 
-public class ReadOnlyConnector extends AbstractConnector{
+public class ReadOnlyConnector implements Connector {
 
-    private Connector delegateConnector;
+    private Connector targetConnector;
+    
     public ReadOnlyConnector(Connector delegateConnector) {
         super();
-        this.delegateConnector = delegateConnector;
+        this.targetConnector = delegateConnector;
     }
-
-    public byte[] getContent(String key) {
-        return delegateConnector.getContent(key);
-    }
-
-    public Object getObject(String key) {
-        return delegateConnector.getObject(key);
-    }
-
-    public String getString(String key) {
-        return delegateConnector.getString(key);
-    }
-
+    
     public int setContent(String key, byte[] value) {
         return SETTING_NOT_POSSIBLE;
     }
@@ -48,5 +39,35 @@ public class ReadOnlyConnector extends AbstractConnector{
 
     public int setString(String key, String value) {
         return SETTING_NOT_POSSIBLE;
+    }
+
+    
+    /* ****************************
+     * Delegating Methodes:
+     * ****************************/
+    
+    public byte[] getContent(String key) {
+        return targetConnector.getContent(key);
+    }
+
+    public Object getObject(String key) {
+        return targetConnector.getObject(key);
+    }
+
+    public String getString(String key) {
+        return targetConnector.getString(key);
+    }
+
+
+    public void addConnector(Connector connector) {
+        targetConnector.addConnector(connector);
+    }
+
+    public void setContentResolver(ContentResolver contentResolver) {
+        targetConnector.setContentResolver(contentResolver);
+    }
+
+    public void setObjectResolver(ObjectResolver objectResolver) {
+        targetConnector.setObjectResolver(objectResolver);
     }
 }

@@ -60,21 +60,21 @@ public class TestDefaultFallbackConfiguration extends TestCase{
             SETTINGS.setString("xyz", "xyz");
             fail("must throw an IllegalStateException");
         } catch (IllegalStateException e) {
-            assertEquals("Conntent 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
+            assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
         }
 
         try {
             SETTINGS.setContent("xyz", "xyz".getBytes());
             fail("must throw an IllegalStateException");
         } catch (IllegalStateException e) {
-            assertEquals("Conntent 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
+            assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
         }
 
         try {
             SETTINGS.setObject("xyz", "xyz");
             fail("must throw an IllegalStateException");
         } catch (IllegalStateException e) {
-            assertEquals("Conntent 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
+            assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
         }
         
         assertEquals(3, SETTINGS.getSettingsRepository().getConnectorCount());

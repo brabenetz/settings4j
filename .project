@@ -1,6 +1,6 @@
 <projectDescription>
   <name>settings4j</name>
-  <comment>The Programmer says he want the settings for Key &apos;xyz&apos;, and
+  <comment>The Programmer want the settings for Key &apos;xyz&apos;, and
 		should not care about where the Settings comes from.</comment>
   <projects/>
   <buildSpec>
