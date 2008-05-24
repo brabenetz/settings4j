@@ -14,7 +14,8 @@ import org.settings4j.settings.DefaultSettings;
 import org.settings4j.settings.HierarchicalSettingsRepository;
 
 /**
- * Unit test for simple App.
+ * Unit test for the Hirachical Structure in Settings4j
+ * Also test simply Connectors, and ContentResolver
  */
 public class SettingsRepositoryTest extends TestCase {
     
@@ -22,7 +23,7 @@ public class SettingsRepositoryTest extends TestCase {
 
     protected void setUp() throws Exception {
         super.setUp();
-        testDir = (new File("test/ContentResolverTest/".toLowerCase())).getAbsoluteFile();
+        testDir = (new File(UtilTesting.getTestFolder(), "ContentResolverTest".toLowerCase())).getAbsoluteFile();
         FileUtils.forceMkdir(testDir);
     }
 
@@ -32,9 +33,18 @@ public class SettingsRepositoryTest extends TestCase {
     }
 
     /**
+     * Test simply getString() in Hierarchical way.<br />
+     * <br />
+     * Tested Connectors:<br />
+     * {@link SystemPropertyConnector}, {@link UnionContentResolver}, {@link ClasspathConnector} (only since hierarchy node: "x.y.z")<br />
+     * <br />
+     * Tested ContentResolver: <br />
+     * {@link FSContentResolver}<br />
+     * <br />
+     * 
      * @throws Exception 
      */
-    public void testApp() throws Exception {
+    public void testHierarchy() throws Exception {
         assertTrue(true);
         SettingsRepository settingsRepository = new HierarchicalSettingsRepository(new DefaultSettings("root"));
 

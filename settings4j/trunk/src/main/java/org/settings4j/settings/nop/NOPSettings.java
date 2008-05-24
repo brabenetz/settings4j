@@ -58,10 +58,6 @@ public class NOPSettings extends Settings {
         return null;
     }
 
-    public Settings getParent() {
-        return null;
-    }
-
     public String getString(String key) {
         return null;
     }
@@ -72,18 +68,10 @@ public class NOPSettings extends Settings {
     public void setObject(String key, Object value) {
     }
 
-    public void setParent(Settings parent) {
-    }
-
     public void setString(String key, String value) {
     }
 
     public SettingsRepository getSettingsRepository() {
         return settingsRepository;
     }
-
-    public void setSettingsRepository(SettingsRepository settingsRepository) {
-        this.settingsRepository = settingsRepository;
-    }
-
 }

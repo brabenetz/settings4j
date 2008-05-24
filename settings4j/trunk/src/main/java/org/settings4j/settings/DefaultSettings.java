@@ -23,13 +23,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.settings4j.Connector;
-import org.settings4j.Settings;
 import org.settings4j.SettingsRepository;
 import org.settings4j.config.DOMConfigurator;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.settings.helper.ConnectorIterator;
 
-public class DefaultSettings extends Settings {
+public class DefaultSettings extends HierarchicalSettings{
     
     /** General Logger for this Class */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
@@ -37,7 +36,7 @@ public class DefaultSettings extends Settings {
     
     String name;
     private List connectors = Collections.checkedList(Collections.synchronizedList(new ArrayList()), Connector.class);
-    private Settings parent;
+    private HierarchicalSettings parent;
 
     // Categories need to know what Hierarchy they are in
     private SettingsRepository settingsRepository;
@@ -149,11 +148,11 @@ public class DefaultSettings extends Settings {
         throw new IllegalStateException("Content '" + key + "' cannot be writen. No writeable Connector found");
     }
 
-    public Settings getParent() {
+    public HierarchicalSettings getParent() {
         return parent;
     }
 
-    public void setParent(Settings parent) {
+    public void setParent(HierarchicalSettings parent) {
         this.parent = parent;
     }
 
