@@ -20,8 +20,41 @@ import java.util.List;
 
 import org.settings4j.settings.SettingsManager;
 
+
+/**
+ * Settings is used to get simply access to Application settings.
+ * The default Settings-Object is embedded into an Hirachical Structure like the Logger in Log4j.
+ * 
+ * <pre>
+ * Example usage java:
+ * --------------------------------------
+ * public class SettingsManager {
+ *     private static final Settings SETTINGS = Settings.getSettings(SettingsManager.class);
+ * 
+ *     public static String getMyFormula() {
+ *         return SETTINGS.getString("com/mycompany/mycalculation/my-formula");
+ *     }
+ * }
+ * --------------------------------------
+ * 
+ * Example configuration in settings4j.xml:
+ * --------------------------------------
+ * &lt;settings name="com.mycompany" &gt;
+ *     &lt;connector-ref name="DBConnector" /&gt;
+ * &lt;/settings&gt;
+ * --------------------------------------
+ * 
+ * </pre>
+ * 
+ * @author hbrabenetz
+ *
+ */
 public abstract class Settings {
     
+    /**
+     * The Name of the Settings
+     * @return
+     */
     public abstract String getName();
 
     public abstract String getString(String key);
@@ -43,34 +76,44 @@ public abstract class Settings {
     public abstract void removeAllConnectors();
 
     /**
-     * For internal use only
+     * Get the {@link SettingsRepository} where this Settings-Object is stored.
+     * 
+     * @return the {@link SettingsRepository} where this Settings-Object is stored.
      */
-    public abstract Settings getParent();
-
-    /**
-     * For internal use only
-     */
-    public abstract void setParent(Settings parent);
-
-    /**
-     * For internal use only
-     */
-    public abstract void setSettingsRepository(SettingsRepository settingsRepository);
-
     public abstract SettingsRepository getSettingsRepository();
     
+    /**
+     * Delegate to {@link SettingsManager#getSettings(String)}
+     * 
+     * @see SettingsManager#getSettings(String)
+     */
     public static Settings getSettings(String name) {
         return SettingsManager.getSettings(name);
     }
 
+    /**
+     * Delegate to {@link SettingsManager#getSettings(Class)}
+     * 
+     * @see SettingsManager#getSettings(Class)
+     */
     public static Settings getSettings(Class clazz) {
         return SettingsManager.getSettings(clazz);
     }
 
+    /**
+     * Delegate to {@link SettingsManager#getSettings(String, SettingsFactory)}
+     * 
+     * @see SettingsManager#getSettings(String, SettingsFactory)
+     */
     public static Settings getSettings(final String name, final SettingsFactory factory) {
         return SettingsManager.getSettings(name, factory);
     }
 
+    /**
+     * Delegate to {@link SettingsManager#getRootSettings()}
+     * 
+     * @see SettingsManager#getRootSettings()
+     */
     public static Settings getRootSettings() {
         return SettingsManager.getRootSettings();
     }

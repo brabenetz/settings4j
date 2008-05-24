@@ -18,12 +18,12 @@ package org.settings4j.settings.helper;
 
 import java.util.Iterator;
 
-import org.settings4j.Settings;
+import org.settings4j.settings.HierarchicalSettings;
 
 public class ConnectorIterator implements Iterator {
-    private Settings settings;
+    private HierarchicalSettings settings;
     Iterator connectorIterator;
-    public ConnectorIterator(Settings settings) {
+    public ConnectorIterator(HierarchicalSettings settings) {
         super();
         this.settings = settings;
         connectorIterator = settings.getConnectors().iterator();
@@ -32,7 +32,7 @@ public class ConnectorIterator implements Iterator {
     public boolean hasNext() {
         if (connectorIterator.hasNext()) return true;
         
-        Settings settingsTemp = settings;
+        HierarchicalSettings settingsTemp = settings;
         while (settingsTemp.getParent() != null){
             settingsTemp = settingsTemp.getParent();
             if (settingsTemp.getConnectors().iterator().hasNext()) return true;
@@ -43,7 +43,7 @@ public class ConnectorIterator implements Iterator {
 
     public Object next() {
         if (connectorIterator.hasNext()) return connectorIterator.next();
-
+        
         while (settings.getParent() != null){
             settings = settings.getParent();
             connectorIterator = settings.getConnectors().iterator();

@@ -37,10 +37,6 @@ public abstract class AbstractDBConnector extends AbstractConnector {
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(AbstractDBConnector.class);
 
-    public AbstractDBConnector() {
-        super();
-    }
-    
     /**
      * This implementation adds a {@link DBContentResolverAdapter} to the contentResolver-List (at the first position).
      * This ContentResolver will be used by the ObjectResolver

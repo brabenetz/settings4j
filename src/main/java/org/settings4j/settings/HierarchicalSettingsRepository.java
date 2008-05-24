@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.settings4j.settings.HierarchicalSettings;
 import org.settings4j.Settings;
 import org.settings4j.SettingsFactory;
 import org.settings4j.SettingsRepository;
@@ -37,12 +38,12 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
     
     private Map map = Collections.synchronizedMap(new HashMap());
     
-    private Settings root;
+    private HierarchicalSettings root;
     
     private int connectorCount;
     
     
-    public HierarchicalSettingsRepository(Settings root) {
+    public HierarchicalSettingsRepository(HierarchicalSettings root) {
         super();
         this.root = root;
         root.setSettingsRepository(this);
@@ -50,8 +51,8 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
 
     public Settings exists(String name) {
         Object o = map.get(new SettingsKey(name));
-        if (o instanceof Settings) {
-            return (Settings) o;
+        if (o instanceof HierarchicalSettings) {
+            return (HierarchicalSettings) o;
         } else {
             return null;
         }
@@ -66,7 +67,7 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
         Iterator iterator = map.values().iterator();
         while (iterator.hasNext()) {
             Object o = iterator.next();
-            if (o instanceof Settings) {
+            if (o instanceof HierarchicalSettings) {
                 list.add(o);
             }
         }
@@ -87,21 +88,21 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
         // Synchronize to prevent write conflicts. Read conflicts (in
         // getChainedLevel method) are possible only if variable
         // assignments are non-atomic.
-        Settings settings;
+        HierarchicalSettings settings;
 
         synchronized (map) {
             Object o = map.get(key);
             if (o == null) {
-                settings = factory.makeNewSettingsInstance(name);
+                settings = (HierarchicalSettings)factory.makeNewSettingsInstance(name);
                 settings.setSettingsRepository(this);
                 map.put(key, settings);
                 updateParents(settings);
                 return settings;
-            } else if (o instanceof Settings) {
-                return (Settings) o;
+            } else if (o instanceof HierarchicalSettings) {
+                return (HierarchicalSettings) o;
             } else if (o instanceof ProvisionNode) {
                 // System.out.println("("+name+") ht.get(this) returned ProvisionNode");
-                settings = factory.makeNewSettingsInstance(name);
+                settings = (HierarchicalSettings)factory.makeNewSettingsInstance(name);
                 settings.setSettingsRepository(this);
                 map.put(key, settings);
                 updateChildren((ProvisionNode) o, settings);
@@ -130,7 +131,7 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
      * 
      * We add 'cat' to the list of children for this potential parent.
      */
-    final private void updateParents(Settings settings) {
+    final private void updateParents(HierarchicalSettings settings) {
         String name = settings.getName();
         int length = name.length();
         boolean parentFound = false;
@@ -149,10 +150,9 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
                 // System.out.println("No parent "+substr+" found. Creating ProvisionNode.");
                 ProvisionNode pn = new ProvisionNode(settings);
                 map.put(key, pn);
-            } else if (o instanceof Settings) {
+            } else if (o instanceof HierarchicalSettings) {
                 parentFound = true;
-                settings.setParent((Settings) o);
-                // System.out.println("Linking " + cat.name + " -> " + ((Category) o).name);
+                settings.setParent((HierarchicalSettings) o);
                 break; // no need to update the ancestors of the closest ancestor
             } else if (o instanceof ProvisionNode) {
                 ((ProvisionNode) o).addElement(settings);
@@ -179,12 +179,12 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
      * Otherwise, we set cat's parent field to c's parent and set c's parent field to cat.
      * 
      */
-    final private void updateChildren(ProvisionNode pn, Settings settings) {
+    final private void updateChildren(ProvisionNode pn, HierarchicalSettings settings) {
         // System.out.println("updateChildren called for " + logger.name);
         final int last = pn.size();
 
         for (int i = 0; i < last; i++) {
-            Settings s = (Settings) pn.elementAt(i);
+            HierarchicalSettings s = (HierarchicalSettings) pn.elementAt(i);
             // System.out.println("Updating child " +p.name);
 
             // Unless this child already points to a correct (lower) parent,
@@ -195,6 +195,7 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
             }
         }
     }
+    
 
     public int getConnectorCount() {
         return connectorCount;
