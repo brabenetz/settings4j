@@ -57,4 +57,8 @@ public abstract class AbstractConnector implements Connector{
     public void setObjectResolver(ObjectResolver objectResolver) {
         this.objectResolver = objectResolver;
     }
+    public void init(){
+        // Overwrite this methode if you want do something after all properties are set.
+        // by default there is nothing to do
+    }
 }

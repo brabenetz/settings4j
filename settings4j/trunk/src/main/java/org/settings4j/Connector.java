@@ -33,4 +33,11 @@ public interface Connector {
     void setContentResolver(ContentResolver contentResolver);
     void setObjectResolver(ObjectResolver objectResolver);
     void addConnector(Connector connector);
+    
+    /**
+     * Will be called after all properties have been set.
+     * This function will only called one times.
+     *  
+     */
+    public void init();
 }

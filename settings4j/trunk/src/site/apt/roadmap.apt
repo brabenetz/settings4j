@@ -48,13 +48,15 @@ Roadmap of changes for this project.
 
     ! Object-Resolver implementations with java.beans.XMLEncoder and XMLDecoder
 
+    ! Object-Resolver implementations with {{{http://springframework.org/}Springframework}} (readonly, an object can only be set with setContent)
+
     ! A DB-Connector implemented with Hibernate, configurable with Settings4j over SystemProperties or JNDI-Envirenment-Variables.
 
     ! settings4j.xml: addictive="false" if no heredity of connectors are being requested.
 
     ! settings4j.xml: cached="true" A Wrapper for Settings, Connectors and ObjectResolvers to cache all requests.
 
-    - Extend the Example-App to configure a DB-Connector. The Datasource-Object comes from JNDI-Context or with an ObjectResolver from FileSystemConnector.
+    - Extend the Example-App to configure a DB-Connector. The {{{http://java.sun.com/j2se/1.4.2/docs/api/javax/sql/DataSource.html}DataSource}}-Object comes from JNDI-Context or with an ObjectResolver from FileSystemConnector.
 
     ! mappings configured in settings4j.xml: map one key to an other Key.
 

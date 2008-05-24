@@ -76,4 +76,9 @@ public class ContentHasChangedNotifierConnectorWrapper implements Connector{
     public int setString(String key, String value) {
         return targetConnector.setString(key, value);
     }
+
+    public void init() {
+        targetConnector.init();
+    }
+
 }

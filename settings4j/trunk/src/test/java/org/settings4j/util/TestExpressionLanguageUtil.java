@@ -79,7 +79,7 @@ public class TestExpressionLanguageUtil extends TestCase{
         
     }
 
-    public void testLazyMapMatchPattern() throws Exception {
+    public void xtestLazyMapMatchPattern() throws Exception {
         
         // the Map with all params 
         // Map<String, Object> context = new java.util.HashMap<String, Object>();

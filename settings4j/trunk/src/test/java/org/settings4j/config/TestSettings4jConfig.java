@@ -18,7 +18,6 @@
 package org.settings4j.config;
 
 import java.io.File;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,9 +33,7 @@ import junit.framework.TestCase;
 import org.apache.commons.io.FileUtils;
 import org.settings4j.Settings;
 import org.settings4j.SettingsRepository;
-import org.settings4j.contentresolver.ClasspathContentResolver;
-import org.settings4j.settings.DefaultSettings;
-import org.settings4j.settings.HierarchicalSettingsRepository;
+import org.settings4j.UtilTesting;
 import org.settings4j.settings.SettingsManager;
 
 public class TestSettings4jConfig extends TestCase{
@@ -46,20 +43,20 @@ public class TestSettings4jConfig extends TestCase{
         .getLog(TestSettings4jConfig.class);
     
     protected void setUp() throws Exception {
-        File tmpFolder = getTmpFolder();
+        File tmpFolder = UtilTesting.getTmpFolder();
         LOG.info("Use temporary Folder: " + tmpFolder.getAbsolutePath());
         FileUtils.deleteDirectory(tmpFolder);
         
-        File testFolder = getTestFolder();
+        File testFolder = UtilTesting.getTestFolder();
         LOG.info("Use test Folder: " + testFolder.getAbsolutePath());
         FileUtils.deleteDirectory(testFolder);
         super.setUp();
     }
 
     protected void tearDown() throws Exception {
-        File tmpFolder = getTmpFolder();
+        File tmpFolder = UtilTesting.getTmpFolder();
         FileUtils.deleteDirectory(tmpFolder);
-        File testFolder = getTestFolder();
+        File testFolder = UtilTesting.getTestFolder();
         FileUtils.deleteDirectory(testFolder);
         super.tearDown();
     }
@@ -68,7 +65,7 @@ public class TestSettings4jConfig extends TestCase{
      * Test parsing of defaultsettings4j.xml (FALLBACK-Configuration)
      */
     public void testDefaultSettings4jConfig(){
-        SettingsRepository settingsRepository = getConfiguredSettingsRepository(SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
+        SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository(SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
         
         Settings rootSeetings = settingsRepository.getRootSettings();
         
@@ -121,14 +118,14 @@ public class TestSettings4jConfig extends TestCase{
     }
     
     public void testCorruptConfig(){
-        SettingsRepository settingsRepository = getConfiguredSettingsRepository("org/settings4j/config/testConfigCorrupt.xml");
+        SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigCorrupt.xml");
 
         assertEquals(0, settingsRepository.getConnectorCount());
     }
     
 
     public void testFSConfigTempFolder(){
-        SettingsRepository settingsRepository = getConfiguredSettingsRepository("org/settings4j/config/testConfigFSTempfolder.xml");
+        SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigFSTempfolder.xml");
 
         Settings mycompanySeetings = settingsRepository.getSettings("com.mycompany");
 
@@ -144,7 +141,7 @@ public class TestSettings4jConfig extends TestCase{
         // store values into the default java temporary directory with subfolder "Settings4j"
         // String tmpdir = System.getProperty("java.io.tmpdir");
         Settings settings1 = settingsRepository.getSettings("com.mycompany.myapp");
-        File tmpFolder = getTmpFolder();
+        File tmpFolder = UtilTesting.getTmpFolder();
         File fileXyz = new File(tmpFolder, "xyz");
         assertFalse(fileXyz.exists());
         settings1.setString("xyz", "abc");
@@ -162,7 +159,7 @@ public class TestSettings4jConfig extends TestCase{
     }
     
     public void testFSConfigTestFolder(){
-        SettingsRepository settingsRepository = getConfiguredSettingsRepository("org/settings4j/config/testConfigFSTestfolder.xml");
+        SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigFSTestfolder.xml");
 
         Settings mycompanySeetings = settingsRepository.getSettings("com.mycompany");
 
@@ -178,7 +175,7 @@ public class TestSettings4jConfig extends TestCase{
         // store values into the default java temporary directory with subfolder "Settings4j"
         // String tmpdir = System.getProperty("java.io.tmpdir");
         Settings settings1 = settingsRepository.getSettings("com.mycompany.myapp");
-        File testFolder = getTestFolder();
+        File testFolder = UtilTesting.getTestFolder();
         File fileXyz = new File(testFolder, "xyz");
         assertFalse(fileXyz.exists());
         settings1.setString("xyz", "abc");
@@ -200,7 +197,7 @@ public class TestSettings4jConfig extends TestCase{
      */
     public void testObjectResolverConfig1(){
         
-        SettingsRepository settingsRepository = getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver1.xml");
+        SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver1.xml");
 
         String key1 = "org/settings4j/objectResolver/test1";
         String key2 = "org/settings4j/objectResolver/test2";
@@ -212,7 +209,7 @@ public class TestSettings4jConfig extends TestCase{
      */
     public void testObjectResolverConfig2(){
         
-        SettingsRepository settingsRepository = getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver2.xml");
+        SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver2.xml");
 
         String key1 = "org/settings4j/objectResolver/test1";
         String key2 = "org/settings4j/objectResolver/test2";
@@ -224,7 +221,7 @@ public class TestSettings4jConfig extends TestCase{
      */
     public void testObjectResolverConfig3(){
         
-        SettingsRepository settingsRepository = getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver3.xml");
+        SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver3.xml");
 
         String key1 = "org/settings4j/objectResolver/test2"; // property with cached==true
         String key2 = "org/settings4j/objectResolver/test3";
@@ -236,7 +233,7 @@ public class TestSettings4jConfig extends TestCase{
      */
     public void testObjectResolverConfig4Spring() throws Exception{
         
-        SettingsRepository settingsRepository = getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver4Spring.xml");
+        SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver4Spring.xml");
 
         String key1 = "org/settings4j/objectResolver/testSpring1"; // spring-configuration
         String key2 = "org/settings4j/objectResolver/test1"; // XML-Bean-Configuration
@@ -310,7 +307,7 @@ public class TestSettings4jConfig extends TestCase{
         // String tmpdir = System.getProperty("java.io.tmpdir");
         Settings settings1 = settingsRepository.getSettings("com.mycompany.myapp");
         
-        File testFolder = getTestFolder();
+        File testFolder = UtilTesting.getTestFolder();
         File fileKey1 = new File(testFolder, key1);
         assertFalse(fileKey1.exists());
 
@@ -355,7 +352,7 @@ public class TestSettings4jConfig extends TestCase{
     }
     
     public void testPropertyFileConfig(){
-        SettingsRepository settingsRepository = getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFile.xml");
+        SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFile.xml");
 
         Settings seetings = settingsRepository.getSettings("com.mycompany");
 
@@ -363,23 +360,5 @@ public class TestSettings4jConfig extends TestCase{
         assertEquals("Value from Property-File", seetings.getString("xyz"));
 
         assertEquals(2, settingsRepository.getConnectorCount());
-    }
-    
-    private SettingsRepository getConfiguredSettingsRepository(String classpathUrl){
-
-        URL url = ClasspathContentResolver.getResource(classpathUrl);
-        SettingsRepository settingsRepository = new HierarchicalSettingsRepository(new DefaultSettings("root"));
-        DOMConfigurator.configure(url, settingsRepository);
-        return settingsRepository;
-    }
-    private static File getTmpFolder(){
-        String tmpdir = System.getProperty("java.io.tmpdir");
-        File tmpFolder = new File(tmpdir + "Settings4jUnittest");
-        return tmpFolder;
-    }
-    
-    private static File getTestFolder(){
-        File testFolder = new File("test/Settings4jUnittest");
-        return testFolder;
     }
 }

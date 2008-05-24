@@ -43,9 +43,6 @@ public class TestDefaultFallbackConfiguration extends TestCase{
      */
     public void testDefaultSettings4jConfig(){
         
-        // rootSettings are extra. So the default Settings have only the Settings of this Class
-        assertEquals(1, SETTINGS.getSettingsRepository().getCurrentSettingsList().size());
-        
         LOG.debug("#### AFTER THE FOLLOWING LINE SETTINGS4J WILL BE CONFIGURED THE FIRST TIME WITH THE FALLBACK-FILE #####");
         assertEquals("HelloWorld", SETTINGS.getString("testDefaultProperty"));
         LOG.debug("#### FINISH CONFIGURATION #####");
