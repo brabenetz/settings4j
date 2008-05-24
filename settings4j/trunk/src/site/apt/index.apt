@@ -44,7 +44,7 @@ Settings4j library 1.0
 
 ** Developer
 
-	Developer wants the settings for Key 'xyz'
+	Developer wants the settings for Key 'com/mycompany/mycalculation/my-formula'
 	He create the following SettingsManager-Class:
 
 --------------------------------------------
