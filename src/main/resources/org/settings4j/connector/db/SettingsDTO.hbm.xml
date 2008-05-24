@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.settings4j.connector.db">
+
+    <class name="SettingsDTO" table="SETTINGS4J">
+        <id name="id" column="ID" unsaved-value="null">
+            <generator class="native" />
+        </id>
+        
+        <property name="key" column="KEY" unique="true" not-null="true" />
+        
+        <property name="stringValue" column="STRING_VALUE" />
+        
+        <property name="contentValue" column="CONTENT_VALUE" />
+    </class>
+
+</hibernate-mapping>
