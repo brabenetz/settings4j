@@ -327,8 +327,7 @@ public class DOMConfigurator {
                         // TODO Harald.Brabenetz Apr 8, 2008 : include subConnectors to settings
                         setParameter(currentElement, connector, subConnectors);
                     } else {
-                        // TODO Harald.Brabenetz Apr 17, 2008 :
-                        //quietParseUnrecognizedElement(settings, currentElement, props);
+                        quietParseUnrecognizedElement(connector, currentElement);
                     }
                 }
             }
@@ -341,9 +340,33 @@ public class DOMConfigurator {
             if (cached != null && cached.booleanValue()){
                 connector = new CachedConnectorWrapper(connector);
             }
+            
+            // initial the connector
+            connector.init();
         }
-        
         return connector;
+    }
+
+    /**
+     * Only logs out unrecognized Elements
+     * 
+     * @param instance instance, may be null.
+     * @param element element, may not be null.
+     */
+    private static void quietParseUnrecognizedElement(final Object instance, final Element element) {
+        String elementName = "UNKNOWN";
+        String instanceClassName = "UNKNOWN";
+        
+        try{
+            elementName = element.getNodeName();
+            instanceClassName = instance.getClass().getName();
+        }catch (Exception e) {
+            LOG.warn("Error in quietParseUnrecognizedElement(): " + e.getMessage());
+            if (LOG.isDebugEnabled()){
+                LOG.debug(e.getMessage(), e);
+            }
+        }
+        LOG.warn("Unrecognized Element will be ignored: " + elementName + " for Instance: " + instanceClassName);
     }
 
     /**
@@ -416,8 +439,7 @@ public class DOMConfigurator {
                 if (tagName.equals(PARAM_TAG)) {
                     setParameter(currentElement, settings, connectors);
                 } else {
-                    // TODO Harald.Brabenetz Apr 17, 2008 :
-                    //quietParseUnrecognizedElement(settings, currentElement, props);
+                    quietParseUnrecognizedElement(settings, currentElement);
                 }
             }
         }
@@ -512,8 +534,7 @@ public class DOMConfigurator {
                     } else if (tagName.equals(PARAM_TAG)) {
                         setParameter(currentElement, objectResolver, connectors);
                     } else {
-                        // TODO Harald.Brabenetz Apr 17, 2008 :
-                        //quietParseUnrecognizedElement(settings, currentElement, props);
+                        quietParseUnrecognizedElement(objectResolver, currentElement);
                     }
                 }
             }
@@ -583,8 +604,7 @@ public class DOMConfigurator {
                     } else if (tagName.equals(PARAM_TAG)) {
                         setParameter(currentElement, contentResolver, connectors);
                     } else {
-                        // TODO Harald.Brabenetz Apr 17, 2008 :
-                        //quietParseUnrecognizedElement(settings, currentElement, props);
+                        quietParseUnrecognizedElement(contentResolver, currentElement);
                     }
                 }
             }

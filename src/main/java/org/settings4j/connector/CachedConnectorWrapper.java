@@ -127,4 +127,8 @@ public class CachedConnectorWrapper implements Connector{
         targetConnector.setObjectResolver(objectResolver);
     }
 
+    public void init() {
+        targetConnector.init();
+    }
+
 }

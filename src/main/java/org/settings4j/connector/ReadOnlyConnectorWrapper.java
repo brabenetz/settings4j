@@ -70,4 +70,9 @@ public class ReadOnlyConnectorWrapper implements Connector {
     public void setObjectResolver(ObjectResolver objectResolver) {
         targetConnector.setObjectResolver(objectResolver);
     }
+
+    public void init() {
+        targetConnector.init();
+    }
+
 }

@@ -22,14 +22,18 @@
 	<connector name="SystemPropertyConnector"
 		class="org.settings4j.connector.SystemPropertyConnector">
 		<contentResolver-ref ref="DefaultContentResolver" />
+		<objectResolver-ref ref="DefaultObjectResolver" />
 	</connector>
 	
 	<connector name="JNDIConnector"
 		class="org.settings4j.connector.JNDIConnector">
 		<contentResolver-ref ref="DefaultContentResolver" />
+		<objectResolver-ref ref="DefaultObjectResolver" />
 	</connector>
 	
-	<connector name="ClasspathConnector" class="org.settings4j.connector.ClasspathConnector" />
+	<connector name="ClasspathConnector" class="org.settings4j.connector.ClasspathConnector" >
+		<objectResolver-ref ref="DefaultObjectResolver" />
+	</connector>
 		
 	<root>
 		<connector-ref ref="SystemPropertyConnector" readonly="true" />
@@ -50,4 +54,15 @@
 		class="org.settings4j.contentresolver.ClasspathContentResolver">
 	</contentResolver>
 
+	<objectResolver name="DefaultObjectResolver" class="org.settings4j.objectresolver.UnionObjectResolver">
+		<objectResolver-ref ref="JavaXMLBeansObjectResolver" />
+		<objectResolver-ref ref="SpingConfigObjectResolver" />
+	</objectResolver>
+	
+	<objectResolver name="JavaXMLBeansObjectResolver" class="org.settings4j.objectresolver.JavaXMLBeansObjectResolver">
+	</objectResolver>
+	
+	<objectResolver name="SpingConfigObjectResolver" class="org.settings4j.objectresolver.SpingConfigObjectResolver">
+	</objectResolver>
+	
 </settings4j:configuration>
