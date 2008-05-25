@@ -16,6 +16,7 @@
  *****************************************************************************/
 package org.settings4j.contentresolver;
 
+import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 
 public class UnionContentResolver implements ContentResolver {
@@ -55,10 +56,10 @@ public class UnionContentResolver implements ContentResolver {
     }
 
     public int setContent(String key, byte[] value) {
-        int status = SETTING_NOT_POSSIBLE;
+        int status = Constants.SETTING_NOT_POSSIBLE;
         for (int i = 0; i < contentResolvers.length; i++) {
             status = contentResolvers[i].setContent(key, value);
-            if (status != SETTING_NOT_POSSIBLE){
+            if (status != Constants.SETTING_NOT_POSSIBLE){
                 return status;
             }
         }

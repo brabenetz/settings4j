@@ -17,6 +17,7 @@
 
 package org.settings4j.objectresolver;
 
+import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
 
@@ -53,10 +54,10 @@ public class UnionObjectResolver implements ObjectResolver{
     }
 
     public int setObject(String key, ContentResolver contentResolver, Object value) {
-        int status = SETTING_NOT_POSSIBLE;
+        int status = Constants.SETTING_NOT_POSSIBLE;
         for (int i = 0; i < objectResolvers.length; i++) {
             status = objectResolvers[i].setObject(key, contentResolver, value);
-            if (status != SETTING_NOT_POSSIBLE){
+            if (status != Constants.SETTING_NOT_POSSIBLE){
                 return status;
             }
         }

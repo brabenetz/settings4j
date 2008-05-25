@@ -25,6 +25,7 @@ import javax.naming.NamingException;
 import javax.naming.NoInitialContextException;
 
 import org.apache.commons.lang.StringUtils;
+import org.settings4j.Constants;
 
 public class JNDIConnector extends AbstractConnector {
     /** General Logger for this Class */
@@ -86,7 +87,7 @@ public class JNDIConnector extends AbstractConnector {
     }
 
     public int setContent(String key, byte[] value) {
-        int result = SETTING_NOT_POSSIBLE;
+        int result = Constants.SETTING_NOT_POSSIBLE;
         String path = getString(key);
         if (path != null && getContentResolver() != null) {
             // assume that the value from JNDI-Context is a Path.
@@ -101,7 +102,7 @@ public class JNDIConnector extends AbstractConnector {
     }
 
     public int setObject(String key, Object value) {
-        int result = SETTING_NOT_POSSIBLE;
+        int result = Constants.SETTING_NOT_POSSIBLE;
         String path = getString(key);
         if (path != null && getObjectResolver() != null) {
             // assume that the value from JNDI-Context is a Path.
@@ -116,7 +117,7 @@ public class JNDIConnector extends AbstractConnector {
     }
 
     public int setString(String key, String value) {
-        int result = SETTING_NOT_POSSIBLE;
+        int result = Constants.SETTING_NOT_POSSIBLE;
         result = rebindToContext(key, value);
         return result;
     }
@@ -182,12 +183,12 @@ public class JNDIConnector extends AbstractConnector {
             LOG.debug("Try to rebind Key '" + key + "' (" + normalizedKey + ")" + " with value: " + value);
         }
         InitialContext ctx = null;
-        int result = SETTING_NOT_POSSIBLE;
+        int result = Constants.SETTING_NOT_POSSIBLE;
         try {
             ctx = getJNDIContext();
             createParentContext(ctx, normalizedKey);
             ctx.rebind(normalizedKey, value);
-            result = SETTING_SUCCESS;
+            result = Constants.SETTING_SUCCESS;
         } catch (NoInitialContextException e) {
             LOG.info("Maybe no JNDI-Context available.");
             LOG.debug(e.getMessage(), e);

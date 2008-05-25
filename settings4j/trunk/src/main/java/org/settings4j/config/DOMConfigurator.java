@@ -324,7 +324,6 @@ public class DOMConfigurator {
                         connector.setObjectResolver(objectResolver);
 
                     } else if (tagName.equals(PARAM_TAG)) {
-                        // TODO Harald.Brabenetz Apr 8, 2008 : include subConnectors to settings
                         setParameter(currentElement, connector, subConnectors);
                     } else {
                         quietParseUnrecognizedElement(connector, currentElement);
@@ -416,7 +415,7 @@ public class DOMConfigurator {
      */
     protected void parseChildrenOfSettingsElement(Element settingsElement, Settings settings, boolean isRoot) {
 
-        // Remove all existing appenders from cat. They will be
+        // Remove all existing appenders from settings. They will be
         // reconstructed if need be.
         settings.removeAllConnectors();
 

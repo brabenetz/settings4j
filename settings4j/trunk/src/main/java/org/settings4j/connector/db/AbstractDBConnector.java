@@ -17,6 +17,7 @@
 
 package org.settings4j.connector.db;
 
+import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 import org.settings4j.connector.AbstractConnector;
 import org.settings4j.connector.db.dao.SettingsDAO;
@@ -88,10 +89,10 @@ public abstract class AbstractDBConnector extends AbstractConnector {
             }
             settingsDTO.setContentValue(value);
             getSettingsDAO().store(settingsDTO);
-            return SETTING_SUCCESS;
+            return Constants.SETTING_SUCCESS;
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
-            return SETTING_NOT_POSSIBLE;
+            return Constants.SETTING_NOT_POSSIBLE;
         }
     }
 
@@ -110,10 +111,10 @@ public abstract class AbstractDBConnector extends AbstractConnector {
             }
             settingsDTO.setStringValue(value);
             getSettingsDAO().store(settingsDTO);
-            return SETTING_SUCCESS;
+            return Constants.SETTING_SUCCESS;
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
-            return SETTING_NOT_POSSIBLE;
+            return Constants.SETTING_NOT_POSSIBLE;
         }
     }
     

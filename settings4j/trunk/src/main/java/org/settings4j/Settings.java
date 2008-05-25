@@ -16,8 +16,7 @@
  *****************************************************************************/
 package org.settings4j;
 
-import java.util.List;
-
+import org.settings4j.exception.NoWriteableConnectorFoundException;
 import org.settings4j.settings.SettingsManager;
 
 
@@ -57,22 +56,110 @@ public abstract class Settings {
      */
     public abstract String getName();
 
+    /**
+     * return the found String-Value for the given key.<br />
+     * The {@link Settings} Instance iterates all his {@link Connector} and return the first found Value.<br />
+     * <br />
+     * Returns null if no connector found a Value for the given key<br />
+     * 
+     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
+     * @return the found String-Value for the given key 
+     */
     public abstract String getString(String key);
 
+    /**
+     * return the found byte[]-Value for the given key.<br />
+     * The {@link Settings} Instance iterates all his {@link Connector} and return the first found Value.<br />
+     * <br />
+     * Returns null if no connector found a Value for the given key<br />
+     * 
+     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
+     * @return the found byte[]-Value for the given key 
+     */
     public abstract byte[] getContent(String key);
 
+    /**
+     * return the found Object-Value for the given key.<br />
+     * The {@link Settings} Instance iterates all his {@link Connector} and return the first found Value.<br />
+     * <br />
+     * Returns null if no connector found a Value for the given key<br />
+     * 
+     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
+     * @return the found Object-Value for the given key 
+     */
     public abstract Object getObject(String key);
 
-    public abstract void setString(String key, String value);
+    /**
+     * Set ( or overwrite ) the Value for the Given key.<br />
+     * The {@link Settings} Instance iterates all his {@link Connector} and
+     * if a Connector can successful write the new Value,
+     * then the Connector must return {@link Constants#SETTING_SUCCESS}<br />
+     * 
+     * If No Connector can write the Value ( all {@link Connector} returns {@link Constants#SETTING_NOT_POSSIBLE}
+     * then a {@link NoWriteableConnectorFoundException} will be thrown.
+     * 
+     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
+     * @param value the new String-Value for the given key 
+     * @throws NoWriteableConnectorFoundException Is thrown if no Connector was Found.
+     *      One Connector must return {@link Constants#SETTING_SUCCESS}
+     */
+    public abstract void setString(String key, String value) throws NoWriteableConnectorFoundException;
 
-    public abstract void setContent(String key, byte[] value);
 
-    public abstract void setObject(String key, Object value);
+    /**
+     * Set ( or overwrite ) the Value for the Given key.<br />
+     * The {@link Settings} Instance iterates all his {@link Connector} and
+     * if a Connector can successful write the new Value,
+     * then the Connector must return {@link Constants#SETTING_SUCCESS}<br />
+     * 
+     * If No Connector can write the Value ( all {@link Connector} returns {@link Constants#SETTING_NOT_POSSIBLE}
+     * then a {@link NoWriteableConnectorFoundException} will be thrown.
+     * 
+     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
+     * @param value the new byte[]-Value for the given key 
+     * @throws NoWriteableConnectorFoundException Is thrown if no Connector was Found.
+     *      One Connector must return {@link Constants#SETTING_SUCCESS}
+     */
+    public abstract void setContent(String key, byte[] value) throws NoWriteableConnectorFoundException;
 
-    public abstract List getConnectors();
 
+    /**
+     * Set ( or overwrite ) the Value for the Given key.<br />
+     * The {@link Settings} Instance iterates all his {@link Connector} and
+     * if a Connector can successful write the new Value,
+     * then the Connector must return {@link Constants#SETTING_SUCCESS}<br />
+     * 
+     * If No Connector can write the Value ( all {@link Connector} returns {@link Constants#SETTING_NOT_POSSIBLE}
+     * then a {@link NoWriteableConnectorFoundException} will be thrown.
+     * 
+     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
+     * @param value the new Object-Value for the given key 
+     * @throws NoWriteableConnectorFoundException Is thrown if no Connector was Found.
+     *      One Connector must return {@link Constants#SETTING_SUCCESS}
+     */
+    public abstract void setObject(String key, Object value) throws NoWriteableConnectorFoundException;
+
+    /**
+     * Add a {@link Connector}.<br />
+     * This method will be call, if you create a connector-ref to a connector configuration in your settings4j.xml
+     * 
+     * <pre>
+     * Example configuration in settings4j.xml:
+     * --------------------------------------
+     * &lt;settings name="com.mycompany" &gt;
+     *     &lt;connector-ref name="DBConnector" /&gt;
+     * &lt;/settings&gt;
+     * --------------------------------------
+     * </pre>
+     * 
+     * @param connector
+     */
     public abstract void addConnector(Connector connector);
     
+    /**
+     * Rmove all Settings.
+     * (Internal use only)
+     */
     public abstract void removeAllConnectors();
 
     /**

@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 
 public class FSContentResolver implements ContentResolver {
@@ -73,7 +74,7 @@ public class FSContentResolver implements ContentResolver {
             key = key.substring(1);
         }
         
-        int status = SETTING_NOT_POSSIBLE;
+        int status = Constants.SETTING_NOT_POSSIBLE;
         File file;
         if (key.contains(":")){
             // don't store Files into a subfolder like "c:/xayc/" + "d:/blabla"
@@ -86,7 +87,7 @@ public class FSContentResolver implements ContentResolver {
         }
         try {
             FileUtils.writeByteArrayToFile(file, value);
-            status = SETTING_SUCCESS;
+            status = Constants.SETTING_SUCCESS;
         } catch (IOException e) {
             LOG.info(e.getMessage(), e);
         }
