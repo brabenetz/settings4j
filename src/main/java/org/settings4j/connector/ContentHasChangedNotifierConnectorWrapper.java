@@ -18,6 +18,7 @@
 package org.settings4j.connector;
 
 import org.settings4j.Connector;
+import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
 
@@ -35,7 +36,7 @@ public class ContentHasChangedNotifierConnectorWrapper implements Connector{
      **/
     public int setContent(String key, byte[] value) {
         int result = targetConnector.setContent(key, value);
-        if (result == SETTING_SUCCESS){
+        if (result == Constants.SETTING_SUCCESS){
             targetConnector.getObjectResolver().notifyContentHasChanged(key);
         }
         return result;

@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
+import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
 
@@ -87,19 +88,19 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
 
     public int setObject(String key, ContentResolver contentResolver, Object value) {
         Properties properties = getObjectProperties(key, contentResolver);
-        int status = SETTING_NOT_POSSIBLE;
+        int status = Constants.SETTING_NOT_POSSIBLE;
         if (properties != null){
             String objectResolverKey = properties.getProperty(PROP_OBJECT_RESOLVER_KEY);
             String cached = properties.getProperty(PROP_CACHED);
             String readonly = properties.getProperty(PROP_READONLY);
             if ("true".equalsIgnoreCase(readonly)){
-                return SETTING_NOT_POSSIBLE;
+                return Constants.SETTING_NOT_POSSIBLE;
             }
             if (StringUtils.isEmpty(objectResolverKey)){
                 // TODO hbrabenetz 21.05.2008 :
                 // set new PropertyFile with this ObjectResolver
                 // if possible, then write with this ObjectResolver normally
-                return SETTING_NOT_POSSIBLE;
+                return Constants.SETTING_NOT_POSSIBLE;
             }
             
             if (getObjectReolverKey().equals(objectResolverKey)){
@@ -109,7 +110,7 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
                 }
             }
             
-            if (status == SETTING_SUCCESS){
+            if (status == Constants.SETTING_SUCCESS){
                 if ("true".equalsIgnoreCase(cached) || (cached== null && isCached())){
                     cachedObjects.put(key, value);
                 }

@@ -16,6 +16,7 @@
  *****************************************************************************/
 package org.settings4j.contentresolver;
 
+import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 
 public class ReadOnlyContentResolverWrapper implements ContentResolver {
@@ -36,7 +37,7 @@ public class ReadOnlyContentResolverWrapper implements ContentResolver {
     }
 
     public int setContent(String key, byte[] value) {
-        return SETTING_NOT_POSSIBLE;
+        return Constants.SETTING_NOT_POSSIBLE;
     }
 
 }

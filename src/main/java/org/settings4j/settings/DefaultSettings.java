@@ -23,22 +23,30 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.settings4j.Connector;
+import org.settings4j.Constants;
 import org.settings4j.SettingsRepository;
 import org.settings4j.config.DOMConfigurator;
 import org.settings4j.contentresolver.ClasspathContentResolver;
+import org.settings4j.exception.NoWriteableConnectorFoundException;
 import org.settings4j.settings.helper.ConnectorIterator;
 
+/**
+ * The default Settings Object is a {@link HierarchicalSettings} implementation.
+ * 
+ * @author hbrabenetz
+ *
+ */
 public class DefaultSettings extends HierarchicalSettings{
     
     /** General Logger for this Class */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(DefaultSettings.class);
     
-    String name;
+    private String name;
     private List connectors = Collections.checkedList(Collections.synchronizedList(new ArrayList()), Connector.class);
     private HierarchicalSettings parent;
 
-    // Categories need to know what Hierarchy they are in
+    // Settings needs to know what Hierarchy they are in
     private SettingsRepository settingsRepository;
 
     public DefaultSettings(String name) {
@@ -46,20 +54,24 @@ public class DefaultSettings extends HierarchicalSettings{
         this.name = name;
     }
 
+    /** {@inheritDoc} */
     public List getConnectors() {
         return Collections.unmodifiableList(connectors);
     }
     
+    /** {@inheritDoc} */
     public void addConnector(Connector connector) {
         connectors.add(connector);
     }
 
+    /** {@inheritDoc} */
     public void removeAllConnectors() {
         connectors.clear();
     }
 
+    /** {@inheritDoc} */
     public byte[] getContent(String key) {
-        checkConnectors();
+        initializeRepositoryIfNecessary();
         byte[] result = null;
         Iterator iterator;
         iterator = new ConnectorIterator(this);
@@ -73,8 +85,9 @@ public class DefaultSettings extends HierarchicalSettings{
         return result;
     }
 
+    /** {@inheritDoc} */
     public Object getObject(String key) {
-        checkConnectors();
+        initializeRepositoryIfNecessary();
         Object result = null;
         Iterator iterator;
         iterator = new ConnectorIterator(this);
@@ -88,8 +101,9 @@ public class DefaultSettings extends HierarchicalSettings{
         return result;
     }
 
+    /** {@inheritDoc} */
     public String getString(String key) {
-        checkConnectors();
+        initializeRepositoryIfNecessary();
         String result = null;
         Iterator iterator;
         iterator = new ConnectorIterator(this);
@@ -103,67 +117,75 @@ public class DefaultSettings extends HierarchicalSettings{
         return result;
     }
 
-    public void setContent(String key, byte[] value) {
-        checkConnectors();
+    /** {@inheritDoc} */
+    public void setContent(String key, byte[] value) throws NoWriteableConnectorFoundException {
+        initializeRepositoryIfNecessary();
         int status;
         Iterator iterator;
         iterator = new ConnectorIterator(this);
         while (iterator.hasNext()) {
             Connector connector = (Connector) iterator.next();
             status = connector.setContent(key, value);
-            if (status == Connector.SETTING_SUCCESS){
+            if (status == Constants.SETTING_SUCCESS){
                 return;
             }
         }
-        throw new IllegalStateException("Content '" + key + "' cannot be writen. No writeable Connector found");
+        throw new NoWriteableConnectorFoundException(key);
     }
 
-    public void setObject(String key, Object value) {
-        checkConnectors();
+    /** {@inheritDoc} */
+    public void setObject(String key, Object value) throws NoWriteableConnectorFoundException {
+        initializeRepositoryIfNecessary();
         int status;
         Iterator iterator;
         iterator = new ConnectorIterator(this);
         while (iterator.hasNext()) {
             Connector connector = (Connector) iterator.next();
             status = connector.setObject(key, value);
-            if (status == Connector.SETTING_SUCCESS){
+            if (status == Constants.SETTING_SUCCESS){
                 return;
             }
         }
-        throw new IllegalStateException("Content '" + key + "' cannot be writen. No writeable Connector found");
+        throw new NoWriteableConnectorFoundException(key);
     }
 
-    public void setString(String key, String value) {
-        checkConnectors();
+    /** {@inheritDoc} */
+    public void setString(String key, String value) throws NoWriteableConnectorFoundException {
+        initializeRepositoryIfNecessary();
         int status;
         Iterator iterator;
         iterator = new ConnectorIterator(this);
         while (iterator.hasNext()) {
             Connector connector = (Connector) iterator.next();
             status = connector.setString(key, value);
-            if (status == Connector.SETTING_SUCCESS){
+            if (status == Constants.SETTING_SUCCESS){
                 return;
             }
         }
-        throw new IllegalStateException("Content '" + key + "' cannot be writen. No writeable Connector found");
+        throw new NoWriteableConnectorFoundException(key);
     }
 
+    /** {@inheritDoc} */
     public HierarchicalSettings getParent() {
         return parent;
     }
 
+    /** {@inheritDoc} */
     public void setParent(HierarchicalSettings parent) {
         this.parent = parent;
     }
 
+    /** {@inheritDoc} */
     public String getName() {
         return name;
     }
 
+    /** {@inheritDoc} */
     public SettingsRepository getSettingsRepository() {
         return settingsRepository;
     }
 
+    /** {@inheritDoc} */
     public void setSettingsRepository(SettingsRepository settingsRepository) {
         this.settingsRepository = settingsRepository;
     }
@@ -171,7 +193,7 @@ public class DefaultSettings extends HierarchicalSettings{
     /**
      * Check if the repository must be configured with the defaul fallback settings4j.xml.
      */
-    private void checkConnectors(){
+    protected void initializeRepositoryIfNecessary(){
         if (settingsRepository.getConnectorCount() == 0){
             // No connectors in hierarchy, warn user and add default-configuration.
             LOG.warn("No connectors could be found! For Setting '" + getName() + "'.");

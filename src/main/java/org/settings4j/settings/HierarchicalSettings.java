@@ -17,6 +17,8 @@
 
 package org.settings4j.settings;
 
+import java.util.List;
+
 import org.settings4j.Settings;
 import org.settings4j.SettingsRepository;
 
@@ -36,4 +38,12 @@ public abstract class HierarchicalSettings extends Settings {
      * For internal use only
      */
     public abstract void setSettingsRepository(SettingsRepository settingsRepository);
+
+    /**
+     * Return all Connectors of this Settings-Instance
+     * 
+     * @return
+     */
+    public abstract List getConnectors();
+    
 }

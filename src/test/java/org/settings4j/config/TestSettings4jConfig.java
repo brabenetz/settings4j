@@ -34,6 +34,8 @@ import org.apache.commons.io.FileUtils;
 import org.settings4j.Settings;
 import org.settings4j.SettingsRepository;
 import org.settings4j.UtilTesting;
+import org.settings4j.exception.NoWriteableConnectorFoundException;
+import org.settings4j.settings.HierarchicalSettings;
 import org.settings4j.settings.SettingsManager;
 
 public class TestSettings4jConfig extends TestCase{
@@ -67,7 +69,7 @@ public class TestSettings4jConfig extends TestCase{
     public void testDefaultSettings4jConfig(){
         SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository(SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
         
-        Settings rootSeetings = settingsRepository.getRootSettings();
+        HierarchicalSettings rootSeetings = (HierarchicalSettings)settingsRepository.getRootSettings();
         
         // rootSettings are extra. So the default Settings have no settings
         assertEquals(0, settingsRepository.getCurrentSettingsList().size());
@@ -95,22 +97,22 @@ public class TestSettings4jConfig extends TestCase{
         //check if there is a Exception thrown:
         try {
             rootSeetings.setString("xyz", "xyz");
-            fail("must throw an IllegalStateException");
-        } catch (IllegalStateException e) {
+            fail("must throw an NoWriteableConnectorFoundException");
+        } catch (NoWriteableConnectorFoundException e) {
             assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
         }
 
         try {
             rootSeetings.setContent("xyz", "xyz".getBytes());
-            fail("must throw an IllegalStateException");
-        } catch (IllegalStateException e) {
+            fail("must throw an NoWriteableConnectorFoundException");
+        } catch (NoWriteableConnectorFoundException e) {
             assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
         }
 
         try {
             rootSeetings.setObject("xyz", "xyz");
-            fail("must throw an IllegalStateException");
-        } catch (IllegalStateException e) {
+            fail("must throw an NoWriteableConnectorFoundException");
+        } catch (NoWriteableConnectorFoundException e) {
             assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
         }
         
@@ -133,8 +135,9 @@ public class TestSettings4jConfig extends TestCase{
         // only com.mycompany.myapp and above can write
         try {
             mycompanySeetings.setString("xyz", "abc");
-            fail("must throw an IllegalStateException");
-        } catch (IllegalStateException e) {
+            fail("must throw an NoWriteableConnectorFoundException");
+        } catch (NoWriteableConnectorFoundException e) {
+            assertEquals(NoWriteableConnectorFoundException.NO_WRITEABLE_CONNECTOR_FOUND_1, e.getKey());
             assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
         }
         
@@ -167,8 +170,9 @@ public class TestSettings4jConfig extends TestCase{
         // only com.mycompany.myapp and above can write
         try {
             mycompanySeetings.setString("xyz", "abc");
-            fail("must throw an IllegalStateException");
-        } catch (IllegalStateException e) {
+            fail("must throw an NoWriteableConnectorFoundException");
+        } catch (NoWriteableConnectorFoundException e) {
+            assertEquals(NoWriteableConnectorFoundException.NO_WRITEABLE_CONNECTOR_FOUND_1, e.getKey());
             assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
         }
         
@@ -298,8 +302,10 @@ public class TestSettings4jConfig extends TestCase{
         // only com.mycompany.myapp and above can write
         try {
             mycompanySeetings.setObject(key1, new HashMap());
-            fail("must throw an IllegalStateException");
-        } catch (IllegalStateException e) {
+            fail("must throw an NoWriteableConnectorFoundException");
+        } catch (NoWriteableConnectorFoundException e) {
+            assertEquals(NoWriteableConnectorFoundException.NO_WRITEABLE_CONNECTOR_FOUND_1, e.getKey());
+            assertEquals(key1, e.getArgs()[0].toString());
             assertEquals("Content '" + key1 + "' cannot be writen. No writeable Connector found", e.getMessage());
         }
         

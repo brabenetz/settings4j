@@ -16,9 +16,23 @@
  *****************************************************************************/
 package org.settings4j;
 
+/**
+ * a ContentResolver is a Helper for read/write byte[] content for a given key.
+ * 
+ * <pre>
+ * 
+ * Example configuration in settings4j.xml:
+ * --------------------------------------
+ * &lt;contentResolver name="ClasspathContentResolver" class="org.settings4j.contentresolver.ClasspathContentResolver"&gt;
+ * &lt;/contentResolver&gt;
+ * --------------------------------------
+ * 
+ * </pre>
+ * 
+ * @author hbrabenetz
+ *
+ */
 public interface ContentResolver {
-    public static final int SETTING_NOT_POSSIBLE = 0;
-    public static final int SETTING_SUCCESS = 1;
     
     byte[] getContent(String key);
     int setContent(String key, byte[] value);

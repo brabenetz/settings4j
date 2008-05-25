@@ -17,6 +17,7 @@
 
 package org.settings4j.objectresolver;
 
+import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
 
@@ -35,7 +36,7 @@ public class ReadOnlyObjectResolverWrapper implements ObjectResolver{
     }
     
     public int setObject(String key, ContentResolver contentResolver, Object value) {
-        return SETTING_NOT_POSSIBLE;
+        return Constants.SETTING_NOT_POSSIBLE;
     }
 
 

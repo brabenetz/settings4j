@@ -18,6 +18,7 @@
 package org.settings4j.connector;
 
 import org.settings4j.Connector;
+import org.settings4j.Constants;
 
 public abstract class AbstractPropertyConnector extends AbstractConnector {
 
@@ -48,7 +49,7 @@ public abstract class AbstractPropertyConnector extends AbstractConnector {
         if (path != null && getContentResolver() != null) {
             return getContentResolver().setContent(path, value);
         } else {
-            return SETTING_NOT_POSSIBLE;
+            return Constants.SETTING_NOT_POSSIBLE;
         }
     }
 
@@ -57,13 +58,13 @@ public abstract class AbstractPropertyConnector extends AbstractConnector {
         if (path != null && getObjectResolver() != null) {
             return getObjectResolver().setObject(path, getContentResolver(), value);
         } else {
-            return SETTING_NOT_POSSIBLE;
+            return Constants.SETTING_NOT_POSSIBLE;
         }
     }
 
     public int setString(String key, String value) {
         // System.setProperty is only temporary => so return NOT POSSIBLE
-        return Connector.SETTING_NOT_POSSIBLE;
+        return Constants.SETTING_NOT_POSSIBLE;
     }
 
     /**

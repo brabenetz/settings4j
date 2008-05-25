@@ -18,6 +18,7 @@ package org.settings4j.connector;
 
 import java.io.UnsupportedEncodingException;
 
+import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.contentresolver.UnionContentResolver;
@@ -60,15 +61,15 @@ public class ClasspathConnector extends AbstractConnector {
     }
 
     public int setContent(String key, byte[] value) {
-        return SETTING_NOT_POSSIBLE;
+        return Constants.SETTING_NOT_POSSIBLE;
     }
 
     public int setObject(String key, Object value) {
-        return SETTING_NOT_POSSIBLE;
+        return Constants.SETTING_NOT_POSSIBLE;
     }
 
     public int setString(String key, String value) {
-        return SETTING_NOT_POSSIBLE;
+        return Constants.SETTING_NOT_POSSIBLE;
     }
 
     public String getCharset() {

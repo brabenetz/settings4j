@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
+import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 
 public class ClasspathContentResolver implements ContentResolver {
@@ -71,7 +72,7 @@ public class ClasspathContentResolver implements ContentResolver {
     }
     
     public int setContent(String key, byte[] value) {
-        return SETTING_NOT_POSSIBLE;
+        return Constants.SETTING_NOT_POSSIBLE;
     }
     
 
