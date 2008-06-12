@@ -20,11 +20,13 @@ Roadmap of changes for this project.
 
 * Winter 2008/2009 1.1.0
 
+	Brainstorming:
+
 	! additional Object-resolver with digester (Use a digester-Rules-XML to convert a XML to an Object)
 
 	! additional Object-resolver with Spring (Use one or more springContext-XML to convert a XML to an Object)
 
-	! additional Content-resolver with VFSPath
+	! additional Content-resolver with VFSPath?
 
 	! additional Connector to Windows registry:
 	
@@ -32,19 +34,27 @@ Roadmap of changes for this project.
 		
 		* {{http://www.trustice.com/java/jnireg/}}
 
+	! additional Connector to Preferences?:
+	
+		* {{http://java.sun.com/j2se/1.4.2/docs/api/java/util/prefs/Preferences.html}}
+	
+		* {{http://www.particle.kth.se/~lindsey/JavaCourse/Book/Part1/Java/Chapter10/Preferences.html}}
+
 
 * September 2008 Final Version 1.0.0 - after few bug fixes
 
 
 
-* Juli 2008 1.0.0-rc - re factored release
+* 27. Juli 2008 1.0.0-rc - re factored release
 
     - extended JavaDoc and UnitTests
 
     - Maven-Site
+    
+    - Simple standalon WebApp to modify Settings (set new String-Values or upload files per Key).
 
 
-* Juny 2008 1.0.0-beta - release with additional features:
+* 6. Juli 2008 1.0.0-beta - release with additional features:
 
     ! Object-Resolver implementations with java.beans.XMLEncoder and XMLDecoder
 
@@ -59,6 +69,12 @@ Roadmap of changes for this project.
     - Extend the Example-App to configure a DB-Connector. The {{{http://java.sun.com/j2se/1.4.2/docs/api/javax/sql/DataSource.html}DataSource}}-Object comes from JNDI-Context or with an ObjectResolver from FileSystemConnector.
 
     ! mappings configured in settings4j.xml: map one key to an other Key.
+
+	! additional Connector to Environment Variables:
+	
+	! Helper Class for SpringFramework:
+	
+		* like org.springframework.jndi.JndiObjectFactoryBean {{http://static.springframework.org/spring/docs/2.5.4/reference/cci.html}}
 
 
 * 12. May 2008 1.0.0-alpha - release with following features:
