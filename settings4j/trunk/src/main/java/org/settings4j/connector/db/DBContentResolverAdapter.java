@@ -41,7 +41,7 @@ public class DBContentResolverAdapter implements ContentResolver {
 
     /** {@inheritDoc} */
     public void addContentResolver(ContentResolver contentResolver) {
-        // DO Nothing
+        throw new UnsupportedOperationException("DBContentResolverAdapter cannot add other ContentResolvers");
     }
 
     /** {@inheritDoc} */

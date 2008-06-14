@@ -18,6 +18,7 @@ package org.settings4j.settings.nop;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.settings4j.Connector;
 import org.settings4j.Settings;
@@ -73,5 +74,12 @@ public class NOPSettings extends Settings {
 
     public SettingsRepository getSettingsRepository() {
         return settingsRepository;
+    }
+
+    public Map getMapping() {
+        return Collections.EMPTY_MAP;
+    }
+
+    public void setMapping(Map mapping) {
     }
 }

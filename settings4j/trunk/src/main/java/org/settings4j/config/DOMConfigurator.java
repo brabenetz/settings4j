@@ -80,6 +80,16 @@ public class DOMConfigurator {
 
     static final String CONTENT_RESOLVER_REF_TAG = "contentResolver-ref";
 
+    static final String MAPPING_TAG = "mapping";
+
+    static final String MAPPING_REF_ATTR = "mapping-ref";
+    
+    static final String ENTRY_TAG = "entry";
+
+    static final String ENTRY_KEY_ATTR = "key";
+
+    static final String ENTRY_REFKEY_ATTR = "ref-key";
+
     static final String PARAM_TAG = "param";
 
     static final String SETTINGS_TAG = "settings";
@@ -107,10 +117,12 @@ public class DOMConfigurator {
 
     // key: ConnectorName, value: Connector
     private Map connectorBag;
-    // key: contentResolver, value: ContentResolver
+    // key: contentResolver-Name, value: ContentResolver
     private Map contentResolverBag;
-    // key: objectResolver, value: ObjectResolver
+    // key: objectResolver-Name, value: ObjectResolver
     private Map objectResolverBag;
+    // key: mapping-Name, value: Map
+    private Map mappingBag;
     
     private SettingsRepository repository;
 
@@ -120,6 +132,7 @@ public class DOMConfigurator {
         connectorBag = new HashMap();
         contentResolverBag = new HashMap();
         objectResolverBag = new HashMap();
+        mappingBag = new HashMap();
     }
     
     /**
@@ -414,7 +427,14 @@ public class DOMConfigurator {
      * Used internally to parse the children of a category element.
      */
     protected void parseChildrenOfSettingsElement(Element settingsElement, Settings settings, boolean isRoot) {
-
+        String mappingRef = settingsElement.getAttribute(MAPPING_REF_ATTR);
+        if (!StringUtils.isEmpty(mappingRef)){
+            Map mapping = findMappingByName(settingsElement.getOwnerDocument(), mappingRef);
+            if (mapping != null){
+                settings.setMapping(mapping);
+            }
+        }
+        
         // Remove all existing appenders from settings. They will be
         // reconstructed if need be.
         settings.removeAllConnectors();
@@ -437,6 +457,8 @@ public class DOMConfigurator {
 
                 if (tagName.equals(PARAM_TAG)) {
                     setParameter(currentElement, settings, connectors);
+                } else if (tagName.equals(CONNECTOR_REF_TAG)) {
+                    LOG.debug("Connector already added");
                 } else {
                     quietParseUnrecognizedElement(settings, currentElement);
                 }
@@ -554,6 +576,59 @@ public class DOMConfigurator {
 
 
     /**
+     * Used internally to parse an mapping element.
+     */
+    protected Map parseMapping(Element mappingElement) {
+        String mappingName = mappingElement.getAttribute(NAME_ATTR);
+
+        Map mapping;
+
+        String className = mappingElement.getAttribute(CLASS_ATTR);
+        if (StringUtils.isEmpty(className)){
+            className = "java.util.HashMap";
+        }
+        
+        LOG.debug("Desired Map class: [" + className + ']');
+        try {
+            Class clazz = loadClass(className);
+            Constructor constructor = clazz.getConstructor(NO_PARAM);
+            mapping = (Map) constructor.newInstance(null);
+        } catch (Exception oops) {
+            LOG.error("Could not retrieve mapping [" + mappingName + "]. Reported error follows.", oops);
+            return null;
+        }
+        
+        // Setting up a mapping needs to be an atomic operation, in order
+        // to protect potential settings operations while settings
+        // configuration is in progress.
+        synchronized (mapping) {
+
+            NodeList children = mappingElement.getChildNodes();
+            final int length = children.getLength();
+
+            for (int loop = 0; loop < length; loop++) {
+                Node currentNode = children.item(loop);
+
+                if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element currentElement = (Element) currentNode;
+                    String tagName = currentElement.getTagName();
+
+                    if (tagName.equals(ENTRY_TAG)) {
+                        String key = currentElement.getAttribute(ENTRY_KEY_ATTR);
+                        String keyRef = currentElement.getAttribute(ENTRY_REFKEY_ATTR);
+                        mapping.put(key, keyRef);
+                    } else {
+                        quietParseUnrecognizedElement(mapping, currentElement);
+                    }
+                }
+            }
+        }
+        
+        return mapping;
+    }
+
+
+    /**
      * Used internally to parse an contentResolver element.
      */
     protected ContentResolver parseContentResolver(Element contentResolverElement) {
@@ -621,7 +696,7 @@ public class DOMConfigurator {
         if (contentResolver != null) {
             return contentResolver;
         } else {
-            Element element = getElementByNameAttr(doc, contentResolverName, "contentResolver");
+            Element element = getElementByNameAttr(doc, contentResolverName, CONTENT_RESOLVER_TAG);
 
             if (element == null) {
                 LOG.error("No contentResolver named [" + contentResolverName + "] could be found.");
@@ -645,7 +720,7 @@ public class DOMConfigurator {
         if (objectResolver != null) {
             return objectResolver;
         } else {
-            Element element = getElementByNameAttr(doc, objectResolverName, "objectResolver");
+            Element element = getElementByNameAttr(doc, objectResolverName, OBJECT_RESOLVER_TAG);
 
             if (element == null) {
                 LOG.error("No objectResolver named [" + objectResolverName + "] could be found.");
@@ -654,6 +729,28 @@ public class DOMConfigurator {
                 objectResolver = parseObjectResolver(element);
                 objectResolverBag.put(objectResolverName, objectResolver);
                 return objectResolver;
+            }
+        }
+    }
+    
+    /**
+     * Used internally to parse mappings by IDREF name.
+     */
+    protected Map findMappingByName(Document doc, String mappingName) {
+        Map mapping = (Map) mappingBag.get(mappingName);
+
+        if (mapping != null) {
+            return mapping;
+        } else {
+            Element element = getElementByNameAttr(doc, mappingName, MAPPING_TAG);
+
+            if (element == null) {
+                LOG.error("No mapping named [" + mappingName + "] could be found.");
+                return null;
+            } else {
+                mapping = parseMapping(element);
+                mappingBag.put(mappingName, mapping);
+                return mapping;
             }
         }
     }

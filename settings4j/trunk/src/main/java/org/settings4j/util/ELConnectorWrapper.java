@@ -39,11 +39,33 @@ public class ELConnectorWrapper {
     
     private Connector[] connectors;
 
+    /**
+     * The list of all connectors, where Values can be searched.
+     * 
+     * @param connectors
+     */
     public ELConnectorWrapper(Connector[] connectors) {
         super();
         this.connectors = connectors;
     }
 
+    /**
+     * Only one Connector Constructor.
+     * All calls will be delegated to this connector.
+     * 
+     * @param connector
+     */
+    public ELConnectorWrapper(Connector connector) {
+        super();
+        this.connectors = new Connector[]{connector};
+    }
+
+    /**
+     * Usage:
+     * <code>${connectors.string['xyz']}</code> returns the first founded Value in all Connectors:
+     * <code>connector.getString("xyz");</code>
+     * @return the first founded Value in all connectors
+     */
     public Map getString() {
         Transformer transformer = new Transformer() {
             public Object transform(Object input) {
@@ -60,6 +82,12 @@ public class ELConnectorWrapper {
         return LazyMap.decorate(new HashMap(), transformer);
     }
 
+    /**
+     * Usage:
+     * <code>${connectors.content['xyz']}</code> returns the first founded Value in all Connectors:
+     * <code>connector.getContent("xyz");</code>
+     * @return the first founded Value in all connectors
+     */
     public Map getContent() {
         Transformer transformer = new Transformer() {
             public Object transform(Object input) {
@@ -78,6 +106,12 @@ public class ELConnectorWrapper {
         return LazyMap.decorate(new HashMap(), transformer);
     }
 
+    /**
+     * Usage:
+     * <code>${connectors.object['xyz']}</code> returns the first founded Value in all Connectors:
+     * <code>connector.getObject("xyz");</code>
+     * @return the first founded Value in all connectors
+     */
     public Map getObject() {
         Transformer transformer = new Transformer() {
             public Object transform(Object input) {

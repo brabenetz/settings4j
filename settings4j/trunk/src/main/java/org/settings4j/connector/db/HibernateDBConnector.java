@@ -62,8 +62,7 @@ public class HibernateDBConnector extends AbstractDBConnector {
      * Example:<br />
      * 
      * <pre>
-     * &lt;connector name="HibernateDBConnector"
-     *     class="org.settings4j.connector.db.HibernateDBConnector"&gt;
+     * &lt;connector name="HibernateDBConnector" class="org.settings4j.connector.db.HibernateDBConnector"&gt;
      *     &lt;param name="<b>hibernateConfigXmlKeys</b>" value="com/mycompany/myapp/hibernate.cfg.xml" /&gt;
      *     &lt;contentResolver-ref ref="DefaultContentResolver" /&gt;
      *     &lt;objectResolver-ref ref="DefaultObjectResolver" /&gt;
@@ -85,8 +84,7 @@ public class HibernateDBConnector extends AbstractDBConnector {
      * Example:<br />
      * 
      * <pre>
-     * &lt;connector name="HibernateDBConnector"
-     *     class="org.settings4j.connector.db.HibernateDBConnector"&gt;
+     * &lt;connector name="HibernateDBConnector" class="org.settings4j.connector.db.HibernateDBConnector"&gt;
      *     &lt;param name="<b>hibernateMappingXmlKeys</b>" value="C:/CustomizedSettingsDTO.hbm.xml" /&gt;
      *     &lt;contentResolver-ref ref="DefaultContentResolver" /&gt;
      *     &lt;objectResolver-ref ref="DefaultObjectResolver" /&gt;
