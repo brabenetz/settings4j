@@ -16,6 +16,8 @@
  *****************************************************************************/
 package org.settings4j;
 
+import java.util.Map;
+
 import org.settings4j.exception.NoWriteableConnectorFoundException;
 import org.settings4j.settings.SettingsManager;
 
@@ -204,4 +206,42 @@ public abstract class Settings {
     public static Settings getRootSettings() {
         return SettingsManager.getRootSettings();
     }
+    
+    /**
+     * The key mapping defined in settings4j.xml:
+     * <pre>
+     * Example:
+     * &lt;mapping name="defaultMapping"&gt;
+     *     &lt;entry key="com/mycompany/moduleX/datasource" ref-key="global/datasource"/&gt;
+     *     &lt;entry key="com/mycompany/moduleY/datasource" ref-key="global/datasource"/&gt;
+     * &lt;/mapping&gt;
+     * </pre>
+     * 
+     * Settings.getXXX("com/mycompany/moduleX/datasource"); <br />
+     * should return the configured value under "global/datasource" <br />
+     * <br />
+     * 
+     * @return the Mappings of this Settings-Object (without inheritances)
+     */
+    public abstract Map getMapping();
+    
+    /**
+     * 
+     * Set the mapping for this Settings-Object without inheritance.<br />
+     * This method will be call, if you create a mapping-ref to a mapping configuration in your settings4j.xml
+     * 
+     * <pre>
+     * Example:
+     * &lt;root mapping-ref="defaultMapping" &gt;
+     *    ...
+     * &lt;/root&gt;
+     * 
+     * &lt;mapping name="defaultMapping"&gt;
+     *     &lt;entry key="com/mycompany/moduleX/datasource" ref-key="global/datasource"/&gt;
+     *     &lt;entry key="com/mycompany/moduleY/datasource" ref-key="global/datasource"/&gt;
+     * &lt;/mapping&gt;
+     * </pre>
+     * 
+     */
+    public abstract void setMapping(Map mapping);
 }

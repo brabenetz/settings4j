@@ -28,6 +28,29 @@ import org.settings4j.Settings;
 import org.settings4j.SettingsFactory;
 import org.settings4j.SettingsRepository;
 
+/**
+ * This class is specialized in retrieving settings by name and also
+ * maintaining the settings hierarchy.
+ * 
+ * <p><em>The casual user does not have to deal with this class
+ * directly.</em>
+ * 
+ * <p>The structure of the settings hierarchy is maintained by the
+ * {@link #getSettings} method. The hierarchy is such that children link
+ * to their parent but parents do not have any pointers to their
+ * children. Moreover, settings can be instantiated in any order, in
+ * particular descendant before ancestor.
+ * 
+ * <p>In case a descendant is created before a particular ancestor,
+ * then it creates a provision node for the ancestor and adds itself
+ * to the provision node. Other descendants of the same ancestor add
+ * themselves to the previously created provision node.
+ * 
+ * 
+ * @author hbrabenetz
+ * @author Ceki G&uuml;lc&uuml; (the original log4j org.apache.log4j.Hierarchy)
+ *
+ */
 public class HierarchicalSettingsRepository implements SettingsRepository {
 
     /** General Logger for this Class */
@@ -60,7 +83,7 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
 
     public List getCurrentSettingsList() {
         // The accumlation in list is necessary because not all elements in
-        // ht are Logger objects as there might be some ProvisionNodes
+        // ht are HierarchicalSettings objects as there might be some ProvisionNodes
         // as well.
         List list = new ArrayList(map.size());
 
@@ -116,20 +139,20 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
     }
 
     /**
-     * This method loops through all the *potential* parents of 'cat'. There 3 possible cases:
+     * This method loops through all the *potential* parents of 'settings'. There 3 possible cases:
      * 
-     * 1) No entry for the potential parent of 'cat' exists
+     * 1) No entry for the potential parent of 'settings' exists
      * 
-     * We create a ProvisionNode for this potential parent and insert 'cat' in that provision node.
+     * We create a ProvisionNode for this potential parent and insert 'settings' in that provision node.
      * 
-     * 2) There entry is of type Logger for the potential parent.
+     * 2) There entry is of type HierarchicalSettings for the potential parent.
      * 
-     * The entry is 'cat's nearest existing parent. We update cat's parent field with this entry. We
+     * The entry is settings nearest existing parent. We update settings parent field with this entry. We
      * also break from the loop because updating our parent's parent is our parent's responsibility.
      * 
      * 3) There entry is of type ProvisionNode for this potential parent.
      * 
-     * We add 'cat' to the list of children for this potential parent.
+     * We add 'settings' to the list of children for this potential parent.
      */
     final private void updateParents(HierarchicalSettings settings) {
         String name = settings.getName();
@@ -168,27 +191,27 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
 
     /**
      * We update the links for all the children that placed themselves in the provision node 'pn'.
-     * The second argument 'cat' is a reference for the newly created Logger, parent of all the
+     * The second argument 'settings' is a reference for the newly created HierarchicalSettings, parent of all the
      * children in 'pn'
      * 
-     * We loop on all the children 'c' in 'pn':
+     * We loop on all the children 's' in 'pn':
      * 
-     * If the child 'c' has been already linked to a child of 'cat' then there is no need to update
-     * 'c'.
+     * If the child 's' has been already linked to a child of 'setting' then there is no need to update
+     * 's'.
      * 
-     * Otherwise, we set cat's parent field to c's parent and set c's parent field to cat.
+     * Otherwise, we set settings parent field to s's parent and set s's parent field to settings.
      * 
      */
     final private void updateChildren(ProvisionNode pn, HierarchicalSettings settings) {
-        // System.out.println("updateChildren called for " + logger.name);
+        // System.out.println("updateChildren called for " + settings.name);
         final int last = pn.size();
 
         for (int i = 0; i < last; i++) {
             HierarchicalSettings s = (HierarchicalSettings) pn.elementAt(i);
-            // System.out.println("Updating child " +p.name);
+            // System.out.println("Updating child " +s.name);
 
             // Unless this child already points to a correct (lower) parent,
-            // make cat.parent point to l.parent and l.parent to cat.
+            // make settings.parent point to s.parent and s.parent to settings.
             if (!s.getParent().getName().startsWith(settings.getName())) {
                 settings.setParent(s.getParent());
                 s.setParent(settings);

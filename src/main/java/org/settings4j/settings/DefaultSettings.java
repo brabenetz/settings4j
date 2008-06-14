@@ -19,9 +19,12 @@ package org.settings4j.settings;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.settings4j.Connector;
 import org.settings4j.Constants;
 import org.settings4j.SettingsRepository;
@@ -29,6 +32,7 @@ import org.settings4j.config.DOMConfigurator;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.exception.NoWriteableConnectorFoundException;
 import org.settings4j.settings.helper.ConnectorIterator;
+import org.settings4j.settings.helper.InheritedMappedKeys;
 
 /**
  * The default Settings Object is a {@link HierarchicalSettings} implementation.
@@ -45,6 +49,7 @@ public class DefaultSettings extends HierarchicalSettings{
     private String name;
     private List connectors = Collections.checkedList(Collections.synchronizedList(new ArrayList()), Connector.class);
     private HierarchicalSettings parent;
+    private Map mapping;
 
     // Settings needs to know what Hierarchy they are in
     private SettingsRepository settingsRepository;
@@ -71,6 +76,7 @@ public class DefaultSettings extends HierarchicalSettings{
 
     /** {@inheritDoc} */
     public byte[] getContent(String key) {
+        key = mappedKey(key);
         initializeRepositoryIfNecessary();
         byte[] result = null;
         Iterator iterator;
@@ -87,6 +93,7 @@ public class DefaultSettings extends HierarchicalSettings{
 
     /** {@inheritDoc} */
     public Object getObject(String key) {
+        key = mappedKey(key);
         initializeRepositoryIfNecessary();
         Object result = null;
         Iterator iterator;
@@ -103,6 +110,7 @@ public class DefaultSettings extends HierarchicalSettings{
 
     /** {@inheritDoc} */
     public String getString(String key) {
+        key = mappedKey(key);
         initializeRepositoryIfNecessary();
         String result = null;
         Iterator iterator;
@@ -119,6 +127,7 @@ public class DefaultSettings extends HierarchicalSettings{
 
     /** {@inheritDoc} */
     public void setContent(String key, byte[] value) throws NoWriteableConnectorFoundException {
+        key = mappedKey(key);
         initializeRepositoryIfNecessary();
         int status;
         Iterator iterator;
@@ -135,6 +144,7 @@ public class DefaultSettings extends HierarchicalSettings{
 
     /** {@inheritDoc} */
     public void setObject(String key, Object value) throws NoWriteableConnectorFoundException {
+        key = mappedKey(key);
         initializeRepositoryIfNecessary();
         int status;
         Iterator iterator;
@@ -151,6 +161,7 @@ public class DefaultSettings extends HierarchicalSettings{
 
     /** {@inheritDoc} */
     public void setString(String key, String value) throws NoWriteableConnectorFoundException {
+        key = mappedKey(key);
         initializeRepositoryIfNecessary();
         int status;
         Iterator iterator;
@@ -163,6 +174,30 @@ public class DefaultSettings extends HierarchicalSettings{
             }
         }
         throw new NoWriteableConnectorFoundException(key);
+    }
+    
+    /**
+     * The key mapping defined in settings4j.xml:
+     * <pre>
+     * Example:
+     * &lt;mapping name="defaultMapping"&gt;
+     *     &lt;entry key="com/mycompany/moduleX/datasource" ref-key="global/datasource"/&gt;
+     *     &lt;entry key="com/mycompany/moduleY/datasource" ref-key="global/datasource"/&gt;
+     * &lt;/mapping&gt;
+     * </pre>
+     * 
+     * This method search also all parent Settings for Mappings.
+     * 
+     * @param key
+     * @return
+     */
+    private String mappedKey(String key){
+        String mappedKey = new InheritedMappedKeys(this).get(key);
+        if(StringUtils.isEmpty(mappedKey)){
+            return key;
+        } else {
+            return mappedKey;
+        }
     }
 
     /** {@inheritDoc} */
@@ -214,5 +249,18 @@ public class DefaultSettings extends HierarchicalSettings{
                 LOG.fatal("Could not find resource: [" + SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE + "].");
             }
         }
+    }
+
+    /** {@inheritDoc} */
+    public Map getMapping() {
+        if (mapping == null){
+            mapping = new HashMap();
+        }
+        return mapping;
+    }
+
+    /** {@inheritDoc} */
+    public void setMapping(Map mapping) {
+        this.mapping = mapping;
     }
 }

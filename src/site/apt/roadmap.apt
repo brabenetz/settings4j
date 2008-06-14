@@ -45,14 +45,18 @@ Roadmap of changes for this project.
 
 
 
-* 27. Juli 2008 1.0.0-rc - re factored release
+* 10. August 2008 1.0.0-rc - re factored release
 
     - extended JavaDoc and UnitTests
 
     - Maven-Site
     
-    - Simple standalon WebApp to modify Settings (set new String-Values or upload files per Key).
-
+    - Simple standalone WebApp to modify Settings (set new String-Values or upload files per Key). This App should be seperated in two modules
+    	
+    	* Core-Module: The main businesslogic who can be simbly integrated in existence applications. The List of keys who are used by your Apps should be configurabel with Settings4j itself.
+    	
+    	* GUI-Module: a simple webGUI with Struts and Tiles and ACEGI-Security as Example who the Core-Module can be integrated. But the resulting WAR can be used immediately as Setup-GUI for your Webapp.
+    	
 
 * 6. Juli 2008 1.0.0-beta - release with additional features:
 
