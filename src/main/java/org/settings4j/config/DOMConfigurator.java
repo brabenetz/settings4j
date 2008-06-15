@@ -227,6 +227,20 @@ public class DOMConfigurator {
             return;
         }
 
+        // TODO hbrabenetz 15.06.2008 : reset Configuration
+//        //
+//        //   reset repository before configuration if reset="true"
+//        //       on configuration element.
+//        //
+//      String resetAttrib = subst(element.getAttribute(RESET_ATTR));
+//      LogLog.debug("reset attribute= \"" + resetAttrib +"\".");
+//      if(!("".equals(resetAttrib))) {
+//           if (OptionConverter.toBoolean(resetAttrib, false)) {
+//               repository.resetConfiguration();
+//           }
+//      }
+        
+        
         /*
          * Building Appender objects, placing them in a local namespace for future reference
          */
@@ -279,7 +293,7 @@ public class DOMConfigurator {
 
             LOG.debug("Setting [" + settings.getName() + "] additivity to [" + additivity + "].");
             if (additivity != null ){
-                // TODO Harald.Brabenetz Apr 8, 2008 : settings.setAdditivity(additivity.booleanValue());
+                // TODO hbrabenetz 08.04.2008 : settings.setAdditivity(additivity.booleanValue());
             }
             parseChildrenOfSettingsElement(loggerElement, settings, false);
         }
