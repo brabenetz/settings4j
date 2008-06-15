@@ -145,6 +145,13 @@
 			<version>1.1.2</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- servlet-api for org.settings4j.helper.web.ConfigureSettings4jWithWebContextName Listener -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.4</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
