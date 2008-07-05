@@ -18,6 +18,7 @@ package org.settings4j;
 
 import java.util.Map;
 
+import org.settings4j.config.DOMConfigurator;
 import org.settings4j.exception.NoWriteableConnectorFoundException;
 import org.settings4j.settings.SettingsManager;
 
@@ -232,11 +233,11 @@ public abstract class Settings {
      * 
      * <pre>
      * Example:
-     * &lt;root mapping-ref="defaultMapping" &gt;
+     * &lt;root mapping-ref="<b>defaultMapping</b>" &gt;
      *    ...
      * &lt;/root&gt;
      * 
-     * &lt;mapping name="defaultMapping"&gt;
+     * &lt;mapping name="<b>defaultMapping</b>"&gt;
      *     &lt;entry key="com/mycompany/moduleX/datasource" ref-key="global/datasource"/&gt;
      *     &lt;entry key="com/mycompany/moduleY/datasource" ref-key="global/datasource"/&gt;
      * &lt;/mapping&gt;
@@ -244,4 +245,28 @@ public abstract class Settings {
      * 
      */
     public abstract void setMapping(Map mapping);
+    
+    /**
+     * <p>By Default a Settings inherited "connector-ref" and
+     * "mapping-ref" from his Parent Settings (or root).
+     * <p>You can change this behavior with the optional
+     * attribute "additivity" of the settings-element.
+     * 
+     * <pre>
+     * Example:
+     * &lt;settings name="com.mycompany.module2" mapping-ref="defaultMapping" <b>additivity="false"</b> &gt;
+     *    &lt;connector-ref ref="FSConnector" readonly="false" &gt;
+     * &lt;/settings&gt;
+     * 
+     * </pre>
+     */
+    public abstract boolean isAdditivity();
+
+    /**
+     * <p>Is Used by the {@link DOMConfigurator} to change the default behavior of this Settings-Object.
+     * 
+     * @see #isAdditivity()
+     * @param additivity
+     */
+    public abstract void setAdditivity(boolean additivity);
 }
