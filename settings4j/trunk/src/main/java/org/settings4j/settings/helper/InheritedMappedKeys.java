@@ -59,7 +59,11 @@ public class InheritedMappedKeys {
             if (value != null){
                 return (String)value;
             }
-            
+
+            // if not additivity, then doen't ask the Parent Settings.
+            if (!settings.isAdditivity()){
+                return null;
+            }
             // if this settings doesn't have a mapping,
             // maybe the parent settings have a mapping.
             settings = settings.getParent();

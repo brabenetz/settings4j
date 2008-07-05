@@ -293,7 +293,7 @@ public class DOMConfigurator {
 
             LOG.debug("Setting [" + settings.getName() + "] additivity to [" + additivity + "].");
             if (additivity != null ){
-                // TODO hbrabenetz 08.04.2008 : settings.setAdditivity(additivity.booleanValue());
+                settings.setAdditivity(additivity.booleanValue());
             }
             parseChildrenOfSettingsElement(loggerElement, settings, false);
         }

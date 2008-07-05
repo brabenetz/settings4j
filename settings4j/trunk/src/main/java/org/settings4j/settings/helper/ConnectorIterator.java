@@ -34,6 +34,10 @@ public class ConnectorIterator implements Iterator {
         
         HierarchicalSettings settingsTemp = settings;
         while (settingsTemp.getParent() != null){
+            // if not additivity, then doen't ask the Parent Settings.
+            if (!settingsTemp.isAdditivity()){
+                break;
+            }
             settingsTemp = settingsTemp.getParent();
             if (settingsTemp.getConnectors().iterator().hasNext()) return true;
         }
@@ -45,6 +49,10 @@ public class ConnectorIterator implements Iterator {
         if (connectorIterator.hasNext()) return connectorIterator.next();
         
         while (settings.getParent() != null){
+            // if not additivity, then doen't ask the Parent Settings.
+            if (!settings.isAdditivity()){
+                break;
+            }
             settings = settings.getParent();
             connectorIterator = settings.getConnectors().iterator();
             if (connectorIterator.hasNext()){

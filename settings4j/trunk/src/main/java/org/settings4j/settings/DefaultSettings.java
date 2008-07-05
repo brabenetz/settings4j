@@ -50,6 +50,7 @@ public class DefaultSettings extends HierarchicalSettings{
     private List connectors = Collections.checkedList(Collections.synchronizedList(new ArrayList()), Connector.class);
     private HierarchicalSettings parent;
     private Map mapping;
+    private boolean additivity = true;
 
     // Settings needs to know what Hierarchy they are in
     private SettingsRepository settingsRepository;
@@ -262,5 +263,15 @@ public class DefaultSettings extends HierarchicalSettings{
     /** {@inheritDoc} */
     public void setMapping(Map mapping) {
         this.mapping = mapping;
+    }
+
+    /** {@inheritDoc} */
+    public boolean isAdditivity() {
+        return additivity;
+    }
+
+    /** {@inheritDoc} */
+    public void setAdditivity(boolean additivity) {
+        this.additivity = additivity;
     }
 }

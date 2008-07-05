@@ -82,4 +82,11 @@ public class NOPSettings extends Settings {
 
     public void setMapping(Map mapping) {
     }
+
+    public boolean isAdditivity() {
+        return false;
+    }
+
+    public void setAdditivity(boolean additivity) {
+    }
 }
