@@ -92,17 +92,18 @@ public class ConfigureSettings4jWithWebContextPath implements ServletContextList
         // get "contextPath" from "http://host/contextPath"
         LOG.info("found real contextPath: " + contextPath);
         
-        // TODO hbrabenetz 15.06.2008 : reset Setting4j-configuration
         SettingsRepository settingsRepository = SettingsManager.getSettingsRepository();
-        //settingsRepository.resetConfiguration();
+        settingsRepository.resetConfiguration();
         
         // read XML default Configuration to configure the repository
         URL url = ClasspathContentResolver.getResource(configurationFile);
         
         DOMConfigurator domConfigurator = new DOMConfigurator(settingsRepository);
-        // TODO hbrabenetz 15.06.2008 : setExpresionAttribute
-        //domConfigurator.setExpresionAttribute(expresionAttributeName, contextPath);
+        domConfigurator.addExpressionAttribute(expresionAttributeName, contextPath);
         domConfigurator.doConfigure(url);
+        
+        
+        
     }
 
 }

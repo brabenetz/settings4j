@@ -77,7 +77,7 @@ public class SettingsRepositoryTest extends TestCase {
         xyz.addConnector(connector);
         // The connector Count must be greater 0
         // otherwise the default-fallback-configuration will be used.
-        settingsRepository.setConnectorCount(2);
+        //settingsRepository.setConnectorCount(2);
         
         /*
          * Now starts the Unittests

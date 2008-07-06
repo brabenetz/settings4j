@@ -30,7 +30,7 @@ import org.apache.commons.io.FileUtils;
 import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 
-public class SpingConfigObjectResolverTest extends TestCase {
+public class SpringConfigObjectResolverTest extends TestCase {
 
     private File testDir;
     
@@ -47,7 +47,7 @@ public class SpingConfigObjectResolverTest extends TestCase {
     }
     
     public void testSpringContext1() throws Exception{
-        SpingConfigObjectResolver objectResolver = new SpingConfigObjectResolver();
+        SpringConfigObjectResolver objectResolver = new SpringConfigObjectResolver();
         
         // Classpath is readonly => the XML-Spring-Config and Properties
         ContentResolver contentResolver = new ClasspathContentResolver();

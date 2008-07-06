@@ -25,8 +25,7 @@ import org.apache.commons.collections.map.LazyMap;
 import junit.framework.TestCase;
 
 /**
- * Tests the OpenCms system roles.
- * <p>
+ * Test ExpressionLanguage Syntax
  */
 public class TestExpressionLanguageUtil extends TestCase{
     

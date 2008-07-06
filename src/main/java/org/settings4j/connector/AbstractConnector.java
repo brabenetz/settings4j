@@ -26,6 +26,7 @@ import org.settings4j.ObjectResolver;
 
 public abstract class AbstractConnector implements Connector{
 
+    private String name;
     private ContentResolver contentResolver;
     private ObjectResolver objectResolver;
     private List connectors = Collections.checkedList(Collections.synchronizedList(new ArrayList()), Connector.class);
@@ -57,6 +58,15 @@ public abstract class AbstractConnector implements Connector{
     public void setObjectResolver(ObjectResolver objectResolver) {
         this.objectResolver = objectResolver;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     public void init(){
         // Overwrite this methode if you want do something after all properties are set.
         // by default there is nothing to do

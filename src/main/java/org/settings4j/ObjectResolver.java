@@ -96,7 +96,7 @@ public interface ObjectResolver {
      * --------------------------------------
      * &lt;objectResolver name="DefaultObjectResolver" class="org.settings4j.objectresolver.UnionObjectResolver"&gt;
      *     &lt;objectResolver-ref ref="JavaXMLBeansObjectResolver" /&gt;
-     *     &lt;objectResolver-ref ref="SpingConfigObjectResolver" /&gt;
+     *     &lt;objectResolver-ref ref="SpringConfigObjectResolver" /&gt;
      * &lt;/objectResolver&gt;
      * --------------------------------------
      * </pre>

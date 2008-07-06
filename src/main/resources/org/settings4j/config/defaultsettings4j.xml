@@ -56,13 +56,16 @@
 
 	<objectResolver name="DefaultObjectResolver" class="org.settings4j.objectresolver.UnionObjectResolver">
 		<objectResolver-ref ref="JavaXMLBeansObjectResolver" />
-		<objectResolver-ref ref="SpingConfigObjectResolver" />
+		<!-- the Spring Content resolver are not defined in default-Config.
+		it would be required, that the Applikation are dependent from springframework.
+		<objectResolver-ref ref="SpringConfigObjectResolver" />
+		 -->
 	</objectResolver>
 	
 	<objectResolver name="JavaXMLBeansObjectResolver" class="org.settings4j.objectresolver.JavaXMLBeansObjectResolver">
 	</objectResolver>
 	
-	<objectResolver name="SpingConfigObjectResolver" class="org.settings4j.objectresolver.SpingConfigObjectResolver">
+	<objectResolver name="SpringConfigObjectResolver" class="org.settings4j.objectresolver.SpringConfigObjectResolver">
 	</objectResolver>
 	
 </settings4j:configuration>

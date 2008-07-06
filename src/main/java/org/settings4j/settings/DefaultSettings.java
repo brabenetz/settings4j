@@ -67,6 +67,7 @@ public class DefaultSettings extends HierarchicalSettings{
     
     /** {@inheritDoc} */
     public void addConnector(Connector connector) {
+        settingsRepository.addConnector(connector);
         connectors.add(connector);
     }
 

@@ -144,4 +144,10 @@ public interface Connector {
      *  
      */
     public void init();
+    
+
+    public String getName();
+
+    public void setName(String name);
+    
 }
