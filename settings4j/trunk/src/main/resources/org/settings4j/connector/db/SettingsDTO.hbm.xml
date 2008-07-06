@@ -10,7 +10,7 @@
             <generator class="native" />
         </id>
         
-        <property name="key" column="KEY" unique="true" not-null="true" />
+        <property name="key" column="KEY_VALUE" unique="true" not-null="true" />
         
         <property name="stringValue" column="STRING_VALUE" />
         

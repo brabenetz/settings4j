@@ -88,7 +88,7 @@ public class ClasspathContentResolver implements ContentResolver {
      * @return the default ClassLoader (never <code>null</code>)
      * @see java.lang.Thread#getContextClassLoader()
      */
-    private static ClassLoader getClassLoader() {
+    public static ClassLoader getClassLoader() {
         ClassLoader cl = null;
         try {
             cl = Thread.currentThread().getContextClassLoader();

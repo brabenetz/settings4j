@@ -25,7 +25,7 @@ import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 
-public class SpingConfigObjectResolver extends AbstractObjectResolver{
+public class SpringConfigObjectResolver extends AbstractObjectResolver{
 
     protected Object contentToObject(String key, Properties properties, byte[] content, ContentResolver contentResolver) {
         AbstractApplicationContext context = new ByteArrayXMLApplicationContext(content);

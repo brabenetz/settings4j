@@ -44,6 +44,7 @@ import org.settings4j.connector.CachedConnectorWrapper;
 import org.settings4j.connector.ContentHasChangedNotifierConnectorWrapper;
 import org.settings4j.connector.ReadOnlyConnectorWrapper;
 import org.settings4j.connector.SystemPropertyConnector;
+import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.contentresolver.ReadOnlyContentResolverWrapper;
 import org.settings4j.objectresolver.AbstractObjectResolver;
 import org.settings4j.objectresolver.ReadOnlyObjectResolverWrapper;
@@ -125,7 +126,9 @@ public class DOMConfigurator {
     private Map mappingBag;
     
     private SettingsRepository repository;
-
+    
+    private Map expressionAttributes = new HashMap();
+    
     public DOMConfigurator(SettingsRepository repository) {
         super();
         this.repository = repository;
@@ -142,7 +145,7 @@ public class DOMConfigurator {
      * @param propSetter property setter, may not be null.
      * @param props properties
      */
-    private static void setParameter(final Element elem, final Object bean, Connector[] connectors) {
+    private void setParameter(final Element elem, final Object bean, Connector[] connectors) {
         String name = elem.getAttribute("name");
         String valueStr = (elem.getAttribute("value"));
         try {
@@ -268,7 +271,6 @@ public class DOMConfigurator {
                 }
             }
         }
-        repository.setConnectorCount(connectorBag.values().size());
     }
 
     /**
@@ -319,6 +321,8 @@ public class DOMConfigurator {
             LOG.error("Could not retrieve connector [" + connectorName + "]. Reported error follows.", oops);
             return null;
         }
+        
+        connector.setName(connectorName);
         
         Connector[] subConnectors = getConnectors(connectorElement);
         for (int i = 0; i < subConnectors.length; i++) {
@@ -538,6 +542,9 @@ public class DOMConfigurator {
         } catch (Exception oops) {
             LOG.error("Could not retrieve objectResolver [" + objectResolverName + "]. Reported error follows.", oops);
             return null;
+        } catch (NoClassDefFoundError e) {
+            LOG.warn("The ObjectResolver '" + objectResolverName + "' cannot be created. There are not all required Libraries inside the Classpath: " + e.getMessage(), e);
+            return null;
         }
         
         // get connectors for ExpressionLanguage validation
@@ -610,6 +617,9 @@ public class DOMConfigurator {
         } catch (Exception oops) {
             LOG.error("Could not retrieve mapping [" + mappingName + "]. Reported error follows.", oops);
             return null;
+        } catch (NoClassDefFoundError e) {
+            LOG.warn("The Mapping '" + mappingName + "' cannot be created. There are not all required Libraries inside the Classpath: " + e.getMessage(), e);
+            return null;
         }
         
         // Setting up a mapping needs to be an atomic operation, in order
@@ -660,6 +670,9 @@ public class DOMConfigurator {
             contentResolver = (ContentResolver) constructor.newInstance(null);
         } catch (Exception oops) {
             LOG.error("Could not retrieve contentResolver [" + contentResolverName + "]. Reported error follows.", oops);
+            return null;
+        } catch (NoClassDefFoundError e) {
+            LOG.warn("The ContentResolver '" + contentResolverName + "' cannot be created. There are not all required Libraries inside the Classpath: " + e.getMessage(), e);
             return null;
         }
         
@@ -837,7 +850,7 @@ public class DOMConfigurator {
      * @param connectors required for validating Expression like ${connectors.string['']}
      * @return
      */
-    protected static String subst(final String value, Connector[] connectors) {
+    protected String subst(final String value, Connector[] connectors) {
         return (String)subst(value, connectors, String.class);
     }
 
@@ -850,17 +863,25 @@ public class DOMConfigurator {
      * @param connectors
      * @return
      */
-    protected static Object subst(final String value, Connector[] connectors, final Class clazz) {
+    protected Object subst(final String value, Connector[] connectors, final Class clazz) {
         if (StringUtils.isEmpty(value)){
             return null;
         }
         
         if (value.contains("${")){
             try {
-                Map context = new HashMap();
+                Map context = new HashMap(expressionAttributes);
                 if (connectors != null){
                     // Expression like ${connectors.object['...']} or ${connectors.string['...']} 
                     context.put("connectors", new ELConnectorWrapper(connectors));
+
+                    // Expression like ${connector.FsConnector.object['...']} or ${connector.ClassPathConnector.string['...']} 
+                    Map connectorMap = new HashMap();
+                    for (int i = 0; i < connectors.length; i++) {
+                        Connector connector = connectors[i];
+                        connectorMap.put(connector.getName(), new ELConnectorWrapper(new Connector[]{connector}));
+                    }
+                    context.put("connector", connectorMap);
                 }
                 // Expression like ${env['...']} e.g.:  ${env['TOMCAT_HOME']} or ${env.TOMCAT_HOME}
                 context.put("env", System.getenv());
@@ -886,8 +907,18 @@ public class DOMConfigurator {
             }
         }
     }
+    
+    /**
+     * Add a ExpressionAttribute.
+     * 
+     * @param key
+     * @param value
+     */
+    public void addExpressionAttribute(String key, Object value){
+        expressionAttributes.put(key, value);
+    }
 
     static public Class loadClass (String clazz) throws ClassNotFoundException{
-        return Thread.currentThread().getContextClassLoader().loadClass(clazz);
+        return ClasspathContentResolver.getClassLoader().loadClass(clazz);
     }
 }

@@ -133,7 +133,7 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
         assertEquals("abc2", settings1.getString("xyz2"));
         assertEquals("abc2", mycompanySeetings.getString("xyz2"));
 
-        assertEquals(2, settingsRepository.getConnectorCount());
+        assertEquals(1, settingsRepository.getConnectorCount());
     }
     
     public void testFSConfigTestFolder(){
@@ -273,6 +273,6 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
         //every settings have read access to the same FSConnector.
         assertEquals("Value from Property-File", seetings.getString("xyz"));
 
-        assertEquals(2, settingsRepository.getConnectorCount());
+        assertEquals(1, settingsRepository.getConnectorCount());
     }
 }

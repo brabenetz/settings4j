@@ -76,4 +76,12 @@ public class ReadOnlyConnectorWrapper implements Connector {
         targetConnector.init();
     }
 
+    public String getName() {
+        return targetConnector.getName();
+    }
+
+    public void setName(String name) {
+        targetConnector.setName(name);
+    }
+
 }

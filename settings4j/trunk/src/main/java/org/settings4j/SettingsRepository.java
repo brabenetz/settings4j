@@ -67,5 +67,23 @@ public interface SettingsRepository {
      * 
      * @param connectorCount
      */
-    void setConnectorCount(int connectorCount);
+    void addConnector(Connector connector);
+    
+    /**
+     * <p>Remove all Settings, Connectors and other Objects from the Repository.
+     * <p>Make it ready to fill it with a new Configuration.
+     * 
+     * <p>Example (maybe in an init()-Methode of your Application):
+     * <pre>
+     * // clear Settings from "settings4j.xml"
+     * SettingsRepository settingsRepository = SettingsManager.getSettingsRepository();
+     * settingsRepository.resetConfiguration();
+     * 
+     * // read XML Custome to configure the repository
+     * URL url = ClasspathContentResolver.getResource("customizedSettings4j.xml");
+     * DOMConfigurator domConfigurator = new DOMConfigurator(settingsRepository);
+     * domConfigurator.doConfigure(url);
+     * </pre>
+     */
+    void resetConfiguration();
 }

@@ -19,6 +19,7 @@ package org.settings4j.settings.nop;
 import java.util.Collections;
 import java.util.List;
 
+import org.settings4j.Connector;
 import org.settings4j.Settings;
 import org.settings4j.SettingsFactory;
 import org.settings4j.SettingsRepository;
@@ -50,6 +51,12 @@ public class NOPSettingsRepository implements SettingsRepository {
     }
 
     public void setConnectorCount(int connectorCount) {
+    }
+
+    public void resetConfiguration() {
+    }
+
+    public void addConnector(Connector connector) {
     }
 
 }

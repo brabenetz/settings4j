@@ -24,48 +24,56 @@ import java.util.List;
 import java.util.Map;
 
 import org.settings4j.settings.HierarchicalSettings;
+import org.settings4j.Connector;
 import org.settings4j.Settings;
 import org.settings4j.SettingsFactory;
 import org.settings4j.SettingsRepository;
 
 /**
- * This class is specialized in retrieving settings by name and also
- * maintaining the settings hierarchy.
+ * This class is specialized in retrieving settings by name and also maintaining the settings
+ * hierarchy.
  * 
- * <p><em>The casual user does not have to deal with this class
+ * <p>
+ * <em>The casual user does not have to deal with this class
  * directly.</em>
  * 
- * <p>The structure of the settings hierarchy is maintained by the
- * {@link #getSettings} method. The hierarchy is such that children link
- * to their parent but parents do not have any pointers to their
- * children. Moreover, settings can be instantiated in any order, in
- * particular descendant before ancestor.
+ * <p>
+ * The structure of the settings hierarchy is maintained by the {@link #getSettings} method. The
+ * hierarchy is such that children link to their parent but parents do not have any pointers to
+ * their children. Moreover, settings can be instantiated in any order, in particular descendant
+ * before ancestor.
  * 
- * <p>In case a descendant is created before a particular ancestor,
- * then it creates a provision node for the ancestor and adds itself
- * to the provision node. Other descendants of the same ancestor add
- * themselves to the previously created provision node.
+ * <p>
+ * In case a descendant is created before a particular ancestor, then it creates a provision node
+ * for the ancestor and adds itself to the provision node. Other descendants of the same ancestor
+ * add themselves to the previously created provision node.
  * 
  * 
  * @author hbrabenetz
  * @author Ceki G&uuml;lc&uuml; (the original log4j org.apache.log4j.Hierarchy)
- *
+ * 
  */
 public class HierarchicalSettingsRepository implements SettingsRepository {
-
+    
     /** General Logger for this Class */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(HierarchicalSettingsRepository.class);
-    
+
     private static final SettingsFactory DEFAULT_FACTORY = new DefaultSettingsFactory();
+
+    /**
+     * contains all SettingObjects <br />
+     * key is {@link SettingsKey} Object<br />
+     * value is a {@link Settings} Object<br />
+     */
+    private Map settingsMap = Collections.synchronizedMap(new HashMap());
     
-    private Map map = Collections.synchronizedMap(new HashMap());
-    
+    private Map connectorMap = Collections.synchronizedMap(new HashMap());
+
     private HierarchicalSettings root;
-    
-    private int connectorCount;
-    
-    
+
+    //private int connectorCount;
+
     public HierarchicalSettingsRepository(HierarchicalSettings root) {
         super();
         this.root = root;
@@ -73,7 +81,7 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
     }
 
     public Settings exists(String name) {
-        Object o = map.get(new SettingsKey(name));
+        Object o = settingsMap.get(new SettingsKey(name));
         if (o instanceof HierarchicalSettings) {
             return (HierarchicalSettings) o;
         } else {
@@ -85,9 +93,9 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
         // The accumlation in list is necessary because not all elements in
         // ht are HierarchicalSettings objects as there might be some ProvisionNodes
         // as well.
-        List list = new ArrayList(map.size());
+        List list = new ArrayList(settingsMap.size());
 
-        Iterator iterator = map.values().iterator();
+        Iterator iterator = settingsMap.values().iterator();
         while (iterator.hasNext()) {
             Object o = iterator.next();
             if (o instanceof HierarchicalSettings) {
@@ -113,21 +121,21 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
         // assignments are non-atomic.
         HierarchicalSettings settings;
 
-        synchronized (map) {
-            Object o = map.get(key);
+        synchronized (settingsMap) {
+            Object o = settingsMap.get(key);
             if (o == null) {
-                settings = (HierarchicalSettings)factory.makeNewSettingsInstance(name);
+                settings = (HierarchicalSettings) factory.makeNewSettingsInstance(name);
                 settings.setSettingsRepository(this);
-                map.put(key, settings);
+                settingsMap.put(key, settings);
                 updateParents(settings);
                 return settings;
             } else if (o instanceof HierarchicalSettings) {
                 return (HierarchicalSettings) o;
             } else if (o instanceof ProvisionNode) {
                 // System.out.println("("+name+") ht.get(this) returned ProvisionNode");
-                settings = (HierarchicalSettings)factory.makeNewSettingsInstance(name);
+                settings = (HierarchicalSettings) factory.makeNewSettingsInstance(name);
                 settings.setSettingsRepository(this);
-                map.put(key, settings);
+                settingsMap.put(key, settings);
                 updateChildren((ProvisionNode) o, settings);
                 updateParents(settings);
                 return settings;
@@ -143,12 +151,14 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
      * 
      * 1) No entry for the potential parent of 'settings' exists
      * 
-     * We create a ProvisionNode for this potential parent and insert 'settings' in that provision node.
+     * We create a ProvisionNode for this potential parent and insert 'settings' in that provision
+     * node.
      * 
      * 2) There entry is of type HierarchicalSettings for the potential parent.
      * 
-     * The entry is settings nearest existing parent. We update settings parent field with this entry. We
-     * also break from the loop because updating our parent's parent is our parent's responsibility.
+     * The entry is settings nearest existing parent. We update settings parent field with this
+     * entry. We also break from the loop because updating our parent's parent is our parent's
+     * responsibility.
      * 
      * 3) There entry is of type ProvisionNode for this potential parent.
      * 
@@ -167,12 +177,12 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
 
             LOG.debug("Updating parent : " + substr);
             SettingsKey key = new SettingsKey(substr); // simple constructor
-            Object o = map.get(key);
+            Object o = settingsMap.get(key);
             // Create a provision node for a future parent.
             if (o == null) {
                 // System.out.println("No parent "+substr+" found. Creating ProvisionNode.");
                 ProvisionNode pn = new ProvisionNode(settings);
-                map.put(key, pn);
+                settingsMap.put(key, pn);
             } else if (o instanceof HierarchicalSettings) {
                 parentFound = true;
                 settings.setParent((HierarchicalSettings) o);
@@ -191,13 +201,13 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
 
     /**
      * We update the links for all the children that placed themselves in the provision node 'pn'.
-     * The second argument 'settings' is a reference for the newly created HierarchicalSettings, parent of all the
-     * children in 'pn'
+     * The second argument 'settings' is a reference for the newly created HierarchicalSettings,
+     * parent of all the children in 'pn'
      * 
      * We loop on all the children 's' in 'pn':
      * 
-     * If the child 's' has been already linked to a child of 'setting' then there is no need to update
-     * 's'.
+     * If the child 's' has been already linked to a child of 'setting' then there is no need to
+     * update 's'.
      * 
      * Otherwise, we set settings parent field to s's parent and set s's parent field to settings.
      * 
@@ -218,13 +228,45 @@ public class HierarchicalSettingsRepository implements SettingsRepository {
             }
         }
     }
-    
 
     public int getConnectorCount() {
-        return connectorCount;
+        return connectorMap.size();
+    }
+//
+//    public void setConnectorCount(int connectorCount) {
+//        this.connectorCount = connectorCount;
+//    }
+
+    /** {@inheritDoc} */
+    public void resetConfiguration() {
+
+        root.setAdditivity(true);
+        root.setParent(null);
+        root.setMapping(null);
+        root.setSettingsRepository(null);
+        root.removeAllConnectors();
+
+        Iterator it = settingsMap.entrySet().iterator();
+        while (it.hasNext()) {
+            HierarchicalSettings s = (HierarchicalSettings) it.next();
+            s.setAdditivity(true);
+            s.setParent(null);
+            s.setMapping(null);
+            s.setSettingsRepository(null);
+            s.removeAllConnectors();
+        }
+        settingsMap.clear();
+        
+        it = connectorMap.entrySet().iterator();
+        while (it.hasNext()) {
+            Connector c = (Connector) it.next();
+            c.setContentResolver(null);
+            c.setObjectResolver(null);
+        }
+        connectorMap.clear();
     }
 
-    public void setConnectorCount(int connectorCount) {
-        this.connectorCount = connectorCount;
+    public void addConnector(Connector connector) {
+        connectorMap.put(connector.getName(), connector);
     }
 }
