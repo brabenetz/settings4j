@@ -20,7 +20,7 @@ Recommendation
 
 * Customized settings4j.xml
 
-   settings4j.xml (accurate to log4j.xml) musst be availabel inside the classpath.
+   settings4j.xml (accurate to log4j.xml) must be availabel inside the classpath.
    But DO NOT put it into the resulting JAR of a Sub-Library.
 
 	 * On Webapps it should be placed on the Server (e.g.: %TOMCAT_HOME%/common/classes)
@@ -41,11 +41,11 @@ Recommendation
    
    []
    
-   Everything who should be differ from Development-, Testing- and Production-System.
+   <<Everything who should be differ from Development-, Testing- and Production-System, but changes never (or at least rarely) after deploying.>>
 	
 * What SHOULD NOT be configured with Settings4j
    
-   <<User>> specific configurations like personal preferences have nothing to do with settings4j !
+   <<Webapp-User>> specific configurations like personal preferences have nothing to do with settings4j !
    
    
 	

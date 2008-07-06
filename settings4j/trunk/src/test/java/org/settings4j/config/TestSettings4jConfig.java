@@ -32,11 +32,6 @@ import org.settings4j.settings.HierarchicalSettings;
 import org.settings4j.settings.SettingsManager;
 
 public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
-    
-    /** General Logger for this Class */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(TestSettings4jConfig.class);
-    
 
     /**
      * Test parsing of defaultsettings4j.xml (FALLBACK-Configuration)
