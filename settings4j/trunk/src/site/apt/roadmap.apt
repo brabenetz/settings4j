@@ -41,15 +41,13 @@ Roadmap of changes for this project.
 		* {{http://www.particle.kth.se/~lindsey/JavaCourse/Book/Part1/Java/Chapter10/Preferences.html}}
 
 
-* Oktober 2008 Final Version 1.0.0 - after few bug fixes
+* June 2009 Final Version 1.0.0 - after few bug fixes
 
 
 
-* September 2008 1.0.0-rc - re factored release
+* January 2009 1.0.0-rc - re factored release
 
     - extended JavaDoc and UnitTests
-
-    - Maven-Site
     
     - Simple standalone WebApp to modify Settings (set new String-Values or upload files per Key). This App should be seperated in two modules
     	
@@ -62,9 +60,16 @@ Roadmap of changes for this project.
 		* like org.springframework.jndi.JndiObjectFactoryBean {{http://static.springframework.org/spring/docs/2.5.4/reference/cci.html}}
 
 	! additional Connector to Environment Variables.
-    	
+  
+* November 2008 1.0.0-beta2 - re factored release  	
 
-* 6. Juli 2008 1.0.0-beta - release with additional features:
+	- Change of the Settings interface: setXXX(key, value) to: setXXX(key, value, connectorName);
+	
+	- Add additional method: getConnectors() returns all Connectors
+	
+	- Add additional method: getConnectors(key) returns Connectors valid for a given Key.
+
+* 6. July 2008 1.0.0-beta - release with additional features:
 
     ! Object-Resolver implementations with java.beans.XMLEncoder and XMLDecoder
 
