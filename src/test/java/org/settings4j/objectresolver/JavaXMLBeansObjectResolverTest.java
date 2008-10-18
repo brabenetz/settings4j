@@ -70,16 +70,16 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
         testData.put("irgendwas", "blablablablablabla");
         testData.put("liste", testList);
         
-        objectResolver.setObject("org/settings4j/objectResolver/test1", contentResolver, testData);
+        objectResolver.setObject("org/settings4j/objectresolver/test1", contentResolver, testData);
         
-        Map result = (Map) objectResolver.getObject("org/settings4j/objectResolver/test1", contentResolver);
+        Map result = (Map) objectResolver.getObject("org/settings4j/objectresolver/test1", contentResolver);
         assertEquals("blablablablablabla", result.get("irgendwas"));
         Object liste = result.get("liste");
         assertNotNull(liste);
         assertTrue(liste instanceof List);
         assertEquals(4, ((List)liste).size());
         
-        Map result2 = (Map) objectResolver.getObject("org/settings4j/objectResolver/test1", contentResolver);
+        Map result2 = (Map) objectResolver.getObject("org/settings4j/objectresolver/test1", contentResolver);
         // no caching by default => difference Objects but same content.
         assertTrue(result != result2);
         assertEquals(result2.get("irgendwas"), result.get("irgendwas"));
@@ -88,10 +88,10 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
     }
     
     /**
-     * cached by propertyfile "org/settings4j/objectResolver/test2.properties"
+     * cached by propertyfile "org/settings4j/objectresolver/test2.properties"
      */
     public void test2Caching(){
-        String key = "org/settings4j/objectResolver/test2";
+        String key = "org/settings4j/objectresolver/test2";
         
         JavaXMLBeansObjectResolver objectResolver = new JavaXMLBeansObjectResolver();
 
@@ -108,7 +108,7 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
      * cached by {@link AbstractObjectResolver#setCached(boolean)}
      */
     public void test3Caching(){
-        String key = "org/settings4j/objectResolver/test3";
+        String key = "org/settings4j/objectresolver/test3";
         
         JavaXMLBeansObjectResolver objectResolver = new JavaXMLBeansObjectResolver();
         objectResolver.setCached(true);
@@ -121,7 +121,7 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
         cachingTest(key, objectResolver, contentResolver);
         
         // The propertyfile "test4.properties" declare explicitly cached=false
-        key = "org/settings4j/objectResolver/test4";
+        key = "org/settings4j/objectresolver/test4";
         Map result = (Map) objectResolver.getObject(key, contentResolver);
         assertEquals("blablablaNEU4blablabla", result.get("irgendwasNeues"));
         Map result2 = (Map) objectResolver.getObject(key, contentResolver);

@@ -38,7 +38,7 @@ public class JNDIConnectorTest extends TestCase {
     
     protected void setUp() throws Exception {
         super.setUp();
-        testDir = (new File("test/ConnectorTest/".toLowerCase())).getAbsoluteFile();
+        testDir = (new File("test/ConnectorTest/".toLowerCase()));
         FileUtils.forceMkdir(testDir);
     }
     
@@ -118,7 +118,6 @@ public class JNDIConnectorTest extends TestCase {
         setTomcatJNDIContextProperties();
         
         final String testTextPath = testDir.getAbsolutePath() + "/test.txt";
-        
         
         Connector connector;
         int saveStatus;

@@ -52,7 +52,10 @@ public class SpringConfigObjectResolverTest extends TestCase {
         // Classpath is readonly => the XML-Spring-Config and Properties
         ContentResolver contentResolver = new ClasspathContentResolver();
         
-        String key = "org/settings4j/objectResolver/testSpring1";
+        String key = "org/settings4j/objectresolver/testSpring1";
+        
+        byte[] springFileContent = contentResolver.getContent(key);
+        assertNotNull(springFileContent);
         
         DataSource hsqlDS = (DataSource)objectResolver.getObject(key, contentResolver);
         assertNotNull(hsqlDS);

@@ -20,7 +20,7 @@
 	
 	<!-- Store settings into the temorary folder -->
 	<connector name="FSConnector" class="org.settings4j.connector.FSConnector" cached="true" >
-		<param name="rootFolderPath" value="${connectors.string['java.io.tmpdir']}Settings4jUnittest"/>
+		<param name="rootFolderPath" value="${connectors.string['java.io.tmpdir']}/Settings4jUnittest"/>
 		<connector-ref ref="SystemPropertyConnector"  />
 	</connector>
 	
