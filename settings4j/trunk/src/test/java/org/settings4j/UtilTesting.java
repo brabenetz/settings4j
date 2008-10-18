@@ -62,7 +62,7 @@ public class UtilTesting {
      */
     public static File getTmpFolder(){
         String tmpdir = System.getProperty("java.io.tmpdir");
-        File tmpFolder = new File(tmpdir + "Settings4jUnittest");
+        File tmpFolder = new File(tmpdir + "/Settings4jUnittest");
         return tmpFolder;
     }
     

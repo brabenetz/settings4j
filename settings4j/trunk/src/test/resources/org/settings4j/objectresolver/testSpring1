@@ -4,7 +4,7 @@
 <beans>
     
     <!-- HSQLDB -->
-    <bean id="org.settings4j.objectResolver.testSpring1" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <bean id="org.settings4j.objectresolver.testSpring1" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 
         <property name="driverClassName"><value>org.hsqldb.jdbcDriver</value></property>
         <property name="url"><value>jdbc:hsqldb:mem:test</value></property>

@@ -42,9 +42,6 @@ public class FSContentResolver implements ContentResolver {
         if (key.startsWith(FILE_URL_PREFIX)){
             key = key.substring(FILE_URL_PREFIX.length());
         }
-        if (key.startsWith("/")){
-            key = key.substring(1);
-        }
         
         File file = new File(key);
         if (file.exists()) {
@@ -70,14 +67,15 @@ public class FSContentResolver implements ContentResolver {
         if (key.startsWith(FILE_URL_PREFIX)){
             key = key.substring(FILE_URL_PREFIX.length());
         }
-        if (key.startsWith("/")){
-            key = key.substring(1);
-        }
-        
+
         int status = Constants.SETTING_NOT_POSSIBLE;
         File file;
-        if (key.contains(":")){
-            // don't store Files into a subfolder like "c:/xayc/" + "d:/blabla"
+        
+        if (key.startsWith("/")){
+        	// Unix-Root
+            file = new File(key);
+        }else if (key.contains(":")){
+            // Windows-Root
             file = new File(key);
         } else {
             file = new File(getRootFolder(), key);

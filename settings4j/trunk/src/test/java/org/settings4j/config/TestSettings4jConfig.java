@@ -173,8 +173,8 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
         
         SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver1.xml");
 
-        String key1 = "org/settings4j/objectResolver/test1";
-        String key2 = "org/settings4j/objectResolver/test2";
+        String key1 = "org/settings4j/objectresolver/test1";
+        String key2 = "org/settings4j/objectresolver/test2";
         testObjectReolver(settingsRepository, key1, key2);
     }
     
@@ -185,8 +185,8 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
         
         SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver2.xml");
 
-        String key1 = "org/settings4j/objectResolver/test1";
-        String key2 = "org/settings4j/objectResolver/test2";
+        String key1 = "org/settings4j/objectresolver/test1";
+        String key2 = "org/settings4j/objectresolver/test2";
         testObjectReolver(settingsRepository, key1, key2);
     }
     
@@ -197,8 +197,8 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
         
         SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver3.xml");
 
-        String key1 = "org/settings4j/objectResolver/test2"; // property with cached==true
-        String key2 = "org/settings4j/objectResolver/test3";
+        String key1 = "org/settings4j/objectresolver/test2"; // property with cached==true
+        String key2 = "org/settings4j/objectresolver/test3";
         testObjectReolver(settingsRepository, key1, key2);
     }
     
@@ -209,14 +209,14 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
         
         SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver4Spring.xml");
 
-        String key1 = "org/settings4j/objectResolver/testSpring1"; // spring-configuration
-        String key2 = "org/settings4j/objectResolver/test1"; // XML-Bean-Configuration
+        String key1 = "org/settings4j/objectresolver/testSpring1"; // spring-configuration
+        String key2 = "org/settings4j/objectresolver/test1"; // XML-Bean-Configuration
 
         // store values into the default java temporary directory with subfolder "Settings4j"
         // String tmpdir = System.getProperty("java.io.tmpdir");
         Settings settings1 = settingsRepository.getSettings("com.mycompany.myapp");
         
-        // the propety-file "org/settings4j/objectResolver/test1.properties must exists"
+        // the propety-file "org/settings4j/objectresolver/test1.properties must exists"
         DataSource dataSource = (DataSource)settings1.getObject(key1);
         assertNotNull(dataSource);
         
