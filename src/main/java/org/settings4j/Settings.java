@@ -16,6 +16,7 @@
  *****************************************************************************/
 package org.settings4j;
 
+import java.util.List;
 import java.util.Map;
 
 import org.settings4j.config.DOMConfigurator;
@@ -103,10 +104,11 @@ public abstract class Settings {
      * 
      * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
      * @param value the new String-Value for the given key 
+     * @param connectorName The name of the connector, who should be used to set the value
      * @throws NoWriteableConnectorFoundException Is thrown if no Connector was Found.
      *      One Connector must return {@link Constants#SETTING_SUCCESS}
      */
-    public abstract void setString(String key, String value) throws NoWriteableConnectorFoundException;
+    public abstract void setString(String key, String value, String connectorName) throws NoWriteableConnectorFoundException;
 
 
     /**
@@ -119,11 +121,12 @@ public abstract class Settings {
      * then a {@link NoWriteableConnectorFoundException} will be thrown.
      * 
      * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
-     * @param value the new byte[]-Value for the given key 
+     * @param value the new byte[]-Value for the given key
+     * @param connectorName The name of the connector, who should be used to set the value 
      * @throws NoWriteableConnectorFoundException Is thrown if no Connector was Found.
      *      One Connector must return {@link Constants#SETTING_SUCCESS}
      */
-    public abstract void setContent(String key, byte[] value) throws NoWriteableConnectorFoundException;
+    public abstract void setContent(String key, byte[] value, String connectorName) throws NoWriteableConnectorFoundException;
 
 
     /**
@@ -137,10 +140,11 @@ public abstract class Settings {
      * 
      * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
      * @param value the new Object-Value for the given key 
+     * @param connectorName The name of the connector, who should be used to set the value
      * @throws NoWriteableConnectorFoundException Is thrown if no Connector was Found.
      *      One Connector must return {@link Constants#SETTING_SUCCESS}
      */
-    public abstract void setObject(String key, Object value) throws NoWriteableConnectorFoundException;
+    public abstract void setObject(String key, Object value, String connectorName) throws NoWriteableConnectorFoundException;
 
     /**
      * Add a {@link Connector}.<br />
@@ -269,4 +273,11 @@ public abstract class Settings {
      * @param additivity
      */
     public abstract void setAdditivity(boolean additivity);
+    
+    /**
+     * Return a List off {@link Connector} who can be used with this {@link Settings} instance
+     * 
+     * @return a list off all Connectors who can be used with this {@link Settings} instance 
+     */
+    public abstract List getAllConnectors();
 }

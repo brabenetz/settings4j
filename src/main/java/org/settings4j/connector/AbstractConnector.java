@@ -71,4 +71,5 @@ public abstract class AbstractConnector implements Connector{
         // Overwrite this methode if you want do something after all properties are set.
         // by default there is nothing to do
     }
+    
 }

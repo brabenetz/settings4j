@@ -40,4 +40,8 @@ public class SystemPropertyConnector extends AbstractPropertyConnector {
             return def;
         }
     }
+
+	public boolean isReadonly() {
+		return false;
+	}
 }

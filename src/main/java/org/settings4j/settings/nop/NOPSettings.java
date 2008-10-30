@@ -47,7 +47,13 @@ public class NOPSettings extends Settings {
         return Collections.EMPTY_LIST;
     }
 
-    public byte[] getContent(String key) {
+    
+    
+    public List getAllConnectors() {
+        return Collections.EMPTY_LIST;
+	}
+
+	public byte[] getContent(String key) {
         return null;
     }
 
@@ -63,13 +69,13 @@ public class NOPSettings extends Settings {
         return null;
     }
 
-    public void setContent(String key, byte[] value) {
+    public void setContent(String key, byte[] value, String connectorName) {
     }
 
-    public void setObject(String key, Object value) {
+    public void setObject(String key, Object value, String connectorName) {
     }
 
-    public void setString(String key, String value) {
+    public void setString(String key, String value, String connectorName) {
     }
 
     public SettingsRepository getSettingsRepository() {

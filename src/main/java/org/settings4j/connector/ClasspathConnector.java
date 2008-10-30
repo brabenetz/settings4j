@@ -84,4 +84,8 @@ public class ClasspathConnector extends AbstractConnector {
         unionContentResolver = new UnionContentResolver(classpathContentResolver);
         unionContentResolver.addContentResolver(contentResolver);
     }
+
+	public boolean isReadonly() {
+		return true;
+	}
 }

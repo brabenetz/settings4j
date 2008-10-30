@@ -90,4 +90,7 @@ public class ContentHasChangedNotifierConnectorWrapper implements Connector{
         targetConnector.setName(name);
     }
 
+	public boolean isReadonly() {
+		return targetConnector.isReadonly();
+	}
 }

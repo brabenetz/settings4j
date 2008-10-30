@@ -40,7 +40,8 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
         SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository(SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
         
         HierarchicalSettings rootSeetings = (HierarchicalSettings)settingsRepository.getRootSettings();
-        
+
+        String rootSeetingsConnector = getFirstWritableConnectorName(rootSeetings);
         // rootSettings are extra. So the default Settings have no settings
         assertEquals(0, settingsRepository.getCurrentSettingsList().size());
 
@@ -66,21 +67,21 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
 
         //check if there is a Exception thrown:
         try {
-            rootSeetings.setString("xyz", "xyz");
+            rootSeetings.setString("xyz", "xyz", rootSeetingsConnector);
             fail("must throw an NoWriteableConnectorFoundException");
         } catch (NoWriteableConnectorFoundException e) {
             assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
         }
 
         try {
-            rootSeetings.setContent("xyz", "xyz".getBytes());
+            rootSeetings.setContent("xyz", "xyz".getBytes(), rootSeetingsConnector);
             fail("must throw an NoWriteableConnectorFoundException");
         } catch (NoWriteableConnectorFoundException e) {
             assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
         }
 
         try {
-            rootSeetings.setObject("xyz", "xyz");
+            rootSeetings.setObject("xyz", "xyz", rootSeetingsConnector);
             fail("must throw an NoWriteableConnectorFoundException");
         } catch (NoWriteableConnectorFoundException e) {
             assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
@@ -100,11 +101,12 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
         SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigFSTempfolder.xml");
 
         Settings mycompanySeetings = settingsRepository.getSettings("com.mycompany");
-
+        String mycompanySeetingsConnector = getFirstWritableConnectorName(mycompanySeetings);
+        
         // check if there is a Exception thrown:
         // only com.mycompany.myapp and above can write
         try {
-            mycompanySeetings.setString("xyz", "abc");
+            mycompanySeetings.setString("xyz", "abc", mycompanySeetingsConnector);
             fail("must throw an NoWriteableConnectorFoundException");
         } catch (NoWriteableConnectorFoundException e) {
             assertEquals(NoWriteableConnectorFoundException.NO_WRITEABLE_CONNECTOR_FOUND_1, e.getKey());
@@ -114,14 +116,16 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
         // store values into the default java temporary directory with subfolder "Settings4j"
         // String tmpdir = System.getProperty("java.io.tmpdir");
         Settings settings1 = settingsRepository.getSettings("com.mycompany.myapp");
+        String settings1Connector = getFirstWritableConnectorName(settings1);
         File tmpFolder = UtilTesting.getTmpFolder();
         File fileXyz = new File(tmpFolder, "xyz");
         assertFalse(fileXyz.exists());
-        settings1.setString("xyz", "abc");
+        settings1.setString("xyz", "abc", settings1Connector);
         assertTrue(fileXyz.exists());
 
         Settings settings2 = settingsRepository.getSettings("com.mycompany.myapp.subcomponent");
-        settings2.setString("xyz2", "abc2");
+        String settings2Connector = getFirstWritableConnectorName(settings2);
+        settings2.setString("xyz2", "abc2", settings2Connector);
         
         //every settings have read access to the same FSConnector.
         assertEquals("abc", settings2.getString("xyz"));
@@ -135,11 +139,12 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
         SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigFSTestfolder.xml");
 
         Settings mycompanySeetings = settingsRepository.getSettings("com.mycompany");
+        String mycompanySeetingsConnector = getFirstWritableConnectorName(mycompanySeetings);
 
         // check if there is a Exception thrown:
         // only com.mycompany.myapp and above can write
         try {
-            mycompanySeetings.setString("xyz", "abc");
+            mycompanySeetings.setString("xyz", "abc", mycompanySeetingsConnector);
             fail("must throw an NoWriteableConnectorFoundException");
         } catch (NoWriteableConnectorFoundException e) {
             assertEquals(NoWriteableConnectorFoundException.NO_WRITEABLE_CONNECTOR_FOUND_1, e.getKey());
@@ -149,14 +154,16 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
         // store values into the default java temporary directory with subfolder "Settings4j"
         // String tmpdir = System.getProperty("java.io.tmpdir");
         Settings settings1 = settingsRepository.getSettings("com.mycompany.myapp");
+        String settings1Connector = getFirstWritableConnectorName(settings1);
         File testFolder = UtilTesting.getTestFolder();
         File fileXyz = new File(testFolder, "xyz");
         assertFalse(fileXyz.exists());
-        settings1.setString("xyz", "abc");
+        settings1.setString("xyz", "abc", settings1Connector);
         assertTrue(fileXyz.exists());
 
         Settings settings2 = settingsRepository.getSettings("com.mycompany.myapp.subcomponent");
-        settings2.setString("xyz2", "abc2");
+        String settings2Connector = getFirstWritableConnectorName(settings2);
+        settings2.setString("xyz2", "abc2", settings2Connector);
         
         //every settings have read access to the same FSConnector.
         assertEquals("abc", settings2.getString("xyz"));
@@ -215,12 +222,13 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
         // store values into the default java temporary directory with subfolder "Settings4j"
         // String tmpdir = System.getProperty("java.io.tmpdir");
         Settings settings1 = settingsRepository.getSettings("com.mycompany.myapp");
+        String settings1Connector = getFirstWritableConnectorName(settings1);
         
         // the propety-file "org/settings4j/objectresolver/test1.properties must exists"
         DataSource dataSource = (DataSource)settings1.getObject(key1);
         assertNotNull(dataSource);
         
-        settings1.setObject(key2, dataSource);
+        settings1.setObject(key2, dataSource, settings1Connector);
 
         DataSource dataSource2 = (DataSource)settings1.getObject(key2);
         assertNotNull(dataSource2);

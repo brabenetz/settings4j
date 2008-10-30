@@ -277,4 +277,11 @@ public class JNDIConnector extends AbstractConnector {
     public void setContextPathPrefix(String contextPathPrefix) {
         this.contextPathPrefix = contextPathPrefix;
     }
+
+	public boolean isReadonly() {
+        // the JNDI-Context from TOMCAT is readonly
+        // if you try to write it, The following Exception will be thrown:
+        // javax.naming.NamingException: Context is read only
+		return false;
+	}
 }

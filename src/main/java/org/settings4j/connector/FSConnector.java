@@ -98,6 +98,10 @@ public class FSConnector extends AbstractConnector {
         unionContentResolver = new UnionContentResolver(fsContentResolver);
         unionContentResolver.addContentResolver(contentResolver);
     }
-    
+
+
+	public boolean isReadonly() {
+		return false;
+	}
     
 }
