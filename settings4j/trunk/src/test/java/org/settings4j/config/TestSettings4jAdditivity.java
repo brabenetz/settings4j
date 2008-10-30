@@ -61,14 +61,15 @@ public class TestSettings4jAdditivity extends AbstractTestSettings4jConfig{
         assertNull(settings1.getString("global/webserviceXY"));
         assertNull(settings1.getString("X"));
         assertNull(settings1.getString("Y"));
-        
+
+        String settings1Connector = getFirstWritableConnectorName(settings1);
         
         // store values into the default java temporary directory with subfolder "Settings4j"
         // String tmpdir = System.getProperty("java.io.tmpdir");
         File testFolder = UtilTesting.getTestFolder();
         File fileXy = new File(testFolder, "global/webserviceXY");
         assertFalse(fileXy.exists());
-        settings1.setString("X", "https://uvw"); // "X" is mapped to "global/webserviceXY"
+        settings1.setString("X", "https://uvw", settings1Connector); // "X" is mapped to "global/webserviceXY"
         assertTrue(fileXy.exists());
         
         assertEquals("https://uvw", settings1.getString("X"));

@@ -140,4 +140,7 @@ public class CachedConnectorWrapper implements Connector{
         targetConnector.setName(name);
     }
 
+	public boolean isReadonly() {
+		return targetConnector.isReadonly();
+	}
 }

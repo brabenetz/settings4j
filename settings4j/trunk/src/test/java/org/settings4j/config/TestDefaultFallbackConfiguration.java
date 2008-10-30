@@ -53,23 +53,25 @@ public class TestDefaultFallbackConfiguration extends TestCase{
         assertNull(SETTINGS.getContent("xyz"));
         assertNull(SETTINGS.getObject("xyz"));
 
+        // the Default settings Configuration is readonly
+        String settingsConnector = null;
         //check if there is a Exception thrown:
         try {
-            SETTINGS.setString("xyz", "xyz");
+            SETTINGS.setString("xyz", "xyz", settingsConnector);
             fail("must throw an NoWriteableConnectorFoundException");
         } catch (NoWriteableConnectorFoundException e) {
             assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
         }
 
         try {
-            SETTINGS.setContent("xyz", "xyz".getBytes());
+            SETTINGS.setContent("xyz", "xyz".getBytes(), settingsConnector);
             fail("must throw an NoWriteableConnectorFoundException");
         } catch (NoWriteableConnectorFoundException e) {
             assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
         }
 
         try {
-            SETTINGS.setObject("xyz", "xyz");
+            SETTINGS.setObject("xyz", "xyz", settingsConnector);
             fail("must throw an NoWriteableConnectorFoundException");
         } catch (NoWriteableConnectorFoundException e) {
             assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());

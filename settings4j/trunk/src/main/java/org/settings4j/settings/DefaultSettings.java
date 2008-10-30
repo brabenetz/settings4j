@@ -64,8 +64,20 @@ public class DefaultSettings extends HierarchicalSettings{
     public List getConnectors() {
         return Collections.unmodifiableList(connectors);
     }
-    
+
     /** {@inheritDoc} */
+    public List getAllConnectors() {
+		List allConnctors = new ArrayList();
+        Iterator iterator;
+        iterator = new ConnectorIterator(this);
+        while (iterator.hasNext()) {
+            Connector connector = (Connector) iterator.next();
+            allConnctors.add(connector);
+        }
+		return Collections.unmodifiableList(allConnctors);
+	}
+
+	/** {@inheritDoc} */
     public void addConnector(Connector connector) {
         settingsRepository.addConnector(connector);
         connectors.add(connector);
@@ -128,51 +140,66 @@ public class DefaultSettings extends HierarchicalSettings{
     }
 
     /** {@inheritDoc} */
-    public void setContent(String key, byte[] value) throws NoWriteableConnectorFoundException {
-        key = mappedKey(key);
+    public void setContent(String key, byte[] value, String connectorName) throws NoWriteableConnectorFoundException {
+    	if (connectorName == null){
+            throw new NoWriteableConnectorFoundException(key);
+        }
+    	key = mappedKey(key);
         initializeRepositoryIfNecessary();
         int status;
         Iterator iterator;
         iterator = new ConnectorIterator(this);
         while (iterator.hasNext()) {
             Connector connector = (Connector) iterator.next();
-            status = connector.setContent(key, value);
-            if (status == Constants.SETTING_SUCCESS){
-                return;
+            if(connectorName.equals(connector.getName())){
+	            status = connector.setContent(key, value);
+	            if (status == Constants.SETTING_SUCCESS){
+	                return;
+	            }
             }
         }
         throw new NoWriteableConnectorFoundException(key);
     }
 
     /** {@inheritDoc} */
-    public void setObject(String key, Object value) throws NoWriteableConnectorFoundException {
-        key = mappedKey(key);
+    public void setObject(String key, Object value, String connectorName) throws NoWriteableConnectorFoundException {
+        if (connectorName == null){
+            throw new NoWriteableConnectorFoundException(key);
+        }
+    	key = mappedKey(key);
         initializeRepositoryIfNecessary();
         int status;
         Iterator iterator;
         iterator = new ConnectorIterator(this);
         while (iterator.hasNext()) {
             Connector connector = (Connector) iterator.next();
-            status = connector.setObject(key, value);
-            if (status == Constants.SETTING_SUCCESS){
-                return;
+            if(connectorName.equals(connector.getName())){
+	            status = connector.setObject(key, value);
+	            if (status == Constants.SETTING_SUCCESS){
+	                return;
+	            }
             }
         }
         throw new NoWriteableConnectorFoundException(key);
     }
 
     /** {@inheritDoc} */
-    public void setString(String key, String value) throws NoWriteableConnectorFoundException {
-        key = mappedKey(key);
+    public void setString(String key, String value, String connectorName) throws NoWriteableConnectorFoundException {
+        if (connectorName == null){
+            throw new NoWriteableConnectorFoundException(key);
+        }
+    	key = mappedKey(key);
         initializeRepositoryIfNecessary();
         int status;
         Iterator iterator;
         iterator = new ConnectorIterator(this);
         while (iterator.hasNext()) {
             Connector connector = (Connector) iterator.next();
-            status = connector.setString(key, value);
-            if (status == Constants.SETTING_SUCCESS){
-                return;
+            if(connectorName.equals(connector.getName())){
+	            status = connector.setString(key, value);
+	            if (status == Constants.SETTING_SUCCESS){
+	                return;
+	            }
             }
         }
         throw new NoWriteableConnectorFoundException(key);

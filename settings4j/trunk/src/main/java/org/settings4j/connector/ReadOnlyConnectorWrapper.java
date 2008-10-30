@@ -84,4 +84,7 @@ public class ReadOnlyConnectorWrapper implements Connector {
         targetConnector.setName(name);
     }
 
+	public boolean isReadonly() {
+		return true;
+	}
 }

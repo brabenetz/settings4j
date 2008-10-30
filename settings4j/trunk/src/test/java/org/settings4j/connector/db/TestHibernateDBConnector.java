@@ -19,10 +19,12 @@ package org.settings4j.connector.db;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import junit.framework.TestCase;
 
 import org.apache.commons.io.FileUtils;
+import org.settings4j.Connector;
 import org.settings4j.Settings;
 import org.settings4j.SettingsRepository;
 import org.settings4j.UtilTesting;
@@ -49,11 +51,20 @@ public class TestHibernateDBConnector extends TestCase {
     public void testHibernateDBConnector1() throws UnsupportedEncodingException{
         SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/connector/db/testHibernateDBConnector1.xml");
         Settings rootSettings = settingsRepository.getRootSettings();
+        List connectors = rootSettings.getAllConnectors();
+        
+        // there are three Connectors configured:
+        // "HibernateDBConnector", "SystemPropertyConnector", "ClasspathConnector"
+        assertEquals(3, connectors.size());
+        // the first one is the "HibernateDBConnector"
+        Connector connector = (Connector)connectors.get(0);
+        assertEquals("HibernateDBConnector", connector.getName());
+        
         
         String stringValue = rootSettings.getString("test");
         assertNull(stringValue);
         
-        rootSettings.setString("test", "Hello World");
+        rootSettings.setString("test", "Hello World", "HibernateDBConnector");
         stringValue = rootSettings.getString("test");
         assertEquals("Hello World", stringValue);
         
@@ -61,7 +72,7 @@ public class TestHibernateDBConnector extends TestCase {
         byte[] byteArrayValue = rootSettings.getContent("test");
         assertNull(byteArrayValue);
         
-        rootSettings.setContent("test", "Hello World".getBytes("UTF-8"));
+        rootSettings.setContent("test", "Hello World".getBytes("UTF-8"), "HibernateDBConnector");
         byteArrayValue = rootSettings.getContent("test");
         assertNotNull(byteArrayValue);
         assertEquals("Hello World", new String(byteArrayValue, "UTF-8"));

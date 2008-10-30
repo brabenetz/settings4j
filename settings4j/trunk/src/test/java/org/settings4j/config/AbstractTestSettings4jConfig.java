@@ -20,12 +20,14 @@ package org.settings4j.config;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import junit.framework.TestCase;
 
 import org.apache.commons.io.FileUtils;
+import org.settings4j.Connector;
 import org.settings4j.Settings;
 import org.settings4j.SettingsRepository;
 import org.settings4j.UtilTesting;
@@ -60,11 +62,12 @@ public abstract class AbstractTestSettings4jConfig extends TestCase{
         // the propety-file "org/settings4j/objectResolver/test1.properties" must exists
         
         Settings mycompanySeetings = settingsRepository.getSettings("com.mycompany");
-
+        String mycompanySeetingsConnector = getFirstWritableConnectorName(mycompanySeetings);
+        
         // check if there is a Exception thrown:
         // only com.mycompany.myapp and above can write
         try {
-            mycompanySeetings.setObject(key1, new HashMap());
+            mycompanySeetings.setObject(key1, new HashMap(), mycompanySeetingsConnector);
             fail("must throw an NoWriteableConnectorFoundException");
         } catch (NoWriteableConnectorFoundException e) {
             assertEquals(NoWriteableConnectorFoundException.NO_WRITEABLE_CONNECTOR_FOUND_1, e.getKey());
@@ -92,9 +95,10 @@ public abstract class AbstractTestSettings4jConfig extends TestCase{
         testList.add(testValue4);
         testData.put("irgendwas", "blablablablablabla");
         testData.put("liste", testList);
-        
+
+        String settings1Connector = getFirstWritableConnectorName(settings1);
         // the propety-file "org/settings4j/objectResolver/test1.properties must exists"
-        settings1.setObject(key1, testData);
+        settings1.setObject(key1, testData, settings1Connector);
         assertTrue(fileKey1.exists());
         
         // The FSConnector is cached! The Objects must be the same.
@@ -108,7 +112,7 @@ public abstract class AbstractTestSettings4jConfig extends TestCase{
         
         // Copy the content from key2 to key1
         byte[] content2 = settings1.getContent(key2);
-        settings1.setContent(key1, content2);
+        settings1.setContent(key1, content2, settings1Connector);
 
         // The Cached Connector should have cleared the cache
         result = (Map)settings1.getObject(key1);
@@ -118,5 +122,24 @@ public abstract class AbstractTestSettings4jConfig extends TestCase{
         assertNotNull(liste);
         assertTrue(liste instanceof List);
         assertEquals(1, ((List)liste).size());
+    }
+    
+    protected Connector getFirstWritableConnector(Settings settings){
+    	 List connectors = settings.getAllConnectors();
+         for (Iterator iterator = connectors.iterator(); iterator.hasNext();) {
+			Connector connector = (Connector) iterator.next();
+			if (!connector.isReadonly()){
+				return connector;
+			}
+		}
+        return null;
+    }
+    protected String getFirstWritableConnectorName(Settings settings){
+    	Connector connector = getFirstWritableConnector(settings);
+    	if (connector == null){
+    		return null;
+    	} else {
+    		return connector.getName();
+    	}
     }
 }

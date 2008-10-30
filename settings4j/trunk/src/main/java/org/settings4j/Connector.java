@@ -150,4 +150,6 @@ public interface Connector {
 
     public void setName(String name);
     
+    public boolean isReadonly();
+    
 }
