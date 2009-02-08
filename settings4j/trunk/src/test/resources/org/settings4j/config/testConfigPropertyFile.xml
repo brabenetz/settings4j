@@ -28,10 +28,6 @@
 	<connector name="ClasspathConnector"
 		class="org.settings4j.connector.ClasspathConnector" />
 
-	<root>
-		<connector-ref ref="PropertyFileConnector" readonly="false" />
-	</root>
-
 	<contentResolver name="DefaultContentResolver"
 		class="org.settings4j.contentresolver.UnionContentResolver">
 		<contentResolver-ref ref="FSContentResolver" />

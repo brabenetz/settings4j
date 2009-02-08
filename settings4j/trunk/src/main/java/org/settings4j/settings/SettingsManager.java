@@ -17,10 +17,10 @@
 package org.settings4j.settings;
 
 import java.net.URL;
-import java.util.List;
 
 import org.settings4j.Settings;
 import org.settings4j.SettingsFactory;
+import org.settings4j.SettingsInstance;
 import org.settings4j.SettingsRepository;
 import org.settings4j.config.DOMConfigurator;
 import org.settings4j.contentresolver.ClasspathContentResolver;
@@ -59,7 +59,7 @@ public class SettingsManager {
          * The root settings names itself as "root". However, the root settings cannot be retrieved
          * by name.
          */
-        settingsRepository = new HierarchicalSettingsRepository(new DefaultSettings("root"));
+        settingsRepository = new DefaultSettingsRepository();
 
         // read XML default Configuration to configure the repository
         URL url = ClasspathContentResolver.getResource(DEFAULT_XML_CONFIGURATION_FILE);
@@ -92,56 +92,45 @@ public class SettingsManager {
     }
 
     /**
-     * the root {@link org.settings4j.Settings} <br />
-     * e.g.: Defined by the root-Tag inside the settings4j.xml
-     * 
-     * @return
+     * Retrieve the appropriate {@link Settings} instance.
      */
-    public static Settings getRootSettings() {
-        return getSettingsRepository().getRootSettings();
+    public static SettingsInstance getSettings() {
+    	initializeRepositoryIfNecessary();
+        // Delegate the actual manufacturing of the settings to the settings repository.
+        return getSettingsRepository().getSettings();
     }
 
     /**
      * Retrieve the appropriate {@link Settings} instance.
      */
-    public static Settings getSettings(final String name) {
+    public static SettingsInstance getSettings(final SettingsFactory factory) {
+    	initializeRepositoryIfNecessary();
         // Delegate the actual manufacturing of the settings to the settings repository.
-        return getSettingsRepository().getSettings(name);
+        return getSettingsRepository().getSettings(factory);
     }
 
     /**
-     * Retrieve the appropriate {@link Settings} instance.
+     * Check if the repository must be configured with the defaul fallback settings4j.xml.
      */
-    public static Settings getSettings(final Class clazz) {
-        // Delegate the actual manufacturing of the settings to the settings repository.
-        return getSettingsRepository().getSettings(clazz.getName());
-    }
+    protected static void initializeRepositoryIfNecessary(){
+        if (getSettingsRepository().getSettings().getConnectors().size() == 0){
+            // No connectors in hierarchy, warn user and add default-configuration.
+            LOG.warn("The settings4j will be configured with the default-fallback-config: " + SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
+            
+            URL url = ClasspathContentResolver.getResource(SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
 
-    /**
-     * Retrieve the appropriate {@link Settings} instance.
-     */
-    public static Settings getSettings(final String name, final SettingsFactory factory) {
-        // Delegate the actual manufacturing of the settings to the settings repository.
-        return getSettingsRepository().getSettings(name, factory);
-    }
-
-    /**
-     * Checks, if the Settings-Object for the given key already exists.<br />
-     * The difference to {@link #getSettings(Class)}: no Settings-Object will be created if it doesn't exists.
-     * 
-     * @param name The name of The {@link Settings}
-     * @return the founded Settings Object or null.
-     */
-    public static Settings exists(final String name) {
-        return getSettingsRepository().exists(name);
-    }
-
-    /**
-     * return a List off all {@link org.settings4j.Settings} who are defind in this Repository.
-     * 
-     * @return the List of all defined Settings, returns NEVER null but maybe an empty list.
-     */
-    public static List getCurrentSettingsList() {
-        return getSettingsRepository().getCurrentSettingsList();
+            // If we have a non-null url, then delegate the rest of the
+            // configuration to the DOMConfigurator.configure method.
+            if (url != null) {
+                LOG.debug("Using URL [" + url + "] for automatic settings4j fallback configuration.");
+                try {
+                    DOMConfigurator.configure(url, getSettingsRepository());
+                } catch (NoClassDefFoundError e) {
+                    LOG.warn("Error during default fallback initialization", e);
+                }
+            } else {
+                LOG.fatal("Could not find resource: [" + SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE + "].");
+            }
+        }
     }
 }

@@ -16,13 +16,13 @@
  *****************************************************************************/
 package org.settings4j.settings;
 
-import org.settings4j.Settings;
 import org.settings4j.SettingsFactory;
+import org.settings4j.SettingsInstance;
 
 public class DefaultSettingsFactory implements SettingsFactory {
 
-    public Settings makeNewSettingsInstance(String name) {
-        return new DefaultSettings(name);
+    public SettingsInstance makeNewSettingsInstance() {
+        return new DefaultSettings();
     }
 
 }

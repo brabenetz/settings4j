@@ -27,8 +27,6 @@ public class TestDefaultFallbackConfiguration extends TestCase{
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(TestDefaultFallbackConfiguration.class);
     
-    private static final Settings SETTINGS = Settings.getSettings(TestDefaultFallbackConfiguration.class);
-
     protected void setUp() throws Exception {
         super.setUp();
         System.setProperty("testDefaultProperty", "HelloWorld");
@@ -45,38 +43,38 @@ public class TestDefaultFallbackConfiguration extends TestCase{
     public void testDefaultSettings4jConfig(){
         
         LOG.debug("#### AFTER THE FOLLOWING LINE SETTINGS4J WILL BE CONFIGURED THE FIRST TIME WITH THE FALLBACK-FILE #####");
-        assertEquals("HelloWorld", SETTINGS.getString("testDefaultProperty"));
+        assertEquals("HelloWorld", Settings.getString("testDefaultProperty"));
         LOG.debug("#### FINISH CONFIGURATION #####");
         
         //check if there is no Exception thrown:
-        assertNull(SETTINGS.getString("xyz"));
-        assertNull(SETTINGS.getContent("xyz"));
-        assertNull(SETTINGS.getObject("xyz"));
+        assertNull(Settings.getString("xyz"));
+        assertNull(Settings.getContent("xyz"));
+        assertNull(Settings.getObject("xyz"));
 
         // the Default settings Configuration is readonly
         String settingsConnector = null;
         //check if there is a Exception thrown:
         try {
-            SETTINGS.setString("xyz", "xyz", settingsConnector);
+        	Settings.setString("xyz", "xyz", settingsConnector);
             fail("must throw an NoWriteableConnectorFoundException");
         } catch (NoWriteableConnectorFoundException e) {
             assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
         }
 
         try {
-            SETTINGS.setContent("xyz", "xyz".getBytes(), settingsConnector);
+        	Settings.setContent("xyz", "xyz".getBytes(), settingsConnector);
             fail("must throw an NoWriteableConnectorFoundException");
         } catch (NoWriteableConnectorFoundException e) {
             assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
         }
 
         try {
-            SETTINGS.setObject("xyz", "xyz", settingsConnector);
+        	Settings.setObject("xyz", "xyz", settingsConnector);
             fail("must throw an NoWriteableConnectorFoundException");
         } catch (NoWriteableConnectorFoundException e) {
             assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
         }
         
-        assertEquals(3, SETTINGS.getSettingsRepository().getConnectorCount());
+        assertEquals(3, Settings.getConnectors().size());
     }
 }

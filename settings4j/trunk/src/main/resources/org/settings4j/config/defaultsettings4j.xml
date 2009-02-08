@@ -34,12 +34,6 @@
 	<connector name="ClasspathConnector" class="org.settings4j.connector.ClasspathConnector" >
 		<objectResolver-ref ref="DefaultObjectResolver" />
 	</connector>
-		
-	<root>
-		<connector-ref ref="SystemPropertyConnector" readonly="true" />
-		<connector-ref ref="JNDIConnector" readonly="true" />
-		<connector-ref ref="ClasspathConnector" readonly="true" />
-	</root>
 
 	<contentResolver name="DefaultContentResolver" class="org.settings4j.contentresolver.UnionContentResolver">
 		<contentResolver-ref ref="FSContentResolver" />

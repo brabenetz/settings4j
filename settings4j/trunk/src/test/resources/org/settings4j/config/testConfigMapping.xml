@@ -22,10 +22,6 @@
 		class="org.settings4j.connector.SystemPropertyConnector">
 	</connector>
 	
-	<root mapping-ref="defaultMapping" >
-		<connector-ref ref="SystemPropertyConnector" readonly="true" />
-	</root>
-	
 	<mapping name="defaultMapping">
 		<entry key="com/mycompany/moduleX/webserviceXY" ref-key="global/webserviceXY"/>
 		<entry key="com/mycompany/moduleY/webserviceXY" ref-key="global/webserviceXY"/>

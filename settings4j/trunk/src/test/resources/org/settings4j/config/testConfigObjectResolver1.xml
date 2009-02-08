@@ -26,14 +26,6 @@
 
 	<connector name="ClasspathConnector" class="org.settings4j.connector.ClasspathConnector" />
 	
-	<settings name="com.mycompany.myapp" >
-		<connector-ref ref="FSConnector" readonly="false" />
-	</settings>
-	
-	<root>
-		<connector-ref ref="ClasspathConnector" readonly="true" />
-	</root>
-	
 	<contentResolver name="ClasspathContentResolver" class="org.settings4j.contentresolver.ClasspathContentResolver">
 	</contentResolver>
 	

@@ -17,9 +17,9 @@
 package org.settings4j;
 
 import java.util.List;
+import java.util.Map;
 
 import org.settings4j.exception.NoWriteableConnectorFoundException;
-import org.settings4j.settings.SettingsManager;
 
 
 /**
@@ -50,52 +50,44 @@ import org.settings4j.settings.SettingsManager;
  * @author hbrabenetz
  *
  */
-public final class Settings {
-    
+public interface SettingsInstance {
+
     /**
      * return the found String-Value for the given key.<br />
-     * The {@link Settings} Instance iterates all his {@link Connector} and return the first found Value.<br />
+     * The {@link SettingsInstance} Instance iterates all his {@link Connector} and return the first found Value.<br />
      * <br />
      * Returns null if no connector found a Value for the given key<br />
      * 
      * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
      * @return the found String-Value for the given key 
      */
-    public static String getString(String key) {
-    	return getSettings().getString(key);
-    }
+    public abstract String getString(String key);
 
     /**
-     * return the found byte[]-Value for the given key.<br /> {
-    	getSettings().getAllConnectors();
-    }
-     * The {@link Settings} Instance iterates all his {@link Connector} and return the first found Value.<br />
+     * return the found byte[]-Value for the given key.<br />
+     * The {@link SettingsInstance} Instance iterates all his {@link Connector} and return the first found Value.<br />
      * <br />
      * Returns null if no connector found a Value for the given key<br />
      * 
      * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
      * @return the found byte[]-Value for the given key 
      */
-    public static byte[] getContent(String key) {
-    	return getSettings().getContent(key);
-    }
+    public abstract byte[] getContent(String key);
 
     /**
      * return the found Object-Value for the given key.<br />
-     * The {@link Settings} Instance iterates all his {@link Connector} and return the first found Value.<br />
+     * The {@link SettingsInstance} Instance iterates all his {@link Connector} and return the first found Value.<br />
      * <br />
      * Returns null if no connector found a Value for the given key<br />
      * 
      * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
      * @return the found Object-Value for the given key 
      */
-    public static Object getObject(String key) {
-    	return getSettings().getObject(key);
-    }
+    public abstract Object getObject(String key);
 
     /**
      * Set ( or overwrite ) the Value for the Given key.<br />
-     * The {@link Settings} Instance iterates all his {@link Connector} and
+     * The {@link SettingsInstance} Instance iterates all his {@link Connector} and
      * if a Connector can successful write the new Value,
      * then the Connector must return {@link Constants#SETTING_SUCCESS}<br />
      * 
@@ -108,14 +100,12 @@ public final class Settings {
      * @throws NoWriteableConnectorFoundException Is thrown if no Connector was Found.
      *      One Connector must return {@link Constants#SETTING_SUCCESS}
      */
-    public static void setString(String key, String value, String connectorName) throws NoWriteableConnectorFoundException {
-    	getSettings().setString(key, value, connectorName);
-    }
+    public abstract void setString(String key, String value, String connectorName) throws NoWriteableConnectorFoundException;
 
 
     /**
      * Set ( or overwrite ) the Value for the Given key.<br />
-     * The {@link Settings} Instance iterates all his {@link Connector} and
+     * The {@link SettingsInstance} Instance iterates all his {@link Connector} and
      * if a Connector can successful write the new Value,
      * then the Connector must return {@link Constants#SETTING_SUCCESS}<br />
      * 
@@ -128,14 +118,12 @@ public final class Settings {
      * @throws NoWriteableConnectorFoundException Is thrown if no Connector was Found.
      *      One Connector must return {@link Constants#SETTING_SUCCESS}
      */
-    public static void setContent(String key, byte[] value, String connectorName) throws NoWriteableConnectorFoundException {
-    	getSettings().setContent(key, value, connectorName);
-    }
+    public abstract void setContent(String key, byte[] value, String connectorName) throws NoWriteableConnectorFoundException;
 
 
     /**
      * Set ( or overwrite ) the Value for the Given key.<br />
-     * The {@link Settings} Instance iterates all his {@link Connector} and
+     * The {@link SettingsInstance} Instance iterates all his {@link Connector} and
      * if a Connector can successful write the new Value,
      * then the Connector must return {@link Constants#SETTING_SUCCESS}<br />
      * 
@@ -148,35 +136,73 @@ public final class Settings {
      * @throws NoWriteableConnectorFoundException Is thrown if no Connector was Found.
      *      One Connector must return {@link Constants#SETTING_SUCCESS}
      */
-    public static void setObject(String key, Object value, String connectorName) throws NoWriteableConnectorFoundException {
-    	getSettings().setObject(key, value, connectorName);
-    }
+    public abstract void setObject(String key, Object value, String connectorName) throws NoWriteableConnectorFoundException;
 
     /**
-     * Get the {@link SettingsRepository} where this Settings-Object is stored.
+     * Add a {@link Connector}.<br />
+     * This method will be call, if you create a connector-ref to a connector configuration in your settings4j.xml
      * 
-     * @return the {@link SettingsRepository} where this Settings-Object is stored.
-     */
-    public static SettingsRepository getSettingsRepository() {
-    	return SettingsManager.getSettingsRepository();
-    }
-    
-
-    /**
-     * Delegate to {@link SettingsManager#getRootSettings()}
+     * <pre>
+     * Example configuration in settings4j.xml:
+     * --------------------------------------
+     * &lt;settings name="com.mycompany" &gt;
+     *     &lt;connector-ref name="DBConnector" /&gt;
+     * &lt;/settings&gt;
+     * --------------------------------------
+     * </pre>
      * 
-     * @see SettingsManager#getRootSettings()
+     * @param connector
      */
-    private static SettingsInstance getSettings() {
-        return SettingsManager.getSettings();
-    }
+    public abstract void addConnector(Connector connector);
     
     /**
-     * Return a List off {@link Connector} who can be used with this {@link Settings} instance
-     * 
-     * @return a list off all Connectors who can be used with this {@link Settings} instance 
+     * Remove all Settings.
+     * (Internal use only)
      */
-    public static List getConnectors() {
-    	return getSettings().getConnectors();
-    }
+    public abstract void removeAllConnectors();
+        
+    /**
+     * The key mapping defined in settings4j.xml:
+     * <pre>
+     * Example:
+     * &lt;mapping name="defaultMapping"&gt;
+     *     &lt;entry key="com/mycompany/moduleX/datasource" ref-key="global/datasource"/&gt;
+     *     &lt;entry key="com/mycompany/moduleY/datasource" ref-key="global/datasource"/&gt;
+     * &lt;/mapping&gt;
+     * </pre>
+     * 
+     * Settings.getXXX("com/mycompany/moduleX/datasource"); <br />
+     * should return the configured value under "global/datasource" <br />
+     * <br />
+     * 
+     * @return the Mappings of this Settings-Object (without inheritances)
+     */
+    public abstract Map getMapping();
+    
+    /**
+     * 
+     * Set the mapping for this Settings-Object without inheritance.<br />
+     * This method will be call, if you create a mapping-ref to a mapping configuration in your settings4j.xml
+     * 
+     * <pre>
+     * Example:
+     * &lt;root mapping-ref="<b>defaultMapping</b>" &gt;
+     *    ...
+     * &lt;/root&gt;
+     * 
+     * &lt;mapping name="<b>defaultMapping</b>"&gt;
+     *     &lt;entry key="com/mycompany/moduleX/datasource" ref-key="global/datasource"/&gt;
+     *     &lt;entry key="com/mycompany/moduleY/datasource" ref-key="global/datasource"/&gt;
+     * &lt;/mapping&gt;
+     * </pre>
+     * 
+     */
+    public abstract void setMapping(Map mapping);
+    
+    /**
+     * Return a List off {@link Connector} who can be used with this {@link SettingsInstance} instance
+     * 
+     * @return a list off all Connectors who can be used with this {@link SettingsInstance} instance 
+     */
+    public abstract List getConnectors();
 }
