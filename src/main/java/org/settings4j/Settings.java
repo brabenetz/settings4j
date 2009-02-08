@@ -24,25 +24,15 @@ import org.settings4j.settings.SettingsManager;
 
 /**
  * Settings is used to get simply access to Application settings.
- * The default Settings-Object is embedded into an Hirachical Structure like the Logger in Log4j.
  * 
  * <pre>
  * Example usage java:
  * --------------------------------------
  * public class SettingsManager {
- *     private static final Settings SETTINGS = Settings.getSettings(SettingsManager.class);
- * 
  *     public static String getMyFormula() {
- *         return SETTINGS.getString("com/mycompany/mycalculation/my-formula");
+ *         return Settings.getString("com/mycompany/mycalculation/my-formula");
  *     }
  * }
- * --------------------------------------
- * 
- * Example configuration in settings4j.xml:
- * --------------------------------------
- * &lt;settings name="com.mycompany" &gt;
- *     &lt;connector-ref name="DBConnector" /&gt;
- * &lt;/settings&gt;
  * --------------------------------------
  * 
  * </pre>
