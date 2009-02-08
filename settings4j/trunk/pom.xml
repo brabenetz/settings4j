@@ -233,14 +233,14 @@
 		<repository>
 			<id>settings4j</id>
 			<url>
-				scp://shell.sourceforge.net/home/groups/s/se/settings4j/htdocs/m2repo
+				scp://web.sourceforge.net/home/groups/s/se/settings4j/htdocs/m2repo
 			</url>
 		</repository>
 		<site>
 			<id>settings4j</id>
 			<name>settings4j</name>
 			<url>
-				scp://shell.sourceforge.net/home/groups/s/se/settings4j/htdocs/archiv/${project.version}/
+				scp://web.sourceforge.net/home/groups/s/se/settings4j/htdocs/archiv/${project.version}/
 			</url>
 		</site>
 	</distributionManagement>
