@@ -23,8 +23,7 @@
 * contentResolver - The Implementation to resolve a Key to a byte[] - Content
 * objectResolver - The Implementation to converte the content from a ContentResolver to an Object.
 -->
-<!ELEMENT settings4j:configuration (connector+,settings*,root?,
-                               contentResolver*, objectResolver*, mapping*)>
+<!ELEMENT settings4j:configuration (connector+, contentResolver*, objectResolver*, mapping*)>
 <!ATTLIST settings4j:configuration
   xmlns:settings4j              CDATA #FIXED "http://settings4j.org/"
 >
@@ -96,21 +95,6 @@ If you use the Expression Language, you have the following implicied Objects:
 >
 
 
-<!-- A settings element consists of following elements:
-* param - Use The Setter-Implementation of this settings-Bean to set a value
-* connector-ref - The Reference to one or more connector elements
-
-And following Attributes:
-name - The name of this settings (is used for the Hierarchical inheritance)
-additivity - default "true". If "false", then the parent Connectors from hirarchy will not be inherited
--->
-<!ELEMENT settings (param*,connector-ref*)>
-<!ATTLIST settings
-  name		CDATA	#REQUIRED
-  additivity	(true|false) "true"
-  mapping-ref	CDATA  ""	
->
-
 <!-- A contentResolver element consists of following elements:
 * param - Use The Setter-Implementation of this contentResolver-Bean to set a value
 * connector-ref - The Reference to one or more connector elements
@@ -147,15 +131,6 @@ cached - default value is false; If true, the Objects will be cached per default
   cached (true|false) "false"
 >
 
-<!-- The root settings always exists and cannot be subclassed.
-A root element consists of following elements:
-* param - Use The Setter-Implementation of this settings-Bean to set a value
-* connector-ref - The Reference to one or more connector elements
--->
-<!ELEMENT root (param*, connector-ref*)>
-<!ATTLIST root
-  mapping-ref	CDATA  ""	
->
 <!-- 
 -->
 <!ELEMENT mapping (entry*)>

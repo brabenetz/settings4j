@@ -16,6 +16,8 @@
  *****************************************************************************/
 package org.settings4j;
 
+import org.settings4j.connector.PropertyFileConnector;
+import org.settings4j.connector.SystemPropertyConnector;
 import org.settings4j.contentresolver.ReadOnlyContentResolverWrapper;
 import org.settings4j.contentresolver.UnionContentResolver;
 
@@ -23,11 +25,32 @@ import org.settings4j.contentresolver.UnionContentResolver;
  * a ContentResolver is a Helper for read/write byte[] content for a given key.
  * 
  * <pre>
- * 
  * Example configuration in settings4j.xml:
  * --------------------------------------
  * &lt;contentResolver name="ClasspathContentResolver" class="org.settings4j.contentresolver.ClasspathContentResolver"&gt;
  * &lt;/contentResolver&gt;
+ * --------------------------------------
+ * </pre>
+ * 
+ * This is usefull for {@link SystemPropertyConnector} or {@link PropertyFileConnector}.
+ * If you define a ContentResolver in this Connectors, you can rever to a File of the FileSystem or Classpath.
+ * 
+ * <pre>
+ * Example Connector usage in settings4j.xml:
+ * --------------------------------------
+ * &lt;connector name="SystemPropertyConnector" class="org.settings4j.connector.SystemPropertyConnector" &gt;
+ *     &lt;contentResolver-ref ref="ClasspathContentResolver" /&gt;
+ * &lt;/connector&gt;
+ * --------------------------------------
+ * 
+ * Example usage in java-code:
+ * 
+ * --------------------------------------
+ * // alternativ start myapp with -Dxyz=com/mycompany/myapp/xyz-config.xml
+ * System.setProperty("xyz", "com/mycompany/myapp/xyz-config.xml"); //refer to the ClasspathContentResolver
+ * 
+ * // somewhere in myapp:
+ * byte[] xyzConfig = Settings.getContent("xyz"); // get Classpath-URL from the SystemPropertyConnector
  * --------------------------------------
  * 
  * </pre>

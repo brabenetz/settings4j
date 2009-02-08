@@ -69,6 +69,15 @@ public class DefaultSettingsRepository implements SettingsRepository {
     }
 
     /** {@inheritDoc} */
+    public int getConnectorCount() {
+        if (this.settings == null) {
+            return 0;
+        } else {
+            return settings.getConnectors().size();
+        }
+    }
+
+    /** {@inheritDoc} */
     public void resetConfiguration() {
     	/*
         root.setAdditivity(true);
