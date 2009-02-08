@@ -22,8 +22,7 @@ import java.net.URL;
 
 import org.settings4j.config.DOMConfigurator;
 import org.settings4j.contentresolver.ClasspathContentResolver;
-import org.settings4j.settings.DefaultSettings;
-import org.settings4j.settings.HierarchicalSettingsRepository;
+import org.settings4j.settings.DefaultSettingsRepository;
 
 /**
  * Some Tools for UnitTesting
@@ -47,7 +46,7 @@ public class UtilTesting {
     public static SettingsRepository getConfiguredSettingsRepository(String classpathUrl){
 
         URL url = ClasspathContentResolver.getResource(classpathUrl);
-        SettingsRepository settingsRepository = new HierarchicalSettingsRepository(new DefaultSettings("root"));
+        SettingsRepository settingsRepository = new DefaultSettingsRepository();
         DOMConfigurator.configure(url, settingsRepository);
         return settingsRepository;
     }

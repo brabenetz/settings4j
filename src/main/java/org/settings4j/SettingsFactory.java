@@ -28,5 +28,5 @@ public interface SettingsFactory {
      * @param name
      * @return
      */
-    Settings makeNewSettingsInstance(String name);
+    SettingsInstance makeNewSettingsInstance();
 }

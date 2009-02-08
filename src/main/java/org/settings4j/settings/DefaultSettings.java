@@ -16,7 +16,6 @@
  *****************************************************************************/
 package org.settings4j.settings;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,12 +26,8 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.settings4j.Connector;
 import org.settings4j.Constants;
-import org.settings4j.SettingsRepository;
-import org.settings4j.config.DOMConfigurator;
-import org.settings4j.contentresolver.ClasspathContentResolver;
+import org.settings4j.SettingsInstance;
 import org.settings4j.exception.NoWriteableConnectorFoundException;
-import org.settings4j.settings.helper.ConnectorIterator;
-import org.settings4j.settings.helper.InheritedMappedKeys;
 
 /**
  * The default Settings Object is a {@link HierarchicalSettings} implementation.
@@ -40,24 +35,13 @@ import org.settings4j.settings.helper.InheritedMappedKeys;
  * @author hbrabenetz
  *
  */
-public class DefaultSettings extends HierarchicalSettings{
+public class DefaultSettings implements SettingsInstance {
     
-    /** General Logger for this Class */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(DefaultSettings.class);
-    
-    private String name;
     private List connectors = Collections.checkedList(Collections.synchronizedList(new ArrayList()), Connector.class);
-    private HierarchicalSettings parent;
     private Map mapping;
-    private boolean additivity = true;
 
-    // Settings needs to know what Hierarchy they are in
-    private SettingsRepository settingsRepository;
-
-    public DefaultSettings(String name) {
+    public DefaultSettings() {
         super();
-        this.name = name;
     }
 
     /** {@inheritDoc} */
@@ -65,21 +49,8 @@ public class DefaultSettings extends HierarchicalSettings{
         return Collections.unmodifiableList(connectors);
     }
 
-    /** {@inheritDoc} */
-    public List getAllConnectors() {
-		List allConnctors = new ArrayList();
-        Iterator iterator;
-        iterator = new ConnectorIterator(this);
-        while (iterator.hasNext()) {
-            Connector connector = (Connector) iterator.next();
-            allConnctors.add(connector);
-        }
-		return Collections.unmodifiableList(allConnctors);
-	}
-
 	/** {@inheritDoc} */
     public void addConnector(Connector connector) {
-        settingsRepository.addConnector(connector);
         connectors.add(connector);
     }
 
@@ -91,10 +62,9 @@ public class DefaultSettings extends HierarchicalSettings{
     /** {@inheritDoc} */
     public byte[] getContent(String key) {
         key = mappedKey(key);
-        initializeRepositoryIfNecessary();
         byte[] result = null;
         Iterator iterator;
-        iterator = new ConnectorIterator(this);
+        iterator = this.connectors.iterator();
         while (iterator.hasNext()) {
             Connector connector = (Connector) iterator.next();
             result = connector.getContent(key);
@@ -108,10 +78,9 @@ public class DefaultSettings extends HierarchicalSettings{
     /** {@inheritDoc} */
     public Object getObject(String key) {
         key = mappedKey(key);
-        initializeRepositoryIfNecessary();
         Object result = null;
         Iterator iterator;
-        iterator = new ConnectorIterator(this);
+        iterator = this.connectors.iterator();
         while (iterator.hasNext()) {
             Connector connector = (Connector) iterator.next();
             result = connector.getObject(key);
@@ -125,10 +94,9 @@ public class DefaultSettings extends HierarchicalSettings{
     /** {@inheritDoc} */
     public String getString(String key) {
         key = mappedKey(key);
-        initializeRepositoryIfNecessary();
         String result = null;
         Iterator iterator;
-        iterator = new ConnectorIterator(this);
+        iterator = this.connectors.iterator();
         while (iterator.hasNext()) {
             Connector connector = (Connector) iterator.next();
             result = connector.getString(key);
@@ -145,10 +113,9 @@ public class DefaultSettings extends HierarchicalSettings{
             throw new NoWriteableConnectorFoundException(key);
         }
     	key = mappedKey(key);
-        initializeRepositoryIfNecessary();
         int status;
         Iterator iterator;
-        iterator = new ConnectorIterator(this);
+        iterator = this.connectors.iterator();
         while (iterator.hasNext()) {
             Connector connector = (Connector) iterator.next();
             if(connectorName.equals(connector.getName())){
@@ -167,10 +134,9 @@ public class DefaultSettings extends HierarchicalSettings{
             throw new NoWriteableConnectorFoundException(key);
         }
     	key = mappedKey(key);
-        initializeRepositoryIfNecessary();
         int status;
         Iterator iterator;
-        iterator = new ConnectorIterator(this);
+        iterator = this.connectors.iterator();
         while (iterator.hasNext()) {
             Connector connector = (Connector) iterator.next();
             if(connectorName.equals(connector.getName())){
@@ -189,10 +155,9 @@ public class DefaultSettings extends HierarchicalSettings{
             throw new NoWriteableConnectorFoundException(key);
         }
     	key = mappedKey(key);
-        initializeRepositoryIfNecessary();
         int status;
         Iterator iterator;
-        iterator = new ConnectorIterator(this);
+        iterator = this.connectors.iterator();
         while (iterator.hasNext()) {
             Connector connector = (Connector) iterator.next();
             if(connectorName.equals(connector.getName())){
@@ -215,68 +180,16 @@ public class DefaultSettings extends HierarchicalSettings{
      * &lt;/mapping&gt;
      * </pre>
      * 
-     * This method search also all parent Settings for Mappings.
      * 
      * @param key
      * @return
      */
     private String mappedKey(String key){
-        String mappedKey = new InheritedMappedKeys(this).get(key);
+        String mappedKey = (String)this.getMapping().get(key);
         if(StringUtils.isEmpty(mappedKey)){
             return key;
         } else {
             return mappedKey;
-        }
-    }
-
-    /** {@inheritDoc} */
-    public HierarchicalSettings getParent() {
-        return parent;
-    }
-
-    /** {@inheritDoc} */
-    public void setParent(HierarchicalSettings parent) {
-        this.parent = parent;
-    }
-
-    /** {@inheritDoc} */
-    public String getName() {
-        return name;
-    }
-
-    /** {@inheritDoc} */
-    public SettingsRepository getSettingsRepository() {
-        return settingsRepository;
-    }
-
-    /** {@inheritDoc} */
-    public void setSettingsRepository(SettingsRepository settingsRepository) {
-        this.settingsRepository = settingsRepository;
-    }
-    
-    /**
-     * Check if the repository must be configured with the defaul fallback settings4j.xml.
-     */
-    protected void initializeRepositoryIfNecessary(){
-        if (settingsRepository.getConnectorCount() == 0){
-            // No connectors in hierarchy, warn user and add default-configuration.
-            LOG.warn("No connectors could be found! For Setting '" + getName() + "'.");
-            LOG.warn("The settings4j will be configured with the default-fallback-config: " + SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
-            
-            URL url = ClasspathContentResolver.getResource(SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
-
-            // If we have a non-null url, then delegate the rest of the
-            // configuration to the DOMConfigurator.configure method.
-            if (url != null) {
-                LOG.debug("Using URL [" + url + "] for automatic settings4j fallback configuration.");
-                try {
-                    DOMConfigurator.configure(url, settingsRepository);
-                } catch (NoClassDefFoundError e) {
-                    LOG.warn("Error during default fallback initialization", e);
-                }
-            } else {
-                LOG.fatal("Could not find resource: [" + SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE + "].");
-            }
         }
     }
 
@@ -291,15 +204,5 @@ public class DefaultSettings extends HierarchicalSettings{
     /** {@inheritDoc} */
     public void setMapping(Map mapping) {
         this.mapping = mapping;
-    }
-
-    /** {@inheritDoc} */
-    public boolean isAdditivity() {
-        return additivity;
-    }
-
-    /** {@inheritDoc} */
-    public void setAdditivity(boolean additivity) {
-        this.additivity = additivity;
     }
 }

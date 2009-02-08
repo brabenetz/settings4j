@@ -16,47 +16,21 @@
  *****************************************************************************/
 package org.settings4j.settings.nop;
 
-import java.util.Collections;
-import java.util.List;
-
-import org.settings4j.Connector;
-import org.settings4j.Settings;
 import org.settings4j.SettingsFactory;
+import org.settings4j.SettingsInstance;
 import org.settings4j.SettingsRepository;
 
 public class NOPSettingsRepository implements SettingsRepository {
 
-    public Settings exists(String name) {
-        return null;
+    public SettingsInstance getSettings() {
+        return new NOPSettings(this);
     }
 
-    public List getCurrentSettingsList() {
-        return Collections.EMPTY_LIST;
-    }
-
-    public Settings getRootSettings() {
-        return new NOPSettings("root", this);
-    }
-
-    public Settings getSettings(String name) {
-        return new NOPSettings(name, this);
-    }
-
-    public Settings getSettings(String name, SettingsFactory factory) {
-        return new NOPSettings(name, this);
-    }
-
-    public int getConnectorCount() {
-        return 0;
-    }
-
-    public void setConnectorCount(int connectorCount) {
+    public SettingsInstance getSettings(SettingsFactory factory) {
+        return new NOPSettings(this);
     }
 
     public void resetConfiguration() {
-    }
-
-    public void addConnector(Connector connector) {
     }
 
 }

@@ -28,12 +28,4 @@
 		class="org.settings4j.connector.SystemPropertyConnector">
 	</connector>
 
-	<settings name="com.mycompany.myapp" >
-		<connector-ref ref="FSConnector" readonly="false" />
-	</settings>
-	
-	<root>
-		<connector-ref ref="FSConnector" readonly="true" />
-	</root>
-
 </settings4j:configuration>

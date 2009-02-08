@@ -37,7 +37,7 @@ import org.apache.taglibs.standard.lang.jstl.ELException;
 import org.settings4j.Connector;
 import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
-import org.settings4j.Settings;
+import org.settings4j.SettingsInstance;
 import org.settings4j.SettingsRepository;
 import org.settings4j.connector.AbstractConnector;
 import org.settings4j.connector.CachedConnectorWrapper;
@@ -63,57 +63,45 @@ public class DOMConfigurator {
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(DOMConfigurator.class);
 
-    static final Class[] NO_PARAM = new Class[] {};
+    private static final Class[] NO_PARAM = new Class[] {};
+
+    private static final String CONFIGURATION_TAG = "settings4j:configuration";
+
+    private static final String CONNECTOR_TAG = "connector";
+
+    private static final String CONNECTOR_REF_TAG = "connector-ref";
+
+    private static final String OBJECT_RESOLVER_TAG = "objectResolver";
+
+    private static final String OBJECT_RESOLVER_REF_TAG = "objectResolver-ref";
+
+    private static final String CONTENT_RESOLVER_TAG = "contentResolver";
+
+    private static final String CONTENT_RESOLVER_REF_TAG = "contentResolver-ref";
+
+    private static final String MAPPING_TAG = "mapping";
     
-    static final Class[] ONE_STRING_PARAM = new Class[] {String.class};
+    private static final String ENTRY_TAG = "entry";
 
-    static final String CONFIGURATION_TAG = "settings4j:configuration";
+    private static final String ENTRY_KEY_ATTR = "key";
 
-    static final String CONNECTOR_TAG = "connector";
+    private static final String ENTRY_REFKEY_ATTR = "ref-key";
 
-    static final String CONNECTOR_REF_TAG = "connector-ref";
+    private static final String PARAM_TAG = "param";
 
-    static final String OBJECT_RESOLVER_TAG = "objectResolver";
+    private static final String NAME_ATTR = "name";
 
-    static final String OBJECT_RESOLVER_REF_TAG = "objectResolver-ref";
+    private static final String CLASS_ATTR = "class";
 
-    static final String CONTENT_RESOLVER_TAG = "contentResolver";
+    private static final String CACHED_ATTR = "cached";
 
-    static final String CONTENT_RESOLVER_REF_TAG = "contentResolver-ref";
+    private static final String VALUE_ATTR = "value";
 
-    static final String MAPPING_TAG = "mapping";
+    private static final String REF_ATTR = "ref";
 
-    static final String MAPPING_REF_ATTR = "mapping-ref";
-    
-    static final String ENTRY_TAG = "entry";
+    private static final String READONLY_ATTR = "readonly";
 
-    static final String ENTRY_KEY_ATTR = "key";
-
-    static final String ENTRY_REFKEY_ATTR = "ref-key";
-
-    static final String PARAM_TAG = "param";
-
-    static final String SETTINGS_TAG = "settings";
-
-    static final String SETTINGS_REF_TAG = "settings-ref";
-
-    static final String NAME_ATTR = "name";
-
-    static final String CLASS_ATTR = "class";
-
-    static final String CACHED_ATTR = "cached";
-
-    static final String VALUE_ATTR = "value";
-
-    static final String ROOT_TAG = "root";
-
-    static final String REF_ATTR = "ref";
-
-    static final String ADDITIVITY_ATTR = "additivity";
-
-    static final String READONLY_ATTR = "readonly";
-
-    final static String dbfKey = "javax.xml.parsers.DocumentBuilderFactory";
+    private final static String dbfKey = "javax.xml.parsers.DocumentBuilderFactory";
 
 
     // key: ConnectorName, value: Connector
@@ -135,7 +123,6 @@ public class DOMConfigurator {
         connectorBag = new HashMap();
         contentResolverBag = new HashMap();
         objectResolverBag = new HashMap();
-        mappingBag = new HashMap();
     }
     
     /**
@@ -146,8 +133,8 @@ public class DOMConfigurator {
      * @param props properties
      */
     private void setParameter(final Element elem, final Object bean, Connector[] connectors) {
-        String name = elem.getAttribute("name");
-        String valueStr = (elem.getAttribute("value"));
+        String name = elem.getAttribute(NAME_ATTR);
+        String valueStr = (elem.getAttribute(VALUE_ATTR));
         try {
             PropertyDescriptor propertyDescriptor = PropertyUtils.getPropertyDescriptor(bean, name);
             Method setter = PropertyUtils.getWriteMethod(propertyDescriptor);
@@ -248,56 +235,12 @@ public class DOMConfigurator {
          * Building Appender objects, placing them in a local namespace for future reference
          */
 
-        // First configure each category factory under the root element.
-        // Category factories need to be configured before any of
-        // categories they support.
-        //
-        String tagName = null;
-        Element currentElement = null;
-        Node currentNode = null;
-        NodeList children = element.getChildNodes();
-        final int length = children.getLength();
-
-        for (int loop = 0; loop < length; loop++) {
-            currentNode = children.item(loop);
-            if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
-                currentElement = (Element) currentNode;
-                tagName = currentElement.getTagName();
-
-                if (tagName.equals(SETTINGS_TAG)) {
-                    parseSettings(currentElement);
-                } else if (tagName.equals(ROOT_TAG)) {
-                    parseRoot(currentElement);
-                }
-            }
-        }
-    }
-
-    /**
-     * Used internally to parse an category element.
-     */
-    protected void parseSettings(Element loggerElement) {
-        // Create a new org.settings4j.Settings object from the <settings> element.
-        String settingsName = loggerElement.getAttribute(NAME_ATTR);
-
-        Settings settings;
-
-        LOG.debug("Retreiving an instance of org.settings4j.Settings");
         // settings = (catFactory == null) ? repository.getSettings(settingsName) :
         // repository.getSettings(settingsName, catFactory);
-        settings = repository.getSettings(settingsName);
-
-        // Setting up a category needs to be an atomic operation, in order
-        // to protect potential log operations while category
-        // configuration is in progress.
-        synchronized (settings) {
-            Boolean additivity = (Boolean)subst(loggerElement.getAttribute(ADDITIVITY_ATTR), null, Boolean.class);
-
-            LOG.debug("Setting [" + settings.getName() + "] additivity to [" + additivity + "].");
-            if (additivity != null ){
-                settings.setAdditivity(additivity.booleanValue());
-            }
-            parseChildrenOfSettingsElement(loggerElement, settings, false);
+    	SettingsInstance root = repository.getSettings();
+        // category configuration needs to be atomic
+        synchronized (root) {
+            parseChildrenOfSettingsElement(element, root);
         }
     }
 
@@ -428,55 +371,61 @@ public class DOMConfigurator {
         
         return (Connector[])connectors.toArray(new Connector[connectors.size()]);
     }
-
-    /**
-     * Used internally to parse the roor category element.
-     */
-    protected void parseRoot(Element rootElement) {
-        Settings root = repository.getRootSettings();
-        // category configuration needs to be atomic
-        synchronized (root) {
-            parseChildrenOfSettingsElement(rootElement, root, true);
-        }
-    }
     
 
     /**
      * Used internally to parse the children of a category element.
      */
-    protected void parseChildrenOfSettingsElement(Element settingsElement, Settings settings, boolean isRoot) {
-        String mappingRef = settingsElement.getAttribute(MAPPING_REF_ATTR);
-        if (!StringUtils.isEmpty(mappingRef)){
-            Map mapping = findMappingByName(settingsElement.getOwnerDocument(), mappingRef);
-            if (mapping != null){
-                settings.setMapping(mapping);
-            }
-        }
+    protected void parseChildrenOfSettingsElement(Element settingsElement, SettingsInstance settings) {
+
+        Node currentNode = null;
+        Element currentElement = null;
+        String tagName = null;
         
         // Remove all existing appenders from settings. They will be
         // reconstructed if need be.
         settings.removeAllConnectors();
 
-        NodeList children = settingsElement.getChildNodes();
-        final int length = children.getLength();
+        // first parse Connectors (are needed to parse param Tags
+        NodeList connectorElements = settingsElement.getElementsByTagName(CONNECTOR_TAG);
+        int length = connectorElements.getLength();
+        for (int i = 0; i < length; i++) {
+            currentNode = connectorElements.item(i);
+            currentElement = (Element) currentNode;
 
-
-        Connector[] connectors = getConnectors(settingsElement);
-        for (int i = 0; i < connectors.length; i++) {
-            settings.addConnector(connectors[i]);
+        	Connector connector = parseConnector(currentElement);
+        	if (connector != null){
+                connectorBag.put(connector.getName(), connector);
+        		settings.addConnector(connector);
+        	}
         }
         
-        for (int loop = 0; loop < length; loop++) {
-            Node currentNode = children.item(loop);
+        List list = settings.getConnectors();
+        Connector[] connectors = (Connector[])list.toArray(new Connector[list.size()]);
 
+        NodeList children = settingsElement.getChildNodes();
+        
+        // Now parse other Tags like PARAM or MAPPING
+        length = children.getLength();
+        for (int i = 0; i < length; i++) {
+            currentNode = children.item(i);
             if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
-                Element currentElement = (Element) currentNode;
-                String tagName = currentElement.getTagName();
+                currentElement = (Element) currentNode;
+                tagName = currentElement.getTagName();
 
-                if (tagName.equals(PARAM_TAG)) {
+                if (tagName.equals(MAPPING_TAG)) {
+                	Map mapping = parseMapping(currentElement);
+                	if (mapping != null){
+                		settings.setMapping(mapping);
+                	}
+                } else if (tagName.equals(PARAM_TAG)) {
                     setParameter(currentElement, settings, connectors);
-                } else if (tagName.equals(CONNECTOR_REF_TAG)) {
-                    LOG.debug("Connector already added");
+                } else if (tagName.equals(CONNECTOR_TAG)) {
+                    LOG.trace("CONNECTOR_TAG already parsed");
+                } else if (tagName.equals(CONTENT_RESOLVER_TAG)) {
+                    LOG.trace("CONTENT_RESOLVER_TAG will be parsed on the maned");
+                } else if (tagName.equals(OBJECT_RESOLVER_TAG)) {
+                    LOG.trace("OBJECT_RESOLVER_TAG will be parsed on the maned");
                 } else {
                     quietParseUnrecognizedElement(settings, currentElement);
                 }

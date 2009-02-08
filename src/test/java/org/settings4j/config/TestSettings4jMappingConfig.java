@@ -17,7 +17,7 @@
 
 package org.settings4j.config;
 
-import org.settings4j.Settings;
+import org.settings4j.SettingsInstance;
 import org.settings4j.SettingsRepository;
 import org.settings4j.UtilTesting;
 
@@ -31,7 +31,7 @@ public class TestSettings4jMappingConfig extends AbstractTestSettings4jConfig{
         LOG.debug("run TestSettings4jMappingConfig.testMapping");
         SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigMapping.xml");
 
-        Settings mycompanySeetings = settingsRepository.getSettings("com.mycompany");
+        SettingsInstance mycompanySeetings = settingsRepository.getSettings();
         
         String webservice = "http://settings4j.org/XY";
         System.setProperty("global/webserviceXY", webservice);

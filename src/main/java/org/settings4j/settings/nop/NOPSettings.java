@@ -21,19 +21,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.settings4j.Connector;
-import org.settings4j.Settings;
 import org.settings4j.SettingsRepository;
 
 /**
  * No-operation implementation of Settings used by NOPSettingsRepository.
  */
-public class NOPSettings extends Settings {
-    String name;
+public class NOPSettings implements org.settings4j.SettingsInstance {
     SettingsRepository settingsRepository;
     
-    public NOPSettings(String name, SettingsRepository settingsRepository) {
+    public NOPSettings(SettingsRepository settingsRepository) {
         super();
-        this.name = name;
         this.settingsRepository = settingsRepository;
     }
 
@@ -47,18 +44,8 @@ public class NOPSettings extends Settings {
         return Collections.EMPTY_LIST;
     }
 
-    
-    
-    public List getAllConnectors() {
-        return Collections.EMPTY_LIST;
-	}
-
 	public byte[] getContent(String key) {
         return null;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public Object getObject(String key) {
@@ -78,21 +65,10 @@ public class NOPSettings extends Settings {
     public void setString(String key, String value, String connectorName) {
     }
 
-    public SettingsRepository getSettingsRepository() {
-        return settingsRepository;
-    }
-
     public Map getMapping() {
         return Collections.EMPTY_MAP;
     }
 
     public void setMapping(Map mapping) {
-    }
-
-    public boolean isAdditivity() {
-        return false;
-    }
-
-    public void setAdditivity(boolean additivity) {
     }
 }

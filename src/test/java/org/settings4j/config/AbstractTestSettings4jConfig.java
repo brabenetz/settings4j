@@ -29,9 +29,9 @@ import junit.framework.TestCase;
 import org.apache.commons.io.FileUtils;
 import org.settings4j.Connector;
 import org.settings4j.Settings;
+import org.settings4j.SettingsInstance;
 import org.settings4j.SettingsRepository;
 import org.settings4j.UtilTesting;
-import org.settings4j.exception.NoWriteableConnectorFoundException;
 
 public abstract class AbstractTestSettings4jConfig extends TestCase{
     
@@ -61,23 +61,10 @@ public abstract class AbstractTestSettings4jConfig extends TestCase{
     protected void testObjectReolver(SettingsRepository settingsRepository, String key1, String key2 ) {
         // the propety-file "org/settings4j/objectResolver/test1.properties" must exists
         
-        Settings mycompanySeetings = settingsRepository.getSettings("com.mycompany");
-        String mycompanySeetingsConnector = getFirstWritableConnectorName(mycompanySeetings);
-        
-        // check if there is a Exception thrown:
-        // only com.mycompany.myapp and above can write
-        try {
-            mycompanySeetings.setObject(key1, new HashMap(), mycompanySeetingsConnector);
-            fail("must throw an NoWriteableConnectorFoundException");
-        } catch (NoWriteableConnectorFoundException e) {
-            assertEquals(NoWriteableConnectorFoundException.NO_WRITEABLE_CONNECTOR_FOUND_1, e.getKey());
-            assertEquals(key1, e.getArgs()[0].toString());
-            assertEquals("Content '" + key1 + "' cannot be writen. No writeable Connector found", e.getMessage());
-        }
+        SettingsInstance settings = settingsRepository.getSettings();
         
         // store values into the default java temporary directory with subfolder "Settings4j"
         // String tmpdir = System.getProperty("java.io.tmpdir");
-        Settings settings1 = settingsRepository.getSettings("com.mycompany.myapp");
         
         File testFolder = UtilTesting.getTestFolder();
         File fileKey1 = new File(testFolder, key1);
@@ -96,13 +83,13 @@ public abstract class AbstractTestSettings4jConfig extends TestCase{
         testData.put("irgendwas", "blablablablablabla");
         testData.put("liste", testList);
 
-        String settings1Connector = getFirstWritableConnectorName(settings1);
+        String settings1Connector = getFirstWritableConnectorName(settings);
         // the propety-file "org/settings4j/objectResolver/test1.properties must exists"
-        settings1.setObject(key1, testData, settings1Connector);
+        settings.setObject(key1, testData, settings1Connector);
         assertTrue(fileKey1.exists());
         
         // The FSConnector is cached! The Objects must be the same.
-        Map result = (Map)settings1.getObject(key1);
+        Map result = (Map)settings.getObject(key1);
         assertTrue(testData == result);
         assertEquals("blablablablablabla", result.get("irgendwas"));
         Object liste = result.get("liste");
@@ -111,11 +98,11 @@ public abstract class AbstractTestSettings4jConfig extends TestCase{
         assertEquals(4, ((List)liste).size());
         
         // Copy the content from key2 to key1
-        byte[] content2 = settings1.getContent(key2);
-        settings1.setContent(key1, content2, settings1Connector);
+        byte[] content2 = settings.getContent(key2);
+        settings.setContent(key1, content2, settings1Connector);
 
         // The Cached Connector should have cleared the cache
-        result = (Map)settings1.getObject(key1);
+        result = (Map)settings.getObject(key1);
         assertFalse(testData == result);
         assertEquals("blablablaNEUblablabla", result.get("irgendwasNeues"));
         liste = result.get("liste");
@@ -123,9 +110,13 @@ public abstract class AbstractTestSettings4jConfig extends TestCase{
         assertTrue(liste instanceof List);
         assertEquals(1, ((List)liste).size());
     }
+
+    protected Connector getFirstWritableConnector() {
+    	return getFirstWritableConnector(Settings.getSettingsRepository().getSettings());
+    }
     
-    protected Connector getFirstWritableConnector(Settings settings){
-    	 List connectors = settings.getAllConnectors();
+    protected Connector getFirstWritableConnector(SettingsInstance settingsInstance){
+    	 List connectors = settingsInstance.getConnectors();
          for (Iterator iterator = connectors.iterator(); iterator.hasNext();) {
 			Connector connector = (Connector) iterator.next();
 			if (!connector.isReadonly()){
@@ -134,8 +125,13 @@ public abstract class AbstractTestSettings4jConfig extends TestCase{
 		}
         return null;
     }
-    protected String getFirstWritableConnectorName(Settings settings){
-    	Connector connector = getFirstWritableConnector(settings);
+
+    protected String getFirstWritableConnectorName() {
+    	return getFirstWritableConnectorName(Settings.getSettingsRepository().getSettings());
+    }
+    
+    protected String getFirstWritableConnectorName(SettingsInstance settingsInstance){
+    	Connector connector = getFirstWritableConnector(settingsInstance);
     	if (connector == null){
     		return null;
     	} else {
