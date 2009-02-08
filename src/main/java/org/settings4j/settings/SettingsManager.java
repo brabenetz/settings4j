@@ -112,8 +112,8 @@ public class SettingsManager {
     /**
      * Check if the repository must be configured with the defaul fallback settings4j.xml.
      */
-    protected static void initializeRepositoryIfNecessary(){
-        if (getSettingsRepository().getSettings().getConnectors().size() == 0){
+    private static void initializeRepositoryIfNecessary(){
+        if (getSettingsRepository().getConnectorCount() == 0){
             // No connectors in hierarchy, warn user and add default-configuration.
             LOG.warn("The settings4j will be configured with the default-fallback-config: " + SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
             

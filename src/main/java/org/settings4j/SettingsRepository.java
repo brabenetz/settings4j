@@ -16,6 +16,14 @@
  *****************************************************************************/
 package org.settings4j;
 
+import org.settings4j.settings.SettingsManager;
+
+/**
+ * Holder for a single {@link SettingsInstance}.
+ * 
+ * @author hbrabenetz
+ *
+ */
 public interface SettingsRepository {
 
     /**
@@ -27,9 +35,18 @@ public interface SettingsRepository {
      * Retrieve the appropriate {@link Settings} instance.
      */
     SettingsInstance getSettings(SettingsFactory factory);
+
+    /**
+     * Return the Connector Count.<br />
+     * If the connector count is 0. the Settings will be reinitialized with
+     * the default-fallback-config in {@link SettingsManager#getSettings()}
+     * 
+     * @return The Connector Count.
+     */
+    int getConnectorCount();
     
     /**
-     * <p>Remove all Settings, Connectors and other Objects from the Repository.
+     * <p>Remove the Settings, Connectors and other Objects from the Repository.
      * <p>Make it ready to fill it with a new Configuration.
      * 
      * <p>Example (maybe in an init()-Methode of your Application):

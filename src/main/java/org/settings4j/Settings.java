@@ -53,6 +53,11 @@ import org.settings4j.settings.SettingsManager;
 public final class Settings {
     
     /**
+     * Hide Constructor (Utility-Pattern)
+     */
+    private Settings() {}
+
+    /**
      * return the found String-Value for the given key.<br />
      * The {@link Settings} Instance iterates all his {@link Connector} and return the first found Value.<br />
      * <br />

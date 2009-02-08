@@ -22,6 +22,12 @@ import java.util.ResourceBundle;
 import org.settings4j.connector.ClasspathConnector;
 import org.settings4j.connector.ReadOnlyConnectorWrapper;
 
+/**
+ * Some Constants like the Return Values (success or not) of Connectors.set*(...) Methodes. 
+ * 
+ * @author hbrabenetz
+ *
+ */
 public interface Constants {
     /**
      * The {@link ResourceBundle} for Settings4j (e.g.: Error Messages)

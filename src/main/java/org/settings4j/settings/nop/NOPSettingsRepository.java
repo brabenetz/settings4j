@@ -30,6 +30,10 @@ public class NOPSettingsRepository implements SettingsRepository {
         return new NOPSettings(this);
     }
 
+    public int getConnectorCount() {
+        return 0;
+    }
+
     public void resetConfiguration() {
     }
 

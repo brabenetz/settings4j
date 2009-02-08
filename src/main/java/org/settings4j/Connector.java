@@ -17,6 +17,8 @@
 package org.settings4j;
 
 import org.settings4j.connector.ClasspathConnector;
+import org.settings4j.connector.PropertyFileConnector;
+import org.settings4j.connector.ReadOnlyConnectorWrapper;
 
 /**
  * An implementation of this Interface can return Values for a given key.<br />
@@ -145,11 +147,35 @@ public interface Connector {
      */
     public void init();
     
-
+    /**
+     * Return The name Of this Connector. The Name is required
+     * in all {@link Settings}.set*(..., String connectorName) Methods.
+     * 
+     * @return The name Of this Connector.
+     */
     public String getName();
 
+    /**
+     * Set the name of the Connector defined in the settings4j.xml configuration:
+     * <pre>
+     * --------------------------------------
+     * &lt;connector <b>name="PropertyFileConnector"</b> ....&gt;
+     *     ....
+     * &lt;/connector&gt;
+     * --------------------------------------
+     * </pre>
+     * 
+     * @param name
+     */
     public void setName(String name);
     
+    /**
+     * Return if this Connector is read Only (or Wrapped with the {@link ReadOnlyConnectorWrapper}).<br />
+     * Example for some Redonly Connectors: {@link PropertyFileConnector}, {@link ClasspathConnector}
+     * 
+     * 
+     * @return if this Connector is read Only (or Wrapped with the {@link ReadOnlyConnectorWrapper})
+     */
     public boolean isReadonly();
     
 }
