@@ -59,7 +59,7 @@ public class TestExpressionLanguageUtil extends TestCase{
          * A complex Test to parse a Object and access the getter
          */
 
-        StringBuilder complexTest = new StringBuilder();
+        StringBuffer complexTest = new StringBuffer();
         complexTest.append("Username: ${user.vorname} ${user.nachname}\n");
         complexTest.append("Adresse: ${user.adresse}\n");
         complexTest.append("EMail: ${user.email}\n");
@@ -69,7 +69,7 @@ public class TestExpressionLanguageUtil extends TestCase{
 
         result = ExpressionLanguageUtil.evaluateExpressionLanguage(complexTest.toString(), context);
         
-        StringBuilder complexTestResult = new StringBuilder();
+        StringBuffer complexTestResult = new StringBuffer();
         complexTestResult.append("Username: Franz Mustermann\n");
         complexTestResult.append("Adresse: Musterstrasse 08/15\n");
         complexTestResult.append("EMail: franz.mustermann@musterserver.net\n");

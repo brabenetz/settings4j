@@ -33,7 +33,7 @@ public class TestDefaultFallbackConfiguration extends TestCase{
     }
 
     protected void tearDown() throws Exception {
-        System.clearProperty("testDefaultProperty");
+        System.getProperties().remove("testDefaultProperty");
         super.tearDown();
     }
 

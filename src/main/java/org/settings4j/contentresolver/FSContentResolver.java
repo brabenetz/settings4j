@@ -74,7 +74,7 @@ public class FSContentResolver implements ContentResolver {
         if (key.startsWith("/")){
         	// Unix-Root
             file = new File(key);
-        }else if (key.contains(":")){
+        }else if (key.indexOf(":")>=0){
             // Windows-Root
             file = new File(key);
         } else {

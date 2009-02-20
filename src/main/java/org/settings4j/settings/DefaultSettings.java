@@ -37,7 +37,7 @@ import org.settings4j.exception.NoWriteableConnectorFoundException;
  */
 public class DefaultSettings implements SettingsInstance {
     
-    private List connectors = Collections.checkedList(Collections.synchronizedList(new ArrayList()), Connector.class);
+    private List connectors = Collections.synchronizedList(new ArrayList());
     private Map mapping;
 
     public DefaultSettings() {

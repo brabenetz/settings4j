@@ -44,18 +44,18 @@ public class JNDIConnectorTest extends TestCase {
     
     protected void tearDown() throws Exception {
         FileUtils.deleteDirectory(new File("test"));
-        System.clearProperty(Context.INITIAL_CONTEXT_FACTORY);
-        System.clearProperty(Context.PROVIDER_URL);
-        System.clearProperty(Context.URL_PKG_PREFIXES);
+        System.getProperties().remove(Context.INITIAL_CONTEXT_FACTORY);
+        System.getProperties().remove(Context.PROVIDER_URL);
+        System.getProperties().remove(Context.URL_PKG_PREFIXES);
         super.tearDown();
     }
 
 
     public void testJNDIConnectorWithoutJNDI() throws Exception {
         //Clear JNDI Configs
-        System.clearProperty(Context.INITIAL_CONTEXT_FACTORY);
-        System.clearProperty(Context.PROVIDER_URL);
-        System.clearProperty(Context.URL_PKG_PREFIXES);
+        System.getProperties().remove(Context.INITIAL_CONTEXT_FACTORY);
+        System.getProperties().remove(Context.PROVIDER_URL);
+        System.getProperties().remove(Context.URL_PKG_PREFIXES);
         
         Connector connector;
         int saveStatus;

@@ -817,7 +817,7 @@ public class DOMConfigurator {
             return null;
         }
         
-        if (value.contains("${")){
+        if (value.indexOf("${") >= 0){
             try {
                 Map context = new HashMap(expressionAttributes);
                 if (connectors != null){
@@ -833,7 +833,8 @@ public class DOMConfigurator {
                     context.put("connector", connectorMap);
                 }
                 // Expression like ${env['...']} e.g.:  ${env['TOMCAT_HOME']} or ${env.TOMCAT_HOME}
-                context.put("env", System.getenv());
+                // Only since jdk 1.5 ....
+                //context.put("env", System.getenv());
                 Object result = ExpressionLanguageUtil.evaluateExpressionLanguage(value, context, clazz);
                 return result;
             } catch (ELException e) {
