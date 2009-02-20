@@ -29,9 +29,9 @@ import org.settings4j.ObjectResolver;
 public class CachedConnectorWrapper implements Connector{
     private Connector targetConnector;
     
-    private Map cachedStrings = Collections.checkedMap(Collections.synchronizedMap(new HashMap()), String.class, String.class);
-    private Map cachedContents = Collections.checkedMap(Collections.synchronizedMap(new HashMap()), String.class, byte[].class);
-    private Map cachedObjects = Collections.checkedMap(Collections.synchronizedMap(new HashMap()), String.class, Object.class);
+    private Map cachedStrings = Collections.synchronizedMap(new HashMap());
+    private Map cachedContents = Collections.synchronizedMap(new HashMap());
+    private Map cachedObjects = Collections.synchronizedMap(new HashMap());
     
 
     public CachedConnectorWrapper(Connector targetConnector) {
