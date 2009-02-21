@@ -18,11 +18,13 @@ package org.settings4j.contentresolver;
 
 import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
+import org.settings4j.Filter;
 
 public class UnionContentResolver implements ContentResolver {
 
     private ContentResolver[] contentResolvers = new ContentResolver[0];
 
+    private Filter filter = Filter.NO_FILTER;
 
     public UnionContentResolver() {
         super();
@@ -45,6 +47,9 @@ public class UnionContentResolver implements ContentResolver {
     }
 
     public byte[] getContent(String key) {
+    	if (!getFilter().isValid(key)){
+            return null;
+    	}
         byte[] result = null;
         for (int i = 0; i < contentResolvers.length; i++) {
             result = contentResolvers[i].getContent(key);
@@ -56,6 +61,9 @@ public class UnionContentResolver implements ContentResolver {
     }
 
     public int setContent(String key, byte[] value) {
+    	if (!getFilter().isValid(key)){
+            return Constants.SETTING_NOT_POSSIBLE;
+    	}
         int status = Constants.SETTING_NOT_POSSIBLE;
         for (int i = 0; i < contentResolvers.length; i++) {
             status = contentResolvers[i].setContent(key, value);
@@ -66,4 +74,11 @@ public class UnionContentResolver implements ContentResolver {
         return status;
     }
 
+	public Filter getFilter() {
+		return filter;
+	}
+
+	public void setFilter(Filter filter) {
+		this.filter = filter;
+	}
 }

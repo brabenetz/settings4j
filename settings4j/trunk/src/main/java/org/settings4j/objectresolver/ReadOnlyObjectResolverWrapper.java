@@ -19,6 +19,7 @@ package org.settings4j.objectresolver;
 
 import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
+import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
 
 public class ReadOnlyObjectResolverWrapper implements ObjectResolver{
@@ -48,4 +49,8 @@ public class ReadOnlyObjectResolverWrapper implements ObjectResolver{
     public Object getObject(String key, ContentResolver contentResolver) {
         return targetObjectResolver.getObject(key, contentResolver);
     }
+
+	public void setFilter(Filter filter) {
+		targetObjectResolver.setFilter(filter);
+	}
 }

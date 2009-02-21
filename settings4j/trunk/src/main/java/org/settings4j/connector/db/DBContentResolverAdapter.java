@@ -18,14 +18,17 @@
 package org.settings4j.connector.db;
 
 import org.settings4j.ContentResolver;
+import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
 
 /**
  * This implementation can Use a {@link AbstractDBConnector} as ContentResolver.<br />
  * <br />
- * This is needed for {@link ObjectResolver}<br />
+ * This is needed for {@link ObjectResolver}:<br />
+ * The ObjectResolver takes the ContentReolvers from the Connector
+ * to transform the content into an Object<br />
  * <br />
- * This implementaiton of a ContentResolver has no default-Constructor.
+ * This implementation of a ContentResolver has no default-Constructor.
  * So it is not possible to use it in a settings4j.xml configuration.
  * 
  * @author hbrabenetz
@@ -53,4 +56,9 @@ public class DBContentResolverAdapter implements ContentResolver {
     public int setContent(String key, byte[] value) {
         return connector.setContent(key, value);
     }
+
+    /** {@inheritDoc} */
+	public void setFilter(Filter filter) {
+		throw new java.lang.IllegalStateException("setFilter(..) is not allowed in " +  this.getClass().getName() + ".");
+	}
 }

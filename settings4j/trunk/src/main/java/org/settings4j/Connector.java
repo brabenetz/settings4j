@@ -42,7 +42,7 @@ import org.settings4j.connector.ReadOnlyConnectorWrapper;
  * @author hbrabenetz
  *
  */
-public interface Connector {
+public interface Connector extends Filterable {
     
     /**
      * return a String-Value for the given key<br />

@@ -23,6 +23,7 @@ import java.net.URL;
 import org.apache.commons.io.IOUtils;
 import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
+import org.settings4j.Filter;
 
 public class ClasspathContentResolver implements ContentResolver {
     /** General Logger for this Class */
@@ -32,6 +33,7 @@ public class ClasspathContentResolver implements ContentResolver {
 
     /** Pseudo URL prefix for loading from the class path: "classpath:" */
     public static final String CLASSPATH_URL_PREFIX = "classpath:";
+    private Filter filter = Filter.NO_FILTER;
     
     
     public void addContentResolver(ContentResolver contentResolver) {
@@ -39,6 +41,9 @@ public class ClasspathContentResolver implements ContentResolver {
     }
 
     public byte[] getContent(String key) {
+    	if (!getFilter().isValid(key)){
+            return null;
+    	}
         if (key.startsWith(CLASSPATH_URL_PREFIX)){
             key = key.substring(CLASSPATH_URL_PREFIX.length());
         }
@@ -102,4 +107,12 @@ public class ClasspathContentResolver implements ContentResolver {
         }
         return cl;
     }
+
+	public Filter getFilter() {
+		return filter;
+	}
+
+	public void setFilter(Filter filter) {
+		this.filter = filter;
+	}
 }
