@@ -22,14 +22,16 @@ import java.util.List;
 
 import org.settings4j.Connector;
 import org.settings4j.ContentResolver;
+import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
 
-public abstract class AbstractConnector implements Connector{
+public abstract class AbstractConnector implements Connector {
 
     private String name;
     private ContentResolver contentResolver;
     private ObjectResolver objectResolver;
     private List connectors = Collections.synchronizedList(new ArrayList());
+    private Filter filter = Filter.NO_FILTER;
     
     public List getConnectors() {
         return Collections.unmodifiableList(connectors);
@@ -71,5 +73,13 @@ public abstract class AbstractConnector implements Connector{
         // Overwrite this methode if you want do something after all properties are set.
         // by default there is nothing to do
     }
+
+	public Filter getFilter() {
+		return filter;
+	}
+
+	public void setFilter(Filter filter) {
+		this.filter = filter;
+	}
     
 }

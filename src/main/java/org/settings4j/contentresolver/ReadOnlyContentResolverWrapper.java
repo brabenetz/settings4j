@@ -18,6 +18,7 @@ package org.settings4j.contentresolver;
 
 import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
+import org.settings4j.Filter;
 
 public class ReadOnlyContentResolverWrapper implements ContentResolver {
 
@@ -40,4 +41,7 @@ public class ReadOnlyContentResolverWrapper implements ContentResolver {
         return Constants.SETTING_NOT_POSSIBLE;
     }
 
+	public void setFilter(Filter filter) {
+		targetContentResolver.setFilter(filter);
+	}
 }

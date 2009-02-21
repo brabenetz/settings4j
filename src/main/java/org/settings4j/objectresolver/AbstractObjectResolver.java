@@ -26,6 +26,7 @@ import java.util.Properties;
 import org.apache.commons.lang.StringUtils;
 import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
+import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
 
 public abstract class AbstractObjectResolver implements ObjectResolver{
@@ -41,6 +42,8 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
     private String propertySuffix = ".properties";
     
     private Map cachedObjects = new HashMap();
+
+    private Filter filter = Filter.NO_FILTER;
     
     private boolean cached = false;
     
@@ -53,6 +56,10 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
     }
 
     public Object getObject(String key, ContentResolver contentResolver) {
+    	if (!getFilter().isValid(key)){
+            return null;
+    	}
+    	
         Object result = cachedObjects.get(key);
         if (result != null){
             return result;
@@ -87,6 +94,9 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
     }
 
     public int setObject(String key, ContentResolver contentResolver, Object value) {
+    	if (!getFilter().isValid(key)){
+            return Constants.SETTING_NOT_POSSIBLE;
+    	}
         Properties properties = getObjectProperties(key, contentResolver);
         int status = Constants.SETTING_NOT_POSSIBLE;
         if (properties != null){
@@ -159,4 +169,12 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
     public void setCached(boolean cached) {
         this.cached = cached;
     }
+
+	public Filter getFilter() {
+		return filter;
+	}
+
+	public void setFilter(Filter filter) {
+		this.filter = filter;
+	}
 }
