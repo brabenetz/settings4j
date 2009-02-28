@@ -36,18 +36,23 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.taglibs.standard.lang.jstl.ELException;
 import org.settings4j.Connector;
 import org.settings4j.ContentResolver;
+import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
 import org.settings4j.SettingsInstance;
 import org.settings4j.SettingsRepository;
 import org.settings4j.connector.AbstractConnector;
 import org.settings4j.connector.CachedConnectorWrapper;
 import org.settings4j.connector.ContentHasChangedNotifierConnectorWrapper;
+import org.settings4j.connector.FilteredConnectorWrapper;
 import org.settings4j.connector.ReadOnlyConnectorWrapper;
 import org.settings4j.connector.SystemPropertyConnector;
 import org.settings4j.contentresolver.ClasspathContentResolver;
+import org.settings4j.contentresolver.FilteredContentResolverWrapper;
 import org.settings4j.contentresolver.ReadOnlyContentResolverWrapper;
 import org.settings4j.objectresolver.AbstractObjectResolver;
+import org.settings4j.objectresolver.FilteredObjectResolverWrapper;
 import org.settings4j.objectresolver.ReadOnlyObjectResolverWrapper;
+import org.settings4j.settings.DefaultFilter;
 import org.settings4j.util.ELConnectorWrapper;
 import org.settings4j.util.ExpressionLanguageUtil;
 import org.w3c.dom.Document;
@@ -80,6 +85,12 @@ public class DOMConfigurator {
     private static final String CONTENT_RESOLVER_REF_TAG = "contentResolver-ref";
 
     private static final String MAPPING_TAG = "mapping";
+
+    private static final String FILTER_TAG = "filter";
+
+    private static final String EXCLUDE_TAG = "exclude";
+
+    private static final String INCLUDE_TAG = "include";
     
     private static final String ENTRY_TAG = "entry";
 
@@ -92,6 +103,8 @@ public class DOMConfigurator {
     private static final String NAME_ATTR = "name";
 
     private static final String CLASS_ATTR = "class";
+
+    private static final String PATTERN_ATTR = "pattern";
 
     private static final String CACHED_ATTR = "cached";
 
@@ -238,14 +251,65 @@ public class DOMConfigurator {
         // settings = (catFactory == null) ? repository.getSettings(settingsName) :
         // repository.getSettings(settingsName, catFactory);
     	SettingsInstance root = repository.getSettings();
-        // category configuration needs to be atomic
+        // settings configuration needs to be atomic
         synchronized (root) {
             parseChildrenOfSettingsElement(element, root);
         }
     }
 
     /**
-     * Used internally to parse an category element.
+     * Used internally to parse an Filter element.
+     */
+    protected Filter parseFilter(Element filterElement) {
+    	
+    	Filter filter;
+
+
+        String className = filterElement.getAttribute(CLASS_ATTR);
+        if (StringUtils.isEmpty(className)){
+        	className = DefaultFilter.class.getName();
+        }
+        
+        LOG.debug("Desired Connector class: [" + className + "]");
+        try {
+            Class clazz = loadClass(className);
+            Constructor constructor = clazz.getConstructor(NO_PARAM);
+            filter = (Filter) constructor.newInstance(null);
+        } catch (Exception oops) {
+            LOG.error("Could not retrieve connector [filter: " + className + "]. Reported error follows.", oops);
+            return null;
+        }
+
+        NodeList children = filterElement.getChildNodes();
+        final int length = children.getLength();
+
+        for (int loop = 0; loop < length; loop++) {
+            Node currentNode = children.item(loop);
+
+            if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element currentElement = (Element) currentNode;
+                String tagName = currentElement.getTagName();
+
+                if (tagName.equals(INCLUDE_TAG)) {
+                    Element includeTag = (Element) currentNode;
+                    String patteren = includeTag.getAttribute(PATTERN_ATTR);
+                    filter.addInclude(patteren);
+
+                } else if (tagName.equals(EXCLUDE_TAG)) {
+                    Element excludeTag = (Element) currentNode;
+                    String patteren = excludeTag.getAttribute(PATTERN_ATTR);
+                    filter.addExclude(patteren);
+                } else {
+                    quietParseUnrecognizedElement(filter, currentElement);
+                }
+            }
+        }
+        
+        return filter;
+    }
+    
+    /**
+     * Used internally to parse an connector element.
      */
     protected Connector parseConnector(Element connectorElement) {
         String connectorName = connectorElement.getAttribute(NAME_ATTR);
@@ -272,8 +336,9 @@ public class DOMConfigurator {
             connector.addConnector(subConnectors[i]);
         }
         
-        // Setting up a category needs to be an atomic operation, in order
-        // to protect potential log operations while category
+        Filter filter = null;
+        // Setting up a connector needs to be an atomic operation, in order
+        // to protect potential setXXX operations while connector
         // configuration is in progress.
         synchronized (connector) {
 
@@ -297,6 +362,9 @@ public class DOMConfigurator {
                         ObjectResolver objectResolver = findObjectResolverByReference(objectResolverRef);
                         connector.setObjectResolver(objectResolver);
 
+                    } else if (tagName.equals(FILTER_TAG)) {
+                        Element filterElement = (Element) currentNode;
+                        filter = parseFilter(filterElement);
                     } else if (tagName.equals(PARAM_TAG)) {
                         setParameter(currentElement, connector, subConnectors);
                     } else {
@@ -309,9 +377,13 @@ public class DOMConfigurator {
                 connector = new ContentHasChangedNotifierConnectorWrapper((AbstractConnector)connector);
             }
 
-            Boolean cached = (Boolean)subst(connectorElement.getAttribute(CACHED_ATTR), null, Boolean.class);
+            Boolean cached = (Boolean)subst(connectorElement.getAttribute(CACHED_ATTR), subConnectors, Boolean.class);
             if (cached != null && cached.booleanValue()){
                 connector = new CachedConnectorWrapper(connector);
+            }
+            
+            if (filter != null){
+            	connector = new FilteredConnectorWrapper(connector, filter);
             }
             
             // initial the connector
@@ -374,7 +446,7 @@ public class DOMConfigurator {
     
 
     /**
-     * Used internally to parse the children of a category element.
+     * Used internally to parse the children of a settings element.
      */
     protected void parseChildrenOfSettingsElement(Element settingsElement, SettingsInstance settings) {
 
@@ -501,7 +573,8 @@ public class DOMConfigurator {
 //        for (int i = 0; i < connectors.length; i++) {
 //            objectResolver.addConnector(connectors[i]);
 //        }
-        
+
+        Filter filter = null;
         // Setting up a objectResolver needs to be an atomic operation, in order
         // to protect potential settings operations while settings
         // configuration is in progress.
@@ -524,6 +597,9 @@ public class DOMConfigurator {
 
                     } else if (tagName.equals(PARAM_TAG)) {
                         setParameter(currentElement, objectResolver, connectors);
+                    } else if (tagName.equals(FILTER_TAG)) {
+                        Element filterElement = (Element) currentNode;
+                        filter = parseFilter(filterElement);
                     } else {
                         quietParseUnrecognizedElement(objectResolver, currentElement);
                     }
@@ -538,6 +614,10 @@ public class DOMConfigurator {
                     LOG.warn("Only AbstractObjectResolver can use the attribute cached=\"true\" ");
                     // TODO hbrabenetz 21.05.2008 : extract setCached into seperate Interface.
                 }
+            }
+            
+            if (filter != null){
+            	objectResolver = new FilteredObjectResolverWrapper(objectResolver, filter);
             }
         }
         
@@ -630,7 +710,8 @@ public class DOMConfigurator {
 //        for (int i = 0; i < connectors.length; i++) {
 //            contentResolver.addConnector(connectors[i]);
 //        }
-        
+
+        Filter filter = null;
         // Setting up a contentResolver needs to be an atomic operation, in order
         // to protect potential settings operations while settings
         // configuration is in progress.
@@ -653,10 +734,17 @@ public class DOMConfigurator {
 
                     } else if (tagName.equals(PARAM_TAG)) {
                         setParameter(currentElement, contentResolver, connectors);
+                    } else if (tagName.equals(FILTER_TAG)) {
+                        Element filterElement = (Element) currentNode;
+                        filter = parseFilter(filterElement);
                     } else {
                         quietParseUnrecognizedElement(contentResolver, currentElement);
                     }
                 }
+            }
+            
+            if (filter != null){
+            	contentResolver = new FilteredContentResolverWrapper(contentResolver, filter);
             }
         }
         
@@ -804,7 +892,7 @@ public class DOMConfigurator {
     }
 
     /**
-     * In future implementation of this function will replace expressions like ${connectors.object['']}
+     * this function will replace expressions like ${connectors.object['']}
      * or simply ${true}
      * 
      * @param value

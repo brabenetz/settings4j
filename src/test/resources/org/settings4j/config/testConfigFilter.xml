@@ -20,15 +20,15 @@
 	<connector name="SystemPropertyConnector"
 		class="org.settings4j.connector.SystemPropertyConnector">
 		<filter>
-			<include patern="org/settings4j/config/testConfigFilter1\.txt" />
-			<exclude patern="org/settings4j/config/testConfigFilter2\.txt" />
+			<include pattern="org/settings4j/config/testConfigFilter1\.txt" />
+			<exclude pattern="org/settings4j/config/testConfigFilter2\.txt" />
 		</filter>
 	</connector>
 	
 	<connector name="ClasspathConnector" class="org.settings4j.connector.ClasspathConnector">
 		<filter>
-			<include patern="org/settings4j/config/testConfigFilter2\.txt" />
-			<exclude patern="org/settings4j/config/testConfigFilter1\.txt" />
+			<include pattern="org/settings4j/config/testConfigFilter2\.txt" />
+			<exclude pattern="org/settings4j/config/testConfigFilter1\.txt" />
 		</filter>
 	</connector>
 	

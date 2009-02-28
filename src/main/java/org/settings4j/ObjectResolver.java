@@ -38,7 +38,7 @@ import org.settings4j.objectresolver.UnionObjectResolver;
  * @author hbrabenetz
  *
  */
-public interface ObjectResolver extends Filterable {
+public interface ObjectResolver {
     
     /**
      * Reads the byte[] content from the ContentResolver and creates an Object.

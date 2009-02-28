@@ -24,7 +24,6 @@ import java.util.Map;
 import org.settings4j.Connector;
 import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
-import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
 
 public class CachedConnectorWrapper implements Connector{
@@ -143,10 +142,6 @@ public class CachedConnectorWrapper implements Connector{
 
 	public boolean isReadonly() {
 		return targetConnector.isReadonly();
-	}
-
-	public void setFilter(Filter filter) {
-		targetConnector.setFilter(filter);
 	}
 	
 }

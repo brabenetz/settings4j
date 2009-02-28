@@ -18,7 +18,6 @@
 package org.settings4j.connector.db;
 
 import org.settings4j.ContentResolver;
-import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
 
 /**
@@ -56,9 +55,4 @@ public class DBContentResolverAdapter implements ContentResolver {
     public int setContent(String key, byte[] value) {
         return connector.setContent(key, value);
     }
-
-    /** {@inheritDoc} */
-	public void setFilter(Filter filter) {
-		throw new java.lang.IllegalStateException("setFilter(..) is not allowed in " +  this.getClass().getName() + ".");
-	}
 }

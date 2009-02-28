@@ -22,7 +22,6 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
-import org.settings4j.Filter;
 
 public class FSContentResolver implements ContentResolver {
     /** General Logger for this Class */
@@ -32,7 +31,6 @@ public class FSContentResolver implements ContentResolver {
 
     /** Pseudo URL prefix for loading from the class path: "classpath:" */
     public static final String FILE_URL_PREFIX = "file:";
-    private Filter filter = Filter.NO_FILTER;
     
     private File rootFolder;
 
@@ -41,9 +39,6 @@ public class FSContentResolver implements ContentResolver {
     }
 
     public byte[] getContent(String key) {
-    	if (!getFilter().isValid(key)){
-            return null;
-    	}
     	
         if (key.startsWith(FILE_URL_PREFIX)){
             key = key.substring(FILE_URL_PREFIX.length());
@@ -70,9 +65,6 @@ public class FSContentResolver implements ContentResolver {
     }
 
     public int setContent(String key, byte[] value) {
-    	if (!getFilter().isValid(key)){
-            return Constants.SETTING_NOT_POSSIBLE;
-    	}
     	
         if (key.startsWith(FILE_URL_PREFIX)){
             key = key.substring(FILE_URL_PREFIX.length());
@@ -129,12 +121,4 @@ public class FSContentResolver implements ContentResolver {
             this.rootFolder = newRootFolder;
         }
     }
-
-	public Filter getFilter() {
-		return filter;
-	}
-
-	public void setFilter(Filter filter) {
-		this.filter = filter;
-	}
 }

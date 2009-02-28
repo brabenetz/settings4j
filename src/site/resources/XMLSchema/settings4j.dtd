@@ -153,3 +153,28 @@ but you must only define/configure one DataSource under "global/DataSource".
   key 		CDATA 	#REQUIRED
   ref-key 	CDATA 	#REQUIRED
 >
+
+<!-- 
+-->
+<!ELEMENT filter (include*, exclude*)>
+<!ATTLIST filter
+  class 	CDATA   "org.settings4j.settings.DefaultFilter"	
+>
+
+<!-- 
+Example:
+<include pattern="com/mycompany/mymoduleX/.*" />
+-->
+<!ELEMENT include EMPTY>
+<!ATTLIST include
+  pattern 		CDATA 	#REQUIRED
+>
+
+<!-- 
+Example:
+<exclude pattern="com/mycompany/mymoduleX/.*" />
+-->
+<!ELEMENT exclude EMPTY>
+<!ATTLIST exclude
+  pattern 		CDATA 	#REQUIRED
+>
