@@ -55,9 +55,6 @@ public abstract class AbstractDBConnector extends AbstractConnector {
 
     /** {@inheritDoc} */
     public byte[] getContent(String key) {
-    	if (!getFilter().isValid(key)){
-            return null;
-    	}
         SettingsDTO settingsDTO = getSettingsDAO().getByKey(key);
         if (settingsDTO != null){
             return settingsDTO.getContentValue();
@@ -68,18 +65,12 @@ public abstract class AbstractDBConnector extends AbstractConnector {
 
     /** {@inheritDoc} */
     public Object getObject(String key) {
-    	if (!getFilter().isValid(key)){
-            return null;
-    	}
         Object object = getObjectResolver().getObject(key, getContentResolver());
         return object;
     }
 
     /** {@inheritDoc} */
     public String getString(String key) {
-    	if (!getFilter().isValid(key)){
-            return null;
-    	}
         SettingsDTO settingsDTO = getSettingsDAO().getByKey(key);
         if (settingsDTO != null){
             return settingsDTO.getStringValue();
@@ -90,9 +81,6 @@ public abstract class AbstractDBConnector extends AbstractConnector {
 
     /** {@inheritDoc} */
     public int setContent(String key, byte[] value) {
-    	if (!getFilter().isValid(key)){
-            return Constants.SETTING_NOT_POSSIBLE;
-    	}
         try {
             SettingsDTO settingsDTO = getSettingsDAO().getByKey(key);
             if (settingsDTO == null) {
@@ -110,17 +98,11 @@ public abstract class AbstractDBConnector extends AbstractConnector {
 
     /** {@inheritDoc} */
     public int setObject(String key, Object value) {
-    	if (!getFilter().isValid(key)){
-            return Constants.SETTING_NOT_POSSIBLE;
-    	}
         return getObjectResolver().setObject(key, getContentResolver(), value);
     }
 
     /** {@inheritDoc} */
     public int setString(String key, String value) {
-    	if (!getFilter().isValid(key)){
-            return Constants.SETTING_NOT_POSSIBLE;
-    	}
         try {
             SettingsDTO settingsDTO = getSettingsDAO().getByKey(key);
             if (settingsDTO == null) {

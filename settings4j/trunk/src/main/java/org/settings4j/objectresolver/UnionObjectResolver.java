@@ -19,14 +19,11 @@ package org.settings4j.objectresolver;
 
 import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
-import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
 
 public class UnionObjectResolver implements ObjectResolver{
 
     private ObjectResolver[] objectResolvers = new ObjectResolver[0];
-
-    private Filter filter = Filter.NO_FILTER;
 
     public void addObjectResolver(ObjectResolver objectResolver) {
         
@@ -46,9 +43,6 @@ public class UnionObjectResolver implements ObjectResolver{
     }
     
     public Object getObject(String key, ContentResolver contentResolver) {
-    	if (!getFilter().isValid(key)){
-            return null;
-    	}
     	
         Object result = null;
         for (int i = 0; i < objectResolvers.length; i++) {
@@ -61,9 +55,6 @@ public class UnionObjectResolver implements ObjectResolver{
     }
 
     public int setObject(String key, ContentResolver contentResolver, Object value) {
-    	if (!getFilter().isValid(key)){
-            return Constants.SETTING_NOT_POSSIBLE;
-    	}
     	
         int status = Constants.SETTING_NOT_POSSIBLE;
         for (int i = 0; i < objectResolvers.length; i++) {
@@ -79,13 +70,5 @@ public class UnionObjectResolver implements ObjectResolver{
         // The UnionObjectResolver cannot cache VAlues
         // The UnionObjectResolver only delegate all requests to his objectResolvers
     }
-
-	public Filter getFilter() {
-		return filter;
-	}
-
-	public void setFilter(Filter filter) {
-		this.filter = filter;
-	}
 
 }

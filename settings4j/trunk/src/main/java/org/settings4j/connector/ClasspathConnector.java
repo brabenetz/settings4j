@@ -34,16 +34,10 @@ public class ClasspathConnector extends AbstractConnector {
     private String charset = "UTF-8";
     
     public byte[] getContent(String key) {
-    	if (!getFilter().isValid(key)){
-            return null;
-    	}
         return classpathContentResolver.getContent(key);
     }
 
     public Object getObject(String key) {
-    	if (!getFilter().isValid(key)){
-            return null;
-    	}
         if (getObjectResolver() != null){
             return getObjectResolver().getObject(key, unionContentResolver);
         } else {
@@ -52,9 +46,6 @@ public class ClasspathConnector extends AbstractConnector {
     }
 
     public String getString(String key) {
-    	if (!getFilter().isValid(key)){
-            return null;
-    	}
         try {
             byte[] content =  getContent(key);
             if (content != null){

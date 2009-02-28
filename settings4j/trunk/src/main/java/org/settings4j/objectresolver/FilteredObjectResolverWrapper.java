@@ -19,15 +19,24 @@ package org.settings4j.objectresolver;
 
 import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
+import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
 
-public class ReadOnlyObjectResolverWrapper implements ObjectResolver{
+public class FilteredObjectResolverWrapper implements ObjectResolver{
 
     private ObjectResolver targetObjectResolver;
+	private Filter filter;
 
-    public ReadOnlyObjectResolverWrapper(ObjectResolver targetObjectResolver) {
+    public FilteredObjectResolverWrapper(ObjectResolver targetObjectResolver, Filter filter) {
         super();
-        this.targetObjectResolver = targetObjectResolver;
+		if (targetObjectResolver == null){
+			throw new IllegalArgumentException("FilteredConnectorWrapper needs a ObjectResolver Object");
+		}
+		if (filter == null){
+			throw new IllegalArgumentException("FilteredConnectorWrapper needs a Filter Object");
+		}
+		this.targetObjectResolver = targetObjectResolver;
+		this.filter = filter;
     }
 
     
@@ -36,7 +45,10 @@ public class ReadOnlyObjectResolverWrapper implements ObjectResolver{
     }
     
     public int setObject(String key, ContentResolver contentResolver, Object value) {
-        return Constants.SETTING_NOT_POSSIBLE;
+    	if (!filter.isValid(key)){
+            return Constants.SETTING_NOT_POSSIBLE;
+    	}
+        return targetObjectResolver.setObject(key, contentResolver, value);
     }
 
 
@@ -46,6 +58,9 @@ public class ReadOnlyObjectResolverWrapper implements ObjectResolver{
 
 
     public Object getObject(String key, ContentResolver contentResolver) {
+    	if (!filter.isValid(key)){
+            return null;
+    	}
         return targetObjectResolver.getObject(key, contentResolver);
     }
 }

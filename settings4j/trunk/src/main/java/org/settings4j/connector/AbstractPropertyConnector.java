@@ -22,9 +22,6 @@ import org.settings4j.Constants;
 public abstract class AbstractPropertyConnector extends AbstractConnector {
 
     public byte[] getContent(String key) {
-    	if (!getFilter().isValid(key)){
-            return null;
-    	}
         String path = getString(key);
         if (path != null && getContentResolver() != null) {
             return getContentResolver().getContent(path);
@@ -34,9 +31,6 @@ public abstract class AbstractPropertyConnector extends AbstractConnector {
     }
 
     public Object getObject(String key) {
-    	if (!getFilter().isValid(key)){
-            return null;
-    	}
         String path = getString(key);
         if (path != null && getObjectResolver() != null) {
             return getObjectResolver().getObject(path, getContentResolver());
@@ -46,16 +40,10 @@ public abstract class AbstractPropertyConnector extends AbstractConnector {
     }
 
     public String getString(String key) {
-    	if (!getFilter().isValid(key)){
-            return null;
-    	}
         return getProperty(key, null);
     }
 
     public int setContent(String key, byte[] value) {
-    	if (!getFilter().isValid(key)){
-            return Constants.SETTING_NOT_POSSIBLE;
-    	}
         String path = getString(key);
         if (path != null && getContentResolver() != null) {
             return getContentResolver().setContent(path, value);
@@ -65,9 +53,6 @@ public abstract class AbstractPropertyConnector extends AbstractConnector {
     }
 
     public int setObject(String key, Object value) {
-    	if (!getFilter().isValid(key)){
-            return Constants.SETTING_NOT_POSSIBLE;
-    	}
         String path = getString(key);
         if (path != null && getObjectResolver() != null) {
             return getObjectResolver().setObject(path, getContentResolver(), value);
@@ -77,9 +62,6 @@ public abstract class AbstractPropertyConnector extends AbstractConnector {
     }
 
     public int setString(String key, String value) {
-    	if (!getFilter().isValid(key)){
-            return Constants.SETTING_NOT_POSSIBLE;
-    	}
         // System.setProperty is only temporary => so return NOT POSSIBLE
         return Constants.SETTING_NOT_POSSIBLE;
     }

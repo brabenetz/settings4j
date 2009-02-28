@@ -20,9 +20,18 @@ package org.settings4j.connector;
 import org.settings4j.Connector;
 import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
-import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
 
+/**
+ * <p>
+ * The AbstractContentResolver has ObjectResolvers to convert byte[] Content to Objects.
+ * This Wrapper notify the ObjectResolver if the Content has changed.
+ * <p>
+ * This is required for Caching Implementations.
+ * 
+ * @author hbrabenetz
+ *
+ */
 public class ContentHasChangedNotifierConnectorWrapper implements Connector{
     
     private AbstractConnector targetConnector;
@@ -93,9 +102,5 @@ public class ContentHasChangedNotifierConnectorWrapper implements Connector{
 
 	public boolean isReadonly() {
 		return targetConnector.isReadonly();
-	}
-
-	public void setFilter(Filter filter) {
-		targetConnector.setFilter(filter);
 	}
 }

@@ -42,9 +42,6 @@ public class JNDIConnector extends AbstractConnector {
     private String contextPathPrefix = "java:comp/env/";
 
     public byte[] getContent(String key) {
-    	if (!getFilter().isValid(key)){
-            return null;
-    	}
         Object obj = lookupInContext(key);
 
         // if obj is a String and an Object resolver is available
@@ -63,9 +60,6 @@ public class JNDIConnector extends AbstractConnector {
     }
 
     public Object getObject(String key) {
-    	if (!getFilter().isValid(key)){
-            return null;
-    	}
         Object obj = lookupInContext(key);
 
         // if obj is a String and an Object resolver is available
@@ -81,9 +75,6 @@ public class JNDIConnector extends AbstractConnector {
     }
 
     public String getString(String key) {
-    	if (!getFilter().isValid(key)){
-            return null;
-    	}
         Object obj = null;
         try {
             obj = lookupInContext(key);
@@ -96,9 +87,6 @@ public class JNDIConnector extends AbstractConnector {
     }
 
     public int setContent(String key, byte[] value) {
-    	if (!getFilter().isValid(key)){
-            return Constants.SETTING_NOT_POSSIBLE;
-    	}
         int result = Constants.SETTING_NOT_POSSIBLE;
         String path = getString(key);
         if (path != null && getContentResolver() != null) {
@@ -114,9 +102,6 @@ public class JNDIConnector extends AbstractConnector {
     }
 
     public int setObject(String key, Object value) {
-    	if (!getFilter().isValid(key)){
-            return Constants.SETTING_NOT_POSSIBLE;
-    	}
         int result = Constants.SETTING_NOT_POSSIBLE;
         String path = getString(key);
         if (path != null && getObjectResolver() != null) {
@@ -132,9 +117,6 @@ public class JNDIConnector extends AbstractConnector {
     }
 
     public int setString(String key, String value) {
-    	if (!getFilter().isValid(key)){
-            return Constants.SETTING_NOT_POSSIBLE;
-    	}
         int result = Constants.SETTING_NOT_POSSIBLE;
         result = rebindToContext(key, value);
         return result;

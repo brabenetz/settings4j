@@ -58,7 +58,7 @@ import org.settings4j.contentresolver.UnionContentResolver;
  * @author hbrabenetz
  *
  */
-public interface ContentResolver extends Filterable {
+public interface ContentResolver {
     
     /**
      * Reads the Content for the given Key or null if nothing where found.

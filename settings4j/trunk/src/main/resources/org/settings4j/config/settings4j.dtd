@@ -158,7 +158,7 @@ but you must only define/configure one DataSource under "global/DataSource".
 -->
 <!ELEMENT filter (include*, exclude*)>
 <!ATTLIST filter
-  class 	CDATA   "org.settings4j."	
+  class 	CDATA   "org.settings4j.settings.DefaultFilter"	
 >
 
 <!-- 

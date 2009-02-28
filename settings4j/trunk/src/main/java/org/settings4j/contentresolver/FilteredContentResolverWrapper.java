@@ -18,14 +18,23 @@ package org.settings4j.contentresolver;
 
 import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
+import org.settings4j.Filter;
 
-public class ReadOnlyContentResolverWrapper implements ContentResolver {
+public class FilteredContentResolverWrapper implements ContentResolver {
 
     private ContentResolver targetContentResolver;
+	private Filter filter;
 
-    public ReadOnlyContentResolverWrapper(ContentResolver targetContentResolver) {
+    public FilteredContentResolverWrapper(ContentResolver targetContentResolver, Filter filter) {
         super();
-        this.targetContentResolver = targetContentResolver;
+		if (targetContentResolver == null){
+			throw new IllegalArgumentException("FilteredConnectorWrapper needs a ContentResolver Object");
+		}
+		if (filter == null){
+			throw new IllegalArgumentException("FilteredConnectorWrapper needs a Filter Object");
+		}
+		this.targetContentResolver = targetContentResolver;
+		this.filter = filter;
     }
     
     public synchronized void addContentResolver(ContentResolver contentResolver) {
@@ -33,10 +42,16 @@ public class ReadOnlyContentResolverWrapper implements ContentResolver {
     }
 
     public byte[] getContent(String key) {
+    	if (!filter.isValid(key)){
+            return null;
+    	}
         return targetContentResolver.getContent(key);
     }
 
     public int setContent(String key, byte[] value) {
-        return Constants.SETTING_NOT_POSSIBLE;
+    	if (!filter.isValid(key)){
+            return Constants.SETTING_NOT_POSSIBLE;
+    	}
+        return targetContentResolver.setContent(key, value);
     }
 }
