@@ -43,7 +43,7 @@ public class Settings4jException extends RuntimeException {
     }
 
     public Settings4jException(String key, Throwable cause) {
-        super(cause);
+        super(getMessage(key, null), cause);
         this.key = key;
         this.args = new Object[0] ;
     }

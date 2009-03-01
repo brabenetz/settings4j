@@ -24,10 +24,13 @@ import java.util.List;
 import junit.framework.TestCase;
 
 import org.apache.commons.io.FileUtils;
+import org.hibernate.SessionFactory;
 import org.settings4j.Connector;
 import org.settings4j.SettingsInstance;
 import org.settings4j.SettingsRepository;
 import org.settings4j.UtilTesting;
+import org.settings4j.connector.db.dao.hibernate.ConfigurationByteArray;
+import org.settings4j.connector.db.dao.hibernate.SettingsDAOHibernate;
 
 public class TestHibernateDBConnector extends TestCase {
 
@@ -76,6 +79,52 @@ public class TestHibernateDBConnector extends TestCase {
         byteArrayValue = rootSettings.getContent("test");
         assertNotNull(byteArrayValue);
         assertEquals("Hello World", new String(byteArrayValue, "UTF-8"));
+        
+    }
+    
+    public void testHibernateDAO(){
+        SettingsDAOHibernate settingsDAO = new SettingsDAOHibernate();
+        ConfigurationByteArray configuration = new ConfigurationByteArray();
+
+        // Test Hibernate-Configuration
+        configuration.configure("org/settings4j/hibernate.cfg.xml");
+        // Default SettingsDTO Mappingfile
+        configuration.addResource("org/settings4j/connector/db/SettingsDTO.hbm.xml");
+        
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        settingsDAO.setSessionFactory(sessionFactory);
+        
+        // getById who doesn't exists must throw an Exception
+        try {
+            settingsDAO.getById(new Long(1));
+            fail("No settingsObject should be found.");
+        } catch (RuntimeException e) {
+            assertEquals("'class org.settings4j.connector.db.SettingsDTO' object with id '1' not found...", e.getMessage());
+        }
+        
+        // store settings Object
+        SettingsDTO settingsDTO = new SettingsDTO();
+        settingsDTO.setKey("test");
+        settingsDTO.setStringValue("testValue");
+        settingsDAO.store(settingsDTO);
+
+        // get By Key
+        settingsDTO = settingsDAO.getByKey("test");
+        assertNotNull(settingsDTO);
+        assertEquals("testValue", settingsDTO.getStringValue());
+
+        // get By Id
+        settingsDTO = settingsDAO.getById(settingsDTO.getId());
+        assertNotNull(settingsDTO);
+        assertEquals("testValue", settingsDTO.getStringValue());
+
+        // remove By Id
+        settingsDAO.remove(settingsDTO.getId());
+
+        // get By Key must return NULL
+        settingsDTO = settingsDAO.getByKey("test");
+        assertNull(settingsDTO);
+        
         
     }
 }
