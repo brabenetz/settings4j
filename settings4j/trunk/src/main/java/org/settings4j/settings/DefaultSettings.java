@@ -36,8 +36,9 @@ import org.settings4j.exception.NoWriteableConnectorFoundException;
  *
  */
 public class DefaultSettings implements SettingsInstance {
-    
+
     private List connectors = Collections.synchronizedList(new ArrayList());
+    private Map connectorMap = Collections.synchronizedMap(new HashMap());
     private Map mapping;
 
     public DefaultSettings() {
@@ -50,13 +51,20 @@ public class DefaultSettings implements SettingsInstance {
     }
 
 	/** {@inheritDoc} */
+	public Connector getConnector(String connectorName) {
+		return (Connector)connectorMap.get(connectorName);
+	}
+
+	/** {@inheritDoc} */
     public void addConnector(Connector connector) {
         connectors.add(connector);
+        connectorMap.put(connector.getName(), connector);
     }
 
     /** {@inheritDoc} */
     public void removeAllConnectors() {
         connectors.clear();
+        connectorMap.clear();
     }
 
     /** {@inheritDoc} */

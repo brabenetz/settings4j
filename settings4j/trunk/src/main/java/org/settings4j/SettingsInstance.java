@@ -185,4 +185,11 @@ public interface SettingsInstance {
      * @return a list off all Connectors who can be used with this {@link SettingsInstance} instance 
      */
     public abstract List getConnectors();
+    
+    /**
+     * Return the {@link Connector} for the given Name.
+     * 
+     * @return The {@link Connector} for the given Name.
+     */
+    public abstract Connector getConnector(String connectorName);
 }
