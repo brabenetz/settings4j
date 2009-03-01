@@ -3,7 +3,7 @@
 	<groupId>org.settings4j</groupId>
 	<artifactId>settings4j</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.0-beta2</version>
+	<version>1.0.0-beta3-SNAPSHOT</version>
 	<name>settings4j</name>
 	<url>http://settings4j.org</url>
 
@@ -18,9 +18,9 @@
 	</issueManagement>
 	
 	<scm>
-		<connection>scm:svn:http://settings4j.svn.sourceforge.net/svnroot/settings4j/settings4j/tags/settings4j-1.0.0-beta2</connection>
-		<developerConnection>scm:svn:https://settings4j.svn.sourceforge.net/svnroot/settings4j/settings4j/tags/settings4j-1.0.0-beta2</developerConnection>
-		<url>http://settings4j.svn.sourceforge.net/viewcvs.cgi/settings4j/settings4j/tags/settings4j-1.0.0-beta2</url>
+		<connection>scm:svn:http://settings4j.svn.sourceforge.net/svnroot/settings4j/settings4j/trunk</connection>
+		<developerConnection>scm:svn:https://settings4j.svn.sourceforge.net/svnroot/settings4j/settings4j/trunk</developerConnection>
+		<url>http://settings4j.svn.sourceforge.net/viewcvs.cgi/settings4j/settings4j/trunk</url>
 	</scm>
 	<inceptionYear>2008</inceptionYear>
 
