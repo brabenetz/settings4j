@@ -51,8 +51,7 @@ public interface SettingsDAO {
     SettingsDTO getById(Long id);
 
     /**
-     * Method to get an object based on class and key. An
-     * ObjectRetrievalFailureException Runtime Exception is thrown if
+     * Method to get an object based on class and key. Returns null if
      * nothing is found.
      *
      * @param id the identifier (primary key) of the object to get

@@ -71,7 +71,7 @@ Roadmap of changes for this project.
 
 	- Add additional method: getConnectors() returns all Connectors
 	
-	- Add additional method: getConnectors(key) returns Connectors valid for a given Key.
+	- Add additional method: getConnector(ConnectorName) return the Connector for the given Name.
 
 * 6. July 2008 1.0.0-beta - release with additional features:
 
