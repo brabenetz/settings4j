@@ -24,6 +24,7 @@ import java.sql.ResultSet;
 
 import javax.sql.DataSource;
 
+import org.settings4j.Connector;
 import org.settings4j.SettingsInstance;
 import org.settings4j.SettingsRepository;
 import org.settings4j.UtilTesting;
@@ -101,8 +102,16 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
         assertEquals("abc", settings.getString("xyz"));
         assertEquals("abc2", settings.getString("xyz2"));
 
-        // TODO hbrabenetz 08.02.2009: Add parameter internal only and validate to "1" ??
         assertEquals(2, settings.getConnectors().size());
+        
+        Connector connector;
+        connector = settings.getConnector("FSConnector");
+        assertNotNull(connector);
+        connector = settings.getConnector("SystemPropertyConnector");
+        assertNotNull(connector);
+        connector = settings.getConnector("nichtVorhanden");
+        assertNull(connector);
+        
     }
     
     public void testFSConfigTestFolder(){

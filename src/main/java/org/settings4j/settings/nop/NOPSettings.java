@@ -71,4 +71,8 @@ public class NOPSettings implements org.settings4j.SettingsInstance {
 
     public void setMapping(Map mapping) {
     }
+
+	public Connector getConnector(String connectorName) {
+		return null;
+	}
 }
