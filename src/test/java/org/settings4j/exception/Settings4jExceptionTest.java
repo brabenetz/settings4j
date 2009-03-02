@@ -26,7 +26,7 @@ public class Settings4jExceptionTest extends TestCase {
 
 		settings4jException = new Settings4jException(errorKey);
 		assertNotNull(settings4jException.toString());
-		assertTrue(settings4jException.toString().contains(errorKey));
+		assertTrue(settings4jException.toString().indexOf(errorKey) > -1);
 		assertEquals("Content '{0}' cannot be writen. No writeable Connector found", settings4jException.getMessage());
 
 		settings4jException = new Settings4jException(errorKey, new RuntimeException("test"));
@@ -34,8 +34,8 @@ public class Settings4jExceptionTest extends TestCase {
 
 		settings4jException = new Settings4jException(errorKey, new String[] { "arg1" });
 		assertNotNull(settings4jException.toString());
-		assertTrue(settings4jException.toString().contains(errorKey));
-		assertTrue(settings4jException.toString().contains("Param"));
+		assertTrue(settings4jException.toString().indexOf(errorKey) > -1);
+		assertTrue(settings4jException.toString().indexOf("Param") > -1);
 		assertEquals("Content 'arg1' cannot be writen. No writeable Connector found", settings4jException.getMessage());
 
 		settings4jException = new Settings4jException(errorKey, new String[] { "arg1" }, new RuntimeException("test"));
