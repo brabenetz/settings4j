@@ -136,7 +136,7 @@ public interface Connector {
      * --------------------------------------
      * 
      * </pre>
-     * @param contentResolver
+     * @param connector
      */
     void addConnector(Connector connector);
     

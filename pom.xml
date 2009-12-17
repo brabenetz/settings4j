@@ -68,6 +68,12 @@
 		<defaultGoal>install</defaultGoal>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.0.2</version>
 				<configuration>
@@ -77,11 +83,34 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.4</version>
+				<version>2.5.1</version>
 				<configuration>
+					<!--  See: http://maven.apache.org/plugins/maven-eclipse-plugin/eclipse-mojo.html -->
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
-					<wtpversion>1.0</wtpversion>
+					<additionalProjectnatures>
+						<projectnature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</projectnature>
+					</additionalProjectnatures>
+					<additionalBuildcommands>
+						<buildcommand>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</buildcommand>
+					</additionalBuildcommands>
+					<additionalConfig>
+						<file>
+							<name>.checkstyle</name>
+							<content>
+								<![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<fileset-config file-format-version="1.2.0" simple-config="true">
+    <local-check-config name="${project.artifactId}-checkstyle" location="src/config/checkstyle.xml" type="project" description="CheckStyle-Configuration for ${project.artifactId}">
+        <property name="checkstyle.header.file" value="${basedir}/src/config/header.txt" />
+        <additional-data name="protect-config-file" value="false" />
+    </local-check-config>
+    <fileset name="Alle" enabled="true" check-config-name="${project.artifactId}-checkstyle" local="true">
+        <file-match-pattern match-pattern="." include-pattern="true" />
+    </fileset>
+</fileset-config>]]>
+							</content>
+						</file>
+					</additionalConfig>
 				</configuration>
 			</plugin>
 
@@ -197,21 +226,87 @@
 
 	<reporting>
 		<plugins>
-			<!-- 
 			<plugin>
-				<artifactId>maven-checkstyle-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>2.0.1</version>
+				<configuration>
+					<outputEncoding>UTF-8</outputEncoding>
+				</configuration>
 			</plugin>
-			 -->
 			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-changes-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<xmlPath>${basedir}/src/site/changes.xml</xmlPath>
+					<issueLinkTemplatePerSystem>
+						<!-- Default-Link Template for Issues -->
+						<!-- See more at http://jira.codehaus.org/browse/MCHANGES-112 -->
+						<!-- See more at http://maven.apache.org/plugins/maven-changes-plugin/changes-report-mojo.html#issueLinkTemplatePerSystem -->
+						<default>https://sourceforge.net/tracker/?func=detail&amp;aid=%ISSUE%&amp;group_id=224313&amp;atid=1061429</default>
+					</issueLinkTemplatePerSystem>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>changes-report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <configLocation>${basedir}/src/config/checkstyle.xml</configLocation>
+                    <headerLocation>${basedir}/src/config/header.txt</headerLocation>
+                    <enableRulesSummary>false</enableRulesSummary>
+                </configuration>
+            </plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.3</version>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.0</version>
+				<version>2.3</version>
 			</plugin>
 			<plugin>
+				<!--
+					Damit das UMLGraph Plugin funktioniert muss ein Commandozeilen-Tool installiert werden:
+					http://www.graphviz.org/
+				-->
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<source>1.4</source>
+					<links>
+						<link>http://java.sun.com/j2se/1.4.2/docs/api/</link>
+						<link>http://static.springframework.org/spring/docs/2.5.x/api/</link>
+						<link>http://logging.apache.org/log4j/docs/api/</link>
+						<link>http://jakarta.apache.org/commons/logging/apidocs/</link>
+						<link>http://junit.org/junit/javadoc/3.8.1/</link>
+					</links>
+					<doclet>
+						gr.spinellis.umlgraph.doclet.UmlGraphDoc
+					</doclet>
+					<docletArtifact>
+						<groupId>gr.spinellis</groupId>
+						<artifactId>UmlGraph</artifactId>
+						<version>4.6</version>
+					</docletArtifact>
+					<additionalparam>
+						-inferrel -inferdep -quiet -hide java.*
+						-collpackages java.util.* -qualify
+						-postfixpackage -nodefontsize 9
+						-nodefontpackagesize 7
+					</additionalparam>
+					<maxmemory>512m</maxmemory>
+				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-jxr-plugin</artifactId>
@@ -220,11 +315,40 @@
 				<artifactId>maven-pmd-plugin</artifactId>
 				<configuration>
 					<linkXref>true</linkXref>
-					<targetJdk>1.5</targetJdk>
+					<targetJdk>1.4</targetJdk>
 				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-report-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+			</plugin>
+			<!-- ============== -->
+			<!--     FindBugs   -->
+			<!-- ============== -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>2.0.1</version>
+
+				<configuration>
+					<!--
+
+						<xmlOutput>true</xmlOutput>
+						<xmlOutputDirectory>target</xmlOutputDirectory>
+					-->
+					<excludeFilterFile>${basedir}/src/config/findbugs-exclude.xml</excludeFilterFile>
+					
+					<threshold>Normal</threshold>
+					<effort>Default</effort>
+					<!--
+
+						<debug>true</debug> <relaxed>true</relaxed>
+					-->
+					<skip>${findbugs.skip}</skip>
+				</configuration>
 			</plugin>
 		</plugins>
 	</reporting>

@@ -28,11 +28,15 @@ public interface SettingsRepository {
 
     /**
      * Retrieve the appropriate {@link Settings} instance.
+     * 
+     * @return the appropriate {@link SettingsInstance}
      */
 	SettingsInstance getSettings();
 
     /**
      * Retrieve the appropriate {@link Settings} instance.
+     * 
+     * @return the appropriate {@link SettingsInstance}
      */
     SettingsInstance getSettings(SettingsFactory factory);
 
