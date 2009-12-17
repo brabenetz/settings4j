@@ -176,6 +176,8 @@ public interface SettingsInstance {
      * &lt;/mapping&gt;
      * </pre>
      * 
+     * @param mapping The Mapping between available settings to used settings.
+     * 
      */
     public abstract void setMapping(Map mapping);
     
@@ -189,6 +191,7 @@ public interface SettingsInstance {
     /**
      * Return the {@link Connector} for the given Name.
      * 
+     * @param connectorName The Connector Name.
      * @return The {@link Connector} for the given Name.
      */
     public abstract Connector getConnector(String connectorName);

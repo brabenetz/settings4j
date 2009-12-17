@@ -45,7 +45,7 @@ Roadmap of changes for this project.
 
 
 
-* 2009 1.0.0-rc - re factored release
+* 2009 1.0.0-rc - refactored release
 
     - extended JavaDoc and UnitTests
     
@@ -61,7 +61,7 @@ Roadmap of changes for this project.
 
 	! additional Connector to Environment Variables.
   
-* 2009 1.0.0-beta2 - re factored release  	
+* 2009 1.0.0-beta2 - refactored release  	
 
 	- Remove Hirachical Structure. (it works, but without it, the usage is much simpler.)
 
