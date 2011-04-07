@@ -18,7 +18,6 @@ package org.settings4j.connector;
 
 import java.io.UnsupportedEncodingException;
 
-import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.FSContentResolver;
 import org.settings4j.contentresolver.UnionContentResolver;
@@ -60,28 +59,6 @@ public class FSConnector extends AbstractConnector {
         }
     }
 
-    public int setContent(String key, byte[] value) {
-        return fsContentResolver.setContent(key, value);
-    }
-
-    public int setObject(String key, Object value) {
-        if (getObjectResolver() != null){
-            return getObjectResolver().setObject(key, unionContentResolver, value);
-        } else {
-            return Constants.SETTING_NOT_POSSIBLE;
-        }
-    }
-
-    public int setString(String key, String value) {
-        try {
-            return setContent(key, value.getBytes(charset));
-        } catch (UnsupportedEncodingException e) {
-            // should never occure with "UTF-8"
-            LOG.error("Charset not found: " + charset, e);
-            return Constants.SETTING_NOT_POSSIBLE;
-        }
-    }
-
     public String getCharset() {
         return charset;
     }
@@ -98,10 +75,5 @@ public class FSConnector extends AbstractConnector {
         unionContentResolver = new UnionContentResolver(fsContentResolver);
         unionContentResolver.addContentResolver(contentResolver);
     }
-
-
-	public boolean isReadonly() {
-		return false;
-	}
     
 }

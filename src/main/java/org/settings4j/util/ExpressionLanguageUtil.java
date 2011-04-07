@@ -49,10 +49,7 @@ public class ExpressionLanguageUtil {
          * Resolves the specified variable within the given context.
          * Returns null if the variable is not found.
          **/
-        public Object resolveVariable (String pName,
-                     Object simpleMap)
-          throws ELException
-        {
+        public Object resolveVariable (String pName, Object simpleMap) {
           Map ctx = (Map) simpleMap;
           return ctx.get(pName);
         }

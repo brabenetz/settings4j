@@ -25,12 +25,10 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.settings4j.Connector;
-import org.settings4j.Constants;
 import org.settings4j.SettingsInstance;
-import org.settings4j.exception.NoWriteableConnectorFoundException;
 
 /**
- * The default Settings Object is a {@link HierarchicalSettings} implementation.
+ * The default Settings Object.
  * 
  * @author hbrabenetz
  *
@@ -69,13 +67,13 @@ public class DefaultSettings implements SettingsInstance {
 
     /** {@inheritDoc} */
     public byte[] getContent(String key) {
-        key = mappedKey(key);
+        String mappedKey = mappedKey(key);
         byte[] result = null;
         Iterator iterator;
         iterator = this.connectors.iterator();
         while (iterator.hasNext()) {
             Connector connector = (Connector) iterator.next();
-            result = connector.getContent(key);
+            result = connector.getContent(mappedKey);
             if (result != null){
                 return result;
             }
@@ -85,13 +83,13 @@ public class DefaultSettings implements SettingsInstance {
 
     /** {@inheritDoc} */
     public Object getObject(String key) {
-        key = mappedKey(key);
+        String mappedKey = mappedKey(key);
         Object result = null;
         Iterator iterator;
         iterator = this.connectors.iterator();
         while (iterator.hasNext()) {
             Connector connector = (Connector) iterator.next();
-            result = connector.getObject(key);
+            result = connector.getObject(mappedKey);
             if (result != null){
                 return result;
             }
@@ -101,81 +99,18 @@ public class DefaultSettings implements SettingsInstance {
 
     /** {@inheritDoc} */
     public String getString(String key) {
-        key = mappedKey(key);
+        String mappedKey = mappedKey(key);
         String result = null;
         Iterator iterator;
         iterator = this.connectors.iterator();
         while (iterator.hasNext()) {
             Connector connector = (Connector) iterator.next();
-            result = connector.getString(key);
+            result = connector.getString(mappedKey);
             if (result != null){
                 return result;
             }
         }
         return result;
-    }
-
-    /** {@inheritDoc} */
-    public void setContent(String key, byte[] value, String connectorName) throws NoWriteableConnectorFoundException {
-    	if (connectorName == null){
-            throw new NoWriteableConnectorFoundException(key);
-        }
-    	key = mappedKey(key);
-        int status;
-        Iterator iterator;
-        iterator = this.connectors.iterator();
-        while (iterator.hasNext()) {
-            Connector connector = (Connector) iterator.next();
-            if(connectorName.equals(connector.getName())){
-	            status = connector.setContent(key, value);
-	            if (status == Constants.SETTING_SUCCESS){
-	                return;
-	            }
-            }
-        }
-        throw new NoWriteableConnectorFoundException(key);
-    }
-
-    /** {@inheritDoc} */
-    public void setObject(String key, Object value, String connectorName) throws NoWriteableConnectorFoundException {
-        if (connectorName == null){
-            throw new NoWriteableConnectorFoundException(key);
-        }
-    	key = mappedKey(key);
-        int status;
-        Iterator iterator;
-        iterator = this.connectors.iterator();
-        while (iterator.hasNext()) {
-            Connector connector = (Connector) iterator.next();
-            if(connectorName.equals(connector.getName())){
-	            status = connector.setObject(key, value);
-	            if (status == Constants.SETTING_SUCCESS){
-	                return;
-	            }
-            }
-        }
-        throw new NoWriteableConnectorFoundException(key);
-    }
-
-    /** {@inheritDoc} */
-    public void setString(String key, String value, String connectorName) throws NoWriteableConnectorFoundException {
-        if (connectorName == null){
-            throw new NoWriteableConnectorFoundException(key);
-        }
-    	key = mappedKey(key);
-        int status;
-        Iterator iterator;
-        iterator = this.connectors.iterator();
-        while (iterator.hasNext()) {
-            Connector connector = (Connector) iterator.next();
-            if(connectorName.equals(connector.getName())){
-	            status = connector.setString(key, value);
-	            if (status == Constants.SETTING_SUCCESS){
-	                return;
-	            }
-            }
-        }
-        throw new NoWriteableConnectorFoundException(key);
     }
     
     /**

@@ -29,6 +29,7 @@ import org.settings4j.Connector;
 import org.settings4j.SettingsInstance;
 import org.settings4j.SettingsRepository;
 import org.settings4j.UtilTesting;
+import org.settings4j.connector.db.dao.SettingsDAO;
 import org.settings4j.connector.db.dao.hibernate.ConfigurationByteArray;
 import org.settings4j.connector.db.dao.hibernate.SettingsDAOHibernate;
 
@@ -56,18 +57,21 @@ public class TestHibernateDBConnector extends TestCase {
         SettingsInstance rootSettings = settingsRepository.getSettings();
         List connectors = rootSettings.getConnectors();
         
+        
         // there are three Connectors configured:
         // "HibernateDBConnector", "SystemPropertyConnector", "ClasspathConnector"
         assertEquals(3, connectors.size());
         // the first one is the "HibernateDBConnector"
         Connector connector = (Connector)connectors.get(0);
         assertEquals("HibernateDBConnector", connector.getName());
-        
+
+        HibernateDBConnector hibernateDBConnector = (HibernateDBConnector) rootSettings.getConnector("HibernateDBConnector");
+        SettingsDAO settingsDAO = hibernateDBConnector.getSettingsDAO();
         
         String stringValue = rootSettings.getString("test");
         assertNull(stringValue);
         
-        rootSettings.setString("test", "Hello World", "HibernateDBConnector");
+        setString(settingsDAO, "test", "Hello World");
         stringValue = rootSettings.getString("test");
         assertEquals("Hello World", stringValue);
         
@@ -75,11 +79,25 @@ public class TestHibernateDBConnector extends TestCase {
         byte[] byteArrayValue = rootSettings.getContent("test");
         assertNull(byteArrayValue);
         
-        rootSettings.setContent("test", "Hello World".getBytes("UTF-8"), "HibernateDBConnector");
-        byteArrayValue = rootSettings.getContent("test");
+        setContent(settingsDAO, "test2", "Hello World".getBytes("UTF-8"));
+        byteArrayValue = rootSettings.getContent("test2");
         assertNotNull(byteArrayValue);
         assertEquals("Hello World", new String(byteArrayValue, "UTF-8"));
         
+    }
+
+    private void setString(SettingsDAO settingsDAO, String key, String stringValue) {
+        SettingsDTO settingsDTO = new SettingsDTO();
+        settingsDTO.setKey(key);
+        settingsDTO.setStringValue(stringValue);
+        settingsDAO.store(settingsDTO);
+    }
+
+    private void setContent(SettingsDAO settingsDAO, String key, byte[] contentValue) {
+        SettingsDTO settingsDTO = new SettingsDTO();
+        settingsDTO.setKey(key);
+        settingsDTO.setContentValue(contentValue);
+        settingsDAO.store(settingsDTO);
     }
     
     public void testHibernateDAO(){

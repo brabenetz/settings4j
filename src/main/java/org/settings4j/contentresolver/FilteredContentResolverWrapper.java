@@ -16,7 +16,6 @@
  *****************************************************************************/
 package org.settings4j.contentresolver;
 
-import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 import org.settings4j.Filter;
 
@@ -46,12 +45,5 @@ public class FilteredContentResolverWrapper implements ContentResolver {
             return null;
     	}
         return targetContentResolver.getContent(key);
-    }
-
-    public int setContent(String key, byte[] value) {
-    	if (!filter.isValid(key)){
-            return Constants.SETTING_NOT_POSSIBLE;
-    	}
-        return targetContentResolver.setContent(key, value);
     }
 }

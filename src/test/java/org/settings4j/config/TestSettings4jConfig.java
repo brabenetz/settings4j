@@ -21,14 +21,15 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.io.FileUtils;
 import org.settings4j.Connector;
 import org.settings4j.SettingsInstance;
 import org.settings4j.SettingsRepository;
 import org.settings4j.UtilTesting;
-import org.settings4j.exception.NoWriteableConnectorFoundException;
 import org.settings4j.settings.SettingsManager;
 
 public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
@@ -40,8 +41,6 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
         SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository(SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
         
         SettingsInstance settings = settingsRepository.getSettings();
-
-        String rootSeetingsConnector = getFirstWritableConnectorName(settings);
         
         //the rootSettings have three Connectors
         assertEquals(3, settings.getConnectors().size());
@@ -50,28 +49,6 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
         assertNull(settings.getString("xyz"));
         assertNull(settings.getContent("xyz"));
         assertNull(settings.getObject("xyz"));
-
-        //check if there is a Exception thrown:
-        try {
-        	settings.setString("xyz", "xyz", rootSeetingsConnector);
-            fail("must throw an NoWriteableConnectorFoundException");
-        } catch (NoWriteableConnectorFoundException e) {
-            assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
-        }
-
-        try {
-        	settings.setContent("xyz", "xyz".getBytes(), rootSeetingsConnector);
-            fail("must throw an NoWriteableConnectorFoundException");
-        } catch (NoWriteableConnectorFoundException e) {
-            assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
-        }
-
-        try {
-        	settings.setObject("xyz", "xyz", rootSeetingsConnector);
-            fail("must throw an NoWriteableConnectorFoundException");
-        } catch (NoWriteableConnectorFoundException e) {
-            assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
-        }
         
         assertEquals(3, settings.getConnectors().size());
     }
@@ -83,20 +60,19 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
     }
     
 
-    public void testFSConfigTempFolder(){
+    public void testFSConfigTempFolder() throws Exception {
         SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigFSTempfolder.xml");
 
         // store values into the default java temporary directory with subfolder "Settings4j"
         // String tmpdir = System.getProperty("java.io.tmpdir");
         SettingsInstance settings = settingsRepository.getSettings();
-        String settingsConnector = getFirstWritableConnectorName(settings);
         File tmpFolder = UtilTesting.getTmpFolder();
         File fileXyz = new File(tmpFolder, "xyz");
         assertFalse(fileXyz.exists());
-        settings.setString("xyz", "abc", settingsConnector);
+        FileUtils.writeStringToFile(fileXyz, "abc", "UTF-8");
         assertTrue(fileXyz.exists());
 
-        settings.setString("xyz2", "abc2", settingsConnector);
+        FileUtils.writeStringToFile(new File(tmpFolder, "xyz2"), "abc2", "UTF-8");
         
         //every settings have read access to the same FSConnector.
         assertEquals("abc", settings.getString("xyz"));
@@ -114,20 +90,19 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
         
     }
     
-    public void testFSConfigTestFolder(){
+    public void testFSConfigTestFolder() throws Exception {
         SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigFSTestfolder.xml");
         
         // store values into the default java temporary directory with subfolder "Settings4j"
         // String tmpdir = System.getProperty("java.io.tmpdir");
         SettingsInstance settings = settingsRepository.getSettings();
-        String settingsConnector = getFirstWritableConnectorName(settings);
         File testFolder = UtilTesting.getTestFolder();
         File fileXyz = new File(testFolder, "xyz");
         assertFalse(fileXyz.exists());
-        settings.setString("xyz", "abc", settingsConnector);
+        FileUtils.writeStringToFile(fileXyz, "abc", "UTF-8");
         assertTrue(fileXyz.exists());
         
-        settings.setString("xyz2", "abc2", settingsConnector);
+        FileUtils.writeStringToFile(new File(testFolder, "xyz2"), "abc2", "UTF-8");
         
         //every settings have read access to the same FSConnector.
         assertEquals("abc", settings.getString("xyz"));
@@ -139,13 +114,25 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
     /**
      * Test ObjectReolver with cached Connector
      */
-    public void testObjectResolverConfig1(){
-        
-        SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver1.xml");
+    public void testObjectResolverConfig(){
 
-        String key1 = "org/settings4j/objectresolver/test1";
-        String key2 = "org/settings4j/objectresolver/test2";
-        testObjectReolver(settingsRepository, key1, key2);
+        
+        testCaching("org/settings4j/config/testConfigObjectResolver-nocaching.xml", //
+            "org/settings4j/objectresolver/test1", //
+            false); // no caching!
+        
+    }
+    
+    /**
+     * Test ObjectReolver with cached Connector
+     */
+    public void testObjectResolverConfig1(){
+
+        
+        testCaching("org/settings4j/config/testConfigObjectResolver1.xml", //
+            "org/settings4j/objectresolver/test1", //
+            true); // The FSConnector is cached!
+        
     }
     
     /**
@@ -153,11 +140,9 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
      */
     public void testObjectResolverConfig2(){
         
-        SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver2.xml");
-
-        String key1 = "org/settings4j/objectresolver/test1";
-        String key2 = "org/settings4j/objectresolver/test2";
-        testObjectReolver(settingsRepository, key1, key2);
+        testCaching("org/settings4j/config/testConfigObjectResolver2.xml", //
+            "org/settings4j/objectresolver/test2", //
+            true); // The JavaXMLBeansObjectResolver is cached!
     }
     
     /**
@@ -165,43 +150,49 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig{
      */
     public void testObjectResolverConfig3(){
         
-        SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver3.xml");
-
-        String key1 = "org/settings4j/objectresolver/test2"; // property with cached==true
-        String key2 = "org/settings4j/objectresolver/test3";
-        testObjectReolver(settingsRepository, key1, key2);
+        testCaching("org/settings4j/config/testConfigObjectResolver-nocaching.xml", //
+            "org/settings4j/objectresolver/test2", //
+            true); // The test2.properties is cached set to true!
     }
-    
+
+
+    private void testCaching(String settingsRepositoryUrl, String objectKey, boolean mustBeTheSame) {
+        SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository(settingsRepositoryUrl);
+
+        SettingsInstance settings = settingsRepository.getSettings();
+        
+        Map result1 = (Map)settings.getObject(objectKey);
+        assertNotNull(result1);
+        Map result2 = (Map)settings.getObject(objectKey);
+        if (mustBeTheSame) {
+            assertTrue(result1 == result2);
+        } else {
+            assertTrue(result1 != result2);
+        }
+    }
     /**
      * Test ObjectReolver with cached Object-Property-config
+     * 
+     * @throws Exception if an error occurs.
      */
-    public void testObjectResolverConfig4Spring() throws Exception{
+    public void testObjectResolverConfig4Spring() throws Exception {
         
         SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver4Spring.xml");
 
         String key1 = "org/settings4j/objectresolver/testSpring1"; // spring-configuration
-        String key2 = "org/settings4j/objectresolver/test1"; // XML-Bean-Configuration
 
         // store values into the default java temporary directory with subfolder "Settings4j"
         // String tmpdir = System.getProperty("java.io.tmpdir");
         SettingsInstance settings1 = settingsRepository.getSettings();
-        String settings1Connector = getFirstWritableConnectorName(settings1);
         
         // the propety-file "org/settings4j/objectresolver/test1.properties must exists"
         DataSource dataSource = (DataSource)settings1.getObject(key1);
         assertNotNull(dataSource);
         
-        settings1.setObject(key2, dataSource, settings1Connector);
-
-        DataSource dataSource2 = (DataSource)settings1.getObject(key2);
-        assertNotNull(dataSource2);
-        assertTrue(dataSource != dataSource2);
-
-        
         // test DataSource
         Connection conn = null;
         try{
-            conn = dataSource2.getConnection();
+            conn = dataSource.getConnection();
             PreparedStatement pstmt = conn.prepareStatement("create Table test ( name VARCHAR )");
             pstmt.execute();
             pstmt.close();

@@ -24,7 +24,6 @@ import javax.naming.Context;
 import junit.framework.TestCase;
 
 import org.apache.commons.io.FileUtils;
-import org.settings4j.Connector;
 import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.ClasspathContentResolver;
@@ -57,7 +56,7 @@ public class JNDIConnectorTest extends TestCase {
         System.getProperties().remove(Context.PROVIDER_URL);
         System.getProperties().remove(Context.URL_PKG_PREFIXES);
         
-        Connector connector;
+        JNDIConnector connector;
         int saveStatus;
         String resultString;
         byte[] resultContent;
@@ -75,13 +74,12 @@ public class JNDIConnectorTest extends TestCase {
         assertNull(resultObject);
         
         // No Exception if JNDIContext not available
-        saveStatus = connector.setString("helloWorldPath", testDir.getAbsolutePath() + "/test.txt");
-        assertEquals(Constants.SETTING_NOT_POSSIBLE, saveStatus);
+        saveStatus = connector.setObject("helloWorldPath", testDir.getAbsolutePath() + "/test.txt");
         resultString = connector.getString("helloWorldPath");
         assertNull(resultString);
         
         // No Exception if JNDIContext not available
-        saveStatus = connector.setContent("helloWorldPath", (testDir.getAbsolutePath() + "/test.txt").getBytes());
+        saveStatus = connector.setObject("helloWorldPath", testDir.getAbsolutePath() + "/test.txt");
         assertEquals(Constants.SETTING_NOT_POSSIBLE, saveStatus);
         
         // No Exception if JNDIContext not available
@@ -119,7 +117,7 @@ public class JNDIConnectorTest extends TestCase {
         
         final String testTextPath = testDir.getAbsolutePath() + "/test.txt";
         
-        Connector connector;
+        JNDIConnector connector;
         int saveStatus;
         String resultString;
         byte[] resultContent;
@@ -137,13 +135,13 @@ public class JNDIConnectorTest extends TestCase {
         assertNull(resultObject);
         
         // set the PATH into the JNDI-Context
-        saveStatus = connector.setString("helloWorldPath", testTextPath);
+        saveStatus = connector.setObject("helloWorldPath", testTextPath);
         assertEquals(Constants.SETTING_SUCCESS, saveStatus);
         resultString = connector.getString("helloWorldPath");
         assertEquals(testTextPath, resultString);
         
         // if no ContentResolver is available. the value will be stored directly into the JNDI-Context
-        saveStatus = connector.setContent("helloWorldPath", "Hello World".getBytes(charset));
+        saveStatus = connector.setObject("helloWorldPath", "Hello World".getBytes(charset));
         assertEquals(Constants.SETTING_SUCCESS, saveStatus);
         // The String-Value cannot read a byte[]
         resultString = connector.getString("helloWorldPath");
@@ -166,7 +164,7 @@ public class JNDIConnectorTest extends TestCase {
         // if no ObjectResolver is available. the value will be stored directly into the JNDI-Context
         ContentResolver contentResolver = new UnionContentResolver();
         FSContentResolver fsContentResolver = new FSContentResolver();
-        //fsContentResolver.setRootFolderPath(testDir.getAbsolutePath()); //should also work with temp-folder
+        fsContentResolver.setRootFolderPath(testDir.getAbsolutePath()); //should also work with temp-folder
         contentResolver.addContentResolver(fsContentResolver);
         contentResolver.addContentResolver(new ClasspathContentResolver());
         connector.setContentResolver(contentResolver);
@@ -174,23 +172,24 @@ public class JNDIConnectorTest extends TestCase {
         
 
         // set the PATH into the JNDI-Context
-        saveStatus = connector.setString("helloWorldPath", testTextPath);
+        saveStatus = connector.setObject("helloWorldPath", testTextPath);
         assertEquals(Constants.SETTING_SUCCESS, saveStatus);
         resultString = connector.getString("helloWorldPath");
         assertEquals(testTextPath, resultString);
         
-        // setContent checks if the current value ist a String.
-        // and try to store the content into the file on the file system.
-        // But only if an ContentResolver is available
-        saveStatus = connector.setContent("helloWorldPath", "Hello World".getBytes(charset));
+        // Store the content into the file on the file system.
+        // And save the Path in the JNDI Context.
+        FileUtils.writeStringToFile(new File(testTextPath), "Hello World FileContent");
+        saveStatus = connector.setObject("helloWorldPath", testTextPath);
+        
         assertEquals(Constants.SETTING_SUCCESS, saveStatus);
-        // The String-Value should be the same as before
+        // The String-Value should be the text-File Path.
         resultString = connector.getString("helloWorldPath");
         assertEquals(testTextPath, resultString);
-        // The Content-Value should be new
+        // The Content-Value should be content of the file.
         resultContent = connector.getContent("helloWorldPath");
         assertNotNull(resultContent);
-        assertEquals("Hello World", new String(resultContent, charset));
+        assertEquals("Hello World FileContent", new String(resultContent, charset));
         
         
     }

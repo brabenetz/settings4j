@@ -19,8 +19,6 @@ package org.settings4j;
 import java.util.List;
 import java.util.Map;
 
-import org.settings4j.exception.NoWriteableConnectorFoundException;
-
 
 /**
  * SettingsInstance is used to get simply access to Application settings.
@@ -64,59 +62,6 @@ public interface SettingsInstance {
      * @return the found Object-Value for the given key 
      */
     public abstract Object getObject(String key);
-
-    /**
-     * Set ( or overwrite ) the Value for the Given key.<br />
-     * The {@link SettingsInstance} Instance iterates all his {@link Connector} and
-     * if a Connector can successful write the new Value,
-     * then the Connector must return {@link Constants#SETTING_SUCCESS}<br />
-     * 
-     * If No Connector can write the Value ( all {@link Connector} returns {@link Constants#SETTING_NOT_POSSIBLE}
-     * then a {@link NoWriteableConnectorFoundException} will be thrown.
-     * 
-     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
-     * @param value the new String-Value for the given key 
-     * @param connectorName The name of the connector, who should be used to set the value
-     * @throws NoWriteableConnectorFoundException Is thrown if no Connector was Found.
-     *      One Connector must return {@link Constants#SETTING_SUCCESS}
-     */
-    public abstract void setString(String key, String value, String connectorName) throws NoWriteableConnectorFoundException;
-
-
-    /**
-     * Set ( or overwrite ) the Value for the Given key.<br />
-     * The {@link SettingsInstance} Instance iterates all his {@link Connector} and
-     * if a Connector can successful write the new Value,
-     * then the Connector must return {@link Constants#SETTING_SUCCESS}<br />
-     * 
-     * If No Connector can write the Value ( all {@link Connector} returns {@link Constants#SETTING_NOT_POSSIBLE}
-     * then a {@link NoWriteableConnectorFoundException} will be thrown.
-     * 
-     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
-     * @param value the new byte[]-Value for the given key
-     * @param connectorName The name of the connector, who should be used to set the value 
-     * @throws NoWriteableConnectorFoundException Is thrown if no Connector was Found.
-     *      One Connector must return {@link Constants#SETTING_SUCCESS}
-     */
-    public abstract void setContent(String key, byte[] value, String connectorName) throws NoWriteableConnectorFoundException;
-
-
-    /**
-     * Set ( or overwrite ) the Value for the Given key.<br />
-     * The {@link SettingsInstance} Instance iterates all his {@link Connector} and
-     * if a Connector can successful write the new Value,
-     * then the Connector must return {@link Constants#SETTING_SUCCESS}<br />
-     * 
-     * If No Connector can write the Value ( all {@link Connector} returns {@link Constants#SETTING_NOT_POSSIBLE}
-     * then a {@link NoWriteableConnectorFoundException} will be thrown.
-     * 
-     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
-     * @param value the new Object-Value for the given key 
-     * @param connectorName The name of the connector, who should be used to set the value
-     * @throws NoWriteableConnectorFoundException Is thrown if no Connector was Found.
-     *      One Connector must return {@link Constants#SETTING_SUCCESS}
-     */
-    public abstract void setObject(String key, Object value, String connectorName) throws NoWriteableConnectorFoundException;
 
     /**
      * Add a {@link Connector}.<br />

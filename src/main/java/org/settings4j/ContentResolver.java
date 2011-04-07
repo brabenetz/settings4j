@@ -18,7 +18,6 @@ package org.settings4j;
 
 import org.settings4j.connector.PropertyFileConnector;
 import org.settings4j.connector.SystemPropertyConnector;
-import org.settings4j.contentresolver.ReadOnlyContentResolverWrapper;
 import org.settings4j.contentresolver.UnionContentResolver;
 
 /**
@@ -69,23 +68,9 @@ public interface ContentResolver {
     byte[] getContent(String key);
     
     /**
-     * Set a new byte[] Content for the given Key.
-     * If the Implementation can write the Content,
-     * then the Connector must return {@link Constants#SETTING_SUCCESS}<br />
-     * 
-     * If there was a Problem, or The Connector doesn't supports write-access,
-     * then the Connector must return {@link Constants#SETTING_NOT_POSSIBLE}
-     * 
-     * @param key The Key for the new content
-     * @param value The new byte[] Content for the given Key
-     * @return {@link Constants#SETTING_SUCCESS} or {@link Constants#SETTING_NOT_POSSIBLE}
-     */
-    int setContent(String key, byte[] value);
-    
-    /**
      * Some Implementations of a {@link ContentResolver} are delegating the functionality
      * to other ContentResolvers.<br />
-     * Examples are: {@link ReadOnlyContentResolverWrapper} or {@link UnionContentResolver}
+     * Examples are: {@link UnionContentResolver}
      * 
      * <pre>
      * --------------------------------------

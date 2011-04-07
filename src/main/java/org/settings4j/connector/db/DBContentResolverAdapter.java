@@ -50,9 +50,4 @@ public class DBContentResolverAdapter implements ContentResolver {
     public byte[] getContent(String key) {
         return connector.getContent(key);
     }
-
-    /** {@inheritDoc} */
-    public int setContent(String key, byte[] value) {
-        return connector.setContent(key, value);
-    }
 }

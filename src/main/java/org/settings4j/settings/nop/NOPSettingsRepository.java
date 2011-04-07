@@ -35,6 +35,7 @@ public class NOPSettingsRepository implements SettingsRepository {
     }
 
     public void resetConfiguration() {
+        // do nothing in NOP-Implementation
     }
 
 }

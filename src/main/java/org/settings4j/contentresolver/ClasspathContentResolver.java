@@ -21,7 +21,6 @@ import java.io.InputStream;
 import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
-import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 
 public class ClasspathContentResolver implements ContentResolver {
@@ -38,18 +37,19 @@ public class ClasspathContentResolver implements ContentResolver {
         throw new UnsupportedOperationException("ClasspathContentResolver cannot add other ContentResolvers");
     }
 
-    public byte[] getContent(String key) {
-        if (key.startsWith(CLASSPATH_URL_PREFIX)){
-            key = key.substring(CLASSPATH_URL_PREFIX.length());
+    public byte[] getContent(final String key) {
+        String normalizedKey = key;
+        if (normalizedKey.startsWith(CLASSPATH_URL_PREFIX)){
+            normalizedKey = normalizedKey.substring(CLASSPATH_URL_PREFIX.length());
         }
-        if (key.startsWith("/")){
-            key = key.substring(1);
+        if (normalizedKey.startsWith("/")){
+            normalizedKey = normalizedKey.substring(1);
         }
         
         try {
-            InputStream is = getClassLoader().getResourceAsStream(key);
+            InputStream is = getClassLoader().getResourceAsStream(normalizedKey);
             if (is != null){
-                return IOUtils.toByteArray(getClassLoader().getResourceAsStream(key));
+                return IOUtils.toByteArray(getClassLoader().getResourceAsStream(normalizedKey));
             } else {
                 return null;
             }
@@ -59,20 +59,16 @@ public class ClasspathContentResolver implements ContentResolver {
         }
     }
     
-    public static URL getResource(String key){
-
-        if (key.startsWith(CLASSPATH_URL_PREFIX)){
-            key = key.substring(CLASSPATH_URL_PREFIX.length());
+    public static URL getResource(final String key){
+        String normalizedKey = key;
+        if (normalizedKey.startsWith(CLASSPATH_URL_PREFIX)){
+            normalizedKey = normalizedKey.substring(CLASSPATH_URL_PREFIX.length());
         }
-        if (key.startsWith("/")){
-            key = key.substring(1);
+        if (normalizedKey.startsWith("/")){
+            normalizedKey = normalizedKey.substring(1);
         }
         
-        return getClassLoader().getResource(key);
-    }
-    
-    public int setContent(String key, byte[] value) {
-        return Constants.SETTING_NOT_POSSIBLE;
+        return getClassLoader().getResource(normalizedKey);
     }
     
 

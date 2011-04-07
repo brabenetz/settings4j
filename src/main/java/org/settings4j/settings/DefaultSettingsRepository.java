@@ -50,8 +50,6 @@ public class DefaultSettingsRepository implements SettingsRepository {
 
     private SettingsInstance settings;
 
-    //private int connectorCount;
-
     public DefaultSettingsRepository() {
         super();
     }
@@ -62,7 +60,6 @@ public class DefaultSettingsRepository implements SettingsRepository {
 
     public SettingsInstance getSettings(SettingsFactory factory) {
         if (this.settings == null) {
-        	// TODO hbrabenetz 07.02.2009 : singletonimpemmentation
         	this.settings = factory.makeNewSettingsInstance();
         }
         return this.settings;
@@ -79,24 +76,6 @@ public class DefaultSettingsRepository implements SettingsRepository {
 
     /** {@inheritDoc} */
     public void resetConfiguration() {
-    	/*
-        root.setAdditivity(true);
-        root.setParent(null);
-        root.setMapping(null);
-        root.setSettingsRepository(null);
-        root.removeAllConnectors();
-
-        Iterator it = settingsMap.entrySet().iterator();
-        while (it.hasNext()) {
-            HierarchicalSettings s = (HierarchicalSettings) it.next();
-            s.setAdditivity(true);
-            s.setParent(null);
-            s.setMapping(null);
-            s.setSettingsRepository(null);
-            s.removeAllConnectors();
-        }
-        settingsMap.clear();
-        */
-        
+        settings.removeAllConnectors();
     }
 }

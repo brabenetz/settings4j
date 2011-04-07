@@ -179,8 +179,4 @@ public class HibernateDBConnector extends AbstractDBConnector {
             configuration.addInputStream(new ByteArrayInputStream(hibernateMappingXml));
         }
     }
-
-	public boolean isReadonly() {
-		return false;
-	}
 }

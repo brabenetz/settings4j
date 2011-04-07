@@ -100,7 +100,7 @@ public class FSContentResolverTest extends TestCase {
         assertNull(content);
         
         // store value;
-        contentResolver.setContent("file:org/settings4j/contentresolver/HelloWorld.txt", value);
+        FileUtils.writeByteArrayToFile(new File(testDir.getAbsolutePath() + "/org/settings4j/contentresolver/HelloWorld.txt"), value);
         
         
         content = contentResolver.getContent("org/settings4j/contentresolver/HelloWorld.txt");

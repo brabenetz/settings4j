@@ -19,7 +19,7 @@
 <settings4j:configuration xmlns:settings4j='http://settings4j.org/'>
 
 	<connector name="FSConnector" class="org.settings4j.connector.FSConnector">
-		<param name="rootFolderPath" value="test/Settings4jUnittest"/>
+		<param name="rootFolderPath" value="target/test/Settings4jUnittest"/>
 		<contentResolver-ref ref="ClasspathContentResolver" />
 		<objectResolver-ref ref="DefaultObjectResolver" />
 	</connector>

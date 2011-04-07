@@ -20,7 +20,7 @@
 
 	<connector name="FSConnector"
 		class="org.settings4j.connector.FSConnector">
-		<param name="rootFolderPath" value="test/Settings4jUnittest"/>
+		<param name="rootFolderPath" value="target/test/Settings4jUnittest"/>
 	</connector>
 
 </settings4j:configuration>
