@@ -54,7 +54,7 @@ public interface SettingsRepository {
      * <p>Remove the Settings, Connectors and other Objects from the Repository.
      * <p>Make it ready to fill it with a new Configuration.
      * 
-     * <p>Example (maybe in an init()-Methode of your Application):
+     * <p>Example (maybe in an init()-Method of your Application):
      * <pre>
      * // clear Settings from "settings4j.xml"
      * SettingsRepository settingsRepository = SettingsManager.getSettingsRepository();
