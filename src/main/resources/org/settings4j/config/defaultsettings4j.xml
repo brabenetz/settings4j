@@ -36,12 +36,7 @@
 	</connector>
 
 	<contentResolver name="DefaultContentResolver" class="org.settings4j.contentresolver.UnionContentResolver">
-		<contentResolver-ref ref="FSContentResolver" />
 		<contentResolver-ref ref="ClasspathContentResolver" />
-	</contentResolver>
-
-	<contentResolver name="FSContentResolver"
-		class="org.settings4j.contentresolver.FSContentResolver">
 	</contentResolver>
 
 	<contentResolver name="ClasspathContentResolver"
