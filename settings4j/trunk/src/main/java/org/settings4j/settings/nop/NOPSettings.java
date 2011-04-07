@@ -35,9 +35,11 @@ public class NOPSettings implements org.settings4j.SettingsInstance {
     }
 
     public void addConnector(Connector connector) {
+        // do nothing in NOP-Implementation
     }
 
     public void removeAllConnectors() {
+        // do nothing in NOP-Implementation
     }
     
     public List getConnectors() {
@@ -56,20 +58,12 @@ public class NOPSettings implements org.settings4j.SettingsInstance {
         return null;
     }
 
-    public void setContent(String key, byte[] value, String connectorName) {
-    }
-
-    public void setObject(String key, Object value, String connectorName) {
-    }
-
-    public void setString(String key, String value, String connectorName) {
-    }
-
     public Map getMapping() {
         return Collections.EMPTY_MAP;
     }
 
     public void setMapping(Map mapping) {
+        // do nothing in NOP-Implementation
     }
 
 	public Connector getConnector(String connectorName) {

@@ -55,8 +55,4 @@ public class PropertyFileConnector extends AbstractPropertyConnector {
             LOG.error(e.getMessage(), e);
         }
     }
-
-	public boolean isReadonly() {
-		return true;
-	}
 }

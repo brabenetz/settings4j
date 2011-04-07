@@ -19,9 +19,6 @@ package org.settings4j;
 
 import java.util.ResourceBundle;
 
-import org.settings4j.connector.ClasspathConnector;
-import org.settings4j.connector.ReadOnlyConnectorWrapper;
-
 /**
  * Some Constants like the Return Values (success or not) of Connectors.set*(...) Methodes. 
  * 
@@ -36,23 +33,15 @@ public interface Constants {
 
     /**
      * Return value for:<br />
-     * {@link ContentResolver#setContent(String, byte[])}<br />
-     * {@link ObjectResolver#setObject(String, ContentResolver, Object)}<br />
-     * {@link Connector#setString(String, String)}<br />
-     * {@link Connector#setContent(String, byte[])}<br />
-     * {@link Connector#setObject(String, Object)} <br />
+     * {@link org.settings4j.connector.JNDIConnector#setObject(String, Object)} <br />
      * <br />
-     * If Settings is not possible (e.g.: {@link ReadOnlyConnectorWrapper} or {@link ClasspathConnector} )
+     * If Settings is not possible (e.g.: {@link org.settings4j.connector.JNDIConnector} )
      */
     public static final int SETTING_NOT_POSSIBLE = 0;
     
     /**
      * Return value for:<br />
-     * {@link ContentResolver#setContent(String, byte[])}<br />
-     * {@link ObjectResolver#setObject(String, ContentResolver, Object)}<br />
-     * {@link Connector#setString(String, String)}<br />
-     * {@link Connector#setContent(String, byte[])}<br />
-     * {@link Connector#setObject(String, Object)} <br />
+     * {@link org.settings4j.connector.JNDIConnector#setObject(String, Object)} <br />
      * <br />
      * if Setting was successful: The value for the given key was replaced.
      */

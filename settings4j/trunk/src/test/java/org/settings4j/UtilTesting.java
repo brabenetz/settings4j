@@ -67,13 +67,13 @@ public class UtilTesting {
     
     /**
      * The test Folder for Unittest.<br />
-     * This is normaly a subfolder "test/Settings4jUnittest" of this current Project.
+     * This is normaly a subfolder "target/test/Settings4jUnittest" of this current Project.
      * 
      * 
-     * @return the subfolder "test/Settings4jUnittest" of the current Project.
+     * @return the subfolder "target/test/Settings4jUnittest" of the current Project.
      */
     public static File getTestFolder(){
-        File testFolder = new File("test/Settings4jUnittest");
+        File testFolder = new File("target/test/Settings4jUnittest");
         return testFolder;
     }
 

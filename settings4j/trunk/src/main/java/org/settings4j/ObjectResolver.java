@@ -16,9 +16,6 @@
  *****************************************************************************/
 package org.settings4j;
 
-import org.settings4j.objectresolver.JavaXMLBeansObjectResolver;
-import org.settings4j.objectresolver.ReadOnlyObjectResolverWrapper;
-import org.settings4j.objectresolver.UnionObjectResolver;
 
 /**
  * <p>The ObjectResolver is a Helper to resolve byte[] Content to a Java Object.
@@ -33,7 +30,8 @@ import org.settings4j.objectresolver.UnionObjectResolver;
  * </div></pre>
  * 
  * 
- * <p>You can now store a XMLEncoded (Serialized) Java-Objects into your Classpath. see {@link JavaXMLBeansObjectResolver} for more details.<br />
+ * <p>You can now store a XMLEncoded (Serialized) Java-Objects into your Classpath.<br />
+ * see {@link org.settings4j.objectresolver.JavaXMLBeansObjectResolver} for more details.<br />
  * 
  * @author hbrabenetz
  *
@@ -61,29 +59,9 @@ public interface ObjectResolver {
     public Object getObject(String key, ContentResolver contentResolver);
     
     /**
-     * Serialize and store the byte[] with the ContentResolver under the given key.
-     * 
-     * The normal usecase of an implementation of this ObjectResolver Interface:<br />
-     * 
-     * <ol>
-     * <li>Read the Propertyfile from {@link ContentResolver}.getContent(key + ".properties")</li>
-     * <li>Read the Value of "objectResolverKey" from propertyfile</li>
-     * <li>The "objectResolverKey" defines which ObjectResolver-Implementation should store the Java-Object to an Byte[]</li>
-     * <li>Convert the Object to a byte[] and store it with {@link ContentResolver#setContent(String, byte[])} .</li>
-     * <li>Maybe additional values are consumed from the propertyfile</li>
-     * </ol>
-     * 
-     * @param key The Key of the byte[] the serialized Object should be stored.
-     * @param contentResolver The ContentResolver is used to store the byte[] content.
-     * @param value The new Object who should be serialized.
-     * @return {@link Constants#SETTING_SUCCESS} or {@link Constants#SETTING_NOT_POSSIBLE}
-     */
-    public int setObject(String key, ContentResolver contentResolver, Object value);
-
-    /**
      * Some Implementations of a {@link ObjectResolver} are delegating the functionality
      * to other ObjectResolvers.<br />
-     * Examples are: {@link ReadOnlyObjectResolverWrapper} or {@link UnionObjectResolver}
+     * Examples are: {@link org.settings4j.objectresolver.UnionObjectResolver}
      * 
      * <pre>
      * --------------------------------------
@@ -97,13 +75,4 @@ public interface ObjectResolver {
      * @param objectResolver the original objectResolver to delegate.
      */
     public void addObjectResolver(ObjectResolver objectResolver);
-    
-    /**
-     * Notify the ObjectResolver-Implementation if a byte[] content is stored by some ContentResolver<br />
-     * <br />
-     * This is the right place to clear cached Objects for the given key.<br />
-     * 
-     * @param key The key from which the Content has changed.
-     */
-    public void notifyContentHasChanged(String key);
 }

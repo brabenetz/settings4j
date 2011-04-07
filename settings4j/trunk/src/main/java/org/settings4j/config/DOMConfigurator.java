@@ -32,7 +32,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.taglibs.standard.lang.jstl.ELException;
 import org.settings4j.Connector;
 import org.settings4j.ContentResolver;
@@ -40,18 +42,13 @@ import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
 import org.settings4j.SettingsInstance;
 import org.settings4j.SettingsRepository;
-import org.settings4j.connector.AbstractConnector;
 import org.settings4j.connector.CachedConnectorWrapper;
-import org.settings4j.connector.ContentHasChangedNotifierConnectorWrapper;
 import org.settings4j.connector.FilteredConnectorWrapper;
-import org.settings4j.connector.ReadOnlyConnectorWrapper;
 import org.settings4j.connector.SystemPropertyConnector;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.contentresolver.FilteredContentResolverWrapper;
-import org.settings4j.contentresolver.ReadOnlyContentResolverWrapper;
 import org.settings4j.objectresolver.AbstractObjectResolver;
 import org.settings4j.objectresolver.FilteredObjectResolverWrapper;
-import org.settings4j.objectresolver.ReadOnlyObjectResolverWrapper;
 import org.settings4j.settings.DefaultFilter;
 import org.settings4j.util.ELConnectorWrapper;
 import org.settings4j.util.ExpressionLanguageUtil;
@@ -112,8 +109,6 @@ public class DOMConfigurator {
 
     private static final String REF_ATTR = "ref";
 
-    private static final String READONLY_ATTR = "readonly";
-
     private final static String dbfKey = "javax.xml.parsers.DocumentBuilderFactory";
 
 
@@ -168,7 +163,11 @@ public class DOMConfigurator {
     }
 
     /**
-     * A static version of {@link #doConfigure(URL, LoggerRepository)}.
+     * A static version of {@link #doConfigure(URL)}.
+     * 
+     * @param url The location of the configuration file.
+     * @param repository the Repository to configure.
+     * @throws FactoryConfigurationError
      */
     static public void configure(URL url, SettingsRepository repository) throws FactoryConfigurationError {
         new DOMConfigurator(repository).doConfigure(url);
@@ -372,10 +371,6 @@ public class DOMConfigurator {
                     }
                 }
             }
-            
-            if (connector instanceof AbstractConnector){
-                connector = new ContentHasChangedNotifierConnectorWrapper((AbstractConnector)connector);
-            }
 
             Boolean cached = (Boolean)subst(connectorElement.getAttribute(CACHED_ATTR), subConnectors, Boolean.class);
             if (cached != null && cached.booleanValue()){
@@ -534,13 +529,8 @@ public class DOMConfigurator {
      */
     protected Connector findConnectorByReference(Element connectorRef) {
         String connectorName = connectorRef.getAttribute(REF_ATTR);
-        Boolean readonly = (Boolean)subst(connectorRef.getAttribute(READONLY_ATTR), null, Boolean.class);
         Document doc = connectorRef.getOwnerDocument();
-        Connector connector = findConnectorByName(doc, connectorName);
-        if (readonly != null && readonly.booleanValue()){
-            return new ReadOnlyConnectorWrapper(connector);
-        }
-        return connector;
+        return findConnectorByName(doc, connectorName);
     }
 
 
@@ -824,13 +814,8 @@ public class DOMConfigurator {
      */
     protected ObjectResolver findObjectResolverByReference(Element objectResolverRef) {
         String objectResolverName = objectResolverRef.getAttribute(REF_ATTR);
-        Boolean readonly = (Boolean)subst(objectResolverRef.getAttribute(READONLY_ATTR), null, Boolean.class);
         Document doc = objectResolverRef.getOwnerDocument();
-        ObjectResolver objectResolver =  findObjectResolverByName(doc, objectResolverName);
-        if (readonly != null && readonly.booleanValue()){
-            return new ReadOnlyObjectResolverWrapper(objectResolver);
-        }
-        return objectResolver;
+        return findObjectResolverByName(doc, objectResolverName);
     }
 
     
@@ -841,14 +826,8 @@ public class DOMConfigurator {
      */
     protected ContentResolver findContentResolverByReference(Element contentResolverRef) {
         String contentResolverName = contentResolverRef.getAttribute(REF_ATTR);
-
-        Boolean readonly = (Boolean)subst(contentResolverRef.getAttribute(READONLY_ATTR), null, Boolean.class);
         Document doc = contentResolverRef.getOwnerDocument();
-        ContentResolver contentResolver = findContentResolverByName(doc, contentResolverName);
-        if (readonly != null && readonly.booleanValue()){
-            return new ReadOnlyContentResolverWrapper(contentResolver);
-        }
-        return contentResolver;
+        return findContentResolverByName(doc, contentResolverName);
     }
     
 
@@ -920,9 +899,11 @@ public class DOMConfigurator {
                     }
                     context.put("connector", connectorMap);
                 }
-                // Expression like ${env['...']} e.g.:  ${env['TOMCAT_HOME']} or ${env.TOMCAT_HOME}
-                // Only since jdk 1.5 ....
-                //context.put("env", System.getenv());
+                if (SystemUtils.isJavaVersionAtLeast(1.5f)) {
+                    // Expression like ${env['...']} e.g.:  ${env['TOMCAT_HOME']} or ${env.TOMCAT_HOME}
+                    // Only since jdk 1.5 ....
+                    context.put("env", System.getenv());
+                }
                 Object result = ExpressionLanguageUtil.evaluateExpressionLanguage(value, context, clazz);
                 return result;
             } catch (ELException e) {
@@ -933,13 +914,7 @@ public class DOMConfigurator {
             if (clazz.equals(String.class)){
                 return value.trim();
             } else if (clazz.equals(Boolean.class)){
-                String trimmedVal = value.trim();
-                if("true".equalsIgnoreCase(trimmedVal)){
-                  return Boolean.TRUE;
-                } else {
-                  //if("false".equalsIgnoreCase(trimmedVal))
-                  return Boolean.FALSE;
-                }
+                return BooleanUtils.toBooleanObject(value.trim());
             } else {
                 throw new UnsupportedOperationException("The following Type is not supported now: " + clazz + "; found value: " + value);
             }

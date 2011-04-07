@@ -18,7 +18,6 @@ package org.settings4j;
 
 import java.util.List;
 
-import org.settings4j.exception.NoWriteableConnectorFoundException;
 import org.settings4j.settings.SettingsManager;
 
 
@@ -45,7 +44,9 @@ public final class Settings {
     /**
      * Hide Constructor (Utility-Pattern)
      */
-    private Settings() {}
+    private Settings() {
+        super();
+    }
 
     /**
      * return the found String-Value for the given key.<br />
@@ -89,65 +90,6 @@ public final class Settings {
     }
 
     /**
-     * Set ( or overwrite ) the Value for the Given key.<br />
-     * The {@link Settings} Instance iterates all his {@link Connector} and
-     * if a Connector can successful write the new Value,
-     * then the Connector must return {@link Constants#SETTING_SUCCESS}<br />
-     * 
-     * If No Connector can write the Value ( all {@link Connector} returns {@link Constants#SETTING_NOT_POSSIBLE}
-     * then a {@link NoWriteableConnectorFoundException} will be thrown.
-     * 
-     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
-     * @param value the new String-Value for the given key 
-     * @param connectorName The name of the connector, who should be used to set the value
-     * @throws NoWriteableConnectorFoundException Is thrown if no Connector was Found.
-     *      One Connector must return {@link Constants#SETTING_SUCCESS}
-     */
-    public static void setString(String key, String value, String connectorName) throws NoWriteableConnectorFoundException {
-    	getSettings().setString(key, value, connectorName);
-    }
-
-
-    /**
-     * Set ( or overwrite ) the Value for the Given key.<br />
-     * The {@link Settings} Instance iterates all his {@link Connector} and
-     * if a Connector can successful write the new Value,
-     * then the Connector must return {@link Constants#SETTING_SUCCESS}<br />
-     * 
-     * If No Connector can write the Value ( all {@link Connector} returns {@link Constants#SETTING_NOT_POSSIBLE}
-     * then a {@link NoWriteableConnectorFoundException} will be thrown.
-     * 
-     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
-     * @param value the new byte[]-Value for the given key
-     * @param connectorName The name of the connector, who should be used to set the value 
-     * @throws NoWriteableConnectorFoundException Is thrown if no Connector was Found.
-     *      One Connector must return {@link Constants#SETTING_SUCCESS}
-     */
-    public static void setContent(String key, byte[] value, String connectorName) throws NoWriteableConnectorFoundException {
-    	getSettings().setContent(key, value, connectorName);
-    }
-
-
-    /**
-     * Set ( or overwrite ) the Value for the Given key.<br />
-     * The {@link Settings} Instance iterates all his {@link Connector} and
-     * if a Connector can successful write the new Value,
-     * then the Connector must return {@link Constants#SETTING_SUCCESS}<br />
-     * 
-     * If No Connector can write the Value ( all {@link Connector} returns {@link Constants#SETTING_NOT_POSSIBLE}
-     * then a {@link NoWriteableConnectorFoundException} will be thrown.
-     * 
-     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
-     * @param value the new Object-Value for the given key 
-     * @param connectorName The name of the connector, who should be used to set the value
-     * @throws NoWriteableConnectorFoundException Is thrown if no Connector was Found.
-     *      One Connector must return {@link Constants#SETTING_SUCCESS}
-     */
-    public static void setObject(String key, Object value, String connectorName) throws NoWriteableConnectorFoundException {
-    	getSettings().setObject(key, value, connectorName);
-    }
-
-    /**
      * Get the {@link SettingsRepository} where this Settings-Object is stored.
      * 
      * @return the {@link SettingsRepository} where this Settings-Object is stored.
@@ -156,7 +98,6 @@ public final class Settings {
     	return SettingsManager.getSettingsRepository();
     }
     
-
     /**
      * Delegate to {@link SettingsManager#getRootSettings()}
      * 

@@ -18,7 +18,6 @@
 package org.settings4j.config;
 
 import org.settings4j.Settings;
-import org.settings4j.exception.NoWriteableConnectorFoundException;
 
 import junit.framework.TestCase;
 
@@ -52,28 +51,6 @@ public class TestDefaultFallbackConfiguration extends TestCase{
         assertNull(Settings.getObject("xyz"));
 
         // the Default settings Configuration is readonly
-        String settingsConnector = null;
-        //check if there is a Exception thrown:
-        try {
-        	Settings.setString("xyz", "xyz", settingsConnector);
-            fail("must throw an NoWriteableConnectorFoundException");
-        } catch (NoWriteableConnectorFoundException e) {
-            assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
-        }
-
-        try {
-        	Settings.setContent("xyz", "xyz".getBytes(), settingsConnector);
-            fail("must throw an NoWriteableConnectorFoundException");
-        } catch (NoWriteableConnectorFoundException e) {
-            assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
-        }
-
-        try {
-        	Settings.setObject("xyz", "xyz", settingsConnector);
-            fail("must throw an NoWriteableConnectorFoundException");
-        } catch (NoWriteableConnectorFoundException e) {
-            assertEquals("Content 'xyz' cannot be writen. No writeable Connector found", e.getMessage());
-        }
         
         assertEquals(3, Settings.getConnectors().size());
     }

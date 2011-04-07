@@ -17,7 +17,6 @@
 
 package org.settings4j.objectresolver;
 
-import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
@@ -37,18 +36,6 @@ public class FilteredObjectResolverWrapper implements ObjectResolver{
 		}
 		this.targetObjectResolver = targetObjectResolver;
 		this.filter = filter;
-    }
-
-    
-    public void notifyContentHasChanged(String key) {
-        targetObjectResolver.notifyContentHasChanged(key);
-    }
-    
-    public int setObject(String key, ContentResolver contentResolver, Object value) {
-    	if (!filter.isValid(key)){
-            return Constants.SETTING_NOT_POSSIBLE;
-    	}
-        return targetObjectResolver.setObject(key, contentResolver, value);
     }
 
 

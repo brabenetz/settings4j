@@ -35,10 +35,6 @@ public class SpringConfigObjectResolver extends AbstractObjectResolver{
         return result;
     }
 
-    protected byte[] objectToContent(String key, Properties properties, Object value) {
-        return null;
-    }
-    
     private static class ByteArrayXMLApplicationContext extends AbstractXmlApplicationContext{
 
         private Resource[] configResources;
@@ -52,6 +48,6 @@ public class SpringConfigObjectResolver extends AbstractObjectResolver{
         protected Resource[] getConfigResources() {
             return this.configResources;
         }
-    };
+    }
     
 }

@@ -1,7 +1,6 @@
 package org.settings4j.connector;
 
 import org.settings4j.Connector;
-import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
@@ -57,17 +56,6 @@ public class FilteredConnectorWrapper implements Connector {
 		targetConnector.init();
 	}
 
-	public boolean isReadonly() {
-		return targetConnector.isReadonly();
-	}
-
-	public int setContent(String key, byte[] value) {
-    	if (!filter.isValid(key)){
-            return Constants.SETTING_NOT_POSSIBLE;
-    	}
-		return targetConnector.setContent(key, value);
-	}
-
 	public void setContentResolver(ContentResolver contentResolver) {
 		targetConnector.setContentResolver(contentResolver);
 	}
@@ -76,22 +64,8 @@ public class FilteredConnectorWrapper implements Connector {
 		targetConnector.setName(name);
 	}
 
-	public int setObject(String key, Object value) {
-    	if (!filter.isValid(key)){
-            return Constants.SETTING_NOT_POSSIBLE;
-    	}
-		return targetConnector.setObject(key, value);
-	}
-
 	public void setObjectResolver(ObjectResolver objectResolver) {
 		targetConnector.setObjectResolver(objectResolver);
-	}
-
-	public int setString(String key, String value) {
-    	if (!filter.isValid(key)){
-            return Constants.SETTING_NOT_POSSIBLE;
-    	}
-		return targetConnector.setString(key, value);
 	}
 	
 	

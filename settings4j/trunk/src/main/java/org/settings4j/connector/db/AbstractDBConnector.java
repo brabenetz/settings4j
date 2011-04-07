@@ -17,7 +17,6 @@
 
 package org.settings4j.connector.db;
 
-import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 import org.settings4j.connector.AbstractConnector;
 import org.settings4j.connector.db.dao.SettingsDAO;
@@ -33,10 +32,6 @@ import org.settings4j.contentresolver.UnionContentResolver;
  *
  */
 public abstract class AbstractDBConnector extends AbstractConnector {
-    
-    /** General Logger for this Class */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(AbstractDBConnector.class);
 
     /**
      * This implementation adds a {@link DBContentResolverAdapter} to the contentResolver-List (at the first position).
@@ -76,45 +71,6 @@ public abstract class AbstractDBConnector extends AbstractConnector {
             return settingsDTO.getStringValue();
         } else {
             return null;
-        }
-    }
-
-    /** {@inheritDoc} */
-    public int setContent(String key, byte[] value) {
-        try {
-            SettingsDTO settingsDTO = getSettingsDAO().getByKey(key);
-            if (settingsDTO == null) {
-                settingsDTO = new SettingsDTO();
-                settingsDTO.setKey(key);
-            }
-            settingsDTO.setContentValue(value);
-            getSettingsDAO().store(settingsDTO);
-            return Constants.SETTING_SUCCESS;
-        } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-            return Constants.SETTING_NOT_POSSIBLE;
-        }
-    }
-
-    /** {@inheritDoc} */
-    public int setObject(String key, Object value) {
-        return getObjectResolver().setObject(key, getContentResolver(), value);
-    }
-
-    /** {@inheritDoc} */
-    public int setString(String key, String value) {
-        try {
-            SettingsDTO settingsDTO = getSettingsDAO().getByKey(key);
-            if (settingsDTO == null) {
-                settingsDTO = new SettingsDTO();
-                settingsDTO.setKey(key);
-            }
-            settingsDTO.setStringValue(value);
-            getSettingsDAO().store(settingsDTO);
-            return Constants.SETTING_SUCCESS;
-        } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-            return Constants.SETTING_NOT_POSSIBLE;
         }
     }
     

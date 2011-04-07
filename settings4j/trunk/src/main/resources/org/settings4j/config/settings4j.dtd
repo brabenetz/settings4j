@@ -51,13 +51,10 @@ cached - default value is false; If true, then this connector will be wrapped
 
 <!-- A connector-ref element consists of following Attributes:
 ref - The refernece to a connector element
-readonly - default value is true; If true, then the connector will be wrapped
-     with the org.settings4j.connector.ReadOnlyConnectorWrapper implementation.
 -->
 <!ELEMENT connector-ref EMPTY>
 <!ATTLIST connector-ref
   ref CDATA #REQUIRED
-  readonly (true|false) "true"
 >
 
 <!-- A contentResolver-ref element consists of following Attributes:

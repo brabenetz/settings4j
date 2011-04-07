@@ -86,40 +86,18 @@ public class JNDIConnector extends AbstractConnector {
         }
     }
 
-    public int setContent(String key, byte[] value) {
-        int result = Constants.SETTING_NOT_POSSIBLE;
-        String path = getString(key);
-        if (path != null && getContentResolver() != null) {
-            // assume that the value from JNDI-Context is a Path.
-            // store the content into the defined Path
-            result = getContentResolver().setContent(path, value);
-        } else {
-            // the current value is not a String or NULL
-            // or no Contentresolver is set
-            result = rebindToContext(key, value);
-        }
-        return result;
-    }
-
+    /**
+     * Set or replace a new Value for the given key.<br />
+     * If set or replace a value is not possible because of a readonly JNDI-Context,
+     * then {@link Constants#SETTING_NOT_POSSIBLE} must be returned.
+     * If set or replace was successful, then {@link Constants#SETTING_SUCCESS} must be returned.
+     * 
+     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
+     * @param value the new Object-Value for the given key 
+     * @return Returns {@link Constants#SETTING_SUCCESS} or {@link Constants#SETTING_NOT_POSSIBLE}
+     */
     public int setObject(String key, Object value) {
-        int result = Constants.SETTING_NOT_POSSIBLE;
-        String path = getString(key);
-        if (path != null && getObjectResolver() != null) {
-            // assume that the value from JNDI-Context is a Path.
-            // serialize the Object into the defined Path
-            result = getObjectResolver().setObject(path, getContentResolver(), value);
-        } else {
-            // the current value is not a String or NULL
-            // or no ObjectResolver is set
-            result = rebindToContext(key, value);
-        }
-        return result;
-    }
-
-    public int setString(String key, String value) {
-        int result = Constants.SETTING_NOT_POSSIBLE;
-        result = rebindToContext(key, value);
-        return result;
+        return rebindToContext(key, value);
     }
 
     private InitialContext getJNDIContext() throws NamingException {
@@ -177,7 +155,12 @@ public class JNDIConnector extends AbstractConnector {
         return null;
     }
     
-    private int rebindToContext(String key, Object value) {
+    /**
+     * @param key the JNDI-Key (will be normalized: add contextPathPrefix, replace '\' with '/').
+     * @param value the JNDI-Value.
+     * @return Constants.SETTING_NOT_POSSIBLE if the JNDI Context ist readonly.
+     */
+    public int rebindToContext(String key, Object value) {
         String normalizedKey = normalizeKey(key);
         if (LOG.isDebugEnabled()){
             LOG.debug("Try to rebind Key '" + key + "' (" + normalizedKey + ")" + " with value: " + value);
@@ -277,11 +260,4 @@ public class JNDIConnector extends AbstractConnector {
     public void setContextPathPrefix(String contextPathPrefix) {
         this.contextPathPrefix = contextPathPrefix;
     }
-
-	public boolean isReadonly() {
-        // the JNDI-Context from TOMCAT is readonly
-        // if you try to write it, The following Exception will be thrown:
-        // javax.naming.NamingException: Context is read only
-		return false;
-	}
 }

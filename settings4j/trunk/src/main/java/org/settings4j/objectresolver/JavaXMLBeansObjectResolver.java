@@ -21,7 +21,6 @@ import java.beans.ExceptionListener;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.util.Properties;
 
 import org.settings4j.ContentResolver;
@@ -47,53 +46,12 @@ public class JavaXMLBeansObjectResolver extends AbstractObjectResolver {
         return encoder.readObject();
     }
 
-    /** {@inheritDoc} */
-    protected byte[] objectToContent(String key, Properties properties, Object value) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-
-        XMLEncoder encoder = new XMLEncoder(byteArrayOutputStream);
-        encoder.setExceptionListener(new LogEncoderExceptionListener(value));
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("START Writing Object " + value.getClass().getName() + " with XMLEncoder");
-        }
-        encoder.writeObject(value);
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("FINISH Writing Object " + value.getClass().getName() + " with XMLEncoder");
-        }
-        encoder.flush();
-        encoder.close();
-        return byteArrayOutputStream.toByteArray();
-    }
-
     /**
      * Log out Exception during Encoding a byte[] to an Object<br />
      * <br />
      * Example:<br />
      * The {@link org.springframework.jdbc.datasource.AbstractDataSource} Object<br />
      * hast Getter and Setter for "logWriter" who throws per default an {@link UnsupportedOperationException}.<br />
-     * 
-     * @author hbrabenetz
-     */
-    private class LogEncoderExceptionListener implements ExceptionListener {
-        private Object obj;
-
-        public LogEncoderExceptionListener(Object obj) {
-            super();
-            this.obj = obj;
-        }
-
-        /** {@inheritDoc} */
-        public void exceptionThrown(Exception e) {
-            LOG.warn("Ignore error on encoding Object from type: " + obj.getClass().getName() + "! "
-                + e.getClass().getName() + ": '" + e.getMessage() + "'. Set Loglevel DEBUG for more informations.");
-            if (LOG.isDebugEnabled()) {
-                LOG.debug(e.getMessage(), e);
-            }
-        }
-    }
-
-    /**
-     * Log out Exception during Decoding an Object to a byte[]
      * 
      * @author hbrabenetz
      */

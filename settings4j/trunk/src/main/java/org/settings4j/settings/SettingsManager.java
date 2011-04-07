@@ -93,6 +93,8 @@ public class SettingsManager {
 
     /**
      * Retrieve the appropriate {@link Settings} instance.
+     * 
+     * @return the appropriate {@link Settings} instance.
      */
     public static SettingsInstance getSettings() {
     	initializeRepositoryIfNecessary();
@@ -101,7 +103,10 @@ public class SettingsManager {
     }
 
     /**
-     * Retrieve the appropriate {@link Settings} instance.
+     * Retrieve the appropriate {@link Settings} instance or create it with the give factory if doesn'r already exist.
+     * 
+     * @param factory The factory to create a {@link SettingsInstance}.
+     * @return the appropriate {@link Settings} instance.
      */
     public static SettingsInstance getSettings(final SettingsFactory factory) {
     	initializeRepositoryIfNecessary();

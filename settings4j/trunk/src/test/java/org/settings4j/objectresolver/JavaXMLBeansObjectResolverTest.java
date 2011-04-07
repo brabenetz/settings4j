@@ -17,7 +17,11 @@
 
 package org.settings4j.objectresolver;
 
+import java.beans.ExceptionListener;
+import java.beans.XMLEncoder;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +37,10 @@ import junit.framework.TestCase;
 
 public class JavaXMLBeansObjectResolverTest extends TestCase {
 
+    /** General Logger for this Class. */
+    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
+        .getLog(JavaXMLBeansObjectResolverTest.class);
+
     private File testDir;
     
     protected void setUp() throws Exception {
@@ -47,15 +55,10 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
         super.tearDown();
     }
     
-    public void test1(){
+    public void test1() throws Exception {
         JavaXMLBeansObjectResolver objectResolver = new JavaXMLBeansObjectResolver();
         
-        // FileSystem is Writeable => the XML-Object
-        // Classpath is readonly => the XML-Object-Properties
-        FSContentResolver fsContentResolver = new FSContentResolver();
-        fsContentResolver.setRootFolderPath(testDir.getAbsolutePath());
-        ContentResolver contentResolver = new UnionContentResolver(fsContentResolver);
-        contentResolver.addContentResolver(new ClasspathContentResolver());
+        ContentResolver contentResolver = createUnionContentResolver();
         
         Map testData =  new HashMap();
         List testList = new ArrayList();
@@ -70,7 +73,9 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
         testData.put("irgendwas", "blablablablablabla");
         testData.put("liste", testList);
         
-        objectResolver.setObject("org/settings4j/objectresolver/test1", contentResolver, testData);
+        String key = "org/settings4j/objectresolver/test1";
+        
+        setObject(key, testData);
         
         Map result = (Map) objectResolver.getObject("org/settings4j/objectresolver/test1", contentResolver);
         assertEquals("blablablablablabla", result.get("irgendwas"));
@@ -89,36 +94,31 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
     
     /**
      * cached by propertyfile "org/settings4j/objectresolver/test2.properties"
+     * 
+     * @throws Exception if an error occurs.
      */
-    public void test2Caching(){
+    public void test2Caching() throws Exception {
         String key = "org/settings4j/objectresolver/test2";
         
         JavaXMLBeansObjectResolver objectResolver = new JavaXMLBeansObjectResolver();
-
-        FSContentResolver fsContentResolver = new FSContentResolver();
-        fsContentResolver.setRootFolderPath(testDir.getAbsolutePath());
-        ContentResolver contentResolver = new UnionContentResolver(fsContentResolver);
-        contentResolver.addContentResolver(new ClasspathContentResolver());
         
-        cachingTest(key, objectResolver, contentResolver);
+        cachingTest(key, objectResolver);
         
     }
     
     /**
      * cached by {@link AbstractObjectResolver#setCached(boolean)}
+     * @throws Exception if an error occurs.
      */
-    public void test3Caching(){
+    public void test3Caching() throws Exception {
         String key = "org/settings4j/objectresolver/test3";
         
         JavaXMLBeansObjectResolver objectResolver = new JavaXMLBeansObjectResolver();
         objectResolver.setCached(true);
         
-        FSContentResolver fsContentResolver = new FSContentResolver();
-        fsContentResolver.setRootFolderPath(testDir.getAbsolutePath());
-        ContentResolver contentResolver = new UnionContentResolver(fsContentResolver);
-        contentResolver.addContentResolver(new ClasspathContentResolver());
+        ContentResolver contentResolver = createUnionContentResolver();
         
-        cachingTest(key, objectResolver, contentResolver);
+        cachingTest(key, objectResolver);
         
         // The propertyfile "test4.properties" declare explicitly cached=false
         key = "org/settings4j/objectresolver/test4";
@@ -131,7 +131,9 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
     
     }
 
-    private void cachingTest(String key, JavaXMLBeansObjectResolver objectResolver, ContentResolver contentResolver) {
+    private void cachingTest(String key, JavaXMLBeansObjectResolver objectResolver) throws Exception {
+        ContentResolver contentResolver = createUnionContentResolver();
+        
         // read from classpath
         Map result = (Map) objectResolver.getObject(key, contentResolver);
         assertEquals("blablablaNEUblablabla", result.get("irgendwasNeues"));
@@ -161,14 +163,14 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
 
         // copy properties for a Temp-Key. This is required for parsing (read/write) of Objects
         byte[] content = contentResolver.getContent(key + ".properties");
-        contentResolver.setContent(key + "temp.properties", content);
+        setContent(key + "temp.properties", content);
         
         // save Object to a Temp-Key
-        objectResolver.setObject(key + "temp", contentResolver, testData);
+        setObject(key + "temp", testData);
         
         // Copy the writen Object without Objectreolver from Temp-Key to real Key
         content = contentResolver.getContent(key + "temp");
-        contentResolver.setContent(key, content);
+        setContent(key, content);
         
         
         // this Object is cached, and the ObjectResolver doesn't know that the content was changed from contentResolver!
@@ -177,18 +179,72 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
         assertTrue(result2 == result);
         assertEquals(result2.get("irgendwasNeues"), result.get("irgendwasNeues"));
         
-        // clear cache:
-        // This is the work of ContentHasChangedNotifierConnectorWrapper in real live
-        objectResolver.notifyContentHasChanged(key);
-        
-        // Now the right Object must be returned.
-        result2 = (Map) objectResolver.getObject(key, contentResolver);
-        assertTrue(result2 != result);
-        assertNull(result2.get("irgendwasNeues"));
-        assertEquals("blablablablablabla", result2.get("irgendwas"));
-        liste = result2.get("liste");
-        assertNotNull(liste);
-        assertTrue(liste instanceof List);
-        assertEquals(4, ((List)liste).size());
+    }
+
+    private ContentResolver createUnionContentResolver() {
+        ContentResolver contentResolver = new UnionContentResolver(createFsContentResolver());
+        contentResolver.addContentResolver(new ClasspathContentResolver());
+        return contentResolver;
+    }
+
+    private FSContentResolver createFsContentResolver() {
+        FSContentResolver fsContentResolver = new FSContentResolver();
+        fsContentResolver.setRootFolderPath(testDir.getAbsolutePath());
+        return fsContentResolver;
+    }
+
+
+    private void setObject(String key, Map testData) throws IOException {
+        byte[] content = objectToContent(testData);
+        setContent(key, content);
+    }
+
+    private void setContent(String key, byte[] content) throws IOException {
+        File file = new File(testDir, key);
+        FileUtils.writeByteArrayToFile(file, content);
+    }
+    
+    private byte[] objectToContent(Object value) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        XMLEncoder encoder = new XMLEncoder(byteArrayOutputStream);
+        encoder.setExceptionListener(new LogEncoderExceptionListener(value));
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("START Writing Object " + value.getClass().getName() + " with XMLEncoder");
+        }
+        encoder.writeObject(value);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("FINISH Writing Object " + value.getClass().getName() + " with XMLEncoder");
+        }
+        encoder.flush();
+        encoder.close();
+        return byteArrayOutputStream.toByteArray();
+    }
+
+    /**
+     * Log out Exception during Encoding a byte[] to an Object<br />
+     * <br />
+     * Example:<br />
+     * The {@link org.springframework.jdbc.datasource.AbstractDataSource} Object<br />
+     * hast Getter and Setter for "logWriter" who throws per default an {@link UnsupportedOperationException}.<br />
+     * 
+     * @author hbrabenetz
+     */
+    private class LogEncoderExceptionListener implements ExceptionListener {
+        private Object obj;
+
+        public LogEncoderExceptionListener(Object obj) {
+            super();
+            this.obj = obj;
+        }
+
+        /** {@inheritDoc} */
+        public void exceptionThrown(Exception e) {
+            LOG.warn("Ignore error on encoding Object from type: " + obj.getClass().getName() + "! "
+                + e.getClass().getName() + ": '" + e.getMessage() + "'. Set Loglevel DEBUG for more informations.");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(e.getMessage(), e);
+            }
+        }
     }
 }

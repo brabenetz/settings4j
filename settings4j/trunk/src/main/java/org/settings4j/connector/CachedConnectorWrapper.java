@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.settings4j.Connector;
-import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
 
@@ -81,33 +80,6 @@ public class CachedConnectorWrapper implements Connector{
         return result;
     }
     
-    public int setContent(String key, byte[] value) {
-        int result = targetConnector.setContent(key, value);
-        if (result == Constants.SETTING_SUCCESS){
-            clearCachedValue(key);
-            cachedContents.put(key, value);
-        }
-        return result;
-    }
-    
-    public int setObject(String key, Object value) {
-        int result = targetConnector.setObject(key, value);
-        if (result == Constants.SETTING_SUCCESS){
-            clearCachedValue(key);
-            cachedObjects.put(key, value);
-        }
-        return result;
-    }
-    
-    public int setString(String key, String value) {
-        int result = targetConnector.setString(key, value);
-        if (result == Constants.SETTING_SUCCESS){
-            clearCachedValue(key);
-            cachedStrings.put(key, value);
-        }
-        return result;
-    }
-    
     public void clearCachedValue(String key){
         cachedStrings.remove(key);
         cachedContents.remove(key);
@@ -139,9 +111,5 @@ public class CachedConnectorWrapper implements Connector{
     public void setName(String name) {
         targetConnector.setName(name);
     }
-
-	public boolean isReadonly() {
-		return targetConnector.isReadonly();
-	}
 	
 }

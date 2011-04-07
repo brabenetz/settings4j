@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
-import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
 
@@ -43,10 +42,6 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
     private Map cachedObjects = new HashMap();
     
     private boolean cached = false;
-    
-    public void notifyContentHasChanged(String key) {
-        cachedObjects.remove(key);
-    }
 
     public void addObjectResolver(ObjectResolver objectResolver) {
         throw new UnsupportedOperationException(this.getClass().getName() + " cannot add other ObjectResolvers");
@@ -63,20 +58,20 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
         byte[] content = contentResolver.getContent(key);
         if (content != null){
             Properties properties = getObjectProperties(key, contentResolver);
-            if (properties != null){
-                String objectResolverKey = properties.getProperty(PROP_OBJECT_RESOLVER_KEY);
-                String cached = properties.getProperty(PROP_CACHED);
-                if (StringUtils.isEmpty(objectResolverKey)){
+            if (properties != null) {
+                String propObjectResolverKey = properties.getProperty(PROP_OBJECT_RESOLVER_KEY);
+                String propCached = properties.getProperty(PROP_CACHED);
+                if (StringUtils.isEmpty(propObjectResolverKey)) {
                     // TODO hbrabenetz 21.05.2008 :
                     // set new PropertyFile with this ObjectResolver (if possible)
                     // write with this ObjectResolver
                     return null;
                 }
                 
-                if (getObjectReolverKey().equals(objectResolverKey)){
+                if (getObjectReolverKey().equals(propObjectResolverKey)){
                     result = contentToObject(key, properties, content, contentResolver);
                     if (result != null){
-                        if ("true".equalsIgnoreCase(cached) || (cached== null && isCached())){
+                        if ("true".equalsIgnoreCase(propCached) || (propCached== null && isCached())){
                             cachedObjects.put(key, result);
                         }
                         return result;
@@ -85,39 +80,6 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
             }
         }
         return null;
-    }
-
-    public int setObject(String key, ContentResolver contentResolver, Object value) {
-        Properties properties = getObjectProperties(key, contentResolver);
-        int status = Constants.SETTING_NOT_POSSIBLE;
-        if (properties != null){
-            String objectResolverKey = properties.getProperty(PROP_OBJECT_RESOLVER_KEY);
-            String cached = properties.getProperty(PROP_CACHED);
-            String readonly = properties.getProperty(PROP_READONLY);
-            if ("true".equalsIgnoreCase(readonly)){
-                return Constants.SETTING_NOT_POSSIBLE;
-            }
-            if (StringUtils.isEmpty(objectResolverKey)){
-                // TODO hbrabenetz 21.05.2008 :
-                // set new PropertyFile with this ObjectResolver
-                // if possible, then write with this ObjectResolver normally
-                return Constants.SETTING_NOT_POSSIBLE;
-            }
-            
-            if (getObjectReolverKey().equals(objectResolverKey)){
-                byte[] content = objectToContent(key, properties, value);
-                if (content != null){
-                    status = contentResolver.setContent(key, content);
-                }
-            }
-            
-            if (status == Constants.SETTING_SUCCESS){
-                if ("true".equalsIgnoreCase(cached) || (cached== null && isCached())){
-                    cachedObjects.put(key, value);
-                }
-            }
-        }
-        return status;
     }
     
     protected Properties getObjectProperties(String key, ContentResolver contentResolver){
@@ -148,8 +110,6 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
     protected String getObjectReolverKey() {
         return this.getClass().getName();
     }
-    
-    protected abstract byte[] objectToContent(String key, Properties properties, Object value);
     
     protected abstract Object contentToObject(String key, Properties properties, byte[] content, ContentResolver contentResolver);
 

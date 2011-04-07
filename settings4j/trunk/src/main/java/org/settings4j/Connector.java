@@ -17,8 +17,6 @@
 package org.settings4j;
 
 import org.settings4j.connector.ClasspathConnector;
-import org.settings4j.connector.PropertyFileConnector;
-import org.settings4j.connector.ReadOnlyConnectorWrapper;
 
 /**
  * An implementation of this Interface can return Values for a given key.<br />
@@ -71,50 +69,14 @@ public interface Connector {
     Object getObject(String key);
     
     /**
-     * Set or replace a new Value for the given key.<br />
-     * If set or replace a value is not possible because of a readonly Connector (e.g.: {@link ClasspathConnector},
-     * then {@link Constants#SETTING_NOT_POSSIBLE} must be returned.
-     * If set or replace was successful, then {@link Constants#SETTING_SUCCESS} must be returned.
-     * 
-     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
-     * @param value the new String-Value for the given key 
-     * @return Returns {@link Constants#SETTING_SUCCESS} or {@link Constants#SETTING_NOT_POSSIBLE}
-     */
-    int setString(String key, String value);
-    
-    /**
-     * Set or replace a new Value for the given key.<br />
-     * If set or replace a value is not possible because of a readonly Connector (e.g.: {@link ClasspathConnector},
-     * then {@link Constants#SETTING_NOT_POSSIBLE} must be returned.
-     * If set or replace was successful, then {@link Constants#SETTING_SUCCESS} must be returned.
-     * 
-     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
-     * @param value the new byte[]-Value for the given key 
-     * @return Returns {@link Constants#SETTING_SUCCESS} or {@link Constants#SETTING_NOT_POSSIBLE}
-     */
-    int setContent(String key, byte[] value);
-    
-    /**
-     * Set or replace a new Value for the given key.<br />
-     * If set or replace a value is not possible because of a readonly Connector (e.g.: {@link ClasspathConnector},
-     * then {@link Constants#SETTING_NOT_POSSIBLE} must be returned.
-     * If set or replace was successful, then {@link Constants#SETTING_SUCCESS} must be returned.
-     * 
-     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
-     * @param value the new Object-Value for the given key 
-     * @return Returns {@link Constants#SETTING_SUCCESS} or {@link Constants#SETTING_NOT_POSSIBLE}
-     */
-    int setObject(String key, Object value);
-
-    /**
-     * set a ContentResolver as Helper for {@link #getContent(String)} and {@link #setContent(String, byte[])}
+     * set a ContentResolver as Helper for {@link #getContent(String)}.
      * 
      * @param contentResolver
      */
     void setContentResolver(ContentResolver contentResolver);
     
     /**
-     * set a ObjectResolver as Helper for {@link #getObject(String)} and {@link #setObject(String, Object)}
+     * set a ObjectResolver as Helper for {@link #getObject(String)}.
      * 
      * @param objectResolver
      */
@@ -168,14 +130,5 @@ public interface Connector {
      * @param name
      */
     public void setName(String name);
-    
-    /**
-     * Return if this Connector is read Only (or Wrapped with the {@link ReadOnlyConnectorWrapper}).<br />
-     * Example for some Redonly Connectors: {@link PropertyFileConnector}, {@link ClasspathConnector}
-     * 
-     * 
-     * @return if this Connector is read Only (or Wrapped with the {@link ReadOnlyConnectorWrapper})
-     */
-    public boolean isReadonly();
     
 }

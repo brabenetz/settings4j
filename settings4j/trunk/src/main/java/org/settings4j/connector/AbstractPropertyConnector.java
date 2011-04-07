@@ -17,8 +17,6 @@
 
 package org.settings4j.connector;
 
-import org.settings4j.Constants;
-
 public abstract class AbstractPropertyConnector extends AbstractConnector {
 
     public byte[] getContent(String key) {
@@ -41,29 +39,6 @@ public abstract class AbstractPropertyConnector extends AbstractConnector {
 
     public String getString(String key) {
         return getProperty(key, null);
-    }
-
-    public int setContent(String key, byte[] value) {
-        String path = getString(key);
-        if (path != null && getContentResolver() != null) {
-            return getContentResolver().setContent(path, value);
-        } else {
-            return Constants.SETTING_NOT_POSSIBLE;
-        }
-    }
-
-    public int setObject(String key, Object value) {
-        String path = getString(key);
-        if (path != null && getObjectResolver() != null) {
-            return getObjectResolver().setObject(path, getContentResolver(), value);
-        } else {
-            return Constants.SETTING_NOT_POSSIBLE;
-        }
-    }
-
-    public int setString(String key, String value) {
-        // System.setProperty is only temporary => so return NOT POSSIBLE
-        return Constants.SETTING_NOT_POSSIBLE;
     }
 
     /**
