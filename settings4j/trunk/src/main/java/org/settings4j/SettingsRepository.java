@@ -34,8 +34,9 @@ public interface SettingsRepository {
 	SettingsInstance getSettings();
 
     /**
-     * Retrieve the appropriate {@link Settings} instance.
+     * Retrieve the appropriate {@link Settings} instance or create it with the give factory if doesn'r already exist.
      * 
+     * @param factory The factory to create a {@link SettingsInstance}.
      * @return the appropriate {@link SettingsInstance}
      */
     SettingsInstance getSettings(SettingsFactory factory);
