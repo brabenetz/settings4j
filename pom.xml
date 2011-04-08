@@ -75,10 +75,10 @@
 		<project.reporting.sourceEncoding>UTF-8</project.reporting.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<distribution.htdocs>scp://shell.sourceforge.net/home/groups/s/se/settings4j/htdocs</distribution.htdocs>
 		<!-- 
-		<distribution.htdocs>scp://brabenetz@213.47.43.153/srv/maven/repos/settings4j</distribution.htdocs>
+		<distribution.htdocs>scp://shell.sourceforge.net/home/groups/s/se/settings4j/htdocs</distribution.htdocs>
 		 -->
+		<distribution.htdocs>scp://brabenetz@213.47.43.153/srv/maven/repos/settings4j</distribution.htdocs>
     </properties>
 
 	<build>
