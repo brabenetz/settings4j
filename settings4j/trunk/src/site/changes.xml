@@ -17,6 +17,7 @@
 		</release>
 
 		<release version="1.0.0-beta3" date="2011" description="Release Candidate">
+			<action dev="brabenetz" type="update" date="2011-04-08">update JNDIConnector: disable Connector if no JNDI Context is available.</action>
 			<action dev="brabenetz" type="update" date="2011-04-07">remove property-write feature to simplify the API.</action>
 			<action dev="brabenetz" type="update">extended JavaDoc and UnitTests</action>
 		</release>
