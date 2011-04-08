@@ -49,7 +49,7 @@ public class ClasspathContentResolver implements ContentResolver {
         try {
             InputStream is = getClassLoader().getResourceAsStream(normalizedKey);
             if (is != null){
-                return IOUtils.toByteArray(getClassLoader().getResourceAsStream(normalizedKey));
+                return IOUtils.toByteArray(is);
             } else {
                 return null;
             }
