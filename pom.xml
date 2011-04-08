@@ -273,8 +273,28 @@
 
 	<repositories>
 		<repository>
-			<id>settings4j</id>
+			<id>settings4j-repository</id>
+			<name>Settings4j Repository</name>
 			<url>http://settings4j.sourceforge.net/m2repo</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>settings4j-snapshots</id>
+			<name>Settings4j Snapshots</name>
+			<url>http://settings4j.sourceforge.net/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
 		</repository>
 	</repositories>
 
