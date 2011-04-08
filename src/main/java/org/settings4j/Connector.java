@@ -111,7 +111,7 @@ public interface Connector {
     
     /**
      * Return The name Of this Connector. The Name is required
-     * in all {@link Settings}.set*(..., String connectorName) Methods.
+     * in all {@link Settings4j}.set*(..., String connectorName) Methods.
      * 
      * @return The name Of this Connector.
      */

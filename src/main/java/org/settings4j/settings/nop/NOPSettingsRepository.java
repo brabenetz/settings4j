@@ -16,17 +16,17 @@
  *****************************************************************************/
 package org.settings4j.settings.nop;
 
-import org.settings4j.SettingsFactory;
-import org.settings4j.SettingsInstance;
-import org.settings4j.SettingsRepository;
+import org.settings4j.Settings4jFactory;
+import org.settings4j.Settings4jInstance;
+import org.settings4j.Settings4jRepository;
 
-public class NOPSettingsRepository implements SettingsRepository {
+public class NOPSettingsRepository implements Settings4jRepository {
 
-    public SettingsInstance getSettings() {
+    public Settings4jInstance getSettings() {
         return new NOPSettings(this);
     }
 
-    public SettingsInstance getSettings(SettingsFactory factory) {
+    public Settings4jInstance getSettings(Settings4jFactory factory) {
         return new NOPSettings(this);
     }
 

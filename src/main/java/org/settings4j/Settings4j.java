@@ -39,18 +39,18 @@ import org.settings4j.settings.SettingsManager;
  * @author hbrabenetz
  *
  */
-public final class Settings {
+public final class Settings4j {
     
     /**
      * Hide Constructor (Utility-Pattern)
      */
-    private Settings() {
+    private Settings4j() {
         super();
     }
 
     /**
      * return the found String-Value for the given key.<br />
-     * The {@link Settings} Instance iterates all his {@link Connector} and return the first found Value.<br />
+     * The {@link Settings4j} Instance iterates all his {@link Connector} and return the first found Value.<br />
      * <br />
      * Returns null if no connector found a Value for the given key<br />
      * 
@@ -65,7 +65,7 @@ public final class Settings {
      * return the found byte[]-Value for the given key.<br /> {
     	getSettings().getAllConnectors();
     }
-     * The {@link Settings} Instance iterates all his {@link Connector} and return the first found Value.<br />
+     * The {@link Settings4j} Instance iterates all his {@link Connector} and return the first found Value.<br />
      * <br />
      * Returns null if no connector found a Value for the given key<br />
      * 
@@ -78,7 +78,7 @@ public final class Settings {
 
     /**
      * return the found Object-Value for the given key.<br />
-     * The {@link Settings} Instance iterates all his {@link Connector} and return the first found Value.<br />
+     * The {@link Settings4j} Instance iterates all his {@link Connector} and return the first found Value.<br />
      * <br />
      * Returns null if no connector found a Value for the given key<br />
      * 
@@ -90,11 +90,11 @@ public final class Settings {
     }
 
     /**
-     * Get the {@link SettingsRepository} where this Settings-Object is stored.
+     * Get the {@link Settings4jRepository} where this Settings-Object is stored.
      * 
-     * @return the {@link SettingsRepository} where this Settings-Object is stored.
+     * @return the {@link Settings4jRepository} where this Settings-Object is stored.
      */
-    public static SettingsRepository getSettingsRepository() {
+    public static Settings4jRepository getSettingsRepository() {
     	return SettingsManager.getSettingsRepository();
     }
     
@@ -103,14 +103,14 @@ public final class Settings {
      * 
      * @see SettingsManager#getRootSettings()
      */
-    private static SettingsInstance getSettings() {
+    private static Settings4jInstance getSettings() {
         return SettingsManager.getSettings();
     }
     
     /**
-     * Return a List off {@link Connector} who can be used with this {@link Settings} instance
+     * Return a List off {@link Connector} who can be used with this {@link Settings4j} instance
      * 
-     * @return a list off all Connectors who can be used with this {@link Settings} instance 
+     * @return a list off all Connectors who can be used with this {@link Settings4j} instance 
      */
     public static List getConnectors() {
     	return getSettings().getConnectors();

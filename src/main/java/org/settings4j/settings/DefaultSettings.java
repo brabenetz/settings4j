@@ -25,7 +25,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.settings4j.Connector;
-import org.settings4j.SettingsInstance;
+import org.settings4j.Settings4jInstance;
 
 /**
  * The default Settings Object.
@@ -33,7 +33,7 @@ import org.settings4j.SettingsInstance;
  * @author hbrabenetz
  *
  */
-public class DefaultSettings implements SettingsInstance {
+public class DefaultSettings implements Settings4jInstance {
 
     private List connectors = Collections.synchronizedList(new ArrayList());
     private Map connectorMap = Collections.synchronizedMap(new HashMap());

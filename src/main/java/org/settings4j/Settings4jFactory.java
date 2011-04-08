@@ -21,11 +21,11 @@ package org.settings4j;
  * 
  * @author hbrabenetz
  */
-public interface SettingsFactory {
+public interface Settings4jFactory {
     /**
      * The default implementation makes a new {@link org.settings4j.settings.DefaultSettings}(String name) instance
      * 
-     * @return new {@link SettingsInstance}
+     * @return new {@link Settings4jInstance}
      */
-    SettingsInstance makeNewSettingsInstance();
+    Settings4jInstance makeNewSettingsInstance();
 }

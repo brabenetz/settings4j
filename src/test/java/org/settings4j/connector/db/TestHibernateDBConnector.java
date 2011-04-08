@@ -26,8 +26,8 @@ import junit.framework.TestCase;
 import org.apache.commons.io.FileUtils;
 import org.hibernate.SessionFactory;
 import org.settings4j.Connector;
-import org.settings4j.SettingsInstance;
-import org.settings4j.SettingsRepository;
+import org.settings4j.Settings4jInstance;
+import org.settings4j.Settings4jRepository;
 import org.settings4j.UtilTesting;
 import org.settings4j.connector.db.dao.SettingsDAO;
 import org.settings4j.connector.db.dao.hibernate.ConfigurationByteArray;
@@ -53,8 +53,8 @@ public class TestHibernateDBConnector extends TestCase {
     }
     
     public void testHibernateDBConnector1() throws UnsupportedEncodingException{
-        SettingsRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/connector/db/testHibernateDBConnector1.xml");
-        SettingsInstance rootSettings = settingsRepository.getSettings();
+        Settings4jRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/connector/db/testHibernateDBConnector1.xml");
+        Settings4jInstance rootSettings = settingsRepository.getSettings();
         List connectors = rootSettings.getConnectors();
         
         

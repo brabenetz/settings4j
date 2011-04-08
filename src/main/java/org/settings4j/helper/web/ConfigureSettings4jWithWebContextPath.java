@@ -22,7 +22,7 @@ import java.net.URL;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.settings4j.SettingsRepository;
+import org.settings4j.Settings4jRepository;
 import org.settings4j.config.DOMConfigurator;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.settings.SettingsManager;
@@ -92,7 +92,7 @@ public class ConfigureSettings4jWithWebContextPath implements ServletContextList
         // get "contextPath" from "http://host/contextPath"
         LOG.info("found real contextPath: " + contextPath);
         
-        SettingsRepository settingsRepository = SettingsManager.getSettingsRepository();
+        Settings4jRepository settingsRepository = SettingsManager.getSettingsRepository();
         settingsRepository.resetConfiguration();
         
         // read XML default Configuration to configure the repository
