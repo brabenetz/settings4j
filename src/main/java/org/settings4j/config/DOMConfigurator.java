@@ -906,7 +906,7 @@ public class DOMConfigurator {
                 }
                 Object result = ExpressionLanguageUtil.evaluateExpressionLanguage(value, context, clazz);
                 return result;
-            } catch (ELException e) {
+            } catch (Exception e) {
                 LOG.error(e.getMessage(), e);
                 return null;
             }
