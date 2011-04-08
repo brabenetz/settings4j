@@ -32,6 +32,10 @@ import org.settings4j.contentresolver.UnionContentResolver;
 
 public class JNDIConnectorTest extends TestCase {
 
+    /** General Logger for this Class. */
+    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
+        .getLog(JNDIConnectorTest.class);
+    
     private String charset = "UTF-8";
     private File testDir;
     
@@ -39,22 +43,18 @@ public class JNDIConnectorTest extends TestCase {
         super.setUp();
         testDir = (new File("test/ConnectorTest/".toLowerCase()));
         FileUtils.forceMkdir(testDir);
+        removeJNDIContextProperties();
     }
     
     protected void tearDown() throws Exception {
         FileUtils.deleteDirectory(new File("test"));
-        System.getProperties().remove(Context.INITIAL_CONTEXT_FACTORY);
-        System.getProperties().remove(Context.PROVIDER_URL);
-        System.getProperties().remove(Context.URL_PKG_PREFIXES);
+        removeJNDIContextProperties();
         super.tearDown();
     }
 
 
     public void testJNDIConnectorWithoutJNDI() throws Exception {
-        //Clear JNDI Configs
-        System.getProperties().remove(Context.INITIAL_CONTEXT_FACTORY);
-        System.getProperties().remove(Context.PROVIDER_URL);
-        System.getProperties().remove(Context.URL_PKG_PREFIXES);
+        LOG.info("START: testJNDIConnectorWithoutJNDI");
         
         JNDIConnector connector;
         int saveStatus;
@@ -64,6 +64,12 @@ public class JNDIConnectorTest extends TestCase {
         
         connector = new JNDIConnector();
 
+        // test
+        assertNull(connector.getIsJNDIAvailable());
+        assertFalse(connector.isJNDIAvailable());
+        assertNotNull(connector.getIsJNDIAvailable());
+        assertFalse(connector.isJNDIAvailable());
+        
         resultString = connector.getString("helloWorldPath");
         assertNull(resultString);
         
@@ -112,6 +118,7 @@ public class JNDIConnectorTest extends TestCase {
     }
     
     public void testJNDIConnectorWithJNDI() throws Exception {
+        LOG.info("START: testJNDIConnectorWithJNDI");
         //Set JNDI Tomcat Configs
         setTomcatJNDIContextProperties();
         
@@ -193,11 +200,53 @@ public class JNDIConnectorTest extends TestCase {
         
         
     }
+    
+    public void testJNDIConnectorIsAvailable() throws Exception {
+        LOG.info("START: testJNDIConnectorIsAvailable");
+        JNDIConnector connector;
+        
+        connector = new JNDIConnector();
+
+        // JNDIContext not available
+        assertNull(connector.getIsJNDIAvailable());
+        assertFalse(connector.isJNDIAvailable()); // will set the boolean Flag
+        assertNotNull(connector.getIsJNDIAvailable());
+        assertFalse(connector.isJNDIAvailable());
+
+        //Set JNDI Tomcat Configs (Enable JNDI Context)
+        setTomcatJNDIContextProperties();
+
+        // JNDI-Connector is disabled:
+        connector.setObject("irgendwas", "Somthing to create parent Context");
+        assertNull(connector.getObject("irgendwas"));
+        
+        //reset boolean Flag
+        connector.setIsJNDIAvailable(null);
+        
+        // JNDIContext is now available
+        assertNull(connector.getIsJNDIAvailable());
+        assertTrue(connector.isJNDIAvailable()); // will set the boolean Flag again
+        assertNotNull(connector.getIsJNDIAvailable());
+        assertTrue(connector.isJNDIAvailable());
+        
+
+        // test setObject and getObject.
+        assertNull(connector.getObject("irgendwas"));
+        connector.setObject("irgendwas", "Somthing to test");
+        assertEquals("Somthing to test", connector.getObject("irgendwas"));
+        
+    }
 
     public static void setTomcatJNDIContextProperties() {
         System.setProperty(Context.INITIAL_CONTEXT_FACTORY, "org.apache.naming.java.javaURLContextFactory");
         System.setProperty(Context.PROVIDER_URL, "localhost:1099");
         System.setProperty(Context.URL_PKG_PREFIXES, "org.apache.naming");
 
+    }
+
+    private void removeJNDIContextProperties() {
+        System.getProperties().remove(Context.INITIAL_CONTEXT_FACTORY);
+        System.getProperties().remove(Context.PROVIDER_URL);
+        System.getProperties().remove(Context.URL_PKG_PREFIXES);
     }
 }

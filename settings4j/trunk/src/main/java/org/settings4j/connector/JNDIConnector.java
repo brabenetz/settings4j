@@ -41,6 +41,8 @@ public class JNDIConnector extends AbstractConnector {
     
     private String contextPathPrefix = "java:comp/env/";
 
+    private Boolean isJNDIAvailable;
+    
     public byte[] getContent(String key) {
         Object obj = lookupInContext(key);
 
@@ -75,9 +77,8 @@ public class JNDIConnector extends AbstractConnector {
     }
 
     public String getString(String key) {
-        Object obj = null;
+        Object obj = lookupInContext(key);
         try {
-            obj = lookupInContext(key);
             return (String) obj;
         } catch (ClassCastException e) {
             LOG.warn("Wrong Type: " + obj.getClass().getName() + " for Key: " + key);
@@ -117,6 +118,32 @@ public class JNDIConnector extends AbstractConnector {
         
         return initialContext;
     }
+    
+    /**
+     * check if a JNDI context is available and sets the internal Flag setIsJNDIAvailable(Boolean).
+     * <p>
+     * If the internal Flag IsJNDIAvailable is <code>False</code> this Connector is disabled.
+     * 
+     * @return true if a JNDI Context could be initialized.
+     */
+    public boolean isJNDIAvailable() {
+        if (isJNDIAvailable == null) {
+            try {
+                getJNDIContext().lookup(getContextPathPrefix());
+                LOG.info("JNDI Context is available.");
+                isJNDIAvailable = Boolean.TRUE;
+            } catch (NoInitialContextException e) {
+                LOG.info("No JNDI Context available! JNDIConnector will be disabled: " + e.getMessage());
+                isJNDIAvailable = Boolean.FALSE;
+            } catch (NamingException e) {
+                LOG.info("JNDI Context is available but " + e.getMessage());
+                LOG.debug("NamingException in isJNDIAvailable: " + e.getMessage(), e);
+                isJNDIAvailable = Boolean.TRUE;
+            }
+        }
+        
+        return isJNDIAvailable.booleanValue();
+    }
 
     public void setProviderUrl(String providerUrl) {
         this.providerUrl = providerUrl;
@@ -131,6 +158,9 @@ public class JNDIConnector extends AbstractConnector {
     }
 
     private Object lookupInContext(String key) {
+        if (!isJNDIAvailable()) {
+            return null;
+        }
         String normalizedKey = normalizeKey(key);
         InitialContext ctx = null;
         try {
@@ -161,6 +191,9 @@ public class JNDIConnector extends AbstractConnector {
      * @return Constants.SETTING_NOT_POSSIBLE if the JNDI Context ist readonly.
      */
     public int rebindToContext(String key, Object value) {
+        if (!isJNDIAvailable()) {
+            return Constants.SETTING_NOT_POSSIBLE;
+        }
         String normalizedKey = normalizeKey(key);
         if (LOG.isDebugEnabled()){
             LOG.debug("Try to rebind Key '" + key + "' (" + normalizedKey + ")" + " with value: " + value);
@@ -212,6 +245,7 @@ public class JNDIConnector extends AbstractConnector {
             try {
                 obj = tmpCtx.lookup(path[i]);
             } catch (NameNotFoundException e) {
+                // obj is null and subcontext must be generated.
             }
             
             if (obj == null) {
@@ -224,33 +258,34 @@ public class JNDIConnector extends AbstractConnector {
             }
         }
 
-        Object obj = null;
-        try {
-            obj = tmpCtx.lookup(path[lastIndex]);
-        } catch (NameNotFoundException e) {
-        }
-
-        if (obj instanceof Context) {
-            tmpCtx.destroySubcontext(path[lastIndex]);
-            obj = null;
-        }
+//        Object obj = null;
+//        try {
+//            obj = tmpCtx.lookup(path[lastIndex]);
+//        } catch (NameNotFoundException e) {
+//            return; // OK only parent Context must be created.
+//        }
+//
+//        if (obj instanceof Context) {
+//            tmpCtx.destroySubcontext(path[lastIndex]);
+//            obj = null;
+//        }
     }
     
-    private String normalizeKey(String key){
+    private String normalizeKey(final String key){
         if (key == null){
             return null;
         }
-        
-        if (key.startsWith(contextPathPrefix)){
-            return key;
+        String normalizeKey = key;
+        if (normalizeKey.startsWith(contextPathPrefix)){
+            return normalizeKey;
         }
         
-        key = key.replace('\\', '/');
+        normalizeKey = normalizeKey.replace('\\', '/');
         
-        if (key.startsWith("/")){
-            key = key.substring(1);
+        if (normalizeKey.startsWith("/")){
+            normalizeKey = normalizeKey.substring(1);
         }
-        return contextPathPrefix + key;
+        return contextPathPrefix + normalizeKey;
     }
     
     public String getContextPathPrefix() {
@@ -260,4 +295,13 @@ public class JNDIConnector extends AbstractConnector {
     public void setContextPathPrefix(String contextPathPrefix) {
         this.contextPathPrefix = contextPathPrefix;
     }
+
+    protected Boolean getIsJNDIAvailable() {
+        return isJNDIAvailable;
+    }
+
+    protected void setIsJNDIAvailable(Boolean isJNDIAvailable) {
+        this.isJNDIAvailable = isJNDIAvailable;
+    }
+    
 }
