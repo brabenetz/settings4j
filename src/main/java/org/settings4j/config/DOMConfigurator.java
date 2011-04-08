@@ -35,7 +35,6 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.taglibs.standard.lang.jstl.ELException;
 import org.settings4j.Connector;
 import org.settings4j.ContentResolver;
 import org.settings4j.Filter;
