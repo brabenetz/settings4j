@@ -35,6 +35,10 @@ import org.settings4j.Settings4jInstance;
  */
 public class DefaultSettings implements Settings4jInstance {
 
+    /** General Logger for this Class. */
+    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
+        .getLog(DefaultSettings.class);
+    
     private List connectors = Collections.synchronizedList(new ArrayList());
     private Map connectorMap = Collections.synchronizedMap(new HashMap());
     private Map mapping;
@@ -75,6 +79,7 @@ public class DefaultSettings implements Settings4jInstance {
             Connector connector = (Connector) iterator.next();
             result = connector.getContent(mappedKey);
             if (result != null){
+                logDebugFoundValueForKey("Content", key, connector);
                 return result;
             }
         }
@@ -91,6 +96,7 @@ public class DefaultSettings implements Settings4jInstance {
             Connector connector = (Connector) iterator.next();
             result = connector.getObject(mappedKey);
             if (result != null){
+                logDebugFoundValueForKey("Object", key, connector);
                 return result;
             }
         }
@@ -107,6 +113,7 @@ public class DefaultSettings implements Settings4jInstance {
             Connector connector = (Connector) iterator.next();
             result = connector.getString(mappedKey);
             if (result != null){
+                logDebugFoundValueForKey("String", key, connector);
                 return result;
             }
         }
@@ -147,5 +154,19 @@ public class DefaultSettings implements Settings4jInstance {
     /** {@inheritDoc} */
     public void setMapping(Map mapping) {
         this.mapping = mapping;
+    }
+
+    private void logDebugFoundValueForKey(String type, String key, Connector connector) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Found "
+                + type
+                + " for Key '"
+                + key
+                + "' in connector '"
+                + connector.getName()
+                + "' ("
+                + connector.getClass().getName()
+                + ")");
+        }
     }
 }
