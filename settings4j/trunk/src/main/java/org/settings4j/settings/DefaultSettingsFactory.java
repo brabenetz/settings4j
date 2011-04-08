@@ -16,12 +16,12 @@
  *****************************************************************************/
 package org.settings4j.settings;
 
-import org.settings4j.SettingsFactory;
-import org.settings4j.SettingsInstance;
+import org.settings4j.Settings4jFactory;
+import org.settings4j.Settings4jInstance;
 
-public class DefaultSettingsFactory implements SettingsFactory {
+public class DefaultSettingsFactory implements Settings4jFactory {
 
-    public SettingsInstance makeNewSettingsInstance() {
+    public Settings4jInstance makeNewSettingsInstance() {
         return new DefaultSettings();
     }
 

@@ -18,17 +18,17 @@ package org.settings4j.settings;
 
 import java.net.URL;
 
-import org.settings4j.Settings;
-import org.settings4j.SettingsFactory;
-import org.settings4j.SettingsInstance;
-import org.settings4j.SettingsRepository;
+import org.settings4j.Settings4j;
+import org.settings4j.Settings4jFactory;
+import org.settings4j.Settings4jInstance;
+import org.settings4j.Settings4jRepository;
 import org.settings4j.config.DOMConfigurator;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.settings.nop.NOPSettingsRepository;
 
 /**
- * managed The {@link SettingsRepository} .
- * This {@link SettingsRepository} is used to store the configuration from the settings4j.xml.
+ * managed The {@link Settings4jRepository} .
+ * This {@link Settings4jRepository} is used to store the configuration from the settings4j.xml.
  * 
  * @author hbrabenetz
  *
@@ -51,9 +51,9 @@ public class SettingsManager {
     public static final String DEFAULT_FALLBACK_CONFIGURATION_FILE = "org/settings4j/config/defaultsettings4j.xml";
 
     /**
-     * The internal default Settings4j Repository where all {@link org.settings4j.Settings} are stored.
+     * The internal default Settings4j Repository where all {@link org.settings4j.Settings4j} are stored.
      */
-    private static SettingsRepository settingsRepository;
+    private static Settings4jRepository settingsRepository;
     static {
         /**
          * The root settings names itself as "root". However, the root settings cannot be retrieved
@@ -79,11 +79,11 @@ public class SettingsManager {
     }
 
     /**
-     * The internal default Settings4j Repository where all {@link org.settings4j.Settings} are stored.
+     * The internal default Settings4j Repository where all {@link org.settings4j.Settings4j} are stored.
      * 
      * @return The Settings4j Repository, Returns NEVER null put maybe a {@link NOPSettingsRepository}.
      */
-    public static SettingsRepository getSettingsRepository() {
+    public static Settings4jRepository getSettingsRepository() {
         if (settingsRepository == null) {
             settingsRepository = new NOPSettingsRepository();
             LOG.error("SettingsManager.settingsRepository was null likely due to error in class reloading, using NOPSettingsRepository.");
@@ -92,23 +92,23 @@ public class SettingsManager {
     }
 
     /**
-     * Retrieve the appropriate {@link Settings} instance.
+     * Retrieve the appropriate {@link Settings4j} instance.
      * 
-     * @return the appropriate {@link Settings} instance.
+     * @return the appropriate {@link Settings4j} instance.
      */
-    public static SettingsInstance getSettings() {
+    public static Settings4jInstance getSettings() {
     	initializeRepositoryIfNecessary();
         // Delegate the actual manufacturing of the settings to the settings repository.
         return getSettingsRepository().getSettings();
     }
 
     /**
-     * Retrieve the appropriate {@link Settings} instance or create it with the give factory if doesn'r already exist.
+     * Retrieve the appropriate {@link Settings4j} instance or create it with the give factory if doesn'r already exist.
      * 
-     * @param factory The factory to create a {@link SettingsInstance}.
-     * @return the appropriate {@link Settings} instance.
+     * @param factory The factory to create a {@link Settings4jInstance}.
+     * @return the appropriate {@link Settings4j} instance.
      */
-    public static SettingsInstance getSettings(final SettingsFactory factory) {
+    public static Settings4jInstance getSettings(final Settings4jFactory factory) {
     	initializeRepositoryIfNecessary();
         // Delegate the actual manufacturing of the settings to the settings repository.
         return getSettingsRepository().getSettings(factory);

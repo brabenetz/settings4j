@@ -19,27 +19,27 @@ package org.settings4j;
 import org.settings4j.settings.SettingsManager;
 
 /**
- * Holder for a single {@link SettingsInstance}.
+ * Holder for a single {@link Settings4jInstance}.
  * 
  * @author hbrabenetz
  *
  */
-public interface SettingsRepository {
+public interface Settings4jRepository {
 
     /**
-     * Retrieve the appropriate {@link Settings} instance.
+     * Retrieve the appropriate {@link Settings4j} instance.
      * 
-     * @return the appropriate {@link SettingsInstance}
+     * @return the appropriate {@link Settings4jInstance}
      */
-	SettingsInstance getSettings();
+	Settings4jInstance getSettings();
 
     /**
-     * Retrieve the appropriate {@link Settings} instance or create it with the give factory if doesn'r already exist.
+     * Retrieve the appropriate {@link Settings4j} instance or create it with the give factory if doesn'r already exist.
      * 
-     * @param factory The factory to create a {@link SettingsInstance}.
-     * @return the appropriate {@link SettingsInstance}
+     * @param factory The factory to create a {@link Settings4jInstance}.
+     * @return the appropriate {@link Settings4jInstance}
      */
-    SettingsInstance getSettings(SettingsFactory factory);
+    Settings4jInstance getSettings(Settings4jFactory factory);
 
     /**
      * Return the Connector Count.<br />

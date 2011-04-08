@@ -21,15 +21,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.settings4j.Connector;
-import org.settings4j.SettingsRepository;
+import org.settings4j.Settings4jRepository;
 
 /**
  * No-operation implementation of Settings used by NOPSettingsRepository.
  */
-public class NOPSettings implements org.settings4j.SettingsInstance {
-    SettingsRepository settingsRepository;
+public class NOPSettings implements org.settings4j.Settings4jInstance {
+    Settings4jRepository settingsRepository;
     
-    public NOPSettings(SettingsRepository settingsRepository) {
+    public NOPSettings(Settings4jRepository settingsRepository) {
         super();
         this.settingsRepository = settingsRepository;
     }

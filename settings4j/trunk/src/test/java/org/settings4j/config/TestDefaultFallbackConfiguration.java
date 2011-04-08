@@ -17,7 +17,7 @@
 
 package org.settings4j.config;
 
-import org.settings4j.Settings;
+import org.settings4j.Settings4j;
 
 import junit.framework.TestCase;
 
@@ -42,16 +42,16 @@ public class TestDefaultFallbackConfiguration extends TestCase{
     public void testDefaultSettings4jConfig(){
         
         LOG.debug("#### AFTER THE FOLLOWING LINE SETTINGS4J WILL BE CONFIGURED THE FIRST TIME WITH THE FALLBACK-FILE #####");
-        assertEquals("HelloWorld", Settings.getString("testDefaultProperty"));
+        assertEquals("HelloWorld", Settings4j.getString("testDefaultProperty"));
         LOG.debug("#### FINISH CONFIGURATION #####");
         
         //check if there is no Exception thrown:
-        assertNull(Settings.getString("xyz"));
-        assertNull(Settings.getContent("xyz"));
-        assertNull(Settings.getObject("xyz"));
+        assertNull(Settings4j.getString("xyz"));
+        assertNull(Settings4j.getContent("xyz"));
+        assertNull(Settings4j.getObject("xyz"));
 
         // the Default settings Configuration is readonly
         
-        assertEquals(3, Settings.getConnectors().size());
+        assertEquals(3, Settings4j.getConnectors().size());
     }
 }

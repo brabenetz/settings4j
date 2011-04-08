@@ -23,16 +23,16 @@ import java.util.Map;
 /**
  * SettingsInstance is used to get simply access to Application settings.
  * 
- * @see Settings
+ * @see Settings4j
  * 
  * @author hbrabenetz
  *
  */
-public interface SettingsInstance {
+public interface Settings4jInstance {
 
     /**
      * return the found String-Value for the given key.<br />
-     * The {@link SettingsInstance} Instance iterates all his {@link Connector} and return the first found Value.<br />
+     * The {@link Settings4jInstance} Instance iterates all his {@link Connector} and return the first found Value.<br />
      * <br />
      * Returns null if no connector found a Value for the given key<br />
      * 
@@ -43,7 +43,7 @@ public interface SettingsInstance {
 
     /**
      * return the found byte[]-Value for the given key.<br />
-     * The {@link SettingsInstance} Instance iterates all his {@link Connector} and return the first found Value.<br />
+     * The {@link Settings4jInstance} Instance iterates all his {@link Connector} and return the first found Value.<br />
      * <br />
      * Returns null if no connector found a Value for the given key<br />
      * 
@@ -54,7 +54,7 @@ public interface SettingsInstance {
 
     /**
      * return the found Object-Value for the given key.<br />
-     * The {@link SettingsInstance} Instance iterates all his {@link Connector} and return the first found Value.<br />
+     * The {@link Settings4jInstance} Instance iterates all his {@link Connector} and return the first found Value.<br />
      * <br />
      * Returns null if no connector found a Value for the given key<br />
      * 
@@ -127,9 +127,9 @@ public interface SettingsInstance {
     public abstract void setMapping(Map mapping);
     
     /**
-     * Return a List off {@link Connector} who can be used with this {@link SettingsInstance} instance
+     * Return a List off {@link Connector} who can be used with this {@link Settings4jInstance} instance
      * 
-     * @return a list off all Connectors who can be used with this {@link SettingsInstance} instance 
+     * @return a list off all Connectors who can be used with this {@link Settings4jInstance} instance 
      */
     public abstract List getConnectors();
     

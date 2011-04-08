@@ -40,8 +40,8 @@ import org.settings4j.Connector;
 import org.settings4j.ContentResolver;
 import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
-import org.settings4j.SettingsInstance;
-import org.settings4j.SettingsRepository;
+import org.settings4j.Settings4jInstance;
+import org.settings4j.Settings4jRepository;
 import org.settings4j.connector.CachedConnectorWrapper;
 import org.settings4j.connector.FilteredConnectorWrapper;
 import org.settings4j.connector.SystemPropertyConnector;
@@ -121,11 +121,11 @@ public class DOMConfigurator {
     // key: mapping-Name, value: Map
     private Map mappingBag;
     
-    private SettingsRepository repository;
+    private Settings4jRepository repository;
     
     private Map expressionAttributes = new HashMap();
     
-    public DOMConfigurator(SettingsRepository repository) {
+    public DOMConfigurator(Settings4jRepository repository) {
         super();
         this.repository = repository;
         connectorBag = new HashMap();
@@ -169,7 +169,7 @@ public class DOMConfigurator {
      * @param repository the Repository to configure.
      * @throws FactoryConfigurationError
      */
-    static public void configure(URL url, SettingsRepository repository) throws FactoryConfigurationError {
+    static public void configure(URL url, Settings4jRepository repository) throws FactoryConfigurationError {
         new DOMConfigurator(repository).doConfigure(url);
     }
 
@@ -249,7 +249,7 @@ public class DOMConfigurator {
 
         // settings = (catFactory == null) ? repository.getSettings(settingsName) :
         // repository.getSettings(settingsName, catFactory);
-    	SettingsInstance root = repository.getSettings();
+    	Settings4jInstance root = repository.getSettings();
         // settings configuration needs to be atomic
         synchronized (root) {
             parseChildrenOfSettingsElement(element, root);
@@ -443,7 +443,7 @@ public class DOMConfigurator {
     /**
      * Used internally to parse the children of a settings element.
      */
-    protected void parseChildrenOfSettingsElement(Element settingsElement, SettingsInstance settings) {
+    protected void parseChildrenOfSettingsElement(Element settingsElement, Settings4jInstance settings) {
 
         Node currentNode = null;
         Element currentElement = null;

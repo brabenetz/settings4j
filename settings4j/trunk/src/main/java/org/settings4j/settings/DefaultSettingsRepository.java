@@ -16,9 +16,9 @@
  *****************************************************************************/
 package org.settings4j.settings;
 
-import org.settings4j.SettingsFactory;
-import org.settings4j.SettingsInstance;
-import org.settings4j.SettingsRepository;
+import org.settings4j.Settings4jFactory;
+import org.settings4j.Settings4jInstance;
+import org.settings4j.Settings4jRepository;
 
 /**
  * This class is specialized in retrieving settings by name and also maintaining the settings
@@ -44,21 +44,21 @@ import org.settings4j.SettingsRepository;
  * @author Ceki G&uuml;lc&uuml; (the original log4j org.apache.log4j.Hierarchy)
  * 
  */
-public class DefaultSettingsRepository implements SettingsRepository {
+public class DefaultSettingsRepository implements Settings4jRepository {
 
-    private static final SettingsFactory DEFAULT_FACTORY = new DefaultSettingsFactory();
+    private static final Settings4jFactory DEFAULT_FACTORY = new DefaultSettingsFactory();
 
-    private SettingsInstance settings;
+    private Settings4jInstance settings;
 
     public DefaultSettingsRepository() {
         super();
     }
 
-    public SettingsInstance getSettings() {
+    public Settings4jInstance getSettings() {
         return getSettings(DEFAULT_FACTORY);
     }
 
-    public SettingsInstance getSettings(SettingsFactory factory) {
+    public Settings4jInstance getSettings(Settings4jFactory factory) {
         if (this.settings == null) {
         	this.settings = factory.makeNewSettingsInstance();
         }

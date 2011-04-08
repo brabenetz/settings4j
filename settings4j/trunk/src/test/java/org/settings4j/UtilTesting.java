@@ -43,10 +43,10 @@ public class UtilTesting {
      * @param classpathUrl The Classpath url where the settings4j.xml are placed.
      * @return The SettingsRepository based on the given configuration found in the classpathUrl
      */
-    public static SettingsRepository getConfiguredSettingsRepository(String classpathUrl){
+    public static Settings4jRepository getConfiguredSettingsRepository(String classpathUrl){
 
         URL url = ClasspathContentResolver.getResource(classpathUrl);
-        SettingsRepository settingsRepository = new DefaultSettingsRepository();
+        Settings4jRepository settingsRepository = new DefaultSettingsRepository();
         DOMConfigurator.configure(url, settingsRepository);
         return settingsRepository;
     }
