@@ -192,8 +192,8 @@ public class JNDIConnector extends AbstractConnector {
      * @return Constants.SETTING_NOT_POSSIBLE if the JNDI Context ist readonly.
      */
     public int rebindToContext(String key, Object value) {
-        // don't do a check, but use it if a check was done.
-        if (BooleanUtils.isNotTrue(isJNDIAvailable)) {
+        // don't do a check, but use the result if a check was done.
+        if (BooleanUtils.isFalse(isJNDIAvailable)) {
             // only if isJNDIAvailable() was called an evaluated to false.
             return Constants.SETTING_NOT_POSSIBLE;
         }
