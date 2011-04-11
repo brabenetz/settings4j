@@ -62,13 +62,12 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
                 String propObjectResolverKey = properties.getProperty(PROP_OBJECT_RESOLVER_KEY);
                 String propCached = properties.getProperty(PROP_CACHED);
                 if (StringUtils.isEmpty(propObjectResolverKey)) {
-                    // TODO hbrabenetz 21.05.2008 :
-                    // set new PropertyFile with this ObjectResolver (if possible)
-                    // write with this ObjectResolver
+                    LOG.warn("The property-File for Key '" + key //
+                        + "' doesn't have the required Property '" + PROP_OBJECT_RESOLVER_KEY + "'");
                     return null;
                 }
                 
-                if (getObjectReolverKey().equals(propObjectResolverKey)){
+                if (getObjectResolverKey().equals(propObjectResolverKey)){
                     result = contentToObject(key, properties, content, contentResolver);
                     if (result != null){
                         if ("true".equalsIgnoreCase(propCached) || (propCached== null && isCached())){
@@ -107,7 +106,7 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
         this.propertySuffix = propertySuffix;
     }
 
-    protected String getObjectReolverKey() {
+    protected String getObjectResolverKey() {
         return this.getClass().getName();
     }
     
