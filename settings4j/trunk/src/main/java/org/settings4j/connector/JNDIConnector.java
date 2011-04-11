@@ -24,6 +24,7 @@ import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 import javax.naming.NoInitialContextException;
 
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.settings4j.Constants;
 
@@ -191,7 +192,9 @@ public class JNDIConnector extends AbstractConnector {
      * @return Constants.SETTING_NOT_POSSIBLE if the JNDI Context ist readonly.
      */
     public int rebindToContext(String key, Object value) {
-        if (!isJNDIAvailable()) {
+        // don't do a check, but use it if a check was done.
+        if (BooleanUtils.isNotTrue(isJNDIAvailable)) {
+            // only if isJNDIAvailable() was called an evaluated to false.
             return Constants.SETTING_NOT_POSSIBLE;
         }
         String normalizedKey = normalizeKey(key);
@@ -231,9 +234,9 @@ public class JNDIConnector extends AbstractConnector {
     private static void createParentContext(Context ctx, String key) throws NamingException {
         // here we need to break by the specified delimiter
 
-        // can't use String.split as the regexp will clash with the types of chars
-        // used in the delimiters. Could use Commons Lang. Quick hack instead.
-        // String[] path = key.split( (String) this.table.get(SIMPLE_DELIMITER));
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("createParentContext: " + key);
+        }
         String[] path = key.split("/");
 
         int lastIndex = path.length - 1;
@@ -250,6 +253,9 @@ public class JNDIConnector extends AbstractConnector {
             
             if (obj == null) {
                 tmpCtx = tmpCtx.createSubcontext(path[i]);
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("createSubcontext: " + path[i]);
+                }
             } else if (obj instanceof Context) {
                 tmpCtx = (Context) obj;
             } else {
@@ -257,18 +263,6 @@ public class JNDIConnector extends AbstractConnector {
                     + "' an Object was found: " + obj);
             }
         }
-
-//        Object obj = null;
-//        try {
-//            obj = tmpCtx.lookup(path[lastIndex]);
-//        } catch (NameNotFoundException e) {
-//            return; // OK only parent Context must be created.
-//        }
-//
-//        if (obj instanceof Context) {
-//            tmpCtx.destroySubcontext(path[lastIndex]);
-//            obj = null;
-//        }
     }
     
     private String normalizeKey(final String key){
