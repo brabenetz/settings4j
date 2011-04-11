@@ -217,7 +217,7 @@ public class JNDIConnectorTest extends TestCase {
         setTomcatJNDIContextProperties();
 
         // JNDI-Connector is disabled:
-        connector.setObject("irgendwas", "Somthing to create parent Context");
+        connector.setObject("irgendwas", "Something to create parent Context");
         assertNull(connector.getObject("irgendwas"));
         
         //reset boolean Flag
@@ -232,8 +232,8 @@ public class JNDIConnectorTest extends TestCase {
 
         // test setObject and getObject.
         assertNull(connector.getObject("irgendwas"));
-        connector.setObject("irgendwas", "Somthing to test");
-        assertEquals("Somthing to test", connector.getObject("irgendwas"));
+        connector.setObject("irgendwas", "Something to test");
+        assertEquals("Something to test", connector.getObject("irgendwas"));
         
     }
 
