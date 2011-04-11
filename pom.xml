@@ -438,4 +438,31 @@
 			<url>${distribution.htdocs}/archiv/settings4j/${project.version}</url>
 		</site>
     </distributionManagement>
+    
+	<profiles>
+		<profile>
+			<id>manifestVersionWithTimestamp</id>
+			<activation>
+				<property>
+					<name>manifestVersionWithTimestamp</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-jar-plugin</artifactId>
+						<configuration>
+							<archive>
+								<manifestEntries>
+									<Implementation-Version>${pom.version}-${maven.build.timestamp}</Implementation-Version>
+								</manifestEntries>
+							</archive>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
