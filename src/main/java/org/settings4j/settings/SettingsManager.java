@@ -120,7 +120,7 @@ public class SettingsManager {
     private static void initializeRepositoryIfNecessary(){
         if (getSettingsRepository().getConnectorCount() == 0){
             // No connectors in hierarchy, warn user and add default-configuration.
-            LOG.warn("The settings4j will be configured with the default-fallback-config: " + SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
+            LOG.info("The settings4j will be configured with the default-fallback-config: " + SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
             
             URL url = ClasspathContentResolver.getResource(SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
 
