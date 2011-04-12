@@ -31,10 +31,40 @@ import org.springframework.beans.factory.InitializingBean;
  * Or with a custom {@link org.settings4j.Connector}-Implementation.
  * <pre>
  *  &lt;bean id="MyConfigurableValue" class="org.settings4j.helper.spring.Settings4jFactoryBean"&gt;
- *      &lt;property name="key"&gt;&lt;value&gt;env/MyVariable&lt;/value&gt;&lt;/property&gt;
+ *      &lt;property name="key"&gt;&lt;value&gt;<b>env/MyVariable</b>&lt;/value&gt;&lt;/property&gt;
  *  &lt;/bean&gt;
  * </pre>
+ * 
+ * 
  * <h2>More complex SpringBean Example:</h2>
+ * 
+ * This Example shows how a Hibernate SessionFactory can optional customized with additional HibernateProperties. 
+ * 
+ * <pre>
+ *    &lt;bean id="hibernateProperties"
+ *        class="org.springframework.beans.factory.config.PropertiesFactoryBean"&gt;
+ *        &lt;property name="locations"&gt;
+ *            &lt;list&gt;
+ *                &lt;value&gt;classpath:org/settings4j/helper/spring/DefaultHibernate.properties&lt;/value&gt;
+ *                &lt;bean class="org.settings4j.helper.spring.Settings4jFactoryBean"&gt;
+ *                    &lt;property name="key"&gt;&lt;value&gt;<b>env/MyCustomProprtiesLocationKey</b>&lt;/value&gt;&lt;/property&gt;
+ *                    &lt;property name="defaultObject"&gt;
+ *                        &lt;!-- This could also be an empty Property-File But it must Exist. --&gt;
+ *                        &lt;!-- PropertiesFactoryBean cannot handle invalid Paths. --&gt;
+ *                        &lt;value&gt;classpath:org/settings4j/helper/spring/DefaultHibernate.properties&lt;/value&gt;
+ *                    &lt;/property&gt;
+ *                &lt;/bean&gt;
+ *            &lt;/list&gt;
+ *        &lt;/property&gt;
+ *    &lt;/bean&gt;
+ *    
+ *    &lt;bean id="mySessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"&gt;
+ *        &lt;property name="dataSource" ref="db2Datasource2" /&gt;
+ *        &lt;property name="hibernateProperties" ref="hibernateProperties" /&gt;
+ *        ....
+ *    &lt;/bean&gt;
+ * </pre>
+ * 
  * 
  * @author <a href="mailto:harald.brabenetz@infonova.com">Harald Brabenetz (hbrabenetz)</a>
  *
@@ -44,6 +74,7 @@ public class Settings4jFactoryBean implements FactoryBean, InitializingBean {
     private String key;
     private boolean singleton = true;
     private Object singletonObject;
+    private Object defaultObject;
     private Class expectedType;
 
     public String getKey() {
@@ -85,6 +116,16 @@ public class Settings4jFactoryBean implements FactoryBean, InitializingBean {
         return this.expectedType;
     }
 
+    
+    public Object getDefaultObject() {
+        return defaultObject;
+    }
+
+    
+    public void setDefaultObject(Object defaultObject) {
+        this.defaultObject = defaultObject;
+    }
+
     /** {@inheritDoc} */
     public Object getObject() {
         if (singleton) {
@@ -119,7 +160,10 @@ public class Settings4jFactoryBean implements FactoryBean, InitializingBean {
         if (result == null) {
             result = Settings4j.getString(key);
         }
-        
+
+        if (result == null) {
+            result = defaultObject;
+        }
         return result;
     }
 

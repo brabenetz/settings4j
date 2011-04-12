@@ -16,12 +16,10 @@
 
 package org.settings4j.helper.spring;
 
-import org.settings4j.Settings4jRepository;
-import org.settings4j.UtilTesting;
+import junit.framework.TestCase;
+
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.objectresolver.SpringConfigObjectResolver;
-
-import junit.framework.TestCase;
 
 
 public class Settings4jFactoryBeanTest extends TestCase {
@@ -31,10 +29,46 @@ public class Settings4jFactoryBeanTest extends TestCase {
         System.setProperty("Spring.HappyPathTest", "Hallo World");
         
         // load the example Spring-Config
-        String key = "org/settings4j/helper/spring/Settings4jFactoryBeanHappyPath";
+        Object result = getObjectFromSpringConfig("org/settings4j/helper/spring/Settings4jFactoryBeanHappyPath");
+        
+        // validate Result
+        assertEquals("Hallo World", result);
+    }
+    
+    public void testHappyPathComplex() {
+        // Example system-Config
+        //System.setProperty("Spring.HappyPathComplexTest", "Hallo World");
+        Object result;
+        DummySessionFactory sessionFactory;
+        
+        // load the example Spring-Config
+        result = getObjectFromSpringConfig("org/settings4j/helper/spring/Settings4jFactoryBeanHappyPathComplex");
+
+        // validate Result
+        assertEquals(DummySessionFactory.class.getName(), result.getClass().getName());
+        sessionFactory = (DummySessionFactory) result;
+        assertEquals("test Property Value 1", sessionFactory.getHibernateProperties().get("testProperty1"));
+        assertEquals("test Property Value 2", sessionFactory.getHibernateProperties().get("testProperty2"));
+        assertNull(sessionFactory.getHibernateProperties().get("testProperty3"));
+        
+        // Now set Custom Proeprty:
+        System.setProperty("Spring.HappyPathComplexTest", "classpath:org/settings4j/helper/spring/CustomHibernate.properties");
+
+        // load the same example Spring-Config (but now a custom config is set)
+        result = getObjectFromSpringConfig("org/settings4j/helper/spring/Settings4jFactoryBeanHappyPathComplex");
+
+        // validate custom Result
+        assertEquals(DummySessionFactory.class.getName(), result.getClass().getName());
+        sessionFactory = (DummySessionFactory) result;
+        assertEquals("test Property Value 1 Custom", sessionFactory.getHibernateProperties().get("testProperty1"));
+        assertEquals("test Property Value 2", sessionFactory.getHibernateProperties().get("testProperty2"));
+        assertEquals("test Property Value 3 Custom", sessionFactory.getHibernateProperties().get("testProperty3"));
+        
+    }
+
+    private Object getObjectFromSpringConfig(String key) {
         SpringConfigObjectResolver springConfigObjectResolver = new SpringConfigObjectResolver();
         Object result = springConfigObjectResolver.getObject(key, new ClasspathContentResolver());
-        
-        assertEquals("Hallo World", result);
+        return result;
     }
 }
