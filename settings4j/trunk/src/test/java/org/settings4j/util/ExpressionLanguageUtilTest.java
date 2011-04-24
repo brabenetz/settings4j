@@ -25,17 +25,23 @@ import org.apache.commons.collections.map.LazyMap;
 import junit.framework.TestCase;
 
 /**
- * Test ExpressionLanguage Syntax
+ * Test ExpressionLanguage Syntax.
+ * <p>
+ * Checkstyle:OFF MagicNumber
  */
-public class TestExpressionLanguageUtil extends TestCase{
-    
+public class ExpressionLanguageUtilTest extends TestCase {
+
+    /**
+     * TestCase for {@link ExpressionLanguageUtil#evaluateExpressionLanguage(String, Map)} HappyPath.
+     * 
+     * @throws Exception if an error occurs.
+     */
     public void testSimple() throws Exception {
         // the Map with all params 
         //Map<String, Object> context = new java.util.HashMap<String, Object>();
         Map context = new java.util.HashMap();
 
         String result;
-        
         
         // First test without Params. Result: "Hallo "
         result = ExpressionLanguageUtil.evaluateExpressionLanguage("Hallo ${name}", context);
@@ -47,7 +53,12 @@ public class TestExpressionLanguageUtil extends TestCase{
         assertEquals(result, "Hallo Harry");
         
     }
-    
+
+    /**
+     * TestCase for {@link ExpressionLanguageUtil#evaluateExpressionLanguage(String, Map)} Complex.
+     * 
+     * @throws Exception if an error occurs.
+     */
     public void testComplex() throws Exception {
         // the Map with all params 
         // Map<String, Object> context = new java.util.HashMap<String, Object>();
@@ -78,6 +89,12 @@ public class TestExpressionLanguageUtil extends TestCase{
         
     }
 
+    /**
+     * TestCase for {@link LazyMap#decorate(Map, org.apache.commons.collections.Factory)}
+     * and {@link MatchPatternTransformer}.
+     * 
+     * @throws Exception if an error occurs.
+     */
     public void testLazyMapMatchPattern() throws Exception {
         
         // the Map with all params 
@@ -90,20 +107,28 @@ public class TestExpressionLanguageUtil extends TestCase{
          */
         context.put("test", LazyMap.decorate(new HashMap(), new MatchPatternTransformer("testString")));
         
-        assertEquals(((Boolean)ExpressionLanguageUtil.evaluateExpressionLanguage("${test['testString']}", context, Boolean.class)).booleanValue(),  true);
-        assertEquals(((Boolean)ExpressionLanguageUtil.evaluateExpressionLanguage("${test['teststring']}", context, Boolean.class)).booleanValue(),  false);
-        assertEquals(((Boolean)ExpressionLanguageUtil.evaluateExpressionLanguage("${test['tesString']}", context, Boolean.class)).booleanValue(),   false);
-        assertEquals(((Boolean)ExpressionLanguageUtil.evaluateExpressionLanguage("${test['.*String']}", context, Boolean.class)).booleanValue(),    true);
-        assertEquals(((Boolean)ExpressionLanguageUtil.evaluateExpressionLanguage("${test['.*string']}", context, Boolean.class)).booleanValue(),    false);
-        assertEquals(((Boolean)ExpressionLanguageUtil.evaluateExpressionLanguage("${test['test.*']}", context, Boolean.class)).booleanValue(),      true);
-        assertEquals(((Boolean)ExpressionLanguageUtil.evaluateExpressionLanguage("${test['askjlf.*']}", context, Boolean.class)).booleanValue(),    false);
-        assertEquals(((Boolean)ExpressionLanguageUtil.evaluateExpressionLanguage("${test['invalid Expresion: \\\\']}", context, Boolean.class)).booleanValue(),    false);
+        assertEquals(true, ((Boolean) ExpressionLanguageUtil.evaluateExpressionLanguage(//
+            "${test['testString']}", context, Boolean.class)).booleanValue());
+        assertEquals(false, ((Boolean) ExpressionLanguageUtil.evaluateExpressionLanguage(//
+            "${test['teststring']}", context, Boolean.class)).booleanValue());
+        assertEquals(false, ((Boolean) ExpressionLanguageUtil.evaluateExpressionLanguage(//
+            "${test['tesString']}", context, Boolean.class)).booleanValue());
+        assertEquals(true, ((Boolean) ExpressionLanguageUtil.evaluateExpressionLanguage(//
+            "${test['.*String']}", context, Boolean.class)).booleanValue());
+        assertEquals(false, ((Boolean) ExpressionLanguageUtil.evaluateExpressionLanguage(//
+            "${test['.*string']}", context, Boolean.class)).booleanValue());
+        assertEquals(true, ((Boolean) ExpressionLanguageUtil.evaluateExpressionLanguage(//
+            "${test['test.*']}", context, Boolean.class)).booleanValue());
+        assertEquals(false, ((Boolean) ExpressionLanguageUtil.evaluateExpressionLanguage(//
+            "${test['askjlf.*']}", context, Boolean.class)).booleanValue());
+        assertEquals(false, ((Boolean) ExpressionLanguageUtil.evaluateExpressionLanguage(//
+            "${test['invalid Expresion: \\\\']}", context, Boolean.class)).booleanValue());
         
         
     }
     
     /**
-     * Example Object for the testComplex()-Function
+     * Example Object for the testComplex()-Function.
      * 
      * @author Harald.Brabenetz
      *

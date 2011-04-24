@@ -41,7 +41,6 @@ import org.settings4j.Settings4jRepository;
  * 
  * 
  * @author hbrabenetz
- * @author Ceki G&uuml;lc&uuml; (the original log4j org.apache.log4j.Hierarchy)
  * 
  */
 public class DefaultSettingsRepository implements Settings4jRepository {

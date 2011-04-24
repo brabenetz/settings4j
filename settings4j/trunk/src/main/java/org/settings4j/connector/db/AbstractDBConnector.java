@@ -28,7 +28,7 @@ import org.settings4j.contentresolver.UnionContentResolver;
  * 
  * The implementation of the SettingsDAO could be Hibernate, JPA, Ibatis, JDBC or something else. 
  * 
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public abstract class AbstractDBConnector extends AbstractConnector {

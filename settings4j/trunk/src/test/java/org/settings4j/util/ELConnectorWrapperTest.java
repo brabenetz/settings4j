@@ -14,18 +14,12 @@
  * limitations under the License.
  * 
  *****************************************************************************/
-package org.settings4j;
 
-/**
- * Create a new instance of Settings-Interface
- * 
- * @author Harald.Brabenetz
- */
-public interface Settings4jFactory {
-    /**
-     * The default implementation makes a new {@link org.settings4j.settings.DefaultSettings}(String name) instance
-     * 
-     * @return new {@link Settings4jInstance}
-     */
-    Settings4jInstance makeNewSettingsInstance();
+package org.settings4j.util;
+
+import junit.framework.TestCase;
+
+
+public class ELConnectorWrapperTest extends TestCase {
+
 }

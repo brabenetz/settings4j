@@ -27,7 +27,7 @@ import org.hibernate.cfg.Configuration;
  * Extends the org.hibernate.cfg.Configuration ( {@link Configuration}) with
  * one Methode to load a Hibernate Configuration-File from a ByteArray.
  * 
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public class ConfigurationByteArray extends Configuration {

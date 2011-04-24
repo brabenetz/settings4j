@@ -37,7 +37,7 @@ import org.settings4j.connector.ClasspathConnector;
  * --------------------------------------
  * 
  * </pre>
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public interface Connector {

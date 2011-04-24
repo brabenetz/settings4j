@@ -6,11 +6,17 @@
                                     11-05-2008
                                     ------------------
 
-Settings4j library 1.0
+	<<Description>>
 
- This documentation is related to the settings4j <<1.0>> release.
+ 	This documentation is related to the settings4j <<1.0>> release.
 
-* THE PROBLEM
+{Index}
+
+%{toc}
+
+{Overview}
+
+* {THE PROBLEM}
 
 	When I make a Project, I must decide where the configuration settings will be stored.\
 	There are many diffeneret solutions:
@@ -31,18 +37,18 @@ Settings4j library 1.0
 	where the information ist logged out.\
 	The Programmer must not care about it.
 
-* THE SOLUTION
+* {THE SOLUTION}
 
 	For Settings, the Solution could be similar.\
 	The Programmer says he want the settings for Key 'xyz', and should not care about where the Settings comes from.
 
-* EXAMPLE
+{EXAMPLE}
 
 	* The <<Developer>> want the settings for Key 'com/mycompany/mycalculation/my-formula'
 	
 	* The <<Deployer>> define where and how the value will be placed.
 
-** Developer
+* {Developer}
 
 	Developer wants the settings for Key 'com/mycompany/mycalculation/my-formula'
 	He create the following SettingsManager-Class:
@@ -56,12 +62,12 @@ public class SettingsManager {
 }
 --------------------------------------------
 
-** Deployer
+* {Deployer}
 
 	By default the Deployer can chose to configure the developers app with the SystemProperties, JNDI-Context or the Classpath (in this order).\
 	He can also define his own settings4j.xml (e.g.: for Database-Configuration, Property-Files, write-access, etc...)
 
-*** SystemProperties
+** {SystemProperties}
 	
 	System Properties can be set as java.exe Argument (JAVA_OPTS):
 	
@@ -89,7 +95,7 @@ startup.bat
 </server>
 --------------------------------------------
 	
-*** JNDI-Context
+** {JNDI-Context}
 	
 	If you want access to the JNDI-Context. you must prepare your (Web) Application
 	
@@ -155,7 +161,7 @@ startup.bat
 </Context>
 --------------------------------------------
 
-*** Classpath
+** {Classpath}
 	
 	The Key-Value can also be placed into the classpath:
 	

@@ -33,7 +33,7 @@ package org.settings4j;
  * <p>You can now store a XMLEncoded (Serialized) Java-Objects into your Classpath.<br />
  * see {@link org.settings4j.objectresolver.JavaXMLBeansObjectResolver} for more details.<br />
  * 
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public interface ObjectResolver {

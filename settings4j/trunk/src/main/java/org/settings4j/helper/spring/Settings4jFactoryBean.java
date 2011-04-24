@@ -66,7 +66,7 @@ import org.springframework.beans.factory.InitializingBean;
  * </pre>
  * 
  * 
- * @author <a href="mailto:harald.brabenetz@infonova.com">Harald Brabenetz (hbrabenetz)</a>
+ * @author Harald.Brabenetz
  *
  */
 public class Settings4jFactoryBean implements FactoryBean, InitializingBean {

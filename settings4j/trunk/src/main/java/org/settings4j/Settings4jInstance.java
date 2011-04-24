@@ -25,7 +25,7 @@ import java.util.Map;
  * 
  * @see Settings4j
  * 
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public interface Settings4jInstance {
