@@ -75,20 +75,22 @@ public class ConfigureSettings4jWithWebContextPath implements ServletContextList
     
     private String expresionAttributeName = "contextPath";
     
-    /** General Logger for this Class */
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(ConfigureSettings4jWithWebContextPath.class);
     
-    public void contextDestroyed(ServletContextEvent sce) {
+    /** {@inheritDoc} */
+    public void contextDestroyed(final ServletContextEvent sce) {
         // do nothing
     }
 
-    public void contextInitialized(ServletContextEvent sce) {
+    /** {@inheritDoc} */
+    public void contextInitialized(final ServletContextEvent sce) {
         String realRootPath = sce.getServletContext().getRealPath("/");
         LOG.info("found realRootPath: " + realRootPath);
         // cut off the last char "/" from "http://host/contextPath/"
-        realRootPath = realRootPath.substring(0, realRootPath.length()-1); 
-        String contextPath = realRootPath.substring(realRootPath.lastIndexOf('/')+1);
+        realRootPath = realRootPath.substring(0, realRootPath.length() - 1); 
+        String contextPath = realRootPath.substring(realRootPath.lastIndexOf('/') + 1);
         // get "contextPath" from "http://host/contextPath"
         LOG.info("found real contextPath: " + contextPath);
         
@@ -96,10 +98,10 @@ public class ConfigureSettings4jWithWebContextPath implements ServletContextList
         settingsRepository.resetConfiguration();
         
         // read XML default Configuration to configure the repository
-        URL url = ClasspathContentResolver.getResource(configurationFile);
+        URL url = ClasspathContentResolver.getResource(this.configurationFile);
         
         DOMConfigurator domConfigurator = new DOMConfigurator(settingsRepository);
-        domConfigurator.addExpressionAttribute(expresionAttributeName, contextPath);
+        domConfigurator.addExpressionAttribute(this.expresionAttributeName, contextPath);
         domConfigurator.doConfigure(url);
         
         
