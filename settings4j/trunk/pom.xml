@@ -143,12 +143,12 @@
 					<!--  See: http://maven.apache.org/plugins/maven-eclipse-plugin/eclipse-mojo.html -->
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
-					<additionalProjectnatures>
-						<projectnature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</projectnature>
-					</additionalProjectnatures>
 					<additionalBuildcommands>
-						<buildcommand>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</buildcommand>
+						<buildCommand><name>net.sf.eclipsecs.core.CheckstyleBuilder</name></buildCommand>
 					</additionalBuildcommands>
+					<additionalProjectnatures>
+						<projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
+					</additionalProjectnatures>
 					<additionalConfig>
 						<file>
 							<name>.checkstyle</name>
