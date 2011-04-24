@@ -54,7 +54,7 @@ import org.settings4j.contentresolver.UnionContentResolver;
  * 
  * </pre>
  * 
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public interface ContentResolver {

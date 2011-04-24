@@ -29,7 +29,7 @@ import org.settings4j.ContentResolver;
  * Thsi ObjectResolver convert a byte[] to an Object an inverse
  * with the {@link XMLDecoder} and {@link XMLEncoder}
  * 
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public class JavaXMLBeansObjectResolver extends AbstractObjectResolver {
@@ -53,7 +53,7 @@ public class JavaXMLBeansObjectResolver extends AbstractObjectResolver {
      * The {@link org.springframework.jdbc.datasource.AbstractDataSource} Object<br />
      * hast Getter and Setter for "logWriter" who throws per default an {@link UnsupportedOperationException}.<br />
      * 
-     * @author hbrabenetz
+     * @author Harald.Brabenetz
      */
     private class LogDecoderExceptionListener implements ExceptionListener {
         private String key;

@@ -26,15 +26,16 @@ import java.io.ByteArrayInputStream;
  * An {@link EntityResolver} specifically designed to return <code>settings4j.dtd</code> which is
  * embedded within the settings4j jar file.
  * 
- * @author Paul Austin
+ * @author Harald.Brabenetz
  */
 public class Settings4jEntityResolver implements EntityResolver {
 
-    /** General Logger for this Class */
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(Settings4jEntityResolver.class);
 
-    public InputSource resolveEntity(String publicId, String systemId) {
+    /** {@inheritDoc} */
+    public InputSource resolveEntity(final String publicId, final String systemId) {
         if (systemId.endsWith("settings4j.dtd")) {
             Class clazz = getClass();
             InputStream in = clazz.getResourceAsStream("/org/settings4j/config/settings4j.dtd");
@@ -44,8 +45,8 @@ public class Settings4jEntityResolver implements EntityResolver {
                 in = new ByteArrayInputStream(new byte[0]);
             }
             return new InputSource(in);
-        } else {
-            return null;
         }
+
+        return null;
     }
 }

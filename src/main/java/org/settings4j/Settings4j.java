@@ -36,7 +36,7 @@ import org.settings4j.settings.SettingsManager;
  * 
  * </pre>
  * 
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public final class Settings4j {

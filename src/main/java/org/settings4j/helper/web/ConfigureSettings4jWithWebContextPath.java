@@ -66,7 +66,7 @@ import org.settings4j.settings.SettingsManager;
  * 
  * <p>Only the settings4j.xml should be placed into the Web-Containers Classpath, where it is accessible by all webapps.
  * 
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public class ConfigureSettings4jWithWebContextPath implements ServletContextListener {

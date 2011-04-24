@@ -30,7 +30,7 @@ import org.settings4j.Settings4jInstance;
 /**
  * The default Settings Object.
  * 
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public class DefaultSettings implements Settings4jInstance {

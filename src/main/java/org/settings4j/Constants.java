@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 /**
  * Some Constants like the Return Values (success or not) of Connectors.set*(...) Methodes. 
  * 
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public interface Constants {

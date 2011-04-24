@@ -20,7 +20,7 @@ package org.settings4j.connector.db;
 /**
  * The Data Transfer Object (Domain Object) for all Database-Operations.
  * 
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public class SettingsDTO {

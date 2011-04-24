@@ -6,14 +6,19 @@
                                     12-05-2008
                                     ------------------
 
-Download
 
-* Manual
+{Index}
+
+%{toc}
+
+{Download}
+
+* {Manual}
 
    You can download source and binary distributions from the
    {{{http://sourceforge.net/projects/settings4j}SourceForge file server}}.
 
-* Automatically with Maven
+* {Automatically with Maven}
 
 	[[1]] Add the Settings4j <<Repository>> to your pom.xml:
 	
@@ -32,6 +37,6 @@ Download
 <dependency>
 	<groupId>org.settings4j</groupId>
 	<artifactId>settings4j</artifactId>
-	<version>1.0.0-alpha</version>
+	<version>1.0-beta3</version>
 </dependency>
 --------------------------------------------

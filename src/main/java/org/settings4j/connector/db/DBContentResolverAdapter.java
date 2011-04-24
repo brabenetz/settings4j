@@ -30,7 +30,7 @@ import org.settings4j.ObjectResolver;
  * This implementation of a ContentResolver has no default-Constructor.
  * So it is not possible to use it in a settings4j.xml configuration.
  * 
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public class DBContentResolverAdapter implements ContentResolver {

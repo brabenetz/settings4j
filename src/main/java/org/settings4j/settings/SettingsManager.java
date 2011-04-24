@@ -18,7 +18,6 @@ package org.settings4j.settings;
 
 import java.net.URL;
 
-import org.settings4j.Settings4j;
 import org.settings4j.Settings4jFactory;
 import org.settings4j.Settings4jInstance;
 import org.settings4j.Settings4jRepository;
@@ -30,16 +29,17 @@ import org.settings4j.settings.nop.NOPSettingsRepository;
  * managed The {@link Settings4jRepository} .
  * This {@link Settings4jRepository} is used to store the configuration from the settings4j.xml.
  * 
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public class SettingsManager {
-    /** General Logger for this Class */
+
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(SettingsManager.class);
 
     /**
-     * The Classpath-Location of the settings4j.xml who i readed by default <br />
+     * The Classpath-Location of the settings4j.xml who i readed by default. <br />
      * settings4j.xml
      */
     public static final String DEFAULT_XML_CONFIGURATION_FILE = "settings4j.xml";
@@ -92,9 +92,9 @@ public class SettingsManager {
     }
 
     /**
-     * Retrieve the appropriate {@link Settings4j} instance.
+     * Retrieve the appropriate {@link org.settings4j.Settings4j} instance.
      * 
-     * @return the appropriate {@link Settings4j} instance.
+     * @return the appropriate {@link org.settings4j.Settings4j} instance.
      */
     public static Settings4jInstance getSettings() {
     	initializeRepositoryIfNecessary();
@@ -103,10 +103,11 @@ public class SettingsManager {
     }
 
     /**
-     * Retrieve the appropriate {@link Settings4j} instance or create it with the give factory if doesn'r already exist.
+     * Retrieve the appropriate {@link org.settings4j.Settings4j} instance or create it with the
+     * give factory if doesn'r already exist.
      * 
      * @param factory The factory to create a {@link Settings4jInstance}.
-     * @return the appropriate {@link Settings4j} instance.
+     * @return the appropriate {@link org.settings4j.Settings4j} instance.
      */
     public static Settings4jInstance getSettings(final Settings4jFactory factory) {
     	initializeRepositoryIfNecessary();

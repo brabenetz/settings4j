@@ -30,7 +30,7 @@ import org.settings4j.connector.db.dao.SettingsDAO;
  * <br />
  * pre required: The sessionFactory must be injected by there Setter before the first usage.
  * 
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public class SettingsDAOHibernate implements SettingsDAO {

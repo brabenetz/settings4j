@@ -21,7 +21,7 @@ import org.settings4j.settings.SettingsManager;
 /**
  * Holder for a single {@link Settings4jInstance}.
  * 
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public interface Settings4jRepository {

@@ -6,11 +6,17 @@
                                     20-05-2008
                                     ------------------
 
-Roadmap of changes for this project.
+	<<Description>>
+	
+	Roadmap of changes for this project.
 
-  Changes are chronologically ordered from top (most recent) to bottom (least recent).
+{Index}
 
-* Legend:
+%{toc}
+
+{Roadmap:}
+
+  	Changes are chronologically ordered from top (most recent) to bottom (least recent).
 
 	! New Feature
 
@@ -18,7 +24,7 @@ Roadmap of changes for this project.
 
 	- General comment
 
-* 2009/2010 1.1.0
+* {2011/2012 1.1.0}
 
 	Brainstorming:
 
@@ -41,27 +47,23 @@ Roadmap of changes for this project.
 		* {{http://www.particle.kth.se/~lindsey/JavaCourse/Book/Part1/Java/Chapter10/Preferences.html}}
 
 
-* 2009 Final Version 1.0.0 - after few bug fixes
+* {2011 Final Version 1.0.0 - after few bug fixes}
 
 
 
-* 2009 1.0.0-rc - refactored release
+* {2011 1.0.0-rc - refactored release}
 
     - extended JavaDoc and UnitTests
-    
-    - Simple standalone WebApp to modify Settings (set new String-Values or upload files per Key). This App should be seperated in two modules
-    	
-    	* Core-Module: The main businesslogic who can be simbly integrated in existence applications. The List of keys who are used by your Apps should be configurabel with Settings4j itself.
-    	
-    	* GUI-Module: a simple webGUI with Struts and Tiles and ACEGI-Security as Example who the Core-Module can be integrated. But the resulting WAR can be used immediately as Setup-GUI for your Webapp.
-	
-	! Helper Class for SpringFramework:
-	
-		* like org.springframework.jndi.JndiObjectFactoryBean {{http://static.springframework.org/spring/docs/2.5.4/reference/cci.html}}
 
 	! additional Connector to Environment Variables.
   
-* 2009 1.0.0-beta2 - refactored release  	
+* {2011 1.0.0-beta3 - refactored release}
+
+	- Remove Setter. (The core-feature of settings4j is to GET Settings, the implementation is now much simpler.)
+
+	! Additional Helper for the Springframework. see JavaDoc of org.settings4j.helper.spring.Settings4jFactoryBean.java
+  
+* {2009 1.0.0-beta2 - refactored release}
 
 	- Remove Hirachical Structure. (it works, but without it, the usage is much simpler.)
 
@@ -73,7 +75,7 @@ Roadmap of changes for this project.
 	
 	- Add additional method: getConnector(ConnectorName) return the Connector for the given Name.
 
-* 6. July 2008 1.0.0-beta - release with additional features:
+* {6. July 2008 1.0.0-beta - release with additional features:}
 
     ! Object-Resolver implementations with java.beans.XMLEncoder and XMLDecoder
 
@@ -90,7 +92,7 @@ Roadmap of changes for this project.
     ! mappings configured in settings4j.xml: map one key to an other Key.
 
 
-* 12. May 2008 1.0.0-alpha - release with following features:
+* {12. May 2008 1.0.0-alpha - release with following features:}
 
     ! Automatically read settings4j.xml from classpath if available
 
@@ -103,11 +105,12 @@ Roadmap of changes for this project.
     - A Simple Example Module who can be use by a Commandline-Client or a web application. The module is configurable either with SystemProperties or JNDI-Envirenment-Variables depends on the settings4j.xml inside the two Client-Applications (jar or war)
 
 
-* 12. April 2008
+* {12. April 2008}
+
 	- Project start
 
 	
-* March/April 2008
+* {March/April 2008}
 
 	- {{{roadmapTheBeginning.html}The beginning}}
 	

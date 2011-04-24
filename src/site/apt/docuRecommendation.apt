@@ -6,34 +6,47 @@
                                     20-05-2008
                                     ------------------
 
-Recommendation
 
-* Encapsulation
+	<<Description>>
+	
+	Some best practice.
 
-   Create a SettingsManager (Synonym: PropertyManager, ConfigurationManager)
+{Index}
+
+%{toc}
+
+
+{Encapsulation}
+
+	Create a SettingsManager (Synonym: PropertyManager, ConfigurationManager)
    
-	* The encapsulation of configurable Data is a good idea (Like SQL encapsulation in DAOs)
+	It is much easier maintainable if all KEYs how you can configure your App
+	where places in one Class or at least in one Package. 
 
-* Key-Name
+{Key-Name}
 
    Use unique and meaningful names for your Keys (like your package-Name) e.g.: "com/mycompany/myapp/myKeyForNumberFormatting"
+   
+   Or at least your AppName:  e.g.: "MyPowerApp/myKeyForTheFormularToSolvingEveryThing"
 
-* Customized settings4j.xml
+{Customized settings4j.xml}
 
    settings4j.xml (accurate to log4j.xml) must be availabel inside the classpath.
    But DO NOT put it into the resulting JAR of a Sub-Library.
 
-	 * On Webapps it should be placed on the Server (e.g.: %TOMCAT_HOME%/common/classes)
+	 * On Webapps it could be placed on the Server (e.g.: %TOMCAT_HOME%/common/classes/).
 	
-	 * On commandline apps it should be placed on the FileSystem which is included into the classpath (e.g.: -cp ./config )
+	 * On commandline apps it should be placed on the FileSystem which is included into the classpath (e.g.: -cp ./config/ )
 
-* What SHOULD be configured with Settings4j
+	 * For UnitTests, you can but it into /src/test/resources/
+
+{What SHOULD be configured with Settings4j}
    
    <<Applikation>> specific configurations like third part Server adresses.
    
-   * Datasource (beta-release)
+   * Datasource (Settings4j supports also environments without JNDI-Context)
    
-   * Webservice adresses
+   * Webservice URLs
    
    * Filesystem paths (e.g.: import/export of Files or temporary usage)
    
@@ -43,7 +56,7 @@ Recommendation
    
    <<Everything who should be differ from Development-, Testing- and Production-System, but changes never (or at least rarely) after deploying.>>
 	
-* What SHOULD NOT be configured with Settings4j
+{What SHOULD NOT be configured with Settings4j}
    
    <<Webapp-User>> specific configurations like personal preferences have nothing to do with settings4j !
    

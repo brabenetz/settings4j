@@ -34,7 +34,7 @@ import org.settings4j.contentresolver.ClasspathContentResolver;
  * <br />
  * Before the Data Access Object will be used, the SessionFactory will be injected into the DAO. <br />
  * 
- * @author hbrabenetz
+ * @author Harald.Brabenetz
  *
  */
 public class HibernateDBConnector extends AbstractDBConnector {
