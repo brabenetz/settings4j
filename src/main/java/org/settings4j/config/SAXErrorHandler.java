@@ -19,20 +19,29 @@ package org.settings4j.config;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXParseException;
 
+/**
+ * Error Handler for parsing the settings4j.xml.
+ * 
+ * @author Harald.Brabenetz
+ *
+ */
 public class SAXErrorHandler implements ErrorHandler {
 
-    /** General Logger for this Class */
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(SAXErrorHandler.class);
 
+    /** {@inheritDoc} */
     public void error(final SAXParseException ex) {
         emitMessage("Continuable parsing error ", ex);
     }
 
+    /** {@inheritDoc} */
     public void fatalError(final SAXParseException ex) {
         emitMessage("Fatal parsing error ", ex);
     }
 
+    /** {@inheritDoc} */
     public void warning(final SAXParseException ex) {
         emitMessage("Parsing warning ", ex);
     }
