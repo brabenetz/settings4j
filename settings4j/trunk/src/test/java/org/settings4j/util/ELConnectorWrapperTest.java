@@ -17,9 +17,56 @@
 
 package org.settings4j.util;
 
+import java.util.Map;
+
+import javax.sql.DataSource;
+
 import junit.framework.TestCase;
 
+import org.settings4j.connector.ClasspathConnector;
+import org.settings4j.objectresolver.JavaXMLBeansObjectResolver;
+import org.settings4j.objectresolver.SpringConfigObjectResolver;
+import org.settings4j.objectresolver.UnionObjectResolver;
 
+
+/**
+ * TestCases for {@link ELConnectorWrapper}.
+ * 
+ * @author Harald.Brabenetz
+ *
+ */
 public class ELConnectorWrapperTest extends TestCase {
 
+    /**
+     * TestCase for {@link ELConnectorWrapper#getObject()}.
+     */
+    public void testGetObject() {
+        Object result;
+        ClasspathConnector classpathConnector = new ClasspathConnector();
+        //ContentResolver contentResolver = new ClasspathContentResolver();
+        UnionObjectResolver unionObjectResolver = new UnionObjectResolver();
+        unionObjectResolver.addObjectResolver(new SpringConfigObjectResolver());
+        unionObjectResolver.addObjectResolver(new JavaXMLBeansObjectResolver());
+        classpathConnector.setObjectResolver(unionObjectResolver);
+        
+        ELConnectorWrapper connectorWrapper = new ELConnectorWrapper(new ClasspathConnector[]{classpathConnector});
+
+        // SpringConfigObjectResolver
+        result = connectorWrapper.getObject().get("org/settings4j/objectresolver/testSpring1");
+        assertNotNull(result);
+        assertTrue(result instanceof DataSource);
+        
+        // JavaXMLBeansObjectResolver
+        result = connectorWrapper.getObject().get("org/settings4j/objectresolver/test1");
+        assertNotNull(result);
+        assertTrue(result instanceof Map);
+        
+        // with classpath prefix
+        result = connectorWrapper.getObject().get("classpath:org/settings4j/objectresolver/testSpring1");
+        assertNotNull(result);
+        assertTrue(result instanceof DataSource);
+        
+        
+        
+    }
 }
