@@ -20,38 +20,42 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+
+/**
+ * The {@link Properties}-File implementation of an {@link org.settings4j.Connector}.
+ * <p>
+ * 
+ * @author Harald.Brabenetz
+ *
+ */
 public class PropertyFileConnector extends AbstractPropertyConnector {
-    /** General Logger for this Class */
+
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(PropertyFileConnector.class);
-    
 
-    Properties property;
+
+    private Properties property;
+
     
-    /**
-     * Very similar to <code>System.getProperty</code> except that the {@link SecurityException}
-     * is hidden.
-     * 
-     * @param key The key to search for.
-     * @param def The default value to return.
-     * @return the string value of the system property, or the default value if there is no property
-     *         with that key.
-     * 
-     */
-    protected String getProperty(String key, String def) {
-        return property.getProperty(key, def);
+    /** {@inheritDoc} */
+    protected String getProperty(final String key, final String def) {
+        return this.property.getProperty(key, def);
     }
 
-    public void setProperty(Properties property) {
+    public void setProperty(final Properties property) {
         this.property = property;
     }
 
-    public void setPropertyFromContent(byte[] content) {
-        Properties tmpProperty = new Properties();
+    /**
+     * @param content The byte[] Content of a Property-File.
+     */
+    public void setPropertyFromContent(final byte[] content) {
+        final Properties tmpProperty = new Properties();
         try {
             tmpProperty.load(new ByteArrayInputStream(content));
-            property = tmpProperty;
-        } catch (IOException e) {
+            this.property = tmpProperty;
+        } catch (final IOException e) {
             LOG.error(e.getMessage(), e);
         }
     }

@@ -22,53 +22,65 @@ import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.contentresolver.UnionContentResolver;
 
+/**
+ * Connector implementation to read Settings from the ClassPath.
+ * 
+ * @author Harald.Brabenetz
+ *
+ */
 public class ClasspathConnector extends AbstractConnector {
-    
-    /** General Logger for this Class */
+
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(ClasspathConnector.class);
-    
-    private ClasspathContentResolver classpathContentResolver = new ClasspathContentResolver();
-    private ContentResolver unionContentResolver = new UnionContentResolver(classpathContentResolver);
+
+    private final ClasspathContentResolver classpathContentResolver = new ClasspathContentResolver();
+    private ContentResolver unionContentResolver = new UnionContentResolver(this.classpathContentResolver);
     private String charset = "UTF-8";
-    
-    public byte[] getContent(String key) {
-        return classpathContentResolver.getContent(key);
+
+    /** {@inheritDoc} */
+    public byte[] getContent(final String key) {
+        return this.classpathContentResolver.getContent(key);
     }
 
-    public Object getObject(String key) {
-        if (getObjectResolver() != null){
-            return getObjectResolver().getObject(key, unionContentResolver);
-        } else {
-            return null;
+    /** {@inheritDoc} */
+    public Object getObject(final String key) {
+        if (getObjectResolver() != null) {
+            return getObjectResolver().getObject(key, this.unionContentResolver);
         }
+        // else
+        return null;
+        
     }
 
-    public String getString(String key) {
+    /** {@inheritDoc} */
+    public String getString(final String key) {
         try {
-            byte[] content =  getContent(key);
-            if (content != null){
-                return new String(classpathContentResolver.getContent(key), charset);
-            } else {
-                return null;
+            final byte[] content = getContent(key);
+            if (content != null) {
+                return new String(this.classpathContentResolver.getContent(key), this.charset);
             }
-        } catch (UnsupportedEncodingException e) {
+            // else
+            return null;
+            
+        } catch (final UnsupportedEncodingException e) {
             // should never occure with "UTF-8"
-            LOG.error("Charset not found: " + charset, e);
+            LOG.error("Charset not found: " + this.charset, e);
             return null;
         }
     }
 
     public String getCharset() {
-        return charset;
+        return this.charset;
     }
 
-    public void setCharset(String charset) {
+    public void setCharset(final String charset) {
         this.charset = charset;
     }
 
-    public void setContentResolver(ContentResolver contentResolver) {
-        unionContentResolver = new UnionContentResolver(classpathContentResolver);
-        unionContentResolver.addContentResolver(contentResolver);
+    /** {@inheritDoc} */
+    public void setContentResolver(final ContentResolver contentResolver) {
+        this.unionContentResolver = new UnionContentResolver(this.classpathContentResolver);
+        this.unionContentResolver.addContentResolver(contentResolver);
     }
 }
