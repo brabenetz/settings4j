@@ -25,61 +25,60 @@ import org.apache.taglibs.standard.lang.jstl.VariableResolver;
 
 
 /**
- * A Simple Variable Resolver for ExpressionLanguage.
- * With the JSTLVariableResolver you need a PageContext-Object with HttpRequest etc....
- * This class is a Simple Variant of the JSTLVariableResolver who accept a Simple Map as PageContext.
- * Example:
- * 1. create a Map with Values(key="name", value="Herr Mustermann")
- * 2. parse the String "Hello, ${name}" with the given Map
- * 3. result: "Hello, Herr Mustermann".
+ * A Simple Variable Resolver for ExpressionLanguage. With the JSTLVariableResolver you need a PageContext-Object with
+ * HttpRequest etc.... This class is a Simple Variant of the JSTLVariableResolver who accept a Simple Map as
+ * PageContext. Example: 1. create a Map with Values(key="name", value="Herr Mustermann") 2. parse the String
+ * "Hello, ${name}" with the given Map 3. result: "Hello, Herr Mustermann".
  * 
  * @see org.apache.taglibs.standard.lang.jstl.JSTLVariableResolver
- * 
  * @author Harald.Brabenetz
- *
  */
-public class ExpressionLanguageUtil {
-    
+public final class ExpressionLanguageUtil {
+
+    /** Hide Constructor (Utility Pattern).*/
+    private ExpressionLanguageUtil() {
+        super();
+    }
     /**
-     * The VariableResolver for a <code>java.util.Map</code> as Context-Object
+     * The VariableResolver for a <code>java.util.Map</code> as Context-Object.
      */
-    private static final VariableResolver simpleVariableResolver = new VariableResolver(){
+    private static final VariableResolver SIMPLE_VARIABLE_RESOLVER = new VariableResolver() {
 
         /**
-         * Resolves the specified variable within the given context.
-         * Returns null if the variable is not found.
+         * Resolves the specified variable within the given context. Returns null if the variable is not found.
          **/
-        public Object resolveVariable (String pName, Object simpleMap) {
-          Map ctx = (Map) simpleMap;
-          return ctx.get(pName);
+        public Object resolveVariable(final String pName, final Object simpleMap) {
+            final Map ctx = (Map) simpleMap;
+            return ctx.get(pName);
         }
     };
 
-    private static final ELEvaluator sEvaluator = new ELEvaluator(simpleVariableResolver);
+    private static final ELEvaluator SIMPLE_EVALUATOR = new ELEvaluator(SIMPLE_VARIABLE_RESOLVER);
 
     /**
-     * Helper-Funktion to evaluate a Expression to a String
+     * Helper-Function to evaluate a Expression to a String.
      * 
-     * @param expression The Expresion to be evaluated
+     * @param expression The Expression to be evaluated
      * @param context The context where the expression has Access
      * @return The Result as String
      * @throws ELException Throw an Exception if the expression is not valid.
      */
-    public static String evaluateExpressionLanguage(String expression, Map context) throws ELException {
-        return (String)evaluateExpressionLanguage(expression, context, String.class);
+    public static String evaluateExpressionLanguage(final String expression, final Map context) throws ELException {
+        return (String) evaluateExpressionLanguage(expression, context, String.class);
     }
-    
+
     /**
-     * Helper-Funktion to evaluate a Expression to a given Class
+     * Helper-Function to evaluate a Expression to a given Class.
      * 
-     * @param expression The Expresion to be evaluated
+     * @param expression The Expression to be evaluated
      * @param context The context where the expression has Access
      * @param returnType the Class-Object who will be returned
      * @return The Result as the given return-Type
      * @throws ELException Throw an Exception if the expression is not valid.
      */
-    public static Object evaluateExpressionLanguage(String expression, Map context, Class returnType) throws ELException {
-        return sEvaluator.evaluate(expression, context, returnType, null, null);
+    public static Object evaluateExpressionLanguage(final String expression, final Map context, final Class returnType)
+            throws ELException {
+        return SIMPLE_EVALUATOR.evaluate(expression, context, returnType, null, null);
     }
-    
+
 }
