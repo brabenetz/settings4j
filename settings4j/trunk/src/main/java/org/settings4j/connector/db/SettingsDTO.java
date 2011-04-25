@@ -21,46 +21,46 @@ package org.settings4j.connector.db;
  * The Data Transfer Object (Domain Object) for all Database-Operations.
  * 
  * @author Harald.Brabenetz
- *
  */
 public class SettingsDTO {
+
     private Long id;
-    
+
     private String key;
-    
+
     private String stringValue;
-    
+
     private byte[] contentValue;
-    
+
     public String getKey() {
-        return key;
+        return this.key;
     }
-    
-    public void setKey(String key) {
+
+    public void setKey(final String key) {
         this.key = key;
     }
-    
+
     public String getStringValue() {
-        return stringValue;
+        return this.stringValue;
     }
-    
-    public void setStringValue(String stringValue) {
+
+    public void setStringValue(final String stringValue) {
         this.stringValue = stringValue;
     }
-    
+
     public byte[] getContentValue() {
-        return contentValue;
+        return this.contentValue;
     }
-    
-    public void setContentValue(byte[] contentValue) {
+
+    public void setContentValue(final byte[] contentValue) {
         this.contentValue = contentValue;
     }
-    
+
     public Long getId() {
-        return id;
+        return this.id;
     }
-    
-    public void setId(Long id) {
+
+    public void setId(final Long id) {
         this.id = id;
     }
 }

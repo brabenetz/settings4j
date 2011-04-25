@@ -20,38 +20,34 @@ package org.settings4j.connector.db.dao.hibernate;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import org.hibernate.HibernateException;
 import org.hibernate.cfg.Configuration;
 
 /**
- * Extends the org.hibernate.cfg.Configuration ( {@link Configuration}) with
- * one Methode to load a Hibernate Configuration-File from a ByteArray.
+ * Extends the org.hibernate.cfg.Configuration ( {@link Configuration}) with one Methode to load a Hibernate
+ * Configuration-File from a ByteArray.
  * 
  * @author Harald.Brabenetz
- *
  */
 public class ConfigurationByteArray extends Configuration {
 
-    /** General Logger for this Class */
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(ConfigurationByteArray.class);
-    
+
     private static final long serialVersionUID = 2770071843496670953L;
-    
+
     /**
-     * Use the mappings and properties specified in the given application
-     * resource. The format of the resource is defined in
-     * <tt>hibernate-configuration-3.0.dtd</tt>.
+     * Use the mappings and properties specified in the given application resource. The format of the resource is
+     * defined in <tt>hibernate-configuration-3.0.dtd</tt>.
      * <p/>
      * 
      * @param resourceContent The Configuration Content
      * @param resourceKey The name to use in warning/error messages
      * @return A configuration configured via the byte[]
-     * @throws HibernateException
      */
-    public Configuration configure(byte[] resourceContent, String resourceKey) throws HibernateException {
-        LOG.info( "configuring from resource: " + resourceKey );
-        InputStream stream = new ByteArrayInputStream(resourceContent);
-        return doConfigure( stream, resourceKey );
+    public Configuration configure(final byte[] resourceContent, final String resourceKey) {
+        LOG.info("configuring from resource: " + resourceKey);
+        final InputStream stream = new ByteArrayInputStream(resourceContent);
+        return doConfigure(stream, resourceKey);
     }
 }

@@ -35,17 +35,16 @@ import org.settings4j.contentresolver.ClasspathContentResolver;
  * Before the Data Access Object will be used, the SessionFactory will be injected into the DAO. <br />
  * 
  * @author Harald.Brabenetz
- *
  */
 public class HibernateDBConnector extends AbstractDBConnector {
 
-    /** General Logger for this Class */
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(HibernateDBConnector.class);
 
-    private static final ContentResolver defaultContentResolver = new ClasspathContentResolver();
-    
-    private SettingsDAOHibernate settingsDAO = new SettingsDAOHibernate();
+    private static final ContentResolver DEFAULT_CONTENT_RESOLVER = new ClasspathContentResolver();
+
+    private final SettingsDAOHibernate settingsDAO = new SettingsDAOHibernate();
 
     private String hibernateConfigXmlKeys = "hibernate.cfg.xml";
     private String hibernateMappingXmlKeys = "org/settings4j/connector/db/SettingsDTO.hbm.xml";
@@ -57,7 +56,7 @@ public class HibernateDBConnector extends AbstractDBConnector {
      * You can set more than one File with the ',' Seperator<br />
      * e.g.: "hibernate1.cfg.xml,hibernate2.cfg.xml"<br />
      * <br />
-     * The files will be readed by the given ContentResolvers.<br />
+     * The files will be readed by the given ContentResolvers. (default is ClasspathConntentResolver)<br />
      * <br />
      * Example:<br />
      * 
@@ -69,17 +68,17 @@ public class HibernateDBConnector extends AbstractDBConnector {
      * &lt;/connector&gt;
      * </pre>
      * 
-     * @param hibernateConfigXmlKeys
+     * @param hibernateConfigXmlKeys the comma seperated list of Hibernate-Configs.
      */
-    public void setHibernateConfigXmlKeys(String hibernateConfigXmlKeys) {
+    public void setHibernateConfigXmlKeys(final String hibernateConfigXmlKeys) {
         this.hibernateConfigXmlKeys = hibernateConfigXmlKeys;
     }
-    
+
     /**
      * You can set a customized HibernateMappingXml in your settings4j.xml<br />
      * Default: "org/settings4j/connector/db/SettingsDTO.hbm.xml"<br />
      * <br />
-     * The files will be readed by the given ContentResolvers.<br />
+     * The files will be readed by the given ContentResolvers (default is ClasspathConntentResolver).<br />
      * <br />
      * Example:<br />
      * 
@@ -91,24 +90,24 @@ public class HibernateDBConnector extends AbstractDBConnector {
      * &lt;/connector&gt;
      * </pre>
      * 
-     * @param hibernateMappingXmlKeys
+     * @param hibernateMappingXmlKeys the comma seperated list of Hibernate-Mappings.
      */
-    public void setHibernateMappingXmlKeys(String hibernateMappingXmlKeys) {
+    public void setHibernateMappingXmlKeys(final String hibernateMappingXmlKeys) {
         this.hibernateMappingXmlKeys = hibernateMappingXmlKeys;
     }
-    
+
     /** {@inheritDoc} */
     protected SettingsDAO getSettingsDAO() {
-        return settingsDAO;
+        return this.settingsDAO;
     }
 
     /**
-     * This implementation creates a Hibernate SessionFactory an inject it into the settingsDAO.
-     * After this, the {@link AbstractDBConnector#init()} will be called to add this Object to the contentResolver list
+     * This implementation creates a Hibernate SessionFactory an inject it into the settingsDAO. After this, the
+     * {@link AbstractDBConnector#init()} will be called to add this Object to the contentResolver list
      **/
     public void init() {
-        SessionFactory sessionFactory = getConfiguration().buildSessionFactory();
-        settingsDAO.setSessionFactory(sessionFactory);
+        final SessionFactory sessionFactory = getConfiguration().buildSessionFactory();
+        this.settingsDAO.setSessionFactory(sessionFactory);
         super.init();
     }
 
@@ -117,44 +116,44 @@ public class HibernateDBConnector extends AbstractDBConnector {
      * 
      * @return the Hibernate Configuration
      */
-    private Configuration getConfiguration(){
-        ConfigurationByteArray configuration = new ConfigurationByteArray();
+    private Configuration getConfiguration() {
+        final ConfigurationByteArray configuration = new ConfigurationByteArray();
 
         // parsing the Configuration-Files
-        StringTokenizer stringTokenizer = new StringTokenizer(hibernateConfigXmlKeys, ",");
+        StringTokenizer stringTokenizer = new StringTokenizer(this.hibernateConfigXmlKeys, ",");
         while (stringTokenizer.hasMoreTokens()) {
-            String hibernateConfigXmlKey = stringTokenizer.nextToken();
-            if (StringUtils.isNotEmpty(hibernateConfigXmlKey)){
+            final String hibernateConfigXmlKey = stringTokenizer.nextToken();
+            if (StringUtils.isNotEmpty(hibernateConfigXmlKey)) {
                 addConfigurationFile(configuration, hibernateConfigXmlKey);
             }
         }
 
         // parsing the Mapping-Files.
-        stringTokenizer = new StringTokenizer(hibernateMappingXmlKeys, ",");
+        stringTokenizer = new StringTokenizer(this.hibernateMappingXmlKeys, ",");
         while (stringTokenizer.hasMoreTokens()) {
-            String hibernateMappingXmlKey = stringTokenizer.nextToken();
-            if (StringUtils.isNotEmpty(hibernateMappingXmlKey)){
+            final String hibernateMappingXmlKey = stringTokenizer.nextToken();
+            if (StringUtils.isNotEmpty(hibernateMappingXmlKey)) {
                 addMappingFile(configuration, hibernateMappingXmlKey);
             }
         }
         configuration.buildMappings();
-        
+
         return configuration;
     }
 
     /**
-     * Add a Configuration-File to the Configuration
+     * Add a Configuration-File to the Configuration.
      * 
      * @param configuration
      * @param settings4jKey
      */
-    private void addConfigurationFile(ConfigurationByteArray configuration, String settings4jKey) {
+    private void addConfigurationFile(final ConfigurationByteArray configuration, final String settings4jKey) {
         byte[] hibernateConfigXml = getContentResolver().getContent(settings4jKey);
-        if (hibernateConfigXml == null){
-            hibernateConfigXml = defaultContentResolver.getContent(settings4jKey);
+        if (hibernateConfigXml == null) {
+            hibernateConfigXml = DEFAULT_CONTENT_RESOLVER.getContent(settings4jKey);
         }
-        
-        if (hibernateConfigXml == null){
+
+        if (hibernateConfigXml == null) {
             LOG.warn("Cannot find Hibernate-Configuration from Key: " + settings4jKey);
         } else {
             configuration.configure(hibernateConfigXml, settings4jKey);
@@ -162,18 +161,18 @@ public class HibernateDBConnector extends AbstractDBConnector {
     }
 
     /**
-     * Add a Mapping-File to the Configuration
+     * Add a Mapping-File to the Configuration.
      * 
      * @param configuration
      * @param settings4jKey
      */
-    private void addMappingFile(ConfigurationByteArray configuration, String settings4jKey) {
+    private void addMappingFile(final ConfigurationByteArray configuration, final String settings4jKey) {
         byte[] hibernateMappingXml = getContentResolver().getContent(settings4jKey);
-        if (hibernateMappingXml == null){
-            hibernateMappingXml = defaultContentResolver.getContent(settings4jKey);
+        if (hibernateMappingXml == null) {
+            hibernateMappingXml = DEFAULT_CONTENT_RESOLVER.getContent(settings4jKey);
         }
-        
-        if (hibernateMappingXml == null){
+
+        if (hibernateMappingXml == null) {
             LOG.warn("Cannot find Hibernate-Mapping from Key: " + settings4jKey);
         } else {
             configuration.addInputStream(new ByteArrayInputStream(hibernateMappingXml));

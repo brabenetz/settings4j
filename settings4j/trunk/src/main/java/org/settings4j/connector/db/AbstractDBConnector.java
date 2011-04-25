@@ -23,61 +23,60 @@ import org.settings4j.connector.db.dao.SettingsDAO;
 import org.settings4j.contentresolver.UnionContentResolver;
 
 /**
- * The basic Database implementation of a Connector-Interface. <br />
- * A concrete Subclass must implement the Methode {@link #getSettingsDAO()} <br />
- * 
- * The implementation of the SettingsDAO could be Hibernate, JPA, Ibatis, JDBC or something else. 
+ * The basic Database implementation of a Connector-Interface.
+ * <p>
+ * A concrete Subclass must implement the Method getSettingsDAO() <br />
+ * The implementation of the SettingsDAO could be Hibernate, JPA, Ibatis, JDBC or something else.
  * 
  * @author Harald.Brabenetz
- *
  */
 public abstract class AbstractDBConnector extends AbstractConnector {
 
     /**
      * This implementation adds a {@link DBContentResolverAdapter} to the contentResolver-List (at the first position).
+     * <p>
      * This ContentResolver will be used by the ObjectResolver
-     * */
+     */
     public void init() {
         super.init();
-        ContentResolver currentContentResolver = getContentResolver();
+        final ContentResolver currentContentResolver = getContentResolver();
 
-        ContentResolver unionContentResolver = new UnionContentResolver();
+        final ContentResolver unionContentResolver = new UnionContentResolver();
         unionContentResolver.addContentResolver(new DBContentResolverAdapter(this));
         unionContentResolver.addContentResolver(currentContentResolver);
-        
+
         setContentResolver(unionContentResolver);
     }
 
     /** {@inheritDoc} */
-    public byte[] getContent(String key) {
-        SettingsDTO settingsDTO = getSettingsDAO().getByKey(key);
-        if (settingsDTO != null){
+    public byte[] getContent(final String key) {
+        final SettingsDTO settingsDTO = getSettingsDAO().getByKey(key);
+        if (settingsDTO != null) {
             return settingsDTO.getContentValue();
-        } else {
-            return null;
         }
+        // else
+        return null;
     }
 
     /** {@inheritDoc} */
-    public Object getObject(String key) {
-        Object object = getObjectResolver().getObject(key, getContentResolver());
+    public Object getObject(final String key) {
+        final Object object = getObjectResolver().getObject(key, getContentResolver());
         return object;
     }
 
     /** {@inheritDoc} */
-    public String getString(String key) {
-        SettingsDTO settingsDTO = getSettingsDAO().getByKey(key);
-        if (settingsDTO != null){
+    public String getString(final String key) {
+        final SettingsDTO settingsDTO = getSettingsDAO().getByKey(key);
+        if (settingsDTO != null) {
             return settingsDTO.getStringValue();
-        } else {
-            return null;
         }
+        // else
+        return null;
     }
-    
+
     /**
      * A concrete Subclass must implement this Methode<br />
-     * 
-     * The implementation of the SettingsDAO could be Hibernate, JPA, Ibatis, JDBC or something else. 
+     * The implementation of the SettingsDAO could be Hibernate, JPA, Ibatis, JDBC or something else.
      * 
      * @return a SettingsDAO Object
      */

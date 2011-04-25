@@ -17,39 +17,50 @@
 
 package org.settings4j.connector;
 
+/**
+ * Basic Implementation of {@link org.settings4j.Connector}s whiche are Property-related.
+ * <p>
+ * Only #getProperty(String, String) must be implemented.
+ * Example implementations are {@link PropertyFileConnector} or {@link SystemPropertyConnector}.
+ * 
+ * @author Harald.Brabenetz
+ *
+ */
 public abstract class AbstractPropertyConnector extends AbstractConnector {
 
-    public byte[] getContent(String key) {
-        String path = getString(key);
+    /** {@inheritDoc} */
+    public byte[] getContent(final String key) {
+        final String path = getString(key);
         if (path != null && getContentResolver() != null) {
             return getContentResolver().getContent(path);
-        } else {
-            return null;
         }
+        // else
+        return null;
+
     }
 
-    public Object getObject(String key) {
-        String path = getString(key);
+    /** {@inheritDoc} */
+    public Object getObject(final String key) {
+        final String path = getString(key);
         if (path != null && getObjectResolver() != null) {
             return getObjectResolver().getObject(path, getContentResolver());
-        } else {
-            return null;
         }
+        // else
+        return null;
+        
     }
 
-    public String getString(String key) {
+    /** {@inheritDoc} */
+    public String getString(final String key) {
         return getProperty(key, null);
     }
 
     /**
-     * Very similar to <code>System.getProperty</code> except that the {@link SecurityException}
-     * is hidden.
+     * Very similar to <code>System.getProperty</code> except that the {@link SecurityException} is hidden.
      * 
      * @param key The key to search for.
-     * @param def The default value to return.
-     * @return the string value of the system property, or the default value if there is no property
-     *         with that key.
-     * 
+     * @param defaultValue The default value to return.
+     * @return the string value of the system property, or the default value if there is no property with that key.
      */
     protected abstract String getProperty(String key, String defaultValue);
 }

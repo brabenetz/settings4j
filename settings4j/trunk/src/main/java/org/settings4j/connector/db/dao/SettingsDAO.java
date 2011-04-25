@@ -27,18 +27,6 @@ import org.settings4j.connector.db.SettingsDTO;
  */
 public interface SettingsDAO {
 
-//
-//
-//    /**
-//     * Method used to get all SettingsDTO. This
-//     * is the same as lookup up all rows in a table.<br />
-//     * <br />
-//     * List&lt;SettingsDTO&gt; getAll();
-//     * 
-//     * @return List of populated objects
-//     */
-//    List getAll();
-//
     /**
      * Method to get an object based on class and identifier. An
      * ObjectRetrievalFailureException Runtime Exception is thrown if
@@ -54,35 +42,20 @@ public interface SettingsDAO {
      * Method to get an object based on class and key. Returns null if
      * nothing is found.
      *
-     * @param id the identifier (primary key) of the object to get
-     * @return a populated object
+     * @param key the {@link SettingsDTO#getKey()}.
+     * @return the {@link SettingsDTO}.
      * @see org.springframework.orm.ObjectRetrievalFailureException
      */
     SettingsDTO getByKey(String key);
-//
-//    /**
-//     * Checks for existence of a SettingsDTO using the id arg.
-//     * @param id the id of the entity
-//     * @return - true if it exists, false if it doesn't
-//     */
-//    boolean exists(Long id);
 
     /**
      * Method to store a SettingsDTO - handles both update and insert.
-     * @param object the object to save
-     * @return the persisted object
+     * @param settingsDTO the {@link SettingsDTO} to save.
      */
     void store(SettingsDTO settingsDTO);
 
-//    /**
-//     * Method to merge a SettingsDTO.
-//     * @param object the object to save
-//     * @return the persisted object
-//     */
-//    SettingsDTO merge(SettingsDTO settingsDTO);
-
     /**
-     * Method to delete an object based on class and id
+     * Method to delete an object based on class and id.
      * @param id the identifier (primary key) of the object to remove
      */
     void remove(Long id);
