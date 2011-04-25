@@ -18,36 +18,38 @@
 package org.settings4j.connector.db;
 
 import org.settings4j.ContentResolver;
-import org.settings4j.ObjectResolver;
 
 /**
  * This implementation can Use a {@link AbstractDBConnector} as ContentResolver.<br />
  * <br />
- * This is needed for {@link ObjectResolver}:<br />
- * The ObjectResolver takes the ContentReolvers from the Connector
- * to transform the content into an Object<br />
+ * This is needed for {@link org.settings4j.ObjectResolver}:<br />
+ * The ObjectResolver takes the ContentReolvers from the Connector to transform the content into an Object<br />
  * <br />
- * This implementation of a ContentResolver has no default-Constructor.
- * So it is not possible to use it in a settings4j.xml configuration.
+ * This implementation of a ContentResolver has no default-Constructor. So it is not possible to use it in a
+ * settings4j.xml configuration.
  * 
  * @author Harald.Brabenetz
- *
  */
 public class DBContentResolverAdapter implements ContentResolver {
-    AbstractDBConnector connector;
 
-    public DBContentResolverAdapter(AbstractDBConnector connector) {
+    private AbstractDBConnector connector;
+
+    /**
+     * Create instance to adapt the DBConnector to a ContentResolver.
+     * @param connector The DBConnector to adapt.
+     */
+    public DBContentResolverAdapter(final AbstractDBConnector connector) {
         super();
         this.connector = connector;
     }
 
     /** {@inheritDoc} */
-    public void addContentResolver(ContentResolver contentResolver) {
+    public void addContentResolver(final ContentResolver contentResolver) {
         throw new UnsupportedOperationException("DBContentResolverAdapter cannot add other ContentResolvers");
     }
 
     /** {@inheritDoc} */
-    public byte[] getContent(String key) {
-        return connector.getContent(key);
+    public byte[] getContent(final String key) {
+        return this.connector.getContent(key);
     }
 }

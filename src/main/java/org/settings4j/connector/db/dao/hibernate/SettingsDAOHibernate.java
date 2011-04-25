@@ -31,11 +31,10 @@ import org.settings4j.connector.db.dao.SettingsDAO;
  * pre required: The sessionFactory must be injected by there Setter before the first usage.
  * 
  * @author Harald.Brabenetz
- *
  */
 public class SettingsDAOHibernate implements SettingsDAO {
 
-    /** General Logger for this Class */
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(SettingsDAOHibernate.class);
 
@@ -44,19 +43,19 @@ public class SettingsDAOHibernate implements SettingsDAO {
     private SessionFactory sessionFactory;
 
     /**
-     * The SessionFactory Must be Set before the first usage
+     * The SessionFactory Must be Set before the first usage.
      * 
      * @param sessionFactory the required SessionFactory
      */
-    public void setSessionFactory(SessionFactory sessionFactory) {
+    public void setSessionFactory(final SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
     /** {@inheritDoc} */
-    public SettingsDTO getById(Long id) {
+    public SettingsDTO getById(final Long id) {
         Session session = null;
         try {
-            session = sessionFactory.openSession();
+            session = this.sessionFactory.openSession();
             return getById(id, session);
         } finally {
             if (session != null) {
@@ -64,27 +63,25 @@ public class SettingsDAOHibernate implements SettingsDAO {
             }
         }
     }
-    
+
     /** {@inheritDoc} */
-    public SettingsDTO getByKey(String key) {
+    public SettingsDTO getByKey(final String key) {
         Session session = null;
         try {
-            session = sessionFactory.openSession();
-            SettingsDTO settingsDTO;
-            Query query = session.createQuery(QUERY_GET_BY_KEY);
+            session = this.sessionFactory.openSession();
+            final Query query = session.createQuery(QUERY_GET_BY_KEY);
             query.setString("key", key);
-            List settingsDTOs = query.list();
+            final List settingsDTOs = query.list();
             if (settingsDTOs.size() == 0) {
                 return null;
-            } else {
-                if (settingsDTOs.size() > 1) {
-                    LOG.warn("More than one SettingsDTO (size:" + settingsDTOs.size() + ") found for query: '"
-                        + QUERY_GET_BY_KEY + "'");
-                }
-                settingsDTO = (SettingsDTO) settingsDTOs.get(0);
+            }
+            // else
+            if (settingsDTOs.size() > 1) {
+                LOG.warn("More than one SettingsDTO (size:" + settingsDTOs.size() + ") found for query: '"
+                    + QUERY_GET_BY_KEY + "'");
             }
 
-            return settingsDTO;
+            return (SettingsDTO) settingsDTOs.get(0);
         } finally {
             if (session != null) {
                 session.close();
@@ -93,10 +90,10 @@ public class SettingsDAOHibernate implements SettingsDAO {
     }
 
     /** {@inheritDoc} */
-    public void store(SettingsDTO settingsDTO) {
+    public void store(final SettingsDTO settingsDTO) {
         Session session = null;
         try {
-            session = sessionFactory.openSession();
+            session = this.sessionFactory.openSession();
 
             session.beginTransaction();
 
@@ -112,10 +109,10 @@ public class SettingsDAOHibernate implements SettingsDAO {
     }
 
     /** {@inheritDoc} */
-    public void remove(Long id) {
+    public void remove(final Long id) {
         Session session = null;
         try {
-            session = sessionFactory.openSession();
+            session = this.sessionFactory.openSession();
 
             session.beginTransaction();
 
@@ -133,15 +130,13 @@ public class SettingsDAOHibernate implements SettingsDAO {
     /**
      * @see #getById(Long)
      */
-    private SettingsDTO getById(Long id, Session session) {
-        SettingsDTO entity = (SettingsDTO) session.get(SettingsDTO.class, id);
+    private SettingsDTO getById(final Long id, final Session session) {
+        final SettingsDTO entity = (SettingsDTO) session.get(SettingsDTO.class, id);
 
         if (entity == null) {
-            String message = "'" + SettingsDTO.class + "' object with id '" + id + "' not found...";
+            final String message = "'" + SettingsDTO.class + "' object with id '" + id + "' not found...";
             LOG.warn(message);
-            // TODO hbrabenetz 24.05.2008 : Create Exceptionhandling
-            throw new RuntimeException(message);
-            // throw new ObjectRetrievalFailureException(this.persistentClass, id);
+            throw new IllegalArgumentException(message);
         }
 
         return entity;

@@ -24,52 +24,56 @@ import org.settings4j.Connector;
 import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
 
+/**
+ * Basic Connector implementations like getter and Settot of contentResolver, objectResolver.
+ * 
+ * @author Harald.Brabenetz
+ *
+ */
 public abstract class AbstractConnector implements Connector {
 
     private String name;
     private ContentResolver contentResolver;
     private ObjectResolver objectResolver;
-    private List connectors = Collections.synchronizedList(new ArrayList());
-    
+    private final List connectors = Collections.synchronizedList(new ArrayList());
+
     public List getConnectors() {
-        return Collections.unmodifiableList(connectors);
-    }
-    
-    public void addConnector(Connector connector) {
-        connectors.add(connector);
+        return Collections.unmodifiableList(this.connectors);
     }
 
-    public void removeAllConnectors() {
-        connectors.clear();
+    /** {@inheritDoc} */
+    public void addConnector(final Connector connector) {
+        this.connectors.add(connector);
     }
-    
+
     protected ContentResolver getContentResolver() {
-        return contentResolver;
+        return this.contentResolver;
     }
-    
-    public void setContentResolver(ContentResolver contentResolver) {
+
+    public void setContentResolver(final ContentResolver contentResolver) {
         this.contentResolver = contentResolver;
     }
-    
+
     protected ObjectResolver getObjectResolver() {
-        return objectResolver;
+        return this.objectResolver;
     }
-    
-    public void setObjectResolver(ObjectResolver objectResolver) {
+
+    public void setObjectResolver(final ObjectResolver objectResolver) {
         this.objectResolver = objectResolver;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
-    
-    public void init(){
+
+    /** {@inheritDoc} */
+    public void init() {
         // Overwrite this methode if you want do something after all properties are set.
         // by default there is nothing to do
     }
-    
+
 }
