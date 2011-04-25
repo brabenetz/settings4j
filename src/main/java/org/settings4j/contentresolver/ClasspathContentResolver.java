@@ -23,64 +23,67 @@ import java.net.URL;
 import org.apache.commons.io.IOUtils;
 import org.settings4j.ContentResolver;
 
+/**
+ * {@link ContentResolver} implementation to read content from the Classpath.
+ * 
+ * @author Harald.Brabenetz
+ *
+ */
 public class ClasspathContentResolver implements ContentResolver {
-    /** General Logger for this Class */
+
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(ClasspathContentResolver.class);
-    
 
-    /** Pseudo URL prefix for loading from the class path: "classpath:" */
+
+    /** Pseudo URL prefix for loading from the class path: "classpath:". */
     public static final String CLASSPATH_URL_PREFIX = "classpath:";
-    
-    
-    public void addContentResolver(ContentResolver contentResolver) {
+
+
+    /** {@inheritDoc} */
+    public void addContentResolver(final ContentResolver contentResolver) {
         throw new UnsupportedOperationException("ClasspathContentResolver cannot add other ContentResolvers");
     }
 
+    /** {@inheritDoc} */
     public byte[] getContent(final String key) {
-        String normalizedKey = key;
-        if (normalizedKey.startsWith(CLASSPATH_URL_PREFIX)){
-            normalizedKey = normalizedKey.substring(CLASSPATH_URL_PREFIX.length());
-        }
-        if (normalizedKey.startsWith("/")){
-            normalizedKey = normalizedKey.substring(1);
-        }
-        
+        String normalizedKey = normalizeKey(key);
+
         try {
-            InputStream is = getClassLoader().getResourceAsStream(normalizedKey);
-            if (is != null){
+            final InputStream is = getClassLoader().getResourceAsStream(normalizedKey);
+            if (is != null) {
                 return IOUtils.toByteArray(is);
-            } else {
-                return null;
             }
-        } catch (IOException e) {
+            // else
+            return null;
+        } catch (final IOException e) {
             LOG.error(e.getMessage(), e);
             return null;
         }
     }
-    
-    public static URL getResource(final String key){
-        String normalizedKey = key;
-        if (normalizedKey.startsWith(CLASSPATH_URL_PREFIX)){
-            normalizedKey = normalizedKey.substring(CLASSPATH_URL_PREFIX.length());
-        }
-        if (normalizedKey.startsWith("/")){
-            normalizedKey = normalizedKey.substring(1);
-        }
-        
-        return getClassLoader().getResource(normalizedKey);
-    }
-    
 
     /**
-     * Return the default ClassLoader to use: typically the thread context
-     * ClassLoader, if available; the ClassLoader that loaded the ClasspathContentResolver
-     * class will be used as fallback.
-     * <p>Call this method if you intend to use the thread context ClassLoader
-     * in a scenario where you absolutely need a non-null ClassLoader reference:
-     * for example, for class path resource loading (but not necessarily for
-     * <code>Class.forName</code>, which accepts a <code>null</code> ClassLoader
-     * reference as well).
+     * Method to get onlx the URL for the given Key.
+     * <p>
+     * 
+     * @param key the key (could have a 'classpath:' prefix or not)
+     * @return The {@link URL}, see {@link ClassLoader#getResource(String)}.
+     */
+    public static URL getResource(final String key) {
+        String normalizedKey = normalizeKey(key);
+
+        return getClassLoader().getResource(normalizedKey);
+    }
+
+
+    /**
+     * Return the default ClassLoader to use: typically the thread context ClassLoader, if available; the ClassLoader
+     * that loaded the ClasspathContentResolver class will be used as fallback.
+     * <p>
+     * Call this method if you intend to use the thread context ClassLoader in a scenario where you absolutely need a
+     * non-null ClassLoader reference: for example, for class path resource loading (but not necessarily for
+     * <code>Class.forName</code>, which accepts a <code>null</code> ClassLoader reference as well).
+     * 
      * @return the default ClassLoader (never <code>null</code>)
      * @see java.lang.Thread#getContextClassLoader()
      */
@@ -88,8 +91,7 @@ public class ClasspathContentResolver implements ContentResolver {
         ClassLoader cl = null;
         try {
             cl = Thread.currentThread().getContextClassLoader();
-        }
-        catch (Throwable ex) {
+        } catch (final Throwable ex) {
             LOG.debug("Cannot access thread context ClassLoader - falling back to system class loader", ex);
         }
         if (cl == null) {
@@ -97,5 +99,16 @@ public class ClasspathContentResolver implements ContentResolver {
             cl = ClasspathContentResolver.class.getClassLoader();
         }
         return cl;
+    }
+
+    private static String normalizeKey(final String key) {
+        String normalizedKey = key;
+        if (normalizedKey.startsWith(CLASSPATH_URL_PREFIX)) {
+            normalizedKey = normalizedKey.substring(CLASSPATH_URL_PREFIX.length());
+        }
+        if (normalizedKey.startsWith("/")) {
+            normalizedKey = normalizedKey.substring(1);
+        }
+        return normalizedKey;
     }
 }
