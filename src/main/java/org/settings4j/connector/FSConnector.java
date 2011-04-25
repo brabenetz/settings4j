@@ -22,58 +22,75 @@ import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.FSContentResolver;
 import org.settings4j.contentresolver.UnionContentResolver;
 
+/**
+ * The FileSystem implementation of an {@link org.settings4j.Connector}.
+ * <p>
+ * 
+ * @author Harald.Brabenetz
+ *
+ */
 public class FSConnector extends AbstractConnector {
-    
-    /** General Logger for this Class */
+
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(FSConnector.class);
 
-    private FSContentResolver fsContentResolver = new FSContentResolver();
-    private ContentResolver unionContentResolver = new UnionContentResolver(fsContentResolver);
+    private final FSContentResolver fsContentResolver = new FSContentResolver();
+    private ContentResolver unionContentResolver = new UnionContentResolver(this.fsContentResolver);
     private String charset = "UTF-8";
-    
-    public byte[] getContent(String key) {
-        return fsContentResolver.getContent(key);
+
+    /** {@inheritDoc} */
+    public byte[] getContent(final String key) {
+        return this.fsContentResolver.getContent(key);
     }
 
-    public Object getObject(String key) {
-        if (getObjectResolver() != null){
-            return getObjectResolver().getObject(key, unionContentResolver);
-        } else {
-            return null;
+    /** {@inheritDoc} */
+    public Object getObject(final String key) {
+        if (getObjectResolver() != null) {
+            return getObjectResolver().getObject(key, this.unionContentResolver);
         }
+        // else
+        return null;
     }
 
-    public String getString(String key) {
+    /** {@inheritDoc} */
+    public String getString(final String key) {
         try {
-            byte[] content =  getContent(key);
-            if (content != null){
-                return new String(fsContentResolver.getContent(key), charset);
-            } else {
-                return null;
+            final byte[] content = getContent(key);
+            if (content != null) {
+                return new String(this.fsContentResolver.getContent(key), this.charset);
             }
-        } catch (UnsupportedEncodingException e) {
+            // else
+            return null;
+
+        } catch (final UnsupportedEncodingException e) {
             // should never occure with "UTF-8"
-            LOG.error("Charset not found: " + charset, e);
+            LOG.error("Charset not found: " + this.charset, e);
             return null;
         }
     }
 
     public String getCharset() {
-        return charset;
+        return this.charset;
     }
 
-    public void setCharset(String charset) {
+    public void setCharset(final String charset) {
         this.charset = charset;
     }
 
-    public void setRootFolderPath(String rootFolderPath) {
-        fsContentResolver.setRootFolderPath(rootFolderPath);
+    /**
+     * Delegate the rootFolderPath to the {@link FSContentResolver#setRootFolderPath(String)}.
+     * 
+     * @param rootFolderPath The root Folder Path where the settings could be stored.
+     */
+    public void setRootFolderPath(final String rootFolderPath) {
+        this.fsContentResolver.setRootFolderPath(rootFolderPath);
     }
 
-    public void setContentResolver(ContentResolver contentResolver) {
-        unionContentResolver = new UnionContentResolver(fsContentResolver);
-        unionContentResolver.addContentResolver(contentResolver);
+    /** {@inheritDoc} */
+    public void setContentResolver(final ContentResolver contentResolver) {
+        this.unionContentResolver = new UnionContentResolver(this.fsContentResolver);
+        this.unionContentResolver.addContentResolver(contentResolver);
     }
-    
+
 }

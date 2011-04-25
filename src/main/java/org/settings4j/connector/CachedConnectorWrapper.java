@@ -25,91 +25,117 @@ import org.settings4j.Connector;
 import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
 
-public class CachedConnectorWrapper implements Connector{
-    private Connector targetConnector;
-    
-    private Map cachedStrings = Collections.synchronizedMap(new HashMap());
-    private Map cachedContents = Collections.synchronizedMap(new HashMap());
-    private Map cachedObjects = Collections.synchronizedMap(new HashMap());
-    
+/**
+ * Wrap a Connector and caches all Values.
+ * <p>
+ * This wrapper will be used if you add in your settings4j.xml the cached="true" Attribute to the Connector TAG.
+ * 
+ * @author Harald.Brabenetz
+ *
+ */
+public class CachedConnectorWrapper implements Connector {
 
-    public CachedConnectorWrapper(Connector targetConnector) {
+    private final Connector targetConnector;
+
+    private final Map cachedStrings = Collections.synchronizedMap(new HashMap());
+    private final Map cachedContents = Collections.synchronizedMap(new HashMap());
+    private final Map cachedObjects = Collections.synchronizedMap(new HashMap());
+
+
+    /**
+     * @param targetConnector The connector to wrap.
+     */
+    public CachedConnectorWrapper(final Connector targetConnector) {
         super();
         this.targetConnector = targetConnector;
     }
 
-    public byte[] getContent(String key) {
-        byte[] result = (byte[])cachedContents.get(key);
-        if (result != null){
+    /** {@inheritDoc} */
+    public byte[] getContent(final String key) {
+        byte[] result = (byte[]) this.cachedContents.get(key);
+        if (result != null) {
             return result;
         }
-        
-        result = targetConnector.getContent(key);
 
-        if (result != null){
-            cachedContents.put(key, result);
+        result = this.targetConnector.getContent(key);
+
+        if (result != null) {
+            this.cachedContents.put(key, result);
         }
         return result;
     }
-    
-    public Object getObject(String key) {
-        Object result = (Object)cachedObjects.get(key);
-        if (result != null){
+
+    /** {@inheritDoc} */
+    public Object getObject(final String key) {
+        Object result = this.cachedObjects.get(key);
+        if (result != null) {
             return result;
         }
-        
-        result = targetConnector.getObject(key);
 
-        if (result != null){
-            cachedObjects.put(key, result);
+        result = this.targetConnector.getObject(key);
+
+        if (result != null) {
+            this.cachedObjects.put(key, result);
         }
         return result;
     }
-    
-    public String getString(String key) {
-        String result = (String)cachedStrings.get(key);
-        if (result != null){
+
+    /** {@inheritDoc} */
+    public String getString(final String key) {
+        String result = (String) this.cachedStrings.get(key);
+        if (result != null) {
             return result;
         }
-        
-        result = targetConnector.getString(key);
 
-        if (result != null){
-            cachedStrings.put(key, result);
+        result = this.targetConnector.getString(key);
+
+        if (result != null) {
+            this.cachedStrings.put(key, result);
         }
         return result;
     }
-    
-    public void clearCachedValue(String key){
-        cachedStrings.remove(key);
-        cachedContents.remove(key);
-        cachedObjects.remove(key);
+
+    /**
+     * @param key the key to clear from all caches.
+     */
+    public void clearCachedValue(final String key) {
+        this.cachedStrings.remove(key);
+        this.cachedContents.remove(key);
+        this.cachedObjects.remove(key);
     }
-    
+
     /* ****************************
-     * Delegating Methodes:
-     * ****************************/
-    
-    public void addConnector(Connector connector) {
-        targetConnector.addConnector(connector);
-    }
-    public void setContentResolver(ContentResolver contentResolver) {
-        targetConnector.setContentResolver(contentResolver);
-    }
-    public void setObjectResolver(ObjectResolver objectResolver) {
-        targetConnector.setObjectResolver(objectResolver);
+     * Delegating Methodes: ***************************
+     */
+
+    /** {@inheritDoc} */
+    public void addConnector(final Connector connector) {
+        this.targetConnector.addConnector(connector);
     }
 
+    /** {@inheritDoc} */
+    public void setContentResolver(final ContentResolver contentResolver) {
+        this.targetConnector.setContentResolver(contentResolver);
+    }
+
+    /** {@inheritDoc} */
+    public void setObjectResolver(final ObjectResolver objectResolver) {
+        this.targetConnector.setObjectResolver(objectResolver);
+    }
+
+    /** {@inheritDoc} */
     public void init() {
-        targetConnector.init();
+        this.targetConnector.init();
     }
 
+    /** {@inheritDoc} */
     public String getName() {
-        return targetConnector.getName();
+        return this.targetConnector.getName();
     }
 
-    public void setName(String name) {
-        targetConnector.setName(name);
+    /** {@inheritDoc} */
+    public void setName(final String name) {
+        this.targetConnector.setName(name);
     }
-	
+
 }
