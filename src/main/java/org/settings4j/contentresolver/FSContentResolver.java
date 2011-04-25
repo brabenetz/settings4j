@@ -22,32 +22,40 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.settings4j.ContentResolver;
 
+/**
+ * {@link ContentResolver} implementation to read content from the File System.
+ * 
+ * @author Harald.Brabenetz
+ */
 public class FSContentResolver implements ContentResolver {
-    /** General Logger for this Class */
+
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(FSContentResolver.class);
 
 
-    /** Pseudo URL prefix for loading from the class path: "classpath:" */
+    /** Pseudo URL prefix for loading from the class path: "classpath:". */
     public static final String FILE_URL_PREFIX = "file:";
-    
+
     private File rootFolder;
 
-    public void addContentResolver(ContentResolver contentResolver) {
+    /** {@inheritDoc} */
+    public void addContentResolver(final ContentResolver contentResolver) {
         throw new UnsupportedOperationException("FSContentResolver cannot add other ContentResolvers");
     }
 
+    /** {@inheritDoc} */
     public byte[] getContent(final String key) {
-    	String normalizedKey = key;
-        if (normalizedKey.startsWith(FILE_URL_PREFIX)){
+        String normalizedKey = key;
+        if (normalizedKey.startsWith(FILE_URL_PREFIX)) {
             normalizedKey = normalizedKey.substring(FILE_URL_PREFIX.length());
         }
-        
+
         File file = new File(normalizedKey);
         if (file.exists()) {
             try {
                 return FileUtils.readFileToByteArray(file);
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 LOG.info(e.getMessage(), e);
             }
         } else {
@@ -55,7 +63,7 @@ public class FSContentResolver implements ContentResolver {
             if (file.exists()) {
                 try {
                     return FileUtils.readFileToByteArray(file);
-                } catch (IOException e) {
+                } catch (final IOException e) {
                     LOG.info(e.getMessage(), e);
                 }
             }
@@ -63,25 +71,35 @@ public class FSContentResolver implements ContentResolver {
         return null;
     }
 
+    /**
+     * return the root of this FileSystem ContenResolver.
+     * <p>
+     * if no one is set, the "." will be returned.
+     * 
+     * @return the root of this FileSystem ContenResolver.
+     */
     public File getRootFolder() {
-        if (rootFolder == null) {
+        if (this.rootFolder == null) {
             LOG.info("FSContentResolver.rootFolder == null");
             // get the current execution directory
-            String tmpdir = ".";
+            final String tmpdir = ".";
             LOG.info("The TEMP Folder will be used: " + tmpdir + "! ");
-            rootFolder = new File(tmpdir);
+            this.rootFolder = new File(tmpdir);
         }
-        return rootFolder;
+        return this.rootFolder;
     }
 
-    public void setRootFolderPath(String rootFolderPath) {
-        File newRootFolder = new File(rootFolderPath);
+    /**
+     * @param rootFolderPath the root folder Path.
+     */
+    public void setRootFolderPath(final String rootFolderPath) {
+        final File newRootFolder = new File(rootFolderPath);
         if (!newRootFolder.exists()) {
             try {
                 FileUtils.forceMkdir(newRootFolder);
                 this.rootFolder = newRootFolder;
                 LOG.info("Set RootPath for FSConntentResolver: " + newRootFolder.getAbsolutePath());
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 LOG.warn("cannot create rootFolder: " + rootFolderPath + "! ");
             }
         } else {
