@@ -23,10 +23,12 @@ package org.settings4j;
  * <pre>
  * Example:
  * <div style="border-width:1px;border-style:solid;">
- * &lt;connector name="<span style="color:green;">ClasspathConnector</span>" class="org.settings4j.connector.ClasspathConnector"&gt;
+ * &lt;connector name="<span style="color:green;">ClasspathConnector</span>"
+ *          class="org.settings4j.connector.ClasspathConnector"&gt;
  *     &lt;objectResolver-ref ref="<span style="color:red;">JavaXMLBeansObjectResolver</span>" /&gt;
  * &lt;/connector&gt;
- * &lt;objectResolver name="<span style="color:red;">JavaXMLBeansObjectResolver</span>" class="org.settings4j.objectresolver.JavaXMLBeansObjectResolver" /&gt;
+ * &lt;objectResolver name="<span style="color:red;">JavaXMLBeansObjectResolver</span>"
+ *          class="org.settings4j.objectresolver.JavaXMLBeansObjectResolver" /&gt;
  * </div></pre>
  * 
  * 
@@ -46,7 +48,8 @@ public interface ObjectResolver {
      * <ol>
      * <li>Read the Propertyfile from {@link ContentResolver}.getContent(key + ".properties")</li>
      * <li>Read the Value of "objectResolverKey" from propertyfile</li>
-     * <li>The "objectResolverKey" defines which ObjectResolver-Implementation should solve the byte[] content to a Java-Object</li>
+     * <li>The "objectResolverKey" defines which ObjectResolver-Implementation should
+     *      solve the byte[] content to a Java-Object</li>
      * <li>Convert the byte[] from {@link ContentResolver#getContent(String key)} to an Object.</li>
      * <li>Maybe additional values are consumed from the propertyfile</li>
      * </ol>
@@ -56,7 +59,7 @@ public interface ObjectResolver {
      * @param contentResolver The contentResolver, from where the content could be read.
      * @return the Object, or null if this Object-Resolver can not convert the byte[] Content to an Object.
      */
-    public Object getObject(String key, ContentResolver contentResolver);
+    Object getObject(String key, ContentResolver contentResolver);
     
     /**
      * Some Implementations of a {@link ObjectResolver} are delegating the functionality
@@ -74,5 +77,5 @@ public interface ObjectResolver {
      * 
      * @param objectResolver the original objectResolver to delegate.
      */
-    public void addObjectResolver(ObjectResolver objectResolver);
+    void addObjectResolver(ObjectResolver objectResolver);
 }

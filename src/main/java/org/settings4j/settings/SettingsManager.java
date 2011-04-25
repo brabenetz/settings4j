@@ -31,7 +31,7 @@ import org.settings4j.settings.nop.NOPSettingsRepository;
  * 
  * @author Harald.Brabenetz
  */
-public abstract class SettingsManager {
+public final class SettingsManager {
 
     /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory

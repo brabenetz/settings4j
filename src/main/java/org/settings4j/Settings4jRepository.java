@@ -16,13 +16,10 @@
  *****************************************************************************/
 package org.settings4j;
 
-import org.settings4j.settings.SettingsManager;
-
 /**
  * Holder for a single {@link Settings4jInstance}.
  * 
  * @author Harald.Brabenetz
- *
  */
 public interface Settings4jRepository {
 
@@ -31,7 +28,7 @@ public interface Settings4jRepository {
      * 
      * @return the appropriate {@link Settings4jInstance}
      */
-	Settings4jInstance getSettings();
+    Settings4jInstance getSettings();
 
     /**
      * Retrieve the appropriate {@link Settings4j} instance or create it with the give factory if doesn'r already exist.
@@ -43,25 +40,28 @@ public interface Settings4jRepository {
 
     /**
      * Return the Connector Count.<br />
-     * If the connector count is 0. the Settings will be reinitialized with
-     * the default-fallback-config in {@link SettingsManager#getSettings()}
+     * If the connector count is 0. the Settings will be reinitialized with the default-fallback-config in
+     * {@link org.settings4j.settings.SettingsManager#getSettings()}
      * 
      * @return The Connector Count.
      */
     int getConnectorCount();
-    
+
     /**
-     * <p>Remove the Settings, Connectors and other Objects from the Repository.
-     * <p>Make it ready to fill it with a new Configuration.
+     * <p>
+     * Remove the Settings, Connectors and other Objects from the Repository.
+     * <p>
+     * Make it ready to fill it with a new Configuration.
+     * <p>
+     * Example (maybe in an init()-Method of your Application):
      * 
-     * <p>Example (maybe in an init()-Method of your Application):
      * <pre>
-     * // clear Settings from "settings4j.xml"
+     * // clear Settings from &quot;settings4j.xml&quot;
      * SettingsRepository settingsRepository = SettingsManager.getSettingsRepository();
      * settingsRepository.resetConfiguration();
      * 
      * // read XML Custome to configure the repository
-     * URL url = ClasspathContentResolver.getResource("customizedSettings4j.xml");
+     * URL url = ClasspathContentResolver.getResource(&quot;customizedSettings4j.xml&quot;);
      * DOMConfigurator domConfigurator = new DOMConfigurator(settingsRepository);
      * domConfigurator.doConfigure(url);
      * </pre>
