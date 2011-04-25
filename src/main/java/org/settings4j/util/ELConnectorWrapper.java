@@ -25,77 +25,44 @@ import org.apache.commons.collections.map.LazyMap;
 import org.settings4j.Connector;
 
 /**
- * This Wrapper makes the Getter-Methodes of Connectors simply accessible
- * by Expressionlanguages like JSP 2.0, Velocity or Freemarker.<BR />
+ * This Wrapper makes the Getter-Methods of Connectors simply accessible by Expressionlanguages like JSP 2.0, Velocity
+ * or Freemarker.<BR />
  * <BR />
  * <B>Example:</B><BR />
  * <code>${connectors.string['xyz']}</code> returns the first founded Value in all Connectors:
  * <code>connector.getString("xyz");</code>
  * 
  * @author Harald.Brabenetz
- *
  */
 public class ELConnectorWrapper {
-    
-    private Connector[] connectors;
+
+    private final Connector[] connectors;
 
     /**
      * The list of all connectors, where Values can be searched.
      * 
-     * @param connectors
+     * @param connectors a array of Connectors which will be processed in Sequence.
      */
-    public ELConnectorWrapper(Connector[] connectors) {
+    public ELConnectorWrapper(final Connector[] connectors) {
         super();
         this.connectors = connectors;
     }
 
     /**
-     * Only one Connector Constructor.
-     * All calls will be delegated to this connector.
+     * Usage: <code>${connectors.string['xyz']}</code> returns the first founded Value in all Connectors:
+     * <code>connector.getString("xyz");</code>.
      * 
-     * @param connector
-     */
-    public ELConnectorWrapper(Connector connector) {
-        super();
-        this.connectors = new Connector[]{connector};
-    }
-
-    /**
-     * Usage:
-     * <code>${connectors.string['xyz']}</code> returns the first founded Value in all Connectors:
-     * <code>connector.getString("xyz");</code>
      * @return the first founded Value in all connectors
      */
     public Map getString() {
-        Transformer transformer = new Transformer() {
-            public Object transform(Object input) {
-                if (input != null && input instanceof String){
-                    String key = input.toString();
-                    for (int i = 0; i < connectors.length; i++) {
-                        Object result = connectors[i].getString(key);
-                        if (result != null) return result;
-                    }
-                }
-                return null;
-            }
-        };
-        return LazyMap.decorate(new HashMap(), transformer);
-    }
+        final Transformer transformer = new Transformer() {
 
-    /**
-     * Usage:
-     * <code>${connectors.content['xyz']}</code> returns the first founded Value in all Connectors:
-     * <code>connector.getContent("xyz");</code>
-     * @return the first founded Value in all connectors
-     */
-    public Map getContent() {
-        Transformer transformer = new Transformer() {
-            public Object transform(Object input) {
-                if (input != null && input instanceof String){
-                    String key = input.toString();
-                    for (int i = 0; i < connectors.length; i++) {
-                        Object result = connectors[i].getContent(key);
-                        if (result != null){
+            public Object transform(final Object input) {
+                if (input != null && input instanceof String) {
+                    final String key = input.toString();
+                    for (int i = 0; i < ELConnectorWrapper.this.connectors.length; i++) {
+                        final Object result = ELConnectorWrapper.this.connectors[i].getString(key);
+                        if (result != null) {
                             return result;
                         }
                     }
@@ -107,19 +74,47 @@ public class ELConnectorWrapper {
     }
 
     /**
-     * Usage:
-     * <code>${connectors.object['xyz']}</code> returns the first founded Value in all Connectors:
-     * <code>connector.getObject("xyz");</code>
+     * Usage: <code>${connectors.content['xyz']}</code> returns the first founded Value in all Connectors:
+     * <code>connector.getContent("xyz");</code>.
+     * 
+     * @return the first founded Value in all connectors
+     */
+    public Map getContent() {
+        final Transformer transformer = new Transformer() {
+
+            public Object transform(final Object input) {
+                if (input != null && input instanceof String) {
+                    final String key = input.toString();
+                    for (int i = 0; i < ELConnectorWrapper.this.connectors.length; i++) {
+                        final Object result = ELConnectorWrapper.this.connectors[i].getContent(key);
+                        if (result != null) {
+                            return result;
+                        }
+                    }
+                }
+                return null;
+            }
+        };
+        return LazyMap.decorate(new HashMap(), transformer);
+    }
+
+    /**
+     * Usage: <code>${connectors.object['xyz']}</code> returns the first founded Value in all Connectors:
+     * <code>connector.getObject("xyz");</code>.
+     * 
      * @return the first founded Value in all connectors
      */
     public Map getObject() {
-        Transformer transformer = new Transformer() {
-            public Object transform(Object input) {
-                if (input != null && input instanceof String){
-                    String key = input.toString();
-                    for (int i = 0; i < connectors.length; i++) {
-                        Object result = connectors[i].getObject(key);
-                        if (result != null) return result;
+        final Transformer transformer = new Transformer() {
+
+            public Object transform(final Object input) {
+                if (input != null && input instanceof String) {
+                    final String key = input.toString();
+                    for (int i = 0; i < ELConnectorWrapper.this.connectors.length; i++) {
+                        final Object result = ELConnectorWrapper.this.connectors[i].getObject(key);
+                        if (result != null) {
+                            return result;
+                        }
                     }
                 }
                 return null;

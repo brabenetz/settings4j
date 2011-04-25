@@ -21,10 +21,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections.Transformer;
-import org.apache.commons.collections.map.LazyMap;
 
 /**
- * This Transformer implements the function for a {@link LazyMap} with Key=String (=RegEx) and Value=Boolean (=Result)
+ * This Transformer implements the function for a {@link org.apache.commons.collections.map.LazyMap}
+ * with Key=String (=RegEx) and Value=Boolean (=Result).
+ * 
  * <pre>
  * Example:
  * 
@@ -43,44 +44,47 @@ import org.apache.commons.collections.map.LazyMap;
  * </pre>
  * 
  * @see java.util.regex.Pattern
- * 
  * @author Harald.Brabenetz
- *
  */
 public class MatchPatternTransformer implements Transformer {
 
-    /** General Logger for this Class */
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(MatchPatternTransformer.class);
-    
-    private String compareValue;
-    
-    public MatchPatternTransformer(String compareValue) {
+
+    private final String compareValue;
+
+    /**
+     * @param compareValue The String which should be Compared with a RegEx. see {@link Pattern}.
+     */
+    public MatchPatternTransformer(final String compareValue) {
         super();
         this.compareValue = compareValue;
     }
 
 
-    public Object transform(Object input) {
+    /** {@inheritDoc} */
+    public Object transform(final Object input) {
         Boolean result = Boolean.FALSE;
-        if (input != null && input instanceof String){
-            String patternString = input.toString();
+        if (input != null && input instanceof String) {
+            final String patternString = input.toString();
             try {
-                Pattern pattern = Pattern.compile(patternString);
-                Matcher matcher = pattern.matcher(compareValue);
-                if (matcher.matches()){
+                final Pattern pattern = Pattern.compile(patternString);
+                final Matcher matcher = pattern.matcher(this.compareValue);
+                if (matcher.matches()) {
                     result = Boolean.TRUE;
-                    if (LOG.isDebugEnabled()){
-                        LOG.debug("TRUE '" + patternString + "'; '" + compareValue + "'");
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("TRUE '" + patternString + "'; '" + this.compareValue + "'");
                     }
                 } else {
                     result = Boolean.FALSE;
-                    if (LOG.isDebugEnabled()){
-                        LOG.debug("FALSE '" + patternString + "'; '" + compareValue + "'");
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("FALSE '" + patternString + "'; '" + this.compareValue + "'");
                     }
                 }
-            } catch (Exception e) {
-                LOG.warn("Cann't matche Pattern '" + patternString + "' with compareValue '" + compareValue + "'", e);
+            } catch (final Exception e) {
+                LOG.warn("Cann't matche Pattern '" + patternString + "' with compareValue '" + this.compareValue + "'",
+                    e);
                 result = Boolean.FALSE;
             }
         }
