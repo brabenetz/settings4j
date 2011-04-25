@@ -18,35 +18,48 @@ package org.settings4j.contentresolver;
 
 import org.settings4j.ContentResolver;
 
+/**
+ * @author Harald.Brabenetz
+ */
 public class UnionContentResolver implements ContentResolver {
 
     private ContentResolver[] contentResolvers = new ContentResolver[0];
 
+    /**
+     * Default Constructor.
+     */
     public UnionContentResolver() {
         super();
     }
-    
-    public UnionContentResolver(ContentResolver contentResolver) {
+
+    /**
+     * Constructor with the first {@link ContentResolver}.
+     * 
+     * @param contentResolver with the first ContentResolver.
+     */
+    public UnionContentResolver(final ContentResolver contentResolver) {
         super();
         addContentResolver(contentResolver);
     }
-    
-    public synchronized void addContentResolver(ContentResolver contentResolver) {
-        
-        ContentResolver[] contentResolversNew = new ContentResolver[contentResolvers.length+1];
-        for (int i = 0; i < contentResolvers.length; i++) {
-            contentResolversNew[i] = contentResolvers[i];
+
+    /** {@inheritDoc} */
+    public synchronized void addContentResolver(final ContentResolver contentResolver) {
+
+        final ContentResolver[] contentResolversNew = new ContentResolver[this.contentResolvers.length + 1];
+        for (int i = 0; i < this.contentResolvers.length; i++) {
+            contentResolversNew[i] = this.contentResolvers[i];
         }
-        contentResolversNew[contentResolvers.length] = contentResolver;
-        
-        contentResolvers = contentResolversNew;
+        contentResolversNew[this.contentResolvers.length] = contentResolver;
+
+        this.contentResolvers = contentResolversNew;
     }
 
-    public byte[] getContent(String key) {
+    /** {@inheritDoc} */
+    public byte[] getContent(final String key) {
         byte[] result = null;
-        for (int i = 0; i < contentResolvers.length; i++) {
-            result = contentResolvers[i].getContent(key);
-            if (result != null){
+        for (int i = 0; i < this.contentResolvers.length; i++) {
+            result = this.contentResolvers[i].getContent(key);
+            if (result != null) {
                 return result;
             }
         }
