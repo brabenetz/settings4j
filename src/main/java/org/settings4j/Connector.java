@@ -16,11 +16,10 @@
  *****************************************************************************/
 package org.settings4j;
 
-import org.settings4j.connector.ClasspathConnector;
-
 /**
  * An implementation of this Interface can return Values for a given key.<br />
- * Not every implementation can write a value for a given key (e.g.: {@link ClasspathConnector} )<br />
+ * Not every implementation can write a value for a given key
+ * (e.g.: {@link org.settings4j.connector.ClasspathConnector} )<br />
  * String, byte[] (content) and Objects should be possible.<br />
  * <br />
  * A Connector can use the Helper Implementations
@@ -43,7 +42,7 @@ import org.settings4j.connector.ClasspathConnector;
 public interface Connector {
     
     /**
-     * return a String-Value for the given key<br />
+     * return a String-Value for the given key.
      * 
      * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
      * @return the String-Value for the given key 
@@ -51,7 +50,8 @@ public interface Connector {
     String getString(String key);
     
     /**
-     * return a byte[]-Value for the given key<br />
+     * return a byte[]-Value for the given key.
+     * <p>
      * The concrete implementation can use the ContentResolver if required
      * 
      * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
@@ -60,7 +60,8 @@ public interface Connector {
     byte[] getContent(String key);
     
     /**
-     * return a Object-Value for the given key<br />
+     * return a Object-Value for the given key.
+     * <p>
      * The concrete implementation can use the ObjectResolver if required<br />
      * 
      * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
@@ -71,19 +72,19 @@ public interface Connector {
     /**
      * set a ContentResolver as Helper for {@link #getContent(String)}.
      * 
-     * @param contentResolver
+     * @param contentResolver the ContentResolver to set.
      */
     void setContentResolver(ContentResolver contentResolver);
     
     /**
      * set a ObjectResolver as Helper for {@link #getObject(String)}.
      * 
-     * @param objectResolver
+     * @param objectResolver the ObjectResolver to set.
      */
     void setObjectResolver(ObjectResolver objectResolver);
 
     /**
-     * add a Connector if you needed inside the {@link #init()} Methode.<br/>
+     * Add a Connector if you needed inside the {@link #init()} Methode.<br/>
      * Or you can use this connectors inside the settings4j.xml to set a parameter/property
      * 
      * <pre>
@@ -91,14 +92,15 @@ public interface Connector {
      * Example configuration in settings4j.xml:
      * --------------------------------------
      * &lt;connector name="PropertyFileConnector" class="org.settings4j.connector.PropertyFileConnector"&gt;
-     *     &lt;param name="propertyFromContent" value="<b>${connectors.content['org/settings4j/config/propertyFile.properties']}</b>" /&gt;
+     *     &lt;param name="propertyFromContent"
+     *          value="<b>${connectors.content['org/settings4j/config/propertyFile.properties']}</b>" /&gt;
      *     &lt;contentResolver-ref ref="DefaultContentResolver" /&gt;
      *     <b>&lt;connector-ref ref="ClasspathConnector" /&gt;</b>
      * &lt;/connector&gt;
      * --------------------------------------
      * 
      * </pre>
-     * @param connector
+     * @param connector the Connector to set.
      */
     void addConnector(Connector connector);
     
@@ -107,7 +109,7 @@ public interface Connector {
      * This function will only called one times.
      *  
      */
-    public void init();
+    void init();
     
     /**
      * Return The name Of this Connector. The Name is required
@@ -115,7 +117,7 @@ public interface Connector {
      * 
      * @return The name Of this Connector.
      */
-    public String getName();
+    String getName();
 
     /**
      * Set the name of the Connector defined in the settings4j.xml configuration:
@@ -127,8 +129,8 @@ public interface Connector {
      * --------------------------------------
      * </pre>
      * 
-     * @param name
+     * @param name the Name of this Connector.
      */
-    public void setName(String name);
+    void setName(String name);
     
 }

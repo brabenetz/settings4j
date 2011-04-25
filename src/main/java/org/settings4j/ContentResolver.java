@@ -16,22 +16,20 @@
  *****************************************************************************/
 package org.settings4j;
 
-import org.settings4j.connector.PropertyFileConnector;
-import org.settings4j.connector.SystemPropertyConnector;
-import org.settings4j.contentresolver.UnionContentResolver;
-
 /**
  * a ContentResolver is a Helper for read/write byte[] content for a given key.
  * 
  * <pre>
  * Example configuration in settings4j.xml:
  * --------------------------------------
- * &lt;contentResolver name="ClasspathContentResolver" class="org.settings4j.contentresolver.ClasspathContentResolver"&gt;
+ * &lt;contentResolver name="ClasspathContentResolver"
+ *      class="org.settings4j.contentresolver.ClasspathContentResolver"&gt;
  * &lt;/contentResolver&gt;
  * --------------------------------------
  * </pre>
  * 
- * This is usefull for {@link SystemPropertyConnector} or {@link PropertyFileConnector}.
+ * This is usefull for {@link org.settings4j.connector.SystemPropertyConnector}
+ * or {@link org.settings4j.connector.PropertyFileConnector}.
  * If you define a ContentResolver in this Connectors, you can rever to a File of the FileSystem or Classpath.
  * 
  * <pre>
@@ -70,7 +68,7 @@ public interface ContentResolver {
     /**
      * Some Implementations of a {@link ContentResolver} are delegating the functionality
      * to other ContentResolvers.<br />
-     * Examples are: {@link UnionContentResolver}
+     * Examples are: {@link org.settings4j.contentresolver.UnionContentResolver}
      * 
      * <pre>
      * --------------------------------------
