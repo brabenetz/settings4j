@@ -20,20 +20,26 @@ import org.settings4j.Settings4jFactory;
 import org.settings4j.Settings4jInstance;
 import org.settings4j.Settings4jRepository;
 
+/**
+ * No-operation implementation of {@link Settings4jRepository}.
+ */
 public class NOPSettingsRepository implements Settings4jRepository {
 
     public Settings4jInstance getSettings() {
-        return new NOPSettings(this);
+        return new NOPSettings();
     }
 
-    public Settings4jInstance getSettings(Settings4jFactory factory) {
-        return new NOPSettings(this);
+    /** {@inheritDoc} */
+    public Settings4jInstance getSettings(final Settings4jFactory factory) {
+        return new NOPSettings();
     }
 
+    /** {@inheritDoc} */
     public int getConnectorCount() {
         return 0;
     }
 
+    /** {@inheritDoc} */
     public void resetConfiguration() {
         // do nothing in NOP-Implementation
     }
