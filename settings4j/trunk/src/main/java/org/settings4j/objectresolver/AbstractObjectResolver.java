@@ -27,51 +27,61 @@ import org.apache.commons.lang.StringUtils;
 import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
 
-public abstract class AbstractObjectResolver implements ObjectResolver{
+/**
+ * Basic Connector implementations like getter and Setter of contentResolver, objectResolver.
+ * <p>
+ * 
+ * @author Harald.Brabenetz
+ *
+ */
+public abstract class AbstractObjectResolver implements ObjectResolver {
 
-    /** General Logger for this Class */
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(AbstractObjectResolver.class);
 
+    /** The Key which ObjectResolver implementation should be used. */
     public static final String PROP_OBJECT_RESOLVER_KEY = "objectResolverKey";
+    /** The Key if the found Object should be cached (this will handle the Object as singleton). */
     public static final String PROP_CACHED = "cached";
-    public static final String PROP_READONLY = "readonly";
-    
+
     private String propertySuffix = ".properties";
-    
-    private Map cachedObjects = new HashMap();
-    
+
+    private final Map cachedObjects = new HashMap();
+
     private boolean cached = false;
 
-    public void addObjectResolver(ObjectResolver objectResolver) {
+    /** {@inheritDoc} */
+    public void addObjectResolver(final ObjectResolver objectResolver) {
         throw new UnsupportedOperationException(this.getClass().getName() + " cannot add other ObjectResolvers");
     }
 
-    public Object getObject(String key, ContentResolver contentResolver) {
-    	
-        Object result = cachedObjects.get(key);
-        if (result != null){
+    /** {@inheritDoc} */
+    public Object getObject(final String key, final ContentResolver contentResolver) {
+
+        Object result = this.cachedObjects.get(key);
+        if (result != null) {
             return result;
         }
-        
-        
-        byte[] content = contentResolver.getContent(key);
-        if (content != null){
-            Properties properties = getObjectProperties(key, contentResolver);
+
+
+        final byte[] content = contentResolver.getContent(key);
+        if (content != null) {
+            final Properties properties = getObjectProperties(key, contentResolver);
             if (properties != null) {
-                String propObjectResolverKey = properties.getProperty(PROP_OBJECT_RESOLVER_KEY);
-                String propCached = properties.getProperty(PROP_CACHED);
+                final String propObjectResolverKey = properties.getProperty(PROP_OBJECT_RESOLVER_KEY);
+                final String propCached = properties.getProperty(PROP_CACHED);
                 if (StringUtils.isEmpty(propObjectResolverKey)) {
                     LOG.warn("The property-File for Key '" + key //
                         + "' doesn't have the required Property '" + PROP_OBJECT_RESOLVER_KEY + "'");
                     return null;
                 }
-                
-                if (getObjectResolverKey().equals(propObjectResolverKey)){
+
+                if (getObjectResolverKey().equals(propObjectResolverKey)) {
                     result = contentToObject(key, properties, content, contentResolver);
-                    if (result != null){
-                        if ("true".equalsIgnoreCase(propCached) || (propCached== null && isCached())){
-                            cachedObjects.put(key, result);
+                    if (result != null) {
+                        if ("true".equalsIgnoreCase(propCached) || (propCached == null && isCached())) {
+                            this.cachedObjects.put(key, result);
                         }
                         return result;
                     }
@@ -80,43 +90,65 @@ public abstract class AbstractObjectResolver implements ObjectResolver{
         }
         return null;
     }
-    
-    protected Properties getObjectProperties(String key, ContentResolver contentResolver){
-        
-        byte[] propertyContent = contentResolver.getContent(key + propertySuffix);
-        if (propertyContent == null){
+
+    /**
+     * To get the additional Properties for the given byte[] content can be overwriten by subclasses.
+     * <p>
+     * The default implementation reads the PropertyFile from key + ".properties".
+     * If no property where found, or an error occurs, this method return null.
+     * 
+     * @param key the key of the byte[] Content to convert.
+     * @param contentResolver the ContentResolver to read the additional Property-File.
+     * @return the parsed {@link Properties} Object or null if an error occurred.
+     */
+    protected Properties getObjectProperties(final String key, final ContentResolver contentResolver) {
+
+        final byte[] propertyContent = contentResolver.getContent(key + this.propertySuffix);
+        if (propertyContent == null) {
             return null;
-        } else {
-            Properties properties = new Properties();
-            try {
-                properties.load(new ByteArrayInputStream(propertyContent));
-            } catch (IOException e) {
-                LOG.error(e.getMessage(), e);
-                return null;
-            }
-            return properties;
         }
+        // else
+        final Properties properties = new Properties();
+        try {
+            properties.load(new ByteArrayInputStream(propertyContent));
+        } catch (final IOException e) {
+            LOG.error(e.getMessage(), e);
+            return null;
+        }
+        return properties;
+        
     }
 
     public String getPropertySuffix() {
-        return propertySuffix;
+        return this.propertySuffix;
     }
 
-    public void setPropertySuffix(String propertySuffix) {
+    public void setPropertySuffix(final String propertySuffix) {
         this.propertySuffix = propertySuffix;
     }
 
     protected String getObjectResolverKey() {
         return this.getClass().getName();
     }
-    
-    protected abstract Object contentToObject(String key, Properties properties, byte[] content, ContentResolver contentResolver);
+
+    /**
+     * Method to convert the given content-File to an Object must be implemented by SubClasses.
+     * <p>
+     * 
+     * @param key The Original Key of the Object
+     * @param properties The Property-File which where Found under key + ".properties"
+     * @param content The byte[] Content to convert.
+     * @param contentResolver the contentResolver to get possible additional content Files.
+     * @return the parsed Object from the byte[] Content.
+     */
+    protected abstract Object contentToObject(String key, Properties properties, byte[] content,
+            ContentResolver contentResolver);
 
     public boolean isCached() {
-        return cached;
+        return this.cached;
     }
 
-    public void setCached(boolean cached) {
+    public void setCached(final boolean cached) {
         this.cached = cached;
     }
 }

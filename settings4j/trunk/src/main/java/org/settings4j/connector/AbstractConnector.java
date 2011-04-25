@@ -25,7 +25,7 @@ import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
 
 /**
- * Basic Connector implementations like getter and Settot of contentResolver, objectResolver.
+ * Basic Connector implementations like getter and Setter of contentResolver, objectResolver.
  * 
  * @author Harald.Brabenetz
  *

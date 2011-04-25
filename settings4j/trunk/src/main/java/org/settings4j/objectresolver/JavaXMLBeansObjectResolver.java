@@ -19,29 +19,27 @@ package org.settings4j.objectresolver;
 
 import java.beans.ExceptionListener;
 import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
 import java.io.ByteArrayInputStream;
 import java.util.Properties;
 
 import org.settings4j.ContentResolver;
 
 /**
- * Thsi ObjectResolver convert a byte[] to an Object an inverse
- * with the {@link XMLDecoder} and {@link XMLEncoder}
+ * This ObjectResolver convert a byte[] to an Object with the {@link XMLDecoder}.
  * 
  * @author Harald.Brabenetz
- *
  */
 public class JavaXMLBeansObjectResolver extends AbstractObjectResolver {
 
-    /** General Logger for this Class */
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(JavaXMLBeansObjectResolver.class);
 
     /** {@inheritDoc} */
-    protected Object contentToObject(String key, Properties properties, byte[] content, ContentResolver contentResolver) {
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(content);
-        XMLDecoder encoder = new XMLDecoder(byteArrayInputStream);
+    protected Object contentToObject(final String key, final Properties properties, final byte[] content,
+            final ContentResolver contentResolver) {
+        final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(content);
+        final XMLDecoder encoder = new XMLDecoder(byteArrayInputStream);
         encoder.setExceptionListener(new LogDecoderExceptionListener(key));
         return encoder.readObject();
     }
@@ -51,22 +49,23 @@ public class JavaXMLBeansObjectResolver extends AbstractObjectResolver {
      * <br />
      * Example:<br />
      * The {@link org.springframework.jdbc.datasource.AbstractDataSource} Object<br />
-     * hast Getter and Setter for "logWriter" who throws per default an {@link UnsupportedOperationException}.<br />
+     * had Getter and Setter for "logWriter" who throws per default an {@link UnsupportedOperationException}.<br />
      * 
      * @author Harald.Brabenetz
      */
     private class LogDecoderExceptionListener implements ExceptionListener {
-        private String key;
 
-        public LogDecoderExceptionListener(String key) {
+        private final String key;
+
+        public LogDecoderExceptionListener(final String key) {
             super();
             this.key = key;
         }
 
         /** {@inheritDoc} */
-        public void exceptionThrown(Exception e) {
-            LOG.warn("Ignore error on decoding Object from key: " + key + "! "
-                + e.getClass().getName() + ": " + e.getMessage() + "; Set Loglevel DEBUG for more informations.");
+        public void exceptionThrown(final Exception e) {
+            LOG.warn("Ignore error on decoding Object from key: " + this.key + "! " + e.getClass().getName() + ": "
+                + e.getMessage() + "; Set Loglevel DEBUG for more informations.");
             if (LOG.isDebugEnabled()) {
                 LOG.debug(e.getMessage(), e);
             }

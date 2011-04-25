@@ -20,27 +20,37 @@ package org.settings4j.objectresolver;
 import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
 
-public class UnionObjectResolver implements ObjectResolver{
+/**
+ * The UnionObjectResolver can be an container for many other {@link ObjectResolver}
+ * which will be processed in sequence.
+ * <p>
+ * the first result of a ObjectResolver which are a not-null value will be used as result.
+ * 
+ * @author Harald.Brabenetz
+ */
+public class UnionObjectResolver implements ObjectResolver {
 
     private ObjectResolver[] objectResolvers = new ObjectResolver[0];
 
-    public void addObjectResolver(ObjectResolver objectResolver) {
-        
-        ObjectResolver[] objectResolversNew = new ObjectResolver[objectResolvers.length+1];
-        for (int i = 0; i < objectResolvers.length; i++) {
-            objectResolversNew[i] = objectResolvers[i];
+    /** {@inheritDoc} */
+    public void addObjectResolver(final ObjectResolver objectResolver) {
+
+        final ObjectResolver[] objectResolversNew = new ObjectResolver[this.objectResolvers.length + 1];
+        for (int i = 0; i < this.objectResolvers.length; i++) {
+            objectResolversNew[i] = this.objectResolvers[i];
         }
-        objectResolversNew[objectResolvers.length] = objectResolver;
-        
-        objectResolvers = objectResolversNew;
+        objectResolversNew[this.objectResolvers.length] = objectResolver;
+
+        this.objectResolvers = objectResolversNew;
     }
-    
-    public Object getObject(String key, ContentResolver contentResolver) {
-    	
+
+    /** {@inheritDoc} */
+    public Object getObject(final String key, final ContentResolver contentResolver) {
+
         Object result = null;
-        for (int i = 0; i < objectResolvers.length; i++) {
-            result = objectResolvers[i].getObject(key, contentResolver);
-            if (result != null){
+        for (int i = 0; i < this.objectResolvers.length; i++) {
+            result = this.objectResolvers[i].getObject(key, contentResolver);
+            if (result != null) {
                 return result;
             }
         }

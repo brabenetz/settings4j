@@ -21,33 +21,43 @@ import org.settings4j.ContentResolver;
 import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
 
-public class FilteredObjectResolverWrapper implements ObjectResolver{
+/**
+ * Wrapper to add a {@link Filter} which is used before the given {@link ObjectResolver} is called.
+ * 
+ * @author Harald.Brabenetz
+ */
+public class FilteredObjectResolverWrapper implements ObjectResolver {
 
-    private ObjectResolver targetObjectResolver;
-	private Filter filter;
+    private final ObjectResolver targetObjectResolver;
+    private final Filter filter;
 
-    public FilteredObjectResolverWrapper(ObjectResolver targetObjectResolver, Filter filter) {
+    /**
+     * 
+     * @param targetObjectResolver The ObjectResolver where the settings should be read if the Filter allows it.
+     * @param filter the {@link Filter} which defines if an key should be read from the given ObjectResolver.
+     */
+    public FilteredObjectResolverWrapper(final ObjectResolver targetObjectResolver, final Filter filter) {
         super();
-		if (targetObjectResolver == null){
-			throw new IllegalArgumentException("FilteredConnectorWrapper needs a ObjectResolver Object");
-		}
-		if (filter == null){
-			throw new IllegalArgumentException("FilteredConnectorWrapper needs a Filter Object");
-		}
-		this.targetObjectResolver = targetObjectResolver;
-		this.filter = filter;
+        if (targetObjectResolver == null) {
+            throw new IllegalArgumentException("FilteredConnectorWrapper needs a ObjectResolver Object");
+        }
+        if (filter == null) {
+            throw new IllegalArgumentException("FilteredConnectorWrapper needs a Filter Object");
+        }
+        this.targetObjectResolver = targetObjectResolver;
+        this.filter = filter;
     }
 
-
-    public void addObjectResolver(ObjectResolver objectResolver) {
-        targetObjectResolver.addObjectResolver(objectResolver);
+    /** {@inheritDoc} */
+    public void addObjectResolver(final ObjectResolver objectResolver) {
+        this.targetObjectResolver.addObjectResolver(objectResolver);
     }
 
-
-    public Object getObject(String key, ContentResolver contentResolver) {
-    	if (!filter.isValid(key)){
+    /** {@inheritDoc} */
+    public Object getObject(final String key, final ContentResolver contentResolver) {
+        if (!this.filter.isValid(key)) {
             return null;
-    	}
-        return targetObjectResolver.getObject(key, contentResolver);
+        }
+        return this.targetObjectResolver.getObject(key, contentResolver);
     }
 }
