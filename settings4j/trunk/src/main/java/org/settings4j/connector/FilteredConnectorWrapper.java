@@ -22,7 +22,7 @@ import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
 
 /**
- * Wrapper to add a {@link Filter} which use used before the given {@link Connector} is called.
+ * Wrapper to add a {@link Filter} which is used before the given {@link Connector} is called.
  * 
  * @author Harald.Brabenetz
  *

@@ -19,31 +19,44 @@ package org.settings4j.contentresolver;
 import org.settings4j.ContentResolver;
 import org.settings4j.Filter;
 
+/**
+ * Wrapper to add a {@link Filter} which is used before the given {@link ContentResolver} is called.
+ * 
+ * @author Harald.Brabenetz
+ *
+ */
 public class FilteredContentResolverWrapper implements ContentResolver {
 
-    private ContentResolver targetContentResolver;
-	private Filter filter;
+    private final ContentResolver targetContentResolver;
+    private final Filter filter;
 
-    public FilteredContentResolverWrapper(ContentResolver targetContentResolver, Filter filter) {
+    /**
+     * @param targetContentResolver The {@link ContentResolver} where the settings
+     *  should be read if the Filter allows it.
+     * @param filter the {@link Filter} which defines if an key should be read from the given {@link ContentResolver}.
+     */
+    public FilteredContentResolverWrapper(final ContentResolver targetContentResolver, final Filter filter) {
         super();
-		if (targetContentResolver == null){
-			throw new IllegalArgumentException("FilteredConnectorWrapper needs a ContentResolver Object");
-		}
-		if (filter == null){
-			throw new IllegalArgumentException("FilteredConnectorWrapper needs a Filter Object");
-		}
-		this.targetContentResolver = targetContentResolver;
-		this.filter = filter;
-    }
-    
-    public synchronized void addContentResolver(ContentResolver contentResolver) {
-        targetContentResolver.addContentResolver(contentResolver);
+        if (targetContentResolver == null) {
+            throw new IllegalArgumentException("FilteredConnectorWrapper needs a ContentResolver Object");
+        }
+        if (filter == null) {
+            throw new IllegalArgumentException("FilteredConnectorWrapper needs a Filter Object");
+        }
+        this.targetContentResolver = targetContentResolver;
+        this.filter = filter;
     }
 
-    public byte[] getContent(String key) {
-    	if (!filter.isValid(key)){
+    /** {@inheritDoc} */
+    public synchronized void addContentResolver(final ContentResolver contentResolver) {
+        this.targetContentResolver.addContentResolver(contentResolver);
+    }
+
+    /** {@inheritDoc} */
+    public byte[] getContent(final String key) {
+        if (!this.filter.isValid(key)) {
             return null;
-    	}
-        return targetContentResolver.getContent(key);
+        }
+        return this.targetContentResolver.getContent(key);
     }
 }
