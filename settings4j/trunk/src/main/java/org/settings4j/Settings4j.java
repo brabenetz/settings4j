@@ -37,13 +37,10 @@ import org.settings4j.settings.SettingsManager;
  * </pre>
  * 
  * @author Harald.Brabenetz
- *
  */
 public final class Settings4j {
-    
-    /**
-     * Hide Constructor (Utility-Pattern)
-     */
+
+    /** Hide Constructor (Utility-Pattern). */
     private Settings4j() {
         super();
     }
@@ -55,25 +52,24 @@ public final class Settings4j {
      * Returns null if no connector found a Value for the given key<br />
      * 
      * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
-     * @return the found String-Value for the given key 
+     * @return the found String-Value for the given key
      */
-    public static String getString(String key) {
-    	return getSettings().getString(key);
+    public static String getString(final String key) {
+        return getSettings().getString(key);
     }
 
     /**
-     * return the found byte[]-Value for the given key.<br /> {
-    	getSettings().getAllConnectors();
-    }
-     * The {@link Settings4j} Instance iterates all his {@link Connector} and return the first found Value.<br />
+     * return the found byte[]-Value for the given key.<br />
+     * { getSettings().getAllConnectors(); } The {@link Settings4j} Instance iterates all his {@link Connector} and
+     * return the first found Value.<br />
      * <br />
      * Returns null if no connector found a Value for the given key<br />
      * 
      * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
-     * @return the found byte[]-Value for the given key 
+     * @return the found byte[]-Value for the given key
      */
-    public static byte[] getContent(String key) {
-    	return getSettings().getContent(key);
+    public static byte[] getContent(final String key) {
+        return getSettings().getContent(key);
     }
 
     /**
@@ -83,10 +79,10 @@ public final class Settings4j {
      * Returns null if no connector found a Value for the given key<br />
      * 
      * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
-     * @return the found Object-Value for the given key 
+     * @return the found Object-Value for the given key
      */
-    public static Object getObject(String key) {
-    	return getSettings().getObject(key);
+    public static Object getObject(final String key) {
+        return getSettings().getObject(key);
     }
 
     /**
@@ -95,24 +91,24 @@ public final class Settings4j {
      * @return the {@link Settings4jRepository} where this Settings-Object is stored.
      */
     public static Settings4jRepository getSettingsRepository() {
-    	return SettingsManager.getSettingsRepository();
+        return SettingsManager.getSettingsRepository();
     }
-    
+
     /**
-     * Delegate to {@link SettingsManager#getRootSettings()}
+     * Delegate to {@link SettingsManager#getRootSettings()}.
      * 
      * @see SettingsManager#getRootSettings()
      */
     private static Settings4jInstance getSettings() {
         return SettingsManager.getSettings();
     }
-    
+
     /**
-     * Return a List off {@link Connector} who can be used with this {@link Settings4j} instance
+     * Return a List off {@link Connector} who can be used with this {@link Settings4j} instance.
      * 
-     * @return a list off all Connectors who can be used with this {@link Settings4j} instance 
+     * @return a list off all Connectors who can be used with this {@link Settings4j} instance
      */
     public static List getConnectors() {
-    	return getSettings().getConnectors();
+        return getSettings().getConnectors();
     }
 }

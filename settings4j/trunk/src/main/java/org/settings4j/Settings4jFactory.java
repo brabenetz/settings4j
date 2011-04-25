@@ -17,13 +17,13 @@
 package org.settings4j;
 
 /**
- * Create a new instance of Settings-Interface
+ * Create a new instance of Settings-Interface.
  * 
  * @author Harald.Brabenetz
  */
 public interface Settings4jFactory {
     /**
-     * The default implementation makes a new {@link org.settings4j.settings.DefaultSettings}(String name) instance
+     * The default implementation makes a new {@link org.settings4j.settings.DefaultSettings}(String name) instance.
      * 
      * @return new {@link Settings4jInstance}
      */
