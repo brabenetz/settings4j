@@ -19,6 +19,11 @@ package org.settings4j.contentresolver;
 import org.settings4j.ContentResolver;
 
 /**
+ * The UnionContentResolver can be an container for many other {@link ContentResolver}
+ * which will be processed in sequence.
+ * <p>
+ * the first result of a ContentResolver which are a not-null value will be used as result.
+ * 
  * @author Harald.Brabenetz
  */
 public class UnionContentResolver implements ContentResolver {

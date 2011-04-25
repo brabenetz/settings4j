@@ -26,24 +26,35 @@ import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 
-public class SpringConfigObjectResolver extends AbstractObjectResolver{
+/**
+ * This implementation parses a Spring-Beans XML File and returns
+ * the Object from the generated Spring Application Context.
+ * <p>
+ * Per Default the bean with id = key.replace('/', '.') will be returned.
+ * But you can configure a key "bean-ref" in the {@link Properties}-File for the given Object.
+ * 
+ * @author Harald.Brabenetz
+ */
+public class SpringConfigObjectResolver extends AbstractObjectResolver {
 
     /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(SpringConfigObjectResolver.class);
-    
+
     private static final String PROPERTY_BEAN_REF = "bean-ref";
 
-    protected Object contentToObject(String key, Properties properties, byte[] content, ContentResolver contentResolver) {
-        AbstractApplicationContext context = new ByteArrayXMLApplicationContext(content);
+    /** {@inheritDoc} */
+    protected Object contentToObject(final String key, final Properties properties, final byte[] content,
+            final ContentResolver contentResolver) {
+        final AbstractApplicationContext context = new ByteArrayXMLApplicationContext(content);
         context.refresh();
-        
+
         String beanRef = properties.getProperty(PROPERTY_BEAN_REF);
         if (StringUtils.isEmpty(beanRef)) {
             beanRef = key.replace('/', '.');
         }
-        
-        Object result = context.getBean(beanRef);
+
+        final Object result = context.getBean(beanRef);
         if (result == null) {
             LOG.warn("SpringContext-Object with ID '" + beanRef + "' for Key '" + key + "' is null!");
         }
@@ -51,11 +62,16 @@ public class SpringConfigObjectResolver extends AbstractObjectResolver{
         return result;
     }
 
-    private static class ByteArrayXMLApplicationContext extends AbstractXmlApplicationContext{
+    /**
+     * A SpringFramework Application Context which can process a spring-XML Content from byte[] as input.
+     * 
+     * @author Harald.Brabenetz
+     */
+    private static class ByteArrayXMLApplicationContext extends AbstractXmlApplicationContext {
 
-        private Resource[] configResources;
+        private final Resource[] configResources;
 
-        public ByteArrayXMLApplicationContext(byte[] content) {
+        public ByteArrayXMLApplicationContext(final byte[] content) {
             super();
             this.configResources = new Resource[1];
             this.configResources[0] = new ByteArrayResource(content);
@@ -65,5 +81,5 @@ public class SpringConfigObjectResolver extends AbstractObjectResolver{
             return this.configResources;
         }
     }
-    
+
 }
