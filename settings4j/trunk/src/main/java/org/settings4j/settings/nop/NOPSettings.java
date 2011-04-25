@@ -21,52 +21,54 @@ import java.util.List;
 import java.util.Map;
 
 import org.settings4j.Connector;
-import org.settings4j.Settings4jRepository;
 
 /**
  * No-operation implementation of Settings used by NOPSettingsRepository.
  */
 public class NOPSettings implements org.settings4j.Settings4jInstance {
-    Settings4jRepository settingsRepository;
-    
-    public NOPSettings(Settings4jRepository settingsRepository) {
-        super();
-        this.settingsRepository = settingsRepository;
-    }
 
-    public void addConnector(Connector connector) {
+    /** {@inheritDoc} */
+    public void addConnector(final Connector connector) {
         // do nothing in NOP-Implementation
     }
 
+    /** {@inheritDoc} */
     public void removeAllConnectors() {
         // do nothing in NOP-Implementation
     }
-    
+
+    /** {@inheritDoc} */
     public List getConnectors() {
         return Collections.EMPTY_LIST;
     }
 
-	public byte[] getContent(String key) {
+    /** {@inheritDoc} */
+    public byte[] getContent(final String key) {
         return null;
     }
 
-    public Object getObject(String key) {
+    /** {@inheritDoc} */
+    public Object getObject(final String key) {
         return null;
     }
 
-    public String getString(String key) {
+    /** {@inheritDoc} */
+    public String getString(final String key) {
         return null;
     }
 
+    /** {@inheritDoc} */
     public Map getMapping() {
         return Collections.EMPTY_MAP;
     }
 
-    public void setMapping(Map mapping) {
+    /** {@inheritDoc} */
+    public void setMapping(final Map mapping) {
         // do nothing in NOP-Implementation
     }
 
-	public Connector getConnector(String connectorName) {
-		return null;
-	}
+    /** {@inheritDoc} */
+    public Connector getConnector(final String connectorName) {
+        return null;
+    }
 }
