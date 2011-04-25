@@ -19,8 +19,15 @@ package org.settings4j.settings;
 import org.settings4j.Settings4jFactory;
 import org.settings4j.Settings4jInstance;
 
+/**
+ * This default Factory uses the {@link DefaultSettings} Implementation.
+ * 
+ * @author Harald.Brabenetz
+ *
+ */
 public class DefaultSettingsFactory implements Settings4jFactory {
 
+    /** {@inheritDoc} */
     public Settings4jInstance makeNewSettingsInstance() {
         return new DefaultSettings();
     }
