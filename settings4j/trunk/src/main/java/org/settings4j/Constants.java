@@ -17,31 +17,31 @@
 
 package org.settings4j;
 
-import java.util.ResourceBundle;
 
 /**
- * Some Constants like the Return Values (success or not) of Connectors.set*(...) Methodes. 
+ * Some Constants like the Return Values (success or not) of Connectors.set*(...) Methods. 
  * 
  * @author Harald.Brabenetz
  *
  */
-public interface Constants {
-    /**
-     * The {@link ResourceBundle} for Settings4j (e.g.: Error Messages)
-     */
-    public static final ResourceBundle SETTINGS4J_MESSAGES = ResourceBundle.getBundle("org/settings4j/Messages");
+public final class Constants {
+
+    /** Hide Constructor.*/
+    private Constants() {
+        super();
+    }
 
     /**
      * Return value for:<br />
-     * {@link org.settings4j.connector.JNDIConnector#setObject(String, Object)} <br />
+     * {@link org.settings4j.connector.JNDIConnector#setObject(String, Object)}.
      * <br />
-     * If Settings is not possible (e.g.: {@link org.settings4j.connector.JNDIConnector} )
+     * If Settings is not possible.
      */
     public static final int SETTING_NOT_POSSIBLE = 0;
     
     /**
      * Return value for:<br />
-     * {@link org.settings4j.connector.JNDIConnector#setObject(String, Object)} <br />
+     * {@link org.settings4j.connector.JNDIConnector#setObject(String, Object)}.
      * <br />
      * if Setting was successful: The value for the given key was replaced.
      */
