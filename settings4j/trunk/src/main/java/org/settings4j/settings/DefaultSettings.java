@@ -31,54 +31,49 @@ import org.settings4j.Settings4jInstance;
  * The default Settings Object.
  * 
  * @author Harald.Brabenetz
- *
  */
 public class DefaultSettings implements Settings4jInstance {
 
     /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(DefaultSettings.class);
-    
-    private List connectors = Collections.synchronizedList(new ArrayList());
-    private Map connectorMap = Collections.synchronizedMap(new HashMap());
-    private Map mapping;
 
-    public DefaultSettings() {
-        super();
-    }
+    private final List connectors = Collections.synchronizedList(new ArrayList());
+    private final Map connectorMap = Collections.synchronizedMap(new HashMap());
+    private Map mapping;
 
     /** {@inheritDoc} */
     public List getConnectors() {
-        return Collections.unmodifiableList(connectors);
+        return Collections.unmodifiableList(this.connectors);
     }
 
-	/** {@inheritDoc} */
-	public Connector getConnector(String connectorName) {
-		return (Connector)connectorMap.get(connectorName);
-	}
+    /** {@inheritDoc} */
+    public Connector getConnector(final String connectorName) {
+        return (Connector) this.connectorMap.get(connectorName);
+    }
 
-	/** {@inheritDoc} */
-    public void addConnector(Connector connector) {
-        connectors.add(connector);
-        connectorMap.put(connector.getName(), connector);
+    /** {@inheritDoc} */
+    public void addConnector(final Connector connector) {
+        this.connectors.add(connector);
+        this.connectorMap.put(connector.getName(), connector);
     }
 
     /** {@inheritDoc} */
     public void removeAllConnectors() {
-        connectors.clear();
-        connectorMap.clear();
+        this.connectors.clear();
+        this.connectorMap.clear();
     }
 
     /** {@inheritDoc} */
-    public byte[] getContent(String key) {
-        String mappedKey = mappedKey(key);
+    public byte[] getContent(final String key) {
+        final String mappedKey = mappedKey(key);
         byte[] result = null;
         Iterator iterator;
         iterator = this.connectors.iterator();
         while (iterator.hasNext()) {
-            Connector connector = (Connector) iterator.next();
+            final Connector connector = (Connector) iterator.next();
             result = connector.getContent(mappedKey);
-            if (result != null){
+            if (result != null) {
                 logDebugFoundValueForKey("Content", key, connector);
                 return result;
             }
@@ -87,15 +82,15 @@ public class DefaultSettings implements Settings4jInstance {
     }
 
     /** {@inheritDoc} */
-    public Object getObject(String key) {
-        String mappedKey = mappedKey(key);
+    public Object getObject(final String key) {
+        final String mappedKey = mappedKey(key);
         Object result = null;
         Iterator iterator;
         iterator = this.connectors.iterator();
         while (iterator.hasNext()) {
-            Connector connector = (Connector) iterator.next();
+            final Connector connector = (Connector) iterator.next();
             result = connector.getObject(mappedKey);
-            if (result != null){
+            if (result != null) {
                 logDebugFoundValueForKey("Object", key, connector);
                 return result;
             }
@@ -104,24 +99,27 @@ public class DefaultSettings implements Settings4jInstance {
     }
 
     /** {@inheritDoc} */
-    public String getString(String key) {
-        String mappedKey = mappedKey(key);
+    public String getString(final String key) {
+        final String mappedKey = mappedKey(key);
         String result = null;
         Iterator iterator;
         iterator = this.connectors.iterator();
         while (iterator.hasNext()) {
-            Connector connector = (Connector) iterator.next();
+            final Connector connector = (Connector) iterator.next();
             result = connector.getString(mappedKey);
-            if (result != null){
+            if (result != null) {
                 logDebugFoundValueForKey("String", key, connector);
                 return result;
             }
         }
         return result;
     }
-    
+
     /**
-     * The key mapping defined in settings4j.xml:
+     * Get the mapped Key.
+     * <p>
+     * if some Sub-Modules of your App defines separated Keys for the DataSource, you can refer it the the same Key:
+     * 
      * <pre>
      * Example:
      * &lt;mapping name="defaultMapping"&gt;
@@ -130,43 +128,38 @@ public class DefaultSettings implements Settings4jInstance {
      * &lt;/mapping&gt;
      * </pre>
      * 
+     * Now you need only configure only one dataSource for your App.
      * 
-     * @param key
-     * @return
+     * @param key the Key to map.
+     * @return The key which must be configured for the given Key.
      */
-    private String mappedKey(String key){
-        String mappedKey = (String)this.getMapping().get(key);
-        if(StringUtils.isEmpty(mappedKey)){
+    private String mappedKey(final String key) {
+        final String mappedKey = (String) this.getMapping().get(key);
+        if (StringUtils.isEmpty(mappedKey)) {
             return key;
-        } else {
-            return mappedKey;
         }
+        //else
+        return mappedKey;
+        
     }
 
     /** {@inheritDoc} */
     public Map getMapping() {
-        if (mapping == null){
-            mapping = new HashMap();
+        if (this.mapping == null) {
+            this.mapping = new HashMap();
         }
-        return mapping;
+        return this.mapping;
     }
 
     /** {@inheritDoc} */
-    public void setMapping(Map mapping) {
+    public void setMapping(final Map mapping) {
         this.mapping = mapping;
     }
 
-    private void logDebugFoundValueForKey(String type, String key, Connector connector) {
+    private void logDebugFoundValueForKey(final String type, final String key, final Connector connector) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Found "
-                + type
-                + " for Key '"
-                + key
-                + "' in connector '"
-                + connector.getName()
-                + "' ("
-                + connector.getClass().getName()
-                + ")");
+            LOG.debug("Found " + type + " for Key '" + key + "' in connector '" + connector.getName() + "' ("
+                + connector.getClass().getName() + ")");
         }
     }
 }
