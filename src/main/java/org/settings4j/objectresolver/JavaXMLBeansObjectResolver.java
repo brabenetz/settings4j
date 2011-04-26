@@ -53,7 +53,7 @@ public class JavaXMLBeansObjectResolver extends AbstractObjectResolver {
      * 
      * @author Harald.Brabenetz
      */
-    private class LogDecoderExceptionListener implements ExceptionListener {
+    private static class LogDecoderExceptionListener implements ExceptionListener {
 
         private final String key;
 
