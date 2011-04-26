@@ -123,7 +123,7 @@ public class DOMConfigurator {
     // key: objectResolver-Name, value: ObjectResolver
     private final Map objectResolverBag;
     // key: mapping-Name, value: Map
-    private Map mappingBag;
+    private final Map mappingBag;
 
     private final Settings4jRepository repository;
 
@@ -139,6 +139,7 @@ public class DOMConfigurator {
         this.connectorBag = new HashMap();
         this.contentResolverBag = new HashMap();
         this.objectResolverBag = new HashMap();
+        this.mappingBag = new HashMap();
     }
 
     /**
