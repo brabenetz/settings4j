@@ -122,8 +122,6 @@ public class DOMConfigurator {
     private final Map contentResolverBag;
     // key: objectResolver-Name, value: ObjectResolver
     private final Map objectResolverBag;
-    // key: mapping-Name, value: Map
-    private final Map mappingBag;
 
     private final Settings4jRepository repository;
 
@@ -139,7 +137,6 @@ public class DOMConfigurator {
         this.connectorBag = new HashMap();
         this.contentResolverBag = new HashMap();
         this.objectResolverBag = new HashMap();
-        this.mappingBag = new HashMap();
     }
 
     /**
@@ -813,32 +810,6 @@ public class DOMConfigurator {
         objectResolver = parseObjectResolver(element);
         this.objectResolverBag.put(objectResolverName, objectResolver);
         return objectResolver;
-    }
-
-    /**
-     * Used internally to parse mappings by IDREF name.
-     * 
-     * @param doc XML Document of the whole settings4j.xml.
-     * @param mappingName the Map name to search for.
-     * @return the Map.
-     */
-    protected Map findMappingByName(final Document doc, final String mappingName) {
-        Map mapping = (Map) this.mappingBag.get(mappingName);
-
-        if (mapping != null) {
-            return mapping;
-        }
-        // else
-        final Element element = getElementByNameAttr(doc, mappingName, MAPPING_TAG);
-
-        if (element == null) {
-            LOG.error("No mapping named [" + mappingName + "] could be found.");
-            return null;
-        }
-        // else
-        mapping = parseMapping(element);
-        this.mappingBag.put(mappingName, mapping);
-        return mapping;
     }
 
     /**
