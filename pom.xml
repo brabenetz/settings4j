@@ -435,7 +435,7 @@
         </snapshotRepository>
 		<site>
 			<id>scp-brabenetz-site</id>
-			<url>${distribution.htdocs}/archiv/settings4j/${project.version}</url>
+			<url>${distribution.htdocs}/archiv/${project.version}</url>
 		</site>
     </distributionManagement>
     
