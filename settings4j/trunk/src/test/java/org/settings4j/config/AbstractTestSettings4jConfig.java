@@ -24,27 +24,34 @@ import junit.framework.TestCase;
 import org.apache.commons.io.FileUtils;
 import org.settings4j.UtilTesting;
 
-public abstract class AbstractTestSettings4jConfig extends TestCase{
-    
-    /** General Logger for this Class */
+/**
+ * Abstract Class for TestCases .
+ * <p>
+ * Checkstyle:OFF MagicNumber
+ */
+public abstract class AbstractTestSettings4jConfig extends TestCase {
+
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(AbstractTestSettings4jConfig.class);
-    
+
+    /** {@inheritDoc} */
     protected void setUp() throws Exception {
-        File tmpFolder = UtilTesting.getTmpFolder();
+        final File tmpFolder = UtilTesting.getTmpFolder();
         LOG.info("Use temporary Folder: " + tmpFolder.getAbsolutePath());
         FileUtils.deleteDirectory(tmpFolder);
-        
-        File testFolder = UtilTesting.getTestFolder();
+
+        final File testFolder = UtilTesting.getTestFolder();
         LOG.info("Use test Folder: " + testFolder.getAbsolutePath());
         FileUtils.deleteDirectory(testFolder);
         super.setUp();
     }
 
+    /** {@inheritDoc} */
     protected void tearDown() throws Exception {
-        File tmpFolder = UtilTesting.getTmpFolder();
+        final File tmpFolder = UtilTesting.getTmpFolder();
         FileUtils.deleteDirectory(tmpFolder);
-        File testFolder = UtilTesting.getTestFolder();
+        final File testFolder = UtilTesting.getTestFolder();
         FileUtils.deleteDirectory(testFolder);
         super.tearDown();
     }

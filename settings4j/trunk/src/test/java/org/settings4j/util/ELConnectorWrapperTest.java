@@ -28,9 +28,10 @@ import org.settings4j.objectresolver.JavaXMLBeansObjectResolver;
 import org.settings4j.objectresolver.SpringConfigObjectResolver;
 import org.settings4j.objectresolver.UnionObjectResolver;
 
-
 /**
  * TestCases for {@link ELConnectorWrapper}.
+ * <p>
+ * Checkstyle:OFF MagicNumber
  * 
  * @author Harald.Brabenetz
  *

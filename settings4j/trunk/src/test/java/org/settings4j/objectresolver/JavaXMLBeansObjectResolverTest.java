@@ -27,13 +27,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.io.FileUtils;
 import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.contentresolver.FSContentResolver;
 import org.settings4j.contentresolver.UnionContentResolver;
-
-import junit.framework.TestCase;
 
 public class JavaXMLBeansObjectResolverTest extends TestCase {
 
@@ -42,118 +42,121 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
         .getLog(JavaXMLBeansObjectResolverTest.class);
 
     private File testDir;
-    
+
+    /** {@inheritDoc} */
     protected void setUp() throws Exception {
         super.setUp();
         FileUtils.deleteDirectory(new File("test"));
-        testDir = (new File("test/JavaXMLBeans/".toLowerCase())).getAbsoluteFile();
-        FileUtils.forceMkdir(testDir);
+        this.testDir = (new File("test/JavaXMLBeans/".toLowerCase())).getAbsoluteFile();
+        FileUtils.forceMkdir(this.testDir);
     }
-    
+
+    /** {@inheritDoc} */
     protected void tearDown() throws Exception {
         FileUtils.deleteDirectory(new File("test"));
         super.tearDown();
     }
-    
+
     public void test1() throws Exception {
-        JavaXMLBeansObjectResolver objectResolver = new JavaXMLBeansObjectResolver();
-        
-        ContentResolver contentResolver = createUnionContentResolver();
-        
-        Map testData =  new HashMap();
-        List testList = new ArrayList();
-        String testValue1 = "testValue1";
-        String testValue2 = "testValue2";
-        String testValue3 = "testValue3";
-        String testValue4 = "testValue4";
+        final JavaXMLBeansObjectResolver objectResolver = new JavaXMLBeansObjectResolver();
+
+        final ContentResolver contentResolver = createUnionContentResolver();
+
+        final Map testData = new HashMap();
+        final List testList = new ArrayList();
+        final String testValue1 = "testValue1";
+        final String testValue2 = "testValue2";
+        final String testValue3 = "testValue3";
+        final String testValue4 = "testValue4";
         testList.add(testValue1);
         testList.add(testValue2);
         testList.add(testValue3);
         testList.add(testValue4);
         testData.put("irgendwas", "blablablablablabla");
         testData.put("liste", testList);
-        
-        String key = "org/settings4j/objectresolver/test1";
-        
+
+        final String key = "org/settings4j/objectresolver/test1";
+
         setObject(key, testData);
-        
-        Map result = (Map) objectResolver.getObject("org/settings4j/objectresolver/test1", contentResolver);
+
+        final Map result = (Map) objectResolver.getObject("org/settings4j/objectresolver/test1", contentResolver);
         assertEquals("blablablablablabla", result.get("irgendwas"));
-        Object liste = result.get("liste");
+        final Object liste = result.get("liste");
         assertNotNull(liste);
         assertTrue(liste instanceof List);
-        assertEquals(4, ((List)liste).size());
-        
-        Map result2 = (Map) objectResolver.getObject("org/settings4j/objectresolver/test1", contentResolver);
+        assertEquals(4, ((List) liste).size());
+
+        final Map result2 = (Map) objectResolver.getObject("org/settings4j/objectresolver/test1", contentResolver);
         // no caching by default => difference Objects but same content.
         assertTrue(result != result2);
         assertEquals(result2.get("irgendwas"), result.get("irgendwas"));
-        
-        
+
+
     }
-    
+
     /**
-     * cached by propertyfile "org/settings4j/objectresolver/test2.properties"
+     * cached by propertyfile "org/settings4j/objectresolver/test2.properties".
      * 
      * @throws Exception if an error occurs.
      */
     public void test2Caching() throws Exception {
-        String key = "org/settings4j/objectresolver/test2";
-        
-        JavaXMLBeansObjectResolver objectResolver = new JavaXMLBeansObjectResolver();
-        
+        final String key = "org/settings4j/objectresolver/test2";
+
+        final JavaXMLBeansObjectResolver objectResolver = new JavaXMLBeansObjectResolver();
+
         cachingTest(key, objectResolver);
-        
+
     }
-    
+
     /**
-     * cached by {@link AbstractObjectResolver#setCached(boolean)}
+     * cached by {@link AbstractObjectResolver#setCached(boolean)}.
+     * 
      * @throws Exception if an error occurs.
      */
     public void test3Caching() throws Exception {
         String key = "org/settings4j/objectresolver/test3";
-        
-        JavaXMLBeansObjectResolver objectResolver = new JavaXMLBeansObjectResolver();
+
+        final JavaXMLBeansObjectResolver objectResolver = new JavaXMLBeansObjectResolver();
         objectResolver.setCached(true);
-        
-        ContentResolver contentResolver = createUnionContentResolver();
-        
+
+        final ContentResolver contentResolver = createUnionContentResolver();
+
         cachingTest(key, objectResolver);
-        
+
         // The propertyfile "test4.properties" declare explicitly cached=false
         key = "org/settings4j/objectresolver/test4";
-        Map result = (Map) objectResolver.getObject(key, contentResolver);
+        final Map result = (Map) objectResolver.getObject(key, contentResolver);
         assertEquals("blablablaNEU4blablabla", result.get("irgendwasNeues"));
-        Map result2 = (Map) objectResolver.getObject(key, contentResolver);
+        final Map result2 = (Map) objectResolver.getObject(key, contentResolver);
         // this Object is explicit NOT cached! The two Objects must be different.
         assertTrue(result != result2);
 
-    
+
     }
 
-    private void cachingTest(String key, JavaXMLBeansObjectResolver objectResolver) throws Exception {
-        ContentResolver contentResolver = createUnionContentResolver();
-        
+    private void cachingTest(final String key, final JavaXMLBeansObjectResolver objectResolver) throws Exception {
+        final ContentResolver contentResolver = createUnionContentResolver();
+
         // read from classpath
-        Map result = (Map) objectResolver.getObject(key, contentResolver);
+        final Map result = (Map) objectResolver.getObject(key, contentResolver);
         assertEquals("blablablaNEUblablabla", result.get("irgendwasNeues"));
-        Object liste = result.get("liste");
+        final Object liste = result.get("liste");
         assertNotNull(liste);
         assertTrue(liste instanceof List);
-        assertEquals(1, ((List)liste).size());
-        assertEquals("testValue1", ((List)liste).get(0));
-        
+        assertEquals(1, ((List) liste).size());
+        assertEquals("testValue1", ((List) liste).get(0));
+
         Map result2 = (Map) objectResolver.getObject(key, contentResolver);
         // this Object is cached! The two Objects must be the same.
         assertTrue(result == result2);
         assertEquals(result2.get("irgendwasNeues"), result.get("irgendwasNeues"));
-        
-        Map testData =  new HashMap();
-        List testList = new ArrayList();
-        String testValue1 = "testValue1";
-        String testValue2 = "testValue2";
-        String testValue3 = "testValue3";
-        String testValue4 = "testValue4";
+
+        final Map testData = new HashMap();
+        final List testList = new ArrayList();
+        final String testValue1 = "testValue1";
+        final String testValue2 = "testValue2";
+        final String testValue3 = "testValue3";
+        final String testValue4 = "testValue4";
         testList.add(testValue1);
         testList.add(testValue2);
         testList.add(testValue3);
@@ -164,50 +167,50 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
         // copy properties for a Temp-Key. This is required for parsing (read/write) of Objects
         byte[] content = contentResolver.getContent(key + ".properties");
         setContent(key + "temp.properties", content);
-        
+
         // save Object to a Temp-Key
         setObject(key + "temp", testData);
-        
+
         // Copy the writen Object without Objectreolver from Temp-Key to real Key
         content = contentResolver.getContent(key + "temp");
         setContent(key, content);
-        
-        
+
+
         // this Object is cached, and the ObjectResolver doesn't know that the content was changed from contentResolver!
         // The OLD Object must be returned.
         result2 = (Map) objectResolver.getObject(key, contentResolver);
         assertTrue(result2 == result);
         assertEquals(result2.get("irgendwasNeues"), result.get("irgendwasNeues"));
-        
+
     }
 
     private ContentResolver createUnionContentResolver() {
-        ContentResolver contentResolver = new UnionContentResolver(createFsContentResolver());
+        final ContentResolver contentResolver = new UnionContentResolver(createFsContentResolver());
         contentResolver.addContentResolver(new ClasspathContentResolver());
         return contentResolver;
     }
 
     private FSContentResolver createFsContentResolver() {
-        FSContentResolver fsContentResolver = new FSContentResolver();
-        fsContentResolver.setRootFolderPath(testDir.getAbsolutePath());
+        final FSContentResolver fsContentResolver = new FSContentResolver();
+        fsContentResolver.setRootFolderPath(this.testDir.getAbsolutePath());
         return fsContentResolver;
     }
 
 
-    private void setObject(String key, Map testData) throws IOException {
-        byte[] content = objectToContent(testData);
+    private void setObject(final String key, final Map testData) throws IOException {
+        final byte[] content = objectToContent(testData);
         setContent(key, content);
     }
 
-    private void setContent(String key, byte[] content) throws IOException {
-        File file = new File(testDir, key);
+    private void setContent(final String key, final byte[] content) throws IOException {
+        final File file = new File(this.testDir, key);
         FileUtils.writeByteArrayToFile(file, content);
     }
-    
-    private byte[] objectToContent(Object value) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-        XMLEncoder encoder = new XMLEncoder(byteArrayOutputStream);
+    private byte[] objectToContent(final Object value) {
+        final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        final XMLEncoder encoder = new XMLEncoder(byteArrayOutputStream);
         encoder.setExceptionListener(new LogEncoderExceptionListener(value));
         if (LOG.isDebugEnabled()) {
             LOG.debug("START Writing Object " + value.getClass().getName() + " with XMLEncoder");
@@ -231,16 +234,17 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
      * @author hbrabenetz
      */
     private class LogEncoderExceptionListener implements ExceptionListener {
-        private Object obj;
 
-        public LogEncoderExceptionListener(Object obj) {
+        private final Object obj;
+
+        public LogEncoderExceptionListener(final Object obj) {
             super();
             this.obj = obj;
         }
 
         /** {@inheritDoc} */
-        public void exceptionThrown(Exception e) {
-            LOG.warn("Ignore error on encoding Object from type: " + obj.getClass().getName() + "! "
+        public void exceptionThrown(final Exception e) {
+            LOG.warn("Ignore error on encoding Object from type: " + this.obj.getClass().getName() + "! "
                 + e.getClass().getName() + ": '" + e.getMessage() + "'. Set Loglevel DEBUG for more informations.");
             if (LOG.isDebugEnabled()) {
                 LOG.debug(e.getMessage(), e);

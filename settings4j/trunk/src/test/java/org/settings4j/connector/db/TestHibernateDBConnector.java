@@ -35,91 +35,96 @@ import org.settings4j.connector.db.dao.hibernate.SettingsDAOHibernate;
 
 public class TestHibernateDBConnector extends TestCase {
 
-    /** General Logger for this Class */
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(TestHibernateDBConnector.class);
-    
+
+    /** {@inheritDoc} */
     protected void setUp() throws Exception {
-        File testFolder = UtilTesting.getTestFolder();
+        final File testFolder = UtilTesting.getTestFolder();
         LOG.info("Use test Folder: " + testFolder.getAbsolutePath());
         FileUtils.deleteDirectory(testFolder);
         super.setUp();
     }
 
+    /** {@inheritDoc} */
     protected void tearDown() throws Exception {
-        File testFolder = UtilTesting.getTestFolder();
+        final File testFolder = UtilTesting.getTestFolder();
         FileUtils.deleteDirectory(testFolder);
         super.tearDown();
     }
-    
-    public void testHibernateDBConnector1() throws UnsupportedEncodingException{
-        Settings4jRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/connector/db/testHibernateDBConnector1.xml");
-        Settings4jInstance rootSettings = settingsRepository.getSettings();
-        List connectors = rootSettings.getConnectors();
-        
-        
+
+    public void testHibernateDBConnector1() throws UnsupportedEncodingException {
+        final Settings4jRepository settingsRepository = UtilTesting
+            .getConfiguredSettingsRepository("org/settings4j/connector/db/testHibernateDBConnector1.xml");
+        final Settings4jInstance rootSettings = settingsRepository.getSettings();
+        final List connectors = rootSettings.getConnectors();
+
+
         // there are three Connectors configured:
         // "HibernateDBConnector", "SystemPropertyConnector", "ClasspathConnector"
         assertEquals(3, connectors.size());
         // the first one is the "HibernateDBConnector"
-        Connector connector = (Connector)connectors.get(0);
+        final Connector connector = (Connector) connectors.get(0);
         assertEquals("HibernateDBConnector", connector.getName());
 
-        HibernateDBConnector hibernateDBConnector = (HibernateDBConnector) rootSettings.getConnector("HibernateDBConnector");
-        SettingsDAO settingsDAO = hibernateDBConnector.getSettingsDAO();
-        
+        final HibernateDBConnector hibernateDBConnector = (HibernateDBConnector) rootSettings
+            .getConnector("HibernateDBConnector");
+        final SettingsDAO settingsDAO = hibernateDBConnector.getSettingsDAO();
+
         String stringValue = rootSettings.getString("test");
         assertNull(stringValue);
-        
+
         setString(settingsDAO, "test", "Hello World");
         stringValue = rootSettings.getString("test");
         assertEquals("Hello World", stringValue);
-        
+
 
         byte[] byteArrayValue = rootSettings.getContent("test");
         assertNull(byteArrayValue);
-        
+
         setContent(settingsDAO, "test2", "Hello World".getBytes("UTF-8"));
         byteArrayValue = rootSettings.getContent("test2");
         assertNotNull(byteArrayValue);
         assertEquals("Hello World", new String(byteArrayValue, "UTF-8"));
-        
+
     }
 
-    private void setString(SettingsDAO settingsDAO, String key, String stringValue) {
-        SettingsDTO settingsDTO = new SettingsDTO();
+    private void setString(final SettingsDAO settingsDAO, final String key, final String stringValue) {
+        final SettingsDTO settingsDTO = new SettingsDTO();
         settingsDTO.setKey(key);
         settingsDTO.setStringValue(stringValue);
         settingsDAO.store(settingsDTO);
     }
 
-    private void setContent(SettingsDAO settingsDAO, String key, byte[] contentValue) {
-        SettingsDTO settingsDTO = new SettingsDTO();
+    private void setContent(final SettingsDAO settingsDAO, final String key, final byte[] contentValue) {
+        final SettingsDTO settingsDTO = new SettingsDTO();
         settingsDTO.setKey(key);
         settingsDTO.setContentValue(contentValue);
         settingsDAO.store(settingsDTO);
     }
-    
-    public void testHibernateDAO(){
-        SettingsDAOHibernate settingsDAO = new SettingsDAOHibernate();
-        ConfigurationByteArray configuration = new ConfigurationByteArray();
+
+    public void testHibernateDAO() {
+        final SettingsDAOHibernate settingsDAO = new SettingsDAOHibernate();
+        final ConfigurationByteArray configuration = new ConfigurationByteArray();
 
         // Test Hibernate-Configuration
         configuration.configure("org/settings4j/hibernate.cfg.xml");
         // Default SettingsDTO Mappingfile
         configuration.addResource("org/settings4j/connector/db/SettingsDTO.hbm.xml");
-        
-        SessionFactory sessionFactory = configuration.buildSessionFactory();
+
+        final SessionFactory sessionFactory = configuration.buildSessionFactory();
         settingsDAO.setSessionFactory(sessionFactory);
-        
+
         // getById who doesn't exists must throw an Exception
         try {
             settingsDAO.getById(new Long(1));
             fail("No settingsObject should be found.");
-        } catch (RuntimeException e) {
-            assertEquals("'class org.settings4j.connector.db.SettingsDTO' object with id '1' not found...", e.getMessage());
+        } catch (final RuntimeException e) {
+            assertEquals("'class org.settings4j.connector.db.SettingsDTO' object with id '1' not found...",
+                e.getMessage());
         }
-        
+
         // store settings Object
         SettingsDTO settingsDTO = new SettingsDTO();
         settingsDTO.setKey("test");
@@ -142,7 +147,7 @@ public class TestHibernateDBConnector extends TestCase {
         // get By Key must return NULL
         settingsDTO = settingsDAO.getByKey("test");
         assertNull(settingsDTO);
-        
-        
+
+
     }
 }

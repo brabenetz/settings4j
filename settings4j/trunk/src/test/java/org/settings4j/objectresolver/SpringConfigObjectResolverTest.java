@@ -33,36 +33,38 @@ import org.settings4j.contentresolver.ClasspathContentResolver;
 public class SpringConfigObjectResolverTest extends TestCase {
 
     private File testDir;
-    
+
+    /** {@inheritDoc} */
     protected void setUp() throws Exception {
         super.setUp();
         FileUtils.deleteDirectory(new File("test"));
-        testDir = (new File("test/JavaXMLBeans/".toLowerCase())).getAbsoluteFile();
-        FileUtils.forceMkdir(testDir);
+        this.testDir = (new File("test/JavaXMLBeans/".toLowerCase())).getAbsoluteFile();
+        FileUtils.forceMkdir(this.testDir);
     }
-    
+
+    /** {@inheritDoc} */
     protected void tearDown() throws Exception {
         FileUtils.deleteDirectory(new File("test"));
         super.tearDown();
     }
-    
-    public void testSpringContext1() throws Exception{
-        SpringConfigObjectResolver objectResolver = new SpringConfigObjectResolver();
-        
+
+    public void testSpringContext1() throws Exception {
+        final SpringConfigObjectResolver objectResolver = new SpringConfigObjectResolver();
+
         // Classpath is readonly => the XML-Spring-Config and Properties
-        ContentResolver contentResolver = new ClasspathContentResolver();
-        
-        String key = "org/settings4j/objectresolver/testSpring1";
-        
-        byte[] springFileContent = contentResolver.getContent(key);
+        final ContentResolver contentResolver = new ClasspathContentResolver();
+
+        final String key = "org/settings4j/objectresolver/testSpring1";
+
+        final byte[] springFileContent = contentResolver.getContent(key);
         assertNotNull(springFileContent);
-        
-        DataSource hsqlDS = (DataSource)objectResolver.getObject(key, contentResolver);
+
+        final DataSource hsqlDS = (DataSource) objectResolver.getObject(key, contentResolver);
         assertNotNull(hsqlDS);
-        
+
         // test DataSource
         Connection conn = null;
-        try{
+        try {
             conn = hsqlDS.getConnection();
             PreparedStatement pstmt = conn.prepareStatement("create Table test ( name VARCHAR )");
             pstmt.execute();
@@ -72,25 +74,25 @@ public class SpringConfigObjectResolverTest extends TestCase {
             pstmt.setString(1, "Hello World");
             pstmt.execute();
             pstmt.close();
-            
+
             pstmt = conn.prepareStatement("select * from test");
-            ResultSet rs = pstmt.executeQuery();
+            final ResultSet rs = pstmt.executeQuery();
             rs.next();
-            String result = rs.getString(1);
+            final String result = rs.getString(1);
             rs.close();
             pstmt.close();
 
             pstmt = conn.prepareStatement("drop Table test");
             pstmt.execute();
             pstmt.close();
-            
+
             assertEquals("Hello World", result);
-            
+
         } finally {
-            if (conn != null){
+            if (conn != null) {
                 conn.close();
             }
         }
-        
+
     }
 }

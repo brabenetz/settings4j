@@ -21,28 +21,31 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
-import junit.framework.TestCase;
-
 public class FSContentResolverTest extends TestCase {
 
-    /** General Logger for this Class */
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(FSContentResolverTest.class);
-    
+
     private static final String BASE_DIR = FSContentResolverTest.class.getPackage().getName().replace('.', '/');
 
-    File testDir;
-    
+    private File testDir;
+
+    /** {@inheritDoc} */
     protected void setUp() throws Exception {
         super.setUp();
-        //testDir = (new File("test/" + System.currentTimeMillis() + "-" + (int)(Math.random()*1000) + "/ContentResolverTest/".toLowerCase())).getAbsoluteFile();
-        testDir = (new File("test/ContentResolverTest/".toLowerCase())).getAbsoluteFile();
-        FileUtils.forceMkdir(testDir);
+        // testDir = (new File("test/" + System.currentTimeMillis() + "-" + (int)(Math.random()*1000) +
+        // "/ContentResolverTest/".toLowerCase())).getAbsoluteFile();
+        this.testDir = (new File("test/ContentResolverTest/".toLowerCase())).getAbsoluteFile();
+        FileUtils.forceMkdir(this.testDir);
     }
-    
+
+    /** {@inheritDoc} */
     protected void tearDown() throws Exception {
         FileUtils.deleteDirectory(new File("test"));
         super.tearDown();
@@ -50,30 +53,31 @@ public class FSContentResolverTest extends TestCase {
 
     public void testReadHelloWorldTxt() throws Exception {
         // Copy the required Test-file to the Temp-Path
-        InputStream helloWorldIS = this.getClass().getClassLoader().getResourceAsStream(BASE_DIR + "/HelloWorld.txt");
-        FileUtils.forceMkdir(new File(testDir.getAbsolutePath() + "/org/settings4j/contentresolver"));
-        String helloWorldPath = testDir.getAbsolutePath() + "/org/settings4j/contentresolver/HelloWorld.txt";
-        FileOutputStream fileOutputStream = new FileOutputStream(new File(helloWorldPath));
+        final InputStream helloWorldIS = this.getClass().getClassLoader()
+            .getResourceAsStream(BASE_DIR + "/HelloWorld.txt");
+        FileUtils.forceMkdir(new File(this.testDir.getAbsolutePath() + "/org/settings4j/contentresolver"));
+        final String helloWorldPath = this.testDir.getAbsolutePath() + "/org/settings4j/contentresolver/HelloWorld.txt";
+        final FileOutputStream fileOutputStream = new FileOutputStream(new File(helloWorldPath));
         IOUtils.copy(helloWorldIS, fileOutputStream);
         IOUtils.closeQuietly(helloWorldIS);
         IOUtils.closeQuietly(fileOutputStream);
         LOG.info("helloWorldPath: " + helloWorldPath);
-        
-        FSContentResolver contentResolver = new FSContentResolver();
-        contentResolver.setRootFolderPath(testDir.getAbsolutePath());
-        
+
+        final FSContentResolver contentResolver = new FSContentResolver();
+        contentResolver.setRootFolderPath(this.testDir.getAbsolutePath());
+
         byte[] content = contentResolver.getContent("org/settings4j/contentresolver/HelloWorld.txt");
         assertNotNull(content);
         assertEquals("Hello World", new String(content, "UTF-8"));
-        
+
         content = contentResolver.getContent("file:org/settings4j/contentresolver/HelloWorld.txt");
         assertNotNull(content);
         assertEquals("Hello World", new String(content, "UTF-8"));
-        
+
         content = contentResolver.getContent("file:/org/settings4j/contentresolver/HelloWorld.txt");
         assertNotNull(content);
         assertEquals("Hello World", new String(content, "UTF-8"));
-        
+
 
         content = contentResolver.getContent("file:laksjdhalksdhfa");
         assertNull(content);
@@ -82,35 +86,37 @@ public class FSContentResolverTest extends TestCase {
         assertNotNull(content);
         assertEquals("Hello World", new String(content, "UTF-8"));
     }
-    
+
     public void testWriteHelloWorldTxt() throws Exception {
-        
-        FileUtils.deleteDirectory(new File(testDir.getCanonicalPath() + "/org"));
 
-        InputStream helloWorldIS = this.getClass().getClassLoader().getResourceAsStream(BASE_DIR + "/HelloWorld.txt");
-        byte[] value = IOUtils.toByteArray(helloWorldIS);
+        FileUtils.deleteDirectory(new File(this.testDir.getCanonicalPath() + "/org"));
 
-        FSContentResolver contentResolver = new FSContentResolver();
-        contentResolver.setRootFolderPath(testDir.getAbsolutePath());
+        final InputStream helloWorldIS = this.getClass().getClassLoader()
+            .getResourceAsStream(BASE_DIR + "/HelloWorld.txt");
+        final byte[] value = IOUtils.toByteArray(helloWorldIS);
+
+        final FSContentResolver contentResolver = new FSContentResolver();
+        contentResolver.setRootFolderPath(this.testDir.getAbsolutePath());
 
         byte[] content = contentResolver.getContent("org/settings4j/contentresolver/HelloWorld.txt");
         assertNull(content);
-        
+
         content = contentResolver.getContent("file:org/settings4j/contentresolver/HelloWorld.txt");
         assertNull(content);
-        
+
         // store value;
-        FileUtils.writeByteArrayToFile(new File(testDir.getAbsolutePath() + "/org/settings4j/contentresolver/HelloWorld.txt"), value);
-        
-        
+        FileUtils.writeByteArrayToFile(new File(this.testDir.getAbsolutePath()
+            + "/org/settings4j/contentresolver/HelloWorld.txt"), value);
+
+
         content = contentResolver.getContent("org/settings4j/contentresolver/HelloWorld.txt");
         assertNotNull(content);
         assertEquals("Hello World", new String(content, "UTF-8"));
-        
+
         content = contentResolver.getContent("file:org/settings4j/contentresolver/HelloWorld.txt");
         assertNotNull(content);
         assertEquals("Hello World", new String(content, "UTF-8"));
-        
+
 
         content = contentResolver.getContent("file:laksjdhalksdhfa");
         assertNull(content);
