@@ -21,26 +21,27 @@ import org.settings4j.Settings4jInstance;
 import org.settings4j.Settings4jRepository;
 import org.settings4j.UtilTesting;
 
-public class TestSettings4jMappingConfig extends AbstractTestSettings4jConfig{
-    
-    /** General Logger for this Class */
+public class TestSettings4jMappingConfig extends AbstractTestSettings4jConfig {
+
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(TestSettings4jMappingConfig.class);
-    
-    public void testMapping(){
-        LOG.debug("run TestSettings4jMappingConfig.testMapping");
-        Settings4jRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigMapping.xml");
 
-        Settings4jInstance mycompanySeetings = settingsRepository.getSettings();
-        
-        String webservice = "http://settings4j.org/XY";
+    public void testMapping() {
+        LOG.debug("run TestSettings4jMappingConfig.testMapping");
+        final Settings4jRepository settingsRepository = UtilTesting
+            .getConfiguredSettingsRepository("org/settings4j/config/testConfigMapping.xml");
+
+        final Settings4jInstance mycompanySeetings = settingsRepository.getSettings();
+
+        final String webservice = "http://settings4j.org/XY";
         System.setProperty("global/webserviceXY", webservice);
-        
-        String moduleXWS = mycompanySeetings.getString("com/mycompany/moduleX/webserviceXY");
-        String moduleYWS = mycompanySeetings.getString("com/mycompany/moduleY/webserviceXY");
+
+        final String moduleXWS = mycompanySeetings.getString("com/mycompany/moduleX/webserviceXY");
+        final String moduleYWS = mycompanySeetings.getString("com/mycompany/moduleY/webserviceXY");
 
         assertEquals(webservice, moduleXWS);
         assertEquals(webservice, moduleYWS);
-        
+
     }
 }

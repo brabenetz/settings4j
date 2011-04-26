@@ -21,25 +21,26 @@ import org.settings4j.Settings4jInstance;
 import org.settings4j.Settings4jRepository;
 import org.settings4j.UtilTesting;
 
-public class TestSettings4jFilterConfig extends AbstractTestSettings4jConfig{
-    
-    /** General Logger for this Class */
+public class TestSettings4jFilterConfig extends AbstractTestSettings4jConfig {
+
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(TestSettings4jFilterConfig.class);
-    
-    public void testMapping(){
+
+    public void testMapping() {
         LOG.debug("run TestSettings4jMappingConfig.testMapping");
-        Settings4jRepository settingsRepository = UtilTesting.getConfiguredSettingsRepository("org/settings4j/config/testConfigFilter.xml");
-        Settings4jInstance settings = settingsRepository.getSettings();
+        final Settings4jRepository settingsRepository = UtilTesting
+            .getConfiguredSettingsRepository("org/settings4j/config/testConfigFilter.xml");
+        final Settings4jInstance settings = settingsRepository.getSettings();
 
         System.setProperty("org/settings4j/config/testConfigFilter1.txt", "testConfig1 System Property");
         System.setProperty("org/settings4j/config/testConfigFilter2.txt", "testConfig2 System Property");
-        
-        String config1 = settings.getString("org/settings4j/config/testConfigFilter1.txt");
-        String config2 = settings.getString("org/settings4j/config/testConfigFilter2.txt");
+
+        final String config1 = settings.getString("org/settings4j/config/testConfigFilter1.txt");
+        final String config2 = settings.getString("org/settings4j/config/testConfigFilter2.txt");
 
         assertEquals("testConfig1 System Property", config1);
         assertEquals("testConfig2 TextFile", config2);
-        
+
     }
 }

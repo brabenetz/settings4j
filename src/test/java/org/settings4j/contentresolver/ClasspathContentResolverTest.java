@@ -17,25 +17,26 @@
 
 package org.settings4j.contentresolver;
 
-import org.settings4j.ContentResolver;
-
 import junit.framework.TestCase;
 
+import org.settings4j.ContentResolver;
+
 public class ClasspathContentResolverTest extends TestCase {
+
     public void testReadHelloWorldTxt() throws Exception {
-        ContentResolver contentResolver = new ClasspathContentResolver();
+        final ContentResolver contentResolver = new ClasspathContentResolver();
         byte[] content = contentResolver.getContent("org/settings4j/contentresolver/HelloWorld.txt");
         assertNotNull(content);
         assertEquals("Hello World", new String(content, "UTF-8"));
-        
+
         content = contentResolver.getContent("classpath:org/settings4j/contentresolver/HelloWorld.txt");
         assertNotNull(content);
         assertEquals("Hello World", new String(content, "UTF-8"));
-        
+
         content = contentResolver.getContent("classpath:/org/settings4j/contentresolver/HelloWorld.txt");
         assertNotNull(content);
         assertEquals("Hello World", new String(content, "UTF-8"));
-        
+
 
         content = contentResolver.getContent("classpath:laksjdhalksdhfa");
         assertNull(content);
