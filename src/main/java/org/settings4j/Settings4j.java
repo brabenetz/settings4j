@@ -29,7 +29,7 @@ import org.settings4j.settings.SettingsManager;
  * --------------------------------------
  * public class SettingsManager {
  *     public static String getMyFormula() {
- *         return Settings.getString("com/mycompany/mycalculation/my-formula");
+ *         return Settings4j.getString("com/mycompany/mycalculation/my-formula");
  *     }
  * }
  * --------------------------------------

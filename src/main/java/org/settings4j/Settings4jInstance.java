@@ -97,7 +97,7 @@ public interface Settings4jInstance {
      * &lt;/mapping&gt;
      * </pre>
      * 
-     * Settings.getXXX("com/mycompany/moduleX/datasource"); <br />
+     * Settings4j.getXXX("com/mycompany/moduleX/datasource"); <br />
      * should return the configured value under "global/datasource" <br />
      * <br />
      * 
