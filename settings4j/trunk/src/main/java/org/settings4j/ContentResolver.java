@@ -47,7 +47,7 @@ package org.settings4j;
  * System.setProperty("xyz", "com/mycompany/myapp/xyz-config.xml"); //refer to the ClasspathContentResolver
  * 
  * // somewhere in myapp:
- * byte[] xyzConfig = Settings.getContent("xyz"); // get Classpath-URL from the SystemPropertyConnector
+ * byte[] xyzConfig = Settings4j.getContent("xyz"); // get Classpath-URL from the SystemPropertyConnector
  * --------------------------------------
  * 
  * </pre>
