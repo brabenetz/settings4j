@@ -20,23 +20,12 @@
 
 * {Automatically with Maven}
 
-	[[1]] Add the Settings4j <<Repository>> to your pom.xml:
-	
---------------------------------------------
-<repositories>
-	<repository>
-		<id>settings4j</id>
-		<url>http://settings4j.sourceforge.net/m2repo</url>
-	</repository>
-</repositories>
---------------------------------------------
-
-	[[1]] Add the Settings4j <<Dependency>> to your pom.xml:
+	Add the Settings4j <<Dependency>> to your pom.xml:
 	
 --------------------------------------------
 <dependency>
 	<groupId>org.settings4j</groupId>
 	<artifactId>settings4j</artifactId>
-	<version>1.0-beta3</version>
+	<version>1.0-beta4</version>
 </dependency>
 --------------------------------------------
