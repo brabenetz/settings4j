@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.settings4j</groupId>
@@ -65,7 +66,6 @@
 	</licenses>
 	
     <properties>
-    
 		<!-- Default configuration for compiler source and target JVM -->
 		<maven.compile.source>1.4</maven.compile.source>
 		<maven.compile.target>1.4</maven.compile.target>
@@ -74,16 +74,33 @@
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.sourceEncoding>UTF-8</project.reporting.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-		<!-- 
-		<distribution.htdocs>scp://shell.sourceforge.net/home/groups/s/se/settings4j/htdocs</distribution.htdocs>
-		 -->
-		<distribution.htdocs>scp://brabenetz@213.47.43.153/srv/maven/repos/settings4j</distribution.htdocs>
     </properties>
 
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<id>enforce-maven</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>(,2.1.0),(2.1.0,2.2.0),(2.2.0,)</version>
+									<message>Maven 2.1.0 and 2.2.0 produce incorrect GPG signatures and checksums respectively.</message>
+								</requireMavenVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		
             <!-- use Java 1.4 compiler settings -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -170,6 +187,21 @@
 			</plugin>
 
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.1</version>
+					<configuration>
+						<mavenExecutorId>forked-path</mavenExecutorId>
+						<useReleaseProfile>false</useReleaseProfile>
+						<!-- add source, javadoc and pgp sign artifacts -->
+						<arguments>-Psonatype-oss-release</arguments>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 	<dependencies>
 		<dependency>
@@ -269,35 +301,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-
-	<repositories>
-		<repository>
-			<id>settings4j-repository</id>
-			<name>Settings4j Repository</name>
-			<url>http://settings4j.sourceforge.net/m2repo</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>settings4j-snapshots</id>
-			<name>Settings4j Snapshots</name>
-			<url>http://settings4j.sourceforge.net/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</repository>
-	</repositories>
-
 
 	<reporting>
 		<plugins>
@@ -424,18 +427,21 @@
 	</reporting>
 	
      <distributionManagement>
-        <repository>
-			<id>scp-brabenetz-repository</id>
-            <url>${distribution.htdocs}/m2repo</url>
-        </repository>
-        <snapshotRepository>
-			<id>scp-brabenetz-snapshots</id>
-            <url>${distribution.htdocs}/snapshots</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
+     	<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</snapshotRepository>
+
+		<repository>
+			<id>sonatype-nexus-staging</id>
+			<name>Nexus Release Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+     
 		<site>
 			<id>scp-brabenetz-site</id>
-			<url>${distribution.htdocs}/archiv/${project.version}</url>
+			<url>scp://brabenetz@213.47.43.153/srv/maven/repos/settings4j/archiv/${project.version}</url>
 		</site>
     </distributionManagement>
     
@@ -460,6 +466,53 @@
 								</manifestEntries>
 							</archive>
 						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>sonatype-oss-release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>2.1.2</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.7</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.1</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>
