@@ -1,0 +1,30 @@
+<project name="Settings4j library">
+	<publishDate position="left" format="dd. MMM yyyy HH:mm" />
+	<bannerLeft>
+		<name>Sourceforge</name>
+		<src>
+			http://sourceforge.net/sflogo.php?group_id=73068&amp;type=2
+		</src>
+		<href>http://sourceforge.net/projects/settings4j</href>
+	</bannerLeft>
+	<!--
+		<bannerRight>
+		<name>Settings4j</name>
+		<src>images/settings4j.png</src>
+		<href>http://settings4j.org</href>
+		</bannerRight>
+	-->
+	<body>
+		<menu name="Settings4j library">
+			<item name="Overview" href="index.html" />
+			<item name="Download" href="download.html" />
+			<item name="Roadmap" href="roadmap.html" />
+			<item name="WIKI" href="http://settings4j.wiki.sourceforge.net/" />
+			<item name="Archiv" href="http://settings4j.sourceforge.net/archiv" />
+		</menu>
+		<menu name="Documentation">
+			<item name="Recommendation" href="docuRecommendation.html" />
+		</menu>
+		<menu ref="reports" />
+	</body>
+</project>
