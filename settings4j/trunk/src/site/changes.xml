@@ -12,11 +12,17 @@
 		<author email="brabenetz@users.sourceforge.net">Harald Brabenetz</author>
 	</properties>
 	<body>
-		<release version="1.0.0" date="2011" description="After few bugfixes, if Release Candidate has been proofed itself in production.">
+		<release version="1.0" date="2011" description="After few bugfixes, if Release Candidate has been proofed itself in production.">
 			<action dev="brabenetz" type="fix" issue="1">Bugfix 1</action>
 		</release>
 
-		<release version="1.0.0-beta3" date="2011" description="Release Candidate">
+		<release version="1.0-beta4" date="2011-04-21" description="Release Candidate">
+			<action dev="brabenetz" type="update" date="2011-04-21">
+				update distributionManagement to sonatype-nexus.
+				will be synched to the public maven central repo.
+			</action>
+		</release>
+		<release version="1.0-beta3" date="2011-04-08" description="Release Candidate">
 			<action dev="brabenetz" type="update" date="2011-04-08">update JNDIConnector: disable Connector if no JNDI Context is available.</action>
 			<action dev="brabenetz" type="update" date="2011-04-07">remove property-write feature to simplify the API.</action>
 			<action dev="brabenetz" type="update">extended JavaDoc and UnitTests</action>
