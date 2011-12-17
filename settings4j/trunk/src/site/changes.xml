@@ -2,7 +2,7 @@
 
 <document xmlns="http://maven.apache.org/changes/1.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd ">
 	<!-- 
 		Simple Description:
 		Supported Action Types: add, fix, update, remove
@@ -12,10 +12,15 @@
 		<author email="brabenetz@users.sourceforge.net">Harald Brabenetz</author>
 	</properties>
 	<body>
-		<release version="1.0" date="2011" description="After few bugfixes, if Release Candidate has been proofed itself in production.">
+		<release version="1.0" date="2012" description="After few bugfixes, if Release Candidate has been proofed itself in production.">
+			<!-- 
 			<action dev="brabenetz" type="fix" issue="1">Bugfix 1</action>
+			 -->
 		</release>
-
+		
+		<release version="1.0-beta5" date="2011-12-24" description="Add Preferencies Connector.">
+			<action dev="brabenetz" type="add" issue="1" date="2011-12-17" >add Preferences Connector</action>
+		</release>
 		<release version="1.0-beta4" date="2011-04-21" description="Release Candidate">
 			<action dev="brabenetz" type="update" date="2011-04-21">
 				update distributionManagement to sonatype-nexus.
