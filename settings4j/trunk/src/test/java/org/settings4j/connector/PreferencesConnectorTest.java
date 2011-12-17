@@ -25,7 +25,7 @@ import junit.framework.TestCase;
 public class PreferencesConnectorTest extends TestCase {
 
 
-    private static final String PREF_UNITTEST_NODE = "net/settings4j/unittest";
+    private static final String PREF_UNITTEST_NODE = "org/settings4j/unittest";
 
     protected void setUp() throws Exception {
         removeUnitTestNode(Preferences.userRoot());

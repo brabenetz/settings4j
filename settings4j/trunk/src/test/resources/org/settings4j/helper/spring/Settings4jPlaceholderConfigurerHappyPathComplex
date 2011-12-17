@@ -3,13 +3,13 @@
 
 <beans>
     <bean class="org.settings4j.helper.spring.Settings4jPlaceholderConfigurer" >
-    	<property name="prefix" value="org/settings4j/helper/spring/"/>
+    	<property name="prefix" value="org/settings4j/unittest/testPlaceholderConfigurerHappyPathComplex/"/>
     	<property name="properties">
 			<props>
 				<!-- Default Values -->
 				<prop key="test2">Second Test</prop>
 				<prop key="test3">Third Test</prop>
-				<prop key="org/settings4j/helper/spring/test4">Fourth Test</prop>
+				<prop key="org/settings4j/unittest/testPlaceholderConfigurerHappyPathComplex/test4">Fourth Test</prop>
 			</props>
 		</property>
     </bean>

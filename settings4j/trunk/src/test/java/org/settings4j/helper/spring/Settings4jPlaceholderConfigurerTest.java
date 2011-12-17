@@ -18,15 +18,32 @@
 package org.settings4j.helper.spring;
 
 import java.util.Map;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
 
 import junit.framework.TestCase;
 
+import org.settings4j.connector.PreferencesConnector;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.objectresolver.SpringConfigObjectResolver;
 
 
 public class Settings4jPlaceholderConfigurerTest extends TestCase {
 
+
+    private static final String PREF_UNITTEST_NODE = "org/settings4j/unittest";
+
+    protected void setUp() throws Exception {
+        removeUnitTestNode(Preferences.userRoot());
+        removeUnitTestNode(Preferences.systemRoot());
+    }
+
+    private void removeUnitTestNode(final Preferences userRoot) throws BackingStoreException {
+        if (userRoot.nodeExists(PREF_UNITTEST_NODE)) {
+            userRoot.node(PREF_UNITTEST_NODE).removeNode();
+        }
+    }
+    
     public void testHappyPath() {
         // Example system-Config
         System.setProperty("org/settings4j/helper/spring/test1", "Hallo World");
@@ -41,8 +58,10 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
 
     public void testHappyPathComplex() {
         // Example system-Config
-        System.setProperty("org/settings4j/helper/spring/test1", "Hallo World");
-        System.setProperty("org/settings4j/helper/spring/test2", "Hallo World 2");
+        System.setProperty("org/settings4j/unittest/testPlaceholderConfigurerHappyPathComplex/test1", "Hallo World");
+        PreferencesConnector prefConnector = new PreferencesConnector();
+        prefConnector.setString(//
+            "org/settings4j/unittest/testPlaceholderConfigurerHappyPathComplex/test2", "Hallo World 2");
 
         // load the example Spring-Config
         final Map result = (Map) getObjectFromSpringConfig(//
@@ -52,7 +71,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
         assertEquals("Hallo World", result.get("MapEntry1"));
         assertEquals("Hallo World 2", result.get("MapEntry2"));
         assertEquals("Third Test", result.get("MapEntry3"));
-//        assertEquals("Fourth Test", result.get("MapEntry4"));
+        assertEquals("Fourth Test", result.get("MapEntry4"));
 
     }
 
