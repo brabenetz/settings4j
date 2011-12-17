@@ -22,7 +22,9 @@ import org.springframework.beans.factory.InitializingBean;
 
 
 /**
- * BeanFactory which gets the Object from {@link Settings4j#getObject(String)}.
+ * BeanFactory which gets the Object from {@link Settings4j#getObject(String)}.<br />
+ * This can also be used for DataSource-Objects with the JNDI-Name as Key.
+ * 
  * <p>
  * <h2>Simple SpringBean Example:</h2> The following Example can be configured with the settings4j-Key "env/MyVariable".
  * <br />
