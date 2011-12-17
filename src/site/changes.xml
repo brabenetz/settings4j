@@ -19,7 +19,7 @@
 		</release>
 		
 		<release version="1.0-beta5" date="2011-12-24" description="Add Preferencies Connector.">
-			<action dev="brabenetz" type="add" issue="1" date="2011-12-17" >add Preferences Connector</action>
+			<action dev="brabenetz" type="add" date="2011-12-17" >add Preferences Connector</action>
 		</release>
 		<release version="1.0-beta4" date="2011-04-21" description="Release Candidate">
 			<action dev="brabenetz" type="update" date="2011-04-21">
