@@ -15,14 +15,6 @@
 
 %{toc}
 
-
-{Encapsulation}
-
-	Create a SettingsManager (Synonym: PropertyManager, ConfigurationManager)
-   
-	It is much easier maintainable if all KEYs how you can configure your App
-	where places in one Class or at least in one Package. 
-
 {Key-Name}
 
    Use unique and meaningful names for your Keys (like your package-Name) e.g.: "com/mycompany/myapp/myKeyForNumberFormatting"

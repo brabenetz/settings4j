@@ -50,12 +50,14 @@
 * {2011 Final Version 1.0.0 - after few bug fixes}
 
 
+  
+* {Dec 2011 1.0.0-beta5 - settings4j goes to maven central repo}
 
-* {2011 1.0.0-rc - refactored release}
+	! 
+  
+* {May 2011 1.0.0-beta4 - settings4j goes to maven central repo}
 
-    - extended JavaDoc and UnitTests
-
-	! additional Connector to Environment Variables.
+	- update distributionManagement to sonatype-nexus. This will be synched to the public maven central repo.
   
 * {2011 1.0.0-beta3 - refactored release}
 
