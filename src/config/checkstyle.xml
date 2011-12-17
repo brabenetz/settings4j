@@ -49,6 +49,7 @@
         <!--     name="headerFile"                                  -->
         <!--     value="${basedir}/java.header"/>                   -->
         <property name="headerFile" value="${checkstyle.header.file}"/>
+        <property name="ignoreLines" value="2"/>
     </module>
     
     <!-- Checks for Size Violations.                    -->
