@@ -100,28 +100,11 @@ public class PreferencesConnector extends AbstractPropertyConnector {
                     return preferences.node(path).get(key, defaultValue);
                 }
                 return defaultValue;
-            } catch (final BackingStoreException ex) {
-                throw new RuntimeException("Cannot access specified node path [" + path + "]", ex);
+            } catch (final BackingStoreException e) {
+                throw new RuntimeException("Cannot access specified node path [" + path + "]", e);
             }
         }
         return preferences.get(key, defaultValue);
-    }
-
-    /**
-     * Resolve the given path and key against the given Preferences.
-     * 
-     * @param path the preferences path (placeholder part before '/')
-     * @param key the preferences key (placeholder part after '/')
-     * @param value the Value to store.
-     * @param preferences the Preferences to resolve against
-     */
-    protected void setPreferenceValue(final String path, final String key, final String value,
-            final Preferences preferences) {
-        if (path != null) {
-            preferences.node(path).put(key, value);
-        } else {
-            preferences.put(key, value);
-        }
     }
 
 
@@ -149,6 +132,28 @@ public class PreferencesConnector extends AbstractPropertyConnector {
         final String path = getPath(normalizedKey);
         final String key = getKey(normalizedKey);
         setPreferenceValue(path, key, value, this.systemPrefs);
+    }
+
+    /**
+     * Resolve the given path and key against the given Preferences.
+     * 
+     * @param path the preferences path (placeholder part before '/')
+     * @param key the preferences key (placeholder part after '/')
+     * @param value the Value to store.
+     * @param preferences the Preferences to resolve against
+     */
+    protected void setPreferenceValue(final String path, final String key, final String value,
+            final Preferences preferences) {
+        if (path != null) {
+            preferences.node(path).put(key, value);
+        } else {
+            preferences.put(key, value);
+        }
+        try {
+            preferences.flush();
+        } catch (BackingStoreException e) {
+            throw new RuntimeException("Cannot access specified node path [" + path + "]", e);
+        }
     }
 
     private String getKey(final String keyPath) {
