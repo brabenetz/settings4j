@@ -20,11 +20,8 @@
 			<item name="Download" href="download.html" />
 			<item name="Roadmap" href="roadmap.html" />
 			<item name="Changes" href="changes-report.html" />
-			<item name="WIKI" href="http://settings4j.wiki.sourceforge.net/" />
-			<item name="Archiv" href="http://settings4j.sourceforge.net/archiv" />
-		</menu>
-		<menu name="Documentation">
 			<item name="Recommendation" href="docuRecommendation.html" />
+			<item name="Archiv" href="http://settings4j.sourceforge.net/archiv" />
 		</menu>
 		<menu ref="reports" />
 	</body>
