@@ -31,6 +31,12 @@
 		<objectResolver-ref ref="DefaultObjectResolver" />
 	</connector>
 	
+	<connector name="PreferencesConnector"
+		class="org.settings4j.connector.PreferencesConnector">
+		<contentResolver-ref ref="DefaultContentResolver" />
+		<objectResolver-ref ref="DefaultObjectResolver" />
+	</connector>
+	
 	<connector name="ClasspathConnector" class="org.settings4j.connector.ClasspathConnector" >
 		<objectResolver-ref ref="DefaultObjectResolver" />
 	</connector>

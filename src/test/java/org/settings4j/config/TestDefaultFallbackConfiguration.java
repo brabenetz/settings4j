@@ -61,7 +61,6 @@ public class TestDefaultFallbackConfiguration extends TestCase {
         assertNull(Settings4j.getObject("xyz"));
 
         // the Default settings Configuration is readonly
-
-        assertEquals(3, Settings4j.getConnectors().size());
+        assertEquals(4, Settings4j.getConnectors().size());
     }
 }
