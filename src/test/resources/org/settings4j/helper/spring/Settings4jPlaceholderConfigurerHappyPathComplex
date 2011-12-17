@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean class="org.settings4j.helper.spring.Settings4jPlaceholderConfigurer" >
+    	<property name="prefix" value="org/settings4j/helper/spring/"/>
+    	<property name="properties">
+			<props>
+				<!-- Default Values -->
+				<prop key="test2">Second Test</prop>
+				<prop key="test3">Third Test</prop>
+				<prop key="org/settings4j/helper/spring/test4">Fourth Test</prop>
+			</props>
+		</property>
+    </bean>
+    
+    <bean id="org.settings4j.helper.spring.Settings4jPlaceholderConfigurerHappyPathComplex" class="java.util.HashMap">
+    	<constructor-arg>
+    		<map>
+    			<entry key="MapEntry1"><value>${test1}</value></entry>
+    			<entry key="MapEntry2"><value>${test2}</value></entry>
+    			<entry key="MapEntry3"><value>${test3}</value></entry>
+    			<entry key="MapEntry4"><value>${test4}</value></entry>
+    		</map>
+    	</constructor-arg>
+    </bean>
+</beans>
