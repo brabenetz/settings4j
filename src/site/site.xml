@@ -20,6 +20,7 @@
 			<item name="Download" href="download.html" />
 			<item name="Roadmap" href="roadmap.html" />
 			<item name="Changes" href="changes-report.html" />
+			<item name="DefaultConfig" href="defaultConfig.html" />
 			<item name="Recommendation" href="docuRecommendation.html" />
 			<item name="Archiv" href="http://settings4j.sourceforge.net/archiv" />
 		</menu>
