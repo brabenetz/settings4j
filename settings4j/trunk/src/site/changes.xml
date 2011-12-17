@@ -18,10 +18,11 @@
 			 -->
 		</release>
 		
-		<release version="1.0-beta5" date="2011-12-24" description="Add Preferencies Connector.">
+		<release version="1.0-beta5" date="2011-12-24" description="Add PreferenciesConnector and Settings4jPlaceholderConfigurer">
+			<action dev="brabenetz" type="add" date="2011-12-17" >add Settings4jPlaceholderConfigurer for Springframework.</action>
 			<action dev="brabenetz" type="add" date="2011-12-17" >add Preferences Connector</action>
 		</release>
-		<release version="1.0-beta4" date="2011-04-21" description="Release Candidate">
+		<release version="1.0-beta4" date="2011-04-21" description="First Version on Maven Central Repository">
 			<action dev="brabenetz" type="update" date="2011-04-21">
 				update distributionManagement to sonatype-nexus.
 				will be synched to the public maven central repo.

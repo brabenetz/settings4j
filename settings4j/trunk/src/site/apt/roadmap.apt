@@ -30,30 +30,26 @@
 
 	! additional Object-resolver with digester (Use a digester-Rules-XML to convert a XML to an Object)
 
-	! additional Object-resolver with Spring (Use one or more springContext-XML to convert a XML to an Object)
-
 	! additional Content-resolver with VFSPath?
-
-	! additional Connector to Windows registry:
-	
-		* {{http://www.rgagnon.com/javadetails/java-0480.html}}
-		
-		* {{http://www.trustice.com/java/jnireg/}}
-
-	! additional Connector to Preferences?:
-	
-		* {{http://java.sun.com/j2se/1.4.2/docs/api/java/util/prefs/Preferences.html}}
-	
-		* {{http://www.particle.kth.se/~lindsey/JavaCourse/Book/Part1/Java/Chapter10/Preferences.html}}
 
 
 * {2011 Final Version 1.0.0 - after few bug fixes}
 
 
   
-* {Dec 2011 1.0.0-beta5 - settings4j goes to maven central repo}
+* {Dec 2011 1.0.0-beta5 - PreferencesConnector and Settings4jPlaceholderConfigurer for Spring}
+	
+	! additional Settings4jPlaceholderConfigurer for Springframework.
+	
+		* {{http://springtips.blogspot.com/}}
+	
+		* {{http://www.mkyong.com/spring/spring-propertyplaceholderconfigurer-example/}}
 
-	! 
+	! additional Connector to Preferences:
+	
+		* {{http://java.sun.com/j2se/1.4.2/docs/api/java/util/prefs/Preferences.html}}
+	
+		* {{http://mindprod.com/jgloss/preferences.html}}
   
 * {May 2011 1.0.0-beta4 - settings4j goes to maven central repo}
 

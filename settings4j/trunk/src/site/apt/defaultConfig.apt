@@ -1,0 +1,34 @@
+                                    ------------------
+                                    Default Configuration
+                                    ------------------
+                                    Brabenetz Harald
+                                    ------------------
+                                    11-05-2008
+                                    ------------------
+
+{Overview}
+
+
+	The Default Configuration works in the following Order to get Configuration-Values:
+	
+    [[]] Lookup in System.getProperty(...)
+    
+    [[]] Lookup in JNDI Context
+    
+    [[]] Lookup in Preferences.userRoot() and then Preferences.systemRoot()
+    
+    [[]] Lookup in Classpath
+	
+	[]
+	
+	The First found value will be returned.\
+	If no Value where Found, NULL will be returned.
+
+{Configuration}
+
+	The complete default configuration can be found there: {{./XMLSchema/defaultsettings4j.xml}}
+
+	The XML Schema Definition can be found there: {{./XMLSchema/settings4j.dtd}}
+	
+	
+	
