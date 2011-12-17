@@ -48,15 +48,15 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
 
         final Settings4jInstance settings = settingsRepository.getSettings();
 
-        // the rootSettings have three Connectors
-        assertEquals(3, settings.getConnectors().size());
+        // the rootSettings have four Connectors
+        assertEquals(4, settings.getConnectors().size());
 
         // check if there is no Exception thrown:
         assertNull(settings.getString("xyz"));
         assertNull(settings.getContent("xyz"));
         assertNull(settings.getObject("xyz"));
 
-        assertEquals(3, settings.getConnectors().size());
+        assertEquals(4, settings.getConnectors().size());
     }
 
     public void testCorruptConfig() {
