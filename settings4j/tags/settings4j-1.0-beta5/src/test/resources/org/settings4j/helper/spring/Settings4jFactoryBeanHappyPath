@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    
+    <bean id="org.settings4j.helper.spring.Settings4jFactoryBeanHappyPath" class="org.settings4j.helper.spring.Settings4jFactoryBean">
+        <property name="key"><value>Spring.HappyPathTest</value></property>
+    </bean>
+</beans>
