@@ -1,0 +1,38 @@
+                                    ------------------
+                                    Logging
+                                    ------------------
+                                    Brabenetz Harald
+                                    ------------------
+                                    21-12-2011
+                                    ------------------
+
+
+{Index}
+
+%{toc}
+
+{Overview}
+
+	Settings4J uses the apache commons logging Framework.
+
+{Log4J}
+
+	If log4j is available in you App you can add the following configuration to your log4j.xml:
+
++--------------
+<category name="org.settings4j.settings.DefaultSettings">
+  <priority value="DEBUG" />
+</category>
++--------------
+
+	The Log-Messages will show the information where the keys are configured:
+
++--------------
+21:20:57,066 DEBUG [main] - Found String for Key 'org/settings4j/objectresolver/test' in connector 'SystemPropertyConnector' (org.settings4j.connector.SystemPropertyConnector)
+21:21:44,067 DEBUG [main] - Found String for Key 'org/settings4j/objectresolver/test1' in connector 'FSConnector' (org.settings4j.connector.CachedConnectorWrapper)
+21:21:48,615 DEBUG [main] - Found Content for Key 'org/settings4j/objectresolver/test2' in connector 'FSConnector' (org.settings4j.connector.FSConnector)
+21:24:59,608 DEBUG [main] - Found Object for Key 'org/settings4j/objectresolver/test3' in connector 'JNDIConnector' (org.settings4j.connector.JNDIConnector)
+21:24:59,619 DEBUG [main] - Found String for Key 'org/settings4j/objectresolver/test4' in connector 'PreferencesConnector' (org.settings4j.connector.PreferencesConnector)
++--------------
+
+
