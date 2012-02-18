@@ -29,6 +29,8 @@
 	Brainstorming:
 
 	! additional Object-resolver with digester (Use a digester-Rules-XML to convert a XML to an Object)
+	
+	! additional Object-resolver with JaxB (Configure the Target-Class in property-File)
 
 	! additional Content-resolver with VFSPath?
 
