@@ -4,7 +4,7 @@
 	<groupId>org.settings4j</groupId>
 	<artifactId>settings4j</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0-beta5-SNAPSHOT</version>
+	<version>1.0-beta6-SNAPSHOT</version>
 	<name>settings4j</name>
 	<url>http://settings4j.org</url>
 
