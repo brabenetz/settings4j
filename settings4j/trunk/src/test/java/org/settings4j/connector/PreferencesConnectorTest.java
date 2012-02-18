@@ -19,9 +19,17 @@ package org.settings4j.connector;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
+import org.settings4j.Settings4j;
+
 import junit.framework.TestCase;
 
-
+/**
+ * Test Suite for {@link PreferencesConnector}.
+ * Checkstyle:OFF .*
+ * 
+ * @author brabenetz
+ *
+ */
 public class PreferencesConnectorTest extends TestCase {
 
 
@@ -77,5 +85,10 @@ public class PreferencesConnectorTest extends TestCase {
         assertEquals("test", connector.getString(PREF_UNITTEST_NODE + "/testRoundup"));
     }
 
+    public void testFormularExample() {
+        final PreferencesConnector connector = new PreferencesConnector();
+        connector.setString("com/mycompany/mycalculation/my-formula", "a * a - 2");
 
+        assertEquals("a * a - 2", Settings4j.getString("com/mycompany/mycalculation/my-formula"));
+    }
 }
