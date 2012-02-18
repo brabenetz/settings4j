@@ -26,6 +26,6 @@
 <dependency>
 	<groupId>org.settings4j</groupId>
 	<artifactId>settings4j</artifactId>
-	<version>1.0-beta4</version>
+	<version>1.0-beta5</version>
 </dependency>
 --------------------------------------------
