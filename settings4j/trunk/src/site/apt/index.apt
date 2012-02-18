@@ -24,6 +24,8 @@
 	
 	* You can get your Settings from a JNDI Context
 	
+	* You can get your Settings from the Preferences (System or User)
+	
 	* You can get your Settings from a DB
 	
 	[]
@@ -61,8 +63,8 @@ public class SettingsManager {
 
 * {Deployer}
 
-	By default the Deployer can chose to configure the developers app with the SystemProperties, JNDI-Context or the Classpath (in this order).\
-	He can also define his own settings4j.xml (e.g.: for Database-Configuration, Property-Files, write-access, etc...)
+	By default the Deployer can chose to configure the developers app with the SystemProperties, JNDI-Context, Preferences (User or System) or the Classpath (in this order).\
+	He can also define his own settings4j.xml (e.g.: for Database-Configuration, a single Property-File, mapping aliases, caching etc...)
 
 ** {SystemProperties}
 	
@@ -91,6 +93,8 @@ startup.bat
 	</mbean>
 </server>
 --------------------------------------------
+
+	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a * a".
 	
 ** {JNDI-Context}
 	
@@ -158,10 +162,55 @@ startup.bat
 </Context>
 --------------------------------------------
 
+	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a + a * a".
+
+** {Preferences}
+
+	Preferences stored and read by <<<java.util.prefs.Preferences>>>.
+	
+	Where the Data are "really" stored is OS dependent: 
+
+	* In W98/Me/NT/W2K/XP/W2003/Vista/W7-32/W7-64 this information is stored in the fragile,
+		hard-to-back-up registry in HKEY_LOCAL_MACHINE\JavaSoft\Prefs for system Preferences
+		and HKEY_CURRENT_USER\JavaSoft\Prefs for user Preferences in a very fluffy format.
+		Every capital letter is preceded with a / and any fields containing accented letters are encoded in Base64. 
+	
+	* In Windows, user Preferences show up at HKEY_CURRENT_USER\Software\JavaSoft\Prefs\com\mindprod\replicator
+		and HKEY_USERS\ usernamexxx\Software\JavaSoft\Prefs\com\mindprod\replicator
+		where the package name is com.mindprod.replicator. 
+	
+	* In Windows, system Preferences show up at HKEY_LOCAL_MACHINE\Software\JavaSoft\Prefs\com\mindprod\replicator,
+		where the package name is com.mindprod.replicator 
+	
+	* In Linux, preferences are stored in ordinary xml files. System Preferences are stored in etc/.java. 
+	
+	* In Linux, user preferences are stored in ~/.java. The file for user preferences may have a goofy base64-encoded name something like this:
+		/home/username/.java/.userPrefs/ com/mindprod/replicator/_!':!bw "t!#4!b@"p!'4!~!"w!()!bw"k!#4!cg"l!(!!b!"p!'}@"0!'8!cg== 
+	
+*** {Preferences Windows}
+
+	With Windows you can edit your formular with regedit.exe:
+	
+[images/indexPreferencesWindows.png] Example Preferences-Configuration for Windows for key "com/mycompany/mycalculation/my-formula"
+
+	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a + a - 2".
+	
+*** {Preferences Linux}
+
+	With Linux you can edit your formular with your prefered editor:
+	
+[images/indexPreferencesLinux.png] Example Preferences-Configuration for Windows for key "com/mycompany/mycalculation/my-formula"
+
+	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a + a - 2".
+	
 ** {Classpath}
 	
 	The Key-Value can also be placed into the classpath:
 	
-[images/indexClasspath.gif] Beispiel Classpath-Configuration for key "com/mycompany/mycalculation/my-formula"
+[images/indexClasspath.gif] Example Classpath-Configuration for key "com/mycompany/mycalculation/my-formula"
+
+	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a * a".
+	
+	The ClasspathConnector reads the Content with "UTF-8" per default.
 	
 	
