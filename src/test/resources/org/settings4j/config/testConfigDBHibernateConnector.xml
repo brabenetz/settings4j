@@ -37,8 +37,8 @@
 		<connector name="DBConnector" class="org.settings4j.connector.DBHibernateJNDIConnector">
 			<param name="jndiName" value="jdbc/settings4j-db"/>
 			<param name="dialect" value="${connectors.string['jdbc/settings4j-db-dialect']}"/>
-			<connector-ref ref="JNDIConnectorNoResolver" readonly="true" />
-			<connector-ref ref="SystemPropertyConnectorNoResolver" readonly="true" />
+			<connector-ref ref="JNDIConnectorNoResolver"/>
+			<connector-ref ref="SystemPropertyConnectorNoResolver"/>
 		</connector>
 		<connector name="DBConnector" class="org.settings4j.connector.DBHibernateConnector">
 			<param name="url" value="jdbc:postgresql://localhost/mydatabase"/>
@@ -67,9 +67,9 @@
 
 
 	<root>
-		<connector-ref ref="SystemPropertyConnector" readonly="true" />
-		<connector-ref ref="JNDIConnector" readonly="true" />
-		<connector-ref ref="ClasspathConnector" readonly="true" />
+		<connector-ref ref="SystemPropertyConnector"/>
+		<connector-ref ref="JNDIConnector"/>
+		<connector-ref ref="ClasspathConnector"/>
 	</root>
 
 	<contentResolver name="DefaultContentResolver"
