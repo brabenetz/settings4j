@@ -28,7 +28,9 @@
 			<item name="DefaultConfig" href="configDefault.html" />
 			<item name="Filter" href="configFilter.html" />
 			<item name="Mappings" href="configMappings.html" />
+			<item name="Caching" href="configCache.html" />
 			<item name="Spring Placeholder" href="configSpringPlaceholder.html" />
+			<item name="Spring Object Factory" href="configSpringObjectFactory.html" />
 		</menu>
 		<menu ref="reports" />
 	</body>

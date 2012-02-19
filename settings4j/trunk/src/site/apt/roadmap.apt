@@ -24,7 +24,7 @@
 
 	- General comment
 
-* {2011/2012 1.1.0}
+* {2012/2013 1.1.0}
 
 	Brainstorming:
 
@@ -35,11 +35,11 @@
 	! additional Content-resolver with VFSPath?
 
 
-* {2011 Final Version 1.0.0 - after few bug fixes}
+* {2012 - Final Version 1.0.0 - after few bug fixes}
 
 
   
-* {Dec 2011 1.0.0-beta5 - PreferencesConnector and Settings4jPlaceholderConfigurer for Spring}
+* {2011 - Dec. 1.0.0-beta5 - PreferencesConnector and Settings4jPlaceholderConfigurer for Spring}
 	
 	! additional Settings4jPlaceholderConfigurer for Springframework.
 	
@@ -53,17 +53,17 @@
 	
 		* {{http://mindprod.com/jgloss/preferences.html}}
   
-* {May 2011 1.0.0-beta4 - settings4j goes to maven central repo}
+* {2011 - May 1.0.0-beta4 - settings4j goes to maven central repo}
 
 	- update distributionManagement to sonatype-nexus. This will be synched to the public maven central repo.
   
-* {2011 1.0.0-beta3 - refactored release}
+* {2011 - 1.0.0-beta3 - refactored release}
 
 	- Remove Setter. (The core-feature of settings4j is to GET Settings, the implementation is now much simpler.)
 
 	! Additional Helper for the Springframework. see JavaDoc of org.settings4j.helper.spring.Settings4jFactoryBean.java
   
-* {2009 1.0.0-beta2 - refactored release}
+* {2009 - 1.0.0-beta2 - refactored release}
 
 	- Remove Hirachical Structure. (it works, but without it, the usage is much simpler.)
 
@@ -75,7 +75,7 @@
 	
 	- Add additional method: getConnector(ConnectorName) return the Connector for the given Name.
 
-* {6. July 2008 1.0.0-beta - release with additional features:}
+* {2008 - 6. July 1.0.0-beta - release with additional features:}
 
     ! Object-Resolver implementations with java.beans.XMLEncoder and XMLDecoder
 
@@ -92,7 +92,7 @@
     ! mappings configured in settings4j.xml: map one key to an other Key.
 
 
-* {12. May 2008 1.0.0-alpha - release with following features:}
+* {2008 - 12. May 1.0.0-alpha - release with following features:}
 
     ! Automatically read settings4j.xml from classpath if available
 
@@ -105,7 +105,7 @@
     - A Simple Example Module who can be use by a Commandline-Client or a web application. The module is configurable either with SystemProperties or JNDI-Envirenment-Variables depends on the settings4j.xml inside the two Client-Applications (jar or war)
 
 
-* {12. April 2008}
+* {2008 - 12. April}
 
 	- Project start
 

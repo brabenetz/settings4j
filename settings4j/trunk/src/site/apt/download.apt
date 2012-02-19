@@ -22,10 +22,10 @@
 
 	Add the Settings4j <<Dependency>> to your pom.xml:
 	
---------------------------------------------
++--------------------------------------------
 <dependency>
 	<groupId>org.settings4j</groupId>
 	<artifactId>settings4j</artifactId>
 	<version>1.0-beta5</version>
 </dependency>
---------------------------------------------
++--------------------------------------------

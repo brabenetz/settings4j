@@ -1,5 +1,5 @@
                                     ------------------
-                                    Filter Configuration
+                                    Spring Placeholder Configuration
                                     ------------------
                                     Brabenetz Harald
                                     ------------------
@@ -16,7 +16,7 @@
 	
 {Example}
 
-	In the Following Example the Expression "${com/mycompany/myEntry}" will be replaced be the value form Settings4j.getString("com/mycompany/myEntry");
+	In the following Example the Expression "${com/mycompany/myEntry}" will be replaced by the value form <<<Settings4j.getString("com/mycompany/myEntry")>>>.
 	
 +--------------
 <beans>
