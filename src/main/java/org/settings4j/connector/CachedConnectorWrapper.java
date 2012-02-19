@@ -104,8 +104,8 @@ public class CachedConnectorWrapper implements Connector {
         this.cachedObjects.remove(key);
     }
 
-    /* ****************************
-     * Delegating Methodes: ***************************
+    /*
+     * Delegating Methodes: 
      */
 
     /** {@inheritDoc} */
