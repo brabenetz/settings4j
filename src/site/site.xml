@@ -15,15 +15,20 @@
 		</bannerRight>
 	-->
 	<body>
-		<menu name="Settings4j library">
+		<menu name="Settings4j Library">
 			<item name="Overview" href="index.html" />
 			<item name="Download" href="download.html" />
 			<item name="Roadmap" href="roadmap.html" />
 			<item name="Changes" href="changes-report.html" />
-			<item name="DefaultConfig" href="defaultConfig.html" />
 			<item name="Logging" href="logging.html" />
 			<item name="Recommendation" href="docuRecommendation.html" />
 			<item name="Archiv" href="http://settings4j.sourceforge.net/archiv" />
+		</menu>
+		<menu name="Settings4j Config">
+			<item name="DefaultConfig" href="configDefault.html" />
+			<item name="Filter" href="configFilter.html" />
+			<item name="Mappings" href="configMappings.html" />
+			<item name="Spring Placeholder" href="configSpringPlaceholder.html" />
 		</menu>
 		<menu ref="reports" />
 	</body>
