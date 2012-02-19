@@ -187,13 +187,21 @@ startup.bat
 	* In Linux, user preferences are stored in ~/.java. The file for user preferences may have a goofy base64-encoded name something like this:
 		/home/username/.java/.userPrefs/ com/mindprod/replicator/_!':!bw "t!#4!b@"p!'4!~!"w!()!bw"k!#4!cg"l!(!!b!"p!'}@"0!'8!cg== 
 	
+	[]
+	
+	See:
+	
+	* {{http://java.sun.com/j2se/1.4.2/docs/api/java/util/prefs/Preferences.html}}
+
+	* {{http://mindprod.com/jgloss/preferences.html}}
+	
 *** {Preferences Windows}
 
 	With Windows you can edit your formular with regedit.exe:
 	
 [images/indexPreferencesWindows.png] Example Preferences-Configuration for Windows for key "com/mycompany/mycalculation/my-formula"
 
-	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a + a - 2".
+	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a * a - 2".
 	
 *** {Preferences Linux}
 
@@ -201,7 +209,7 @@ startup.bat
 	
 [images/indexPreferencesLinux.png] Example Preferences-Configuration for Windows for key "com/mycompany/mycalculation/my-formula"
 
-	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a + a - 2".
+	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a * a - 2".
 	
 ** {Classpath}
 	
