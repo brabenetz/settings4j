@@ -23,8 +23,19 @@ import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.objectresolver.SpringConfigObjectResolver;
 
 
+/**
+ * TestSuite for {@link Settings4jFactoryBean}.
+ * 
+ * @author brabenetz
+ *
+ */
 public class Settings4jFactoryBeanTest extends TestCase {
 
+    /**
+     * Test simple UseCase and read a String Object. 
+     * <p>
+     * See /src/test/resources/org/settings4j/helper/spring/Settings4jFactoryBeanHappyPath
+     */
     public void testHappyPath() {
         // Example system-Config
         System.setProperty("Spring.HappyPathTest", "Hallo World");
@@ -36,6 +47,11 @@ public class Settings4jFactoryBeanTest extends TestCase {
         assertEquals("Hallo World", result);
     }
 
+    /**
+     * Test complex UseCase with "defaultObject". 
+     * <p>
+     * See /src/test/resources/org/settings4j/helper/spring/Settings4jFactoryBeanHappyPathComplex
+     */
     public void testHappyPathComplex() {
         // Example system-Config
         // System.setProperty("Spring.HappyPathComplexTest", "Hallo World");
