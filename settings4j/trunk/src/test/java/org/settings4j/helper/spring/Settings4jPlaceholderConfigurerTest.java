@@ -29,14 +29,26 @@ import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.objectresolver.SpringConfigObjectResolver;
 
 
+/**
+ * TestSuite for {@link Settings4jPlaceholderConfigurer}.
+ * 
+ * @author brabenetz
+ */
 public class Settings4jPlaceholderConfigurerTest extends TestCase {
 
 
+    private static final String SYSTEM_PROPERTY_TEST_1 = "a/b/test-1";
+    private static final String SYSTEM_PROPERTY_TEST_2 = "a/b/test-2";
+    private static final String SYSTEM_PROPERTY_TEST_3 = "a/b/test-3";
     private static final String PREF_UNITTEST_NODE = "org/settings4j/unittest";
 
+    /** {@inheritDoc} */
     protected void setUp() throws Exception {
         removeUnitTestNode(Preferences.userRoot());
         removeUnitTestNode(Preferences.systemRoot());
+        System.clearProperty(SYSTEM_PROPERTY_TEST_1);
+        System.clearProperty(SYSTEM_PROPERTY_TEST_2);
+        System.clearProperty(SYSTEM_PROPERTY_TEST_3);
     }
 
     private void removeUnitTestNode(final Preferences userRoot) throws BackingStoreException {
@@ -44,19 +56,27 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
             userRoot.node(PREF_UNITTEST_NODE).removeNode();
         }
     }
-    
+
+    /**
+     * TestCase for the normal use case in Spring configuration.
+     * <p>
+     * See /src/test/resources/org/settings4j/helper/spring/Settings4jPlaceholderConfigurerHappyPath
+     */
     public void testHappyPath() {
         // Example system-Config
         System.setProperty("org/settings4j/helper/spring/test1", "Hallo World");
 
         // load the example Spring-Config
         final Map result = (Map) getObjectFromSpringConfig(//
-            "org/settings4j/helper/spring/Settings4jPlaceholderConfigurerHappyPath");
+        "org/settings4j/helper/spring/Settings4jPlaceholderConfigurerHappyPath");
 
         // validate Result
         assertEquals("Hallo World", result.get("MapEntry1"));
     }
 
+    /**
+     * TestCase for the complex use case in Spring configuration with prefix and default values.
+     */
     public void testHappyPathComplex() {
         // Example system-Config
         System.setProperty("org/settings4j/unittest/testPlaceholderConfigurerHappyPathComplex/test1", "Hallo World");
@@ -66,7 +86,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
 
         // load the example Spring-Config
         final Map result = (Map) getObjectFromSpringConfig(//
-            "org/settings4j/helper/spring/Settings4jPlaceholderConfigurerHappyPathComplex");
+        "org/settings4j/helper/spring/Settings4jPlaceholderConfigurerHappyPathComplex");
 
         // validate Result
         assertEquals("Hallo World", result.get("MapEntry1"));
@@ -75,25 +95,56 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
         assertEquals("Fourth Test", result.get("MapEntry4"));
 
     }
-    
-    public void testParseStringValue(){
 
-    	// prepare SystemProperties
-    	System.setProperty("a/b/test-2", "value-2");
-    	System.setProperty("a/b/test-3", "value-3");
-    	
-    	// prepare default Values
-		Properties props = new Properties();
-		props.put("a/b/test-1", "value-1b");
-		props.put("a/b/test-2", "value-2b");
-    	
-		// start test
-    	Settings4jPlaceholderConfigurer configurer = new Settings4jPlaceholderConfigurer();
-    	String strVal = "${a/b/test-1},\n${a/b/test-2},\n${a/b/test-3}";
-		String result = configurer.parseStringValue(strVal, props);
-		
-		//validate result
-		assertEquals("value-1b,\nvalue-2,\nvalue-3", result);
+    /**
+     * TestCase to parse a Simple String with placeholders.
+     * <p>
+     * In this use case no spring application context is required.
+     */
+    public void testParseStringValue() {
+
+        // prepare SystemProperties
+        System.setProperty(SYSTEM_PROPERTY_TEST_2, "value-2b");
+        System.setProperty(SYSTEM_PROPERTY_TEST_3, "value-3b");
+
+        // prepare default Values 1 and 2
+        Properties props = createDefaultProperties();
+
+        // start test
+        String strVal = "${a/b/test-1},\n${a/b/test-2},\n${a/b/test-3}";
+        String result = Settings4jPlaceholderConfigurer.parseStringValue(strVal, props);
+
+        // validate result
+        assertEquals("value-1a,\nvalue-2b,\nvalue-3b", result);
+    }
+
+    /**
+     * TestCase to parse a Simple String with prefix for placeholders.
+     * <p>
+     * In this use case no spring application context is required.
+     */
+    public void testParseStringValueWithPrefix() {
+
+        // prepare SystemProperties
+        System.setProperty(SYSTEM_PROPERTY_TEST_2, "value-2b");
+        System.setProperty(SYSTEM_PROPERTY_TEST_3, "value-3b");
+
+        // prepare default Values 1 and 2
+        Properties props = createDefaultProperties();
+
+        // start test
+        String strVal = "${test-1},\n${test-2},\n${test-3}";
+        String result = Settings4jPlaceholderConfigurer.parseStringValue(strVal, "a/b/", props);
+
+        // validate result
+        assertEquals("value-1a,\nvalue-2b,\nvalue-3b", result);
+    }
+
+    private Properties createDefaultProperties() {
+        Properties props = new Properties();
+        props.put(SYSTEM_PROPERTY_TEST_1, "value-1a");
+        props.put(SYSTEM_PROPERTY_TEST_2, "value-2a");
+        return props;
     }
 
     private Object getObjectFromSpringConfig(final String key) {

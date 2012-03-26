@@ -42,19 +42,57 @@ public class Settings4jPlaceholderConfigurer extends PropertyPlaceholderConfigur
     /** {@inheritDoc} */
     protected String resolvePlaceholder(final String placeholder, final Properties props) {
 
-        String value = Settings4j.getString(this.prefix + placeholder);
+        String value = Settings4j.getString(prefix + placeholder);
         if (value == null) {
-            value = props.getProperty(this.prefix + placeholder);
+            value = props.getProperty(prefix + placeholder);
             if (value == null) {
                 value = props.getProperty(placeholder);
             }
         }
         return value;
     }
-    // TODO hbrabenetz 23.03.2012 : write unittest
-	public String parseStringValue(String strVal, Properties props) throws BeanDefinitionStoreException {
-		return super.parseStringValue(strVal, props, new HashSet());
-	}
+
+    /**
+     * Parse the given String with Placeholder "${...}" and returns the result.
+     * 
+     * @param strVal the String with the Paceholders
+     * @param props The default Properties if no Value where found
+     * @return the parsed String
+     * @throws BeanDefinitionStoreException
+     *            if invalid values are encountered (Placeholders where no values where found).
+     */
+    public static String parseStringValue(final String strVal, final Properties props)
+            throws BeanDefinitionStoreException {
+        return createInstance().parseStringValue(strVal, props, new HashSet());
+    }
+
+    /**
+     * Parse the given String with Placeholder "${...}" and returns the result.
+     * <p>
+     * A Prefix for all Placeholders can be defined.
+     * e.g.: with the prefix "a/b/" the placeholder ${x} will be parsed as ${a/b/x})
+     * 
+     * @param strVal the String with the Placeholders.
+     * @param prefix for all placehodlers.
+     * @param props The default Properties if no Value where found
+     * @return the parsed String
+     * @throws BeanDefinitionStoreException
+     *            if invalid values are encountered (Placeholders where no values where found).
+     */
+    public static String parseStringValue(final String strVal, final String prefix, final Properties props)
+            throws BeanDefinitionStoreException {
+        return createInstance(prefix).parseStringValue(strVal, props, new HashSet());
+    }
+
+    private static Settings4jPlaceholderConfigurer createInstance() {
+        return createInstance(StringUtils.EMPTY);
+    }
+
+    private static Settings4jPlaceholderConfigurer createInstance(final String prefix) {
+        final Settings4jPlaceholderConfigurer placeholderConfigurer = new Settings4jPlaceholderConfigurer();
+        placeholderConfigurer.setPrefix(prefix);
+        return placeholderConfigurer;
+    }
 
 
 }
