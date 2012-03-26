@@ -26,23 +26,40 @@ import javax.servlet.ServletContext;
 import org.settings4j.Settings4j;
 import org.settings4j.connector.PropertyFileConnector;
 
+/**
+ * Implementation which loads Default Properties from web.xml Init-Paramters and adds a Property connector to
+ * Settings4j.
+ * 
+ * @author brabenetz
+ */
 public class DefaultPropertiesLoader {
 
-    /** General Logger for this Class */
+    /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(DefaultPropertiesLoader.class);
 
+    /**
+     * The Name of the Connector which will be added to the Settings4j Config.
+     */
+    public static final String CONNECTOR_NAME = "DefaultPropertiesFromWebXml";
+
+    /**
+     * The Init-Parameter Name from the web.xml from where the default properties can be used.
+     */
     public static final String DEFAULT_PROPERTIES = "settings4jDefaultProperties";
 
-    private static Boolean isInitialized = Boolean.FALSE;
-
-    public void initDefaultPropertiesConnector(final ServletContext servletContext) {
-        synchronized (DefaultPropertiesLoader.class) {
-            if (!isInitialized.booleanValue()) {
+    /**
+     * If the InitParameter "settings4jDefaultProperties" exists in the given {@link ServletContext}, then a Connector
+     * will be added to Settings4j.
+     * 
+     * @param servletContext The ServletContext where the InitParameters are configured.
+     */
+    public void initDefaultProperties(final ServletContext servletContext) {
+        synchronized (Settings4j.getSettingsRepository().getSettings()) {
+            if (Settings4j.getSettingsRepository().getSettings().getConnector(CONNECTOR_NAME) == null) {
                 addPropertyConnector(servletContext);
-                isInitialized = Boolean.TRUE;
             } else {
-                LOG.info("DefaultConfigLoader cannot run twice in one VM");
+                LOG.info(CONNECTOR_NAME + " Connector already exists in Settings4j");
             }
         }
     }
@@ -56,6 +73,7 @@ public class DefaultPropertiesLoader {
 
     private void addPropertyConnector(final Properties property) {
         final PropertyFileConnector propertyFileConnector = new PropertyFileConnector();
+        propertyFileConnector.setName(CONNECTOR_NAME);
         propertyFileConnector.setProperty(property);
         Settings4j.getSettingsRepository().getSettings().addConnector(propertyFileConnector);
     }
@@ -66,10 +84,10 @@ public class DefaultPropertiesLoader {
         try {
             property.load(new ByteArrayInputStream(defaultProperties.getBytes("ISO-8859-1")));
         } catch (final UnsupportedEncodingException e) {
-            // every JDK must have the ISO-8859-1 Charset;
+            // every JDK must have the ISO-8859-1 Charset...
             throw new IllegalStateException(e.getMessage());
         } catch (final IOException e) {
-            // IOException never happens in ByteArrayInputStream implementation.
+            // IOException never happens in ByteArrayInputStream implementation...
             throw new IllegalStateException(e.getMessage());
         }
         return property;
