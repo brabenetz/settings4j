@@ -101,7 +101,48 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
      * <p>
      * In this use case no spring application context is required.
      */
-    public void testParseStringValue() {
+    public void testParseStringValueSimple() {
+
+        // prepare SystemProperties
+        System.setProperty(SYSTEM_PROPERTY_TEST_1, "value-1");
+        System.setProperty(SYSTEM_PROPERTY_TEST_2, "value-2");
+
+
+        // start test
+        String strVal = "${a/b/test-1},\n${a/b/test-2}";
+        String result = Settings4jPlaceholderConfigurer.parseStringValue(strVal);
+
+        // validate result
+        assertEquals("value-1,\nvalue-2", result);
+    }
+
+    /**
+     * TestCase to parse a Simple String with placeholders.
+     * <p>
+     * In this use case no spring application context is required.
+     */
+    public void testParseStringValueSimpleWithPlaceholders() {
+
+        // prepare SystemProperties
+        System.setProperty(SYSTEM_PROPERTY_TEST_1, "value-1");
+        System.setProperty(SYSTEM_PROPERTY_TEST_2, "value-2");
+
+
+        // start test
+        String strVal = "${test-1},\n${test-2}";
+        String result = Settings4jPlaceholderConfigurer.parseStringValue(strVal, "a/b/");
+
+        // validate result
+        assertEquals("value-1,\nvalue-2", result);
+    }
+    
+
+    /**
+     * TestCase to parse a Simple String with placeholders.
+     * <p>
+     * In this use case no spring application context is required.
+     */
+    public void testParseStringValueWithDefaultProperties() {
 
         // prepare SystemProperties
         System.setProperty(SYSTEM_PROPERTY_TEST_2, "value-2b");
@@ -123,7 +164,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
      * <p>
      * In this use case no spring application context is required.
      */
-    public void testParseStringValueWithPrefix() {
+    public void testParseStringValueWithDefaultPropertiesAndPrefix() {
 
         // prepare SystemProperties
         System.setProperty(SYSTEM_PROPERTY_TEST_2, "value-2b");

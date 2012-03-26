@@ -54,6 +54,23 @@ public class Settings4jPlaceholderConfigurer extends PropertyPlaceholderConfigur
 
     /**
      * Parse the given String with Placeholder "${...}" and returns the result.
+     * <p>
+     * Placeholders will be resolved with Settings4j.
+     * 
+     * @param strVal the String with the Paceholders
+     * @return the parsed String
+     * @throws BeanDefinitionStoreException
+     *            if invalid values are encountered (Placeholders where no values where found).
+     */
+    public static String parseStringValue(final String strVal)
+            throws BeanDefinitionStoreException {
+        return parseStringValue(strVal, new Properties());
+    }
+
+    /**
+     * Parse the given String with Placeholder "${...}" and returns the result.
+     * <p>
+     * Placeholders will be resolved with Settings4j.
      * 
      * @param strVal the String with the Paceholders
      * @param props The default Properties if no Value where found
@@ -63,7 +80,23 @@ public class Settings4jPlaceholderConfigurer extends PropertyPlaceholderConfigur
      */
     public static String parseStringValue(final String strVal, final Properties props)
             throws BeanDefinitionStoreException {
-        return createInstance().parseStringValue(strVal, props, new HashSet());
+        return parseStringValue(strVal, StringUtils.EMPTY, props);
+    }
+
+    /**
+     * Parse the given String with Placeholder "${...}" and returns the result.
+     * <p>
+     * Placeholders will be resolved with Settings4j.
+     * 
+     * @param strVal the String with the Paceholders
+     * @param prefix for all placehodlers.
+     * @return the parsed String
+     * @throws BeanDefinitionStoreException
+     *            if invalid values are encountered (Placeholders where no values where found).
+     */
+    public static String parseStringValue(final String strVal, final String prefix)
+            throws BeanDefinitionStoreException {
+        return parseStringValue(strVal, prefix, new Properties());
     }
 
     /**
@@ -71,6 +104,8 @@ public class Settings4jPlaceholderConfigurer extends PropertyPlaceholderConfigur
      * <p>
      * A Prefix for all Placeholders can be defined.
      * e.g.: with the prefix "a/b/" the placeholder ${x} will be parsed as ${a/b/x})
+     * <p>
+     * Placeholders will be resolved with Settings4j.
      * 
      * @param strVal the String with the Placeholders.
      * @param prefix for all placehodlers.
@@ -82,10 +117,6 @@ public class Settings4jPlaceholderConfigurer extends PropertyPlaceholderConfigur
     public static String parseStringValue(final String strVal, final String prefix, final Properties props)
             throws BeanDefinitionStoreException {
         return createInstance(prefix).parseStringValue(strVal, props, new HashSet());
-    }
-
-    private static Settings4jPlaceholderConfigurer createInstance() {
-        return createInstance(StringUtils.EMPTY);
     }
 
     private static Settings4jPlaceholderConfigurer createInstance(final String prefix) {
