@@ -16,10 +16,12 @@
  *****************************************************************************/
 package org.settings4j.helper.spring;
 
+import java.util.HashSet;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
 import org.settings4j.Settings4j;
+import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
 /**
@@ -49,6 +51,10 @@ public class Settings4jPlaceholderConfigurer extends PropertyPlaceholderConfigur
         }
         return value;
     }
+    // TODO hbrabenetz 23.03.2012 : write unittest
+	public String parseStringValue(String strVal, Properties props) throws BeanDefinitionStoreException {
+		return super.parseStringValue(strVal, props, new HashSet());
+	}
 
 
 }
