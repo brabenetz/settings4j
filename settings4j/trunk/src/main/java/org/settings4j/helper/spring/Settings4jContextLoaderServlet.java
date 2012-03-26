@@ -17,15 +17,17 @@
 package org.settings4j.helper.spring;
 
 import org.springframework.web.context.ContextLoader;
-import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.ContextLoaderServlet;
 
 /**
- * {@link javax.servlet.ServletContextListener} to initialize the {@link Settings4jContextLoader}.
+ * {@link javax.servlet.http.HttpServlet} to initialize the {@link Settings4jContextLoader}.
  * 
  * @author brabenetz
  *
  */
-public class Settings4jContextLoaderListener extends ContextLoaderListener {
+public class Settings4jContextLoaderServlet extends ContextLoaderServlet {
+
+    private static final long serialVersionUID = 1L;
 
     /** {@inheritDoc} */
     protected ContextLoader createContextLoader() {
