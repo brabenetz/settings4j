@@ -18,6 +18,7 @@
 package org.settings4j.helper.spring;
 
 import java.util.Map;
+import java.util.Properties;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
@@ -73,6 +74,26 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
         assertEquals("Third Test", result.get("MapEntry3"));
         assertEquals("Fourth Test", result.get("MapEntry4"));
 
+    }
+    
+    public void testParseStringValue(){
+
+    	// prepare SystemProperties
+    	System.setProperty("a/b/test-2", "value-2");
+    	System.setProperty("a/b/test-3", "value-3");
+    	
+    	// prepare default Values
+		Properties props = new Properties();
+		props.put("a/b/test-1", "value-1b");
+		props.put("a/b/test-2", "value-2b");
+    	
+		// start test
+    	Settings4jPlaceholderConfigurer configurer = new Settings4jPlaceholderConfigurer();
+    	String strVal = "${a/b/test-1},\n${a/b/test-2},\n${a/b/test-3}";
+		String result = configurer.parseStringValue(strVal, props);
+		
+		//validate result
+		assertEquals("value-1b,\nvalue-2,\nvalue-3", result);
     }
 
     private Object getObjectFromSpringConfig(final String key) {
