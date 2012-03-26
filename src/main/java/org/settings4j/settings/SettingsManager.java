@@ -113,8 +113,11 @@ public final class SettingsManager {
      * 
      * @param factory The factory to create a {@link Settings4jInstance}.
      * @return the appropriate {@link org.settings4j.Settings4j} instance.
+     * @deprecated will be removed. Call {@link #getSettingsRepository()}
+     *      and {@link Settings4jRepository#getSettings(Settings4jFactory)} instead.
      */
     public static Settings4jInstance getSettings(final Settings4jFactory factory) {
+        // TODO brabenetz 26.03.2012 : remove this method after release 1.0
         initializeRepositoryIfNecessary();
         // Delegate the actual manufacturing of the settings to the settings repository.
         return getSettingsRepository().getSettings(factory);
