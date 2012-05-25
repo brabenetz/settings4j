@@ -82,6 +82,9 @@ public class SettingsDAOHibernate implements SettingsDAO {
             }
 
             return (SettingsDTO) settingsDTOs.get(0);
+        } catch (RuntimeException e) {
+            LOG.warn("Cannot get Value for Key '" + key + "' from Database! " + e.getMessage());
+            return null;
         } finally {
             if (session != null) {
                 session.close();
