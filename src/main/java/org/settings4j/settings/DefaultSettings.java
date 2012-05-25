@@ -158,8 +158,10 @@ public class DefaultSettings implements Settings4jInstance {
 
     private void logDebugFoundValueForKey(final String type, final String key, final Connector connector) {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Found " + type + " for Key '" + key + "' in connector '" + connector.getName() + "' ("
-                + connector.getClass().getName() + ")");
+            LOG.debug("Found " + type //
+                + " for Key '" + key //
+                + "' in connector '" + connector.getName() //
+                + "' (" + connector.getClass().getName() + ")");
         }
     }
 }
