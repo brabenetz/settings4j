@@ -32,6 +32,11 @@ import org.settings4j.contentresolver.UnionContentResolver;
  */
 public abstract class AbstractDBConnector extends AbstractConnector {
 
+
+    /** General Logger for this Class. */
+    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
+        .getLog(AbstractDBConnector.class);
+
     /**
      * This implementation adds a {@link DBContentResolverAdapter} to the contentResolver-List (at the first position).
      * <p>
@@ -72,6 +77,60 @@ public abstract class AbstractDBConnector extends AbstractConnector {
         }
         // else
         return null;
+    }
+
+
+    /**
+     * @param key The Settings4j Key.
+     * @param value The value to Store.
+     */
+    public void setContent(final String key, final byte[] value) {
+        try {
+            SettingsDTO settingsDTO = getSettingsDAO().getByKey(key);
+            if (settingsDTO == null) {
+                settingsDTO = new SettingsDTO();
+                settingsDTO.setKey(key);
+            }
+            settingsDTO.setContentValue(value);
+            getSettingsDAO().store(settingsDTO);
+        } catch (final RuntimeException e) {
+            LOG.error(e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    /**
+     * @param key The Settings4j Key.
+     * @param value The value to Store.
+     */
+    public void setString(final String key, final String value) {
+        try {
+            SettingsDTO settingsDTO = getSettingsDAO().getByKey(key);
+            if (settingsDTO == null) {
+                settingsDTO = new SettingsDTO();
+                settingsDTO.setKey(key);
+            }
+            settingsDTO.setStringValue(value);
+            getSettingsDAO().store(settingsDTO);
+        } catch (final RuntimeException e) {
+            LOG.error(e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    /**
+     * @param key The Settings4j Key.
+     */
+    public void deleteValue(final String key) {
+        try {
+            SettingsDTO settingsDTO = getSettingsDAO().getByKey(key);
+            if (settingsDTO != null) {
+                getSettingsDAO().remove(settingsDTO.getId());
+            }
+        } catch (final RuntimeException e) {
+            LOG.error(e.getMessage(), e);
+            throw e;
+        }
     }
 
     /**
