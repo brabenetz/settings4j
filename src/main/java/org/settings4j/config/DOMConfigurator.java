@@ -349,7 +349,12 @@ public class DOMConfigurator {
                     final Element currentElement = (Element) currentNode;
                     final String tagName = currentElement.getTagName();
 
-                    if (tagName.equals(CONTENT_RESOLVER_REF_TAG)) {
+                    if (tagName.equals(CONNECTOR_REF_TAG)) {
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug(CONNECTOR_REF_TAG + " is only parsed for the RegularExpression Context " //
+                                + "or init-Method. See org.settings4j.Connector.addConnector(Connector) Javadoc.");
+                        }
+                    } else if (tagName.equals(CONTENT_RESOLVER_REF_TAG)) {
                         final Element contentResolverRef = (Element) currentNode;
                         final ContentResolver contentResolver = findContentResolverByReference(contentResolverRef);
                         connector.setContentResolver(contentResolver);
@@ -590,7 +595,13 @@ public class DOMConfigurator {
                     final Element currentElement = (Element) currentNode;
                     final String tagName = currentElement.getTagName();
 
-                    if (tagName.equals(OBJECT_RESOLVER_REF_TAG)) {
+
+                    if (tagName.equals(CONNECTOR_REF_TAG)) {
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug(CONNECTOR_REF_TAG + " is only parsed for the RegularExpression Context. " //
+                                + "See org.settings4j.Connector.addConnector(Connector) Javadoc.");
+                        }
+                    } else if (tagName.equals(OBJECT_RESOLVER_REF_TAG)) {
                         final Element objectResolverRef = (Element) currentNode;
                         final ObjectResolver subObjectResolver = findObjectResolverByReference(objectResolverRef);
                         objectResolver.addObjectResolver(subObjectResolver);
@@ -735,7 +746,12 @@ public class DOMConfigurator {
                     final Element currentElement = (Element) currentNode;
                     final String tagName = currentElement.getTagName();
 
-                    if (tagName.equals(CONTENT_RESOLVER_REF_TAG)) {
+                    if (tagName.equals(CONNECTOR_REF_TAG)) {
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug(CONNECTOR_REF_TAG + " is only parsed for the RegularExpression Context. " //
+                                + "See org.settings4j.Connector.addConnector(Connector) Javadoc.");
+                        }
+                    } else if (tagName.equals(CONTENT_RESOLVER_REF_TAG)) {
                         final Element contentResolverRef = (Element) currentNode;
                         final ContentResolver subContentResolver = findContentResolverByReference(contentResolverRef);
                         contentResolver.addContentResolver(subContentResolver);
