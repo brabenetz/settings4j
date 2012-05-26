@@ -16,6 +16,7 @@
  *****************************************************************************/
 package org.settings4j.connector;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import org.settings4j.ContentResolver;
@@ -27,7 +28,6 @@ import org.settings4j.contentresolver.UnionContentResolver;
  * <p>
  * 
  * @author Harald.Brabenetz
- *
  */
 public class FSConnector extends AbstractConnector {
 
@@ -36,18 +36,18 @@ public class FSConnector extends AbstractConnector {
         .getLog(FSConnector.class);
 
     private final FSContentResolver fsContentResolver = new FSContentResolver();
-    private ContentResolver unionContentResolver = new UnionContentResolver(this.fsContentResolver);
+    private ContentResolver unionContentResolver = new UnionContentResolver(fsContentResolver);
     private String charset = "UTF-8";
 
     /** {@inheritDoc} */
     public byte[] getContent(final String key) {
-        return this.fsContentResolver.getContent(key);
+        return fsContentResolver.getContent(key);
     }
 
     /** {@inheritDoc} */
     public Object getObject(final String key) {
         if (getObjectResolver() != null) {
-            return getObjectResolver().getObject(key, this.unionContentResolver);
+            return getObjectResolver().getObject(key, unionContentResolver);
         }
         // else
         return null;
@@ -58,20 +58,43 @@ public class FSConnector extends AbstractConnector {
         try {
             final byte[] content = getContent(key);
             if (content != null) {
-                return new String(this.fsContentResolver.getContent(key), this.charset);
+                return new String(fsContentResolver.getContent(key), charset);
             }
             // else
             return null;
 
         } catch (final UnsupportedEncodingException e) {
             // should never occure with "UTF-8"
-            LOG.error("Charset not found: " + this.charset, e);
+            LOG.error("Charset not found: " + charset, e);
             return null;
         }
     }
 
+    /**
+     * @param key The Settings4j Key.
+     * @param value The value to Store.
+     * @throws IOException if an error occured.
+     */
+    public void setContent(final String key, final byte[] value) throws IOException {
+        fsContentResolver.setContent(key, value);
+    }
+
+    /**
+     * @param key The Settings4j Key.
+     * @param value The value to Store.
+     * @throws IOException if an error occured.
+     */
+    public void setString(final String key, final String value) throws IOException {
+        try {
+            setContent(key, value.getBytes(charset));
+        } catch (final UnsupportedEncodingException e) {
+            // should never occure with "UTF-8"
+            LOG.error("Charset not found: " + charset, e);
+        }
+    }
+
     public String getCharset() {
-        return this.charset;
+        return charset;
     }
 
     public void setCharset(final String charset) {
@@ -84,13 +107,13 @@ public class FSConnector extends AbstractConnector {
      * @param rootFolderPath The root Folder Path where the settings could be stored.
      */
     public void setRootFolderPath(final String rootFolderPath) {
-        this.fsContentResolver.setRootFolderPath(rootFolderPath);
+        fsContentResolver.setRootFolderPath(rootFolderPath);
     }
 
     /** {@inheritDoc} */
     public void setContentResolver(final ContentResolver contentResolver) {
-        this.unionContentResolver = new UnionContentResolver(this.fsContentResolver);
-        this.unionContentResolver.addContentResolver(contentResolver);
+        unionContentResolver = new UnionContentResolver(fsContentResolver);
+        unionContentResolver.addContentResolver(contentResolver);
     }
 
 }

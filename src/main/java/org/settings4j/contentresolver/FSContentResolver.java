@@ -71,6 +71,39 @@ public class FSContentResolver implements ContentResolver {
         return null;
     }
 
+
+    /**
+     * @param key The Settings4j Key.
+     * @param value The value to Store.
+     * @throws IOException if an error occured.
+     */
+    public void setContent(final String key, final byte[] value) throws IOException {
+
+        final String normalizedKey;
+        if (key.startsWith(FILE_URL_PREFIX)) {
+            normalizedKey = key.substring(FILE_URL_PREFIX.length());
+        } else {
+            normalizedKey = key;
+        }
+
+        File file;
+
+        if (normalizedKey.startsWith("/")) {
+            // Unix-Root
+            file = new File(normalizedKey);
+        } else if (normalizedKey.indexOf(":") >= 0) {
+            // Windows-Root
+            file = new File(normalizedKey);
+        } else {
+            file = new File(getRootFolder(), normalizedKey);
+        }
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Store content in: " + file.getAbsolutePath());
+        }
+
+        FileUtils.writeByteArrayToFile(file, value);
+    }
+
     /**
      * return the root of this FileSystem ContenResolver.
      * <p>
@@ -79,14 +112,14 @@ public class FSContentResolver implements ContentResolver {
      * @return the root of this FileSystem ContenResolver.
      */
     public File getRootFolder() {
-        if (this.rootFolder == null) {
+        if (rootFolder == null) {
             LOG.info("FSContentResolver.rootFolder == null");
             // get the current execution directory
             final String tmpdir = ".";
             LOG.info("The TEMP Folder will be used: " + tmpdir + "! ");
-            this.rootFolder = new File(tmpdir);
+            rootFolder = new File(tmpdir);
         }
-        return this.rootFolder;
+        return rootFolder;
     }
 
     /**
@@ -97,13 +130,13 @@ public class FSContentResolver implements ContentResolver {
         if (!newRootFolder.exists()) {
             try {
                 FileUtils.forceMkdir(newRootFolder);
-                this.rootFolder = newRootFolder;
+                rootFolder = newRootFolder;
                 LOG.info("Set RootPath for FSConntentResolver: " + newRootFolder.getAbsolutePath());
             } catch (final IOException e) {
                 LOG.warn("cannot create rootFolder: " + rootFolderPath + "! ");
             }
         } else {
-            this.rootFolder = newRootFolder;
+            rootFolder = newRootFolder;
         }
     }
 }
