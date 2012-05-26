@@ -111,4 +111,14 @@ public final class Settings4j {
     public static List getConnectors() {
         return getSettings().getConnectors();
     }
+
+    /**
+     * Return the {@link Connector} for the given Name.
+     * 
+     * @param connectorName The Connector Name.
+     * @return The {@link Connector} for the given Name.
+     */
+    public static Connector getConnector(final String connectorName) {
+        return getSettings().getConnector(connectorName);
+    }
 }
