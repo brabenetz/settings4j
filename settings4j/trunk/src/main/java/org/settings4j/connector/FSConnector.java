@@ -16,6 +16,7 @@
  *****************************************************************************/
 package org.settings4j.connector;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
@@ -116,4 +117,14 @@ public class FSConnector extends AbstractConnector {
         unionContentResolver.addContentResolver(contentResolver);
     }
 
+    /**
+     * return the root of this FileSystem ContenResolver.
+     * <p>
+     * if no one is set, the "." will be returned.
+     * 
+     * @return the root of this FileSystem ContenResolver.
+     */
+    public File getRootFolder() {
+        return fsContentResolver.getRootFolder();
+    }
 }
