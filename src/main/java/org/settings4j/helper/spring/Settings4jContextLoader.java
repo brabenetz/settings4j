@@ -36,26 +36,29 @@ public class Settings4jContextLoader extends ContextLoader {
         .getLog(Settings4jContextLoader.class);
 
     /**
-     * Name of servlet context parameter (i.e., "<code>contextConfigLocation</code>") that can specify the config
-     * location for the root context, falling back to the implementation's default otherwise.
-     * 
+     * Name of servlet context parameter (i.e., "<code>settings4jContextConfigLocation</code>")
+     * that can specify the config location for the root context, falling back
+     * to the implementation's default otherwise.
      * @see org.springframework.web.context.support.XmlWebApplicationContext#DEFAULT_CONFIG_LOCATION
      */
-    public static final String CONFIG_DEFAULT_VALUES = "settings4jContextConfigDefaultValues";
-
+    public static final String SETTINGS4J_CONFIG_LOCATION_PARAM = "settings4jContextConfigLocation";
+    
     /** {@inheritDoc} */
     protected void customizeContext(final ServletContext servletContext, final ConfigurableWebApplicationContext wac) {
         if (wac instanceof XmlWebApplicationContext) {
             // be sure that the DefaultPropertiesLoader is initialized:
             createDefaultPropertiesLoader().initDefaultProperties(servletContext);
             // replace Placeholders in configLocations.
-            final String[] configLocations = wac.getConfigLocations();
-            // TODO hbrabenetz 23.03.2012 : get Placeholder Prefix from Context!?
-            for (int i = 0; i < configLocations.length; i++) {
-                final String configLocation = configLocations[i];
-                configLocations[i] = Settings4jPlaceholderConfigurer.parseStringValue(configLocation);
+            String configLocations = servletContext.getInitParameter(SETTINGS4J_CONFIG_LOCATION_PARAM);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("settings4jContextConfigLocation configLocations: " + configLocations);
             }
-            wac.setConfigLocations(configLocations);
+            String parsedConfigLocations = Settings4jPlaceholderConfigurer.parseStringValue(configLocations);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("settings4jContextConfigLocation parsed configLocations: " + parsedConfigLocations);
+            }
+            
+            wac.setConfigLocation(parsedConfigLocations);
         } else {
             LOG.warn(//
             "Settings4jContextLoader only works with an ApplicationContext from type XmlWebApplicationContext.");
