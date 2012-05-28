@@ -142,7 +142,7 @@ public class JNDIConnector extends AbstractConnector {
         if (this.isJNDIAvailable == null) {
             try {
                 getJNDIContext().lookup(getContextPathPrefix());
-                LOG.info("JNDI Context is available.");
+                LOG.debug("JNDI Context is available.");
                 this.isJNDIAvailable = Boolean.TRUE;
             } catch (final NoInitialContextException e) {
                 LOG.info("No JNDI Context available! JNDIConnector will be disabled: " + e.getMessage());
