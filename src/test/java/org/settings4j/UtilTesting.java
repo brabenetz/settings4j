@@ -25,55 +25,53 @@ import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.settings.DefaultSettingsRepository;
 
 /**
- * Some Tools for UnitTesting
+ * Some Tools for UnitTesting.
  * 
  * @author hbrabenetz
- *
  */
-public class UtilTesting {
+public final class UtilTesting {
 
-    /** Hide constructor */
+    /** Hide constructor. */
     private UtilTesting() {
         super();
     }
-    
+
     /**
-     * Read and parse a Settings4j.xml Configuration from Classpath and return the SettingsRepository
+     * Read and parse a Settings4j.xml Configuration from Classpath and return the SettingsRepository.
      * 
      * @param classpathUrl The Classpath url where the settings4j.xml are placed.
      * @return The SettingsRepository based on the given configuration found in the classpathUrl
      */
-    public static Settings4jRepository getConfiguredSettingsRepository(String classpathUrl){
+    public static Settings4jRepository getConfiguredSettingsRepository(final String classpathUrl) {
 
-        URL url = ClasspathContentResolver.getResource(classpathUrl);
-        Settings4jRepository settingsRepository = new DefaultSettingsRepository();
+        final URL url = ClasspathContentResolver.getResource(classpathUrl);
+        final Settings4jRepository settingsRepository = new DefaultSettingsRepository();
         DOMConfigurator.configure(url, settingsRepository);
         return settingsRepository;
     }
-    
+
     /**
-     * The TempFolder from System Property "java.io.tmpdir" and the subfolder "Settings4jUnittest"<br />
+     * The TempFolder from System Property "java.io.tmpdir" and the subfolder "Settings4jUnittest".<br />
      * <br />
      * On my windows maschine this is:<br />
      * C:\Dokumente und Einstellungen\hbrabenetz\Lokale Einstellungen\Temp\Settings4jUnittest\<br />
      * 
      * @return to tempfolder for unittests
      */
-    public static File getTmpFolder(){
-        String tmpdir = System.getProperty("java.io.tmpdir");
-        File tmpFolder = new File(tmpdir + "/Settings4jUnittest");
+    public static File getTmpFolder() {
+        final String tmpdir = System.getProperty("java.io.tmpdir");
+        final File tmpFolder = new File(tmpdir + "/Settings4jUnittest");
         return tmpFolder;
     }
-    
+
     /**
      * The test Folder for Unittest.<br />
      * This is normaly a subfolder "target/test/Settings4jUnittest" of this current Project.
      * 
-     * 
      * @return the subfolder "target/test/Settings4jUnittest" of the current Project.
      */
-    public static File getTestFolder(){
-        File testFolder = new File("target/test/Settings4jUnittest");
+    public static File getTestFolder() {
+        final File testFolder = new File("target/test/Settings4jUnittest");
         return testFolder;
     }
 
