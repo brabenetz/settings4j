@@ -70,11 +70,12 @@ public final class SettingsManager {
             try {
                 DOMConfigurator.configure(url, settingsRepository);
             } catch (final NoClassDefFoundError e) {
-                LOG.warn("Error during default initialization", e);
+                LOG.warn("Error during default initialization. Use default fallback", e);
             }
         } else {
-            LOG.debug("Could not find resource: [" + DEFAULT_XML_CONFIGURATION_FILE + "].");
+            LOG.debug("Could not find resource: [" + DEFAULT_XML_CONFIGURATION_FILE + "]. Use default fallback.");
         }
+        initializeRepositoryIfNecessary(); // default fallback
     }
 
     /** Hide Constructor, Utility Pattern. */
