@@ -19,10 +19,15 @@ package org.settings4j.helper.web;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 
+import org.settings4j.Connector;
 import org.settings4j.Settings4j;
 import org.settings4j.connector.PropertyFileConnector;
 
@@ -67,7 +72,17 @@ public class DefaultPropertiesLoader {
     private void addPropertyConnector(final ServletContext servletContext) {
         if (servletContext.getInitParameter(DEFAULT_PROPERTIES) != null) {
             final Properties property = getDefaultProperties(servletContext);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Add Property Connector '" + CONNECTOR_NAME + "' to the Settings4j Repository.");
+                Set entires = property.entrySet();
+                for (Iterator iterator = entires.iterator(); iterator.hasNext();) {
+                    Entry entry = (Entry) iterator.next();
+                    LOG.debug(entry.getKey() + " = " + entry.getValue());
+                }
+            }
             addPropertyConnector(property);
+        } else {
+            LOG.debug("No InitParameter 'settings4jDefaultProperties' found.");
         }
     }
 
@@ -76,6 +91,15 @@ public class DefaultPropertiesLoader {
         propertyFileConnector.setName(CONNECTOR_NAME);
         propertyFileConnector.setProperty(property);
         Settings4j.getSettingsRepository().getSettings().addConnector(propertyFileConnector);
+        if (LOG.isDebugEnabled()) {
+            final List connectors = Settings4j.getConnectors();
+            LOG.debug("Current Connectors are " + connectors.size());
+            for (Iterator iterator = connectors.iterator(); iterator.hasNext();) {
+                Connector connector = (Connector) iterator.next();
+                LOG.debug("Connector: " + connector.getName());
+            }
+            
+        }
     }
 
     private Properties getDefaultProperties(final ServletContext servletContext) {
