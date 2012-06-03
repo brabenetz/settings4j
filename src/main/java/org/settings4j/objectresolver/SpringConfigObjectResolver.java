@@ -21,10 +21,7 @@ import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
 import org.settings4j.ContentResolver;
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.AbstractXmlApplicationContext;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
+import org.settings4j.helper.spring.ByteArrayXMLApplicationContext;
 
 /**
  * This implementation parses a Spring-Beans XML File and returns
@@ -46,40 +43,17 @@ public class SpringConfigObjectResolver extends AbstractObjectResolver {
     /** {@inheritDoc} */
     protected Object contentToObject(final String key, final Properties properties, final byte[] content,
             final ContentResolver contentResolver) {
-        final AbstractApplicationContext context = new ByteArrayXMLApplicationContext(content);
-        context.refresh();
 
         String beanRef = properties.getProperty(PROPERTY_BEAN_REF);
         if (StringUtils.isEmpty(beanRef)) {
             beanRef = key.replace('/', '.');
         }
 
-        final Object result = context.getBean(beanRef);
+        final Object result = ByteArrayXMLApplicationContext.getBean(content, beanRef);
         if (result == null) {
             LOG.warn("SpringContext-Object with ID '" + beanRef + "' for Key '" + key + "' is null!");
         }
-        context.close();
         return result;
-    }
-
-    /**
-     * A SpringFramework Application Context which can process a spring-XML Content from byte[] as input.
-     * 
-     * @author Harald.Brabenetz
-     */
-    private static class ByteArrayXMLApplicationContext extends AbstractXmlApplicationContext {
-
-        private final Resource[] configResources;
-
-        public ByteArrayXMLApplicationContext(final byte[] content) {
-            super();
-            this.configResources = new Resource[1];
-            this.configResources[0] = new ByteArrayResource(content);
-        }
-
-        protected Resource[] getConfigResources() {
-            return this.configResources;
-        }
     }
 
 }
