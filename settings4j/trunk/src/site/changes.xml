@@ -18,6 +18,19 @@
 			 -->
 		</release>
 		
+		<release version="1.0-beta6" date="2012-06-??" description="Add Settings4jContextLoader (Spring) and DefaultPropertiesLoader for web.xml">
+			<action dev="brabenetz" type="add" date="2012-06-03" >improve JavaDoc.</action>
+			<action dev="brabenetz" type="add" date="2012-06-03" >
+				update Default settings4j.xml configuration: Add FSContentResolver and add SpringConfigObjectReolver.
+			</action>
+			<action dev="brabenetz" type="add" date="2012-03-12" >
+				add Settings4jContextLoader and Listener for web.xml (Configurable SpringContext in webapps)
+			</action>
+			<action dev="brabenetz" type="add" date="2012-03-12" >
+				add DefaultPropertiesLoader and Listener for web.xml
+			</action>
+		</release>
+		
 		<release version="1.0-beta5" date="2011-12-24" description="Add PreferenciesConnector and Settings4jPlaceholderConfigurer">
 			<action dev="brabenetz" type="add" date="2011-12-17" >add Settings4jPlaceholderConfigurer for Springframework.</action>
 			<action dev="brabenetz" type="add" date="2011-12-17" >add Preferences Connector</action>
