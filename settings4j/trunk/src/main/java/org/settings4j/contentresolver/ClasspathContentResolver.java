@@ -25,6 +25,11 @@ import org.settings4j.ContentResolver;
 
 /**
  * {@link ContentResolver} implementation to read content from the Classpath.
+ * <p>
+ * Uses the default ClassLoader: typically the thread context ClassLoader
+ * see {@link #getClassLoader()}.
+ * <p>
+ * Optional Path Prefix is "classpath:".
  * 
  * @author Harald.Brabenetz
  *

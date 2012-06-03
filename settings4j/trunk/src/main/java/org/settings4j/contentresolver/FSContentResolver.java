@@ -24,6 +24,13 @@ import org.settings4j.ContentResolver;
 
 /**
  * {@link ContentResolver} implementation to read content from the File System.
+ * <p>
+ * The optional Path Prefix is "file:".
+ * <p>
+ * Absolute Windows paths contains a <b>":"</b>.<br/>
+ * Absolute Unix paths starts with <b>"/"</b>.<br/>
+ * Other Paths are relative and uses the {@link #getRootFolder()} as root.
+ * Which is per default <code>new File(".")</code>.<br/>
  * 
  * @author Harald.Brabenetz
  */
@@ -113,11 +120,9 @@ public class FSContentResolver implements ContentResolver {
      */
     public File getRootFolder() {
         if (rootFolder == null) {
-            LOG.info("FSContentResolver.rootFolder == null");
-            // get the current execution directory
-            final String tmpdir = ".";
-            LOG.info("The TEMP Folder will be used: " + tmpdir + "! ");
-            rootFolder = new File(tmpdir);
+            rootFolder = new File(".");
+            LOG.info("FSContentResolver.rootFolder is null. " //
+                + "The RootPath Folder will be used: " + rootFolder.getAbsolutePath());
         }
         return rootFolder;
     }

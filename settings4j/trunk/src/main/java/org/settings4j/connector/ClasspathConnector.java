@@ -23,7 +23,10 @@ import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.contentresolver.UnionContentResolver;
 
 /**
- * Connector implementation to read Settings from the ClassPath.
+ * Connector implementation to read Settings from the Classpath.
+ * <p>
+ * Default Charset "UTF-8" is used to read the content from Classpath.
+ * 
  * 
  * @author Harald.Brabenetz
  *
