@@ -50,6 +50,19 @@ public final class Settings4j {
      * The {@link Settings4j} Instance iterates all his {@link Connector} and return the first found Value.<br />
      * <br />
      * Returns null if no connector found a Value for the given key<br />
+     * <p>
+     * If no custom settings4j.xml exist in classpath, the following default order will be used:
+     * <ol>
+     * <li>check if value for {@link System#getProperty(String)} exist (see
+     * {@link org.settings4j.connector.SystemPropertyConnector} ),</li>
+     * <li>else check if value for {@link javax.naming.InitialContext#lookup(String)} exist (see
+     * {@link org.settings4j.connector.JNDIConnector} ),</li>
+     * <li>else check if in {@link java.util.prefs.Preferences#userRoot()} and
+     * {@link java.util.prefs.Preferences#systemRoot()} the Value for
+     * {@link java.util.prefs.Preferences#get(String, String)} exist (see
+     * {@link org.settings4j.connector.PreferencesConnector} ),</li>
+     * <li>else check if the value exist in Classpath (see {@link org.settings4j.connector.ClasspathConnector} ).</li>
+     * </ol>
      * 
      * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
      * @return the found String-Value for the given key
@@ -62,8 +75,22 @@ public final class Settings4j {
      * return the found byte[]-Value for the given key.<br />
      * { getSettings().getAllConnectors(); } The {@link Settings4j} Instance iterates all his {@link Connector} and
      * return the first found Value.<br />
-     * <br />
+     * <p>
      * Returns null if no connector found a Value for the given key<br />
+     * <p>
+     * If no custom settings4j.xml exist in classpath, the behavior is like {@link #getString(String)},
+     * but only the {@link org.settings4j.connector.ClasspathConnector} can return a byte[] content directly.<br />
+     * The other Connectors calls there getString(...) Method to get a valid Filesystempath or Classpath.
+     * <p>
+     * e.g {@link org.settings4j.connector.SystemPropertyConnector}:<br />
+     * Start the Application with -Dcom/mycompany/myapp/myParameterKey=file:D:/PathToMyFileContent<br />
+     * Then: <code>getContent("com/mycompany/myapp/myParameterKey")</code> will return the byte[] Content
+     * of <code>"file:D:/PathToMyFileContent"</code>.<br />
+     * 
+     * <p>
+     * Valid Path-Prefixes are "file:" and "classpath:".<br />
+     * See {@link ContentResolver} and {@link org.settings4j.contentresolver.FSContentResolver} and
+     * {@link org.settings4j.contentresolver.ClasspathContentResolver}.
      * 
      * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
      * @return the found byte[]-Value for the given key
@@ -75,8 +102,16 @@ public final class Settings4j {
     /**
      * return the found Object-Value for the given key.<br />
      * The {@link Settings4j} Instance iterates all his {@link Connector} and return the first found Value.<br />
-     * <br />
+     * <p>
      * Returns null if no connector found a Value for the given key<br />
+     * <p>
+     * If no custom settings4j.xml exist in classpath, the behavior is like {@link #getString(String)},
+     * but only the {@link org.settings4j.connector.JNDIConnector} can return an Object directly.<br />
+     * The other Connectors calls there getContent(...) Method to get a content which can be transformed to
+     * an Object.<br />
+     * See {@link ObjectResolver}.
+     * <p>
+     * 
      * 
      * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
      * @return the found Object-Value for the given key
