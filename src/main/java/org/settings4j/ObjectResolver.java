@@ -21,7 +21,7 @@ package org.settings4j;
  * <p>The ObjectResolver is a Helper to resolve byte[] Content to a Java Object.
  * 
  * <pre>
- * Example:
+ * Example Configuration in settings4j.xml:
  * <div style="border-width:1px;border-style:solid;">
  * &lt;connector name="<span style="color:green;">ClasspathConnector</span>"
  *          class="org.settings4j.connector.ClasspathConnector"&gt;
@@ -34,6 +34,8 @@ package org.settings4j;
  * 
  * <p>You can now store a XMLEncoded (Serialized) Java-Objects into your Classpath.<br />
  * see {@link org.settings4j.objectresolver.JavaXMLBeansObjectResolver} for more details.<br />
+ * Or see {@link org.settings4j.objectresolver.SpringConfigObjectResolver} for more details on a Spring Configuration
+ * File to generate an Object. Requires Springframework (tested with 2.5.6)<br />
  * 
  * @author Harald.Brabenetz
  *
