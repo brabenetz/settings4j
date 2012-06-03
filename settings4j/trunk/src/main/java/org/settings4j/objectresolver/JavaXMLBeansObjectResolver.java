@@ -26,6 +26,54 @@ import org.settings4j.ContentResolver;
 
 /**
  * This ObjectResolver convert a byte[] to an Object with the {@link XMLDecoder}.
+ * <p>
+ * Example: The following code should return a {@link javax.sql.DataSource} Object:<br/>
+ * <code>
+ * Settings4j.getObject("com/myCompany/myApp/MyDatasource");
+ * </code>
+ * <p>
+ * In normal Cases the DataSource comes from the JNDI-Context (available in most Servlet Containers).<br/>
+ * But in some environments there are no JNDI-Context (Commandline-Clients, UnitTests).<br/>
+ * <p>
+ * With Settings4j (default configuration) you can also place two Files into your Classpath:
+ * <ol>
+ * <li><code>"com/myCompany/myApp/MyDatasource"</code>: The File which defines the DataSource
+ * <li><code>"com/myCompany/myApp/MyDatasource.properties"</code>: Some Properties,
+ * like which ObjectResolver should be use.
+ * </ol>
+ * <p>
+ * The File Content whould be the following:
+ * <pre>
+ * Classpath File "com/myCompany/myApp/MyDatasource.properties":
+ * <div style="border-width:1px;border-style:solid;">
+ * objectResolverKey=org.settings4j.objectresolver.JavaXMLBeansObjectResolver
+ * cached=true
+ * </div></pre>
+ * 
+ * <pre>
+ * Classpath File "com/myCompany/myApp/MyDatasource":
+ * <div style="border-width:1px;border-style:solid;">
+ * &lt;?xml version="1.0" encoding="UTF-8"?&gt; 
+ * &lt;java version="1.6.0_05" class="java.beans.XMLDecoder"&gt; 
+ *  &lt;object class="org.springframework.jdbc.datasource.DriverManagerDataSource"&gt; 
+ *   &lt;void property="driverClassName"&gt; 
+ *    &lt;string&gt;org.hsqldb.jdbcDriver&lt;/string&gt; 
+ *   &lt;/void&gt; 
+ *   &lt;void property="password"&gt; 
+ *    &lt;string&gt;&lt;/string&gt; 
+ *   &lt;/void&gt; 
+ *   &lt;void property="url"&gt; 
+ *    &lt;string&gt;jdbc:hsqldb:mem:test&lt;/string&gt; 
+ *   &lt;/void&gt; 
+ *   &lt;void property="username"&gt; 
+ *    &lt;string&gt;sa&lt;/string&gt; 
+ *   &lt;/void&gt; 
+ *  &lt;/object&gt; 
+ * &lt;/java&gt; 
+ * </div></pre>
+ * 
+ * <p>
+ * 
  * 
  * @author Harald.Brabenetz
  */
