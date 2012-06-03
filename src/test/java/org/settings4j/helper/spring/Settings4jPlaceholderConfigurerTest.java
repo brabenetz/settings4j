@@ -46,9 +46,11 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
     protected void setUp() throws Exception {
         removeUnitTestNode(Preferences.userRoot());
         removeUnitTestNode(Preferences.systemRoot());
-        System.clearProperty(SYSTEM_PROPERTY_TEST_1);
-        System.clearProperty(SYSTEM_PROPERTY_TEST_2);
-        System.clearProperty(SYSTEM_PROPERTY_TEST_3);
+        Properties props = System.getProperties();
+        props.remove(SYSTEM_PROPERTY_TEST_1);
+        props.remove(SYSTEM_PROPERTY_TEST_2);
+        props.remove(SYSTEM_PROPERTY_TEST_3);
+        System.setProperties(props);
     }
 
     private void removeUnitTestNode(final Preferences userRoot) throws BackingStoreException {

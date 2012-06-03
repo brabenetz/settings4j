@@ -127,7 +127,7 @@ public class DefaultPropertiesLoaderTest extends TestCase {
     }
 
     private MockServletContext prepareServletContext() {
-        final StringBuilder propertiesString = new StringBuilder();
+        final StringBuffer propertiesString = new StringBuffer();
         propertiesString.append("test1=value1\n");
         propertiesString.append("    test2=value2\n"); // with whiteSpaces
         propertiesString.append("\ttest3=value3\n"); // with Tabs
