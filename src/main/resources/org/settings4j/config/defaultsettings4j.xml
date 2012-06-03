@@ -43,10 +43,15 @@
 
 	<contentResolver name="DefaultContentResolver" class="org.settings4j.contentresolver.UnionContentResolver">
 		<contentResolver-ref ref="ClasspathContentResolver" />
+		<contentResolver-ref ref="FilesystemContentResolver" />
 	</contentResolver>
 
 	<contentResolver name="ClasspathContentResolver"
 		class="org.settings4j.contentresolver.ClasspathContentResolver">
+	</contentResolver>
+
+	<contentResolver name="FilesystemContentResolver"
+		class="org.settings4j.contentresolver.FSContentResolver">
 	</contentResolver>
 
 	<objectResolver name="DefaultObjectResolver" class="org.settings4j.objectresolver.UnionObjectResolver">
