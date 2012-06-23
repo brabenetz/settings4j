@@ -1,5 +1,5 @@
 /* ***************************************************************************
- * Copyright (c) 2008 Brabenetz Harald, Austria.
+ * Copyright (c) 2012 Brabenetz Harald, Austria.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,23 +20,25 @@ package org.settings4j.helper.web;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import org.apache.log4j.LogManager;
+
 
 /**
- * {@link javax.servlet.ServletContextListener} to initialize the {@link DefaultPropertiesLoader}.
+ * {@link javax.servlet.ServletContextListener} to initialize the {@link Log4jConfigurationLoader}.
  * 
  * @author brabenetz
  */
-public class DefaultPropertiesLoaderListener implements ServletContextListener {
+public class Log4jConfigurationLoaderListener implements ServletContextListener {
 
     /** {@inheritDoc} */
     public void contextInitialized(final ServletContextEvent event) {
-        new DefaultPropertiesLoader().initDefaultProperties(event.getServletContext());
+        new Log4jConfigurationLoader().initLog4jConfiguration(event.getServletContext());
     }
 
 
     /** {@inheritDoc} */
     public void contextDestroyed(final ServletContextEvent event) {
-        // do nothing
+        LogManager.shutdown();
     }
 
 }
