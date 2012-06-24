@@ -34,6 +34,8 @@ import org.settings4j.connector.PropertyFileConnector;
 /**
  * Implementation which loads Default Properties from web.xml Init-Paramters and adds a Property connector to
  * Settings4j.
+ * <p>
+ * See Example {@link DefaultPropertiesLoaderListener}.
  * 
  * @author brabenetz
  */
