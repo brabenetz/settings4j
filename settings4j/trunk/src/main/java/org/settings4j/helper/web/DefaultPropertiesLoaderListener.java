@@ -23,6 +23,26 @@ import javax.servlet.ServletContextListener;
 
 /**
  * {@link javax.servlet.ServletContextListener} to initialize the {@link DefaultPropertiesLoader}.
+ * <p>
+ * Example Configuration could look like the following:
+ * 
+ * <pre>
+ * web.xml
+ * --------------------------------------
+ * &lt;context-param&gt;
+ *     &lt;param-name&gt;settings4jDefaultProperties&lt;/param-name&gt;
+ *     &lt;param-value&gt;
+ *         com/myCompany/myApp/log4j.configuration=com/myCompany/myApp/log4j.xml
+ *     &lt;/param-value&gt;
+ * &lt;/context-param&gt;
+ * 
+ * &lt;!-- Creates the Spring Container shared by all Servlets and Filters --&gt;
+ * &lt;listener&gt;
+ *     &lt;display-name&gt;&lt;/display-name&gt;
+ *     &lt;listener-class&gt;org.settings4j.helper.web.DefaultPropertiesLoaderListener&lt;/listener-class&gt;
+ * &lt;/listener&gt;
+ * --------------------------------------
+ * </pre>
  * 
  * @author brabenetz
  */

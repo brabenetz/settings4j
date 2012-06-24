@@ -25,6 +25,26 @@ import org.apache.log4j.LogManager;
 
 /**
  * {@link javax.servlet.ServletContextListener} to initialize the {@link Log4jConfigurationLoader}.
+ * <p>
+ * Example Configuration could look like the following:
+ * 
+ * <pre>
+ * web.xml
+ * --------------------------------------
+ * 
+ * &lt;context-param&gt;
+ *     &lt;param-name&gt;settings4jLog4jConfigurationKey&lt;/param-name&gt;
+ *     &lt;param-value&gt;com/myCompany/myApp/log4j.configuration&lt;/param-value&gt;
+ * &lt;/context-param&gt;
+ * 
+ * &lt;!-- Creates the Spring Container shared by all Servlets and Filters --&gt;
+ * &lt;listener&gt;
+ *     &lt;display-name&gt;&lt;/display-name&gt;
+ *     &lt;listener-class&gt;org.settings4j.helper.web.Log4jConfigurationLoaderListener&lt;/listener-class&gt;
+ * &lt;/listener&gt;
+ * --------------------------------------
+ * </pre>
+ * You can combine this config with he {@link DefaultPropertiesLoaderListener}.
  * 
  * @author brabenetz
  */

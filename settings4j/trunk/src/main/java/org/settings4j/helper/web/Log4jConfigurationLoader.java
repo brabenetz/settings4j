@@ -29,6 +29,14 @@ import org.settings4j.Settings4j;
 
 
 /**
+ * With this Implementation you can define a Key in your web.xml (init-parameter "settings4jLog4jConfigurationKey") with
+ * that you can configure your Path to your log4j.xml.
+ * <p>
+ * Each WebApplication in you Servlet Container can have its own key. And so you can configure for each webApplication a
+ * separated log4j.xml.
+ * <p>
+ * See Example {@link Log4jConfigurationLoaderListener}.
+ * 
  * @author brabenetz
  */
 public class Log4jConfigurationLoader {
@@ -47,7 +55,7 @@ public class Log4jConfigurationLoader {
      * @param servCxt The ServletContext where the InitParameters are configured.
      */
     public void initLog4jConfiguration(final ServletContext servCxt) {
-        this.servletContext = servCxt;
+        servletContext = servCxt;
 
         // be sure that the DefaultPropertiesLoader is initialized:
         createDefaultPropertiesLoader().initDefaultProperties(servletContext);
