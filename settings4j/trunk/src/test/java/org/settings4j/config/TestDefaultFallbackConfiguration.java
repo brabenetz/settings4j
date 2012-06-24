@@ -20,6 +20,7 @@ package org.settings4j.config;
 import junit.framework.TestCase;
 
 import org.settings4j.Settings4j;
+import org.settings4j.test.TestUtils;
 
 /**
  * TestCases for {@link Settings4j}.
@@ -34,13 +35,14 @@ public class TestDefaultFallbackConfiguration extends TestCase {
 
     /** {@inheritDoc} */
     protected void setUp() throws Exception {
+        TestUtils.reconfigureSettings4jWithDefaultConfig();
         super.setUp();
         System.setProperty("testDefaultProperty", "HelloWorld");
     }
 
     /** {@inheritDoc} */
     protected void tearDown() throws Exception {
-        System.getProperties().remove("testDefaultProperty");
+        TestUtils.clearSystemProperty("testDefaultProperty");
         super.tearDown();
     }
 
@@ -61,6 +63,7 @@ public class TestDefaultFallbackConfiguration extends TestCase {
         assertNull(Settings4j.getObject("xyz"));
 
         // the Default settings Configuration is readonly
-        assertEquals(4, Settings4j.getConnectors().size());
+        final int expectedConnectors = 4;
+        assertEquals(expectedConnectors, Settings4j.getConnectors().size());
     }
 }

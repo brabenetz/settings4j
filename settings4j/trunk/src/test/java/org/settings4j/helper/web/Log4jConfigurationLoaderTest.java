@@ -17,15 +17,13 @@
 
 package org.settings4j.helper.web;
 
-import java.util.Properties;
-
 import junit.framework.TestCase;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.helpers.Loader;
 import org.apache.log4j.xml.DOMConfigurator;
-import org.settings4j.Settings4j;
 import org.settings4j.test.InMemoryLog4jAppender;
+import org.settings4j.test.TestUtils;
 import org.springframework.mock.web.MockServletContext;
 
 
@@ -52,16 +50,10 @@ public class Log4jConfigurationLoaderTest extends TestCase {
 
     /** {@inheritDoc} */
     protected void setUp() throws Exception {
-        // settings4j will be configured with the default-fallback-config if no connector exists:
-        // org/settings4j/config/defaultsettings4j.xml
-        Settings4j.getSettingsRepository().getSettings().removeAllConnectors();
-        Settings4j.getString("something"); //reconfigure Settings4j with default values
+        TestUtils.reconfigureSettings4jWithDefaultConfig();
         
         // clearProperties
-        final Properties props = System.getProperties();
-        props.remove(LOG4J_CONFIG_KEY);
-        props.remove(LOG4J_DOCUMENT_BUILDER_FACTORY);
-        System.setProperties(props);
+        TestUtils.clearSystemProperties(new String[]{LOG4J_CONFIG_KEY, LOG4J_DOCUMENT_BUILDER_FACTORY});
         
         // Configure Log4j
         DOMConfigurator.configure(Loader.getResource("org/settings4j/helper/web/log4j-Config-Default.xml"));
@@ -69,10 +61,7 @@ public class Log4jConfigurationLoaderTest extends TestCase {
 
     /** {@inheritDoc} */
     protected void tearDown() throws Exception {
-        final Properties props = System.getProperties();
-        props.remove(LOG4J_CONFIG_KEY);
-        props.remove(LOG4J_DOCUMENT_BUILDER_FACTORY);
-        System.setProperties(props);
+        TestUtils.clearSystemProperties(new String[]{LOG4J_CONFIG_KEY, LOG4J_DOCUMENT_BUILDER_FACTORY});
         DOMConfigurator.configure(Loader.getResource("log4j.xml"));
         InMemoryLog4jAppender.linesClear();
     }
