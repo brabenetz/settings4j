@@ -31,6 +31,9 @@
 			<item name="Caching" href="configCache.html" />
 			<item name="Spring Placeholder" href="configSpringPlaceholder.html" />
 			<item name="Spring Object Factory" href="configSpringObjectFactory.html" />
+			<item name="Spring Context Web" href="configSpringContextWebXml.html" />
+			<item name="Web Default Configs" href="configWebDefaultConfig.html" />
+			<item name="Web Log4j Config" href="configWebLog4jConfig.html" />
 		</menu>
 		<menu ref="reports" />
 	</body>

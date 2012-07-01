@@ -36,7 +36,6 @@ import javax.servlet.ServletContextListener;
  *     &lt;/param-value&gt;
  * &lt;/context-param&gt;
  * 
- * &lt;!-- Creates the Spring Container shared by all Servlets and Filters --&gt;
  * &lt;listener&gt;
  *     &lt;display-name&gt;&lt;/display-name&gt;
  *     &lt;listener-class&gt;org.settings4j.helper.web.DefaultPropertiesLoaderListener&lt;/listener-class&gt;

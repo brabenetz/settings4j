@@ -37,7 +37,6 @@ import org.apache.log4j.LogManager;
  *     &lt;param-value&gt;com/myCompany/myApp/log4j.configuration&lt;/param-value&gt;
  * &lt;/context-param&gt;
  * 
- * &lt;!-- Creates the Spring Container shared by all Servlets and Filters --&gt;
  * &lt;listener&gt;
  *     &lt;display-name&gt;&lt;/display-name&gt;
  *     &lt;listener-class&gt;org.settings4j.helper.web.Log4jConfigurationLoaderListener&lt;/listener-class&gt;

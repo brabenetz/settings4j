@@ -1,0 +1,80 @@
+                                    ------------------
+                                    Web.xml Log4j configuration
+                                    ------------------
+                                    Brabenetz Harald
+                                    ------------------
+                                    01-07-2012
+                                    ------------------
+
+{Overview}
+
+	With the <<<Log4jConfigurationLoaderListener>>> you can define a Key for your web-application
+	where the log4j.xml can be configured.
+	
+{Example}
+
+	Example Application exists in: {{https://settings4j.svn.sourceforge.net/svnroot/settings4j/example/example-log4jConfigurationWebXml/trunk}}.
+
+* {Example Usage}
+
+	The example Configuration looks like the following: 
+
+	web.xml
+	
++--------------------------------------
+ <context-param>
+     <param-name>settings4jLog4jConfigurationKey</param-name>
+     <param-value>com/myCompany/myApp/log4j.configuration</param-value>
+ </context-param>
+ 
+ <listener>
+     <display-name></display-name>
+     <listener-class>org.settings4j.helper.web.Log4jConfigurationLoaderListener</listener-class>
+ </listener>
++--------------------------------------
+
+* {Example With Default Configuration}
+
+	You can combine this with Default configuration: 
+	web.xml
+	
++--------------------------------------
+ <context-param>
+     <param-name>settings4jDefaultProperties</param-name>
+     <param-value>
+         com/myCompany/myApp/log4j.configuration=com/myCompany/myApp/log4j.xml
+     </param-value>
+ </context-param>
+
+ <context-param>
+     <param-name>settings4jLog4jConfigurationKey</param-name>
+     <param-value>com/myCompany/myApp/log4j.configuration</param-value>
+ </context-param>
+ 
+ <listener>
+     <display-name></display-name>
+     <listener-class>org.settings4j.helper.web.Log4jConfigurationLoaderListener</listener-class>
+ </listener>
++--------------------------------------
+	
+* {Example Server Configuration}
+
+	Assuming that you have three Applications in your Servlet container deployed.\
+	With Keys for Log4j e.g.:\
+	"com/myCompany/myApp1/log4j.configuration" \
+	"com/myCompany/myApp2/log4j.configuration" \
+	"com/myCompany/myApp3/log4j.configuration" 
+	
+	you can now start you servlet container with System parameters:
+
++---------------------------------------------------
+	-Dcom/myCompany/myApp1/log4j.configuration=file:/config/log4j-app1.xml 
+	-Dcom/myCompany/myApp2/log4j.configuration=file:/config/log4j-app2.xml 
+	-Dcom/myCompany/myApp3/log4j.configuration=file:/config/log4j-app3.xml 
++---------------------------------------------------
+
+	And each Application can have its own log4j configuration.
+	
+	Also configuration per {{{./index.html#Preferences}Preferences}} and {{{./index.html#JNDI-Context}JNDI-Context}}
+	works out of the box.
+
