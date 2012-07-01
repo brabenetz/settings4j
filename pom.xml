@@ -112,7 +112,7 @@
 						<mavenExecutorId>forked-path</mavenExecutorId>
 						<useReleaseProfile>false</useReleaseProfile>
 						<!-- add source, javadoc and pgp sign artifacts -->
-						<arguments>-Psonatype-oss-release</arguments>
+						<arguments>-Psonatype-oss-release,gpg</arguments>
 					</configuration>
 				</plugin>
 			</plugins>
