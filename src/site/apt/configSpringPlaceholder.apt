@@ -16,7 +16,7 @@
 	
 {Example}
 
-	In the following Example the Expression "${com/mycompany/myEntry}" will be replaced by the value form <<<Settings4j.getString("com/mycompany/myEntry")>>>.
+	In the following Example the Expression "$\{com/mycompany/myEntry\}" will be replaced by the value form <<<Settings4j.getString("com/mycompany/myEntry")>>>.
 	
 +--------------
 <beans>
