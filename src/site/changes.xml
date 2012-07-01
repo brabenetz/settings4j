@@ -24,7 +24,7 @@
 				Each WebApp in your Servlet Container can have its own log4.xml configuration.
 			</action>
 			<action dev="brabenetz" type="add" date="2012-06-03" >improve JavaDoc.</action>
-			<action dev="brabenetz" type="add" date="2012-06-03" >
+			<action dev="brabenetz" type="update" date="2012-06-03" >
 				update Default settings4j.xml configuration: Add FSContentResolver and add SpringConfigObjectReolver.
 			</action>
 			<action dev="brabenetz" type="add" date="2012-03-12" >
