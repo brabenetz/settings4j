@@ -26,6 +26,10 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 /**
  * Spring Context Loader which can replaces Placeholders in contextConfigLocations like "${...}" with Values from
  * Settings4j.
+ * <p>
+ * This Implementation replaces the {@link ContextLoader}
+ * <p>
+ * See configuration Example: {@link Settings4jContextLoaderListener}.
  * 
  * @author brabenetz
  */

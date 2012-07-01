@@ -21,6 +21,10 @@ import org.springframework.web.context.ContextLoaderServlet;
 
 /**
  * {@link javax.servlet.http.HttpServlet} to initialize the {@link Settings4jContextLoader}.
+ * <p>
+ * This Implementation replaces the {@link ContextLoaderServlet}.
+ * <p>
+ * This Servlet is similar to {@link Settings4jContextLoaderListener} configure.
  * 
  * @author brabenetz
  *
