@@ -1,0 +1,41 @@
+                                    ------------------
+                                    Cache Configuration
+                                    ------------------
+                                    Brabenetz Harald
+                                    ------------------
+                                    11-05-2008
+                                    ------------------
+
+{Overview}
+
+	If you use your own <<<classpath:settings4j.xml>>>, then you can enable caching for your Connectors and ObjectResolvers (only which extents AbstractObjectResolver).
+	
+	This is especially useful to make sure that an Object-Value from an ObjectResolver should always be the same instants (singleton).
+	
+	At the Moment (Release 1.0-beta5) there is no way to clear the cache. For clearing the cache, you must restart your application.
+	
+{Example}
+
+	For enable caching simply add the "cached" Attribute to your Connector or ObjectResolver
+	
++--------------
+<settings4j:configuration xmlns:settings4j='http://settings4j.org/'>
+
+  <connector name="FSConnector" class="org.settings4j.connector.FSConnector" cached="true">
+    <param name="rootFolderPath" value="target/test/Settings4jUnittest" />
+    <contentResolver-ref ref="ClasspathContentResolver" />
+    <objectResolver-ref ref="JavaXMLBeansObjectResolver" />
+  </connector>
+
+  <connector name="ClasspathConnector" class="org.settings4j.connector.ClasspathConnector" />
+
+  <contentResolver name="ClasspathContentResolver" class="org.settings4j.contentresolver.ClasspathContentResolver">
+  </contentResolver>
+
+  <objectResolver name="JavaXMLBeansObjectResolver" class="org.settings4j.objectresolver.JavaXMLBeansObjectResolver" cached="true">
+  </objectResolver>
+</settings4j:configuration>
++--------------
+
+	
+	
