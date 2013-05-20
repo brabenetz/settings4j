@@ -1,0 +1,66 @@
+/* ***************************************************************************
+ * Copyright (c) 2008 Brabenetz Harald, Austria.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ *****************************************************************************/
+
+package org.settings4j.connector;
+
+/**
+ * Basic Implementation of {@link org.settings4j.Connector}s whiche are Property-related.
+ * <p>
+ * Only #getProperty(String, String) must be implemented.
+ * Example implementations are {@link PropertyFileConnector} or {@link SystemPropertyConnector}.
+ * 
+ * @author Harald.Brabenetz
+ *
+ */
+public abstract class AbstractPropertyConnector extends AbstractConnector {
+
+    /** {@inheritDoc} */
+    public byte[] getContent(final String key) { // NOPMD return null instead of empty array exception for byte array
+        final String path = getString(key);
+        if (path != null && getContentResolver() != null) {
+            return getContentResolver().getContent(path);
+        }
+        // else
+        return null;
+
+    }
+
+    /** {@inheritDoc} */
+    public Object getObject(final String key) {
+        final String path = getString(key);
+        if (path != null && getObjectResolver() != null) {
+            return getObjectResolver().getObject(path, getContentResolver());
+        }
+        // else
+        return null;
+        
+    }
+
+    /** {@inheritDoc} */
+    public String getString(final String key) {
+        return getProperty(key, null);
+    }
+
+    /**
+     * Very similar to <code>System.getProperty</code> except that the {@link SecurityException} is hidden.
+     * 
+     * @param key The key to search for.
+     * @param defaultValue The default value to return.
+     * @return the string value of the system property, or the default value if there is no property with that key.
+     */
+    protected abstract String getProperty(String key, String defaultValue);
+}

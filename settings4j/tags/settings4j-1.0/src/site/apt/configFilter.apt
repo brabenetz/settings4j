@@ -1,0 +1,40 @@
+                                    ------------------
+                                    Filter Configuration
+                                    ------------------
+                                    Brabenetz Harald
+                                    ------------------
+                                    11-05-2008
+                                    ------------------
+
+{Overview}
+
+	If you use your own <<<classpath:settings4j.xml>>>, then you can configure Filters for each Connector.
+	
+{Example}
+
+	* The Key "org/mycompany/testConfig1.txt" should only be read from the SystemProperties.
+	
+	* The Key "org/mycompany/testConfig2.txt" should only be read from the Classpath.
+
+	[]
+	
++--------------
+<settings4j:configuration xmlns:settings4j='http://settings4j.org/'>
+	<connector name="SystemPropertyConnector" class="org.settings4j.connector.SystemPropertyConnector">
+		<filter>
+			<include pattern="org/mycompany/testConfig1\.txt" />
+			<exclude pattern="org/mycompany/testConfig2\.txt" />
+		</filter>
+	</connector>
+	<connector name="ClasspathConnector" class="org.settings4j.connector.ClasspathConnector">
+		<filter>
+			<include pattern="org/mycompany/testConfig2\.txt" />
+			<exclude pattern="org/mycompany/testConfig1\.txt" />
+		</filter>
+	</connector>
+</settings4j:configuration>
++--------------
+
+	You can always use a list of <<<include>>> or <<<exclude>>> Elements.
+	
+	

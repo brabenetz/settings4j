@@ -1,0 +1,73 @@
+                                    ------------------
+                                    Spring Placeholder Configuration
+                                    ------------------
+                                    Brabenetz Harald
+                                    ------------------
+                                    11-05-2008
+                                    ------------------
+
+{Overview}
+
+	With the Settings4jPlaceholderConfigurer for the Springframework you can use Settings4j to inject Values into your beans.
+	
+	* {{http://springtips.blogspot.com/}}
+
+	* {{http://www.mkyong.com/spring/spring-propertyplaceholderconfigurer-example/}}.
+	
+{Example}
+
+	In the following Example the Expression "$\{com/mycompany/myEntry\}" will be replaced by the value form <<<Settings4j.getString("com/mycompany/myEntry")>>>.
+	
++--------------
+<beans>
+  <bean class="org.settings4j.helper.spring.Settings4jPlaceholderConfigurer" />
+  
+  <bean id="myDummyMap" class="java.util.HashMap">
+    <constructor-arg>
+      <map>
+        <entry key="MapEntry1"><value>${com/mycompany/myEntry}</value></entry>
+      </map>
+    </constructor-arg>
+  </bean>
+</beans>
++--------------
+
+	
+* {Example Prefixes}
+
+	In most cases you will have the same Prefix for all Entries. So it's easier to define the Prefix in Settings4jPlaceholderConfigurer:
+	
++--------------
+<bean class="org.settings4j.helper.spring.Settings4jPlaceholderConfigurer" >
+  <property name="prefix" value="com/mycompany/"/>
+</bean>
+
+<bean id="myDummyMap" class="java.util.HashMap">
+  <constructor-arg>
+    <map>
+      <entry key="MapEntry1"><value>${myEntry1}</value></entry>
+      <entry key="MapEntry2"><value>${myEntry2}</value></entry>
+    </map>
+  </constructor-arg>
+</bean>
++--------------
+
+	So the values Settings4j.getString("com/mycompany/myEntry1") and Settings4j.getString("com/mycompany/myEntry2") will be read.
+	
+	
+* {Example Default Values}
+	
+	You can also define Default Properties if nothing is defined for some optional KEYs:
+	
++--------------
+<bean class="org.settings4j.helper.spring.Settings4jPlaceholderConfigurer" >
+  <property name="prefix" value="com/mycompany/"/>
+  <property name="properties">
+    <props>
+      <!-- Default Values -->
+      <prop key="myEntry2">My Default Value for Entry 2</prop>
+    </props>
+  </property>
+</bean>
++--------------
+	
