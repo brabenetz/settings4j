@@ -53,11 +53,11 @@ public class Settings4jContextLoader extends ContextLoader {
             // be sure that the DefaultPropertiesLoader is initialized:
             createDefaultPropertiesLoader().initDefaultProperties(servletContext);
             // replace Placeholders in configLocations.
-            String configLocations = servletContext.getInitParameter(SETTINGS4J_CONFIG_LOCATION_PARAM);
+            final String configLocations = servletContext.getInitParameter(SETTINGS4J_CONFIG_LOCATION_PARAM);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("settings4jContextConfigLocation configLocations: " + configLocations);
             }
-            String parsedConfigLocations = Settings4jPlaceholderConfigurer.parseStringValue(configLocations);
+            final String parsedConfigLocations = Settings4jPlaceholderConfigurer.parseStringValue(configLocations);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("settings4jContextConfigLocation parsed configLocations: " + parsedConfigLocations);
             }

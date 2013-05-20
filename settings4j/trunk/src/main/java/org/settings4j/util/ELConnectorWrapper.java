@@ -58,7 +58,7 @@ public class ELConnectorWrapper {
         final Transformer transformer = new Transformer() {
 
             public Object transform(final Object input) {
-                if (input != null && input instanceof String) {
+                if (input instanceof String) {
                     final String key = input.toString();
                     for (int i = 0; i < ELConnectorWrapper.this.connectors.length; i++) {
                         final Object result = ELConnectorWrapper.this.connectors[i].getString(key);
@@ -83,7 +83,7 @@ public class ELConnectorWrapper {
         final Transformer transformer = new Transformer() {
 
             public Object transform(final Object input) {
-                if (input != null && input instanceof String) {
+                if (input instanceof String) {
                     final String key = input.toString();
                     for (int i = 0; i < ELConnectorWrapper.this.connectors.length; i++) {
                         final Object result = ELConnectorWrapper.this.connectors[i].getContent(key);
@@ -108,7 +108,7 @@ public class ELConnectorWrapper {
         final Transformer transformer = new Transformer() {
 
             public Object transform(final Object input) {
-                if (input != null && input instanceof String) {
+                if (input instanceof String) {
                     final String key = input.toString();
                     for (int i = 0; i < ELConnectorWrapper.this.connectors.length; i++) {
                         final Object result = ELConnectorWrapper.this.connectors[i].getObject(key);

@@ -54,6 +54,7 @@ public class PreferencesConnector extends AbstractPropertyConnector {
      * Default Constructor initialize the User and System {@link Preferences}.
      */
     public PreferencesConnector() {
+        super();
         this.systemPrefs = Preferences.systemRoot();
         this.userPrefs = Preferences.userRoot();
     }
@@ -61,7 +62,7 @@ public class PreferencesConnector extends AbstractPropertyConnector {
 
     /** {@inheritDoc} */
     protected String getProperty(final String keyPath, final String defaultValue) {
-        String normalizedKey = normalizeKey(keyPath);
+        final String normalizedKey = normalizeKey(keyPath);
         final String path = getPath(normalizedKey);
         final String key = getKey(normalizedKey);
         String value = getPreferenceValue(path, key, defaultValue, this.userPrefs);
@@ -115,7 +116,7 @@ public class PreferencesConnector extends AbstractPropertyConnector {
      * @param value - The new Value
      */
     public void setString(final String keyPath, final String value) {
-        String normalizedKey = normalizeKey(keyPath);
+        final String normalizedKey = normalizeKey(keyPath);
         final String path = getPath(normalizedKey);
         final String key = getKey(normalizedKey);
         setPreferenceValue(path, key, value, this.userPrefs);
@@ -128,7 +129,7 @@ public class PreferencesConnector extends AbstractPropertyConnector {
      * @param value - The new Value
      */
     public void setSystemString(final String keyPath, final String value) {
-        String normalizedKey = normalizeKey(keyPath);
+        final String normalizedKey = normalizeKey(keyPath);
         final String path = getPath(normalizedKey);
         final String key = getKey(normalizedKey);
         setPreferenceValue(path, key, value, this.systemPrefs);

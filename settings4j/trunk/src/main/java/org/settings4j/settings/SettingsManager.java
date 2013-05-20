@@ -89,7 +89,7 @@ public final class SettingsManager {
      * @return The Settings4j Repository, Returns NEVER null put maybe a {@link NOPSettingsRepository}.
      */
     public static Settings4jRepository getSettingsRepository() {
-        if (settingsRepository == null) {
+        if (settingsRepository == null) { //NOPMD 'singleton is not threadsafe' its only a fallback case.
             settingsRepository = new NOPSettingsRepository();
             LOG.error("SettingsManager.settingsRepository was null likely due to error in class reloading, " //
                 + "using the NOPSettingsRepository.");

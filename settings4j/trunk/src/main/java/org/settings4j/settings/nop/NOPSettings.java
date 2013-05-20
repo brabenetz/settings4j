@@ -43,7 +43,7 @@ public class NOPSettings implements org.settings4j.Settings4jInstance {
     }
 
     /** {@inheritDoc} */
-    public byte[] getContent(final String key) {
+    public byte[] getContent(final String key) { // NOPMD return null instead of empty array exception for byte array
         return null;
     }
 

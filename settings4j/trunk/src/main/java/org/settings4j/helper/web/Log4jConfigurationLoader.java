@@ -19,6 +19,7 @@ package org.settings4j.helper.web;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Locale;
 
 import javax.servlet.ServletContext;
 
@@ -96,7 +97,7 @@ public class Log4jConfigurationLoader {
         if (url != null) {
             log("Using URL [" + url + "] for automatic log4j configuration.");
 
-            if (configLocation.toLowerCase().endsWith(".xml")) {
+            if (configLocation.toLowerCase(Locale.ENGLISH).endsWith(".xml")) {
                 DOMConfigurator.configure(url);
             } else {
                 PropertyConfigurator.configure(url);

@@ -148,7 +148,7 @@ public class Settings4jFactoryBean implements FactoryBean, InitializingBean {
     }
 
     /** {@inheritDoc} */
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         if (this.singleton) {
             this.singletonObject = getSettings4jObject();
         }

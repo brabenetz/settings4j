@@ -37,7 +37,7 @@ public class Settings4jEntityResolver implements EntityResolver {
     /** {@inheritDoc} */
     public InputSource resolveEntity(final String publicId, final String systemId) {
         if (systemId.endsWith("settings4j.dtd")) {
-            Class clazz = getClass();
+            final Class clazz = getClass();
             InputStream in = clazz.getResourceAsStream("/org/settings4j/config/settings4j.dtd");
             if (in == null) {
                 LOG.warn("Could not find [settings4j.dtd] using [" + clazz.getClassLoader()

@@ -52,7 +52,7 @@ public class FSContentResolver implements ContentResolver {
     }
 
     /** {@inheritDoc} */
-    public byte[] getContent(final String key) {
+    public byte[] getContent(final String key) { // NOPMD return null instead of empty array exception for byte array
         String normalizedKey = key;
         if (normalizedKey.startsWith(FILE_URL_PREFIX)) {
             normalizedKey = normalizedKey.substring(FILE_URL_PREFIX.length());
@@ -98,7 +98,7 @@ public class FSContentResolver implements ContentResolver {
         if (normalizedKey.startsWith("/")) {
             // Unix-Root
             file = new File(normalizedKey);
-        } else if (normalizedKey.indexOf(":") >= 0) {
+        } else if (normalizedKey.indexOf(':') >= 0) {
             // Windows-Root
             file = new File(normalizedKey);
         } else {

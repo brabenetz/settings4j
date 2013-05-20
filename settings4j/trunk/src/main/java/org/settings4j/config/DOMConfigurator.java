@@ -148,7 +148,7 @@ public class DOMConfigurator {
      */
     private void setParameter(final Element elem, final Object bean, final Connector[] connectors) {
         final String name = elem.getAttribute(NAME_ATTR);
-        final String valueStr = (elem.getAttribute(VALUE_ATTR));
+        final String valueStr = elem.getAttribute(VALUE_ATTR);
         try {
             final PropertyDescriptor propertyDescriptor = PropertyUtils.getPropertyDescriptor(bean, name);
             final Method setter = PropertyUtils.getWriteMethod(propertyDescriptor);

@@ -76,9 +76,9 @@ public class DefaultPropertiesLoader {
             final Properties property = getDefaultProperties(servletContext);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Add Property Connector '" + CONNECTOR_NAME + "' to the Settings4j Repository.");
-                Set entires = property.entrySet();
-                for (Iterator iterator = entires.iterator(); iterator.hasNext();) {
-                    Entry entry = (Entry) iterator.next();
+                final Set entires = property.entrySet();
+                for (final Iterator iterator = entires.iterator(); iterator.hasNext();) {
+                    final Entry entry = (Entry) iterator.next();
                     LOG.debug(entry.getKey() + " = " + entry.getValue());
                 }
             }
@@ -96,8 +96,8 @@ public class DefaultPropertiesLoader {
         if (LOG.isDebugEnabled()) {
             final List connectors = Settings4j.getConnectors();
             LOG.debug("Current Connectors are " + connectors.size());
-            for (Iterator iterator = connectors.iterator(); iterator.hasNext();) {
-                Connector connector = (Connector) iterator.next();
+            for (final Iterator iterator = connectors.iterator(); iterator.hasNext();) {
+                final Connector connector = (Connector) iterator.next();
                 LOG.debug("Connector: " + connector.getName());
             }
             

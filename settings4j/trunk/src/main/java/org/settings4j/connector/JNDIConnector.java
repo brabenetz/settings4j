@@ -53,7 +53,7 @@ public class JNDIConnector extends AbstractConnector {
     private Boolean isJNDIAvailable;
 
     /** {@inheritDoc} */
-    public byte[] getContent(final String key) {
+    public byte[] getContent(final String key) { // NOPMD return null instead of empty array exception for byte array
         final Object obj = lookupInContext(key);
 
         // if obj is a String and an Object resolver is available
