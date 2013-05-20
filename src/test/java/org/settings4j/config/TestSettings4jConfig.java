@@ -49,16 +49,21 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
         final Settings4jInstance settings = settingsRepository.getSettings();
 
         // the rootSettings have four Connectors
-        assertEquals(4, settings.getConnectors().size());
+        final int expectedConnectorSize = 4;
+        assertEquals(expectedConnectorSize, settings.getConnectors().size());
 
         // check if there is no Exception thrown:
         assertNull(settings.getString("xyz"));
         assertNull(settings.getContent("xyz"));
         assertNull(settings.getObject("xyz"));
 
-        assertEquals(4, settings.getConnectors().size());
+        assertEquals(expectedConnectorSize, settings.getConnectors().size());
     }
 
+    /**
+     * test corrupt config  xml file.
+     * 
+     */
     public void testCorruptConfig() {
         final Settings4jRepository settingsRepository = UtilTesting
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigCorrupt.xml");
@@ -67,6 +72,11 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
     }
 
 
+    /**
+     * test for {@link org.settings4j.connector.FSConnector}.
+     * 
+     * @throws Exception in case of an error. 
+     */
     public void testFSConfigTempFolder() throws Exception {
         final Settings4jRepository settingsRepository = UtilTesting
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigFSTempfolder.xml");
@@ -98,6 +108,11 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
 
     }
 
+    /**
+     * test for {@link org.settings4j.connector.FSConnector}.
+     * 
+     * @throws Exception in case of an error. 
+     */
     public void testFSConfigTestFolder() throws Exception {
         final Settings4jRepository settingsRepository = UtilTesting
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigFSTestfolder.xml");
@@ -234,6 +249,9 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
         }
     }
 
+    /**
+     * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromContent(byte[])}.
+     */
     public void testPropertyFileConfig() {
         final Settings4jRepository settingsRepository = UtilTesting
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFile.xml");
@@ -244,5 +262,61 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
         assertEquals("Value from Property-File", settings.getString("xyz"));
 
         assertEquals(2, settings.getConnectors().size());
+    }
+
+    /**
+     * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromPath(String)} with classpath url.
+     */
+    public void testPropertyFileConfigFromPath1() {
+        final Settings4jRepository settingsRepository = UtilTesting
+            .getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFileFromPath1.xml");
+
+        final Settings4jInstance settings = settingsRepository.getSettings();
+
+        // every settings have read access to the same FSConnector.
+        assertEquals("Value from Property-File", settings.getString("xyz"));
+
+        assertEquals(1, settings.getConnectors().size());
+    }
+
+    /**
+     * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromPath(String)} with filepath url.
+     */
+    public void testPropertyFileConfigFromPath2() {
+        final Settings4jRepository settingsRepository = UtilTesting
+            .getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFileFromPath2.xml");
+
+        final Settings4jInstance settings = settingsRepository.getSettings();
+
+        // every settings have read access to the same FSConnector.
+        assertEquals("Value from Property-File", settings.getString("xyz"));
+
+        assertEquals(1, settings.getConnectors().size());
+    }
+
+    /**
+     * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromPath(String)} with empty String.
+     */
+    public void testPropertyFileConfigFromPathException1() {
+        final Settings4jRepository settingsRepository = UtilTesting
+            .getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFileFromPathException1.xml");
+
+        final Settings4jInstance settings = settingsRepository.getSettings();
+
+        assertNull(settings.getString("xyz"));
+        assertEquals(1, settings.getConnectors().size());
+    }
+
+    /**
+     * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromPath(String)} without prefix.
+     */
+    public void testPropertyFileConfigFromPathException2() {
+        final Settings4jRepository settingsRepository = UtilTesting
+            .getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFileFromPathException2.xml");
+
+        final Settings4jInstance settings = settingsRepository.getSettings();
+
+        assertNull(settings.getString("xyz"));
+        assertEquals(1, settings.getConnectors().size());
     }
 }

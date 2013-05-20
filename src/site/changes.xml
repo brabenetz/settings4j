@@ -12,13 +12,19 @@
 		<author email="brabenetz@users.sourceforge.net">Harald Brabenetz</author>
 	</properties>
 	<body>
-		<release version="1.0" date="2012" description="After few bugfixes, if Release Candidate has been proofed itself in production.">
+		<release version="1.0" date="2013-05-??" description="After few bugfixes, if Release Candidate has been proofed itself in production.">
 			<!-- 
 			<action dev="brabenetz" type="fix" issue="1">Bugfix 1</action>
 			 -->
+			<action dev="brabenetz" type="remove">
+				Remove Database Connector and DAO. This is most likely Project specific
+			</action>
+			<action dev="brabenetz" type="update">
+				Improve PropertyFileConnector: Add JavaDoc and add additional setter "propertyFromPath" for configuration.
+			</action>
 		</release>
 		
-		<release version="1.0-beta6" date="2012-06-??" description="Add Settings4jContextLoader (Spring) and DefaultPropertiesLoader for web.xml">
+		<release version="1.0-beta6" date="2012-07-01" description="Add Settings4jContextLoader (Spring) and DefaultPropertiesLoader for web.xml">
 			<action dev="brabenetz" type="add" date="2012-06-24" >
 				add Log4jConfigurationLoader and Listener for web.xml.
 				Each WebApp in your Servlet Container can have its own log4.xml configuration.

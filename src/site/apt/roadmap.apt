@@ -38,8 +38,25 @@
 * {2012 - Final Version 1.0.0 - after few bug fixes}
 
 
+    - remove DB-Connector implemented with Hibernate. This is most likely Project specific and should be implemented in your Project if required.
+    
+    ! improve PropertyFileConnector: Add JavaDoc and add additional setter "propertyFromPath" for configuration.
+
   
-* {2011 - Dec. 1.0.0-beta5 - PreferencesConnector and Settings4jPlaceholderConfigurer for Spring}
+* {2012-07-01 1.0.0-beta6 - Add Settings4jContextLoader (Spring) and DefaultPropertiesLoader for web.xml}
+
+	! add Log4jConfigurationLoader and Listener for web.xml. Each WebApp in your Servlet Container can
+	have its own log4.xml configuration. You must only define an unique key for your webapp-log4j-config.
+
+	! improve JavaDoc.
+
+	! update Default settings4j.xml configuration: Add FSContentResolver and add SpringConfigObjectReolver.
+
+	! add Settings4jContextLoader and Listener for web.xml (Configurable SpringContext in webapps)
+
+	! add DefaultPropertiesLoader and Listener for web.xml (Define default Values for your properties in your web.xml)
+  
+* {2011-12-24 1.0.0-beta5 - PreferencesConnector and Settings4jPlaceholderConfigurer for Spring}
 	
 	! additional Settings4jPlaceholderConfigurer for Springframework.
 	
