@@ -18,7 +18,6 @@ package org.settings4j.settings;
 
 import java.net.URL;
 
-import org.settings4j.Settings4jFactory;
 import org.settings4j.Settings4jInstance;
 import org.settings4j.Settings4jRepository;
 import org.settings4j.config.DOMConfigurator;
@@ -106,22 +105,6 @@ public final class SettingsManager {
         initializeRepositoryIfNecessary();
         // Delegate the actual manufacturing of the settings to the settings repository.
         return getSettingsRepository().getSettings();
-    }
-
-    /**
-     * Retrieve the appropriate {@link org.settings4j.Settings4j} instance or create it with the give factory if doesn'r
-     * already exist.
-     * 
-     * @param factory The factory to create a {@link Settings4jInstance}.
-     * @return the appropriate {@link org.settings4j.Settings4j} instance.
-     * @deprecated will be removed. Call {@link #getSettingsRepository()}
-     *      and {@link Settings4jRepository#getSettings(Settings4jFactory)} instead.
-     */
-    public static Settings4jInstance getSettings(final Settings4jFactory factory) {
-        // TODO brabenetz 26.03.2012 : remove this method after release 1.0
-        initializeRepositoryIfNecessary();
-        // Delegate the actual manufacturing of the settings to the settings repository.
-        return getSettingsRepository().getSettings(factory);
     }
 
     /**
