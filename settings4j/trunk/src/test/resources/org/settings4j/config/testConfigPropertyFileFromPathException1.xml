@@ -19,12 +19,8 @@
 <settings4j:configuration xmlns:settings4j='http://settings4j.org/'>
 
 	<connector name="PropertyFileConnector" class="org.settings4j.connector.PropertyFileConnector">
-		<param	name="propertyFromContent"
-				value="${connectors.content['org/settings4j/config/propertyFile.properties']}" />
-		<connector-ref ref="ClasspathConnector" />
+		<param	name="propertyFromPath"
+				value="" />
 	</connector>
-	
-	<connector name="ClasspathConnector"
-		class="org.settings4j.connector.ClasspathConnector" />
 
 </settings4j:configuration>
