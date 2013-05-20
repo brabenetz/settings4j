@@ -412,7 +412,7 @@
 							<content>
 								<![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <fileset-config file-format-version="1.2.0" simple-config="true">
-    <local-check-config name="${project.artifactId}-checkstyle" location="${checkstyle-config-location}" type="project" description="CheckStyle-Configuration for ${project.artifactId}">
+    <local-check-config name="${project.artifactId}-checkstyle" location="src/config/checkstyle.xml" type="project" description="CheckStyle-Configuration for ${project.artifactId}">
         <property name="checkstyle.header.file" value="${checkstyle-config-header-location}" />
         <additional-data name="protect-config-file" value="false" />
     </local-check-config>
