@@ -52,7 +52,7 @@ public class ClasspathContentResolver implements ContentResolver {
 
     /** {@inheritDoc} */
     public byte[] getContent(final String key) {
-        String normalizedKey = normalizeKey(key);
+        final String normalizedKey = normalizeKey(key);
 
         try {
             final InputStream is = getClassLoader().getResourceAsStream(normalizedKey);
@@ -75,7 +75,7 @@ public class ClasspathContentResolver implements ContentResolver {
      * @return The {@link URL}, see {@link ClassLoader#getResource(String)}.
      */
     public static URL getResource(final String key) {
-        String normalizedKey = normalizeKey(key);
+        final String normalizedKey = normalizeKey(key);
 
         return getClassLoader().getResource(normalizedKey);
     }
@@ -101,7 +101,7 @@ public class ClasspathContentResolver implements ContentResolver {
         }
         if (cl == null) {
             // No thread context class loader -> use class loader of this class.
-            cl = ClasspathContentResolver.class.getClassLoader();
+            cl = ClasspathContentResolver.class.getClassLoader(); // NOPMD it is only a fallback case.
         }
         return cl;
     }

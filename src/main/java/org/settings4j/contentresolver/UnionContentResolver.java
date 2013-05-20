@@ -44,20 +44,24 @@ public class UnionContentResolver implements ContentResolver {
      */
     public UnionContentResolver(final ContentResolver contentResolver) {
         super();
-        addContentResolver(contentResolver);
+        addContentResolverInternal(contentResolver);
     }
 
     /** {@inheritDoc} */
     public void addContentResolver(final ContentResolver contentResolver) {
         synchronized (this) {
-            final ContentResolver[] contentResolversNew = new ContentResolver[this.contentResolvers.length + 1];
-            for (int i = 0; i < this.contentResolvers.length; i++) {
-                contentResolversNew[i] = this.contentResolvers[i];
-            }
-            contentResolversNew[this.contentResolvers.length] = contentResolver;
-
-            this.contentResolvers = contentResolversNew;
+            addContentResolverInternal(contentResolver);
         }
+    }
+
+    private void addContentResolverInternal(final ContentResolver contentResolver) {
+        final ContentResolver[] contentResolversNew = new ContentResolver[this.contentResolvers.length + 1];
+        for (int i = 0; i < this.contentResolvers.length; i++) {
+            contentResolversNew[i] = this.contentResolvers[i];
+        }
+        contentResolversNew[this.contentResolvers.length] = contentResolver;
+
+        this.contentResolvers = contentResolversNew;
     }
 
     /** {@inheritDoc} */

@@ -66,7 +66,7 @@ public class MatchPatternTransformer implements Transformer {
     /** {@inheritDoc} */
     public Object transform(final Object input) {
         Boolean result = Boolean.FALSE;
-        if (input != null && input instanceof String) {
+        if (input instanceof String) {
             final String patternString = input.toString();
             try {
                 final Pattern pattern = Pattern.compile(patternString);

@@ -48,7 +48,7 @@ public class FilteredContentResolverWrapper implements ContentResolver {
     }
 
     /** {@inheritDoc} */
-    public synchronized void addContentResolver(final ContentResolver contentResolver) {
+    public void addContentResolver(final ContentResolver contentResolver) {
         this.targetContentResolver.addContentResolver(contentResolver);
     }
 
