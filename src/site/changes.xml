@@ -12,7 +12,7 @@
 		<author email="brabenetz@users.sourceforge.net">Harald Brabenetz</author>
 	</properties>
 	<body>
-		<release version="1.0" date="2013-05-??" description="After few bugfixes, if Release Candidate has been proofed itself in production.">
+		<release version="1.0" date="2013-05-20" description="First Release of settings4j. Requires JDK 1.4 or above.">
 			<!-- 
 			<action dev="brabenetz" type="fix" issue="1">Bugfix 1</action>
 			 -->
