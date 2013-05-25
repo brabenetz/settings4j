@@ -12,8 +12,8 @@
 	
 {Example}
 
-	Example Application exists in: {{https://settings4j.svn.sourceforge.net/svnroot/settings4j/example/example-springContextWebXml/trunk}}\
-	and {{https://settings4j.svn.sourceforge.net/svnroot/settings4j/example/example-log4jConfigurationWebXml/trunk}}.
+	Example Application exists in: {{https://sourceforge.net/p/settings4j/code/HEAD/tree/example/example-springContextWebXml/trunk}}\
+	and {{https://sourceforge.net/p/settings4j/code/HEAD/tree/example/example-log4jConfigurationWebXml/trunk}}.
 
 	The example Configuration looks like the following: 
 

@@ -16,7 +16,7 @@
 * {Manual}
 
    You can download source and binary distributions from the
-   {{{http://sourceforge.net/projects/settings4j}SourceForge file server}}.
+   {{{https://sourceforge.net/projects/settings4j/files/settings4j/}SourceForge file server}}.
 
 * {Automatically with Maven}
 
@@ -26,6 +26,6 @@
 <dependency>
 	<groupId>org.settings4j</groupId>
 	<artifactId>settings4j</artifactId>
-	<version>1.0-beta5</version>
+	<version>1.0</version>
 </dependency>
 +--------------------------------------------

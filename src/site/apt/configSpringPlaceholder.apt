@@ -32,6 +32,13 @@
 </beans>
 +--------------
 
+	Or inject the Value with the Spring Annotation (Spring 3.0+;
+	{{http://static.springsource.org/spring/docs/3.0.x/reference/expressions.html#expressions-beandef-annotation-based}}):
+
++--------------
+@Value("${com/mycompany/myEntry}")
+private String myEntry;
++--------------
 	
 * {Example Prefixes}
 
