@@ -30,7 +30,7 @@
 	
 	 * On commandline apps it should be placed on the FileSystem which is included into the classpath (e.g.: -cp ./config/ )
 
-	 * For UnitTests, you can but it into /src/test/resources/
+	 * For UnitTests, you can but it into /src/test/resources/ (Maven Folder Structure)
 
 {What SHOULD be configured with Settings4j}
    

@@ -24,7 +24,7 @@
 
 	- General comment
 
-* {2012/2013 1.1.0}
+* {2013/2014 1.1.0}
 
 	Brainstorming:
 
@@ -34,9 +34,12 @@
 
 	! additional Content-resolver with VFSPath?
 
+	! compatible with JDK 5: update dependencies: Spring 3.0 (optional), commons-lang 3.1, commons-io 2.2
 
-* {2012 - Final Version 1.0.0 - after few bug fixes}
 
+* {2013-05-20 - Final Version 1.0 for JDK 1.4 and above}
+
+	! compatible with JDK 1.4
 
     - remove DB-Connector implemented with Hibernate. This is most likely Project specific and should be implemented in your Project if required.
     

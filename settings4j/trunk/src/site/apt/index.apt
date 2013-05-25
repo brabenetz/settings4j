@@ -52,14 +52,14 @@
 	Developer wants the settings for Key 'com/mycompany/mycalculation/my-formula'
 	He create the following SettingsManager-Class:
 
---------------------------------------------
++--------------------------------------------
 public class SettingsManager {
 
     public static String getMyFormula() {
         return Settings4j.getString("com/mycompany/mycalculation/my-formula");
     }
 }
---------------------------------------------
++--------------------------------------------
 
 * {Deployer}
 
@@ -70,21 +70,21 @@ public class SettingsManager {
 	
 	System Properties can be set as java.exe Argument (JAVA_OPTS):
 	
---------------------------------------------
++--------------------------------------------
 java -Dcom/mycompany/mycalculation/my-formula=a*a .....
---------------------------------------------
++--------------------------------------------
 	
 	You can also add SystemProperties on the Tomcat-Startup
 	
---------------------------------------------
++--------------------------------------------
 cd %TOMCAT_HOME%/bin
 set JAVA_OPTS=-Dcom/mycompany/mycalculation/my-formula=a*a
 startup.bat
---------------------------------------------
++--------------------------------------------
 	
 	With JBOSS you can set SystemProperties with mbeans: {{{http://docs.jboss.org/admin-devel/Chap10.html}org.jboss.varia.property.SystemPropertiesService}}
 	
---------------------------------------------
++--------------------------------------------
 <server>
 	<mbean code="org.jboss.varia.property.SystemPropertiesService" name="jboss.util:type=Service,name=SystemProperties">
 		<attribute name="Properties">
@@ -92,7 +92,7 @@ startup.bat
 		</attribute>
 	</mbean>
 </server>
---------------------------------------------
++--------------------------------------------
 
 	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a * a".
 	
@@ -104,7 +104,7 @@ startup.bat
 
 	similar to the specification add a resource-ref into your web.xml like the following:
 
---------------------------------------------
++--------------------------------------------
 	....
 	....
 	<resource-env-ref>
@@ -115,7 +115,7 @@ startup.bat
 	</resource-env-ref>
 	....
 </web-app>
---------------------------------------------
++--------------------------------------------
 
 	
 	<<Server specific deployment descriptors>>
@@ -138,7 +138,7 @@ startup.bat
 	
 	%TOMCAT_HOME%/conf/server.xml 
 	
---------------------------------------------
++--------------------------------------------
 <Server ...>
 	...
 	<!-- Global JNDI resources -->
@@ -150,17 +150,17 @@ startup.bat
 	...
 	...
 </Server>
---------------------------------------------
++--------------------------------------------
 	
 	Add the Tomcat-specific deployment descriptor to your webapp:
 	
 	META-INF/context.xml
 	
---------------------------------------------
++--------------------------------------------
 <Context path="/${artifactId}" docBase="${artifactId}" debug="0">
 	<ResourceLink name="com/mycompany/mycalculation/my-formula" global="com/mycompany/mycalculation/my-formula" type="java.lang.String" />
 </Context>
---------------------------------------------
++--------------------------------------------
 
 	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a + a * a".
 
