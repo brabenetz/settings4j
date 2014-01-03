@@ -48,6 +48,7 @@ public class Settings4jContextLoader extends ContextLoader {
     public static final String SETTINGS4J_CONFIG_LOCATION_PARAM = "settings4jContextConfigLocation";
     
     /** {@inheritDoc} */
+    @Override
     protected void customizeContext(final ServletContext servletContext, final ConfigurableWebApplicationContext wac) {
         if (wac instanceof XmlWebApplicationContext) {
             // be sure that the DefaultPropertiesLoader is initialized:

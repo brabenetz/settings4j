@@ -230,7 +230,7 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
             pstmt.close();
 
             pstmt = conn.prepareStatement("select * from test");
-            final ResultSet rs = pstmt.executeQuery();
+            final ResultSet rs = pstmt.executeQuery(); // NOPMD must have Result - An exception would break the test.
             rs.next();
             final String result = rs.getString(1);
             rs.close();

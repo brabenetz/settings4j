@@ -34,7 +34,6 @@ import javax.xml.parsers.FactoryConfigurationError;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.SystemUtils;
 import org.settings4j.Connector;
 import org.settings4j.ContentResolver;
 import org.settings4j.Filter;
@@ -66,8 +65,6 @@ public class DOMConfigurator {
     /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(DOMConfigurator.class);
-
-    private static final Class[] NO_PARAM = new Class[] {};
 
     private static final String CONFIGURATION_TAG = "settings4j:configuration";
 
@@ -113,19 +110,17 @@ public class DOMConfigurator {
 
     private static final String DOCUMENT_BUILDER_FACTORY_KEY = "javax.xml.parsers.DocumentBuilderFactory";
 
-    private static final float JAVA_VERSION_1_5 = 1.5f;
-
 
     // key: ConnectorName, value: Connector
-    private final Map connectorBag;
+    private final Map<String, Connector> connectorBag;
     // key: contentResolver-Name, value: ContentResolver
-    private final Map contentResolverBag;
+    private final Map<String, ContentResolver> contentResolverBag;
     // key: objectResolver-Name, value: ObjectResolver
-    private final Map objectResolverBag;
+    private final Map<String, ObjectResolver> objectResolverBag;
 
     private final Settings4jRepository repository;
 
-    private final Map expressionAttributes = new HashMap();
+    private final Map<String, Object> expressionAttributes = new HashMap<String, Object>();
 
     /**
      * Configure the given Settings4jRepository with an XMl-configuration (see settings4j.dtd).
@@ -134,9 +129,9 @@ public class DOMConfigurator {
     public DOMConfigurator(final Settings4jRepository repository) {
         super();
         this.repository = repository;
-        this.connectorBag = new HashMap();
-        this.contentResolverBag = new HashMap();
-        this.objectResolverBag = new HashMap();
+        this.connectorBag = new HashMap<String, Connector>();
+        this.contentResolverBag = new HashMap<String, ContentResolver>();
+        this.objectResolverBag = new HashMap<String, ObjectResolver>();
     }
 
     /**
@@ -190,6 +185,7 @@ public class DOMConfigurator {
                 return parser.parse(url.toString());
             }
 
+            @Override
             public String toString() {
                 return "url [" + url.toString() + "]";
             }
@@ -267,8 +263,8 @@ public class DOMConfigurator {
         LOG.debug("Desired Connector class: [" + className + "]");
         try {
             final Class clazz = loadClass(className);
-            final Constructor constructor = clazz.getConstructor(NO_PARAM);
-            filter = (Filter) constructor.newInstance(null);
+            final Constructor constructor = clazz.getConstructor();
+            filter = (Filter) constructor.newInstance();
         } catch (final Exception oops) {
             LOG.error("Could not retrieve connector [filter: " + className + "]. Reported error follows.", oops);
             return null;
@@ -319,8 +315,8 @@ public class DOMConfigurator {
         LOG.debug("Desired Connector class: [" + className + ']');
         try {
             final Class clazz = loadClass(className);
-            final Constructor constructor = clazz.getConstructor(NO_PARAM);
-            connector = (Connector) constructor.newInstance(null);
+            final Constructor constructor = clazz.getConstructor();
+            connector = (Connector) constructor.newInstance();
         } catch (final Exception oops) {
             LOG.error("Could not retrieve connector [" + connectorName + "]. Reported error follows.", oops);
             return null;
@@ -420,7 +416,7 @@ public class DOMConfigurator {
      * @return the Connectors Objects as Array.
      */
     protected Connector[] getConnectors(final Element connectorsElement) {
-        final List connectors = new ArrayList();
+        final List<Connector> connectors = new ArrayList<Connector>();
 
         final NodeList children = connectorsElement.getChildNodes();
         final int length = children.getLength();
@@ -440,7 +436,7 @@ public class DOMConfigurator {
             }
         }
 
-        return (Connector[]) connectors.toArray(new Connector[connectors.size()]);
+        return connectors.toArray(new Connector[connectors.size()]);
     }
 
 
@@ -474,8 +470,8 @@ public class DOMConfigurator {
             }
         }
 
-        final List list = settings.getConnectors();
-        final Connector[] connectors = (Connector[]) list.toArray(new Connector[list.size()]);
+        final List<Connector> list = settings.getConnectors();
+        final Connector[] connectors = list.toArray(new Connector[list.size()]);
 
         final NodeList children = settingsElement.getChildNodes();
 
@@ -516,7 +512,7 @@ public class DOMConfigurator {
      * @return the Connector instance.
      */
     protected Connector findConnectorByName(final Document doc, final String connectorName) {
-        Connector connector = (Connector) this.connectorBag.get(connectorName);
+        Connector connector = this.connectorBag.get(connectorName);
 
         if (connector != null) {
             return connector;
@@ -564,8 +560,8 @@ public class DOMConfigurator {
         LOG.debug("Desired ObjectResolver class: [" + className + ']');
         try {
             final Class clazz = loadClass(className);
-            final Constructor constructor = clazz.getConstructor(NO_PARAM);
-            objectResolver = (ObjectResolver) constructor.newInstance(null);
+            final Constructor constructor = clazz.getConstructor();
+            objectResolver = (ObjectResolver) constructor.newInstance();
         } catch (final Exception oops) {
             LOG.error("Could not retrieve objectResolver [" + objectResolverName + "]. Reported error follows.", oops);
             return null;
@@ -646,7 +642,7 @@ public class DOMConfigurator {
     protected Map parseMapping(final Element mappingElement) {
         final String mappingName = mappingElement.getAttribute(NAME_ATTR);
 
-        Map mapping;
+        Map<String, String> mapping;
 
         String className = mappingElement.getAttribute(CLASS_ATTR);
         if (StringUtils.isEmpty(className)) {
@@ -656,8 +652,8 @@ public class DOMConfigurator {
         LOG.debug("Desired Map class: [" + className + ']');
         try {
             final Class clazz = loadClass(className);
-            final Constructor constructor = clazz.getConstructor(NO_PARAM);
-            mapping = (Map) constructor.newInstance(null);
+            final Constructor constructor = clazz.getConstructor();
+            mapping = (Map<String, String>) constructor.newInstance();
         } catch (final Exception oops) {
             LOG.error("Could not retrieve mapping [" + mappingName + "]. Reported error follows.", oops);
             return null;
@@ -715,8 +711,8 @@ public class DOMConfigurator {
         LOG.debug("Desired ContentResolver class: [" + className + ']');
         try {
             final Class clazz = loadClass(className);
-            final Constructor constructor = clazz.getConstructor(NO_PARAM);
-            contentResolver = (ContentResolver) constructor.newInstance(null);
+            final Constructor constructor = clazz.getConstructor();
+            contentResolver = (ContentResolver) constructor.newInstance();
         } catch (final Exception e) {
             LOG.error("Could not retrieve contentResolver [" + contentResolverName + "]. " //
                 + "Reported error follows.", e);
@@ -783,7 +779,7 @@ public class DOMConfigurator {
      * @return the ContentResolver instance.
      */
     protected ContentResolver findContentResolverByName(final Document doc, final String contentResolverName) {
-        ContentResolver contentResolver = (ContentResolver) this.contentResolverBag.get(contentResolverName);
+        ContentResolver contentResolver = this.contentResolverBag.get(contentResolverName);
 
         if (contentResolver != null) {
             return contentResolver;
@@ -810,7 +806,7 @@ public class DOMConfigurator {
      * @return the ObjectResolver instance.
      */
     protected ObjectResolver findObjectResolverByName(final Document doc, final String objectResolverName) {
-        ObjectResolver objectResolver = (ObjectResolver) this.objectResolverBag.get(objectResolverName);
+        ObjectResolver objectResolver = this.objectResolverBag.get(objectResolverName);
 
         if (objectResolver != null) {
             return objectResolver;
@@ -909,25 +905,21 @@ public class DOMConfigurator {
 
         if (value.indexOf("${") >= 0) {
             try {
-                final Map context = new HashMap(this.expressionAttributes);
+                final Map<String, Object> context = new HashMap<String, Object>(this.expressionAttributes);
                 if (connectors != null) {
                     // Expression like ${connectors.object['...']} or ${connectors.string['...']}
                     context.put("connectors", new ELConnectorWrapper(connectors));
 
                     // Expression like ${connector.FsConnector.object['...']} or
                     // ${connector.ClassPathConnector.string['...']}
-                    final Map connectorMap = new HashMap();
+                    final Map<String, ELConnectorWrapper> connectorMap = new HashMap<String, ELConnectorWrapper>();
                     for (int i = 0; i < connectors.length; i++) {
                         final Connector connector = connectors[i];
                         connectorMap.put(connector.getName(), new ELConnectorWrapper(new Connector[] {connector}));
                     }
                     context.put("connector", connectorMap);
                 }
-                if (SystemUtils.isJavaVersionAtLeast(JAVA_VERSION_1_5)) {
-                    // Expression like ${env['...']} e.g.: ${env['TOMCAT_HOME']} or ${env.TOMCAT_HOME}
-                    // Only since jdk 1.5 ....
-                    context.put("env", System.getenv());
-                }
+                context.put("env", System.getenv());
                 final Object result = ExpressionLanguageUtil.evaluateExpressionLanguage(value, context, clazz);
                 return result;
             } catch (final Exception e) {

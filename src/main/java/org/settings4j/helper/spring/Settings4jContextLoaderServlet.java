@@ -34,6 +34,7 @@ public class Settings4jContextLoaderServlet extends ContextLoaderServlet {
     private static final long serialVersionUID = 1L;
 
     /** {@inheritDoc} */
+    @Override
     protected ContextLoader createContextLoader() {
         return new Settings4jContextLoader();
     }

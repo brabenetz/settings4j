@@ -38,8 +38,8 @@ public class NOPSettings implements org.settings4j.Settings4jInstance {
     }
 
     /** {@inheritDoc} */
-    public List getConnectors() {
-        return Collections.EMPTY_LIST;
+    public List<Connector> getConnectors() {
+        return Collections.emptyList();
     }
 
     /** {@inheritDoc} */

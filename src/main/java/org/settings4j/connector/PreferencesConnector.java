@@ -61,6 +61,7 @@ public class PreferencesConnector extends AbstractPropertyConnector {
 
 
     /** {@inheritDoc} */
+    @Override
     protected String getProperty(final String keyPath, final String defaultValue) {
         final String normalizedKey = normalizeKey(keyPath);
         final String path = getPath(normalizedKey);

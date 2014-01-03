@@ -130,7 +130,7 @@ public interface Settings4jInstance {
      * 
      * @return a list off all Connectors who can be used with this {@link Settings4jInstance} instance
      */
-    List getConnectors();
+    List<Connector> getConnectors();
 
     /**
      * Return the {@link Connector} for the given Name.

@@ -17,7 +17,6 @@
 package org.settings4j.settings;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -33,8 +32,8 @@ public class DefaultFilter implements Filter {
     /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(DefaultFilter.class);
-    private final List includePatterns = new ArrayList();
-    private final List excludePatterns = new ArrayList();
+    private final List<Pattern> includePatterns = new ArrayList<Pattern>();
+    private final List<Pattern> excludePatterns = new ArrayList<Pattern>();
 
     /** {@inheritDoc} */
     public void addExclude(final String pattern) {
@@ -59,8 +58,7 @@ public class DefaultFilter implements Filter {
     /** {@inheritDoc} */
     public boolean isValid(final String key) {
         // if exclude match, return always false.
-        for (final Iterator iterator = this.excludePatterns.iterator(); iterator.hasNext();) {
-            final Pattern pattern = (Pattern) iterator.next();
+        for (final Pattern pattern : this.excludePatterns) {
             if (pattern.matcher(key).matches()) {
                 return false;
             }
@@ -72,8 +70,7 @@ public class DefaultFilter implements Filter {
         }
 
         // if include match, return true.
-        for (final Iterator iterator = this.includePatterns.iterator(); iterator.hasNext();) {
-            final Pattern pattern = (Pattern) iterator.next();
+        for (final Pattern pattern : this.includePatterns) {
             if (pattern.matcher(key).matches()) {
                 return true;
             }

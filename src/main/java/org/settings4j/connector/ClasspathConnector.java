@@ -82,6 +82,7 @@ public class ClasspathConnector extends AbstractConnector {
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setContentResolver(final ContentResolver contentResolver) {
         this.unionContentResolver = new UnionContentResolver(this.classpathContentResolver);
         this.unionContentResolver.addContentResolver(contentResolver);

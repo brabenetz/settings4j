@@ -47,7 +47,7 @@ public abstract class AbstractObjectResolver implements ObjectResolver {
 
     private String propertySuffix = ".properties";
 
-    private final Map cachedObjects = new HashMap();
+    private final Map<String, Object> cachedObjects = new HashMap<String, Object>();
 
     private boolean cached = false;
 

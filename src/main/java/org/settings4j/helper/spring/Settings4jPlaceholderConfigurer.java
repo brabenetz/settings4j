@@ -40,6 +40,7 @@ public class Settings4jPlaceholderConfigurer extends PropertyPlaceholderConfigur
     }
 
     /** {@inheritDoc} */
+    @Override
     protected String resolvePlaceholder(final String placeholder, final Properties props) {
 
         String value = Settings4j.getString(prefix + placeholder);
