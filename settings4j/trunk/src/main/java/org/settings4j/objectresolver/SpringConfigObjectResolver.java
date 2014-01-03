@@ -88,6 +88,7 @@ public class SpringConfigObjectResolver extends AbstractObjectResolver {
     private static final String PROPERTY_BEAN_REF = "bean-ref";
 
     /** {@inheritDoc} */
+    @Override
     protected Object contentToObject(final String key, final Properties properties, final byte[] content,
             final ContentResolver contentResolver) {
 

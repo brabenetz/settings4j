@@ -37,9 +37,9 @@ public class CachedConnectorWrapper implements Connector {
 
     private final Connector targetConnector;
 
-    private final Map cachedStrings = Collections.synchronizedMap(new HashMap());
-    private final Map cachedContents = Collections.synchronizedMap(new HashMap());
-    private final Map cachedObjects = Collections.synchronizedMap(new HashMap());
+    private final Map<String, String> cachedStrings = Collections.synchronizedMap(new HashMap<String, String>());
+    private final Map<String, byte[]> cachedContents = Collections.synchronizedMap(new HashMap<String, byte[]>());
+    private final Map<String, Object> cachedObjects = Collections.synchronizedMap(new HashMap<String, Object>());
 
 
     /**
@@ -52,7 +52,7 @@ public class CachedConnectorWrapper implements Connector {
 
     /** {@inheritDoc} */
     public byte[] getContent(final String key) {
-        byte[] result = (byte[]) this.cachedContents.get(key);
+        byte[] result = this.cachedContents.get(key);
         if (result != null) {
             return result;
         }
@@ -82,7 +82,7 @@ public class CachedConnectorWrapper implements Connector {
 
     /** {@inheritDoc} */
     public String getString(final String key) {
-        String result = (String) this.cachedStrings.get(key);
+        String result = this.cachedStrings.get(key);
         if (result != null) {
             return result;
         }

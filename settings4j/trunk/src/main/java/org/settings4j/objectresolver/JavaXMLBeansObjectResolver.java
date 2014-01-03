@@ -84,6 +84,7 @@ public class JavaXMLBeansObjectResolver extends AbstractObjectResolver {
         .getLog(JavaXMLBeansObjectResolver.class);
 
     /** {@inheritDoc} */
+    @Override
     protected Object contentToObject(final String key, final Properties properties, final byte[] content,
             final ContentResolver contentResolver) {
         final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(content);

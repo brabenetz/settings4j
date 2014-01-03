@@ -38,6 +38,7 @@ public class SystemPropertyConnector extends AbstractPropertyConnector {
      * @param def The default value to return.
      * @return the string value of the system property, or the default value if there is no property with that key.
      */
+    @Override
     protected String getProperty(final String key, final String def) {
         try {
             return System.getProperty(key, def);

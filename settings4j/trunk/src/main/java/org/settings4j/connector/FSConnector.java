@@ -112,6 +112,7 @@ public class FSConnector extends AbstractConnector {
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setContentResolver(final ContentResolver contentResolver) {
         unionContentResolver = new UnionContentResolver(fsContentResolver);
         unionContentResolver.addContentResolver(contentResolver);

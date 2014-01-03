@@ -96,6 +96,7 @@ import org.springframework.web.context.ContextLoaderListener;
 public class Settings4jContextLoaderListener extends ContextLoaderListener {
 
     /** {@inheritDoc} */
+    @Override
     protected ContextLoader createContextLoader() {
         return new Settings4jContextLoader();
     }

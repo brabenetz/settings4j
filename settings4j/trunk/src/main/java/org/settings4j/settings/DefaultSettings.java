@@ -19,7 +19,6 @@ package org.settings4j.settings;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -38,18 +37,18 @@ public class DefaultSettings implements Settings4jInstance {
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
         .getLog(DefaultSettings.class);
 
-    private final List connectors = Collections.synchronizedList(new ArrayList());
-    private final Map connectorMap = Collections.synchronizedMap(new HashMap());
+    private final List<Connector> connectors = Collections.synchronizedList(new ArrayList<Connector>());
+    private final Map<String, Connector> connectorMap = Collections.synchronizedMap(new HashMap<String, Connector>());
     private Map mapping;
 
     /** {@inheritDoc} */
-    public List getConnectors() {
+    public List<Connector> getConnectors() {
         return Collections.unmodifiableList(this.connectors);
     }
 
     /** {@inheritDoc} */
     public Connector getConnector(final String connectorName) {
-        return (Connector) this.connectorMap.get(connectorName);
+        return this.connectorMap.get(connectorName);
     }
 
     /** {@inheritDoc} */
@@ -68,10 +67,7 @@ public class DefaultSettings implements Settings4jInstance {
     public byte[] getContent(final String key) {
         final String mappedKey = mappedKey(key);
         byte[] result = null;
-        Iterator iterator;
-        iterator = this.connectors.iterator();
-        while (iterator.hasNext()) {
-            final Connector connector = (Connector) iterator.next();
+        for (Connector connector : this.connectors) {
             result = connector.getContent(mappedKey);
             if (result != null) {
                 logDebugFoundValueForKey("Content", key, connector);
@@ -85,10 +81,7 @@ public class DefaultSettings implements Settings4jInstance {
     public Object getObject(final String key) {
         final String mappedKey = mappedKey(key);
         Object result = null;
-        Iterator iterator;
-        iterator = this.connectors.iterator();
-        while (iterator.hasNext()) {
-            final Connector connector = (Connector) iterator.next();
+        for (Connector connector : this.connectors) {
             result = connector.getObject(mappedKey);
             if (result != null) {
                 logDebugFoundValueForKey("Object", key, connector);
@@ -102,10 +95,7 @@ public class DefaultSettings implements Settings4jInstance {
     public String getString(final String key) {
         final String mappedKey = mappedKey(key);
         String result = null;
-        Iterator iterator;
-        iterator = this.connectors.iterator();
-        while (iterator.hasNext()) {
-            final Connector connector = (Connector) iterator.next();
+        for (Connector connector : this.connectors) {
             result = connector.getString(mappedKey);
             if (result != null) {
                 logDebugFoundValueForKey("String", key, connector);

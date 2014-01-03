@@ -57,6 +57,7 @@ public class ByteArrayXMLApplicationContext extends AbstractXmlApplicationContex
         configResources[0] = new ByteArrayResource(content);
     }
 
+    @Override
     protected Resource[] getConfigResources() {
         return configResources;
     }

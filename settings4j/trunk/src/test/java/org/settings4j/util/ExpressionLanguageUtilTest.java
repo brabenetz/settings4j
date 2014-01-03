@@ -38,8 +38,7 @@ public class ExpressionLanguageUtilTest extends TestCase {
      */
     public void testSimple() throws Exception {
         // the Map with all params 
-        //Map<String, Object> context = new java.util.HashMap<String, Object>();
-        Map context = new java.util.HashMap();
+        Map<String, Object> context = new HashMap<String, Object>();
 
         String result;
         
@@ -61,8 +60,7 @@ public class ExpressionLanguageUtilTest extends TestCase {
      */
     public void testComplex() throws Exception {
         // the Map with all params 
-        // Map<String, Object> context = new java.util.HashMap<String, Object>();
-        Map context = new java.util.HashMap();
+        Map<String, Object> context = new HashMap<String, Object>();
 
         String result;
 
@@ -98,8 +96,7 @@ public class ExpressionLanguageUtilTest extends TestCase {
     public void testLazyMapMatchPattern() throws Exception {
         
         // the Map with all params 
-        // Map<String, Object> context = new java.util.HashMap<String, Object>();
-        Map context = new java.util.HashMap();
+        Map<String, Object> context = new HashMap<String, Object>();
         
 
         /*

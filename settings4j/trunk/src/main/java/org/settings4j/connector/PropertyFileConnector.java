@@ -80,6 +80,7 @@ public class PropertyFileConnector extends AbstractPropertyConnector {
 
 
     /** {@inheritDoc} */
+    @Override
     protected String getProperty(final String key, final String def) {
         return property.getProperty(key, def);
     }
