@@ -20,6 +20,7 @@ package org.settings4j.connector;
 import java.io.File;
 
 import javax.naming.Context;
+import javax.naming.InitialContext;
 
 import junit.framework.TestCase;
 
@@ -40,20 +41,45 @@ public class JNDIConnectorTest extends TestCase {
     private File testDir;
 
     /** {@inheritDoc} */
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
-        this.testDir = (new File("test/ConnectorTest/".toLowerCase()));
-        FileUtils.forceMkdir(this.testDir);
+        testDir = (new File("test/ConnectorTest/".toLowerCase()));
+        FileUtils.forceMkdir(testDir);
         removeJNDIContextProperties();
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void tearDown() throws Exception {
         FileUtils.deleteDirectory(new File("test"));
         removeJNDIContextProperties();
         super.tearDown();
     }
 
+    /**
+     * SmokeTest: tests if the {@link #setTomcatJNDIContextProperties()} works which is required for all other
+     * TestCases.
+     * 
+     * @throws Exception in case of an error
+     */
+    public void testSmokeTest() throws Exception {
+        LOG.info("START: testJNDIConnectorWithoutJNDI");
+        // Set JNDI Tomcat Configs
+        setTomcatJNDIContextProperties();
+        final InitialContext initialContext = new InitialContext();
+        Context tmpCtx = initialContext.createSubcontext("java:");
+        tmpCtx = tmpCtx.createSubcontext("comp");
+        tmpCtx = tmpCtx.createSubcontext("env");
+        tmpCtx.bind("testKey", "testValue");
+
+        // start getting the JNDI Resource
+        Context envCtx = (Context) new InitialContext().lookup("java:/comp/env");
+        final Object testValue = envCtx.lookup("testKey");
+
+        assertEquals("testValue", testValue);
+
+    }
 
     public void testJNDIConnectorWithoutJNDI() throws Exception {
         LOG.info("START: testJNDIConnectorWithoutJNDI");
@@ -82,23 +108,23 @@ public class JNDIConnectorTest extends TestCase {
         assertNull(resultObject);
 
         // No Exception if JNDIContext not available
-        saveStatus = connector.setObject("helloWorldPath", this.testDir.getAbsolutePath() + "/test.txt");
+        saveStatus = connector.setObject("helloWorldPath", testDir.getAbsolutePath() + "/test.txt");
         resultString = connector.getString("helloWorldPath");
         assertNull(resultString);
 
         // No Exception if JNDIContext not available
-        saveStatus = connector.setObject("helloWorldPath", this.testDir.getAbsolutePath() + "/test.txt");
+        saveStatus = connector.setObject("helloWorldPath", testDir.getAbsolutePath() + "/test.txt");
         assertEquals(Constants.SETTING_NOT_POSSIBLE, saveStatus);
 
         // No Exception if JNDIContext not available
-        saveStatus = connector.setObject("helloWorldPath", this.testDir.getAbsolutePath() + "/test.txt");
+        saveStatus = connector.setObject("helloWorldPath", testDir.getAbsolutePath() + "/test.txt");
         assertEquals(Constants.SETTING_NOT_POSSIBLE, saveStatus);
 
 
         // add contentResolver
         final ContentResolver contentResolver = new UnionContentResolver();
         final FSContentResolver fsContentResolver = new FSContentResolver();
-        fsContentResolver.setRootFolderPath(this.testDir.getAbsolutePath());
+        fsContentResolver.setRootFolderPath(testDir.getAbsolutePath());
         contentResolver.addContentResolver(new ClasspathContentResolver());
         contentResolver.addContentResolver(fsContentResolver);
         connector.setContentResolver(contentResolver);
@@ -121,7 +147,7 @@ public class JNDIConnectorTest extends TestCase {
         // Set JNDI Tomcat Configs
         setTomcatJNDIContextProperties();
 
-        final String testTextPath = this.testDir.getAbsolutePath() + "/test.txt";
+        final String testTextPath = testDir.getAbsolutePath() + "/test.txt";
 
         JNDIConnector connector;
         int saveStatus;
@@ -147,7 +173,7 @@ public class JNDIConnectorTest extends TestCase {
         assertEquals(testTextPath, resultString);
 
         // if no ContentResolver is available. the value will be stored directly into the JNDI-Context
-        saveStatus = connector.setObject("helloWorldPath", "Hello World".getBytes(this.charset));
+        saveStatus = connector.setObject("helloWorldPath", "Hello World".getBytes(charset));
         assertEquals(Constants.SETTING_SUCCESS, saveStatus);
         // The String-Value cannot read a byte[]
         resultString = connector.getString("helloWorldPath");
@@ -155,7 +181,7 @@ public class JNDIConnectorTest extends TestCase {
         // The Content-Value should be the same
         resultContent = connector.getContent("helloWorldPath");
         assertNotNull(resultContent);
-        assertEquals("Hello World", new String(resultContent, this.charset));
+        assertEquals("Hello World", new String(resultContent, charset));
 
 
         // No Exception if JNDIContext not available
@@ -169,7 +195,7 @@ public class JNDIConnectorTest extends TestCase {
         // if no ObjectResolver is available. the value will be stored directly into the JNDI-Context
         final ContentResolver contentResolver = new UnionContentResolver();
         final FSContentResolver fsContentResolver = new FSContentResolver();
-        fsContentResolver.setRootFolderPath(this.testDir.getAbsolutePath()); // should also work with temp-folder
+        fsContentResolver.setRootFolderPath(testDir.getAbsolutePath()); // should also work with temp-folder
         contentResolver.addContentResolver(fsContentResolver);
         contentResolver.addContentResolver(new ClasspathContentResolver());
         connector.setContentResolver(contentResolver);
@@ -193,7 +219,7 @@ public class JNDIConnectorTest extends TestCase {
         // The Content-Value should be content of the file.
         resultContent = connector.getContent("helloWorldPath");
         assertNotNull(resultContent);
-        assertEquals("Hello World FileContent", new String(resultContent, this.charset));
+        assertEquals("Hello World FileContent", new String(resultContent, charset));
 
 
     }
