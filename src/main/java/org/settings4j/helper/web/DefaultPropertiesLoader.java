@@ -19,7 +19,6 @@ package org.settings4j.helper.web;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -76,9 +75,8 @@ public class DefaultPropertiesLoader {
             final Properties property = getDefaultProperties(servletContext);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Add Property Connector '" + CONNECTOR_NAME + "' to the Settings4j Repository.");
-                final Set entires = property.entrySet();
-                for (final Iterator iterator = entires.iterator(); iterator.hasNext();) {
-                    final Entry entry = (Entry) iterator.next();
+                final Set<Entry<Object, Object>> entries = property.entrySet();
+                for (Entry<Object, Object> entry : entries) {
                     LOG.debug(entry.getKey() + " = " + entry.getValue());
                 }
             }
@@ -94,10 +92,9 @@ public class DefaultPropertiesLoader {
         propertyFileConnector.setProperty(property);
         Settings4j.getSettingsRepository().getSettings().addConnector(propertyFileConnector);
         if (LOG.isDebugEnabled()) {
-            final List connectors = Settings4j.getConnectors();
+            final List<Connector> connectors = Settings4j.getConnectors();
             LOG.debug("Current Connectors are " + connectors.size());
-            for (final Iterator iterator = connectors.iterator(); iterator.hasNext();) {
-                final Connector connector = (Connector) iterator.next();
+            for (Connector connector : connectors) {
                 LOG.debug("Connector: " + connector.getName());
             }
             

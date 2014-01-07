@@ -143,7 +143,7 @@ public final class Settings4j {
      * 
      * @return a list off all Connectors who can be used with this {@link Settings4j} instance
      */
-    public static List getConnectors() {
+    public static List<Connector> getConnectors() {
         return getSettings().getConnectors();
     }
 

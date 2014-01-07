@@ -37,7 +37,7 @@ public abstract class AbstractConnector implements Connector {
     private ObjectResolver objectResolver;
     private final List<Connector> connectors = Collections.synchronizedList(new ArrayList<Connector>());
 
-    public List getConnectors() {
+    public List<Connector> getConnectors() {
         return Collections.unmodifiableList(this.connectors);
     }
 
