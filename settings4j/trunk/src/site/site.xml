@@ -7,13 +7,11 @@
 		</src>
 		<href>http://sourceforge.net/projects/settings4j</href>
 	</bannerLeft>
-	<!--
-		<bannerRight>
+	<bannerRight>
 		<name>Settings4j</name>
-		<src>images/settings4j.png</src>
+		<src>images/settings4j-logo-37px.png</src>
 		<href>http://settings4j.org</href>
-		</bannerRight>
-	-->
+	</bannerRight>
 	<body>
 		<menu name="Settings4j Library">
 			<item name="Overview" href="index.html" />
