@@ -13,6 +13,12 @@
 
 {Overview}
 
+	settings4j provides you with a lightweight Java library that allows programmers not to worry
+	about the location where the configuration settings are stored.
+
+	Designed to ease the development process, settings4j can decide where the value will be placed,
+	so the developer does not have to select the type of configuration.
+
 * {THE PROBLEM}
 
 	When I make a Project, I must decide where the configuration settings will be stored.\
