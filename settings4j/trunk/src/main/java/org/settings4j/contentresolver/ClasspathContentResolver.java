@@ -101,7 +101,7 @@ public class ClasspathContentResolver implements ContentResolver {
         }
         if (cl == null) {
             // No thread context class loader -> use class loader of this class.
-            cl = ClasspathContentResolver.class.getClassLoader(); // NOPMD it is only a fallback case.
+            cl = ClasspathContentResolver.class.getClassLoader(); 
         }
         return cl;
     }
