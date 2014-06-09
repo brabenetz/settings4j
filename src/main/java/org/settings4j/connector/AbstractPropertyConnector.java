@@ -29,7 +29,7 @@ package org.settings4j.connector;
 public abstract class AbstractPropertyConnector extends AbstractConnector {
 
     /** {@inheritDoc} */
-    public byte[] getContent(final String key) { // NOPMD return null instead of empty array exception for byte array
+    public byte[] getContent(final String key) {
         final String path = getString(key);
         if (path != null && getContentResolver() != null) {
             return getContentResolver().getContent(path);

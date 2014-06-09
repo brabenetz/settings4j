@@ -52,7 +52,7 @@ public class FSContentResolver implements ContentResolver {
     }
 
     /** {@inheritDoc} */
-    public byte[] getContent(final String key) { // NOPMD return null instead of empty array exception for byte array
+    public byte[] getContent(final String key) { 
         String normalizedKey = key;
         if (normalizedKey.startsWith(FILE_URL_PREFIX)) {
             normalizedKey = normalizedKey.substring(FILE_URL_PREFIX.length());
