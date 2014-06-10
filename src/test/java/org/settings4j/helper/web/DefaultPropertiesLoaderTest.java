@@ -32,8 +32,7 @@ import org.springframework.mock.web.MockServletContext;
 public class DefaultPropertiesLoaderTest extends TestCase {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(DefaultPropertiesLoaderTest.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DefaultPropertiesLoaderTest.class);
 
     private static final int DEFAULT_CONNECTOR_COUNT = 4;
 

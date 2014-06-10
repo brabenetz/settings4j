@@ -37,9 +37,7 @@ import org.settings4j.ContentResolver;
 public class FSContentResolver implements ContentResolver {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(FSContentResolver.class);
-
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(FSContentResolver.class);
 
     /** Pseudo URL prefix for loading from the class path: "classpath:". */
     public static final String FILE_URL_PREFIX = "file:";
@@ -104,9 +102,7 @@ public class FSContentResolver implements ContentResolver {
         } else {
             file = new File(getRootFolder(), normalizedKey);
         }
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Store content in: " + file.getAbsolutePath());
-        }
+        LOG.debug("Store content in: {}", file.getAbsolutePath());
 
         FileUtils.writeByteArrayToFile(file, value);
     }
@@ -136,9 +132,9 @@ public class FSContentResolver implements ContentResolver {
             try {
                 FileUtils.forceMkdir(newRootFolder);
                 rootFolder = newRootFolder;
-                LOG.info("Set RootPath for FSConntentResolver: " + newRootFolder.getAbsolutePath());
+                LOG.info("Set RootPath for FSConntentResolver: {}", newRootFolder.getAbsolutePath());
             } catch (final IOException e) {
-                LOG.warn("cannot create rootFolder: " + rootFolderPath + "! ");
+                LOG.warn("cannot create rootFolder: {}!", rootFolderPath);
             }
         } else {
             rootFolder = newRootFolder;

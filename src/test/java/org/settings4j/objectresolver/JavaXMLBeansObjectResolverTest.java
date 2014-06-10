@@ -38,8 +38,7 @@ import org.settings4j.contentresolver.UnionContentResolver;
 public class JavaXMLBeansObjectResolverTest extends TestCase {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(JavaXMLBeansObjectResolverTest.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(JavaXMLBeansObjectResolverTest.class);
 
     private File testDir;
 
@@ -212,13 +211,11 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
 
         final XMLEncoder encoder = new XMLEncoder(byteArrayOutputStream);
         encoder.setExceptionListener(new LogEncoderExceptionListener(value));
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("START Writing Object " + value.getClass().getName() + " with XMLEncoder");
-        }
+
+        LOG.debug("START Writing Object {} with XMLEncoder", value.getClass().getName());
         encoder.writeObject(value);
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("FINISH Writing Object " + value.getClass().getName() + " with XMLEncoder");
-        }
+        LOG.debug("FINISH Writing Object {} with XMLEncoder", value.getClass().getName());
+        
         encoder.flush();
         encoder.close();
         return byteArrayOutputStream.toByteArray();
@@ -246,9 +243,7 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
         public void exceptionThrown(final Exception e) {
             LOG.warn("Ignore error on encoding Object from type: " + this.obj.getClass().getName() + "! "
                 + e.getClass().getName() + ": '" + e.getMessage() + "'. Set Loglevel DEBUG for more informations.");
-            if (LOG.isDebugEnabled()) {
-                LOG.debug(e.getMessage(), e);
-            }
+            LOG.debug(e.getMessage(), e);
         }
     }
 }

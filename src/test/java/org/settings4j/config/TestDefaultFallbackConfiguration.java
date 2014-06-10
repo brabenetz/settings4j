@@ -30,10 +30,11 @@ import org.settings4j.test.TestUtils;
 public class TestDefaultFallbackConfiguration extends TestCase {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(TestDefaultFallbackConfiguration.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory
+        .getLogger(TestDefaultFallbackConfiguration.class);
 
     /** {@inheritDoc} */
+    @Override
     protected void setUp() throws Exception {
         TestUtils.reconfigureSettings4jWithDefaultConfig();
         super.setUp();
@@ -41,6 +42,7 @@ public class TestDefaultFallbackConfiguration extends TestCase {
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void tearDown() throws Exception {
         TestUtils.clearSystemProperty("testDefaultProperty");
         super.tearDown();
@@ -52,7 +54,7 @@ public class TestDefaultFallbackConfiguration extends TestCase {
     public void testDefaultSettings4jConfig() {
 
         LOG.debug(//
-            "#### AFTER THE FOLLOWING LINE SETTINGS4J WILL BE " //
+        "#### AFTER THE FOLLOWING LINE SETTINGS4J WILL BE " //
             + "CONFIGURED THE FIRST TIME WITH THE FALLBACK-FILE #####");
         assertEquals("HelloWorld", Settings4j.getString("testDefaultProperty"));
         LOG.debug("#### FINISH CONFIGURATION #####");

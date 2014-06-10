@@ -37,9 +37,7 @@ import org.settings4j.ContentResolver;
 public class ClasspathContentResolver implements ContentResolver {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(ClasspathContentResolver.class);
-
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(ClasspathContentResolver.class);
 
     /** Pseudo URL prefix for loading from the class path: "classpath:". */
     public static final String CLASSPATH_URL_PREFIX = "classpath:";

@@ -49,8 +49,7 @@ import org.apache.commons.collections4.Transformer;
 public class MatchPatternTransformer implements Transformer<String, Boolean> {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(MatchPatternTransformer.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(MatchPatternTransformer.class);
 
     private final String compareValue;
 
@@ -73,14 +72,10 @@ public class MatchPatternTransformer implements Transformer<String, Boolean> {
                 final Matcher matcher = pattern.matcher(this.compareValue);
                 if (matcher.matches()) {
                     result = Boolean.TRUE;
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("TRUE '" + patternString + "'; '" + this.compareValue + "'");
-                    }
+                    LOG.debug("TRUE - found '{}' in '{}'", patternString, compareValue);
                 } else {
                     result = Boolean.FALSE;
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("FALSE '" + patternString + "'; '" + this.compareValue + "'");
-                    }
+                    LOG.debug("FALSE - do not found '{}' in '{}'", patternString, compareValue);
                 }
             } catch (final Exception e) {
                 LOG.warn("Cann't matche Pattern '" + patternString + "' with compareValue '" + this.compareValue + "'",

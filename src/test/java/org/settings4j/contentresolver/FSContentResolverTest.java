@@ -29,8 +29,7 @@ import org.apache.commons.io.IOUtils;
 public class FSContentResolverTest extends TestCase {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(FSContentResolverTest.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(FSContentResolverTest.class);
 
     private static final String BASE_DIR = FSContentResolverTest.class.getPackage().getName().replace('.', '/');
 
@@ -61,7 +60,7 @@ public class FSContentResolverTest extends TestCase {
         IOUtils.copy(helloWorldIS, fileOutputStream);
         IOUtils.closeQuietly(helloWorldIS);
         IOUtils.closeQuietly(fileOutputStream);
-        LOG.info("helloWorldPath: " + helloWorldPath);
+        LOG.info("helloWorldPath: {}", helloWorldPath);
 
         final FSContentResolver contentResolver = new FSContentResolver();
         contentResolver.setRootFolderPath(this.testDir.getAbsolutePath());

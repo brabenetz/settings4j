@@ -72,9 +72,7 @@ import org.settings4j.contentresolver.FSContentResolver;
 public class PropertyFileConnector extends AbstractPropertyConnector {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(PropertyFileConnector.class);
-
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(PropertyFileConnector.class);
 
     private Properties property = new Properties();
 

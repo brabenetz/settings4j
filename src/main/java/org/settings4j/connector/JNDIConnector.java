@@ -38,9 +38,7 @@ import org.settings4j.Constants;
 public class JNDIConnector extends AbstractConnector {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(JNDIConnector.class);
-
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(JNDIConnector.class);
 
     private String providerUrl;
 
@@ -93,7 +91,7 @@ public class JNDIConnector extends AbstractConnector {
         try {
             return (String) obj;
         } catch (final ClassCastException e) {
-            LOG.warn("Wrong Type: " + obj.getClass().getName() + " for Key: " + key);
+            LOG.warn("Wrong Type: {} for Key: {}", obj.getClass().getName(), key);
             LOG.debug(e.getMessage(), e);
             return null;
         }
@@ -145,10 +143,10 @@ public class JNDIConnector extends AbstractConnector {
                 LOG.debug("JNDI Context is available.");
                 this.isJNDIAvailable = Boolean.TRUE;
             } catch (final NoInitialContextException e) {
-                LOG.info("No JNDI Context available! JNDIConnector will be disabled: " + e.getMessage());
+                LOG.info("No JNDI Context available! JNDIConnector will be disabled: {}", e.getMessage());
                 this.isJNDIAvailable = Boolean.FALSE;
             } catch (final NamingException e) {
-                LOG.info("JNDI Context is available but " + e.getMessage());
+                LOG.info("JNDI Context is available but {}", e.getMessage());
                 LOG.debug("NamingException in isJNDIAvailable: " + e.getMessage(), e);
                 this.isJNDIAvailable = Boolean.TRUE;
             }
@@ -209,9 +207,8 @@ public class JNDIConnector extends AbstractConnector {
             return Constants.SETTING_NOT_POSSIBLE;
         }
         final String normalizedKey = normalizeKey(key);
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Try to rebind Key '" + key + "' (" + normalizedKey + ")" + " with value: " + value);
-        }
+        LOG.debug("Try to rebind Key '{}' ({}) with value: {}", key, normalizedKey, value);
+
         InitialContext ctx = null;
         int result = Constants.SETTING_NOT_POSSIBLE;
         try {
@@ -226,7 +223,7 @@ public class JNDIConnector extends AbstractConnector {
             // the JNDI-Context from TOMCAT is readonly
             // if you try to write it, The following Exception will be thrown:
             // javax.naming.NamingException: Context is read only
-            LOG.info("cannot bind key: " + key + " (" + normalizedKey + ")" + e.getMessage());
+            LOG.info("cannot bind key: '{}' ({}). {}", key, normalizedKey, e.getMessage());
             if (LOG.isDebugEnabled()) {
                 LOG.debug("cannot bind key: " + key + " (" + normalizedKey + ")", e);
             }
@@ -245,9 +242,8 @@ public class JNDIConnector extends AbstractConnector {
     private static void createParentContext(final Context ctx, final String key) throws NamingException {
         // here we need to break by the specified delimiter
 
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("createParentContext: " + key);
-        }
+        LOG.debug("createParentContext: {}", key);
+        
         final String[] path = key.split("/");
 
         final int lastIndex = path.length - 1;
@@ -259,16 +255,12 @@ public class JNDIConnector extends AbstractConnector {
             try {
                 obj = tmpCtx.lookup(path[i]);
             } catch (final NameNotFoundException e) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("obj is null and subcontext will be generated: " + path[i]);
-                }
+                LOG.debug("obj is null and subcontext will be generated: {}", path[i]);
             }
 
             if (obj == null) {
                 tmpCtx = tmpCtx.createSubcontext(path[i]);
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("createSubcontext: " + path[i]);
-                }
+                LOG.debug("createSubcontext: {}", path[i]);
             } else if (obj instanceof Context) {
                 tmpCtx = (Context) obj;
             } else {

@@ -37,8 +37,7 @@ import org.settings4j.ObjectResolver;
 public abstract class AbstractObjectResolver implements ObjectResolver {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(AbstractObjectResolver.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(AbstractObjectResolver.class);
 
     /** The Key which ObjectResolver implementation should be used. */
     public static final String PROP_OBJECT_RESOLVER_KEY = "objectResolverKey";
@@ -72,8 +71,8 @@ public abstract class AbstractObjectResolver implements ObjectResolver {
                 final String propObjectResolverKey = properties.getProperty(PROP_OBJECT_RESOLVER_KEY);
                 final String propCached = properties.getProperty(PROP_CACHED);
                 if (StringUtils.isEmpty(propObjectResolverKey)) {
-                    LOG.warn("The property-File for Key '" + key //
-                        + "' doesn't have the required Property '" + PROP_OBJECT_RESOLVER_KEY + "'");
+                    LOG.warn("The property-File for Key '{}' doesn't have the required Property '{}'", //
+                        key, PROP_OBJECT_RESOLVER_KEY);
                     return null;
                 }
 

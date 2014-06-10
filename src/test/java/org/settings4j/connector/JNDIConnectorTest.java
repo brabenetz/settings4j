@@ -34,8 +34,7 @@ import org.settings4j.contentresolver.UnionContentResolver;
 public class JNDIConnectorTest extends TestCase {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(JNDIConnectorTest.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(JNDIConnectorTest.class);
 
     private final String charset = "UTF-8";
     private File testDir;
@@ -74,7 +73,7 @@ public class JNDIConnectorTest extends TestCase {
         tmpCtx.bind("testKey", "testValue");
 
         // start getting the JNDI Resource
-        Context envCtx = (Context) new InitialContext().lookup("java:/comp/env");
+        final Context envCtx = (Context) new InitialContext().lookup("java:/comp/env");
         final Object testValue = envCtx.lookup("testKey");
 
         assertEquals("testValue", testValue);

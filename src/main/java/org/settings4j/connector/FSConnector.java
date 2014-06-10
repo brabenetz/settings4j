@@ -33,8 +33,7 @@ import org.settings4j.contentresolver.UnionContentResolver;
 public class FSConnector extends AbstractConnector {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(FSConnector.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(FSConnector.class);
 
     private final FSContentResolver fsContentResolver = new FSContentResolver();
     private ContentResolver unionContentResolver = new UnionContentResolver(fsContentResolver);

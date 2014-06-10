@@ -16,11 +16,11 @@
  *****************************************************************************/
 package org.settings4j.config;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
-
-import java.io.InputStream;
-import java.io.ByteArrayInputStream;
 
 /**
  * An {@link EntityResolver} specifically designed to return <code>settings4j.dtd</code> which is
@@ -31,8 +31,7 @@ import java.io.ByteArrayInputStream;
 public class Settings4jEntityResolver implements EntityResolver {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(Settings4jEntityResolver.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(Settings4jEntityResolver.class);
 
     /** {@inheritDoc} */
     public InputSource resolveEntity(final String publicId, final String systemId) {
@@ -40,8 +39,8 @@ public class Settings4jEntityResolver implements EntityResolver {
             final Class clazz = getClass();
             InputStream in = clazz.getResourceAsStream("/org/settings4j/config/settings4j.dtd");
             if (in == null) {
-                LOG.warn("Could not find [settings4j.dtd] using [" + clazz.getClassLoader()
-                    + "] class loader, parsed without DTD.");
+                LOG.warn("Could not find [settings4j.dtd] using [{}] class loader, parsed without DTD.",
+                    clazz.getClassLoader());
                 in = new ByteArrayInputStream(new byte[0]);
             }
             return new InputSource(in);

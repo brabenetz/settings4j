@@ -34,8 +34,7 @@ import org.settings4j.contentresolver.UnionContentResolver;
 public class ClasspathConnector extends AbstractConnector {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(ClasspathConnector.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(ClasspathConnector.class);
 
     private final ClasspathContentResolver classpathContentResolver = new ClasspathContentResolver();
     private ContentResolver unionContentResolver = new UnionContentResolver(this.classpathContentResolver);

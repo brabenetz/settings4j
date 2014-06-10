@@ -41,8 +41,7 @@ import org.settings4j.connector.PropertyFileConnector;
 public class DefaultPropertiesLoader {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(DefaultPropertiesLoader.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DefaultPropertiesLoader.class);
 
     /**
      * The Name of the Connector which will be added to the Settings4j Config.
@@ -65,7 +64,7 @@ public class DefaultPropertiesLoader {
             if (Settings4j.getSettingsRepository().getSettings().getConnector(CONNECTOR_NAME) == null) {
                 addPropertyConnector(servletContext);
             } else {
-                LOG.info(CONNECTOR_NAME + " Connector already exists in Settings4j");
+                LOG.info("{} Connector already exists in Settings4j", CONNECTOR_NAME);
             }
         }
     }
@@ -74,10 +73,10 @@ public class DefaultPropertiesLoader {
         if (servletContext.getInitParameter(DEFAULT_PROPERTIES) != null) {
             final Properties property = getDefaultProperties(servletContext);
             if (LOG.isDebugEnabled()) {
-                LOG.debug("Add Property Connector '" + CONNECTOR_NAME + "' to the Settings4j Repository.");
+                LOG.debug("Add Property Connector '{}' to the Settings4j Repository.", CONNECTOR_NAME);
                 final Set<Entry<Object, Object>> entries = property.entrySet();
                 for (Entry<Object, Object> entry : entries) {
-                    LOG.debug(entry.getKey() + " = " + entry.getValue());
+                    LOG.debug("{} = {}", entry.getKey(), entry.getValue());
                 }
             }
             addPropertyConnector(property);
@@ -93,9 +92,9 @@ public class DefaultPropertiesLoader {
         Settings4j.getSettingsRepository().getSettings().addConnector(propertyFileConnector);
         if (LOG.isDebugEnabled()) {
             final List<Connector> connectors = Settings4j.getConnectors();
-            LOG.debug("Current Connectors are " + connectors.size());
+            LOG.debug("Current Connectors are {}", connectors.size());
             for (Connector connector : connectors) {
-                LOG.debug("Connector: " + connector.getName());
+                LOG.debug("Connector: {}", connector.getName());
             }
             
         }
