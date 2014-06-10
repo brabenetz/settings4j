@@ -28,8 +28,7 @@ import org.xml.sax.SAXParseException;
 public class SAXErrorHandler implements ErrorHandler {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(SAXErrorHandler.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(SAXErrorHandler.class);
 
     /** {@inheritDoc} */
     public void error(final SAXParseException ex) {
@@ -47,7 +46,7 @@ public class SAXErrorHandler implements ErrorHandler {
     }
 
     private static void emitMessage(final String msg, final SAXParseException ex) {
-        LOG.warn(msg + ex.getLineNumber() + " and column " + ex.getColumnNumber());
-        LOG.warn(ex.getMessage(), ex.getException());
+        LOG.warn(msg + ex.getLineNumber() + " and column " + ex.getColumnNumber() + ". " + ex.getMessage(), //
+            ex.getException());
     }
 }

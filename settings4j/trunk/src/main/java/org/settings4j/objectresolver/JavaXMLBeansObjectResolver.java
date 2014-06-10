@@ -80,8 +80,7 @@ import org.settings4j.ContentResolver;
 public class JavaXMLBeansObjectResolver extends AbstractObjectResolver {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(JavaXMLBeansObjectResolver.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(JavaXMLBeansObjectResolver.class);
 
     /** {@inheritDoc} */
     @Override
@@ -113,11 +112,10 @@ public class JavaXMLBeansObjectResolver extends AbstractObjectResolver {
 
         /** {@inheritDoc} */
         public void exceptionThrown(final Exception e) {
-            LOG.warn("Ignore error on decoding Object from key: " + this.key + "! " + e.getClass().getName() + ": "
-                + e.getMessage() + "; Set Loglevel DEBUG for more informations.");
-            if (LOG.isDebugEnabled()) {
-                LOG.debug(e.getMessage(), e);
-            }
+            LOG.warn(//
+                "Ignore error on decoding Object from key: {}! {}: {}; Set Loglevel DEBUG for more informations.", //
+                this.key, e.getClass().getName(), e.getMessage());
+            LOG.debug(e.getMessage(), e);
         }
     }
 }

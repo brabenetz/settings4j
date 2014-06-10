@@ -82,8 +82,7 @@ import org.settings4j.helper.spring.ByteArrayXMLApplicationContext;
 public class SpringConfigObjectResolver extends AbstractObjectResolver {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(SpringConfigObjectResolver.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(SpringConfigObjectResolver.class);
 
     private static final String PROPERTY_BEAN_REF = "bean-ref";
 
@@ -99,7 +98,7 @@ public class SpringConfigObjectResolver extends AbstractObjectResolver {
 
         final Object result = ByteArrayXMLApplicationContext.getBean(content, beanRef);
         if (result == null) {
-            LOG.warn("SpringContext-Object with ID '" + beanRef + "' for Key '" + key + "' is null!");
+            LOG.warn("SpringContext-Object with ID '{}' for Key '{}' is null!", beanRef, key);
         }
         return result;
     }

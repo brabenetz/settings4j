@@ -24,8 +24,7 @@ import org.settings4j.UtilTesting;
 public class TestSettings4jFilterConfig extends AbstractTestSettings4jConfig {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(TestSettings4jFilterConfig.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(TestSettings4jFilterConfig.class);
 
     public void testMapping() {
         LOG.debug("run TestSettings4jMappingConfig.testMapping");

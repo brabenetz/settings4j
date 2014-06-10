@@ -42,7 +42,6 @@ import org.settings4j.Settings4jInstance;
 import org.settings4j.Settings4jRepository;
 import org.settings4j.connector.CachedConnectorWrapper;
 import org.settings4j.connector.FilteredConnectorWrapper;
-import org.settings4j.connector.SystemPropertyConnector;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.contentresolver.FilteredContentResolverWrapper;
 import org.settings4j.objectresolver.AbstractObjectResolver;
@@ -63,8 +62,7 @@ import org.xml.sax.SAXException;
 public class DOMConfigurator {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(DOMConfigurator.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DOMConfigurator.class);
 
     private static final String CONFIGURATION_TAG = "settings4j:configuration";
 
@@ -196,10 +194,10 @@ public class DOMConfigurator {
     private void doConfigure(final ParseAction action) throws FactoryConfigurationError {
         DocumentBuilderFactory dbf = null;
         try {
-            LOG.debug("System property is :" + new SystemPropertyConnector().getString(DOCUMENT_BUILDER_FACTORY_KEY));
+            LOG.debug("System property is: {}", System.getProperty(DOCUMENT_BUILDER_FACTORY_KEY));
             dbf = DocumentBuilderFactory.newInstance();
             LOG.debug("Standard DocumentBuilderFactory search succeded.");
-            LOG.debug("DocumentBuilderFactory is: " + dbf.getClass().getName());
+            LOG.debug("DocumentBuilderFactory is: {}", dbf.getClass().getName());
         } catch (final FactoryConfigurationError fce) {
             final Exception e = fce.getException();
             LOG.debug("Could not instantiate a DocumentBuilderFactory.", e);
@@ -233,7 +231,7 @@ public class DOMConfigurator {
         final String rootElementName = element.getTagName();
 
         if (!rootElementName.equals(CONFIGURATION_TAG)) {
-            LOG.error("DOM element is - not a <" + CONFIGURATION_TAG + "> element.");
+            LOG.error("DOM element is - not a <{}> element.", CONFIGURATION_TAG);
             return;
         }
 
@@ -260,7 +258,7 @@ public class DOMConfigurator {
             className = DefaultFilter.class.getName();
         }
 
-        LOG.debug("Desired Connector class: [" + className + "]");
+        LOG.debug("Desired Connector class: [{}]", className);
         try {
             final Class clazz = loadClass(className);
             final Constructor constructor = clazz.getConstructor();
@@ -312,7 +310,7 @@ public class DOMConfigurator {
         final String className = connectorElement.getAttribute(CLASS_ATTR);
 
 
-        LOG.debug("Desired Connector class: [" + className + ']');
+        LOG.debug("Desired Connector class: [{}]", className);
         try {
             final Class clazz = loadClass(className);
             final Constructor constructor = clazz.getConstructor();
@@ -346,10 +344,9 @@ public class DOMConfigurator {
                     final String tagName = currentElement.getTagName();
 
                     if (tagName.equals(CONNECTOR_REF_TAG)) {
-                        if (LOG.isDebugEnabled()) {
-                            LOG.debug(CONNECTOR_REF_TAG + " is only parsed for the RegularExpression Context " //
-                                + "or init-Method. See org.settings4j.Connector.addConnector(Connector) Javadoc.");
-                        }
+                        LOG.debug("{} is only parsed for the RegularExpression Context " //
+                            + "or init-Method. See org.settings4j.Connector.addConnector(Connector) Javadoc.", //
+                            CONNECTOR_REF_TAG);
                     } else if (tagName.equals(CONTENT_RESOLVER_REF_TAG)) {
                         final Element contentResolverRef = (Element) currentNode;
                         final ContentResolver contentResolver = findContentResolverByReference(contentResolverRef);
@@ -401,12 +398,10 @@ public class DOMConfigurator {
             elementName = element.getNodeName();
             instanceClassName = instance.getClass().getName();
         } catch (final Exception e) {
-            LOG.warn("Error in quietParseUnrecognizedElement(): " + e.getMessage());
-            if (LOG.isDebugEnabled()) {
-                LOG.debug(e.getMessage(), e);
-            }
+            LOG.warn("Error in quietParseUnrecognizedElement(): {}", e.getMessage());
+            LOG.debug(e.getMessage(), e);
         }
-        LOG.warn("Unrecognized Element will be ignored: " + elementName + " for Instance: " + instanceClassName);
+        LOG.warn("Unrecognized Element will be ignored: {} for Instance: {}", elementName, instanceClassName);
     }
 
     /**
@@ -521,7 +516,7 @@ public class DOMConfigurator {
         final Element element = getElementByNameAttr(doc, connectorName, "connector");
 
         if (element == null) {
-            LOG.error("No connector named [" + connectorName + "] could be found.");
+            LOG.error("No connector named [{}] could be found.", connectorName);
             return null;
         }
         // else
@@ -557,7 +552,7 @@ public class DOMConfigurator {
         final String className = objectResolverElement.getAttribute(CLASS_ATTR);
 
 
-        LOG.debug("Desired ObjectResolver class: [" + className + ']');
+        LOG.debug("Desired ObjectResolver class: [{}]", className);
         try {
             final Class clazz = loadClass(className);
             final Constructor constructor = clazz.getConstructor();
@@ -593,10 +588,9 @@ public class DOMConfigurator {
 
 
                     if (tagName.equals(CONNECTOR_REF_TAG)) {
-                        if (LOG.isDebugEnabled()) {
-                            LOG.debug(CONNECTOR_REF_TAG + " is only parsed for the RegularExpression Context. " //
-                                + "See org.settings4j.Connector.addConnector(Connector) Javadoc.");
-                        }
+                        LOG.debug("{} is only parsed for the RegularExpression Context. " //
+                            + "See org.settings4j.Connector.addConnector(Connector) Javadoc.", //
+                            CONNECTOR_REF_TAG);
                     } else if (tagName.equals(OBJECT_RESOLVER_REF_TAG)) {
                         final Element objectResolverRef = (Element) currentNode;
                         final ObjectResolver subObjectResolver = findObjectResolverByReference(objectResolverRef);
@@ -650,7 +644,7 @@ public class DOMConfigurator {
             className = "java.util.HashMap";
         }
 
-        LOG.debug("Desired Map class: [" + className + ']');
+        LOG.debug("Desired Map class: [{}]", className);
         try {
             final Class clazz = loadClass(className);
             final Constructor constructor = clazz.getConstructor();
@@ -709,7 +703,7 @@ public class DOMConfigurator {
         final String className = contentResolverElement.getAttribute(CLASS_ATTR);
 
 
-        LOG.debug("Desired ContentResolver class: [" + className + ']');
+        LOG.debug("Desired ContentResolver class: [{}]", className);
         try {
             final Class clazz = loadClass(className);
             final Constructor constructor = clazz.getConstructor();
@@ -744,10 +738,9 @@ public class DOMConfigurator {
                     final String tagName = currentElement.getTagName();
 
                     if (tagName.equals(CONNECTOR_REF_TAG)) {
-                        if (LOG.isDebugEnabled()) {
-                            LOG.debug(CONNECTOR_REF_TAG + " is only parsed for the RegularExpression Context. " //
-                                + "See org.settings4j.Connector.addConnector(Connector) Javadoc.");
-                        }
+                        LOG.debug("{} is only parsed for the RegularExpression Context. " //
+                            + "See org.settings4j.Connector.addConnector(Connector) Javadoc.", //
+                            CONNECTOR_REF_TAG);
                     } else if (tagName.equals(CONTENT_RESOLVER_REF_TAG)) {
                         final Element contentResolverRef = (Element) currentNode;
                         final ContentResolver subContentResolver = findContentResolverByReference(contentResolverRef);
@@ -789,7 +782,7 @@ public class DOMConfigurator {
         final Element element = getElementByNameAttr(doc, contentResolverName, CONTENT_RESOLVER_TAG);
 
         if (element == null) {
-            LOG.error("No contentResolver named [" + contentResolverName + "] could be found.");
+            LOG.error("No contentResolver named [{}] could be found.", contentResolverName);
             return null;
         }
         // else
@@ -816,7 +809,7 @@ public class DOMConfigurator {
         final Element element = getElementByNameAttr(doc, objectResolverName, OBJECT_RESOLVER_TAG);
     
         if (element == null) {
-            LOG.error("No objectResolver named [" + objectResolverName + "] could be found.");
+            LOG.error("No objectResolver named [{}] could be found.", objectResolverName);
             return null;
         }
         // else

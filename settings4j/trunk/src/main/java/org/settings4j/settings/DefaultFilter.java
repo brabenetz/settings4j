@@ -30,8 +30,8 @@ import org.settings4j.Filter;
 public class DefaultFilter implements Filter {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(DefaultFilter.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DefaultFilter.class);
+
     private final List<Pattern> includePatterns = new ArrayList<Pattern>();
     private final List<Pattern> excludePatterns = new ArrayList<Pattern>();
 

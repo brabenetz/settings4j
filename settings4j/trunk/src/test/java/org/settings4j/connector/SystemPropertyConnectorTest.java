@@ -35,8 +35,7 @@ import org.settings4j.contentresolver.UnionContentResolver;
 public class SystemPropertyConnectorTest extends TestCase {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(SystemPropertyConnectorTest.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(SystemPropertyConnectorTest.class);
 
     private File testDir;
 
@@ -125,7 +124,7 @@ public class SystemPropertyConnectorTest extends TestCase {
         IOUtils.copy(helloWorldIS, fileOutputStream);
         IOUtils.closeQuietly(helloWorldIS);
         IOUtils.closeQuietly(fileOutputStream);
-        LOG.info("helloWorld2Path: " + helloWorldPath);
+        LOG.info("helloWorld2Path: {}", helloWorldPath);
 
 
         System.setProperty("helloWorldPath", "file:org/settings4j/connector/HelloWorld2.txt");

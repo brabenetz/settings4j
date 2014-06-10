@@ -32,22 +32,23 @@ import org.settings4j.UtilTesting;
 public abstract class AbstractTestSettings4jConfig extends TestCase {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(AbstractTestSettings4jConfig.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(AbstractTestSettings4jConfig.class);
 
     /** {@inheritDoc} */
+    @Override
     protected void setUp() throws Exception {
         final File tmpFolder = UtilTesting.getTmpFolder();
-        LOG.info("Use temporary Folder: " + tmpFolder.getAbsolutePath());
+        LOG.info("Use temporary Folder: {}", tmpFolder.getAbsolutePath());
         FileUtils.deleteDirectory(tmpFolder);
 
         final File testFolder = UtilTesting.getTestFolder();
-        LOG.info("Use test Folder: " + testFolder.getAbsolutePath());
+        LOG.info("Use test Folder: {}", testFolder.getAbsolutePath());
         FileUtils.deleteDirectory(testFolder);
         super.setUp();
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void tearDown() throws Exception {
         final File tmpFolder = UtilTesting.getTmpFolder();
         FileUtils.deleteDirectory(tmpFolder);

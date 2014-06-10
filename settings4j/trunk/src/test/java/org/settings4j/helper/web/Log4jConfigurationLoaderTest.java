@@ -35,8 +35,7 @@ import org.springframework.mock.web.MockServletContext;
 public class Log4jConfigurationLoaderTest extends TestCase {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(Log4jConfigurationLoaderTest.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(Log4jConfigurationLoaderTest.class);
 
     private static final String LOG4J_CONFIG1_PROPERTIES = "org/settings4j/helper/web/log4j-Config.properties";
     private static final String LOG4J_CONFIG_XML = "org/settings4j/helper/web/log4j-Config1.xml";

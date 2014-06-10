@@ -34,8 +34,7 @@ import org.settings4j.Settings4jInstance;
 public class DefaultSettings implements Settings4jInstance {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(DefaultSettings.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DefaultSettings.class);
 
     private final List<Connector> connectors = Collections.synchronizedList(new ArrayList<Connector>());
     private final Map<String, Connector> connectorMap = Collections.synchronizedMap(new HashMap<String, Connector>());
@@ -147,11 +146,7 @@ public class DefaultSettings implements Settings4jInstance {
     }
 
     private void logDebugFoundValueForKey(final String type, final String key, final Connector connector) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Found " + type //
-                + " for Key '" + key //
-                + "' in connector '" + connector.getName() //
-                + "' (" + connector.getClass().getName() + ")");
-        }
+        LOG.debug("Found {} for Key '{}' in connector '{}' ({})", //
+            type, key, connector.getName(), connector.getClass().getName());
     }
 }

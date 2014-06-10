@@ -28,8 +28,7 @@ package org.settings4j.connector;
 public class SystemPropertyConnector extends AbstractPropertyConnector {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(SystemPropertyConnector.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(SystemPropertyConnector.class);
 
     /**
      * Very similar to <code>System.getProperty</code> except that the {@link SecurityException} is hidden.
@@ -43,7 +42,7 @@ public class SystemPropertyConnector extends AbstractPropertyConnector {
         try {
             return System.getProperty(key, def);
         } catch (final Throwable e) { // MS-Java throws com.ms.security.SecurityExceptionEx
-            LOG.debug("Was not allowed to read system property \"" + key + "\".");
+            LOG.debug("Was not allowed to read system property '{}'.", key);
             return def;
         }
     }

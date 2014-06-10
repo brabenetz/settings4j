@@ -36,8 +36,7 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 public class Settings4jContextLoader extends ContextLoader {
 
     /** General Logger for this Class. */
-    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
-        .getLog(Settings4jContextLoader.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(Settings4jContextLoader.class);
 
     /**
      * Name of servlet context parameter (i.e., "<code>settings4jContextConfigLocation</code>")
@@ -55,13 +54,9 @@ public class Settings4jContextLoader extends ContextLoader {
             createDefaultPropertiesLoader().initDefaultProperties(servletContext);
             // replace Placeholders in configLocations.
             final String configLocations = servletContext.getInitParameter(SETTINGS4J_CONFIG_LOCATION_PARAM);
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("settings4jContextConfigLocation configLocations: " + configLocations);
-            }
+            LOG.debug("settings4jContextConfigLocation configLocations: {}", configLocations);
             final String parsedConfigLocations = Settings4jPlaceholderConfigurer.parseStringValue(configLocations);
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("settings4jContextConfigLocation parsed configLocations: " + parsedConfigLocations);
-            }
+            LOG.debug("settings4jContextConfigLocation parsed configLocations: {}", parsedConfigLocations);
             
             wac.setConfigLocation(parsedConfigLocations);
         } else {
