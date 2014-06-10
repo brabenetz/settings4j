@@ -16,13 +16,14 @@
  *****************************************************************************/
 package org.settings4j.helper.spring;
 
-import java.util.HashSet;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
 import org.settings4j.Settings4j;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.util.PropertyPlaceholderHelper;
+import org.springframework.util.PropertyPlaceholderHelper.PlaceholderResolver;
 
 /**
  * Subclass of PropertyPlaceholderConfigurer uses the Settings4j API.
@@ -60,28 +61,11 @@ public class Settings4jPlaceholderConfigurer extends PropertyPlaceholderConfigur
      * 
      * @param strVal the String with the Paceholders
      * @return the parsed String
-     * @throws BeanDefinitionStoreException
-     *            if invalid values are encountered (Placeholders where no values where found).
+     * @throws BeanDefinitionStoreException if invalid values are encountered (Placeholders where no values where
+     *             found).
      */
-    public static String parseStringValue(final String strVal)
-            throws BeanDefinitionStoreException {
-        return parseStringValue(strVal, new Properties());
-    }
-
-    /**
-     * Parse the given String with Placeholder "${...}" and returns the result.
-     * <p>
-     * Placeholders will be resolved with Settings4j.
-     * 
-     * @param strVal the String with the Paceholders
-     * @param props The default Properties if no Value where found
-     * @return the parsed String
-     * @throws BeanDefinitionStoreException
-     *            if invalid values are encountered (Placeholders where no values where found).
-     */
-    public static String parseStringValue(final String strVal, final Properties props)
-            throws BeanDefinitionStoreException {
-        return parseStringValue(strVal, StringUtils.EMPTY, props);
+    public static String parseStringValue(final String strVal) throws BeanDefinitionStoreException {
+        return parseStringValue(strVal, StringUtils.EMPTY);
     }
 
     /**
@@ -92,10 +76,10 @@ public class Settings4jPlaceholderConfigurer extends PropertyPlaceholderConfigur
      * @param strVal the String with the Paceholders
      * @param prefix for all placehodlers.
      * @return the parsed String
-     * @throws BeanDefinitionStoreException
-     *            if invalid values are encountered (Placeholders where no values where found).
+     * @throws BeanDefinitionStoreException if invalid values are encountered (Placeholders where no values where
+     *             found).
      */
-    public static String parseStringValue(final String strVal, final String prefix)
+    public static String parseStringValue(final String strVal, final String prefix) //
             throws BeanDefinitionStoreException {
         return parseStringValue(strVal, prefix, new Properties());
     }
@@ -103,28 +87,44 @@ public class Settings4jPlaceholderConfigurer extends PropertyPlaceholderConfigur
     /**
      * Parse the given String with Placeholder "${...}" and returns the result.
      * <p>
-     * A Prefix for all Placeholders can be defined.
-     * e.g.: with the prefix "a/b/" the placeholder ${x} will be parsed as ${a/b/x})
-     * <p>
      * Placeholders will be resolved with Settings4j.
      * 
-     * @param strVal the String with the Placeholders.
+     * @param strVal the String with the Paceholders
      * @param prefix for all placehodlers.
      * @param props The default Properties if no Value where found
      * @return the parsed String
-     * @throws BeanDefinitionStoreException
-     *            if invalid values are encountered (Placeholders where no values where found).
+     * @throws BeanDefinitionStoreException if invalid values are encountered (Placeholders where no values where
+     *             found).
      */
     public static String parseStringValue(final String strVal, final String prefix, final Properties props)
             throws BeanDefinitionStoreException {
-        return createInstance(prefix).parseStringValue(strVal, props, new HashSet());
+        final PropertyPlaceholderHelper helper = new PropertyPlaceholderHelper(DEFAULT_PLACEHOLDER_PREFIX,
+            DEFAULT_PLACEHOLDER_SUFFIX, DEFAULT_VALUE_SEPARATOR, false);
+        return helper.replacePlaceholders(strVal, new Settings4jPlaceholderConfigurerResolver(prefix, props));
     }
 
-    private static Settings4jPlaceholderConfigurer createInstance(final String prefix) {
-        final Settings4jPlaceholderConfigurer placeholderConfigurer = new Settings4jPlaceholderConfigurer();
-        placeholderConfigurer.setPrefix(prefix);
-        return placeholderConfigurer;
-    }
+    /**
+     * PlaceholderResolver implementation can be used for
+     * {@link PropertyPlaceholderHelper#replacePlaceholders(String, PlaceholderResolver)}.
+     * 
+     * @author brabenetz
+     */
+    private static final class Settings4jPlaceholderConfigurerResolver implements PlaceholderResolver {
 
+        private final String prefix;
+        private final Properties props;
+
+
+        private Settings4jPlaceholderConfigurerResolver(final String prefix, final Properties props) {
+            this.prefix = prefix;
+            this.props = props;
+        }
+
+        public String resolvePlaceholder(final String placeholderName) {
+            final Settings4jPlaceholderConfigurer placeholderConfigurer = new Settings4jPlaceholderConfigurer();
+            placeholderConfigurer.setPrefix(prefix);
+            return placeholderConfigurer.resolvePlaceholder(placeholderName, props);
+        }
+    }
 
 }
