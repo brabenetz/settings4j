@@ -53,7 +53,8 @@ public class Log4jConfigurationLoaderTest extends TestCase {
         TestUtils.reconfigureSettings4jWithDefaultConfig();
 
         // clearProperties
-        TestUtils.clearSystemProperties(new String[] {LOG4J_CONFIG_KEY, LOG4J_DOCUMENT_BUILDER_FACTORY});
+        System.clearProperty(LOG4J_CONFIG_KEY);
+        System.clearProperty(LOG4J_DOCUMENT_BUILDER_FACTORY);
 
         // Configure Log4j
         DOMConfigurator.configure(Loader.getResource("org/settings4j/helper/web/log4j-Config-Default.xml"));
@@ -62,7 +63,8 @@ public class Log4jConfigurationLoaderTest extends TestCase {
     /** {@inheritDoc} */
     @Override
     protected void tearDown() throws Exception {
-        TestUtils.clearSystemProperties(new String[] {LOG4J_CONFIG_KEY, LOG4J_DOCUMENT_BUILDER_FACTORY});
+        System.clearProperty(LOG4J_CONFIG_KEY);
+        System.clearProperty(LOG4J_DOCUMENT_BUILDER_FACTORY);
         DOMConfigurator.configure(Loader.getResource("log4j.xml"));
         InMemoryLog4jAppender.linesClear();
     }

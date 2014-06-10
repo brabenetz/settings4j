@@ -323,8 +323,8 @@ public class DOMConfigurator {
         connector.setName(connectorName);
 
         final Connector[] subConnectors = getConnectors(connectorElement);
-        for (int i = 0; i < subConnectors.length; i++) {
-            connector.addConnector(subConnectors[i]);
+        for (Connector subConnector : subConnectors) {
+            connector.addConnector(subConnector);
         }
 
         Filter filter = null;
@@ -907,8 +907,7 @@ public class DOMConfigurator {
                     // Expression like ${connector.FsConnector.object['...']} or
                     // ${connector.ClassPathConnector.string['...']}
                     final Map<String, ELConnectorWrapper> connectorMap = new HashMap<String, ELConnectorWrapper>();
-                    for (int i = 0; i < connectors.length; i++) {
-                        final Connector connector = connectors[i];
+                    for (Connector connector : connectors) {
                         connectorMap.put(connector.getName(), new ELConnectorWrapper(new Connector[] {connector}));
                     }
                     context.put("connector", connectorMap);

@@ -44,7 +44,7 @@ public class TestDefaultFallbackConfiguration extends TestCase {
     /** {@inheritDoc} */
     @Override
     protected void tearDown() throws Exception {
-        TestUtils.clearSystemProperty("testDefaultProperty");
+        System.clearProperty("testDefaultProperty");
         super.tearDown();
     }
 

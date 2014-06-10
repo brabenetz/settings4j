@@ -60,8 +60,8 @@ public class ELConnectorWrapper {
             public String transform(final String input) {
                 if (input != null) {
                     final String key = input.toString();
-                    for (int i = 0; i < ELConnectorWrapper.this.connectors.length; i++) {
-                        final String result = ELConnectorWrapper.this.connectors[i].getString(key);
+                    for (Connector connector : ELConnectorWrapper.this.connectors) {
+                        final String result = connector.getString(key);
                         if (result != null) {
                             return result;
                         }
@@ -85,8 +85,8 @@ public class ELConnectorWrapper {
             public byte[] transform(final String input) {
                 if (input != null) {
                     final String key = input.toString();
-                    for (int i = 0; i < ELConnectorWrapper.this.connectors.length; i++) {
-                        final byte[] result = ELConnectorWrapper.this.connectors[i].getContent(key);
+                    for (Connector connector : ELConnectorWrapper.this.connectors) {
+                        final byte[] result = connector.getContent(key);
                         if (result != null) {
                             return result;
                         }
@@ -110,8 +110,8 @@ public class ELConnectorWrapper {
             public Object transform(final String input) {
                 if (input != null) {
                     final String key = input.toString();
-                    for (int i = 0; i < ELConnectorWrapper.this.connectors.length; i++) {
-                        final Object result = ELConnectorWrapper.this.connectors[i].getObject(key);
+                    for (Connector connector : ELConnectorWrapper.this.connectors) {
+                        final Object result = connector.getObject(key);
                         if (result != null) {
                             return result;
                         }

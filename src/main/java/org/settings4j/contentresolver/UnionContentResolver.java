@@ -67,8 +67,8 @@ public class UnionContentResolver implements ContentResolver {
     /** {@inheritDoc} */
     public byte[] getContent(final String key) {
         byte[] result = null;
-        for (int i = 0; i < this.contentResolvers.length; i++) {
-            result = this.contentResolvers[i].getContent(key);
+        for (ContentResolver contentResolver : contentResolvers) {
+            result = contentResolver.getContent(key);
             if (result != null) {
                 return result;
             }

@@ -17,8 +17,6 @@
 
 package org.settings4j.test;
 
-import java.util.Properties;
-
 import org.settings4j.Settings4j;
 
 
@@ -42,25 +40,4 @@ public final class TestUtils {
         Settings4j.getString("something"); // reconfigure Settings4j with default values
     }
 
-    /**
-     * System.clearProperty(...) doesn't exist in JDK-1.4.
-     * 
-     * @param property the Property to clear
-     */
-    public static void clearSystemProperty(final String property) {
-        clearSystemProperties(new String[]{property});
-    }
-
-    /**
-     * System.clearProperty(...) doesn't exist in JDK-1.4.
-     * 
-     * @param properties the Properties to clear
-     */
-    public static void clearSystemProperties(final String[] properties) {
-        final Properties props = System.getProperties();
-        for (int i = 0; i < properties.length; i++) {
-            props.remove(properties[i]);
-        }
-        System.setProperties(props);
-    }
 }

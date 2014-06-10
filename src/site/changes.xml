@@ -16,14 +16,24 @@
 			<!-- 
 			<action dev="brabenetz" type="fix" issue="1">Bugfix 1</action>
 			 -->
-			<action dev="brabenetz" type="update">
+			<action dev="brabenetz" type="update" date="2014-06-10">
+				replace dependency commons logging with slf4j-api.
+			</action>
+			<action dev="brabenetz" type="update" date="2014-06-10">
+				replace dependency commons-lang with commons-lang3.
+			</action>
+			<action dev="brabenetz" type="update" date="2014-06-10">
+				replace dependency commons-collections with commons-collections4.
+			</action>
+			<action dev="brabenetz" type="update" date="2014-06-10">
+				update dependencies which works with JDK5 like Spring 3.x.
+			</action>
+			<action dev="brabenetz" type="update" date="2014-01-07" >
 				Use Generics for Collections like Settings4j.getConnectors().
 			</action>
 			<!--
 			TODO:
-				- replace Iterator with for-each
-				- replace commons logging with slf4j-api
-				- replace commons-lang with commons-lang3 (also update other dependencies).
+				- update UnitTests to JUnit 4
 			 -->
 		</release>
 		<release version="1.0" date="2013-05-20" description="First Release of settings4j. Requires JDK 1.4 or above.">
