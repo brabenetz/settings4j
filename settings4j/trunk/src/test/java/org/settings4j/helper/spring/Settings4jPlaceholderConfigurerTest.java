@@ -24,6 +24,7 @@ import java.util.prefs.Preferences;
 
 import junit.framework.TestCase;
 
+import org.apache.commons.lang3.StringUtils;
 import org.settings4j.connector.PreferencesConnector;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.objectresolver.SpringConfigObjectResolver;
@@ -43,6 +44,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
     private static final String PREF_UNITTEST_NODE = "org/settings4j/unittest";
 
     /** {@inheritDoc} */
+    @Override
     protected void setUp() throws Exception {
         removeUnitTestNode(Preferences.userRoot());
         removeUnitTestNode(Preferences.systemRoot());
@@ -155,7 +157,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
 
         // start test
         String strVal = "${a/b/test-1},\n${a/b/test-2},\n${a/b/test-3}";
-        String result = Settings4jPlaceholderConfigurer.parseStringValue(strVal, props);
+        String result = Settings4jPlaceholderConfigurer.parseStringValue(strVal, StringUtils.EMPTY, props);
 
         // validate result
         assertEquals("value-1a,\nvalue-2b,\nvalue-3b", result);
