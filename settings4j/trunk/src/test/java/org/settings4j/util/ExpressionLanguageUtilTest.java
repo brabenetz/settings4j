@@ -20,9 +20,9 @@ package org.settings4j.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.collections.map.LazyMap;
-
 import junit.framework.TestCase;
+
+import org.apache.commons.collections4.map.LazyMap;
 
 /**
  * Test ExpressionLanguage Syntax.
@@ -88,7 +88,7 @@ public class ExpressionLanguageUtilTest extends TestCase {
     }
 
     /**
-     * TestCase for {@link LazyMap#decorate(Map, org.apache.commons.collections.Factory)}
+     * TestCase for {@link LazyMap#lazyMap(Map, org.apache.commons.collections4.Factory)}
      * and {@link MatchPatternTransformer}.
      * 
      * @throws Exception if an error occurs.
@@ -102,7 +102,7 @@ public class ExpressionLanguageUtilTest extends TestCase {
         /*
          * A complex Test to parse a LazyMap and access the dynamic generated values
          */
-        context.put("test", LazyMap.decorate(new HashMap(), new MatchPatternTransformer("testString")));
+        context.put("test", LazyMap.lazyMap(new HashMap<String, Boolean>(), new MatchPatternTransformer("testString")));
         
         assertEquals(true, ((Boolean) ExpressionLanguageUtil.evaluateExpressionLanguage(//
             "${test['testString']}", context, Boolean.class)).booleanValue());

@@ -19,7 +19,7 @@ package org.settings4j.helper.web;
 
 import junit.framework.TestCase;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.helpers.Loader;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.settings4j.test.InMemoryLog4jAppender;
@@ -42,26 +42,28 @@ public class Log4jConfigurationLoaderTest extends TestCase {
     private static final String LOG4J_CONFIG_XML = "org/settings4j/helper/web/log4j-Config1.xml";
     private static final String LOG4J_CONFIG2_XML = "org/settings4j/helper/web/log4j-Config2.xml";
     private static final String LOG4J_CONFIG3_XML = //
-            "file:./src/test/resources/org/settings4j/helper/web/log4j-Config3.xml";
+    "file:./src/test/resources/org/settings4j/helper/web/log4j-Config3.xml";
     private static final String LOG4J_CONFIG4_CORRUPT_XML = "org/settings4j/helper/web/log4j-Config4-corrupt.xml";
 
     private static final String LOG4J_CONFIG_KEY = "myDummyKey";
     private static final String LOG4J_DOCUMENT_BUILDER_FACTORY = "javax.xml.parsers.DocumentBuilderFactory";
 
     /** {@inheritDoc} */
+    @Override
     protected void setUp() throws Exception {
         TestUtils.reconfigureSettings4jWithDefaultConfig();
-        
+
         // clearProperties
-        TestUtils.clearSystemProperties(new String[]{LOG4J_CONFIG_KEY, LOG4J_DOCUMENT_BUILDER_FACTORY});
-        
+        TestUtils.clearSystemProperties(new String[] {LOG4J_CONFIG_KEY, LOG4J_DOCUMENT_BUILDER_FACTORY});
+
         // Configure Log4j
         DOMConfigurator.configure(Loader.getResource("org/settings4j/helper/web/log4j-Config-Default.xml"));
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void tearDown() throws Exception {
-        TestUtils.clearSystemProperties(new String[]{LOG4J_CONFIG_KEY, LOG4J_DOCUMENT_BUILDER_FACTORY});
+        TestUtils.clearSystemProperties(new String[] {LOG4J_CONFIG_KEY, LOG4J_DOCUMENT_BUILDER_FACTORY});
         DOMConfigurator.configure(Loader.getResource("log4j.xml"));
         InMemoryLog4jAppender.linesClear();
     }
@@ -92,7 +94,7 @@ public class Log4jConfigurationLoaderTest extends TestCase {
     public void testInitLog4jConfigurationEmptyLog4jPath() {
         // Prepare servletContext with Default Properties as InitParameter.
         initLog4jConfigurationHappyPath(null);
-        
+
         // assert PreReQuirements
         InMemoryLog4jAppender.linesClear();
 
@@ -160,7 +162,7 @@ public class Log4jConfigurationLoaderTest extends TestCase {
         assertEquals("[CONFIG3]  INFO test", InMemoryLog4jAppender.linesGet(0).toString().trim());
 
     }
-    
+
     /**
      * The normal usage of the DefaultPropertiesLoader: Load default Properties from ServletContext and add Connector to
      * Settings4j.
@@ -168,7 +170,7 @@ public class Log4jConfigurationLoaderTest extends TestCase {
     public void testInitLog4jConfigurationInvalideLog4jFactory() {
 
         System.setProperty(LOG4J_DOCUMENT_BUILDER_FACTORY, "NotExistintg"); //
-        
+
         initLog4jConfigurationHappyPath(LOG4J_CONFIG_XML);
 
         // Log SomeThing
@@ -179,6 +181,7 @@ public class Log4jConfigurationLoaderTest extends TestCase {
         assertEquals("[CONFIG-DEFAULT]  INFO test", InMemoryLog4jAppender.linesGet(0).toString().trim());
 
     }
+
     /**
      * The normal usage of the DefaultPropertiesLoader: Load default Properties from ServletContext and add Connector to
      * Settings4j.

@@ -20,10 +20,10 @@ package org.settings4j.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections4.Transformer;
 
 /**
- * This Transformer implements the function for a {@link org.apache.commons.collections.map.LazyMap}
+ * This Transformer implements the function for a {@link org.apache.commons.collections4.map.LazyMap}
  * with Key=String (=RegEx) and Value=Boolean (=Result).
  * 
  * <pre>
@@ -46,7 +46,7 @@ import org.apache.commons.collections.Transformer;
  * @see java.util.regex.Pattern
  * @author Harald.Brabenetz
  */
-public class MatchPatternTransformer implements Transformer {
+public class MatchPatternTransformer implements Transformer<String, Boolean> {
 
     /** General Logger for this Class. */
     private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory
@@ -64,9 +64,9 @@ public class MatchPatternTransformer implements Transformer {
 
 
     /** {@inheritDoc} */
-    public Object transform(final Object input) {
+    public Boolean transform(final String input) {
         Boolean result = Boolean.FALSE;
-        if (input instanceof String) {
+        if (input != null) {
             final String patternString = input.toString();
             try {
                 final Pattern pattern = Pattern.compile(patternString);
