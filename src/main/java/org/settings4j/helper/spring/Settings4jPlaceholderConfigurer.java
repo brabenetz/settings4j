@@ -18,7 +18,7 @@ package org.settings4j.helper.spring;
 
 import java.util.Properties;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.settings4j.Settings4j;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;

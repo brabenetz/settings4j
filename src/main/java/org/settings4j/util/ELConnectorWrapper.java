@@ -20,8 +20,8 @@ package org.settings4j.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.collections.Transformer;
-import org.apache.commons.collections.map.LazyMap;
+import org.apache.commons.collections4.Transformer;
+import org.apache.commons.collections4.map.LazyMap;
 import org.settings4j.Connector;
 
 /**
@@ -54,14 +54,14 @@ public class ELConnectorWrapper {
      * 
      * @return the first founded Value in all connectors
      */
-    public Map getString() {
-        final Transformer transformer = new Transformer() {
+    public Map<String, String> getString() {
+        final Transformer<String, String> transformer = new Transformer<String, String>() {
 
-            public Object transform(final Object input) {
-                if (input instanceof String) {
+            public String transform(final String input) {
+                if (input != null) {
                     final String key = input.toString();
                     for (int i = 0; i < ELConnectorWrapper.this.connectors.length; i++) {
-                        final Object result = ELConnectorWrapper.this.connectors[i].getString(key);
+                        final String result = ELConnectorWrapper.this.connectors[i].getString(key);
                         if (result != null) {
                             return result;
                         }
@@ -70,7 +70,7 @@ public class ELConnectorWrapper {
                 return null;
             }
         };
-        return LazyMap.decorate(new HashMap(), transformer);
+        return LazyMap.lazyMap(new HashMap<String, String>(), transformer);
     }
 
     /**
@@ -79,14 +79,14 @@ public class ELConnectorWrapper {
      * 
      * @return the first founded Value in all connectors
      */
-    public Map getContent() {
-        final Transformer transformer = new Transformer() {
+    public Map<String, byte[]> getContent() {
+        final Transformer<String, byte[]> transformer = new Transformer<String, byte[]>() {
 
-            public Object transform(final Object input) {
-                if (input instanceof String) {
+            public byte[] transform(final String input) {
+                if (input != null) {
                     final String key = input.toString();
                     for (int i = 0; i < ELConnectorWrapper.this.connectors.length; i++) {
-                        final Object result = ELConnectorWrapper.this.connectors[i].getContent(key);
+                        final byte[] result = ELConnectorWrapper.this.connectors[i].getContent(key);
                         if (result != null) {
                             return result;
                         }
@@ -95,7 +95,7 @@ public class ELConnectorWrapper {
                 return null;
             }
         };
-        return LazyMap.decorate(new HashMap(), transformer);
+        return LazyMap.lazyMap(new HashMap<String, byte[]>(), transformer);
     }
 
     /**
@@ -104,11 +104,11 @@ public class ELConnectorWrapper {
      * 
      * @return the first founded Value in all connectors
      */
-    public Map getObject() {
-        final Transformer transformer = new Transformer() {
+    public Map<String, Object> getObject() {
+        final Transformer<String, Object> transformer = new Transformer<String, Object>() {
 
-            public Object transform(final Object input) {
-                if (input instanceof String) {
+            public Object transform(final String input) {
+                if (input != null) {
                     final String key = input.toString();
                     for (int i = 0; i < ELConnectorWrapper.this.connectors.length; i++) {
                         final Object result = ELConnectorWrapper.this.connectors[i].getObject(key);
@@ -120,6 +120,6 @@ public class ELConnectorWrapper {
                 return null;
             }
         };
-        return LazyMap.decorate(new HashMap(), transformer);
+        return LazyMap.lazyMap(new HashMap<String, Object>(), transformer);
     }
 }

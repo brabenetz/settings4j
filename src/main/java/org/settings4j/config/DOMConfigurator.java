@@ -32,8 +32,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.lang.BooleanUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.settings4j.Connector;
 import org.settings4j.ContentResolver;
 import org.settings4j.Filter;
@@ -639,6 +639,7 @@ public class DOMConfigurator {
      * @param mappingElement The XML Mapping Element.
      * @return the Map instance (Key = String; Value = String).
      */
+    @SuppressWarnings("unchecked")
     protected Map parseMapping(final Element mappingElement) {
         final String mappingName = mappingElement.getAttribute(NAME_ATTR);
 

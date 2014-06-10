@@ -19,7 +19,7 @@ package org.settings4j.objectresolver;
 
 import java.util.Properties;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.settings4j.ContentResolver;
 import org.settings4j.helper.spring.ByteArrayXMLApplicationContext;
 
