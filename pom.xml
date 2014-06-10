@@ -466,12 +466,6 @@
 		  <version>3.1</version>
 		</dependency>
 		<dependency>
-		  <groupId>org.apache.commons</groupId>
-		  <artifactId>commons-lang3</artifactId>
-		  <!-- commons-lang3 3.2+ requires JDK 6 -->
-		  <version>3.1</version>
-		</dependency>
-		<dependency>
 			<!-- Needed for FSContentResolver -->
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
