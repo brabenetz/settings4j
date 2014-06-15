@@ -3,10 +3,10 @@
                                     ------------------
                                     Brabenetz Harald
                                     ------------------
-                                    11-05-2008
+                                    15-06-2014
                                     ------------------
 
-{Overview}
+{Settings4j vs. Apache Commons Configuration}
 
 	{{{http://commons.apache.org/proper/commons-configuration/}Apache Commons Configuration}} is the most similar
 	library to settings4j.\
