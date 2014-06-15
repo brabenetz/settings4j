@@ -20,6 +20,7 @@
 			<item name="Changes" href="changes-report.html" />
 			<item name="Logging" href="logging.html" />
 			<item name="Recommendation" href="docuRecommendation.html" />
+			<item name="Commons-Configuration" href="commonsConfiguration.html" />
 			<item name="Archiv" href="http://settings4j.sourceforge.net/archiv" />
 		</menu>
 		<menu name="Settings4j Config">

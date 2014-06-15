@@ -1,0 +1,88 @@
+                                    ------------------
+                                    Settings4j vs. commons-configuration
+                                    ------------------
+                                    Brabenetz Harald
+                                    ------------------
+                                    11-05-2008
+                                    ------------------
+
+{Overview}
+
+	{{{http://commons.apache.org/proper/commons-configuration/}Apache Commons Configuration}} is the most similar
+	library to settings4j.\
+	Commons Configuration has also like settings4j the ability to mix configurations from heterogeneous sources and treat
+	them like a single logic configuration.
+	
+	The main differences are (as far as I know):
+	
+	* Commons configurations has more Sources/Connectors (see {{Compare Sources/Connectors}})
+	
+	* Settings4j can also handle Objects and byte[] Content.
+	
+	* Settings4j can be accessed in a static way which made it much easier to use.
+	
+	* Settings4j has a default configuration which includes settings in System Properties, JNDI, Preferences and Classpath 
+
+{Compare Sources/Connectors}
+
+*-----------------------------------+-------------------------------+------------------------------+
+|                                   | <<Commons Configuration>>     | <<Settings4j>>
+*-----------------------------------+-------------------------------+------------------------------+
+| Properties files                  |   PropertiesConfiguration     | PropertyFileConnector
+*-----------------------------------+-------------------------------+------------------------------+
+| Property list files (plist)       |   PropertyListConfiguration   | -
+*-----------------------------------+-------------------------------+------------------------------+
+| JNDI                              |   JNDIConfiguration           | JndiConnector
+*-----------------------------------+-------------------------------+------------------------------+
+| System properties                 |   SystemConfiguration         | SystemPropertyConnector
+*-----------------------------------+-------------------------------+------------------------------+
+| XML                               |   XMLConfiguration            | -
+*-----------------------------------+-------------------------------+------------------------------+
+| Windows INI files                 |   INIConfiguration            | -
+*-----------------------------------+-------------------------------+------------------------------+
+| JDBC Datasource                   |   DatabaseConfiguration       | -
+*-----------------------------------+-------------------------------+------------------------------+
+| java.util.prefs.Preferences       |   -                           | PreferencesConnector
+*-----------------------------------+-------------------------------+------------------------------+
+| Applet parameters                 |   AppletConfiguration         | -
+*-----------------------------------+-------------------------------+------------------------------+
+| Servlet parameters                |   ServletConfiguration        | -
+*-----------------------------------+-------------------------------+------------------------------+
+| File System                       |   -                           | FSConnector
+*-----------------------------------+-------------------------------+------------------------------+
+| Classpath                         |   -                           | ClasspathConnector
+*-----------------------------------+-------------------------------+------------------------------+
+
+	The list maybe not complete. Everyone can implement his own Converters for Commons-Configuration or Connectors for Settings4j.
+
+{Compare provided/transformed Values}
+
+~~ Sympols: http://de.wikipedia.org/wiki/Unicodeblock_Dingbats
+*-----------------------------------+-------------------------------+------------------------------+
+|                                   | <<Commons Configuration>>     | <<Settings4j>>
+*-----------------------------------+-------------------------------+------------------------------+
+| String                            |   \u2714                      | \u2714
+*-----------------------------------+-------------------------------+------------------------------+
+| byte[] content                    |   -                           | \u2714
+*-----------------------------------+-------------------------------+------------------------------+
+| Object                            |   -                           | \u2714
+*-----------------------------------+-------------------------------+------------------------------+
+| BigDecimal                        |   \u2714                      | -
+*-----------------------------------+-------------------------------+------------------------------+
+| BigInteger                        |   \u2714                      | -
+*-----------------------------------+-------------------------------+------------------------------+
+| boolean                           |   \u2714                      | -
+*-----------------------------------+-------------------------------+------------------------------+
+| byte                              |   \u2714                      | -
+*-----------------------------------+-------------------------------+------------------------------+
+| double                            |   \u2714                      | -
+*-----------------------------------+-------------------------------+------------------------------+
+| float                             |   \u2714                      | -
+*-----------------------------------+-------------------------------+------------------------------+
+| int                               |   \u2714                      | -
+*-----------------------------------+-------------------------------+------------------------------+
+| long                              |   \u2714                      | -
+*-----------------------------------+-------------------------------+------------------------------+
+| short                             |   \u2714                      | -
+*-----------------------------------+-------------------------------+------------------------------+
+	
