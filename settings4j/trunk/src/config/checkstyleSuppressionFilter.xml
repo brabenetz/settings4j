@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+    "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+    "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+	<!-- VisibilityModifier: JUnit member Field from Type ExternalResource with Rule-Annotations must be public. -->
+	<!-- MagicNumber: Make no sense in unitTests. e.g.: assert a List Size with an expected magic number. -->
+	<!-- Javadoc: for UnitTests Method names should be self-explanatory. -->
+    <suppress files=".*Test\.java" checks="Javadoc|MagicNumberCheck|VisibilityModifier"/>
+</suppressions>
