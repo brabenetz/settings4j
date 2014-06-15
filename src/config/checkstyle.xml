@@ -29,6 +29,10 @@
     <!-- settings4j-2009-11-27: Prefer Warnings instead of Copilation errors -->
     <!-- See http://checkstyle.sourceforge.net/config.html#Severity -->
     <property name="severity" value="warning"/>
+	
+	<module name="SuppressionFilter">
+		<property name="file" value="${basedir}/src/config/checkstyleSuppressionFilter.xml" />
+	</module>
 
     <!-- Checks that a package-info.java file exists for each package.     -->
     <!-- See http://checkstyle.sourceforge.net/config_javadoc.html#JavadocPackage -->
@@ -50,16 +54,17 @@
         <!--     value="${basedir}/java.header"/>                   -->
         <property name="headerFile" value="${checkstyle.header.file}"/>
         <property name="ignoreLines" value="2"/>
+        <property name="fileExtensions" value="java"/>
     </module>
-    
+
     <!-- Checks for Size Violations.                    -->
     <!-- See http://checkstyle.sourceforge.net/config_sizes.html#FileLength -->
     <module name="FileLength"/>
-        
+
     <!-- Checks for whitespace                               -->
     <!-- See http://checkstyle.sourceforge.net/config_whitespace.html#FileTabCharacter -->
     <module name="FileTabCharacter"/>
-    
+
     <!-- Checks whether files end with a new line.                        -->
     <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
     <!-- Doesn't Work on Mac
@@ -75,9 +80,11 @@
 
     <module name="TreeWalker">
 
+        <module name="FileContentsHolder"/>
+
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
-        <!-- settings4j-2009-11-27: add scope=public and allow no Javadoc for Getter and Setter  -->
+        <!-- settings4j-2009-11-27: add scope=protected and allow no Javadoc for Getter and Setter  -->
         <module name="JavadocMethod">
            <property name="allowUndeclaredRTE" value="true"/>
            <property name="allowMissingPropertyJavadoc" value="true"/>
@@ -102,17 +109,11 @@
         <module name="StaticVariableName"/>
         <module name="TypeName"/>
 
-
-
-        <!-- Following interprets the header file as regular expressions. -->
-        <!-- <module name="RegexpHeader"/>                                -->
-
-
         <!-- Checks for imports                              -->
-        <!-- See http://checkstyle.sf.net/config_import.html -->
-
+        <!-- See http://checkstyle.sf.net/config_imports.html -->
+        
         <module name="AvoidStarImport"/>
-        <module name="IllegalImport"/> 
+        <module name="IllegalImport"/>
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>
 
@@ -186,14 +187,20 @@
         <!-- See http://checkstyle.sf.net/config_misc.html -->
         <module name="ArrayTypeStyle"/>
         <module name="FinalParameters"/>
+        <module name="Regexp">
+            <metadata name="net.sf.eclipsecs.core.comment" value="Line has trailing spaces."/>
+            <property name="format" value="\s+$"/>
+            <property name="message" value="Line has trailing spaces."/>
+        </module>
         <module name="TodoComment"/>
         <module name="UpperEll"/>
 
     </module>
 
+    <!-- http://checkstyle.sourceforge.net/config.html#SuppressionCommentFilter -->
     <module name="SuppressionCommentFilter">
-        <property name="offCommentFormat" value="Checkstyle:OFF ([\w\|.*]+)"/>
-        <property name="onCommentFormat" value="Checkstyle:ON ([\w\|.*]+)"/>
-        <property name="checkFormat" value="$1"/>
+        <property name="offCommentFormat" value="(Checkstyle|CHECKSTYLE)\:OFF\s([\w\|.*]+)"/>
+        <property name="onCommentFormat" value="(Checkstyle|CHECKSTYLE)\:ON\s([\w\|.*]+)"/>
+        <property name="checkFormat" value="$2"/>
     </module>
 </module>
