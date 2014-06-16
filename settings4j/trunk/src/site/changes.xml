@@ -16,6 +16,14 @@
 			<!-- 
 			<action dev="brabenetz" type="fix" issue="1">Bugfix 1</action>
 			 -->
+			<action dev="brabenetz" type="add" date="2014-06-16">
+				Add ConfigurationToConnectorAdapter for Apache Commons Configuration.
+				Now all Configuration implementations from commons-configuration can be used for Settings4j.
+			</action>
+			<action dev="brabenetz" type="add" date="2014-06-15">
+				Add implementation for  Settings4jInstance#addConnector(Connector, ConnectorPosition).
+				Used like: addConnector(myConnector, ConnectorPositions.atFirst())
+			</action>
 			<action dev="brabenetz" type="update" date="2014-06-10">
 				replace dependency commons logging with slf4j-api.
 			</action>
