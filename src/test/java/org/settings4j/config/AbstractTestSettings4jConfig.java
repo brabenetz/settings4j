@@ -22,7 +22,7 @@ import java.io.File;
 import junit.framework.TestCase;
 
 import org.apache.commons.io.FileUtils;
-import org.settings4j.UtilTesting;
+import org.settings4j.test.TestUtils;
 
 /**
  * Abstract Class for TestCases .
@@ -37,11 +37,11 @@ public abstract class AbstractTestSettings4jConfig extends TestCase {
     /** {@inheritDoc} */
     @Override
     protected void setUp() throws Exception {
-        final File tmpFolder = UtilTesting.getTmpFolder();
+        final File tmpFolder = TestUtils.getTmpFolder();
         LOG.info("Use temporary Folder: {}", tmpFolder.getAbsolutePath());
         FileUtils.deleteDirectory(tmpFolder);
 
-        final File testFolder = UtilTesting.getTestFolder();
+        final File testFolder = TestUtils.getTestFolder();
         LOG.info("Use test Folder: {}", testFolder.getAbsolutePath());
         FileUtils.deleteDirectory(testFolder);
         super.setUp();
@@ -50,9 +50,9 @@ public abstract class AbstractTestSettings4jConfig extends TestCase {
     /** {@inheritDoc} */
     @Override
     protected void tearDown() throws Exception {
-        final File tmpFolder = UtilTesting.getTmpFolder();
+        final File tmpFolder = TestUtils.getTmpFolder();
         FileUtils.deleteDirectory(tmpFolder);
-        final File testFolder = UtilTesting.getTestFolder();
+        final File testFolder = TestUtils.getTestFolder();
         FileUtils.deleteDirectory(testFolder);
         super.tearDown();
     }

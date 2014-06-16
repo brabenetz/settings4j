@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE settings4j:configuration SYSTEM "http://settings4j.org/archiv/1.0.0-alpha/XMLSchema/settings4j.dtd">
+<settings4j:configuration xmlns:settings4j='http://settings4j.org/'>
+
+	<connector name="SystemPropertyConnector" class="org.settings4j.connector.SystemPropertyConnector" />
+
+	<connector name="ClasspathConnector" class="org.settings4j.connector.ClasspathConnector" />
+
+</settings4j:configuration>
