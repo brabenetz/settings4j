@@ -79,7 +79,7 @@ public interface Settings4jInstance {
 
     /**
      * Add a custom {@link Connector} to the right position in relation to the other connectors.<br />
-     * This method can be used to add custom connectors into th e{@link Settings4jInstance}
+     * This method can be used to add custom connectors into the {@link Settings4jInstance}
      * <p>
      * <h4>Example usage 1:</h4>
      * 
