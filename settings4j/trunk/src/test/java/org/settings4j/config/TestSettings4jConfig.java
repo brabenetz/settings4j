@@ -29,7 +29,7 @@ import org.apache.commons.io.FileUtils;
 import org.settings4j.Connector;
 import org.settings4j.Settings4jInstance;
 import org.settings4j.Settings4jRepository;
-import org.settings4j.UtilTesting;
+import org.settings4j.test.TestUtils;
 import org.settings4j.settings.SettingsManager;
 
 /**
@@ -43,7 +43,7 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
      * Test parsing of defaultsettings4j.xml (FALLBACK-Configuration).
      */
     public void testDefaultSettings4jConfig() {
-        final Settings4jRepository settingsRepository = UtilTesting
+        final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository(SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
 
         final Settings4jInstance settings = settingsRepository.getSettings();
@@ -65,7 +65,7 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
      * 
      */
     public void testCorruptConfig() {
-        final Settings4jRepository settingsRepository = UtilTesting
+        final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigCorrupt.xml");
 
         assertEquals(0, settingsRepository.getSettings().getConnectors().size());
@@ -78,13 +78,13 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
      * @throws Exception in case of an error. 
      */
     public void testFSConfigTempFolder() throws Exception {
-        final Settings4jRepository settingsRepository = UtilTesting
+        final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigFSTempfolder.xml");
 
         // store values into the default java temporary directory with subfolder "Settings4j"
         // String tmpdir = System.getProperty("java.io.tmpdir");
         final Settings4jInstance settings = settingsRepository.getSettings();
-        final File tmpFolder = UtilTesting.getTmpFolder();
+        final File tmpFolder = TestUtils.getTmpFolder();
         final File fileXyz = new File(tmpFolder, "xyz");
         assertFalse(fileXyz.exists());
         FileUtils.writeStringToFile(fileXyz, "abc", "UTF-8");
@@ -114,13 +114,13 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
      * @throws Exception in case of an error. 
      */
     public void testFSConfigTestFolder() throws Exception {
-        final Settings4jRepository settingsRepository = UtilTesting
+        final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigFSTestfolder.xml");
 
         // store values into the default java temporary directory with subfolder "Settings4j"
         // String tmpdir = System.getProperty("java.io.tmpdir");
         final Settings4jInstance settings = settingsRepository.getSettings();
-        final File testFolder = UtilTesting.getTestFolder();
+        final File testFolder = TestUtils.getTestFolder();
         final File fileXyz = new File(testFolder, "xyz");
         assertFalse(fileXyz.exists());
         FileUtils.writeStringToFile(fileXyz, "abc", "UTF-8");
@@ -181,7 +181,7 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
 
 
     private void testCaching(final String settingsRepositoryUrl, final String objectKey, final boolean mustBeTheSame) {
-        final Settings4jRepository settingsRepository = UtilTesting
+        final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository(settingsRepositoryUrl);
 
         final Settings4jInstance settings = settingsRepository.getSettings();
@@ -203,7 +203,7 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
      */
     public void testObjectResolverConfig4Spring() throws Exception {
 
-        final Settings4jRepository settingsRepository = UtilTesting
+        final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigObjectResolver4Spring.xml");
 
         final String key1 = "org/settings4j/objectresolver/testSpring1"; // spring-configuration
@@ -253,7 +253,7 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
      * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromContent(byte[])}.
      */
     public void testPropertyFileConfig() {
-        final Settings4jRepository settingsRepository = UtilTesting
+        final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFile.xml");
 
         final Settings4jInstance settings = settingsRepository.getSettings();
@@ -268,7 +268,7 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
      * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromPath(String)} with classpath url.
      */
     public void testPropertyFileConfigFromPath1() {
-        final Settings4jRepository settingsRepository = UtilTesting
+        final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFileFromPath1.xml");
 
         final Settings4jInstance settings = settingsRepository.getSettings();
@@ -283,7 +283,7 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
      * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromPath(String)} with filepath url.
      */
     public void testPropertyFileConfigFromPath2() {
-        final Settings4jRepository settingsRepository = UtilTesting
+        final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFileFromPath2.xml");
 
         final Settings4jInstance settings = settingsRepository.getSettings();
@@ -298,7 +298,7 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
      * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromPath(String)} with empty String.
      */
     public void testPropertyFileConfigFromPathException1() {
-        final Settings4jRepository settingsRepository = UtilTesting
+        final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFileFromPathException1.xml");
 
         final Settings4jInstance settings = settingsRepository.getSettings();
@@ -311,7 +311,7 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
      * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromPath(String)} without prefix.
      */
     public void testPropertyFileConfigFromPathException2() {
-        final Settings4jRepository settingsRepository = UtilTesting
+        final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFileFromPathException2.xml");
 
         final Settings4jInstance settings = settingsRepository.getSettings();

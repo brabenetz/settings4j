@@ -19,7 +19,7 @@ package org.settings4j.config;
 
 import org.settings4j.Settings4jInstance;
 import org.settings4j.Settings4jRepository;
-import org.settings4j.UtilTesting;
+import org.settings4j.test.TestUtils;
 
 public class TestSettings4jMappingConfig extends AbstractTestSettings4jConfig {
 
@@ -28,7 +28,7 @@ public class TestSettings4jMappingConfig extends AbstractTestSettings4jConfig {
 
     public void testMapping() {
         LOG.debug("run TestSettings4jMappingConfig.testMapping");
-        final Settings4jRepository settingsRepository = UtilTesting
+        final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigMapping.xml");
 
         final Settings4jInstance mycompanySeetings = settingsRepository.getSettings();
