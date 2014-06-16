@@ -44,7 +44,6 @@ import org.settings4j.connector.AbstractPropertyConnector;
  *             ConnectorPositions.atFirst() // if no SystemPropertyConnector is configured.
  *             )//
  *         );
- * 
  * }
  * </pre>
  * 
