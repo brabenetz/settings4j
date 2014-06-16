@@ -234,6 +234,7 @@
 								<configuration>
 									<configLocation>${checkstyle-config-location}</configLocation>
 									<headerLocation>${checkstyle-config-header-location}</headerLocation>
+									<propertyExpansion>basedir=${project.basedir}</propertyExpansion>
 									<enableRulesSummary>false</enableRulesSummary>
 								</configuration>
 							</plugin>
