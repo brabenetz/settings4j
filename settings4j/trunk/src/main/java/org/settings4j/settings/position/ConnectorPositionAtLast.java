@@ -1,5 +1,5 @@
 /* ***************************************************************************
- * Copyright (c) 2008 Brabenetz Harald, Austria.
+ * Copyright (c) 2012 Brabenetz Harald, Austria.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,34 +14,26 @@
  * limitations under the License.
  * 
  *****************************************************************************/
-package org.settings4j.settings.nop;
 
-import org.settings4j.Settings4jFactory;
-import org.settings4j.Settings4jInstance;
-import org.settings4j.Settings4jRepository;
+package org.settings4j.settings.position;
+
+import java.util.List;
+
+import org.settings4j.Connector;
+import org.settings4j.ConnectorPosition;
+
 
 /**
- * No-operation implementation of {@link Settings4jRepository}.
+ * Return the last position of the connectors list.
+ * 
+ * @author brabenetz
+ *
  */
-public class NOPSettingsRepository implements Settings4jRepository {
-
-    public Settings4jInstance getSettings() {
-        return new NOPSettings();
-    }
+public class ConnectorPositionAtLast implements ConnectorPosition {
 
     /** {@inheritDoc} */
-    public Settings4jInstance getSettings(final Settings4jFactory factory) {
-        return new NOPSettings();
-    }
-
-    /** {@inheritDoc} */
-    public int getConnectorCount() {
-        return 0;
-    }
-
-    /** {@inheritDoc} */
-    public void resetConfiguration() {
-        // do nothing in NOP-Implementation
+    public int getPosition(final List<Connector> connectors) {
+        return connectors.size();
     }
 
 }

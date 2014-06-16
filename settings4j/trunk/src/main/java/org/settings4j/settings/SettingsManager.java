@@ -18,15 +18,15 @@ package org.settings4j.settings;
 
 import java.net.URL;
 
+import javax.xml.parsers.FactoryConfigurationError;
+
 import org.settings4j.Settings4jInstance;
 import org.settings4j.Settings4jRepository;
 import org.settings4j.config.DOMConfigurator;
 import org.settings4j.contentresolver.ClasspathContentResolver;
-import org.settings4j.settings.nop.NOPSettingsRepository;
 
 /**
- * managed The {@link Settings4jRepository} . This {@link Settings4jRepository} is used to store the configuration from
- * the settings4j.xml.
+ * manage the {@link Settings4jRepository} which is used to store the configuration from the settings4j.xml.
  * 
  * @author Harald.Brabenetz
  */
@@ -50,30 +50,10 @@ public final class SettingsManager {
     /**
      * The internal default Settings4j Repository where all {@link org.settings4j.Settings4j} are stored.
      */
-    private static Settings4jRepository settingsRepository;
+    private static Settings4jRepository settingsRepository = new DefaultSettingsRepository();
     static {
-
-        /**
-         * The root settings names itself as "root". However, the root settings cannot be retrieved by name.
-         */
-        settingsRepository = new DefaultSettingsRepository();
-
-        // read XML default Configuration to configure the repository
-        final URL url = ClasspathContentResolver.getResource(DEFAULT_XML_CONFIGURATION_FILE);
-
-        // If we have a non-null url, then delegate the rest of the
-        // configuration to the DOMConfigurator.configure method.
-        if (url != null) {
-            LOG.debug("Using URL [{}] for automatic settings4j configuration.", url);
-            try {
-                DOMConfigurator.configure(url, settingsRepository);
-            } catch (final NoClassDefFoundError e) {
-                LOG.warn("Error during default initialization. Use default fallback", e);
-            }
-        } else {
-            LOG.debug("Could not find resource: [{}]. Use default fallback.", DEFAULT_XML_CONFIGURATION_FILE);
-        }
-        initializeRepositoryIfNecessary(); // default fallback
+        initializeRepository(SettingsManager.DEFAULT_XML_CONFIGURATION_FILE);
+        initializeRepositoryIfNecessary(); // default fallback if connectors are empty
     }
 
     /** Hide Constructor, Utility Pattern. */
@@ -84,14 +64,9 @@ public final class SettingsManager {
     /**
      * The internal default Settings4j Repository where all {@link org.settings4j.Settings4j} are stored.
      * 
-     * @return The Settings4j Repository, Returns NEVER null put maybe a {@link NOPSettingsRepository}.
+     * @return The Settings4j Repository, Returns NEVER null.
      */
     public static Settings4jRepository getSettingsRepository() {
-        if (settingsRepository == null) { //NOPMD 'singleton is not threadsafe' its only a fallback case.
-            settingsRepository = new NOPSettingsRepository();
-            LOG.error("SettingsManager.settingsRepository was null likely due to error in class reloading, " //
-                + "using the NOPSettingsRepository.");
-        }
         return settingsRepository;
     }
 
@@ -111,23 +86,30 @@ public final class SettingsManager {
      */
     private static void initializeRepositoryIfNecessary() {
         if (getSettingsRepository().getConnectorCount() == 0) {
-            // No connectors in hierarchy, warn user and add default-configuration.
-            LOG.info("The settings4j will be configured with the default-fallback-config: {}",
-                SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
+            // No connectors in hierarchy, add default-configuration.
+            initializeRepository(SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
+        }
+    }
 
-            final URL url = ClasspathContentResolver.getResource(SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
+    private static void initializeRepository(final String configurationFile) throws FactoryConfigurationError {
+        LOG.debug("Using URL [{}] for automatic settings4j configuration.", configurationFile);
 
-            // If we have a non-null url, then delegate the rest of the
-            // configuration to the DOMConfigurator.configure method.
-            if (url != null) {
-                LOG.debug("Using URL [{}] for automatic settings4j fallback configuration.", url);
-                try {
-                    DOMConfigurator.configure(url, getSettingsRepository());
-                } catch (final NoClassDefFoundError e) {
-                    LOG.warn("Error during default fallback initialization", e);
-                }
+        final URL url = ClasspathContentResolver.getResource(configurationFile);
+
+        // If we have a non-null url, then delegate the rest of the
+        // configuration to the DOMConfigurator.configure method.
+        if (url != null) {
+            LOG.info("The settings4j will be configured with the config: {}", url);
+            try {
+                DOMConfigurator.configure(url, getSettingsRepository());
+            } catch (final NoClassDefFoundError e) {
+                LOG.warn("Error during initialization " + configurationFile, e);
+            }
+        } else {
+            if (SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE.equals(configurationFile)) {
+                LOG.error("Could not find resource: [{}].", configurationFile);
             } else {
-                LOG.error("Could not find resource: [{}].", SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
+                LOG.debug("Could not find resource: [{}]. Use default fallback.", configurationFile);
             }
         }
     }

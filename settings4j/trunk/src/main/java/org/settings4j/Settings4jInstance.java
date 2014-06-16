@@ -30,7 +30,7 @@ public interface Settings4jInstance {
 
     /**
      * return the found String-Value for the given key.<br />
-     * The {@link Settings4jInstance} Instance iterates all his {@link Connector} and return the first found Value.
+     * The {@link Settings4jInstance} Instance iterates all his {@link Connector}s and return the first found Value.
      * <p>
      * Returns null if no connector found a Value for the given key<br />
      * 
@@ -41,7 +41,7 @@ public interface Settings4jInstance {
 
     /**
      * return the found byte[]-Value for the given key.<br />
-     * The {@link Settings4jInstance} Instance iterates all his {@link Connector} and return the first found Value.
+     * The {@link Settings4jInstance} Instance iterates all his {@link Connector}s and return the first found Value.
      * <p>
      * Returns null if no connector found a Value for the given key<br />
      * 
@@ -52,8 +52,7 @@ public interface Settings4jInstance {
 
     /**
      * return the found Object-Value for the given key.<br />
-     * The {@link Settings4jInstance} Instance iterates all his {@link Connector} and return the first found Value.
-     * <br />
+     * The {@link Settings4jInstance} iterates all his {@link Connector}s and return the first found Value. <br />
      * Returns null if no connector found a Value for the given key<br />
      * 
      * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
@@ -79,6 +78,58 @@ public interface Settings4jInstance {
     void addConnector(Connector connector);
 
     /**
+     * Add a custom {@link Connector} to the right position in relation to the other connectors.<br />
+     * This method can be used to add custom connectors into th e{@link Settings4jInstance}
+     * <p>
+     * <h4>Example usage 1:</h4>
+     * 
+     * <pre>
+     * --------------------------------------
+     * Connector myConnector = ...
+     * addConnector(myConnector, {@link ConnectorPositions}.afterLast(SystemPropertyConnector.class));
+     * --------------------------------------
+     * </pre>
+     * 
+     * <h4>Example usage 2:</h4> <br />
+     * <code>{@link ConnectorPositions}.afterLast(SystemPropertyConnector.class)</code> will throw an exception if the
+     * {@link Settings4jInstance} doesn't have a SystemPropertyConnector. <br />
+     * To prevent an Exception you can provide multiple ConnectorPositions as fallback:
+     * 
+     * <pre>
+     * --------------------------------------
+     * Connector myConnector = ...
+     * addConnector(myConnector, ConnectorPositions.firstValid(//
+     *     ConnectorPositions.afterLast(SystemPropertyConnector.class),
+     *     ConnectorPositions.atFirst() // fallback if no SystemPropertyConnector exists.
+     *   )
+     * );
+     * --------------------------------------
+     * </pre>
+     * 
+     * <h4>Example usage 3:</h4> <br />
+     * {@link #addConnector(Connector)} will throw an exception if a connector with the same name already exists. <br />
+     * To prevent this Exception you should also check with {@link #getConnector(String)} if the Connector already
+     * exists:
+     * 
+     * <pre>
+     * --------------------------------------
+     * Connector myConnector = ...
+     * if(getConnector(myConnector.getName()) == null) {
+     *   addConnector(myConnector, ConnectorPositions.firstValid(//
+     *       ConnectorPositions.afterLast(SystemPropertyConnector.class),
+     *       ConnectorPositions.atFirst() // fallback if no SystemPropertyConnector exists.
+     *     )
+     *   );
+     * }
+     * --------------------------------------
+     * </pre>
+     * 
+     * @param connector The connector to add.
+     * @param position The position where the connector should be added.
+     */
+    void addConnector(Connector connector, ConnectorPosition position);
+
+    /**
      * Remove all Settings. (Internal use only)
      */
     void removeAllConnectors();
@@ -86,8 +137,8 @@ public interface Settings4jInstance {
     /**
      * The key mapping defined in settings4j.xml.
      * <p>
-     * if some Sub-Modules of your App defines separated Keys for e.g. the DataSource,
-     * you can refer it to one unique Key:
+     * if some Sub-Modules of your App defines separated Keys for e.g. the DataSource, you can refer it to one unique
+     * Key:
      * 
      * <pre>
      * Example:

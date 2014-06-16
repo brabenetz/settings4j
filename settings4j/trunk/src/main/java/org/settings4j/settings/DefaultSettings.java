@@ -23,7 +23,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.settings4j.Connector;
+import org.settings4j.ConnectorPosition;
+import org.settings4j.ConnectorPositions;
 import org.settings4j.Settings4jInstance;
 
 /**
@@ -42,31 +45,42 @@ public class DefaultSettings implements Settings4jInstance {
 
     /** {@inheritDoc} */
     public List<Connector> getConnectors() {
-        return Collections.unmodifiableList(this.connectors);
+        return Collections.unmodifiableList(connectors);
     }
 
     /** {@inheritDoc} */
     public Connector getConnector(final String connectorName) {
-        return this.connectorMap.get(connectorName);
+        return connectorMap.get(connectorName);
     }
 
     /** {@inheritDoc} */
     public void addConnector(final Connector connector) {
-        this.connectors.add(connector);
-        this.connectorMap.put(connector.getName(), connector);
+        addConnector(connector, ConnectorPositions.atLast());
+    }
+
+    /** {@inheritDoc} */
+    public void addConnector(final Connector connector, final ConnectorPosition position) {
+        final int pos = position.getPosition(connectors);
+        Validate.isTrue(pos != ConnectorPosition.UNKNOWN_POSITION,
+            "No valid Position found to add the given connector.");
+        Validate.isTrue(connectorMap.get(connector.getName()) == null, //
+            "A connector with the given name '%s' already exists!", connector.getName());
+        connectors.add(pos, connector);
+        connectorMap.put(connector.getName(), connector);
+
     }
 
     /** {@inheritDoc} */
     public void removeAllConnectors() {
-        this.connectors.clear();
-        this.connectorMap.clear();
+        connectors.clear();
+        connectorMap.clear();
     }
 
     /** {@inheritDoc} */
     public byte[] getContent(final String key) {
         final String mappedKey = mappedKey(key);
         byte[] result = null;
-        for (Connector connector : this.connectors) {
+        for (final Connector connector : connectors) {
             result = connector.getContent(mappedKey);
             if (result != null) {
                 logDebugFoundValueForKey("Content", key, connector);
@@ -80,7 +94,7 @@ public class DefaultSettings implements Settings4jInstance {
     public Object getObject(final String key) {
         final String mappedKey = mappedKey(key);
         Object result = null;
-        for (Connector connector : this.connectors) {
+        for (final Connector connector : connectors) {
             result = connector.getObject(mappedKey);
             if (result != null) {
                 logDebugFoundValueForKey("Object", key, connector);
@@ -94,7 +108,7 @@ public class DefaultSettings implements Settings4jInstance {
     public String getString(final String key) {
         final String mappedKey = mappedKey(key);
         String result = null;
-        for (Connector connector : this.connectors) {
+        for (final Connector connector : connectors) {
             result = connector.getString(mappedKey);
             if (result != null) {
                 logDebugFoundValueForKey("String", key, connector);
@@ -127,17 +141,17 @@ public class DefaultSettings implements Settings4jInstance {
         if (StringUtils.isEmpty(mappedKey)) {
             return key;
         }
-        //else
+        // else
         return mappedKey;
-        
+
     }
 
     /** {@inheritDoc} */
     public Map getMapping() {
-        if (this.mapping == null) {
-            this.mapping = new HashMap();
+        if (mapping == null) {
+            mapping = new HashMap();
         }
-        return this.mapping;
+        return mapping;
     }
 
     /** {@inheritDoc} */
