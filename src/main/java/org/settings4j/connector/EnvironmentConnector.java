@@ -17,35 +17,39 @@
 package org.settings4j.connector;
 
 /**
- * The SystemProperties implementation of an {@link org.settings4j.Connector}.
+ * The Environment variable implementation of an {@link org.settings4j.Connector}.
  * <p>
  * 
- * see also {@link System#getProperty(String, String)}.
+ * see also {@link System#getenv(String)}.
  * 
  * @author Harald.Brabenetz
  *
  */
-public class SystemPropertyConnector extends AbstractPropertyConnector {
+public class EnvironmentConnector extends AbstractPropertyConnector {
 
     /** General Logger for this Class. */
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(SystemPropertyConnector.class);
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(EnvironmentConnector.class);
 
     /**
-     * Very similar to <code>System.getProperty</code> except that the {@link SecurityException} is hidden.
+     * Very similar to <code>System.getenv</code> except that the {@link SecurityException} is hidden.
      * 
      * @param key The key to search for.
      * @param def The default value to return.
-     * @return the string value of the system property, or the default value if there is no property with that key.
+     * @return the string value of the Environment variable, or the default value if there is no property with that key.
      */
     @Override
     protected String getProperty(final String key, final String def) {
         try {
-            return System.getProperty(key, def);
+            final String envValue = System.getenv(key);
+            if (envValue == null) {
+                return def;
+            }
+            return envValue;
         } catch (final SecurityException e) {
-            LOG.info("Was not allowed to read system property value for key '{}'.", key);
+            LOG.info("Was not allowed to read environment value for key '{}'.", key);
             return def;
-        } catch (final Throwable e) { // MS-Java throws com.ms.security.SecurityExceptionEx
-            LOG.warn("Exception reading system property value for key '{}': {}", key, e.getMessage());
+        } catch (final Throwable e) {
+            LOG.warn("Exception reading environment value for key '{}': {}", key, e.getMessage());
             return def;
         }
     }
