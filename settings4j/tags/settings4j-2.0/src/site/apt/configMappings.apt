@@ -1,0 +1,39 @@
+                                    ------------------
+                                    Mapping Configuration
+                                    ------------------
+                                    Brabenetz Harald
+                                    ------------------
+                                    11-05-2008
+                                    ------------------
+
+{Overview}
+
+	If you use your own <<<classpath:settings4j.xml>>>, then you can configure Mappings for your Keys (aliases).
+	
+{Example}
+
+	Assuming you have one Application with two modules which needs the same Webservice URL.\
+	And you want configure the WebService URL only one time.
+	
+	You can do the following:
+	
++--------------
+<settings4j:configuration xmlns:settings4j='http://settings4j.org/'>
+
+	<connector name="SystemPropertyConnector" class="org.settings4j.connector.SystemPropertyConnector">
+	</connector>
+	
+	<mapping name="defaultMapping">
+		<entry key="com/mycompany/moduleX/webserviceXY" ref-key="global/webserviceXY"/>
+		<entry key="com/mycompany/moduleY/webserviceXY" ref-key="global/webserviceXY"/>
+	</mapping>
+
+</settings4j:configuration>
++--------------
+
+	Configure the Webservice URL one time with <<<System.setProperty("global/webserviceXY", "MYURL");>>>\
+	<<<Settings4j.getString("com/mycompany/moduleX/webserviceXY");>>> will return the URL.\
+	And <<<Settings4j.getString("com/mycompany/moduleY/webserviceXY");>>> will return the same URL.
+	
+	
+	

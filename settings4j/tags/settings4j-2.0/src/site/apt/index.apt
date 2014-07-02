@@ -1,0 +1,230 @@
+                                    ------------------
+                                    Overview
+                                    ------------------
+                                    Brabenetz Harald
+                                    ------------------
+                                    11-05-2008
+                                    ------------------
+
+
+{Index}
+
+%{toc}
+
+{Overview}
+
+	settings4j provides you with a lightweight Java library that allows programmers not to worry
+	about the location where the configuration settings are stored.
+
+	Designed to ease the development process, settings4j can decide where the value will be placed,
+	so the developer does not have to select the type of configuration.
+
+* {THE PROBLEM}
+
+	When I make a Project, I must decide where the configuration settings will be stored.\
+	There are many diffeneret solutions:
+	
+	* You can use SystemProperties on startup
+	
+	* You can store *.property and *.xml into the Classpath/FileSystem
+	
+	* You can get your Settings from a JNDI Context
+	
+	* You can get your Settings from the Preferences (System or User)
+	
+	* You can get your Settings from a DB
+	
+	[]
+	
+	I was inspired by log4j:\
+	The programmer says, that he want log some information.\
+	It is everytime possible to simply change the target (FileSystem, DB, MailServer, ...)
+	where the information ist logged out.\
+	The Programmer must not care about it.
+
+* {THE SOLUTION}
+
+	For Settings, the Solution could be similar.\
+	The Programmer says he want the settings for Key 'xyz', and should not care about where the Settings comes from.
+
+{EXAMPLE}
+
+	* The <<Developer>> want the settings for Key 'com/mycompany/mycalculation/my-formula'
+	
+	* The <<Deployer>> define where and how the value will be placed.
+
+* {Developer}
+
+	Developer wants the settings for Key 'com/mycompany/mycalculation/my-formula'
+	He create the following SettingsManager-Class:
+
++--------------------------------------------
+public class SettingsManager {
+
+    public static String getMyFormula() {
+        return Settings4j.getString("com/mycompany/mycalculation/my-formula");
+    }
+}
++--------------------------------------------
+
+* {Deployer}
+
+	By default the Deployer can chose to configure the developers app with the SystemProperties, JNDI-Context, Preferences (User or System) or the Classpath (in this order).\
+	He can also define his own settings4j.xml (e.g.: for Database-Configuration, a single Property-File, mapping aliases, caching etc...)
+
+** {SystemProperties}
+	
+	System Properties can be set as java.exe Argument (JAVA_OPTS):
+	
++--------------------------------------------
+java -Dcom/mycompany/mycalculation/my-formula=a*a .....
++--------------------------------------------
+	
+	You can also add SystemProperties on the Tomcat-Startup
+	
++--------------------------------------------
+cd %TOMCAT_HOME%/bin
+set JAVA_OPTS=-Dcom/mycompany/mycalculation/my-formula=a*a
+startup.bat
++--------------------------------------------
+	
+	With JBOSS you can set SystemProperties with mbeans: {{{http://docs.jboss.org/admin-devel/Chap10.html}org.jboss.varia.property.SystemPropertiesService}}
+	
++--------------------------------------------
+<server>
+	<mbean code="org.jboss.varia.property.SystemPropertiesService" name="jboss.util:type=Service,name=SystemProperties">
+		<attribute name="Properties">
+			com/mycompany/mycalculation/my-formula=a*a
+		</attribute>
+	</mbean>
+</server>
++--------------------------------------------
+
+	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a * a".
+	
+** {JNDI-Context}
+	
+	If you want access to the JNDI-Context. you must prepare your (Web) Application
+	
+	<<web.xml>>
+
+	similar to the specification add a resource-ref into your web.xml like the following:
+
++--------------------------------------------
+	....
+	....
+	<resource-env-ref>
+		<resource-env-ref-name>
+			com/mycompany/mycalculation/my-formula
+		</resource-env-ref-name>
+		<resource-env-ref-type>java.lang.String</resource-env-ref-type>
+	</resource-env-ref>
+	....
+</web-app>
++--------------------------------------------
+
+	
+	<<Server specific deployment descriptors>>
+
+	Dependents of the Server you must also place a XML Configuration into your webapp (rtm):
+	
+	* META-INF/context.xml (TOMCAT)
+	
+	* WEB-INF/jboss-web.xml (JBOSS)
+	
+	* WEB-INF/jetty-web.xml (Jetty)
+	
+	* WEB-INF/weblogic.xml (Weblogic)
+	
+	[]
+	
+	<<Tomcat Example>>
+	
+	Add the configuration-value into the server.xml
+	
+	%TOMCAT_HOME%/conf/server.xml 
+	
++--------------------------------------------
+<Server ...>
+	...
+	<!-- Global JNDI resources -->
+	<GlobalNamingResources>
+		...
+		<!-- Test calculation configuration-Path for demonstration purposes -->
+		<Environment name="com/mycompany/mycalculation/my-formula" type="java.lang.String" value="a + a * a" />
+	</GlobalNamingResources>
+	...
+	...
+</Server>
++--------------------------------------------
+	
+	Add the Tomcat-specific deployment descriptor to your webapp:
+	
+	META-INF/context.xml
+	
++--------------------------------------------
+<Context path="/${artifactId}" docBase="${artifactId}" debug="0">
+	<ResourceLink name="com/mycompany/mycalculation/my-formula" global="com/mycompany/mycalculation/my-formula" type="java.lang.String" />
+</Context>
++--------------------------------------------
+
+	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a + a * a".
+
+** {Preferences}
+
+	Preferences stored and read by <<<java.util.prefs.Preferences>>>.
+	
+	Where the Data are "really" stored is OS dependent: 
+
+	* In W98/Me/NT/W2K/XP/W2003/Vista/W7-32/W7-64 this information is stored in the fragile,
+		hard-to-back-up registry in HKEY_LOCAL_MACHINE\JavaSoft\Prefs for system Preferences
+		and HKEY_CURRENT_USER\JavaSoft\Prefs for user Preferences in a very fluffy format.
+		Every capital letter is preceded with a / and any fields containing accented letters are encoded in Base64. 
+	
+	* In Windows, user Preferences show up at HKEY_CURRENT_USER\Software\JavaSoft\Prefs\com\mindprod\replicator
+		and HKEY_USERS\ usernamexxx\Software\JavaSoft\Prefs\com\mindprod\replicator
+		where the package name is com.mindprod.replicator. 
+	
+	* In Windows, system Preferences show up at HKEY_LOCAL_MACHINE\Software\JavaSoft\Prefs\com\mindprod\replicator,
+		where the package name is com.mindprod.replicator 
+	
+	* In Linux, preferences are stored in ordinary xml files. System Preferences are stored in etc/.java. 
+	
+	* In Linux, user preferences are stored in ~/.java. The file for user preferences may have a goofy base64-encoded name something like this:
+		/home/username/.java/.userPrefs/ com/mindprod/replicator/_!':!bw "t!#4!b@"p!'4!~!"w!()!bw"k!#4!cg"l!(!!b!"p!'}@"0!'8!cg== 
+	
+	[]
+	
+	See:
+	
+	* {{http://java.sun.com/j2se/1.4.2/docs/api/java/util/prefs/Preferences.html}}
+
+	* {{http://mindprod.com/jgloss/preferences.html}}
+	
+*** {Preferences Windows}
+
+	With Windows you can edit your formular with regedit.exe:
+	
+[images/indexPreferencesWindows.png] Example Preferences-Configuration for Windows for key "com/mycompany/mycalculation/my-formula"
+
+	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a * a - 2".
+	
+*** {Preferences Linux}
+
+	With Linux you can edit your formular with your prefered editor:
+	
+[images/indexPreferencesLinux.png] Example Preferences-Configuration for Windows for key "com/mycompany/mycalculation/my-formula"
+
+	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a * a - 2".
+	
+** {Classpath}
+	
+	The Key-Value can also be placed into the classpath:
+	
+[images/indexClasspath.gif] Example Classpath-Configuration for key "com/mycompany/mycalculation/my-formula"
+
+	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a * a".
+	
+	The ClasspathConnector reads the Content with "UTF-8" per default.
+	
+	

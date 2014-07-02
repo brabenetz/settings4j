@@ -1,0 +1,35 @@
+                                    ------------------
+                                    Web.xml Default configurations
+                                    ------------------
+                                    Brabenetz Harald
+                                    ------------------
+                                    01-07-2012
+                                    ------------------
+
+{Overview}
+
+	With the <<<DefaultPropertiesLoaderListener>>> you can define Default configurations for all Settings4j-Keys.
+	
+{Example}
+
+	Example Application exists in: {{https://sourceforge.net/p/settings4j/code/HEAD/tree/example/example-springContextWebXml/trunk}}\
+	and {{https://sourceforge.net/p/settings4j/code/HEAD/tree/example/example-log4jConfigurationWebXml/trunk}}.
+
+	The example Configuration looks like the following: 
+
+	web.xml
+	
++--------------------------------------
+ <context-param>
+     <param-name>settings4jDefaultProperties</param-name>
+     <param-value>
+         com/myCompany/myApp/log4j.configuration=com/myCompany/myApp/log4j.xml
+     </param-value>
+ </context-param>
+ 
+ <listener>
+     <display-name></display-name>
+     <listener-class>org.settings4j.helper.web.DefaultPropertiesLoaderListener</listener-class>
+ </listener>
++--------------------------------------
+ 

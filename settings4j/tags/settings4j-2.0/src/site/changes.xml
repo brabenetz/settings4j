@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd ">
+	<!-- 
+		Simple Description:
+		Supported Action Types: add, fix, update, remove
+	  -->
+	<properties>
+		<title>Changes</title>
+		<author email="brabenetz@users.sourceforge.net">Harald Brabenetz</author>
+	</properties>
+	<body>
+		<release version="2.0" date="2014-" description="settings4j 2.0 - Requires JDK 1.5 or above.">
+			<!-- 
+			<action dev="brabenetz" type="fix" issue="1">Bugfix 1</action>
+			 -->
+			<action dev="brabenetz" type="add" date="2014-06-16">
+				Add ConfigurationToConnectorAdapter for Apache Commons Configuration.
+				Now all Configuration implementations from commons-configuration can be used for Settings4j.
+			</action>
+			<action dev="brabenetz" type="add" date="2014-06-15">
+				Add implementation for  Settings4jInstance#addConnector(Connector, ConnectorPosition).
+				Used like: addConnector(myConnector, ConnectorPositions.atFirst())
+			</action>
+			<action dev="brabenetz" type="update" date="2014-06-10">
+				replace dependency commons logging with slf4j-api.
+			</action>
+			<action dev="brabenetz" type="update" date="2014-06-10">
+				replace dependency commons-lang with commons-lang3.
+			</action>
+			<action dev="brabenetz" type="update" date="2014-06-10">
+				replace dependency commons-collections with commons-collections4.
+			</action>
+			<action dev="brabenetz" type="update" date="2014-06-10">
+				update dependencies which works with JDK5 like Spring 3.x.
+			</action>
+			<action dev="brabenetz" type="update" date="2014-01-07" >
+				Use Generics for Collections like Settings4j.getConnectors().
+			</action>
+			<!--
+			TODO:
+				- update UnitTests to JUnit 4
+			 -->
+		</release>
+		<release version="1.0" date="2013-05-20" description="First Release of settings4j. Requires JDK 1.4 or above.">
+			<action dev="brabenetz" type="remove">
+				Remove Database Connector and DAO. This is most likely Project specific
+			</action>
+			<action dev="brabenetz" type="update">
+				Improve PropertyFileConnector: Add JavaDoc and add additional setter "propertyFromPath" for configuration.
+			</action>
+		</release>
+		
+		<release version="1.0-beta6" date="2012-07-01" description="Add Settings4jContextLoader (Spring) and DefaultPropertiesLoader for web.xml">
+			<action dev="brabenetz" type="add" date="2012-06-24" >
+				add Log4jConfigurationLoader and Listener for web.xml.
+				Each WebApp in your Servlet Container can have its own log4.xml configuration.
+			</action>
+			<action dev="brabenetz" type="add" date="2012-06-03" >improve JavaDoc.</action>
+			<action dev="brabenetz" type="update" date="2012-06-03" >
+				update Default settings4j.xml configuration: Add FSContentResolver and add SpringConfigObjectReolver.
+			</action>
+			<action dev="brabenetz" type="add" date="2012-03-12" >
+				add Settings4jContextLoader and Listener for web.xml (Configurable SpringContext in webapps)
+			</action>
+			<action dev="brabenetz" type="add" date="2012-03-12" >
+				add DefaultPropertiesLoader and Listener for web.xml
+			</action>
+		</release>
+		
+		<release version="1.0-beta5" date="2011-12-24" description="Add PreferenciesConnector and Settings4jPlaceholderConfigurer">
+			<action dev="brabenetz" type="add" date="2011-12-17" >add Settings4jPlaceholderConfigurer for Springframework.</action>
+			<action dev="brabenetz" type="add" date="2011-12-17" >add Preferences Connector</action>
+		</release>
+		<release version="1.0-beta4" date="2011-04-21" description="First Version on Maven Central Repository">
+			<action dev="brabenetz" type="update" date="2011-04-21">
+				update distributionManagement to sonatype-nexus.
+				will be synched to the public maven central repo.
+			</action>
+		</release>
+		<release version="1.0-beta3" date="2011-04-08" description="Release Candidate">
+			<action dev="brabenetz" type="update" date="2011-04-08">update JNDIConnector: disable Connector if no JNDI Context is available.</action>
+			<action dev="brabenetz" type="update" date="2011-04-07">remove property-write feature to simplify the API.</action>
+			<action dev="brabenetz" type="update">extended JavaDoc and UnitTests</action>
+		</release>
+		<release version="1.0.0-beta2" date="2010" description="refactored Version">
+			<action dev="brabenetz" type="remove">Remove Hirachical Structure. (it works, but without it, the usage is much simpler.)</action>
+			<action dev="brabenetz" type="update">Change of the Settings interface: setXXX(key, value) to: setXXX(key, value, connectorName)</action>
+			<action dev="brabenetz" type="add">Add Filter to Connectors, ContentResolver and ObjectResolvers</action>
+			<action dev="brabenetz" type="add">Add additional method: getConnectors() returns all Connectors</action>
+			<action dev="brabenetz" type="add">Add additional method: getConnector(ConnectorName) return the Connector for the given Name.</action>
+			<action dev="brabenetz" type="remove">remove cached attribute in settings4j.xml</action>
+			<action dev="brabenetz" type="add">add singleton attribute to the Object-Resolver in settings4j.xml</action>
+			<action dev="brabenetz" type="add">additional Connector to Environment Variables</action>
+			<action dev="brabenetz" type="add">additional Connector to Preferences Variables: Preferences.systemRoot() and Preferences.userRoot()</action>
+		</release>
+		
+		<release version="1.0.0-beta" date="2008-07-06" description="release with improved features">
+			<action dev="brabenetz" type="add">Object-Resolver implementations with java.beans.XMLEncoder and XMLDecoder</action>
+			<action dev="brabenetz" type="add">Object-Resolver implementations with http://springframework.org/ (readonly, an object can only be set with setContent)</action>
+			<action dev="brabenetz" type="add">A DB-Connector implemented with Hibernate, configurable with Settings4j over SystemProperties or JNDI-Envirenment-Variables.</action>
+			<action dev="brabenetz" type="add">settings4j.xml: addictive="false" if no heredity of connectors are being requested.</action>
+			<action dev="brabenetz" type="add">settings4j.xml: cached="true" A Wrapper for Settings, Connectors and ObjectResolvers to cache all requests.</action>
+			<action dev="brabenetz" type="add">mappings configured in settings4j.xml: map one key to an other Key.</action>
+		</release>
+		<release version="1.0.0-alpha" date="2008-05-12" description="release with rudimentary features">
+			<action dev="brabenetz" type="add">Automatically read settings4j.xml from classpath if available</action>
+			<action dev="brabenetz" type="add">Simple Default fall back Configuration if no settings4j.xml is found.</action>
+			<action dev="brabenetz" type="add">Hirachical Structure in settings4j.xml like log4j</action>
+			<action dev="brabenetz" type="add">Main Connector-Implementations: for SystemProperties, Classpath, JNDI-Context, PropertyFile</action>
+		</release>
+	</body>
+</document>
