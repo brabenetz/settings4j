@@ -21,7 +21,7 @@
 			<item name="Logging" href="logging.html" />
 			<item name="Recommendation" href="docuRecommendation.html" />
 			<item name="Commons-Configuration" href="commonsConfiguration.html" />
-			<item name="Archiv" href="http://settings4j.org/archiv" />
+			<item name="Archiv" href="http://settings4j.org/archiv/" />
 		</menu>
 		<menu name="Settings4j Config">
 			<item name="DefaultConfig" href="configDefault.html" />
