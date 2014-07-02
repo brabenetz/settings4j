@@ -61,8 +61,8 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
 
         final ContentResolver contentResolver = createUnionContentResolver();
 
-        final Map testData = new HashMap();
-        final List testList = new ArrayList();
+        final Map<String, Object> testData = new HashMap<String, Object>();
+        final List<String>  testList = new ArrayList<String>();
         final String testValue1 = "testValue1";
         final String testValue2 = "testValue2";
         final String testValue3 = "testValue3";
@@ -150,8 +150,8 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
         assertTrue(result == result2);
         assertEquals(result2.get("irgendwasNeues"), result.get("irgendwasNeues"));
 
-        final Map testData = new HashMap();
-        final List testList = new ArrayList();
+        final Map<String, Object> testData = new HashMap<String, Object>();
+        final List<String> testList = new ArrayList<String>();
         final String testValue1 = "testValue1";
         final String testValue2 = "testValue2";
         final String testValue3 = "testValue3";

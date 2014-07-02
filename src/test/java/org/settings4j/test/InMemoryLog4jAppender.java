@@ -32,7 +32,7 @@ import org.apache.log4j.spi.LoggingEvent;
  */
 public class InMemoryLog4jAppender extends AppenderSkeleton {
 
-    private static final List LINES = Collections.synchronizedList(new ArrayList());
+    private static final List<String> LINES = Collections.synchronizedList(new ArrayList<String>());
 
     /**
      * Returns the number of lines in this list. If this list contains more than <tt>Integer.MAX_VALUE</tt> elements,
@@ -48,7 +48,6 @@ public class InMemoryLog4jAppender extends AppenderSkeleton {
      * Removes all of the lines from this list (optional operation). This list will be empty after this call returns
      * (unless it throws an exception).
      * 
-     * @throws UnsupportedOperationException if the <tt>clear</tt> method is not supported by this list.
      */
     public static void linesClear() {
         LINES.clear();
@@ -61,7 +60,7 @@ public class InMemoryLog4jAppender extends AppenderSkeleton {
      * @return the line at the specified position in this list.
      * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &gt;= size()).
      */
-    public static Object linesGet(final int index) {
+    public static Object linesGet(final int index) throws IndexOutOfBoundsException {
         return LINES.get(index);
     }
 
@@ -76,6 +75,7 @@ public class InMemoryLog4jAppender extends AppenderSkeleton {
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void append(final LoggingEvent event) {
         final String message = layout.format(event);
         LINES.add(message);
