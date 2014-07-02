@@ -13,11 +13,12 @@
 
 {Overview}
 
-	Settings4J uses the apache commons logging Framework.
+	Settings4J uses the {{{http://www.slf4j.org/}Apache SLF4j}} Library for logging.
 
 {Log4J}
 
-	If log4j is available in you App you can add the following configuration to your log4j.xml:
+	If you use the {{{http://search.maven.org/#artifactdetails|org.slf4j|slf4j-log4j12|1.7.7|jar}slf4j-log4j}}
+	connector for {{{http://logging.apache.org/log4j/2.x/}Log4j}}  you can add the following configuration to your log4j.xml:
 
 +--------------
 <category name="org.settings4j.settings.DefaultSettings">

@@ -8,7 +8,9 @@
 
 {Overview}
 
-	If you use your own <<<classpath:settings4j.xml>>>, then you can configure Filters for each Connector.
+	If you use your own <<<classpath:settings4j.xml>>>, then you can configure Filters for each Connector.\
+	The default Filter implementation uses the regular-expression syntax from
+	{{{http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html}java.util.regex.Pattern}}
 	
 {Example}
 
