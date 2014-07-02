@@ -46,6 +46,20 @@ import org.settings4j.settings.position.ConnectorPositionFirstValid;
  * --------------------------------------
  * </pre>
  * 
+ * It is even more readable with static import:
+ * <pre>
+ * --------------------------------------
+ * import static org.settings4j.ConnectorPositions.*;
+ * ..
+ * Connector myConnector = ...
+ * if (Settings4j.getSettings().getConnector(myConnector.getName()) == null) {
+ *   Settings4j.getSettings().addConnector(myConnector, //
+ *      firstValid(afterLast(SystemPropertyConnector.class), atFirst())
+ *   );
+ * }
+ * --------------------------------------
+ * </pre>
+ * 
  * @author brabenetz
  */
 public final class ConnectorPositions {
