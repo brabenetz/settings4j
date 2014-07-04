@@ -31,9 +31,57 @@ import org.settings4j.Constants;
 /**
  * The JNDI Context implementation of an {@link org.settings4j.Connector}.
  * <p>
+ * <h3>Normal Use</h3>
+ * <p>
+ * This JNDI connector is used in the default settings4j-config:
+ * 
+ * <pre>
+ * &lt;connector name="JNDIConnector"
+ *     class="org.settings4j.connector.JNDIConnector"&gt;
+ *     &lt;contentResolver-ref ref="DefaultContentResolver" /&gt;
+ *     &lt;objectResolver-ref ref="DefaultObjectResolver" /&gt;
+ * &lt;/connector&gt;
+ * </pre>
+ * 
+ * During the first use it will check if JNDI is accessible. If no JNDI context exists, The connector will deactivate
+ * itself. A INFO-Log message will print this information.
+ * <p>
+ * The default contextPathPrefix is "java:comp/env/". This JNDI Connector will first check if a value for
+ * <code>"contextPathPrefix + key"</code> exists and second if a value for the <code>"key"</code> only exists.
+ * <p>
+ * <h3>Custom Use</h3>
+ * <p>
+ * You can also configure the JNDI Connector to connect to another JNDI Context as the default one.
+ * 
+ * <pre>
+ * &lt;connector name="JNDIConnector"
+ *     class="org.settings4j.connector.JNDIConnector"&gt;
+ *     &lt;param name="initialContextFactory" value="org.apache.naming.java.javaURLContextFactory"/&gt;
+ *     &lt;param name="providerUrl" value="localhost:1099"/&gt;
+ *     &lt;param name="urlPkgPrefixes" value="org.apache.naming"/&gt;
+ * &lt;/connector&gt;
+ * </pre>
+ * 
+ * All three parameters must be set "initialContextFactory", "providerUrl", "urlPkgPrefixes" if you want use another
+ * JNDI Context.
+ * <p>
+ * <h3>getString(), getContent(), getObject()</h3>
+ * <p>
+ * <h4>getString()</h4>
+ * <p>
+ * If the getString() JNDI lookup returns an Object which isn't a String, a WARN-Log message will be printed.
+ * <h4>getContent()</h4>
+ * <p>
+ * If the getContent() JNDI lookup returns a String it will try to get a byte-Array Content from the ContentResolvers
+ * (assuming the String is as FileSystemPath or ClassPath). <br />
+ * Else if the getContent() JNDI lookup returns an Object which isn't a byte[], a WARN-Log message will be printed.
+ * <h4>getObject()</h4>
+ * <p>
+ * If the getObject() JNDI lookup returns a String it will try to get an Object from the ObjectResolvers (assuming the
+ * String is as FileSystemPath or ClassPath which can be resolved to an Object).
+ * <p>
  * 
  * @author Harald.Brabenetz
- *
  */
 public class JNDIConnector extends AbstractConnector {
 
@@ -53,7 +101,10 @@ public class JNDIConnector extends AbstractConnector {
     /** {@inheritDoc} */
     public byte[] getContent(final String key) { 
         final Object obj = lookupInContext(key);
-
+        if (obj == null) {
+            return null;
+        }
+        
         // if obj is a String and an Object resolver is available
         // obj could be a Path.
         if (obj instanceof String && getContentResolver() != null) {
@@ -66,6 +117,8 @@ public class JNDIConnector extends AbstractConnector {
         if (obj instanceof byte[]) {
             return (byte[]) obj;
         }
+
+        LOG.warn("Wrong Type: {} for Key: {}", obj.getClass().getName(), key);
         return null;
     }
 
@@ -103,12 +156,15 @@ public class JNDIConnector extends AbstractConnector {
      * {@link Constants#SETTING_NOT_POSSIBLE} must be returned. If set or replace was successful, then
      * {@link Constants#SETTING_SUCCESS} must be returned.
      * 
-     * @param key the Key for the configuration-property. e.g.: "com/mycompany/myapp/myParameterKey"
+     * @param key the Key for the configuration-property (will not be normalized:
+     *  add contextPathPrefix, replace '\' with '/').
+     *  e.g.: "com\mycompany\myapp\myParameterKey" => "java:comp/env/com/mycompany/myapp/myParameterKey"
+     * 
      * @param value the new Object-Value for the given key
      * @return Returns {@link Constants#SETTING_SUCCESS} or {@link Constants#SETTING_NOT_POSSIBLE}
      */
     public int setObject(final String key, final Object value) {
-        return rebindToContext(key, value);
+        return rebindToContext(normalizeKey(key), value);
     }
 
     private InitialContext getJNDIContext() throws NamingException {
@@ -168,21 +224,27 @@ public class JNDIConnector extends AbstractConnector {
     }
 
     private Object lookupInContext(final String key) {
+        return lookupInContext(key, true);
+    }
+
+    private Object lookupInContext(final String key, final boolean withPrefix) {
         if (!isJNDIAvailable()) {
             return null;
         }
-        final String normalizedKey = normalizeKey(key);
+        final String normalizedKey = normalizeKey(key, withPrefix);
         InitialContext ctx = null;
+        Object result = null;
         try {
-            Object result;
             ctx = getJNDIContext();
             result = ctx.lookup(normalizedKey);
-            return result;
         } catch (final NoInitialContextException e) {
             LOG.info("Maybe no JNDI-Context available.");
             LOG.debug(e.getMessage(), e);
         } catch (final NamingException e) {
             LOG.debug("cannot lookup key: " + key + " (" + normalizedKey + ")", e);
+            if (withPrefix) {
+                result = lookupInContext(key, false);
+            }
         } finally {
             if (ctx != null) {
                 try {
@@ -192,11 +254,11 @@ public class JNDIConnector extends AbstractConnector {
                 }
             }
         }
-        return null;
+        return result;
     }
 
     /**
-     * @param key the JNDI-Key (will be normalized: add contextPathPrefix, replace '\' with '/').
+     * @param key the JNDI-Key (will NOT be normalized).
      * @param value the JNDI-Value.
      * @return Constants.SETTING_NOT_POSSIBLE if the JNDI Context ist readonly.
      */
@@ -206,15 +268,15 @@ public class JNDIConnector extends AbstractConnector {
             // only if isJNDIAvailable() was called an evaluated to false.
             return Constants.SETTING_NOT_POSSIBLE;
         }
-        final String normalizedKey = normalizeKey(key);
-        LOG.debug("Try to rebind Key '{}' ({}) with value: {}", key, normalizedKey, value);
+        
+        LOG.debug("Try to rebind Key '{}' with value: {}", key, value);
 
         InitialContext ctx = null;
         int result = Constants.SETTING_NOT_POSSIBLE;
         try {
             ctx = getJNDIContext();
-            createParentContext(ctx, normalizedKey);
-            ctx.rebind(normalizedKey, value);
+            createParentContext(ctx, key);
+            ctx.rebind(key, value);
             result = Constants.SETTING_SUCCESS;
         } catch (final NoInitialContextException e) {
             LOG.info("Maybe no JNDI-Context available.");
@@ -223,16 +285,16 @@ public class JNDIConnector extends AbstractConnector {
             // the JNDI-Context from TOMCAT is readonly
             // if you try to write it, The following Exception will be thrown:
             // javax.naming.NamingException: Context is read only
-            LOG.info("cannot bind key: '{}' ({}). {}", key, normalizedKey, e.getMessage());
+            LOG.info("cannot bind key: '{}'. {}", key, e.getMessage());
             if (LOG.isDebugEnabled()) {
-                LOG.debug("cannot bind key: " + key + " (" + normalizedKey + ")", e);
+                LOG.debug("cannot bind key: " + key, e);
             }
         } finally {
             if (ctx != null) {
                 try {
                     ctx.close();
                 } catch (final NamingException e) {
-                    LOG.info("cannot close context: " + key + " (" + normalizedKey + ")", e);
+                    LOG.info("cannot close context: " + key, e);
                 }
             }
         }
@@ -271,6 +333,10 @@ public class JNDIConnector extends AbstractConnector {
     }
 
     private String normalizeKey(final String key) {
+        return normalizeKey(key, true);
+    }
+
+    private String normalizeKey(final String key, final boolean withPrefix) {
         if (key == null) {
             return null;
         }
@@ -284,7 +350,11 @@ public class JNDIConnector extends AbstractConnector {
         if (normalizeKey.startsWith("/")) {
             normalizeKey = normalizeKey.substring(1);
         }
-        return this.contextPathPrefix + normalizeKey;
+        if (withPrefix) {
+            return this.contextPathPrefix + normalizeKey;
+        } else {
+            return normalizeKey;
+        }
     }
 
     public String getContextPathPrefix() {

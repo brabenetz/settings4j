@@ -17,6 +17,10 @@
 
 package org.settings4j.connector;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
+
 import java.io.File;
 
 import javax.naming.Context;
@@ -141,6 +145,29 @@ public class JNDIConnectorTest extends TestCase {
 
     }
 
+    public void testJNDIConnectorWithCustomJNDIProperties() throws Exception {
+        LOG.info("START: testJNDIConnectorWithJNDI");
+        // Remove default JNDI Tomcat Configs
+        removeJNDIContextProperties();
+
+        JNDIConnector connector = new JNDIConnector();
+        connector.setInitialContextFactory("org.apache.naming.java.javaURLContextFactory");
+        connector.setProviderUrl("localhost:1099");
+        connector.setUrlPkgPrefixes("org.apache.naming");
+
+        // the value should be found with or without prefix.
+        connector.rebindToContext("java:comp/env/myTestKey1", "myTestValue1");
+        
+        
+        // start Test and validation
+        assertThat(connector.getString("myTestKey1"), is("myTestValue1"));
+        assertThat(connector.getString("java:comp/env/myTestKey1"), is("myTestValue1"));
+        assertThat(connector.getString("unknown"), is(nullValue()));
+
+
+    }
+
+
     public void testJNDIConnectorWithJNDI() throws Exception {
         LOG.info("START: testJNDIConnectorWithJNDI");
         // Set JNDI Tomcat Configs
@@ -221,6 +248,23 @@ public class JNDIConnectorTest extends TestCase {
         assertEquals("Hello World FileContent", new String(resultContent, charset));
 
 
+    }
+
+    public void testJNDIConnectorWithJNDIAndPathPrefix() throws Exception {
+        LOG.info("START: testJNDIConnectorWithJNDIAndPathPrefix");
+        // Set JNDI Tomcat Configs
+        setTomcatJNDIContextProperties();
+
+        JNDIConnector connector = new JNDIConnector();
+        // the value shopould be found with or without prefix.
+        connector.rebindToContext("java:comp/env/myTestKey1", "myTestValue1");
+        connector.rebindToContext("myTestKey2", "myTestValue2");
+        
+        
+        // start Test and validation
+        assertThat(connector.getString("myTestKey1"), is("myTestValue1"));
+        assertThat(connector.getString("myTestKey2"), is("myTestValue2"));
+        
     }
 
     public void testJNDIConnectorIsAvailable() throws Exception {
