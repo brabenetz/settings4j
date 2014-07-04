@@ -21,6 +21,13 @@
 				- update UnitTests to JUnit 4
 			 -->
 		</release>
+		<release version="2.0.1" date="2014-07-04" description="settings4j 2.0.1 - improved JNDI Connector">
+			<action dev="brabenetz" type="update">
+				improve JNDIConnector: add TestCases, add JavaDoc and fix implementation:
+				This JNDI Connector should first check if a value for "contextPathPrefix + key" exists
+				and second if a value for the "key" only exists.
+			</action>
+		</release>
 		<release version="2.0" date="2014-07-02" description="settings4j 2.0 - Requires JDK 1.5 or above.">
 			<!-- 
 			<action dev="brabenetz" type="fix" issue="1">Bugfix 1</action>
