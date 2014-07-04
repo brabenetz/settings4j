@@ -1,0 +1,90 @@
+                                    ------------------
+                                    Spring context web.xml Configuration
+                                    ------------------
+                                    Brabenetz Harald
+                                    ------------------
+                                    01-07-2012
+                                    ------------------
+
+{Overview}
+
+	With the <<<Settings4jContextLoaderListener>>> you can configure your webapp
+	which Spring-Configuration-Xml should be used. 
+	
+{Example}
+
+	Example Application exists in: {{https://sourceforge.net/p/settings4j/code/HEAD/tree/example/example-springContextWebXml/trunk}}
+
+* {Usage - Make SpringContext configurable}
+	
+	An example Configuration could look like the following:
+	
+	web.xml:
+	
++--------------------------------------
+ <context-param>
+     <param-name>settings4jContextConfigLocation</param-name>
+     <param-value>
+         ${com/myCompany/myApp/appContextSecurity},
+         /WEB-INF/applicationContext-otherBeans.xml
+     </param-value>
+ </context-param>
+ 
+ <listener>
+     <display-name></display-name>
+     <listener-class>org.settings4j.helper.spring.Settings4jContextLoaderListener</listener-class>
+ </listener>
++--------------------------------------
+ 
+	With this configuration you define with tehKey teh path to your Security configuration. 
+
+* {Server config Example}
+
+	Example Configuration in TOMCAT:
+
+	Start tomcat with -Dcom/myCompany/myApp/appContextSecurity=file:.../applicationContext-security-alwaysAdmin.xml
+	
+	Or configure a JNDI Value:
+
+	TOMCAT context.xml
+
++--------------------------------------
+ <Environment name ="com/myCompany/myApp/appContextSecurity" 
+              value="/WEB-INF/applicationContext-security.xml" 
+              type="java.lang.String" />
+ 
++--------------------------------------
+	
+	Also configuration per {{{./index.html#Preferences}Preferences}} and {{{./index.html#SystemProperties}SystemProperties}}
+	works out of the box.
+
+ 
+
+* {Default Values}
+
+	It is recommended to use this in combination with org.settings4j.helper.web.DefaultPropertiesLoader: 
+	
+	web.xml
+	
++--------------------------------------
+ <context-param>
+     <param-name>settings4jDefaultProperties</param-name>
+     <param-value>
+         com/myCompany/myApp/appContextSecurity=/WEB-INF/applicationContext-security.xml
+     </param-value>
+ </context-param>
+ 
+ <context-param>
+     <param-name>settings4jContextConfigLocation</param-name>
+     <param-value>
+         ${com/myCompany/myApp/appContextSecurity},
+         /WEB-INF/applicationContext-otherBeans.xml
+     </param-value>
+ </context-param>
+ 
+ <listener>
+     <display-name></display-name>
+     <listener-class>org.settings4j.helper.spring.Settings4jContextLoaderListener</listener-class>
+ </listener>
++--------------------------------------
+

@@ -1,0 +1,65 @@
+                                    ------------------
+                                    Spring Object Factory Configuration
+                                    ------------------
+                                    Brabenetz Harald
+                                    ------------------
+                                    11-05-2008
+                                    ------------------
+
+{Overview}
+
+	With the <<<Settings4jFactoryBean>>> you can define Objects in Spring Configuration. 
+	
+{Example}
+
+	For example: You want configure your DataSource with Settitngs4j:\
+	The following example could load your DataSource from the JNDI Context with <<<Settings4j.getObject("com/myCompany/myDataSource")>>>\
+	The JNDIConnector will read the Object "java:comp/env/com/myCompany/myDataSource" from the JNDI Context.
+	
++--------------
+  <bean id="myDataSource" class="org.settings4j.helper.spring.Settings4jFactoryBean">
+    <property name="key"><value>com/myCompany/myDataSource</value></property>
+  </bean>
++--------------
+
+	
+* {Example Classpath Config with ObjectResolver}
+
+	With Settings4j you can also configure the DataSource in your Classpath without requirement of a JNDI-Context:
+	
+	Example Database Configuration with JavaXMLBeansObjectResolver:
+	
+	create the Classpath File "com/myCompany/myDataSource":
+	
++--------------------------------------
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_05" class="java.beans.XMLDecoder"> 
+ <object class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+  <void property="driverClassName"> 
+   <string>org.hsqldb.jdbcDriver</string> 
+  </void> 
+  <void property="password"> 
+   <string></string> 
+  </void> 
+  <void property="url"> 
+   <string>jdbc:hsqldb:mem:test</string> 
+  </void> 
+  <void property="username"> 
+   <string>sa</string> 
+  </void> 
+ </object> 
+</java> 
++--------------------------------------
+
+	and create the Classpath File "com/myCompany/myDataSource.properties":
+	
++--------------------------------------
+objectResolverKey=org.settings4j.objectresolver.JavaXMLBeansObjectResolver
+cached=true
++--------------------------------------
+
+	<<Place Your DataSource Config into your Filesystem:>>
+	
+	You can also start your Application with <<<-Dcom/myCompany/myDataSource=file:/opt/myApp/config/myDataSource>>>\
+	Then the two Files "myDataSource" and "myDataSource.properties" must be place in "/opt/myApp/config/".
+	
