@@ -8,7 +8,7 @@ about the location where the configuration settings are stored.
 Designed to ease the development process, settings4j can decide where the value will be placed,
 so the developer does not have to select the type of configuration.
 
-### You don't know how your Projekt should be configured (System Properties, JNDI, Preferences, others...)?
+### You don't know how your Project should be configured (System Properties, JNDI, Preferences, others...)?
 
 Use settings4j:
 
@@ -38,7 +38,7 @@ You probable uses "@Value" annotation like that:
   String myValue;
 ```
 
-simply configure Settings4jPlaceholderConfigurer and your "@Value" Annotations will be processes throught Settings4j:
+simply configure Settings4jPlaceholderConfigurer and your "@Value" Annotations will be processes through Settings4j:
 
 ```xml
 <beans>
