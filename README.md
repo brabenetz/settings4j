@@ -1,6 +1,11 @@
-# Settings for Java
+![settings4jlogo](http://settings4j.org/currentrelease/icon/settings4j-logo-64px.png)
 
-http://settings4j.org
+[![Build Status](https://secure.travis-ci.org/brabenetz/settings4j.png?branch=master)](http://travis-ci.org/brabenetz/settings4j)
+[![Dependency Status](https://www.versioneye.com/user/projects/55e50d658c0f62001b000180/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55e50d658c0f62001b000180)
+[![Maven site](https://img.shields.io/badge/Maven-site-blue.svg)](http://settings4j.org/currentrelease/)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.settings4j/settings4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.settings4j/settings4j)
+
+# Settings for Java
 
 Settings4j provides you with a lightweight Java library that allows programmers not to worry
 about the location where the configuration settings are stored.
@@ -8,7 +13,7 @@ about the location where the configuration settings are stored.
 Designed to ease the development process, settings4j can decide where the value will be placed,
 so the developer does not have to select the type of configuration.
 
-### Dependency Information
+## Dependency Information
 
 Simply add to your pom.xml:
 
@@ -20,9 +25,9 @@ Simply add to your pom.xml:
 </dependency>
 ```
 
-See http://settings4j.org/currentrelease/dependency-info.html
+See https://maven-badges.herokuapp.com/maven-central/org.settings4j/settings4j
 
-### You don't know how your Project should be configured (System Properties, JNDI, Preferences, others...)?
+## You don't know how your Project should be configured (System Properties, JNDI, Preferences, others...)?
 
 Use settings4j:
 
@@ -39,11 +44,11 @@ The Default Configuration works in the following Order to get Configuration-Valu
 
 With Settings4j, your Operation can decide how the application should be configured.
 
-### You are not happy with the default setting4j config?
+## You are not happy with the default setting4j config?
 
 Simply put your own settings4j.xml into the root-classpath or configure it manual in Java.
 
-### You use Spring?
+## You use Spring?
 
 You probable uses "@Value" annotation like that:
 
@@ -62,7 +67,10 @@ simply configure Settings4jPlaceholderConfigurer and your "@Value" Annotations w
 ```
 (Works also with Spring Java Based Configuration)
 
+## License
 
+This project is licensed under Apache License, Version 2.0.
 
+See http://settings4j.org/currentrelease/license.html
 
 
