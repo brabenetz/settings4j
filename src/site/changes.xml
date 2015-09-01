@@ -25,7 +25,6 @@
       </action>
     </release>
     <release version="2.0" date="2014-07-02" description="settings4j 2.0 - Requires JDK 1.5 or above.">
-      <!-- <action dev="brabenetz" type="fix" issue="1">Bugfix 1</action> -->
       <action dev="brabenetz" type="add" date="2014-06-16">
         Add ConfigurationToConnectorAdapter for Apache Commons Configuration.
         Now all Configuration implementations from commons-configuration can be used for Settings4j.

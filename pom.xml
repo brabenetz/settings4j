@@ -24,7 +24,7 @@
     <developer>
       <id>brabenetz</id>
       <name>Harald Brabenetz</name>
-      <email>brabenetz(at)users.sourceforge.net</email>
+      <email>brabenetz(at)gmx.net</email>
       <roles>
         <role>Developer</role>
       </roles>
@@ -311,10 +311,7 @@
                 <configuration>
                   <xmlPath>${basedir}/src/site/changes.xml</xmlPath>
                   <issueLinkTemplatePerSystem>
-                    <!-- Default-Link Template for Issues -->
-                    <!-- See more at http://jira.codehaus.org/browse/MCHANGES-112 -->
-                    <!-- See more at http://maven.apache.org/plugins/maven-changes-plugin/changes-report-mojo.html#issueLinkTemplatePerSystem -->
-                    <default>https://sourceforge.net/tracker/?func=detail&amp;aid=%ISSUE%&amp;group_id=224313&amp;atid=1061429</default>
+                    <default>https://github.com/brabenetz/settings4j/issues/%ISSUE%</default>
                   </issueLinkTemplatePerSystem>
                 </configuration>
                 <reportSets>
@@ -452,7 +449,6 @@
                 <configuration>
                   <excludeFilterFile>${findbug-config-location}</excludeFilterFile>
                   <!-- Effort of the bug finders. Valid values are: 'MIN', 'DEFAULT', 'MAX' -->
-                  <!-- see: http://findbugs.sourceforge.net/manual/running.html#commandLineOptions -->
                   <effort>MAX</effort>
                   <threshold>LOW</threshold>
                   <skip>${findbugs.skip}</skip>
