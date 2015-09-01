@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ClasspathConnector.html" title="org.settings4j.connector.ClasspathConnector" alt="" coords="137,113,271,137"/>
+<area shape="rect" id="node1" href="./ClasspathConnector.html" title="&lt;TABLE&gt;" alt="" coords="127,101,281,149"/>
+<area shape="rect" id="node3_1" href="../ContentResolver.html" title="org.settings4j.ContentResolver" alt="" coords="45,203,155,253"/>
+<area shape="rect" id="node3" href="../ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="34,197,166,259"/>
+<area shape="rect" id="node4_2" href="../contentresolver/ClasspathContentResolver.html" title="org.settings4j.contentresolver.ClasspathContentResolver" alt="" coords="16,313,184,349"/>
+<area shape="rect" id="node4" href="../contentresolver/ClasspathContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="5,307,195,355"/>
+<area shape="rect" id="node2_3" href="./AbstractConnector.html" title="org.settings4j.connector.AbstractConnector" alt="" coords="37,17,117,41"/>
+<area shape="rect" id="node2" href="./AbstractConnector.html" title="&lt;TABLE&gt;" alt="" coords="27,5,128,53"/>
+</map>

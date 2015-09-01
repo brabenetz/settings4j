@@ -1,0 +1,20 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ConnectorPositionFirstValid.html" title="org.settings4j.settings.position.ConnectorPositionFirstValid" alt="" coords="15,17,187,41"/>
+<area shape="rect" id="node1" href="./ConnectorPositionFirstValid.html" title="&lt;TABLE&gt;" alt="" coords="5,5,198,53"/>
+<area shape="rect" id="node2_1" href="./ConnectorPositionBeforeName.html" title="org.settings4j.settings.position.ConnectorPositionBeforeName" alt="" coords="233,17,423,41"/>
+<area shape="rect" id="node2" href="./ConnectorPositionBeforeName.html" title="&lt;TABLE&gt;" alt="" coords="222,5,434,53"/>
+<area shape="rect" id="node3_2" href="./ConnectorPositionBeforeLastClass.html" title="org.settings4j.settings.position.ConnectorPositionBeforeLastClass" alt="" coords="469,17,683,41"/>
+<area shape="rect" id="node3" href="./ConnectorPositionBeforeLastClass.html" title="&lt;TABLE&gt;" alt="" coords="459,5,693,53"/>
+<area shape="rect" id="node4_3" href="./ConnectorPositionBeforeFirstClass.html" title="org.settings4j.settings.position.ConnectorPositionBeforeFirstClass" alt="" coords="728,17,941,41"/>
+<area shape="rect" id="node4" href="./ConnectorPositionBeforeFirstClass.html" title="&lt;TABLE&gt;" alt="" coords="717,5,952,53"/>
+<area shape="rect" id="node5_4" href="./ConnectorPositionAtLast.html" title="org.settings4j.settings.position.ConnectorPositionAtLast" alt="" coords="987,17,1141,41"/>
+<area shape="rect" id="node5" href="./ConnectorPositionAtLast.html" title="&lt;TABLE&gt;" alt="" coords="976,5,1152,53"/>
+<area shape="rect" id="node6_5" href="./ConnectorPositionAtFirst.html" title="org.settings4j.settings.position.ConnectorPositionAtFirst" alt="" coords="1187,17,1341,41"/>
+<area shape="rect" id="node6" href="./ConnectorPositionAtFirst.html" title="&lt;TABLE&gt;" alt="" coords="1176,5,1352,53"/>
+<area shape="rect" id="node7_6" href="./ConnectorPositionAfterName.html" title="org.settings4j.settings.position.ConnectorPositionAfterName" alt="" coords="1387,17,1565,41"/>
+<area shape="rect" id="node7" href="./ConnectorPositionAfterName.html" title="&lt;TABLE&gt;" alt="" coords="1376,5,1576,53"/>
+<area shape="rect" id="node8_7" href="./ConnectorPositionAfterLastClass.html" title="org.settings4j.settings.position.ConnectorPositionAfterLastClass" alt="" coords="1611,17,1813,41"/>
+<area shape="rect" id="node8" href="./ConnectorPositionAfterLastClass.html" title="&lt;TABLE&gt;" alt="" coords="1601,5,1823,53"/>
+<area shape="rect" id="node9_8" href="./ConnectorPositionAfterFirstClass.html" title="org.settings4j.settings.position.ConnectorPositionAfterFirstClass" alt="" coords="1858,17,2059,41"/>
+<area shape="rect" id="node9" href="./ConnectorPositionAfterFirstClass.html" title="&lt;TABLE&gt;" alt="" coords="1847,5,2070,53"/>
+</map>
