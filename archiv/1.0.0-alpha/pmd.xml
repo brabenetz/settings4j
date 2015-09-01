@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="4.1" timestamp="2008-05-12T00:41:26.077">
+<file name="D:\Proj-settings4j\WS\settings4j\target\checkout\src\main\java\org\settings4j\config\DOMConfigurator.java">
+<violation beginline="290" endline="292" begincolumn="37" endcolumn="13" rule="EmptyIfStmt" ruleset="Basic Rules" package="org.settings4j.config" class="DOMConfigurator" method="parseSettings" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyIfStmt" priority="3">
+Avoid empty if statements
+</violation>
+<violation beginline="351" endline="354" begincolumn="28" endcolumn="21" rule="EmptyIfStmt" ruleset="Basic Rules" package="org.settings4j.config" class="DOMConfigurator" method="parseConnector" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyIfStmt" priority="3">
+Avoid empty if statements
+</violation>
+<violation beginline="431" endline="434" begincolumn="24" endcolumn="17" rule="EmptyIfStmt" ruleset="Basic Rules" package="org.settings4j.config" class="DOMConfigurator" method="parseChildrenOfSettingsElement" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyIfStmt" priority="3">
+Avoid empty if statements
+</violation>
+<violation beginline="527" endline="530" begincolumn="28" endcolumn="21" rule="EmptyIfStmt" ruleset="Basic Rules" package="org.settings4j.config" class="DOMConfigurator" method="parseObjectResolver" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyIfStmt" priority="3">
+Avoid empty if statements
+</violation>
+<violation beginline="588" endline="591" begincolumn="28" endcolumn="21" rule="EmptyIfStmt" ruleset="Basic Rules" package="org.settings4j.config" class="DOMConfigurator" method="parseContentResolver" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyIfStmt" priority="3">
+Avoid empty if statements
+</violation>
+</file>
+<file name="D:\Proj-settings4j\WS\settings4j\target\checkout\src\main\java\org\settings4j\connector\JNDIConnector.java">
+<violation beginline="230" endline="231" begincolumn="15" endcolumn="13" rule="EmptyCatchBlock" ruleset="Basic Rules" package="org.settings4j.connector" class="JNDIConnector" method="createParentContext" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
+Avoid empty catch blocks
+</violation>
+<violation beginline="246" endline="247" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="org.settings4j.connector" class="JNDIConnector" method="createParentContext" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
+Avoid empty catch blocks
+</violation>
+</file>
+</pmd>

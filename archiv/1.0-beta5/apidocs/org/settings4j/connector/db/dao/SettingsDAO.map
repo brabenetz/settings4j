@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../SettingsDTO.html" title="&lt;TABLE&gt;" alt="" coords="101,398,211,434"/>
+<area shape="rect" id="node2_1" href="../HibernateDBConnector.html" title="&lt;TABLE&gt;" alt="" coords="20,107,167,143"/>
+<area shape="rect" id="node4_2" href="./hibernate/SettingsDAOHibernate.html" title="&lt;TABLE&gt;" alt="" coords="15,302,171,338"/>
+<area shape="rect" id="node5_3" href="./SettingsDAO.html" title="&lt;TABLE&gt;" alt="" coords="155,203,245,242"/>
+<area shape="rect" id="node3_4" href="../AbstractDBConnector.html" title="&lt;TABLE&gt;" alt="" coords="91,11,216,47"/>
+</map>

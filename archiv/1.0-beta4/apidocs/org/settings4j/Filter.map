@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" href="./config/DOMConfigurator.html" title="&lt;TABLE&gt;" alt="" coords="16,12,128,47"/>
+<area shape="rect" href="./Filter.html" title="&lt;TABLE&gt;" alt="" coords="328,107,405,144"/>
+<area shape="rect" href="./connector/FilteredConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="173,12,336,47"/>
+<area shape="rect" href="./settings/DefaultFilter.html" title="&lt;TABLE&gt;" alt="" coords="312,204,421,239"/>
+<area shape="rect" href="./contentresolver/FilteredContentResolverWrapper.html" title="&lt;TABLE&gt;" alt="" coords="381,12,579,47"/>
+<area shape="rect" href="./objectresolver/FilteredObjectResolverWrapper.html" title="&lt;TABLE&gt;" alt="" coords="624,12,813,47"/>
+</map>

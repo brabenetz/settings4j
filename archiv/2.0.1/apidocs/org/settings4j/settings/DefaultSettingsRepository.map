@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../Settings4jRepository.html" title="org.settings4j.Settings4jRepository" alt="" coords="29,11,163,61"/>
+<area shape="rect" id="node1" href="../Settings4jRepository.html" title="&lt;TABLE&gt;" alt="" coords="19,5,173,67"/>
+<area shape="rect" id="node4_1" href="./DefaultSettingsRepository.html" title="org.settings4j.settings.DefaultSettingsRepository" alt="" coords="15,127,177,151"/>
+<area shape="rect" id="node4" href="./DefaultSettingsRepository.html" title="&lt;TABLE&gt;" alt="" coords="5,115,187,163"/>
+<area shape="rect" id="node2_2" href="../Settings4jInstance.html" title="org.settings4j.Settings4jInstance" alt="" coords="35,216,157,267"/>
+<area shape="rect" id="node2" href="../Settings4jInstance.html" title="&lt;TABLE&gt;" alt="" coords="25,211,167,272"/>
+<area shape="rect" id="node3_3" href="../Settings4jFactory.html" title="org.settings4j.Settings4jFactory" alt="" coords="202,216,315,267"/>
+<area shape="rect" id="node3" href="../Settings4jFactory.html" title="&lt;TABLE&gt;" alt="" coords="191,211,326,272"/>
+</map>

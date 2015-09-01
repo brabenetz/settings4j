@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" href="./JNDIConnector.html" title="&lt;TABLE&gt;" alt="" coords="16,120,117,144"/>
+<area shape="rect" href="./FSConnector.html" title="&lt;TABLE&gt;" alt="" coords="163,120,253,144"/>
+<area shape="rect" href="../ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="309,216,419,267"/>
+<area shape="rect" href="./ClasspathConnector.html" title="&lt;TABLE&gt;" alt="" coords="299,120,429,144"/>
+<area shape="rect" href="./AbstractPropertyConnector.html" title="&lt;TABLE&gt;" alt="" coords="475,120,637,144"/>
+<area shape="rect" href="./AbstractConnector.html" title="&lt;TABLE&gt;" alt="" coords="856,17,973,41"/>
+<area shape="rect" href="./db/AbstractDBConnector.html" title="&lt;TABLE&gt;" alt="" coords="683,115,819,149"/>
+<area shape="rect" href="../ObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="864,107,965,157"/>
+<area shape="rect" href="../Connector.html" title="&lt;TABLE&gt;" alt="" coords="1085,107,1163,157"/>
+</map>

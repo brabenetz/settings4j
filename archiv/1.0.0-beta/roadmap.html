@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Settings4j library - Roadmap</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+          <meta name="author" content="Brabenetz Harald" />
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+      </head>
+  <body class="composite">
+    <div id="banner">
+                  <a href="http://sourceforge.net/projects/settings4j" id="bannerLeft">
+    
+                                    <img src="http://sourceforge.net/sflogo.php?group_id=73068&type=2" alt="" />
+    
+            </a>
+                    <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="breadcrumbs">
+          
+  
+
+  
+    
+  
+  
+    
+            <div class="xleft">
+        Last Published: 06. Jul 2008 20:55
+                      </div>
+            <div class="xright">      
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+           
+  
+
+  
+    
+  
+  
+    
+                   <h5>Settings4j library</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="index.html">Overview</a>
+          </li>
+              
+    <li class="none">
+                    <a href="download.html">Download</a>
+          </li>
+              
+    <li class="none">
+              <strong>Roadmap</strong>
+        </li>
+              
+    <li class="none">
+                    <a href="http://settings4j.wiki.sourceforge.net/" class="externalLink">WIKI</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://settings4j.sourceforge.net/archiv" class="externalLink">Archiv</a>
+          </li>
+          </ul>
+              <h5>Documentation</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="docuRecommendation.html">Recommendation</a>
+          </li>
+          </ul>
+              <h5>Project Documentation</h5>
+            <ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-info.html">Project Information</a>
+                </li>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-reports.html">Project Reports</a>
+                </li>
+          </ul>
+                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+          </a>
+                       
+  
+
+  
+    
+  
+  
+    
+        </div>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <div class="section"><h2>Roadmap of changes for this project.</h2>
+<p>Changes are chronologically ordered from top (most recent) to bottom (least recent).</p>
+<div class="section"><h3>Legend:</h3>
+<p>! New Feature</p>
+<p>* Bug fixed</p>
+<p>- General comment</p>
+</div>
+<div class="section"><h3>Winter 2009 1.1.0</h3>
+<p>Brainstorming:</p>
+<p>! additional Object-resolver with digester (Use a digester-Rules-XML to convert a XML to an Object)</p>
+<p>! additional Object-resolver with Spring (Use one or more springContext-XML to convert a XML to an Object)</p>
+<p>! additional Content-resolver with VFSPath?</p>
+<p>! additional Connector to Windows registry:</p>
+<ul><li><a href="http://www.rgagnon.com/javadetails/java-0480.html" class="externalLink">http://www.rgagnon.com/javadetails/java-0480.html</a>
+</li>
+<li><a href="http://www.trustice.com/java/jnireg/" class="externalLink">http://www.trustice.com/java/jnireg/</a>
+</li>
+</ul>
+<p>! additional Connector to Preferences?:</p>
+<ul><li><a href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/prefs/Preferences.html" class="externalLink">http://java.sun.com/j2se/1.4.2/docs/api/java/util/prefs/Preferences.html</a>
+</li>
+<li><a href="http://www.particle.kth.se/~lindsey/JavaCourse/Book/Part1/Java/Chapter10/Preferences.html" class="externalLink">http://www.particle.kth.se/~lindsey/JavaCourse/Book/Part1/Java/Chapter10/Preferences.html</a>
+</li>
+</ul>
+</div>
+<div class="section"><h3>Oktober 2008 Final Version 1.0.0 - after few bug fixes</h3>
+</div>
+<div class="section"><h3>September 2008 1.0.0-rc - re factored release</h3>
+<p>- extended JavaDoc and UnitTests</p>
+<p>- Maven-Site</p>
+<p>- Simple standalone WebApp to modify Settings (set new String-Values or upload files per Key). This App should be seperated in two modules</p>
+<ul><li>Core-Module: The main businesslogic who can be simbly integrated in existence applications. The List of keys who are used by your Apps should be configurabel with Settings4j itself.</li>
+<li>GUI-Module: a simple webGUI with Struts and Tiles and ACEGI-Security as Example who the Core-Module can be integrated. But the resulting WAR can be used immediately as Setup-GUI for your Webapp.</li>
+</ul>
+<p>! Helper Class for SpringFramework:</p>
+<ul><li>like org.springframework.jndi.JndiObjectFactoryBean <a href="http://static.springframework.org/spring/docs/2.5.4/reference/cci.html" class="externalLink">http://static.springframework.org/spring/docs/2.5.4/reference/cci.html</a>
+</li>
+</ul>
+<p>! additional Connector to Environment Variables.</p>
+</div>
+<div class="section"><h3>6. Juli 2008 1.0.0-beta - release with additional features:</h3>
+<p>! Object-Resolver implementations with java.beans.XMLEncoder and XMLDecoder</p>
+<p>! Object-Resolver implementations with <a href="http://springframework.org/" class="externalLink">Springframework</a>
+ (readonly, an object can only be set with setContent)</p>
+<p>! A DB-Connector implemented with Hibernate, configurable with Settings4j over SystemProperties or JNDI-Envirenment-Variables.</p>
+<p>! settings4j.xml: addictive=&quot;false&quot; if no heredity of connectors are being requested.</p>
+<p>! settings4j.xml: cached=&quot;true&quot; A Wrapper for Settings, Connectors and ObjectResolvers to cache all requests.</p>
+<p>- Extend the Example-App to configure a DB-Connector. The <a href="http://java.sun.com/j2se/1.4.2/docs/api/javax/sql/DataSource.html" class="externalLink">DataSource</a>
+-Object comes from JNDI-Context or with an ObjectResolver from FileSystemConnector.</p>
+<p>! mappings configured in settings4j.xml: map one key to an other Key.</p>
+</div>
+<div class="section"><h3>12. May 2008 1.0.0-alpha - release with following features:</h3>
+<p>! Automatically read settings4j.xml from classpath if available</p>
+<p>! Simple Default fall back Configuration if no settings4j.xml is found.</p>
+<p>! Hirachical Structure in settings4j.xml like log4j</p>
+<p>! Main Connector-Implementations: for SystemProperties, Classpath, JNDI-Context, PropertyFile</p>
+<p>- A Simple Example Module who can be use by a Commandline-Client or a web application. The module is configurable either with SystemProperties or JNDI-Envirenment-Variables depends on the settings4j.xml inside the two Client-Applications (jar or war)</p>
+</div>
+<div class="section"><h3>12. April 2008 - Project start</h3>
+</div>
+<div class="section"><h3>March/April 2008</h3>
+<p>- <a href="roadmapTheBeginning.html">The beginning</a>
+</p>
+</div>
+</div>
+
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          2008
+    
+          
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>

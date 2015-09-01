@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./SystemPropertyConnectorTest.html" title="org.settings4j.connector.SystemPropertyConnectorTest" alt="" coords="15,17,201,41"/>
+<area shape="rect" id="node1" href="./SystemPropertyConnectorTest.html" title="&lt;TABLE&gt;" alt="" coords="5,5,211,53"/>
+<area shape="rect" id="node2_1" href="./PreferencesConnectorTest.html" title="org.settings4j.connector.PreferencesConnectorTest" alt="" coords="246,17,413,41"/>
+<area shape="rect" id="node2" href="./PreferencesConnectorTest.html" title="&lt;TABLE&gt;" alt="" coords="235,5,423,53"/>
+<area shape="rect" id="node3_2" href="./JNDIConnectorTest.html" title="org.settings4j.connector.JNDIConnectorTest" alt="" coords="458,17,585,41"/>
+<area shape="rect" id="node3" href="./JNDIConnectorTest.html" title="&lt;TABLE&gt;" alt="" coords="447,5,595,53"/>
+<area shape="rect" id="node4_3" href="./EnvironmentConnectorTest.html" title="org.settings4j.connector.EnvironmentConnectorTest" alt="" coords="630,17,799,41"/>
+<area shape="rect" id="node4" href="./EnvironmentConnectorTest.html" title="&lt;TABLE&gt;" alt="" coords="619,5,810,53"/>
+</map>

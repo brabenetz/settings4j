@@ -1,0 +1,8 @@
+org.settings4j.config
+org.settings4j.connector
+org.settings4j
+org.settings4j.contentresolver
+org.settings4j.settings
+org.settings4j.settings.helper
+org.settings4j.settings.nop
+org.settings4j.util

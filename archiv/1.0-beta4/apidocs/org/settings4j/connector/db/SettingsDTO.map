@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="./SettingsDTO.html" title="&lt;TABLE&gt;" alt="" coords="47,223,135,247"/>
+<area shape="rect" href="./dao/hibernate/SettingsDAOHibernate.html" title="&lt;TABLE&gt;" alt="" coords="68,121,257,156"/>
+<area shape="rect" href="./dao/SettingsDAO.html" title="&lt;TABLE&gt;" alt="" coords="16,11,165,61"/>
+</map>

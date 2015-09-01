@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" href="./config/DOMConfigurator.html" title="&lt;TABLE&gt;" alt="" coords="251,12,363,47"/>
+<area shape="rect" href="./Connector.html" title="&lt;TABLE&gt;" alt="" coords="268,107,345,144"/>
+<area shape="rect" href="./connector/FilteredConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="16,204,179,239"/>
+<area shape="rect" href="./connector/CachedConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="224,204,389,239"/>
+<area shape="rect" href="./connector/AbstractConnector.html" title="&lt;TABLE&gt;" alt="" coords="435,204,552,239"/>
+<area shape="rect" href="./settings/DefaultSettings.html" title="&lt;TABLE&gt;" alt="" coords="408,12,517,47"/>
+<area shape="rect" href="./settings/nop/NOPSettings.html" title="&lt;TABLE&gt;" alt="" coords="563,12,691,47"/>
+<area shape="rect" href="./util/ELConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="736,12,872,47"/>
+</map>

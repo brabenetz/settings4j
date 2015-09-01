@@ -1,0 +1,14 @@
+org.settings4j.config
+org.settings4j.connector
+org.settings4j.connector.db
+org.settings4j.connector.db.dao.hibernate
+org.settings4j.connector.db.dao
+org.settings4j
+org.settings4j.contentresolver
+org.settings4j.exception
+org.settings4j.helper.web
+org.settings4j.objectresolver
+org.settings4j.settings
+org.settings4j.settings.helper
+org.settings4j.settings.nop
+org.settings4j.util

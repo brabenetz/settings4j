@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Settings4j library - Overview</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+          <meta name="author" content="Brabenetz Harald" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      </head>
+  <body class="composite">
+    <div id="banner">
+                  <a href="http://sourceforge.net/projects/settings4j" id="bannerLeft">
+    
+                                    <img src="http://sourceforge.net/sflogo.php?group_id=73068&type=2" alt="" />
+    
+            </a>
+                    <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="breadcrumbs">
+          
+  
+
+  
+    
+  
+  
+    
+            <div class="xleft">
+        Last Published: 27. Apr 2011 01:18
+                      </div>
+            <div class="xright">      
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+           
+  
+
+  
+    
+  
+  
+    
+                   <h5>Settings4j library</h5>
+            <ul>
+              
+    <li class="none">
+              <strong>Overview</strong>
+        </li>
+              
+    <li class="none">
+                    <a href="download.html">Download</a>
+          </li>
+              
+    <li class="none">
+                    <a href="roadmap.html">Roadmap</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://settings4j.wiki.sourceforge.net/" class="externalLink">WIKI</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://settings4j.sourceforge.net/archiv" class="externalLink">Archiv</a>
+          </li>
+          </ul>
+              <h5>Documentation</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="docuRecommendation.html">Recommendation</a>
+          </li>
+          </ul>
+              <h5>Project Documentation</h5>
+            <ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-info.html">Project Information</a>
+                </li>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-reports.html">Project Reports</a>
+                </li>
+          </ul>
+                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+          </a>
+                       
+  
+
+  
+    
+  
+  
+    
+        </div>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <p><b>Description</b></p>
+<p>This documentation is related to the settings4j <b>1.0</b> release.</p>
+<div class="section"><h2><a name="Index">Index</a></h2>
+<ul><li><a href="#Index">Index</a></li>
+<li><a href="#Overview">Overview</a><ul><li><a href="#THE_PROBLEM">THE PROBLEM</a></li>
+<li><a href="#THE_SOLUTION">THE SOLUTION</a></li>
+</ul>
+</li>
+<li><a href="#EXAMPLE">EXAMPLE</a><ul><li><a href="#Developer">Developer</a></li>
+<li><a href="#Deployer">Deployer</a><ul><li><a href="#SystemProperties">SystemProperties</a></li>
+<li><a href="#JNDI-Context">JNDI-Context</a></li>
+<li><a href="#Classpath">Classpath</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section"><h2><a name="Overview">Overview</a></h2>
+<div class="section"><h3><a name="THE_PROBLEM">THE PROBLEM</a></h3>
+<p>When I make a Project, I must decide where the configuration settings will be stored.<br />
+There are many diffeneret solutions:</p>
+<ul><li>You can use SystemProperties on startup</li>
+<li>You can store *.property and *.xml into the Classpath/FileSystem</li>
+<li>You can get your Settings from a JNDI Context</li>
+<li>You can get your Settings from a DB</li>
+</ul>
+<p>I was inspired by log4j:<br />
+The programmer says, that he want log some information.<br />
+It is everytime possible to simply change the target (FileSystem, DB, MailServer, ...) where the information ist logged out.<br />
+The Programmer must not care about it.</p>
+</div>
+<div class="section"><h3><a name="THE_SOLUTION">THE SOLUTION</a></h3>
+<p>For Settings, the Solution could be similar.<br />
+The Programmer says he want the settings for Key 'xyz', and should not care about where the Settings comes from.</p>
+</div>
+</div>
+<div class="section"><h2><a name="EXAMPLE">EXAMPLE</a></h2>
+<ul><li>The <b>Developer</b> want the settings for Key 'com/mycompany/mycalculation/my-formula'</li>
+<li>The <b>Deployer</b> define where and how the value will be placed.</li>
+</ul>
+<div class="section"><h3><a name="Developer">Developer</a></h3>
+<p>Developer wants the settings for Key 'com/mycompany/mycalculation/my-formula' He create the following SettingsManager-Class:</p>
+<div class="source"><pre>public class SettingsManager {
+
+    public static String getMyFormula() {
+        return Settings.getString(&quot;com/mycompany/mycalculation/my-formula&quot;);
+    }
+}</pre>
+</div>
+</div>
+<div class="section"><h3><a name="Deployer">Deployer</a></h3>
+<p>By default the Deployer can chose to configure the developers app with the SystemProperties, JNDI-Context or the Classpath (in this order).<br />
+He can also define his own settings4j.xml (e.g.: for Database-Configuration, Property-Files, write-access, etc...)</p>
+<div class="section"><h4><a name="SystemProperties">SystemProperties</a></h4>
+<p>System Properties can be set as java.exe Argument (JAVA_OPTS):</p>
+<div class="source"><pre>java -Dcom/mycompany/mycalculation/my-formula=a*a .....</pre>
+</div>
+<p>You can also add SystemProperties on the Tomcat-Startup</p>
+<div class="source"><pre>cd %TOMCAT_HOME%/bin
+set JAVA_OPTS=-Dcom/mycompany/mycalculation/my-formula=a*a
+startup.bat</pre>
+</div>
+<p>With JBOSS you can set SystemProperties with mbeans: <a href="http://docs.jboss.org/admin-devel/Chap10.html" class="externalLink">org.jboss.varia.property.SystemPropertiesService</a></p>
+<div class="source"><pre>&lt;server&gt;
+        &lt;mbean code=&quot;org.jboss.varia.property.SystemPropertiesService&quot; name=&quot;jboss.util:type=Service,name=SystemProperties&quot;&gt;
+                &lt;attribute name=&quot;Properties&quot;&gt;
+                        com/mycompany/mycalculation/my-formula=a*a
+                &lt;/attribute&gt;
+        &lt;/mbean&gt;
+&lt;/server&gt;</pre>
+</div>
+</div>
+<div class="section"><h4><a name="JNDI-Context">JNDI-Context</a></h4>
+<p>If you want access to the JNDI-Context. you must prepare your (Web) Application</p>
+<p><b>web.xml</b></p>
+<p>similar to the specification add a resource-ref into your web.xml like the following:</p>
+<div class="source"><pre>        ....
+        ....
+        &lt;resource-env-ref&gt;
+                &lt;resource-env-ref-name&gt;
+                        com/mycompany/mycalculation/my-formula
+                &lt;/resource-env-ref-name&gt;
+                &lt;resource-env-ref-type&gt;java.lang.String&lt;/resource-env-ref-type&gt;
+        &lt;/resource-env-ref&gt;
+        ....
+&lt;/web-app&gt;</pre>
+</div>
+<p><b>Server specific deployment descriptors</b></p>
+<p>Dependents of the Server you must also place a XML Configuration into your webapp (rtm):</p>
+<ul><li>META-INF/context.xml (TOMCAT)</li>
+<li>WEB-INF/jboss-web.xml (JBOSS)</li>
+<li>WEB-INF/jetty-web.xml (Jetty)</li>
+<li>WEB-INF/weblogic.xml (Weblogic)</li>
+</ul>
+<p><b>Tomcat Example</b></p>
+<p>Add the configuration-value into the server.xml</p>
+<p>%TOMCAT_HOME%/conf/server.xml </p>
+<div class="source"><pre>&lt;Server ...&gt;
+        ...
+        &lt;!-- Global JNDI resources --&gt;
+        &lt;GlobalNamingResources&gt;
+                ...
+                &lt;!-- Test calculation configuration-Path for demonstration purposes --&gt;
+                &lt;Environment name=&quot;com/mycompany/mycalculation/my-formula&quot; type=&quot;java.lang.String&quot; value=&quot;a + a * a&quot; /&gt;
+        &lt;/GlobalNamingResources&gt;
+        ...
+        ...
+&lt;/Server&gt;</pre>
+</div>
+<p>Add the Tomcat-specific deployment descriptor to your webapp:</p>
+<p>META-INF/context.xml</p>
+<div class="source"><pre>&lt;Context path=&quot;/${artifactId}&quot; docBase=&quot;${artifactId}&quot; debug=&quot;0&quot;&gt;
+        &lt;ResourceLink name=&quot;com/mycompany/mycalculation/my-formula&quot; global=&quot;com/mycompany/mycalculation/my-formula&quot; type=&quot;java.lang.String&quot; /&gt;
+&lt;/Context&gt;</pre>
+</div>
+</div>
+<div class="section"><h4><a name="Classpath">Classpath</a></h4>
+<p>The Key-Value can also be placed into the classpath:</p>
+<img src="images/indexClasspath.gif" alt="Beispiel Classpath-Configuration for key &quot;com/mycompany/mycalculation/my-formula&quot;" /></div>
+</div>
+</div>
+
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          2008-2011
+    
+          
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>

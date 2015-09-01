@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./SettingsManager.html" title="org.settings4j.settings.SettingsManager" alt="" coords="16,17,128,41"/>
+<area shape="rect" id="node1" href="./SettingsManager.html" title="&lt;TABLE&gt;" alt="" coords="5,5,139,53"/>
+<area shape="rect" id="node2_1" href="./DefaultSettingsRepository.html" title="org.settings4j.settings.DefaultSettingsRepository" alt="" coords="174,17,335,41"/>
+<area shape="rect" id="node2" href="./DefaultSettingsRepository.html" title="&lt;TABLE&gt;" alt="" coords="163,5,346,53"/>
+<area shape="rect" id="node3_2" href="./DefaultSettingsFactory.html" title="org.settings4j.settings.DefaultSettingsFactory" alt="" coords="381,17,523,41"/>
+<area shape="rect" id="node3" href="./DefaultSettingsFactory.html" title="&lt;TABLE&gt;" alt="" coords="371,5,533,53"/>
+<area shape="rect" id="node4_3" href="./DefaultSettings.html" title="org.settings4j.settings.DefaultSettings" alt="" coords="569,17,671,41"/>
+<area shape="rect" id="node4" href="./DefaultSettings.html" title="&lt;TABLE&gt;" alt="" coords="558,5,682,53"/>
+<area shape="rect" id="node5_4" href="./DefaultFilter.html" title="org.settings4j.settings.DefaultFilter" alt="" coords="717,17,803,41"/>
+<area shape="rect" id="node5" href="./DefaultFilter.html" title="&lt;TABLE&gt;" alt="" coords="707,5,813,53"/>
+</map>

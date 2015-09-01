@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" href="./Settings4jRepository.html" title="&lt;TABLE&gt;" alt="" coords="16,11,147,48"/>
+<area shape="rect" href="./Settings4jInstance.html" title="&lt;TABLE&gt;" alt="" coords="192,11,312,48"/>
+<area shape="rect" href="./Settings4jFactory.html" title="&lt;TABLE&gt;" alt="" coords="357,11,469,48"/>
+<area shape="rect" href="./Settings4j.html" title="&lt;TABLE&gt;" alt="" coords="515,17,587,41"/>
+<area shape="rect" href="./ObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="632,11,733,48"/>
+<area shape="rect" href="./Filter.html" title="&lt;TABLE&gt;" alt="" coords="779,11,856,48"/>
+<area shape="rect" href="./ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="901,11,1011,48"/>
+<area shape="rect" href="./Constants.html" title="&lt;TABLE&gt;" alt="" coords="1056,17,1131,41"/>
+<area shape="rect" href="./Connector.html" title="&lt;TABLE&gt;" alt="" coords="1176,11,1253,48"/>
+</map>

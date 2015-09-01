@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./Settings4jFactory.html" title="&lt;TABLE&gt;" alt="" coords="198,107,311,146"/>
+<area shape="rect" id="node4_1" href="./settings/DefaultSettingsFactory.html" title="&lt;TABLE&gt;" alt="" coords="184,206,325,242"/>
+<area shape="rect" id="node2_2" href="./settings/SettingsManager.html" title="&lt;TABLE&gt;" alt="" coords="16,11,128,47"/>
+<area shape="rect" id="node3_3" href="./settings/DefaultSettingsRepository.html" title="&lt;TABLE&gt;" alt="" coords="174,11,335,47"/>
+<area shape="rect" id="node5_4" href="./settings/nop/NOPSettingsRepository.html" title="&lt;TABLE&gt;" alt="" coords="381,11,531,47"/>
+</map>

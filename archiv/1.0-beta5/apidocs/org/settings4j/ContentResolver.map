@@ -1,0 +1,19 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./config/DOMConfigurator.html" title="&lt;TABLE&gt;" alt="" coords="923,107,1037,143"/>
+<area shape="rect" id="node8_1" href="./ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="577,203,687,242"/>
+<area shape="rect" id="node2_2" href="./connector/FSConnector.html" title="&lt;TABLE&gt;" alt="" coords="227,107,346,143"/>
+<area shape="rect" id="node10_3" href="./contentresolver/FSContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="229,302,355,338"/>
+<area shape="rect" id="node3_4" href="./connector/FilteredConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="1082,107,1246,143"/>
+<area shape="rect" id="node4_5" href="./connector/ClasspathConnector.html" title="&lt;TABLE&gt;" alt="" coords="48,107,181,143"/>
+<area shape="rect" id="node12_6" href="./contentresolver/ClasspathContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="16,302,184,338"/>
+<area shape="rect" id="node5_7" href="./connector/CachedConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="1524,107,1689,143"/>
+<area shape="rect" id="node6_8" href="./connector/AbstractConnector.html" title="&lt;TABLE&gt;" alt="" coords="291,11,402,47"/>
+<area shape="rect" id="node7_9" href="./connector/db/DBContentResolverAdapter.html" title="&lt;TABLE&gt;" alt="" coords="401,302,570,338"/>
+<area shape="rect" id="node9_10" href="./contentresolver/UnionContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="616,302,760,338"/>
+<area shape="rect" id="node11_11" href="./contentresolver/FilteredContentResolverWrapper.html" title="&lt;TABLE&gt;" alt="" coords="806,302,1005,338"/>
+<area shape="rect" id="node13_12" href="./objectresolver/UnionObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="1786,107,1923,143"/>
+<area shape="rect" id="node14_13" href="./objectresolver/SpringConfigObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="703,107,878,143"/>
+<area shape="rect" id="node15_14" href="./objectresolver/JavaXMLBeansObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="1292,107,1479,143"/>
+<area shape="rect" id="node16_15" href="./objectresolver/FilteredObjectResolverWrapper.html" title="&lt;TABLE&gt;" alt="" coords="467,107,658,143"/>
+<area shape="rect" id="node17_16" href="./objectresolver/AbstractObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="1330,11,1441,47"/>
+</map>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="4.1" timestamp="2008-07-06T20:55:46.523">
+<file name="D:\Proj-settings4j\WS\settings4j\target\checkout\src\main\java\org\settings4j\Connector.java">
+<violation beginline="19" endline="19" begincolumn="1" endcolumn="51" rule="UnusedImports" ruleset="Import Statement Rules" package="org.settings4j" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.settings4j.connector.ClasspathConnector'
+</violation>
+</file>
+<file name="D:\Proj-settings4j\WS\settings4j\target\checkout\src\main\java\org\settings4j\Constants.java">
+<violation beginline="22" endline="22" begincolumn="1" endcolumn="51" rule="UnusedImports" ruleset="Import Statement Rules" package="org.settings4j" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.settings4j.connector.ClasspathConnector'
+</violation>
+<violation beginline="23" endline="23" begincolumn="1" endcolumn="57" rule="UnusedImports" ruleset="Import Statement Rules" package="org.settings4j" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.settings4j.connector.ReadOnlyConnectorWrapper'
+</violation>
+</file>
+<file name="D:\Proj-settings4j\WS\settings4j\target\checkout\src\main\java\org\settings4j\ContentResolver.java">
+<violation beginline="19" endline="19" begincolumn="1" endcolumn="69" rule="UnusedImports" ruleset="Import Statement Rules" package="org.settings4j" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.settings4j.contentresolver.ReadOnlyContentResolverWrapper'
+</violation>
+<violation beginline="20" endline="20" begincolumn="1" endcolumn="59" rule="UnusedImports" ruleset="Import Statement Rules" package="org.settings4j" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.settings4j.contentresolver.UnionContentResolver'
+</violation>
+</file>
+<file name="D:\Proj-settings4j\WS\settings4j\target\checkout\src\main\java\org\settings4j\ObjectResolver.java">
+<violation beginline="19" endline="19" begincolumn="1" endcolumn="64" rule="UnusedImports" ruleset="Import Statement Rules" package="org.settings4j" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.settings4j.objectresolver.JavaXMLBeansObjectResolver'
+</violation>
+<violation beginline="20" endline="20" begincolumn="1" endcolumn="67" rule="UnusedImports" ruleset="Import Statement Rules" package="org.settings4j" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.settings4j.objectresolver.ReadOnlyObjectResolverWrapper'
+</violation>
+<violation beginline="21" endline="21" begincolumn="1" endcolumn="57" rule="UnusedImports" ruleset="Import Statement Rules" package="org.settings4j" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.settings4j.objectresolver.UnionObjectResolver'
+</violation>
+</file>
+<file name="D:\Proj-settings4j\WS\settings4j\target\checkout\src\main\java\org\settings4j\Settings.java">
+<violation beginline="21" endline="21" begincolumn="1" endcolumn="45" rule="UnusedImports" ruleset="Import Statement Rules" package="org.settings4j" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.settings4j.config.DOMConfigurator'
+</violation>
+</file>
+<file name="D:\Proj-settings4j\WS\settings4j\target\checkout\src\main\java\org\settings4j\connector\JNDIConnector.java">
+<violation beginline="231" endline="232" begincolumn="15" endcolumn="13" rule="EmptyCatchBlock" ruleset="Basic Rules" package="org.settings4j.connector" class="JNDIConnector" method="createParentContext" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
+Avoid empty catch blocks
+</violation>
+<violation beginline="247" endline="248" begincolumn="11" endcolumn="9" rule="EmptyCatchBlock" ruleset="Basic Rules" package="org.settings4j.connector" class="JNDIConnector" method="createParentContext" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
+Avoid empty catch blocks
+</violation>
+</file>
+<file name="D:\Proj-settings4j\WS\settings4j\target\checkout\src\main\java\org\settings4j\connector\db\DBContentResolverAdapter.java">
+<violation beginline="21" endline="21" begincolumn="1" endcolumn="37" rule="UnusedImports" ruleset="Import Statement Rules" package="org.settings4j.connector.db" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.settings4j.ObjectResolver'
+</violation>
+</file>
+<file name="D:\Proj-settings4j\WS\settings4j\target\checkout\src\main\java\org\settings4j\objectresolver\AbstractObjectResolver.java">
+<violation beginline="114" endline="116" begincolumn="17" endcolumn="17" rule="CollapsibleIfStatements" ruleset="Basic Rules" package="org.settings4j.objectresolver" class="AbstractObjectResolver" method="setObject" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+</file>
+<file name="D:\Proj-settings4j\WS\settings4j\target\checkout\src\main\java\org\settings4j\settings\HierarchicalSettingsRepository.java">
+<violation beginline="26" endline="26" begincolumn="1" endcolumn="52" rule="ImportFromSamePackage" ruleset="Import Statement Rules" package="org.settings4j.settings" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#ImportFromSamePackage" priority="3">
+No need to import a type that lives in the same package
+</violation>
+</file>
+<file name="D:\Proj-settings4j\WS\settings4j\target\checkout\src\main\java\org\settings4j\settings\helper\InheritedMappedKeys.java">
+<violation beginline="19" endline="19" begincolumn="1" endcolumn="31" rule="UnusedImports" ruleset="Import Statement Rules" package="org.settings4j.settings.helper" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.settings4j.Settings'
+</violation>
+</file>
+<file name="D:\Proj-settings4j\WS\settings4j\target\checkout\src\main\java\org\settings4j\util\MatchPatternTransformer.java">
+<violation beginline="24" endline="24" begincolumn="1" endcolumn="50" rule="UnusedImports" ruleset="Import Statement Rules" package="org.settings4j.util" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'org.apache.commons.collections.map.LazyMap'
+</violation>
+</file>
+</pmd>

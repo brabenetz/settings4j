@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" href="./config/DOMConfigurator.html" title="&lt;TABLE&gt;" alt="" coords="16,12,128,47"/>
+<area shape="rect" href="./Settings4jInstance.html" title="&lt;TABLE&gt;" alt="" coords="348,107,468,144"/>
+<area shape="rect" href="./settings/DefaultSettings.html" title="&lt;TABLE&gt;" alt="" coords="272,204,381,239"/>
+<area shape="rect" href="./settings/nop/NOPSettings.html" title="&lt;TABLE&gt;" alt="" coords="427,204,555,239"/>
+<area shape="rect" href="./settings/SettingsManager.html" title="&lt;TABLE&gt;" alt="" coords="173,12,283,47"/>
+<area shape="rect" href="./settings/DefaultSettingsRepository.html" title="&lt;TABLE&gt;" alt="" coords="328,12,488,47"/>
+<area shape="rect" href="./settings/DefaultSettingsFactory.html" title="&lt;TABLE&gt;" alt="" coords="533,12,675,47"/>
+<area shape="rect" href="./settings/nop/NOPSettingsRepository.html" title="&lt;TABLE&gt;" alt="" coords="720,12,867,47"/>
+</map>

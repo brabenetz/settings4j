@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./config/DOMConfigurator.html" title="org.settings4j.config.DOMConfigurator" alt="" coords="139,11,253,47"/>
+<area shape="rect" id="node1" href="./config/DOMConfigurator.html" title="&lt;TABLE&gt;" alt="" coords="129,5,263,53"/>
+<area shape="rect" id="node2_1" href="./Settings4jRepository.html" title="org.settings4j.Settings4jRepository" alt="" coords="129,107,263,146"/>
+<area shape="rect" id="node2" href="./Settings4jRepository.html" title="&lt;TABLE&gt;" alt="" coords="119,102,273,151"/>
+<area shape="rect" id="node4_2" href="./settings/DefaultSettingsRepository.html" title="org.settings4j.settings.DefaultSettingsRepository" alt="" coords="15,206,177,242"/>
+<area shape="rect" id="node4" href="./settings/DefaultSettingsRepository.html" title="&lt;TABLE&gt;" alt="" coords="5,200,187,248"/>
+<area shape="rect" id="node5_3" href="./settings/nop/NOPSettingsRepository.html" title="org.settings4j.settings.nop.NOPSettingsRepository" alt="" coords="223,206,372,242"/>
+<area shape="rect" id="node5" href="./settings/nop/NOPSettingsRepository.html" title="&lt;TABLE&gt;" alt="" coords="212,200,383,248"/>
+<area shape="rect" id="node3_4" href="./settings/SettingsManager.html" title="org.settings4j.settings.SettingsManager" alt="" coords="299,11,411,47"/>
+<area shape="rect" id="node3" href="./settings/SettingsManager.html" title="&lt;TABLE&gt;" alt="" coords="288,5,421,53"/>
+</map>

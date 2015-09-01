@@ -1,0 +1,11 @@
+org.settings4j
+org.settings4j.config
+org.settings4j.connector
+org.settings4j.connector.db
+org.settings4j.contentresolver
+org.settings4j.helper.spring
+org.settings4j.helper.web
+org.settings4j.objectresolver
+org.settings4j.settings
+org.settings4j.test
+org.settings4j.util

@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./config/DOMConfigurator.html" title="org.settings4j.config.DOMConfigurator" alt="" coords="15,11,129,47"/>
+<area shape="rect" id="node1" href="./config/DOMConfigurator.html" title="&lt;TABLE&gt;" alt="" coords="5,5,139,53"/>
+<area shape="rect" id="node3_1" href="./Filter.html" title="org.settings4j.Filter" alt="" coords="329,107,409,146"/>
+<area shape="rect" id="node3" href="./Filter.html" title="&lt;TABLE&gt;" alt="" coords="319,102,420,151"/>
+<area shape="rect" id="node2_2" href="./connector/FilteredConnectorWrapper.html" title="org.settings4j.connector.FilteredConnectorWrapper" alt="" coords="174,11,338,47"/>
+<area shape="rect" id="node2" href="./connector/FilteredConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="163,5,349,53"/>
+<area shape="rect" id="node6_3" href="./settings/DefaultFilter.html" title="org.settings4j.settings.DefaultFilter" alt="" coords="314,206,425,242"/>
+<area shape="rect" id="node6" href="./settings/DefaultFilter.html" title="&lt;TABLE&gt;" alt="" coords="303,200,435,248"/>
+<area shape="rect" id="node4_4" href="./contentresolver/FilteredContentResolverWrapper.html" title="org.settings4j.contentresolver.FilteredContentResolverWrapper" alt="" coords="383,11,582,47"/>
+<area shape="rect" id="node4" href="./contentresolver/FilteredContentResolverWrapper.html" title="&lt;TABLE&gt;" alt="" coords="373,5,593,53"/>
+<area shape="rect" id="node5_5" href="./objectresolver/FilteredObjectResolverWrapper.html" title="org.settings4j.objectresolver.FilteredObjectResolverWrapper" alt="" coords="627,11,818,47"/>
+<area shape="rect" id="node5" href="./objectresolver/FilteredObjectResolverWrapper.html" title="&lt;TABLE&gt;" alt="" coords="617,5,829,53"/>
+</map>

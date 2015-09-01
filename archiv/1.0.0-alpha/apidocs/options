@@ -1,0 +1,17 @@
+-classpath 'D:/Proj-settings4j/WS/settings4j/target/checkout/target/classes;C:/Dokumente und Einstellungen/hbrabenetz/.m2/repository/commons-io/commons-io/1.4/commons-io-1.4.jar;C:/Dokumente und Einstellungen/hbrabenetz/.m2/repository/commons-lang/commons-lang/2.4/commons-lang-2.4.jar;C:/Dokumente und Einstellungen/hbrabenetz/.m2/repository/commons-logging/commons-logging/1.1/commons-logging-1.1.jar;C:/Dokumente und Einstellungen/hbrabenetz/.m2/repository/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar;C:/Dokumente und Einstellungen/hbrabenetz/.m2/repository/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.jar;C:/Dokumente und Einstellungen/hbrabenetz/.m2/repository/taglibs/standard/1.1.2/standard-1.1.2.jar'
+ -protected
+-sourcepath
+'D:/Proj-settings4j/WS/settings4j/target/checkout/src/main/java'
+-author
+-bottom
+'Copyright © 2008. All Rights Reserved.'
+-charset
+'ISO-8859-1'
+-d
+'D:/Proj-settings4j/WS/settings4j/target/checkout/target/site/apidocs'
+-doctitle
+'settings4j 1.0.0-alpha API'
+-use
+-version
+-windowtitle
+'settings4j 1.0.0-alpha API'

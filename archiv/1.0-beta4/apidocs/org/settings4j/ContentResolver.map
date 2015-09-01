@@ -1,0 +1,19 @@
+<map id="G" name="G">
+<area shape="rect" href="./config/DOMConfigurator.html" title="&lt;TABLE&gt;" alt="" coords="921,108,1033,143"/>
+<area shape="rect" href="./ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="585,203,695,240"/>
+<area shape="rect" href="./connector/FSConnector.html" title="&lt;TABLE&gt;" alt="" coords="231,108,348,143"/>
+<area shape="rect" href="./contentresolver/FSContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="227,300,368,335"/>
+<area shape="rect" href="./connector/FilteredConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="1079,108,1241,143"/>
+<area shape="rect" href="./connector/ClasspathConnector.html" title="&lt;TABLE&gt;" alt="" coords="55,108,185,143"/>
+<area shape="rect" href="./contentresolver/ClasspathContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="16,300,181,335"/>
+<area shape="rect" href="./connector/CachedConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="1519,108,1684,143"/>
+<area shape="rect" href="./connector/AbstractConnector.html" title="&lt;TABLE&gt;" alt="" coords="289,12,407,47"/>
+<area shape="rect" href="./connector/db/DBContentResolverAdapter.html" title="&lt;TABLE&gt;" alt="" coords="413,300,581,335"/>
+<area shape="rect" href="./contentresolver/UnionContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="627,300,768,335"/>
+<area shape="rect" href="./contentresolver/FilteredContentResolverWrapper.html" title="&lt;TABLE&gt;" alt="" coords="813,300,1011,335"/>
+<area shape="rect" href="./objectresolver/UnionObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="1780,108,1916,143"/>
+<area shape="rect" href="./objectresolver/SpringConfigObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="703,108,876,143"/>
+<area shape="rect" href="./objectresolver/JavaXMLBeansObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="1287,108,1473,143"/>
+<area shape="rect" href="./objectresolver/FilteredObjectResolverWrapper.html" title="&lt;TABLE&gt;" alt="" coords="468,108,657,143"/>
+<area shape="rect" href="./objectresolver/AbstractObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="1307,12,1453,47"/>
+</map>

@@ -1,0 +1,775 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Settings4j library - Surefire Report</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      </head>
+  <body class="composite">
+    <div id="banner">
+                  <a href="http://sourceforge.net/projects/settings4j" id="bannerLeft">
+    
+                                    <img src="http://sourceforge.net/sflogo.php?group_id=73068&type=2" alt="" />
+    
+            </a>
+                    <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="breadcrumbs">
+          
+  
+
+  
+    
+  
+  
+    
+            <div class="xleft">
+        Last Published: 27. Apr 2011 01:19
+                      </div>
+            <div class="xright">      
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+           
+  
+
+  
+    
+  
+  
+    
+                   <h5>Settings4j library</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="index.html">Overview</a>
+          </li>
+              
+    <li class="none">
+                    <a href="download.html">Download</a>
+          </li>
+              
+    <li class="none">
+                    <a href="roadmap.html">Roadmap</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://settings4j.wiki.sourceforge.net/" class="externalLink">WIKI</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://settings4j.sourceforge.net/archiv" class="externalLink">Archiv</a>
+          </li>
+          </ul>
+              <h5>Documentation</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="docuRecommendation.html">Recommendation</a>
+          </li>
+          </ul>
+              <h5>Project Documentation</h5>
+            <ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-info.html">Project Information</a>
+                </li>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+            
+            
+      
+            
+      
+              
+            <li class="expanded">
+                    <a href="project-reports.html">Project Reports</a>
+                  <ul>
+                  
+    <li class="none">
+                    <a href="changes-report.html">Changes Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="checkstyle.html">Checkstyle</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="cobertura/index.html">Cobertura Test Coverage</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="cpd.html">CPD Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="findbugs.html">FindBugs Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="apidocs/index.html">JavaDocs</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="pmd.html">PMD Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="xref/index.html">Source Xref</a>
+          </li>
+                  
+    <li class="none">
+              <strong>Surefire Report</strong>
+        </li>
+                  
+    <li class="none">
+                    <a href="testapidocs/index.html">Test JavaDocs</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="xref-test/index.html">Test Source Xref</a>
+          </li>
+              </ul>
+        </li>
+          </ul>
+                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+          </a>
+                       
+  
+
+  
+    
+  
+  
+    
+        </div>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <script type="text/javascript">
+function toggleDisplay(elementId) {
+ var elm = document.getElementById(elementId + 'error');
+ if (elm && typeof elm.style != "undefined") {
+ if (elm.style.display == "none") {
+ elm.style.display = "";
+ document.getElementById(elementId + 'off').style.display = "none";
+ document.getElementById(elementId + 'on').style.display = "inline";
+ } else if (elm.style.display == "") { elm.style.display = "none";
+ document.getElementById(elementId + 'off').style.display = "inline";
+ document.getElementById(elementId + 'on').style.display = "none";
+ } 
+ } 
+ }
+</script><div class="section"><h2>Surefire Report</h2>
+</div>
+<div class="section"><h2><a name="Summary"></a>Summary</h2>
+<div class="section">[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</div>
+<br />
+<table class="bodyTable"><tr class="a"><th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th>
+</tr>
+<tr class="b"><td>34</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>1.906</td>
+</tr>
+</table>
+<br />
+Note: failures are anticipated and checked for with assertions while errors are unanticipated.<br />
+</div>
+<div class="section"><h2><a name="Package_List"></a>Package List</h2>
+<div class="section">[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</div>
+<br />
+<table class="bodyTable"><tr class="a"><th>Package</th>
+<th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th>
+</tr>
+<tr class="b"><td><a href="#org.settings4j.config">org.settings4j.config</a></td>
+<td>13</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.529</td>
+</tr>
+<tr class="a"><td><a href="#org.settings4j.helper.spring">org.settings4j.helper.spring</a></td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.072</td>
+</tr>
+<tr class="b"><td><a href="#org.settings4j.contentresolver">org.settings4j.contentresolver</a></td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.021</td>
+</tr>
+<tr class="a"><td><a href="#org.settings4j.objectresolver">org.settings4j.objectresolver</a></td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.086</td>
+</tr>
+<tr class="b"><td><a href="#org.settings4j.settings">org.settings4j.settings</a></td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.004</td>
+</tr>
+<tr class="a"><td><a href="#org.settings4j.util">org.settings4j.util</a></td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.057</td>
+</tr>
+<tr class="b"><td><a href="#org.settings4j.connector.db">org.settings4j.connector.db</a></td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>1.05</td>
+</tr>
+<tr class="a"><td><a href="#org.settings4j.connector">org.settings4j.connector</a></td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.087</td>
+</tr>
+</table>
+<br />
+Note: package statistics are not computed recursively, they only sum up all of its testsuites numbers.<div class="section"><h3><a name="org.settings4j.config"></a>org.settings4j.config</h3>
+<table class="bodyTable"><tr class="b"><th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th>
+</tr>
+<tr class="a"><td><a href="#org.settings4j.configTestDefaultFallbackConfiguration"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.settings4j.configTestDefaultFallbackConfiguration">TestDefaultFallbackConfiguration</a></td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.029</td>
+</tr>
+<tr class="b"><td><a href="#org.settings4j.configTestSettings4jConfig"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.settings4j.configTestSettings4jConfig">TestSettings4jConfig</a></td>
+<td>10</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.471</td>
+</tr>
+<tr class="a"><td><a href="#org.settings4j.configTestSettings4jFilterConfig"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.settings4j.configTestSettings4jFilterConfig">TestSettings4jFilterConfig</a></td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.015</td>
+</tr>
+<tr class="b"><td><a href="#org.settings4j.configTestSettings4jMappingConfig"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.settings4j.configTestSettings4jMappingConfig">TestSettings4jMappingConfig</a></td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.014</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.helper.spring"></a>org.settings4j.helper.spring</h3>
+<table class="bodyTable"><tr class="a"><th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th>
+</tr>
+<tr class="b"><td><a href="#org.settings4j.helper.springSettings4jFactoryBeanTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.settings4j.helper.springSettings4jFactoryBeanTest">Settings4jFactoryBeanTest</a></td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.072</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.contentresolver"></a>org.settings4j.contentresolver</h3>
+<table class="bodyTable"><tr class="a"><th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th>
+</tr>
+<tr class="b"><td><a href="#org.settings4j.contentresolverClasspathContentResolverTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.settings4j.contentresolverClasspathContentResolverTest">ClasspathContentResolverTest</a></td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.002</td>
+</tr>
+<tr class="a"><td><a href="#org.settings4j.contentresolverFSContentResolverTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.settings4j.contentresolverFSContentResolverTest">FSContentResolverTest</a></td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.019</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.objectresolver"></a>org.settings4j.objectresolver</h3>
+<table class="bodyTable"><tr class="b"><th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th>
+</tr>
+<tr class="a"><td><a href="#org.settings4j.objectresolverJavaXMLBeansObjectResolverTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.settings4j.objectresolverJavaXMLBeansObjectResolverTest">JavaXMLBeansObjectResolverTest</a></td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.068</td>
+</tr>
+<tr class="b"><td><a href="#org.settings4j.objectresolverSpringConfigObjectResolverTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.settings4j.objectresolverSpringConfigObjectResolverTest">SpringConfigObjectResolverTest</a></td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.018</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.settings"></a>org.settings4j.settings</h3>
+<table class="bodyTable"><tr class="a"><th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th>
+</tr>
+<tr class="b"><td><a href="#org.settings4j.settingsDefaultFilterTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.settings4j.settingsDefaultFilterTest">DefaultFilterTest</a></td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.004</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.util"></a>org.settings4j.util</h3>
+<table class="bodyTable"><tr class="a"><th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th>
+</tr>
+<tr class="b"><td><a href="#org.settings4j.utilELConnectorWrapperTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.settings4j.utilELConnectorWrapperTest">ELConnectorWrapperTest</a></td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.043</td>
+</tr>
+<tr class="a"><td><a href="#org.settings4j.utilExpressionLanguageUtilTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.settings4j.utilExpressionLanguageUtilTest">ExpressionLanguageUtilTest</a></td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.014</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.connector.db"></a>org.settings4j.connector.db</h3>
+<table class="bodyTable"><tr class="b"><th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th>
+</tr>
+<tr class="a"><td><a href="#org.settings4j.connector.dbTestHibernateDBConnector"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.settings4j.connector.dbTestHibernateDBConnector">TestHibernateDBConnector</a></td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>1.05</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.connector"></a>org.settings4j.connector</h3>
+<table class="bodyTable"><tr class="b"><th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th>
+</tr>
+<tr class="a"><td><a href="#org.settings4j.connectorJNDIConnectorTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.settings4j.connectorJNDIConnectorTest">JNDIConnectorTest</a></td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.075</td>
+</tr>
+<tr class="b"><td><a href="#org.settings4j.connectorSystemPropertyConnectorTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.settings4j.connectorSystemPropertyConnectorTest">SystemPropertyConnectorTest</a></td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.012</td>
+</tr>
+</table>
+</div>
+<br />
+</div>
+<div class="section"><h2><a name="Test_Cases"></a>Test Cases</h2>
+<div class="section">[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</div>
+<div class="section"><h3><a name="org.settings4j.configTestDefaultFallbackConfiguration"></a>TestDefaultFallbackConfiguration</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testDefaultSettings4jConfig</td>
+<td>0.028</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.configTestSettings4jConfig"></a>TestSettings4jConfig</h3>
+<table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testDefaultSettings4jConfig</td>
+<td>0.032</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCorruptConfig</td>
+<td>0.013</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testFSConfigTempFolder</td>
+<td>0.067</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testFSConfigTestFolder</td>
+<td>0.012</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testObjectResolverConfig</td>
+<td>0.025</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testObjectResolverConfig1</td>
+<td>0.018</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testObjectResolverConfig2</td>
+<td>0.064</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testObjectResolverConfig3</td>
+<td>0.015</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testObjectResolverConfig4Spring</td>
+<td>0.204</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testPropertyFileConfig</td>
+<td>0.018</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.configTestSettings4jFilterConfig"></a>TestSettings4jFilterConfig</h3>
+<table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testMapping</td>
+<td>0.014</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.configTestSettings4jMappingConfig"></a>TestSettings4jMappingConfig</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testMapping</td>
+<td>0.013</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.connector.dbTestHibernateDBConnector"></a>TestHibernateDBConnector</h3>
+<table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testHibernateDBConnector1</td>
+<td>0.902</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testHibernateDAO</td>
+<td>0.062</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.connectorJNDIConnectorTest"></a>JNDIConnectorTest</h3>
+<table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testJNDIConnectorWithoutJNDI</td>
+<td>0.003</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testJNDIConnectorWithJNDI</td>
+<td>0.067</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testJNDIConnectorIsAvailable</td>
+<td>0.003</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.connectorSystemPropertyConnectorTest"></a>SystemPropertyConnectorTest</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testSystemPropertyConnector</td>
+<td>0.011</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.contentresolverClasspathContentResolverTest"></a>ClasspathContentResolverTest</h3>
+<table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testReadHelloWorldTxt</td>
+<td>0.002</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.contentresolverFSContentResolverTest"></a>FSContentResolverTest</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testReadHelloWorldTxt</td>
+<td>0.01</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testWriteHelloWorldTxt</td>
+<td>0.007</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.helper.springSettings4jFactoryBeanTest"></a>Settings4jFactoryBeanTest</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testHappyPath</td>
+<td>0.017</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testHappyPathComplex</td>
+<td>0.053</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.objectresolverJavaXMLBeansObjectResolverTest"></a>JavaXMLBeansObjectResolverTest</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>test1</td>
+<td>0.028</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>test2Caching</td>
+<td>0.017</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>test3Caching</td>
+<td>0.021</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.objectresolverSpringConfigObjectResolverTest"></a>SpringConfigObjectResolverTest</h3>
+<table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testSpringContext1</td>
+<td>0.016</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.settingsDefaultFilterTest"></a>DefaultFilterTest</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testDefaultFilterInclude</td>
+<td>0.003</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testDefaultFilterExclude</td>
+<td>0</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.utilELConnectorWrapperTest"></a>ELConnectorWrapperTest</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testGetObject</td>
+<td>0.039</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.settings4j.utilExpressionLanguageUtilTest"></a>ExpressionLanguageUtilTest</h3>
+<table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testSimple</td>
+<td>0</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testComplex</td>
+<td>0.002</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testLazyMapMatchPattern</td>
+<td>0.01</td>
+</tr>
+</table>
+</div>
+<br />
+</div>
+<br />
+
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          2008-2011
+    
+          
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>

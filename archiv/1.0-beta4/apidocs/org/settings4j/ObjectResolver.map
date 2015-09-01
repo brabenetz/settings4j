@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" href="./config/DOMConfigurator.html" title="&lt;TABLE&gt;" alt="" coords="16,12,128,47"/>
+<area shape="rect" href="./ObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="413,107,515,144"/>
+<area shape="rect" href="./connector/FilteredConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="173,12,336,47"/>
+<area shape="rect" href="./connector/CachedConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="381,12,547,47"/>
+<area shape="rect" href="./connector/AbstractConnector.html" title="&lt;TABLE&gt;" alt="" coords="592,12,709,47"/>
+<area shape="rect" href="./objectresolver/UnionObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="188,204,324,239"/>
+<area shape="rect" href="./objectresolver/FilteredObjectResolverWrapper.html" title="&lt;TABLE&gt;" alt="" coords="369,204,559,239"/>
+<area shape="rect" href="./objectresolver/AbstractObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="604,204,751,239"/>
+</map>

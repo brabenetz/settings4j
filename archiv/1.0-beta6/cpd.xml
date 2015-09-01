@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd>
+<duplication lines="17" tokens="104">
+<file line="588" path="C:\WS_37_SETTINGS4J\settings4j\target\checkout\src\main\java\org\settings4j\config\DOMConfigurator.java"/>
+<file line="739" path="C:\WS_37_SETTINGS4J\settings4j\target\checkout\src\main\java\org\settings4j\config\DOMConfigurator.java"/>
+<codefragment>
+<![CDATA[
+            final NodeList children = objectResolverElement.getChildNodes();
+            final int length = children.getLength();
+
+            for (int loop = 0; loop < length; loop++) {
+                final Node currentNode = children.item(loop);
+
+                if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
+                    final Element currentElement = (Element) currentNode;
+                    final String tagName = currentElement.getTagName();
+
+
+                    if (tagName.equals(CONNECTOR_REF_TAG)) {
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug(CONNECTOR_REF_TAG + " is only parsed for the RegularExpression Context. " //
+                                + "See org.settings4j.Connector.addConnector(Connector) Javadoc.");
+                        }
+                    } else if (tagName.equals(OBJECT_RESOLVER_REF_TAG)) {
+]]>
+</codefragment>
+</duplication>
+</pmd-cpd>

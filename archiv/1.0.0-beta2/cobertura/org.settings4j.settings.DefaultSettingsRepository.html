@@ -1,0 +1,534 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Coverage Report</title>
+<link title="Style" type="text/css" rel="stylesheet" href="css/main.css"/>
+<script type="text/javascript" src="js/popup.js"></script>
+</head>
+<body>
+<h5>Coverage Report - org.settings4j.settings.DefaultSettingsRepository</h5>
+<div class="separator">&nbsp;</div>
+<table class="report">
+<thead><tr>  <td class="heading">Classes in this File</td>  <td class="heading" width="20%"><a class="dfn" href="help.html" onclick="popupwindow('help.html'); return false;">Line Coverage</a></td>  <td class="heading" width="20%"><a class="dfn" href="help.html" onclick="popupwindow('help.html'); return false;">Branch Coverage</a></td>  <td class="heading" width="10%"><a class="dfn" href="help.html" onclick="popupwindow('help.html'); return false;">Complexity</a></td></tr></thead>
+  <tr><td class="text"><a href="org.settings4j.settings.DefaultSettingsRepository.html">DefaultSettingsRepository</a></td><td class="value"><table cellpadding="0" cellspacing="0" align="right"><tr><td>91%&nbsp;</td><td><table class="percentGraph" cellpadding="0" cellspacing="0" width="100"><tr><td class="covered" width="90"></td><td class="uncovered" width="9"></td></tr></table></td></tr></table></td><td class="value"><table cellpadding="0" cellspacing="0" align="right"><tr><td>100%&nbsp;</td><td><table class="percentGraph" cellpadding="0" cellspacing="0" width="100"><tr><td class="covered" width="100"></td><td class="uncovered" width="0"></td></tr></table></td></tr></table></td><td class="value"><span class="hidden">1.6;</span>1,6</td></tr>
+</table>
+<div class="separator">&nbsp;</div>
+<table cellspacing="0" cellpadding="0" class="src">
+<tr>
+  <td class="numLine">&nbsp;1</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">/* ***************************************************************************</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;2</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * Copyright (c) 2008 Brabenetz Harald, Austria.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;3</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> *</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;4</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;5</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * you may not use this file except in compliance with the License.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;6</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * You may obtain a copy of the License at</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;7</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;8</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;9</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;10</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;11</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;12</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;13</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * See the License for the specific language governing permissions and</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;14</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * limitations under the License.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;15</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;16</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> *****************************************************************************/</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;17</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">package</span> org.settings4j.settings;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;18</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;19</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">import</span> org.settings4j.SettingsFactory;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;20</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">import</span> org.settings4j.SettingsInstance;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;21</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">import</span> org.settings4j.SettingsRepository;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;22</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;23</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">/**</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;24</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * This class is specialized in retrieving settings by name and also maintaining the settings</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;25</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * hierarchy.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;26</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;27</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * &lt;p&gt;</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;28</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * &lt;em&gt;The casual user does not have to deal with this class</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;29</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * directly.&lt;/em&gt;</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;30</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;31</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * &lt;p&gt;</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;32</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * The structure of the settings hierarchy is maintained by the {@link #getSettings} method. The</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;33</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * hierarchy is such that children link to their parent but parents do not have any pointers to</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;34</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * their children. Moreover, settings can be instantiated in any order, in particular descendant</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;35</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * before ancestor.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;36</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;37</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * &lt;p&gt;</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;38</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * In case a descendant is created before a particular ancestor, then it creates a provision node</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;39</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * for the ancestor and adds itself to the provision node. Other descendants of the same ancestor</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;40</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * add themselves to the previously created provision node.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;41</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;42</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;43</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * @author hbrabenetz</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;44</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * @author Ceki G&amp;uuml;lc&amp;uuml; (the original log4j org.apache.log4j.Hierarchy)</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;45</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;46</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> */</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;47</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">public</span> <span class="keyword">class</span> DefaultSettingsRepository <span class="keyword">implements</span> SettingsRepository {</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;48</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;49</td>
+  <td class="nbHitsCovered">&nbsp;1</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> SettingsFactory DEFAULT_FACTORY = <span class="keyword">new</span> DefaultSettingsFactory();</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;50</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;51</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">private</span> SettingsInstance settings;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;52</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;53</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="comment">//private int connectorCount;</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;54</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;55</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> DefaultSettingsRepository() {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;56</td>
+  <td class="nbHitsCovered">&nbsp;13</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">super</span>();</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;57</td>
+  <td class="nbHitsCovered">&nbsp;13</td>
+  <td class="src"><pre class="src">&nbsp;    }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;58</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;59</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> SettingsInstance getSettings() {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;60</td>
+  <td class="nbHitsCovered">&nbsp;33</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> getSettings(DEFAULT_FACTORY);</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;61</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;62</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;63</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> SettingsInstance getSettings(SettingsFactory factory) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;64</td>
+  <td class="nbHitsCovered">&nbsp;33</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">if</span> (<span class="keyword">this</span>.settings == <span class="keyword">null</span>) {</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;65</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;                <span class="comment">// TODO hbrabenetz 07.02.2009 : singletonimpemmentation</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;66</td>
+  <td class="nbHitsCovered">&nbsp;13</td>
+  <td class="src"><pre class="src">&nbsp;                <span class="keyword">this</span>.settings = factory.makeNewSettingsInstance();</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;67</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        }</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;68</td>
+  <td class="nbHitsCovered">&nbsp;33</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> <span class="keyword">this</span>.settings;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;69</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;70</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;71</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="comment">/** {@inheritDoc} */</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;72</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> <span class="keyword">int</span> getConnectorCount() {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;73</td>
+  <td class="nbHitsCovered">&nbsp;8</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">if</span> (<span class="keyword">this</span>.settings == <span class="keyword">null</span>) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;74</td>
+  <td class="nbHitsCovered">&nbsp;1</td>
+  <td class="src"><pre class="src">&nbsp;            <span class="keyword">return</span> 0;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;75</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        } <span class="keyword">else</span> {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;76</td>
+  <td class="nbHitsCovered">&nbsp;7</td>
+  <td class="src"><pre class="src">&nbsp;            <span class="keyword">return</span> settings.getConnectors().size();</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;77</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;78</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;79</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;80</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="comment">/** {@inheritDoc} */</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;81</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> <span class="keyword">void</span> resetConfiguration() {</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;82</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;            <span class="comment">/*</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;83</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">        root.setAdditivity(true);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;84</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">        root.setParent(null);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;85</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">        root.setMapping(null);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;86</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">        root.setSettingsRepository(null);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;87</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">        root.removeAllConnectors();</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;88</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;89</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">        Iterator it = settingsMap.entrySet().iterator();</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;90</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">        while (it.hasNext()) {</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;91</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">            HierarchicalSettings s = (HierarchicalSettings) it.next();</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;92</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">            s.setAdditivity(true);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;93</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">            s.setParent(null);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;94</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">            s.setMapping(null);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;95</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">            s.setSettingsRepository(null);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;96</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">            s.removeAllConnectors();</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;97</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">        }</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;98</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">        settingsMap.clear();</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;99</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">        */</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;100</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        </pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;101</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;    }</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;102</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;}</pre></td>
+</tr>
+</table>
+<div class="footer">
+Reports generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a>.
+</div>
+</body>
+</html>

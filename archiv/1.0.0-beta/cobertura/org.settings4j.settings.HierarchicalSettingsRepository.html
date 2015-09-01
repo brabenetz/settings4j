@@ -1,0 +1,1384 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Coverage Report</title>
+<link title="Style" type="text/css" rel="stylesheet" href="css/main.css"/>
+<script type="text/javascript" src="js/popup.js"></script>
+</head>
+<body>
+<h5>Coverage Report - org.settings4j.settings.HierarchicalSettingsRepository</h5>
+<div class="separator">&nbsp;</div>
+<table class="report">
+<thead><tr>  <td class="heading">Classes in this File</td>  <td class="heading" width="20%"><a class="dfn" href="help.html" onclick="popupwindow('help.html'); return false;">Line Coverage</a></td>  <td class="heading" width="20%"><a class="dfn" href="help.html" onclick="popupwindow('help.html'); return false;">Branch Coverage</a></td>  <td class="heading" width="10%"><a class="dfn" href="help.html" onclick="popupwindow('help.html'); return false;">Complexity</a></td></tr></thead>
+  <tr><td class="text"><a href="org.settings4j.settings.HierarchicalSettingsRepository.html">HierarchicalSettingsRepository</a></td><td class="value"><table cellpadding="0" cellspacing="0" align="right"><tr><td>68%&nbsp;</td><td><table class="percentGraph" cellpadding="0" cellspacing="0" width="100"><tr><td class="covered" width="68"></td><td class="uncovered" width="31"></td></tr></table></td></tr></table></td><td class="value"><table cellpadding="0" cellspacing="0" align="right"><tr><td>80%&nbsp;</td><td><table class="percentGraph" cellpadding="0" cellspacing="0" width="100"><tr><td class="covered" width="80"></td><td class="uncovered" width="19"></td></tr></table></td></tr></table></td><td class="value"><span class="hidden">2.727272727272727;</span>2,727</td></tr>
+</table>
+<div class="separator">&nbsp;</div>
+<table cellspacing="0" cellpadding="0" class="src">
+<tr>
+  <td class="numLine">&nbsp;1</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">/* ***************************************************************************</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;2</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * Copyright (c) 2008 Brabenetz Harald, Austria.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;3</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> *</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;4</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * Licensed under the Apache License, Version 2.0 (the "License");</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;5</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * you may not use this file except in compliance with the License.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;6</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * You may obtain a copy of the License at</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;7</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;8</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> *     http://www.apache.org/licenses/LICENSE-2.0</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;9</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;10</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;11</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * distributed under the License is distributed on an "AS IS" BASIS,</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;12</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;13</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * See the License for the specific language governing permissions and</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;14</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * limitations under the License.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;15</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;16</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> *****************************************************************************/</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;17</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">package</span> org.settings4j.settings;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;18</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;19</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">import</span> java.util.ArrayList;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;20</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">import</span> java.util.Collections;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;21</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">import</span> java.util.HashMap;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;22</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">import</span> java.util.Iterator;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;23</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">import</span> java.util.List;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;24</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">import</span> java.util.Map;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;25</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;26</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">import</span> org.settings4j.settings.HierarchicalSettings;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;27</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">import</span> org.settings4j.Connector;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;28</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">import</span> org.settings4j.Settings;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;29</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">import</span> org.settings4j.SettingsFactory;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;30</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">import</span> org.settings4j.SettingsRepository;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;31</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;32</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">/**</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;33</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * This class is specialized in retrieving settings by name and also maintaining the settings</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;34</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * hierarchy.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;35</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;36</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * &lt;p&gt;</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;37</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * &lt;em&gt;The casual user does not have to deal with this class</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;38</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * directly.&lt;/em&gt;</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;39</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;40</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * &lt;p&gt;</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;41</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * The structure of the settings hierarchy is maintained by the {@link #getSettings} method. The</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;42</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * hierarchy is such that children link to their parent but parents do not have any pointers to</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;43</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * their children. Moreover, settings can be instantiated in any order, in particular descendant</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;44</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * before ancestor.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;45</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;46</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * &lt;p&gt;</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;47</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * In case a descendant is created before a particular ancestor, then it creates a provision node</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;48</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * for the ancestor and adds itself to the provision node. Other descendants of the same ancestor</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;49</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * add themselves to the previously created provision node.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;50</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;51</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;52</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * @author hbrabenetz</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;53</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * @author Ceki G&amp;uuml;lc&amp;uuml; (the original log4j org.apache.log4j.Hierarchy)</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;54</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;55</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment"> */</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;56</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="keyword">public</span> <span class="keyword">class</span> HierarchicalSettingsRepository <span class="keyword">implements</span> SettingsRepository {</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;57</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    </pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;58</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="comment">/** General Logger for this Class */</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;59</td>
+  <td class="nbHitsCovered">&nbsp;1</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;60</td>
+  <td class="nbHitsCovered">&nbsp;1</td>
+  <td class="src"><pre class="src">&nbsp;        .getLog(HierarchicalSettingsRepository.<span class="keyword">class</span>);</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;61</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;62</td>
+  <td class="nbHitsCovered">&nbsp;1</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> SettingsFactory DEFAULT_FACTORY = <span class="keyword">new</span> DefaultSettingsFactory();</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;63</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;64</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="comment">/**</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;65</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * contains all SettingObjects &lt;br /&gt;</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;66</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * key is {@link SettingsKey} Object&lt;br /&gt;</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;67</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * value is a {@link Settings} Object&lt;br /&gt;</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;68</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     */</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;69</td>
+  <td class="nbHitsCovered">&nbsp;14</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">private</span> Map settingsMap = Collections.synchronizedMap(<span class="keyword">new</span> HashMap());</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;70</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    </pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;71</td>
+  <td class="nbHitsCovered">&nbsp;14</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">private</span> Map connectorMap = Collections.synchronizedMap(<span class="keyword">new</span> HashMap());</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;72</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;73</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">private</span> HierarchicalSettings root;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;74</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;75</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="comment">//private int connectorCount;</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;76</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;77</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> HierarchicalSettingsRepository(HierarchicalSettings root) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;78</td>
+  <td class="nbHitsCovered">&nbsp;14</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">super</span>();</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;79</td>
+  <td class="nbHitsCovered">&nbsp;14</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">this</span>.root = root;</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;80</td>
+  <td class="nbHitsCovered">&nbsp;14</td>
+  <td class="src"><pre class="src">&nbsp;        root.setSettingsRepository(<span class="keyword">this</span>);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;81</td>
+  <td class="nbHitsCovered">&nbsp;14</td>
+  <td class="src"><pre class="src">&nbsp;    }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;82</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;83</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> Settings exists(String name) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;84</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        Object o = settingsMap.get(<span class="keyword">new</span> SettingsKey(name));</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;85</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        <span class="keyword">if</span> (o <span class="keyword">instanceof</span> HierarchicalSettings) {</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;86</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;            <span class="keyword">return</span> (HierarchicalSettings) o;</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;87</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        } <span class="keyword">else</span> {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;88</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;            <span class="keyword">return</span> <span class="keyword">null</span>;</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;89</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;90</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;91</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;92</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> List getCurrentSettingsList() {</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;93</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="comment">// The accumlation in list is necessary because not all elements in</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;94</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="comment">// ht are HierarchicalSettings objects as there might be some ProvisionNodes</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;95</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="comment">// as well.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;96</td>
+  <td class="nbHitsCovered">&nbsp;2</td>
+  <td class="src"><pre class="src">&nbsp;        List list = <span class="keyword">new</span> ArrayList(settingsMap.size());</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;97</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;98</td>
+  <td class="nbHitsCovered">&nbsp;2</td>
+  <td class="src"><pre class="src">&nbsp;        Iterator iterator = settingsMap.values().iterator();</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;99</td>
+  <td class="nbHitsCovered">&nbsp;4</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">while</span> (iterator.hasNext()) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;100</td>
+  <td class="nbHitsCovered">&nbsp;2</td>
+  <td class="src"><pre class="src">&nbsp;            Object o = iterator.next();</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;101</td>
+  <td class="nbHitsCovered">&nbsp;2</td>
+  <td class="src"><pre class="src">&nbsp;            <span class="keyword">if</span> (o <span class="keyword">instanceof</span> HierarchicalSettings) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;102</td>
+  <td class="nbHitsCovered">&nbsp;1</td>
+  <td class="src"><pre class="src">&nbsp;                list.add(o);</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;103</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;            }</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;104</td>
+  <td class="nbHitsCovered">&nbsp;2</td>
+  <td class="src"><pre class="src">&nbsp;        }</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;105</td>
+  <td class="nbHitsCovered">&nbsp;2</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> list;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;106</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;107</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;108</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> Settings getRootSettings() {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;109</td>
+  <td class="nbHitsCovered">&nbsp;17</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> root;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;110</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;111</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;112</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> Settings getSettings(String name) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;113</td>
+  <td class="nbHitsCovered">&nbsp;30</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> getSettings(name, DEFAULT_FACTORY);</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;114</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;115</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;116</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> Settings getSettings(String name, SettingsFactory factory) {</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;117</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="comment">// System.out.println("getInstance("+name+") called.");</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;118</td>
+  <td class="nbHitsCovered">&nbsp;30</td>
+  <td class="src"><pre class="src">&nbsp;        SettingsKey key = <span class="keyword">new</span> SettingsKey(name);</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;119</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="comment">// Synchronize to prevent write conflicts. Read conflicts (in</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;120</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="comment">// getChainedLevel method) are possible only if variable</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;121</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="comment">// assignments are non-atomic.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;122</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        HierarchicalSettings settings;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;123</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;124</td>
+  <td class="nbHitsCovered">&nbsp;30</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">synchronized</span> (settingsMap) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;125</td>
+  <td class="nbHitsCovered">&nbsp;30</td>
+  <td class="src"><pre class="src">&nbsp;            Object o = settingsMap.get(key);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;126</td>
+  <td class="nbHitsCovered">&nbsp;30</td>
+  <td class="src"><pre class="src">&nbsp;            <span class="keyword">if</span> (o == <span class="keyword">null</span>) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;127</td>
+  <td class="nbHitsCovered">&nbsp;16</td>
+  <td class="src"><pre class="src">&nbsp;                settings = (HierarchicalSettings) factory.makeNewSettingsInstance(name);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;128</td>
+  <td class="nbHitsCovered">&nbsp;16</td>
+  <td class="src"><pre class="src">&nbsp;                settings.setSettingsRepository(<span class="keyword">this</span>);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;129</td>
+  <td class="nbHitsCovered">&nbsp;16</td>
+  <td class="src"><pre class="src">&nbsp;                settingsMap.put(key, settings);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;130</td>
+  <td class="nbHitsCovered">&nbsp;16</td>
+  <td class="src"><pre class="src">&nbsp;                updateParents(settings);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;131</td>
+  <td class="nbHitsCovered">&nbsp;16</td>
+  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> settings;</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;132</td>
+  <td class="nbHitsCovered">&nbsp;14</td>
+  <td class="src"><pre class="src">&nbsp;            } <span class="keyword">else</span> <span class="keyword">if</span> (o <span class="keyword">instanceof</span> HierarchicalSettings) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;133</td>
+  <td class="nbHitsCovered">&nbsp;8</td>
+  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> (HierarchicalSettings) o;</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;134</td>
+  <td class="nbHitsCovered">&nbsp;6</td>
+  <td class="src"><pre class="src">&nbsp;            } <span class="keyword">else</span> <span class="keyword">if</span> (o <span class="keyword">instanceof</span> ProvisionNode) {</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;135</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;                <span class="comment">// System.out.println("("+name+") ht.get(this) returned ProvisionNode");</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;136</td>
+  <td class="nbHitsCovered">&nbsp;6</td>
+  <td class="src"><pre class="src">&nbsp;                settings = (HierarchicalSettings) factory.makeNewSettingsInstance(name);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;137</td>
+  <td class="nbHitsCovered">&nbsp;6</td>
+  <td class="src"><pre class="src">&nbsp;                settings.setSettingsRepository(<span class="keyword">this</span>);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;138</td>
+  <td class="nbHitsCovered">&nbsp;6</td>
+  <td class="src"><pre class="src">&nbsp;                settingsMap.put(key, settings);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;139</td>
+  <td class="nbHitsCovered">&nbsp;6</td>
+  <td class="src"><pre class="src">&nbsp;                updateChildren((ProvisionNode) o, settings);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;140</td>
+  <td class="nbHitsCovered">&nbsp;6</td>
+  <td class="src"><pre class="src">&nbsp;                updateParents(settings);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;141</td>
+  <td class="nbHitsCovered">&nbsp;6</td>
+  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> settings;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;142</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;            } <span class="keyword">else</span> {</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;143</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;                <span class="comment">// It should be impossible to arrive here</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;144</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;                <span class="keyword">return</span> <span class="keyword">null</span>; <span class="comment">// but let's keep the compiler happy.</span></span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;145</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;            }</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;146</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        }</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;147</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;148</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;149</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="comment">/**</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;150</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * This method loops through all the *potential* parents of 'settings'. There 3 possible cases:</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;151</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;152</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * 1) No entry for the potential parent of 'settings' exists</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;153</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;154</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * We create a ProvisionNode for this potential parent and insert 'settings' in that provision</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;155</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * node.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;156</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;157</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * 2) There entry is of type HierarchicalSettings for the potential parent.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;158</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;159</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * The entry is settings nearest existing parent. We update settings parent field with this</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;160</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * entry. We also break from the loop because updating our parent's parent is our parent's</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;161</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * responsibility.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;162</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;163</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * 3) There entry is of type ProvisionNode for this potential parent.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;164</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;165</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * We add 'settings' to the list of children for this potential parent.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;166</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     */</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;167</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">final</span> <span class="keyword">private</span> <span class="keyword">void</span> updateParents(HierarchicalSettings settings) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;168</td>
+  <td class="nbHitsCovered">&nbsp;22</td>
+  <td class="src"><pre class="src">&nbsp;        String name = settings.getName();</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;169</td>
+  <td class="nbHitsCovered">&nbsp;22</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">int</span> length = name.length();</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;170</td>
+  <td class="nbHitsCovered">&nbsp;22</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">boolean</span> parentFound = <span class="keyword">false</span>;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;171</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;172</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="comment">// System.out.println("UpdateParents called for " + name);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;173</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;174</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="comment">// if name = "w.x.y.z", loop thourgh "w.x.y", "w.x" and "w", but not "w.x.y.z"</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;175</td>
+  <td class="nbHitsCovered">&nbsp;49</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">for</span> (<span class="keyword">int</span> i = name.lastIndexOf(<span class="string">'.'</span>, length - 1); i &gt;= 0; i = name.lastIndexOf(<span class="string">'.'</span>, i - 1)) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;176</td>
+  <td class="nbHitsCovered">&nbsp;31</td>
+  <td class="src"><pre class="src">&nbsp;            String substr = name.substring(0, i);</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;177</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;178</td>
+  <td class="nbHitsCovered">&nbsp;31</td>
+  <td class="src"><pre class="src">&nbsp;            LOG.debug(<span class="string">"Updating parent : "</span> + substr);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;179</td>
+  <td class="nbHitsCovered">&nbsp;31</td>
+  <td class="src"><pre class="src">&nbsp;            SettingsKey key = <span class="keyword">new</span> SettingsKey(substr); <span class="comment">// simple constructor</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;180</td>
+  <td class="nbHitsCovered">&nbsp;31</td>
+  <td class="src"><pre class="src">&nbsp;            Object o = settingsMap.get(key);</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;181</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;            <span class="comment">// Create a provision node for a future parent.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;182</td>
+  <td class="nbHitsCovered">&nbsp;31</td>
+  <td class="src"><pre class="src">&nbsp;            <span class="keyword">if</span> (o == <span class="keyword">null</span>) {</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;183</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;                <span class="comment">// System.out.println("No parent "+substr+" found. Creating ProvisionNode.");</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;184</td>
+  <td class="nbHitsCovered">&nbsp;21</td>
+  <td class="src"><pre class="src">&nbsp;                ProvisionNode pn = <span class="keyword">new</span> ProvisionNode(settings);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;185</td>
+  <td class="nbHitsCovered">&nbsp;21</td>
+  <td class="src"><pre class="src">&nbsp;                settingsMap.put(key, pn);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;186</td>
+  <td class="nbHitsCovered">&nbsp;21</td>
+  <td class="src"><pre class="src">&nbsp;            } <span class="keyword">else</span> <span class="keyword">if</span> (o <span class="keyword">instanceof</span> HierarchicalSettings) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;187</td>
+  <td class="nbHitsCovered">&nbsp;4</td>
+  <td class="src"><pre class="src">&nbsp;                parentFound = <span class="keyword">true</span>;</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;188</td>
+  <td class="nbHitsCovered">&nbsp;4</td>
+  <td class="src"><pre class="src">&nbsp;                settings.setParent((HierarchicalSettings) o);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;189</td>
+  <td class="nbHitsCovered">&nbsp;4</td>
+  <td class="src"><pre class="src">&nbsp;                <span class="keyword">break</span>; <span class="comment">// no need to update the ancestors of the closest ancestor</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;190</td>
+  <td class="nbHitsCovered">&nbsp;6</td>
+  <td class="src"><pre class="src">&nbsp;            } <span class="keyword">else</span> <span class="keyword">if</span> (o <span class="keyword">instanceof</span> ProvisionNode) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;191</td>
+  <td class="nbHitsCovered">&nbsp;6</td>
+  <td class="src"><pre class="src">&nbsp;                ((ProvisionNode) o).addElement(settings);</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;192</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;            } <span class="keyword">else</span> {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;193</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;                Exception e = <span class="keyword">new</span> IllegalStateException(<span class="string">"unexpected object type "</span> + o.getClass() + <span class="string">" in ht."</span>);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;194</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;                e.printStackTrace();</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;195</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;            }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;196</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;197</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="comment">// If we could not find any existing parents, then link with root.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;198</td>
+  <td class="nbHitsCovered">&nbsp;22</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">if</span> (!parentFound)</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;199</td>
+  <td class="nbHitsCovered">&nbsp;18</td>
+  <td class="src"><pre class="src">&nbsp;            settings.setParent(root);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;200</td>
+  <td class="nbHitsCovered">&nbsp;22</td>
+  <td class="src"><pre class="src">&nbsp;    }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;201</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;202</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="comment">/**</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;203</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * We update the links for all the children that placed themselves in the provision node 'pn'.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;204</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * The second argument 'settings' is a reference for the newly created HierarchicalSettings,</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;205</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * parent of all the children in 'pn'</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;206</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;207</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * We loop on all the children 's' in 'pn':</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;208</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;209</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * If the child 's' has been already linked to a child of 'setting' then there is no need to</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;210</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * update 's'.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;211</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;212</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * Otherwise, we set settings parent field to s's parent and set s's parent field to settings.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;213</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     * </span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;214</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">     */</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;215</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">final</span> <span class="keyword">private</span> <span class="keyword">void</span> updateChildren(ProvisionNode pn, HierarchicalSettings settings) {</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;216</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="comment">// System.out.println("updateChildren called for " + settings.name);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;217</td>
+  <td class="nbHitsCovered">&nbsp;6</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">final</span> <span class="keyword">int</span> last = pn.size();</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;218</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;219</td>
+  <td class="nbHitsCovered">&nbsp;12</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; last; i++) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;220</td>
+  <td class="nbHitsCovered">&nbsp;6</td>
+  <td class="src"><pre class="src">&nbsp;            HierarchicalSettings s = (HierarchicalSettings) pn.elementAt(i);</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;221</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;            <span class="comment">// System.out.println("Updating child " +s.name);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;222</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;223</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;            <span class="comment">// Unless this child already points to a correct (lower) parent,</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;224</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;            <span class="comment">// make settings.parent point to s.parent and s.parent to settings.</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;225</td>
+  <td class="nbHitsCovered">&nbsp;6</td>
+  <td class="src"><pre class="src">&nbsp;            <span class="keyword">if</span> (!s.getParent().getName().startsWith(settings.getName())) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;226</td>
+  <td class="nbHitsCovered">&nbsp;6</td>
+  <td class="src"><pre class="src">&nbsp;                settings.setParent(s.getParent());</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;227</td>
+  <td class="nbHitsCovered">&nbsp;6</td>
+  <td class="src"><pre class="src">&nbsp;                s.setParent(settings);</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;228</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;            }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;229</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        }</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;230</td>
+  <td class="nbHitsCovered">&nbsp;6</td>
+  <td class="src"><pre class="src">&nbsp;    }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;231</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;232</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> <span class="keyword">int</span> getConnectorCount() {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;233</td>
+  <td class="nbHitsCovered">&nbsp;94</td>
+  <td class="src"><pre class="src">&nbsp;        <span class="keyword">return</span> connectorMap.size();</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;234</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;235</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">//</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;236</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">//    public void setConnectorCount(int connectorCount) {</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;237</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">//        this.connectorCount = connectorCount;</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;238</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;<span class="comment">//    }</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;239</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;240</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="comment">/** {@inheritDoc} */</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;241</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> <span class="keyword">void</span> resetConfiguration() {</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;242</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;243</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        root.setAdditivity(<span class="keyword">true</span>);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;244</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        root.setParent(<span class="keyword">null</span>);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;245</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        root.setMapping(<span class="keyword">null</span>);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;246</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        root.setSettingsRepository(<span class="keyword">null</span>);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;247</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        root.removeAllConnectors();</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;248</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;249</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        Iterator it = settingsMap.entrySet().iterator();</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;250</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        <span class="keyword">while</span> (it.hasNext()) {</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;251</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;            HierarchicalSettings s = (HierarchicalSettings) it.next();</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;252</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;            s.setAdditivity(<span class="keyword">true</span>);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;253</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;            s.setParent(<span class="keyword">null</span>);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;254</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;            s.setMapping(<span class="keyword">null</span>);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;255</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;            s.setSettingsRepository(<span class="keyword">null</span>);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;256</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;            s.removeAllConnectors();</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;257</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        }</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;258</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        settingsMap.clear();</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;259</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;        </pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;260</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        it = connectorMap.entrySet().iterator();</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;261</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        <span class="keyword">while</span> (it.hasNext()) {</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;262</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;            Connector c = (Connector) it.next();</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;263</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;            c.setContentResolver(<span class="keyword">null</span>);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;264</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;            c.setObjectResolver(<span class="keyword">null</span>);</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;265</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        }</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;266</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;        connectorMap.clear();</span></pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;267</td>
+  <td class="nbHitsUncovered">&nbsp;0</td>
+  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;    }</span></pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;268</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;269</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;    <span class="keyword">public</span> <span class="keyword">void</span> addConnector(Connector connector) {</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;270</td>
+  <td class="nbHitsCovered">&nbsp;27</td>
+  <td class="src"><pre class="src">&nbsp;        connectorMap.put(connector.getName(), connector);</pre></td>
+</tr>
+<tr>
+  <td class="numLineCover">&nbsp;271</td>
+  <td class="nbHitsCovered">&nbsp;27</td>
+  <td class="src"><pre class="src">&nbsp;    }</pre></td>
+</tr>
+<tr>
+  <td class="numLine">&nbsp;272</td>
+  <td class="nbHits">&nbsp;</td>
+  <td class="src"><pre class="src">&nbsp;}</pre></td>
+</tr>
+</table>
+<div class="footer">
+Reports generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a>.
+</div>
+</body>
+</html>

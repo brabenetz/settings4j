@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./JNDIConnector.html" title="&lt;TABLE&gt;" alt="" coords="15,120,118,144"/>
+<area shape="rect" id="node2_1" href="./FSConnector.html" title="&lt;TABLE&gt;" alt="" coords="164,120,255,144"/>
+<area shape="rect" id="node8_2" href="../ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="311,216,422,267"/>
+<area shape="rect" id="node3_3" href="./ClasspathConnector.html" title="&lt;TABLE&gt;" alt="" coords="300,120,433,144"/>
+<area shape="rect" id="node4_4" href="./AbstractPropertyConnector.html" title="&lt;TABLE&gt;" alt="" coords="479,120,671,144"/>
+<area shape="rect" id="node5_5" href="./AbstractConnector.html" title="&lt;TABLE&gt;" alt="" coords="869,17,1008,41"/>
+<area shape="rect" id="node6_6" href="./db/AbstractDBConnector.html" title="&lt;TABLE&gt;" alt="" coords="716,114,841,150"/>
+<area shape="rect" id="node7_7" href="../ObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="887,107,990,157"/>
+<area shape="rect" id="node9_8" href="../Connector.html" title="&lt;TABLE&gt;" alt="" coords="1111,107,1191,157"/>
+</map>

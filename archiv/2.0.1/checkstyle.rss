@@ -1,0 +1,908 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+<rss version="0.91">
+  <channel>
+    <title>settings4j - Checkstyle report</title>
+    <link>http://settings4j.org</link>
+    <description>settings4j - Checkstyle report</description>
+    <language>en-us</language>
+    <copyright>&#169;2008 - 2014</copyright>
+    <item>
+      <title>File: 61,
+             Errors: 0,
+             Warnings: 0,
+             Infos: 0
+      </title>
+            <link>http://settings4j.org/checkstyle.html</link>
+      <description>
+        <p>Click <a href="http://settings4j.org/checkstyle.html">here</a> for the full Checkstyle report.</p>
+
+        <table summary="Files" boder="1">
+          <thead>
+            <tr>
+              <th>Files</th>
+              <th style="width:30px;"><abbr title="Info">I</abbr></th>
+              <th style="width:30px;"><abbr title="Warning">W</abbr></th>
+              <th style="width:30px;"><abbr title="Error">E</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.objectresolver.AbstractObjectResolver.java">org/settings4j/objectresolver/AbstractObjectResolver.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.connector.JNDIConnector.java">org/settings4j/connector/JNDIConnector.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.settings.position.ConnectorPositionBeforeName.java">org/settings4j/settings/position/ConnectorPositionBeforeName.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.connector.AbstractConnector.java">org/settings4j/connector/AbstractConnector.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.util.MatchPatternTransformer.java">org/settings4j/util/MatchPatternTransformer.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.settings.position.ConnectorPositionAtLast.java">org/settings4j/settings/position/ConnectorPositionAtLast.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.helper.web.Log4jConfigurationLoader.java">org/settings4j/helper/web/Log4jConfigurationLoader.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.connector.FSConnector.java">org/settings4j/connector/FSConnector.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.helper.web.DefaultPropertiesLoaderListener.java">org/settings4j/helper/web/DefaultPropertiesLoaderListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.settings.DefaultSettingsFactory.java">org/settings4j/settings/DefaultSettingsFactory.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.ContentResolver.java">org/settings4j/ContentResolver.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.connector.EnvironmentConnector.java">org/settings4j/connector/EnvironmentConnector.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.config.Settings4jEntityResolver.java">org/settings4j/config/Settings4jEntityResolver.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.helper.web.DefaultPropertiesLoader.java">org/settings4j/helper/web/DefaultPropertiesLoader.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.helper.configuration.ConfigurationToConnectorAdapter.java">org/settings4j/helper/configuration/ConfigurationToConnectorAdapter.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.contentresolver.FilteredContentResolverWrapper.java">org/settings4j/contentresolver/FilteredContentResolverWrapper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.contentresolver.ClasspathContentResolver.java">org/settings4j/contentresolver/ClasspathContentResolver.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.connector.CachedConnectorWrapper.java">org/settings4j/connector/CachedConnectorWrapper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.connector.PreferencesConnector.java">org/settings4j/connector/PreferencesConnector.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.ConnectorPositions.java">org/settings4j/ConnectorPositions.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.Connector.java">org/settings4j/Connector.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.config.DOMConfigurator.java">org/settings4j/config/DOMConfigurator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.ConnectorPosition.java">org/settings4j/ConnectorPosition.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.Settings4j.java">org/settings4j/Settings4j.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.settings.DefaultSettingsRepository.java">org/settings4j/settings/DefaultSettingsRepository.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.settings.position.ConnectorPositionAtFirst.java">org/settings4j/settings/position/ConnectorPositionAtFirst.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.util.ELConnectorWrapper.java">org/settings4j/util/ELConnectorWrapper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.helper.spring.Settings4jContextLoader.java">org/settings4j/helper/spring/Settings4jContextLoader.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.connector.PropertyFileConnector.java">org/settings4j/connector/PropertyFileConnector.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.helper.web.Log4jConfigurationLoaderListener.java">org/settings4j/helper/web/Log4jConfigurationLoaderListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.settings.position.ConnectorPositionBeforeLastClass.java">org/settings4j/settings/position/ConnectorPositionBeforeLastClass.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.connector.ClasspathConnector.java">org/settings4j/connector/ClasspathConnector.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.contentresolver.UnionContentResolver.java">org/settings4j/contentresolver/UnionContentResolver.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.settings.DefaultFilter.java">org/settings4j/settings/DefaultFilter.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.objectresolver.JavaXMLBeansObjectResolver.java">org/settings4j/objectresolver/JavaXMLBeansObjectResolver.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.util.ExpressionLanguageUtil.java">org/settings4j/util/ExpressionLanguageUtil.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.settings.position.ConnectorPositionAfterLastClass.java">org/settings4j/settings/position/ConnectorPositionAfterLastClass.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.settings.position.ConnectorPositionAfterName.java">org/settings4j/settings/position/ConnectorPositionAfterName.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.ObjectResolver.java">org/settings4j/ObjectResolver.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.helper.spring.Settings4jFactoryBean.java">org/settings4j/helper/spring/Settings4jFactoryBean.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.settings.position.ConnectorPositionBeforeFirstClass.java">org/settings4j/settings/position/ConnectorPositionBeforeFirstClass.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.settings.position.ConnectorPositionAfterFirstClass.java">org/settings4j/settings/position/ConnectorPositionAfterFirstClass.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.Settings4jFactory.java">org/settings4j/Settings4jFactory.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.connector.SystemPropertyConnector.java">org/settings4j/connector/SystemPropertyConnector.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.objectresolver.FilteredObjectResolverWrapper.java">org/settings4j/objectresolver/FilteredObjectResolverWrapper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.settings.position.ConnectorPositionFirstValid.java">org/settings4j/settings/position/ConnectorPositionFirstValid.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.settings.DefaultSettings.java">org/settings4j/settings/DefaultSettings.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.settings.SettingsManager.java">org/settings4j/settings/SettingsManager.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.contentresolver.FSContentResolver.java">org/settings4j/contentresolver/FSContentResolver.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.Filter.java">org/settings4j/Filter.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.Settings4jInstance.java">org/settings4j/Settings4jInstance.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.helper.spring.Settings4jPlaceholderConfigurer.java">org/settings4j/helper/spring/Settings4jPlaceholderConfigurer.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.objectresolver.UnionObjectResolver.java">org/settings4j/objectresolver/UnionObjectResolver.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.Settings4jRepository.java">org/settings4j/Settings4jRepository.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.connector.AbstractPropertyConnector.java">org/settings4j/connector/AbstractPropertyConnector.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.config.SAXErrorHandler.java">org/settings4j/config/SAXErrorHandler.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.connector.FilteredConnectorWrapper.java">org/settings4j/connector/FilteredConnectorWrapper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.helper.spring.Settings4jContextLoaderListener.java">org/settings4j/helper/spring/Settings4jContextLoaderListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.objectresolver.SpringConfigObjectResolver.java">org/settings4j/objectresolver/SpringConfigObjectResolver.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.helper.spring.ByteArrayXMLApplicationContext.java">org/settings4j/helper/spring/ByteArrayXMLApplicationContext.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.Constants.java">org/settings4j/Constants.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                      </tbody>
+        </table>
+        
+      </description>
+    </item>
+  </channel>
+</rss>
+

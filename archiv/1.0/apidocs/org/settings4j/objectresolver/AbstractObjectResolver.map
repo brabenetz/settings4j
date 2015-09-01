@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../ObjectResolver.html" title="org.settings4j.ObjectResolver" alt="" coords="72,11,175,61"/>
+<area shape="rect" id="node1" href="../ObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="62,5,186,67"/>
+<area shape="rect" id="node5_1" href="./AbstractObjectResolver.html" title="org.settings4j.objectresolver.AbstractObjectResolver" alt="" coords="75,127,172,151"/>
+<area shape="rect" id="node5" href="./AbstractObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="64,115,183,163"/>
+<area shape="rect" id="node2_2" href="../ContentResolver.html" title="org.settings4j.ContentResolver" alt="" coords="68,312,179,363"/>
+<area shape="rect" id="node2" href="../ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="58,307,190,368"/>
+<area shape="rect" id="node3_3" href="./SpringConfigObjectResolver.html" title="org.settings4j.objectresolver.SpringConfigObjectResolver" alt="" coords="36,223,211,247"/>
+<area shape="rect" id="node3" href="./SpringConfigObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="26,211,222,259"/>
+<area shape="rect" id="node4_4" href="./JavaXMLBeansObjectResolver.html" title="org.settings4j.objectresolver.JavaXMLBeansObjectResolver" alt="" coords="257,223,444,247"/>
+<area shape="rect" id="node4" href="./JavaXMLBeansObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="246,211,454,259"/>
+</map>
