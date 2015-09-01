@@ -8,6 +8,20 @@ about the location where the configuration settings are stored.
 Designed to ease the development process, settings4j can decide where the value will be placed,
 so the developer does not have to select the type of configuration.
 
+### Dependency Information
+
+Simply add to your pom.xml:
+
+```xml
+<dependency>
+  <groupId>org.settings4j</groupId>
+  <artifactId>settings4j</artifactId>
+  <version>2.0.1</version>
+</dependency>
+```
+
+See http://settings4j.org/currentrelease/dependency-info.html
+
 ### You don't know how your Project should be configured (System Properties, JNDI, Preferences, others...)?
 
 Use settings4j:
