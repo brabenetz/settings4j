@@ -2,6 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/brabenetz/settings4j.png?branch=master)](http://travis-ci.org/brabenetz/settings4j)
 [![Coverage Status](https://coveralls.io/repos/brabenetz/settings4j/badge.svg?branch=master&service=github)](https://coveralls.io/github/brabenetz/settings4j?branch=master)
+[![Coverity](https://scan.coverity.com/projects/6217/badge.svg)](https://scan.coverity.com/projects/brabenetz-settings4j)
 [![Dependency Status](https://www.versioneye.com/user/projects/55e50d658c0f62001b000180/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55e50d658c0f62001b000180)
 [![Maven site](https://img.shields.io/badge/Maven-site-blue.svg)](http://settings4j.org/archiv/current/)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.settings4j/settings4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.settings4j/settings4j)
