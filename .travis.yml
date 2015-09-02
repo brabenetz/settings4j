@@ -19,7 +19,7 @@ addons:
     notification_email: brabenetz@gmx.net
     build_command_prepend: "mvn clean"
     build_command:   "mvn -DskipTests=true compile"
-    branch_pattern: coverity_scan
+    branch_pattern: code-quality
     
 after_success:
   - mvn clean cobertura:cobertura coveralls:report
