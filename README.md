@@ -1,8 +1,8 @@
-![settings4jlogo](http://settings4j.org/currentrelease/icon/settings4j-logo-64px.png)
+![settings4jlogo](http://settings4j.org/archiv/current/icon/settings4j-logo-64px.png)
 
 [![Build Status](https://secure.travis-ci.org/brabenetz/settings4j.png?branch=master)](http://travis-ci.org/brabenetz/settings4j)
 [![Dependency Status](https://www.versioneye.com/user/projects/55e50d658c0f62001b000180/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55e50d658c0f62001b000180)
-[![Maven site](https://img.shields.io/badge/Maven-site-blue.svg)](http://settings4j.org/currentrelease/)
+[![Maven site](https://img.shields.io/badge/Maven-site-blue.svg)](http://settings4j.org/archiv/current/)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.settings4j/settings4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.settings4j/settings4j)
 
 # Settings for Java
@@ -71,6 +71,6 @@ simply configure Settings4jPlaceholderConfigurer and your "@Value" Annotations w
 
 This project is licensed under Apache License, Version 2.0.
 
-See http://settings4j.org/currentrelease/license.html
+See http://settings4j.org/archiv/current/license.html
 
 
