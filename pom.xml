@@ -76,14 +76,13 @@
   </distributionManagement>
 
   <properties>
-    <checkstyle-config-header-location>${basedir}/src/config/header.txt</checkstyle-config-header-location>
-
-    <checkstyle-config-location>${basedir}/src/config/checkstyle.xml</checkstyle-config-location>
-    <findbug-config-location>${basedir}/src/config/findbugs-exclude.xml</findbug-config-location>
-
     <maven.compile.source>1.5</maven.compile.source>
     <maven.compile.target>1.5</maven.compile.target>
-    <pmd-config-location>${basedir}/src/config/pmd5-rulesets.xml</pmd-config-location>
+
+    <plugin-config-checkstyle-header-location>${basedir}/src/config/header.txt</plugin-config-checkstyle-header-location>
+    <plugin-config-checkstyle-location>${basedir}/src/config/checkstyle.xml</plugin-config-checkstyle-location>
+    <plugin-config-findbug-location>${basedir}/src/config/findbugs-exclude.xml</plugin-config-findbug-location>
+    <plugin-config-pmd-location>${basedir}/src/config/pmd5-rulesets.xml</plugin-config-pmd-location>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -405,8 +404,8 @@
           <artifactId>maven-checkstyle-plugin</artifactId>
           <version>2.16</version>
           <configuration>
-            <configLocation>${checkstyle-config-location}</configLocation>
-            <headerLocation>${checkstyle-config-header-location}</headerLocation>
+            <configLocation>${plugin-config-checkstyle-location}</configLocation>
+            <headerLocation>${plugin-config-checkstyle-header-location}</headerLocation>
             <propertyExpansion>basedir=${project.basedir}</propertyExpansion>
             <enableRulesSummary>false</enableRulesSummary>
           </configuration>
@@ -467,8 +466,8 @@
                 <name>.checkstyle</name>
                 <content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
   <fileset-config file-format-version="1.2.0" simple-config="true">
-      <local-check-config name="${project.artifactId}-checkstyle" location="src/config/checkstyle.xml" type="project" description="CheckStyle-Configuration for ${project.artifactId}">
-          <property name="checkstyle.header.file" value="${checkstyle-config-header-location}" />
+      <local-check-config name="${project.artifactId}-checkstyle" location="src/config/checkstyle.xml" type="project" description="plugin-config-checkstyleuration for ${project.artifactId}">
+          <property name="checkstyle.header.file" value="${plugin-config-checkstyle-header-location}" />
           <additional-data name="protect-config-file" value="false" />
       </local-check-config>
       <fileset name="Alle" enabled="true" check-config-name="${project.artifactId}-checkstyle" local="true">
@@ -526,8 +525,7 @@
     </attributes>
   </classpathentry>
   <classpathentry kind="output" path="target/classes"/>
-</classpath>
-]]></content>
+</classpath>]]></content>
               </file>
             </additionalConfig>
           </configuration>
@@ -617,7 +615,7 @@
             <linkXref>true</linkXref>
             <targetJdk>1.5</targetJdk>
             <rulesets>
-              <ruleset>${pmd-config-location}</ruleset>
+              <ruleset>${plugin-config-pmd-location}</ruleset>
             </rulesets>
             <format>xml</format>
             <linkXref>true</linkXref>
@@ -741,7 +739,7 @@
           <artifactId>findbugs-maven-plugin</artifactId>
           <version>3.0.2</version>
           <configuration>
-            <excludeFilterFile>${findbug-config-location}</excludeFilterFile>
+            <excludeFilterFile>${plugin-config-findbug-location}</excludeFilterFile>
             <!-- Effort of the bug finders. Valid values are: 'MIN', 'DEFAULT', 'MAX' -->
             <effort>MAX</effort>
             <threshold>LOW</threshold>
