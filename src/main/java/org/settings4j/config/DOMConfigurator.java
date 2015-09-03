@@ -4,15 +4,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  *****************************************************************************/
 package org.settings4j.config;
 
@@ -134,7 +134,7 @@ public class DOMConfigurator {
 
     /**
      * Sets a parameter based from configuration file content.
-     * 
+     *
      * @param elem param element, may not be null.
      * @param propSetter property setter, may not be null.
      * @param props properties
@@ -163,13 +163,13 @@ public class DOMConfigurator {
 
     /**
      * A static version of {@link #doConfigure(URL)}.
-     * 
+     *
      * @param url The location of the configuration file.
      * @param repository the Repository to configure.
      * @throws FactoryConfigurationError if {@link DocumentBuilderFactory#newInstance()} throws an exception.
      */
     public static void configure(//
-            final URL url, final Settings4jRepository repository) throws FactoryConfigurationError {
+        final URL url, final Settings4jRepository repository) throws FactoryConfigurationError {
         new DOMConfigurator(repository).doConfigure(url);
     }
 
@@ -223,7 +223,7 @@ public class DOMConfigurator {
     /**
      * Used internally to configure the settings4j framework by parsing a DOM tree of XML elements based on <a
      * href="doc-files/settings4j.dtd">settings4j.dtd</a>.
-     * 
+     *
      * @param element The XML {@link #CONFIGURATION_TAG} Element.
      */
     protected void parse(final Element element) {
@@ -244,7 +244,7 @@ public class DOMConfigurator {
 
     /**
      * Used internally to parse an Filter element.
-     * 
+     *
      * @param filterElement the XML-Element for Filter.
      * @return the Filter-Object
      */
@@ -298,7 +298,7 @@ public class DOMConfigurator {
 
     /**
      * Used internally to parse an connector element.
-     * 
+     *
      * @param connectorElement The XML Connector Element
      * @return the Connector Object.
      */
@@ -386,7 +386,7 @@ public class DOMConfigurator {
 
     /**
      * Only logs out unrecognized Elements.
-     * 
+     *
      * @param instance instance, may be null.
      * @param element element, may not be null.
      */
@@ -406,7 +406,7 @@ public class DOMConfigurator {
 
     /**
      * Return all referenced connectors from Child-Nodes {@link #CONNECTOR_REF_TAG}.
-     * 
+     *
      * @param connectorsElement The XML Connectors Element
      * @return the Connectors Objects as Array.
      */
@@ -437,7 +437,7 @@ public class DOMConfigurator {
 
     /**
      * Used internally to parse the children of a settings element.
-     * 
+     *
      * @param settingsElement The XML Settings Element
      * @param settings _The Settings Object do apply the values.
      */
@@ -501,7 +501,7 @@ public class DOMConfigurator {
 
     /**
      * Used internally to parse connectors by IDREF name.
-     * 
+     *
      * @param doc The whole XML configuration.
      * @param connectorName The Connector-Name, to search for.
      * @return the Connector instance.
@@ -527,7 +527,7 @@ public class DOMConfigurator {
 
     /**
      * Used internally to parse connectors by IDREF element.
-     * 
+     *
      * @param connectorRef The Element with the {@link #REF_ATTR} - Attribute.
      * @return the Connector instance.
      */
@@ -540,7 +540,7 @@ public class DOMConfigurator {
 
     /**
      * Used internally to parse an objectResolver element.
-     * 
+     *
      * @param objectResolverElement The XML Object resolver Element.
      * @return The ObjectResolver instance.
      */
@@ -629,7 +629,7 @@ public class DOMConfigurator {
 
     /**
      * Used internally to parse an mapping element.
-     * 
+     *
      * @param mappingElement The XML Mapping Element.
      * @return the Map instance (Key = String; Value = String).
      */
@@ -691,7 +691,7 @@ public class DOMConfigurator {
 
     /**
      * Used internally to parse an contentResolver element.
-     * 
+     *
      * @param contentResolverElement The ContentResolver Element.
      * @return the ContentResolver instance.
      */
@@ -767,7 +767,7 @@ public class DOMConfigurator {
 
     /**
      * Used internally to parse contentResolvers by IDREF name.
-     * 
+     *
      * @param doc XML Document of the whole settings4j.xml.
      * @param contentResolverName the contentResolver Name to search for.
      * @return the ContentResolver instance.
@@ -794,7 +794,7 @@ public class DOMConfigurator {
 
     /**
      * Used internally to parse objectResolvers by IDREF name.
-     * 
+     *
      * @param doc XML Document of the whole settings4j.xml.
      * @param objectResolverName the ObjectResolver Name to search for.
      * @return the ObjectResolver instance.
@@ -807,7 +807,7 @@ public class DOMConfigurator {
         }
         // else
         final Element element = getElementByNameAttr(doc, objectResolverName, OBJECT_RESOLVER_TAG);
-    
+
         if (element == null) {
             LOG.error("No objectResolver named [{}] could be found.", objectResolverName);
             return null;
@@ -820,7 +820,7 @@ public class DOMConfigurator {
 
     /**
      * Used internally to parse objectResolvers by IDREF element.
-     * 
+     *
      * @param objectResolverRef The Element with the {@link #REF_ATTR}.
      * @return the ObjectResolver instance.
      */
@@ -833,7 +833,7 @@ public class DOMConfigurator {
 
     /**
      * Used internally to parse contentResolvers by IDREF element.
-     * 
+     *
      * @param contentResolverRef The Element with the {@link #REF_ATTR}.
      * @return the ContentResolver instance.
      */
@@ -845,7 +845,7 @@ public class DOMConfigurator {
 
 
     private static Element getElementByNameAttr(final Document doc, final String nameAttrValue,
-            final String elementTagName) {
+        final String elementTagName) {
         // Doesn't work on DOM Level 1 :
         // Element element = doc.getElementById(nameAttrValue);
 
@@ -875,7 +875,7 @@ public class DOMConfigurator {
 
     /**
      * This function will replace expressions like ${connectors.string['']}.
-     * 
+     *
      * @param value The value or Expression.
      * @param connectors required for validating Expression like ${connectors.string['']}
      * @return the String-Value of the given value or Expression
@@ -886,7 +886,7 @@ public class DOMConfigurator {
 
     /**
      * This function will replace expressions like ${connectors.object['']} or simply ${true}.
-     * 
+     *
      * @param value The value or Expression.
      * @param clazz The expected {@link Class}.
      * @param connectors required for validating Expression like ${connectors.string['']}
@@ -920,7 +920,7 @@ public class DOMConfigurator {
                 return null;
             }
         }
-        // else 
+        // else
         if (clazz.equals(String.class)) {
             return value.trim();
         } else if (clazz.equals(Boolean.class)) {
@@ -934,11 +934,13 @@ public class DOMConfigurator {
     /**
      * Add a ExpressionAttribute like ('ContextPath', 'myApp').
      * <p>
-     * A settings4j.xml Value like value="c:/settings/${contextPath}" will be evaluated as 
-     * "c:/settings/myApp".
-     * 
-     * @param key The Key as String.
-     * @param value The value as Object.
+     * A settings4j.xml Value like value="c:/settings/${contextPath}" will be evaluated as "c:/settings/myApp".
+     * </p>
+     *
+     * @param key
+     *        The Key as String.
+     * @param value
+     *        The value as Object.
      */
     public void addExpressionAttribute(final String key, final Object value) {
         this.expressionAttributes.put(key, value);

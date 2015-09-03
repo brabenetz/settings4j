@@ -26,9 +26,9 @@ import org.settings4j.Connector;
 
 /**
  * This Wrapper makes the Getter-Methods of Connectors simply accessible by Expressionlanguages like JSP 2.0, Velocity
- * or Freemarker.<BR />
- * <BR />
- * <B>Example:</B><BR />
+ * or Freemarker.<br>
+ * <br>
+ * <B>Example:</B><br>
  * <code>${connectors.string['xyz']}</code> returns the first founded Value in all Connectors:
  * <code>connector.getString("xyz");</code>
  * 

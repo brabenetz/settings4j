@@ -32,17 +32,17 @@ public final class Constants {
     }
 
     /**
-     * Return value for:<br />
+     * Return value for:<br>
      * {@link org.settings4j.connector.JNDIConnector#setObject(String, Object)}.
-     * <br />
+     * <br>
      * If Settings is not possible.
      */
     public static final int SETTING_NOT_POSSIBLE = 0;
     
     /**
-     * Return value for:<br />
+     * Return value for:<br>
      * {@link org.settings4j.connector.JNDIConnector#setObject(String, Object)}.
-     * <br />
+     * <br>
      * if Setting was successful: The value for the given key was replaced.
      */
     public static final int SETTING_SUCCESS = 1;

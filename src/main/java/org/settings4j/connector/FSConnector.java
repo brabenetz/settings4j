@@ -4,15 +4,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  *****************************************************************************/
 package org.settings4j.connector;
 
@@ -26,8 +26,7 @@ import org.settings4j.contentresolver.UnionContentResolver;
 
 /**
  * The FileSystem implementation of an {@link org.settings4j.Connector}.
- * <p>
- * 
+ *
  * @author Harald.Brabenetz
  */
 public class FSConnector extends AbstractConnector {
@@ -36,18 +35,18 @@ public class FSConnector extends AbstractConnector {
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(FSConnector.class);
 
     private final FSContentResolver fsContentResolver = new FSContentResolver();
-    private ContentResolver unionContentResolver = new UnionContentResolver(fsContentResolver);
+    private ContentResolver unionContentResolver = new UnionContentResolver(this.fsContentResolver);
     private String charset = "UTF-8";
 
     /** {@inheritDoc} */
     public byte[] getContent(final String key) {
-        return fsContentResolver.getContent(key);
+        return this.fsContentResolver.getContent(key);
     }
 
     /** {@inheritDoc} */
     public Object getObject(final String key) {
         if (getObjectResolver() != null) {
-            return getObjectResolver().getObject(key, unionContentResolver);
+            return getObjectResolver().getObject(key, this.unionContentResolver);
         }
         // else
         return null;
@@ -58,14 +57,14 @@ public class FSConnector extends AbstractConnector {
         try {
             final byte[] content = getContent(key);
             if (content != null) {
-                return new String(fsContentResolver.getContent(key), charset);
+                return new String(this.fsContentResolver.getContent(key), this.charset);
             }
             // else
             return null;
 
         } catch (final UnsupportedEncodingException e) {
             // should never occure with "UTF-8"
-            LOG.error("Charset not found: " + charset, e);
+            LOG.error("Charset not found: " + this.charset, e);
             return null;
         }
     }
@@ -76,7 +75,7 @@ public class FSConnector extends AbstractConnector {
      * @throws IOException if an error occured.
      */
     public void setContent(final String key, final byte[] value) throws IOException {
-        fsContentResolver.setContent(key, value);
+        this.fsContentResolver.setContent(key, value);
     }
 
     /**
@@ -86,15 +85,15 @@ public class FSConnector extends AbstractConnector {
      */
     public void setString(final String key, final String value) throws IOException {
         try {
-            setContent(key, value.getBytes(charset));
+            setContent(key, value.getBytes(this.charset));
         } catch (final UnsupportedEncodingException e) {
             // should never occure with "UTF-8"
-            LOG.error("Charset not found: " + charset, e);
+            LOG.error("Charset not found: " + this.charset, e);
         }
     }
 
     public String getCharset() {
-        return charset;
+        return this.charset;
     }
 
     public void setCharset(final String charset) {
@@ -103,28 +102,29 @@ public class FSConnector extends AbstractConnector {
 
     /**
      * Delegate the rootFolderPath to the {@link FSContentResolver#setRootFolderPath(String)}.
-     * 
+     *
      * @param rootFolderPath The root Folder Path where the settings could be stored.
      */
     public void setRootFolderPath(final String rootFolderPath) {
-        fsContentResolver.setRootFolderPath(rootFolderPath);
+        this.fsContentResolver.setRootFolderPath(rootFolderPath);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setContentResolver(final ContentResolver contentResolver) {
-        unionContentResolver = new UnionContentResolver(fsContentResolver);
-        unionContentResolver.addContentResolver(contentResolver);
+        this.unionContentResolver = new UnionContentResolver(this.fsContentResolver);
+        this.unionContentResolver.addContentResolver(contentResolver);
     }
 
     /**
      * return the root of this FileSystem ContenResolver.
      * <p>
      * if no one is set, the "." will be returned.
-     * 
+     * </p>
+     *
      * @return the root of this FileSystem ContenResolver.
      */
     public File getRootFolder() {
-        return fsContentResolver.getRootFolder();
+        return this.fsContentResolver.getRootFolder();
     }
 }

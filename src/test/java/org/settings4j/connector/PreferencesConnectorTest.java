@@ -4,28 +4,28 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  *****************************************************************************/
 package org.settings4j.connector;
 
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-import junit.framework.TestCase;
-
 import org.settings4j.Settings4j;
+
+import junit.framework.TestCase;
 
 /**
  * Test Suite for {@link PreferencesConnector}. Checkstyle:OFF .*
- * 
+ *
  * @author brabenetz
  */
 public class PreferencesConnectorTest extends TestCase {
@@ -42,13 +42,14 @@ public class PreferencesConnectorTest extends TestCase {
     /**
      * Smoke Test if the Preferences from JDK works as expected.
      * <p>
-     * This Test tests the PRE-REQUIREMENTS for the PreferencesConnector-tests and NOT the {@link PreferencesConnector}
-     * itself.
-     * 
-     * @throws BackingStoreException in case of an error.
+     * This Test tests the PRE-REQUIREMENTS for the PreferencesConnector-tests and NOT the {@link PreferencesConnector} itself.
+     * </p>
+     *
+     * @throws BackingStoreException
+     *         in case of an error.
      */
     public void testSmokeTest() throws BackingStoreException {
-        
+
         final Preferences myModulePrefs = Preferences.userRoot().node("com/myapp/mymodule");
         // put test value
         myModulePrefs.put("myKey", "myNewValue");

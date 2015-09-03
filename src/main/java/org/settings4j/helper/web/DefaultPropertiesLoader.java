@@ -4,15 +4,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  *****************************************************************************/
 package org.settings4j.helper.web;
 
@@ -31,11 +31,11 @@ import org.settings4j.Settings4j;
 import org.settings4j.connector.PropertyFileConnector;
 
 /**
- * Implementation which loads Default Properties from web.xml Init-Paramters and adds a Property connector to
- * Settings4j.
+ * Implementation which loads Default Properties from web.xml Init-Paramters and adds a Property connector to Settings4j.
  * <p>
  * See Example {@link DefaultPropertiesLoaderListener}.
- * 
+ * </p>
+ *
  * @author brabenetz
  */
 public class DefaultPropertiesLoader {
@@ -56,7 +56,7 @@ public class DefaultPropertiesLoader {
     /**
      * If the InitParameter "settings4jDefaultProperties" exists in the given {@link ServletContext}, then a Connector
      * will be added to Settings4j.
-     * 
+     *
      * @param servletContext The ServletContext where the InitParameters are configured.
      */
     public void initDefaultProperties(final ServletContext servletContext) {
@@ -96,7 +96,7 @@ public class DefaultPropertiesLoader {
             for (Connector connector : connectors) {
                 LOG.debug("Connector: {}", connector.getName());
             }
-            
+
         }
     }
 

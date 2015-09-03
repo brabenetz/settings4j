@@ -4,15 +4,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  *****************************************************************************/
 
 package org.settings4j.config;
@@ -29,13 +29,14 @@ import org.apache.commons.io.FileUtils;
 import org.settings4j.Connector;
 import org.settings4j.Settings4jInstance;
 import org.settings4j.Settings4jRepository;
-import org.settings4j.test.TestUtils;
 import org.settings4j.settings.SettingsManager;
+import org.settings4j.test.TestUtils;
 
 /**
  * TestCases for {@link Settings4jInstance}.
  * <p>
  * Checkstyle:OFF MagicNumber
+ * </p>
  */
 public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
 
@@ -62,7 +63,7 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
 
     /**
      * test corrupt config  xml file.
-     * 
+     *
      */
     public void testCorruptConfig() {
         final Settings4jRepository settingsRepository = TestUtils
@@ -74,8 +75,8 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
 
     /**
      * test for {@link org.settings4j.connector.FSConnector}.
-     * 
-     * @throws Exception in case of an error. 
+     *
+     * @throws Exception in case of an error.
      */
     public void testFSConfigTempFolder() throws Exception {
         final Settings4jRepository settingsRepository = TestUtils
@@ -110,8 +111,8 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
 
     /**
      * test for {@link org.settings4j.connector.FSConnector}.
-     * 
-     * @throws Exception in case of an error. 
+     *
+     * @throws Exception in case of an error.
      */
     public void testFSConfigTestFolder() throws Exception {
         final Settings4jRepository settingsRepository = TestUtils
@@ -198,7 +199,7 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
 
     /**
      * Test ObjectReolver with cached Object-Property-config.
-     * 
+     *
      * @throws Exception if an error occurs.
      */
     public void testObjectResolverConfig4Spring() throws Exception {
@@ -230,7 +231,7 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
             pstmt.close();
 
             pstmt = conn.prepareStatement("select * from test");
-            final ResultSet rs = pstmt.executeQuery(); // NOPMD must have Result - An exception would break the test.
+            final ResultSet rs = pstmt.executeQuery();
             rs.next();
             final String result = rs.getString(1);
             rs.close();

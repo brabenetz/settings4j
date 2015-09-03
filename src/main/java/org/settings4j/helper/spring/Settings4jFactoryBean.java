@@ -4,15 +4,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  *****************************************************************************/
 package org.settings4j.helper.spring;
 
@@ -22,15 +22,14 @@ import org.springframework.beans.factory.InitializingBean;
 
 
 /**
- * BeanFactory which gets the Object from {@link Settings4j#getObject(String)}.<br />
+ * BeanFactory which gets the Object from {@link Settings4j#getObject(String)}.<br>
  * This can also be used for DataSource-Objects with the JNDI-Name as Key.
- * 
+ * <h2>Simple SpringBean Example:</h2>
  * <p>
- * <h2>Simple SpringBean Example:</h2> The following Example can be configured with the settings4j-Key "env/MyVariable".
- * <br />
- * e.g.: System.setProperty("env/MyVariable", "Hallo World");<br />
- * OR with JNDI-Context OR in a Classpath-File under "classpath:env/MyVariable" Or with a custom
- * {@link org.settings4j.Connector}-Implementation.
+ * The following Example can be configured with the settings4j-Key "env/MyVariable".<br>
+ * e.g.: System.setProperty("env/MyVariable", "Hallo World");<br>
+ * OR with JNDI-Context OR in a Classpath-File under "classpath:env/MyVariable" Or with a custom {@link org.settings4j.Connector}-Implementation.
+ * </p>
  * 
  * <pre>
  *  &lt;bean id="MyConfigurableValue" class="org.settings4j.helper.spring.Settings4jFactoryBean"&gt;
@@ -38,8 +37,10 @@ import org.springframework.beans.factory.InitializingBean;
  *  &lt;/bean&gt;
  * </pre>
  * 
- * <h2>More complex SpringBean Example:</h2> This Example shows how a Hibernate SessionFactory can optional customized
- * with additional HibernateProperties.
+ * <h2>More complex SpringBean Example:</h2>
+ * <p>
+ * This Example shows how a Hibernate SessionFactory can optional customized with additional HibernateProperties.
+ * </p>
  * 
  * <pre>
  *  &lt;bean id="hibernateProperties"
@@ -60,14 +61,14 @@ import org.springframework.beans.factory.InitializingBean;
  *          &lt;/list&gt;
  *      &lt;/property&gt;
  *  &lt;/bean&gt;
- *  
+ *
  *  &lt;bean id="mySessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"&gt;
  *      &lt;property name="dataSource" ref="db2Datasource2" /&gt;
  *      &lt;property name="hibernateProperties" ref="hibernateProperties" /&gt;
  *      ....
  *  &lt;/bean&gt;
  * </pre>
- * 
+ *
  * @author Harald.Brabenetz
  */
 public class Settings4jFactoryBean implements FactoryBean, InitializingBean {
@@ -99,7 +100,7 @@ public class Settings4jFactoryBean implements FactoryBean, InitializingBean {
 
     /**
      * Specify the type that the configured object is supposed to be assignable to, if any.
-     * 
+     *
      * @param expectedType the expected {@link Class}.
      */
     public void setExpectedType(final Class expectedType) {
@@ -108,7 +109,7 @@ public class Settings4jFactoryBean implements FactoryBean, InitializingBean {
 
     /**
      * Return the type that the configured object is supposed to be assignable to, if any.
-     * 
+     *
      * @return the type that the configured object is supposed to be assignable to.
      */
     public Class getExpectedType() {

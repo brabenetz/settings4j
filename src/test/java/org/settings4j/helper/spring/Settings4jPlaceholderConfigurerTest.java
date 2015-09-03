@@ -4,15 +4,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  *****************************************************************************/
 
 package org.settings4j.helper.spring;
@@ -22,17 +22,17 @@ import java.util.Properties;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.lang3.StringUtils;
 import org.settings4j.connector.PreferencesConnector;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.objectresolver.SpringConfigObjectResolver;
 
+import junit.framework.TestCase;
+
 
 /**
  * TestSuite for {@link Settings4jPlaceholderConfigurer}.
- * 
+ *
  * @author brabenetz
  */
 public class Settings4jPlaceholderConfigurerTest extends TestCase {
@@ -65,6 +65,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
      * TestCase for the normal use case in Spring configuration.
      * <p>
      * See /src/test/resources/org/settings4j/helper/spring/Settings4jPlaceholderConfigurerHappyPath
+     * </p>
      */
     public void testHappyPath() {
         // Example system-Config
@@ -72,7 +73,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
 
         // load the example Spring-Config
         final Map result = (Map) getObjectFromSpringConfig(//
-        "org/settings4j/helper/spring/Settings4jPlaceholderConfigurerHappyPath");
+            "org/settings4j/helper/spring/Settings4jPlaceholderConfigurerHappyPath");
 
         // validate Result
         assertEquals("Hallo World", result.get("MapEntry1"));
@@ -90,7 +91,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
 
         // load the example Spring-Config
         final Map result = (Map) getObjectFromSpringConfig(//
-        "org/settings4j/helper/spring/Settings4jPlaceholderConfigurerHappyPathComplex");
+            "org/settings4j/helper/spring/Settings4jPlaceholderConfigurerHappyPathComplex");
 
         // validate Result
         assertEquals("Hallo World", result.get("MapEntry1"));
@@ -124,6 +125,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
      * TestCase to parse a Simple String with placeholders.
      * <p>
      * In this use case no spring application context is required.
+     * </p>
      */
     public void testParseStringValueSimpleWithPlaceholders() {
 
@@ -139,12 +141,13 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
         // validate result
         assertEquals("value-1,\nvalue-2", result);
     }
-    
+
 
     /**
      * TestCase to parse a Simple String with placeholders.
      * <p>
      * In this use case no spring application context is required.
+     * </p>
      */
     public void testParseStringValueWithDefaultProperties() {
 
@@ -167,6 +170,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
      * TestCase to parse a Simple String with prefix for placeholders.
      * <p>
      * In this use case no spring application context is required.
+     * </p>
      */
     public void testParseStringValueWithDefaultPropertiesAndPrefix() {
 
