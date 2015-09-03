@@ -76,7 +76,7 @@ public class SpringConfigObjectResolverTest extends TestCase {
             pstmt.close();
 
             pstmt = conn.prepareStatement("select * from test");
-            final ResultSet rs = pstmt.executeQuery(); // NOPMD must have Result - An exception would break the test.
+            final ResultSet rs = pstmt.executeQuery(); 
             rs.next();
             final String result = rs.getString(1);
             rs.close();

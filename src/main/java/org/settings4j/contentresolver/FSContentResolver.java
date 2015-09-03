@@ -4,15 +4,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  *****************************************************************************/
 package org.settings4j.contentresolver;
 
@@ -26,12 +26,13 @@ import org.settings4j.ContentResolver;
  * {@link ContentResolver} implementation to read content from the File System.
  * <p>
  * The optional Path Prefix is "file:".
+ * </p>
  * <p>
- * Absolute Windows paths contains a <b>":"</b>.<br/>
- * Absolute Unix paths starts with <b>"/"</b>.<br/>
- * Other Paths are relative and uses the {@link #getRootFolder()} as root.
- * Which is per default <code>new File(".")</code>.<br/>
- * 
+ * Absolute Windows paths contains a <b>":"</b>.<br>
+ * Absolute Unix paths starts with <b>"/"</b>.<br>
+ * Other Paths are relative and uses the {@link #getRootFolder()} as root. Which is per default <code>new File(".")</code>.<br>
+ * </p>
+ *
  * @author Harald.Brabenetz
  */
 public class FSContentResolver implements ContentResolver {
@@ -50,7 +51,7 @@ public class FSContentResolver implements ContentResolver {
     }
 
     /** {@inheritDoc} */
-    public byte[] getContent(final String key) { 
+    public byte[] getContent(final String key) {
         String normalizedKey = key;
         if (normalizedKey.startsWith(FILE_URL_PREFIX)) {
             normalizedKey = normalizedKey.substring(FILE_URL_PREFIX.length());
@@ -111,16 +112,17 @@ public class FSContentResolver implements ContentResolver {
      * return the root of this FileSystem ContenResolver.
      * <p>
      * if no one is set, the "." will be returned.
-     * 
+     * </p>
+     *
      * @return the root of this FileSystem ContenResolver.
      */
     public File getRootFolder() {
-        if (rootFolder == null) {
-            rootFolder = new File(".");
+        if (this.rootFolder == null) {
+            this.rootFolder = new File(".");
             LOG.info("FSContentResolver.rootFolder is null. " //
-                + "The RootPath Folder will be used: " + rootFolder.getAbsolutePath());
+                + "The RootPath Folder will be used: " + this.rootFolder.getAbsolutePath());
         }
-        return rootFolder;
+        return this.rootFolder;
     }
 
     /**
@@ -131,13 +133,13 @@ public class FSContentResolver implements ContentResolver {
         if (!newRootFolder.exists()) {
             try {
                 FileUtils.forceMkdir(newRootFolder);
-                rootFolder = newRootFolder;
+                this.rootFolder = newRootFolder;
                 LOG.info("Set RootPath for FSConntentResolver: {}", newRootFolder.getAbsolutePath());
             } catch (final IOException e) {
                 LOG.warn("cannot create rootFolder: {}!", rootFolderPath);
             }
         } else {
-            rootFolder = newRootFolder;
+            this.rootFolder = newRootFolder;
         }
     }
 }

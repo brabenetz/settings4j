@@ -4,15 +4,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  *****************************************************************************/
 
 package org.settings4j.objectresolver;
@@ -29,8 +29,7 @@ import org.settings4j.ObjectResolver;
 
 /**
  * Basic Connector implementations like getter and Setter of contentResolver, objectResolver.
- * <p>
- * 
+ *
  * @author Harald.Brabenetz
  *
  */
@@ -93,11 +92,13 @@ public abstract class AbstractObjectResolver implements ObjectResolver {
     /**
      * To get the additional Properties for the given byte[] content can be overwriten by subclasses.
      * <p>
-     * The default implementation reads the PropertyFile from key + ".properties".
-     * If no property where found, or an error occurs, this method return null.
-     * 
-     * @param key the key of the byte[] Content to convert.
-     * @param contentResolver the ContentResolver to read the additional Property-File.
+     * The default implementation reads the PropertyFile from key + ".properties". If no property where found, or an error occurs, this method return null.
+     * </p>
+     *
+     * @param key
+     *        the key of the byte[] Content to convert.
+     * @param contentResolver
+     *        the ContentResolver to read the additional Property-File.
      * @return the parsed {@link Properties} Object or null if an error occurred.
      */
     protected Properties getObjectProperties(final String key, final ContentResolver contentResolver) {
@@ -115,7 +116,7 @@ public abstract class AbstractObjectResolver implements ObjectResolver {
             return null;
         }
         return properties;
-        
+
     }
 
     public String getPropertySuffix() {
@@ -132,8 +133,7 @@ public abstract class AbstractObjectResolver implements ObjectResolver {
 
     /**
      * Method to convert the given content-File to an Object must be implemented by SubClasses.
-     * <p>
-     * 
+     *
      * @param key The Original Key of the Object
      * @param properties The Property-File which where Found under key + ".properties"
      * @param content The byte[] Content to convert.
@@ -141,7 +141,7 @@ public abstract class AbstractObjectResolver implements ObjectResolver {
      * @return the parsed Object from the byte[] Content.
      */
     protected abstract Object contentToObject(String key, Properties properties, byte[] content,
-            ContentResolver contentResolver);
+        ContentResolver contentResolver);
 
     public boolean isCached() {
         return this.cached;

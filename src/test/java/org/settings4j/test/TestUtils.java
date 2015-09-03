@@ -62,10 +62,10 @@ public final class TestUtils {
     }
 
     /**
-     * The TempFolder from System Property "java.io.tmpdir" and the subfolder "Settings4jUnittest".<br />
-     * <br />
-     * On my windows maschine this is:<br />
-     * C:\Dokumente und Einstellungen\hbrabenetz\Lokale Einstellungen\Temp\Settings4jUnittest\<br />
+     * The TempFolder from System Property "java.io.tmpdir" and the subfolder "Settings4jUnittest".<br>
+     * <br>
+     * On my windows maschine this is:<br>
+     * C:\Dokumente und Einstellungen\hbrabenetz\Lokale Einstellungen\Temp\Settings4jUnittest\<br>
      * 
      * @return to tempfolder for unittests
      */
@@ -76,7 +76,7 @@ public final class TestUtils {
     }
 
     /**
-     * The test Folder for Unittest.<br />
+     * The test Folder for Unittest.<br>
      * This is normaly a subfolder "target/test/Settings4jUnittest" of this current Project.
      * 
      * @return the subfolder "target/test/Settings4jUnittest" of the current Project.

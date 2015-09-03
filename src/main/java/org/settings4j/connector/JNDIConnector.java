@@ -4,15 +4,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  *****************************************************************************/
 package org.settings4j.connector;
 
@@ -30,11 +30,11 @@ import org.settings4j.Constants;
 
 /**
  * The JNDI Context implementation of an {@link org.settings4j.Connector}.
- * <p>
  * <h3>Normal Use</h3>
  * <p>
  * This JNDI connector is used in the default settings4j-config:
- * 
+ * </p>
+ *
  * <pre>
  * &lt;connector name="JNDIConnector"
  *     class="org.settings4j.connector.JNDIConnector"&gt;
@@ -42,17 +42,19 @@ import org.settings4j.Constants;
  *     &lt;objectResolver-ref ref="DefaultObjectResolver" /&gt;
  * &lt;/connector&gt;
  * </pre>
- * 
- * During the first use it will check if JNDI is accessible. If no JNDI context exists, The connector will deactivate
- * itself. A INFO-Log message will print this information.
  * <p>
- * The default contextPathPrefix is "java:comp/env/". This JNDI Connector will first check if a value for
- * <code>"contextPathPrefix + key"</code> exists and second if a value for the <code>"key"</code> only exists.
+ * During the first use it will check if JNDI is accessible. If no JNDI context exists, The connector will deactivate itself. A INFO-Log message will print this
+ * information.
+ * </p>
  * <p>
+ * The default contextPathPrefix is "java:comp/env/". This JNDI Connector will first check if a value for <code>"contextPathPrefix + key"</code> exists and
+ * second if a value for the <code>"key"</code> only exists.
+ * </p>
  * <h3>Custom Use</h3>
  * <p>
  * You can also configure the JNDI Connector to connect to another JNDI Context as the default one.
- * 
+ * </p>
+ *
  * <pre>
  * &lt;connector name="JNDIConnector"
  *     class="org.settings4j.connector.JNDIConnector"&gt;
@@ -61,26 +63,26 @@ import org.settings4j.Constants;
  *     &lt;param name="urlPkgPrefixes" value="org.apache.naming"/&gt;
  * &lt;/connector&gt;
  * </pre>
- * 
- * All three parameters must be set "initialContextFactory", "providerUrl", "urlPkgPrefixes" if you want use another
- * JNDI Context.
  * <p>
+ * All three parameters must be set "initialContextFactory", "providerUrl", "urlPkgPrefixes" if you want use another JNDI Context.
+ * </p>
  * <h3>getString(), getContent(), getObject()</h3>
- * <p>
  * <h4>getString()</h4>
  * <p>
  * If the getString() JNDI lookup returns an Object which isn't a String, a WARN-Log message will be printed.
+ * </p>
  * <h4>getContent()</h4>
  * <p>
- * If the getContent() JNDI lookup returns a String it will try to get a byte-Array Content from the ContentResolvers
- * (assuming the String is as FileSystemPath or ClassPath). <br />
+ * If the getContent() JNDI lookup returns a String it will try to get a byte-Array Content from the ContentResolvers (assuming the String is as FileSystemPath
+ * or ClassPath). <br>
  * Else if the getContent() JNDI lookup returns an Object which isn't a byte[], a WARN-Log message will be printed.
+ * </p>
  * <h4>getObject()</h4>
  * <p>
- * If the getObject() JNDI lookup returns a String it will try to get an Object from the ObjectResolvers (assuming the
- * String is as FileSystemPath or ClassPath which can be resolved to an Object).
- * <p>
- * 
+ * If the getObject() JNDI lookup returns a String it will try to get an Object from the ObjectResolvers (assuming the String is as FileSystemPath or ClassPath
+ * which can be resolved to an Object).
+ * </p>
+ *
  * @author Harald.Brabenetz
  */
 public class JNDIConnector extends AbstractConnector {
@@ -99,12 +101,12 @@ public class JNDIConnector extends AbstractConnector {
     private Boolean isJNDIAvailable;
 
     /** {@inheritDoc} */
-    public byte[] getContent(final String key) { 
+    public byte[] getContent(final String key) {
         final Object obj = lookupInContext(key);
         if (obj == null) {
             return null;
         }
-        
+
         // if obj is a String and an Object resolver is available
         // obj could be a Path.
         if (obj instanceof String && getContentResolver() != null) {
@@ -151,16 +153,15 @@ public class JNDIConnector extends AbstractConnector {
     }
 
     /**
-     * Set or replace a new Value for the given key.<br />
-     * If set or replace a value is not possible because of a readonly JNDI-Context, then
-     * {@link Constants#SETTING_NOT_POSSIBLE} must be returned. If set or replace was successful, then
-     * {@link Constants#SETTING_SUCCESS} must be returned.
-     * 
-     * @param key the Key for the configuration-property (will not be normalized:
-     *  add contextPathPrefix, replace '\' with '/').
-     *  e.g.: "com\mycompany\myapp\myParameterKey" => "java:comp/env/com/mycompany/myapp/myParameterKey"
-     * 
-     * @param value the new Object-Value for the given key
+     * Set or replace a new Value for the given key.<br>
+     * If set or replace a value is not possible because of a readonly JNDI-Context, then {@link Constants#SETTING_NOT_POSSIBLE} must be returned. If set or
+     * replace was successful, then {@link Constants#SETTING_SUCCESS} must be returned.
+     *
+     * @param key
+     *        the Key for the configuration-property (will not be normalized: add contextPathPrefix, replace '\' with '/'). e.g.:
+     *        "com\mycompany\myapp\myParameterKey" =&gt; "java:comp/env/com/mycompany/myapp/myParameterKey"
+     * @param value
+     *        the new Object-Value for the given key
      * @return Returns {@link Constants#SETTING_SUCCESS} or {@link Constants#SETTING_NOT_POSSIBLE}
      */
     public int setObject(final String key, final Object value) {
@@ -189,7 +190,8 @@ public class JNDIConnector extends AbstractConnector {
      * check if a JNDI context is available and sets the internal Flag setIsJNDIAvailable(Boolean).
      * <p>
      * If the internal Flag IsJNDIAvailable is <code>False</code> this Connector is disabled.
-     * 
+     * </p>
+     *
      * @return true if a JNDI Context could be initialized.
      */
     public boolean isJNDIAvailable() {
@@ -268,7 +270,7 @@ public class JNDIConnector extends AbstractConnector {
             // only if isJNDIAvailable() was called an evaluated to false.
             return Constants.SETTING_NOT_POSSIBLE;
         }
-        
+
         LOG.debug("Try to rebind Key '{}' with value: {}", key, value);
 
         InitialContext ctx = null;
@@ -305,7 +307,7 @@ public class JNDIConnector extends AbstractConnector {
         // here we need to break by the specified delimiter
 
         LOG.debug("createParentContext: {}", key);
-        
+
         final String[] path = key.split("/");
 
         final int lastIndex = path.length - 1;

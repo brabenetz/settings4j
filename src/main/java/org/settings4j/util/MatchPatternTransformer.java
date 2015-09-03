@@ -72,10 +72,10 @@ public class MatchPatternTransformer implements Transformer<String, Boolean> {
                 final Matcher matcher = pattern.matcher(this.compareValue);
                 if (matcher.matches()) {
                     result = Boolean.TRUE;
-                    LOG.debug("TRUE - found '{}' in '{}'", patternString, compareValue);
+                    LOG.debug("TRUE - found '{}' in '{}'", patternString, this.compareValue);
                 } else {
                     result = Boolean.FALSE;
-                    LOG.debug("FALSE - do not found '{}' in '{}'", patternString, compareValue);
+                    LOG.debug("FALSE - do not found '{}' in '{}'", patternString, this.compareValue);
                 }
             } catch (final Exception e) {
                 LOG.warn("Cann't matche Pattern '" + patternString + "' with compareValue '" + this.compareValue + "'",

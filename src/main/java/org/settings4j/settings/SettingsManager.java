@@ -36,13 +36,13 @@ public final class SettingsManager {
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(SettingsManager.class);
 
     /**
-     * The Classpath-Location of the settings4j.xml who i readed by default. <br />
+     * The Classpath-Location of the settings4j.xml who i readed by default. <br>
      * settings4j.xml
      */
     public static final String DEFAULT_XML_CONFIGURATION_FILE = "settings4j.xml";
 
     /**
-     * The fallback settings4j.xml who is used if not settings4j.xml where found. <br />
+     * The fallback settings4j.xml who is used if not settings4j.xml where found. <br>
      * org/settings4j/config/defaultsettings4j.xml
      */
     public static final String DEFAULT_FALLBACK_CONFIGURATION_FILE = "org/settings4j/config/defaultsettings4j.xml";

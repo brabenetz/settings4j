@@ -564,7 +564,7 @@
                     <artifactId>umlgraph</artifactId>
                     <version>5.6</version>
                   </docletArtifact>
-                  <additionalparam>-Xdoclint:none -inferrel -inferdep -quiet -hide java.*
+                  <additionalparam>-inferrel -inferdep -quiet -hide java.*
                     -collpackages java.util.* -qualify
                     -postfixpackage
                     -nodefontsize 9
@@ -878,26 +878,6 @@
                 <jvmArgs>
                   <value>-XX:MaxPermSize=256M</value>
                 </jvmArgs>
-              </configuration>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-      </build>
-    </profile>
-    <profile>
-      <id>jdk_higher_or_equal_than_8</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <jdk>[1.8,)</jdk>
-      </activation>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-javadoc-plugin</artifactId>
-              <configuration>
-                <additionalparam>-Xdoclint:none</additionalparam>
               </configuration>
             </plugin>
           </plugins>

@@ -222,11 +222,11 @@ public class JavaXMLBeansObjectResolverTest extends TestCase {
     }
 
     /**
-     * Log out Exception during Encoding a byte[] to an Object<br />
-     * <br />
-     * Example:<br />
-     * The {@link org.springframework.jdbc.datasource.AbstractDataSource} Object<br />
-     * hast Getter and Setter for "logWriter" who throws per default an {@link UnsupportedOperationException}.<br />
+     * Log out Exception during Encoding a byte[] to an Object<br>
+     * <br>
+     * Example:<br>
+     * The {@link org.springframework.jdbc.datasource.AbstractDataSource} Object<br>
+     * hast Getter and Setter for "logWriter" who throws per default an {@link UnsupportedOperationException}.<br>
      * 
      * @author hbrabenetz
      */
