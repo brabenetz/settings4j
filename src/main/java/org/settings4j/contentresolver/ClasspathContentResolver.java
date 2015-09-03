@@ -52,8 +52,9 @@ public class ClasspathContentResolver implements ContentResolver {
     public byte[] getContent(final String key) {
         final String normalizedKey = normalizeKey(key);
 
+        InputStream is = null;
         try {
-            final InputStream is = getClassLoader().getResourceAsStream(normalizedKey);
+            is = getClassLoader().getResourceAsStream(normalizedKey);
             if (is != null) {
                 return IOUtils.toByteArray(is);
             }
@@ -62,6 +63,8 @@ public class ClasspathContentResolver implements ContentResolver {
         } catch (final IOException e) {
             LOG.error(e.getMessage(), e);
             return null;
+        } finally {
+            IOUtils.closeQuietly(is);
         }
     }
 
@@ -90,6 +93,8 @@ public class ClasspathContentResolver implements ContentResolver {
      * @return the default ClassLoader (never <code>null</code>)
      * @see java.lang.Thread#getContextClassLoader()
      */
+    // SuppressWarnings PMD.UseProperClassLoader: ProperClassLoader is only a fall back solution if Thread ContextClassloder not exit.
+    @SuppressWarnings("PMD.UseProperClassLoader")
     public static ClassLoader getClassLoader() {
         ClassLoader cl = null;
         try {

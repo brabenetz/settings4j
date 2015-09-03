@@ -47,7 +47,7 @@ public abstract class AbstractObjectResolver implements ObjectResolver {
 
     private final Map<String, Object> cachedObjects = new HashMap<String, Object>();
 
-    private boolean cached = false;
+    private boolean cached;
 
     /** {@inheritDoc} */
     public void addObjectResolver(final ObjectResolver objectResolver) {
@@ -64,29 +64,37 @@ public abstract class AbstractObjectResolver implements ObjectResolver {
 
 
         final byte[] content = contentResolver.getContent(key);
-        if (content != null) {
-            final Properties properties = getObjectProperties(key, contentResolver);
-            if (properties != null) {
-                final String propObjectResolverKey = properties.getProperty(PROP_OBJECT_RESOLVER_KEY);
-                final String propCached = properties.getProperty(PROP_CACHED);
-                if (StringUtils.isEmpty(propObjectResolverKey)) {
-                    LOG.warn("The property-File for Key '{}' doesn't have the required Property '{}'", //
-                        key, PROP_OBJECT_RESOLVER_KEY);
-                    return null;
-                }
+        if (content == null) {
+            return null;
+        }
+        final Properties properties = getObjectProperties(key, contentResolver);
+        if (properties == null) {
+            return null;
+        }
 
-                if (getObjectResolverKey().equals(propObjectResolverKey)) {
-                    result = contentToObject(key, properties, content, contentResolver);
-                    if (result != null) {
-                        if ("true".equalsIgnoreCase(propCached) || (propCached == null && isCached())) {
-                            this.cachedObjects.put(key, result);
-                        }
-                        return result;
-                    }
-                }
+        final String propObjectResolverKey = properties.getProperty(PROP_OBJECT_RESOLVER_KEY);
+        if (StringUtils.isEmpty(propObjectResolverKey)) {
+            LOG.warn("The property-File for Key '{}' doesn't have the required Property '{}'", //
+                key, PROP_OBJECT_RESOLVER_KEY);
+            return null;
+        }
+        if (!getObjectResolverKey().equals(propObjectResolverKey)) {
+            return null;
+        }
+
+        result = contentToObject(key, properties, content, contentResolver);
+        if (result != null) {
+            if (isCacheEnabled(properties)) {
+                this.cachedObjects.put(key, result);
             }
+            return result;
         }
         return null;
+    }
+
+    private boolean isCacheEnabled(final Properties properties) {
+        final String propCached = properties.getProperty(PROP_CACHED);
+        return "true".equalsIgnoreCase(propCached) || (propCached == null && isCached());
     }
 
     /**

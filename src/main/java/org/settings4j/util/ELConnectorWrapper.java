@@ -81,6 +81,8 @@ public class ELConnectorWrapper {
     public Map<String, byte[]> getContent() {
         final Transformer<String, byte[]> transformer = new Transformer<String, byte[]>() {
 
+            // SuppressWarnings PMD.ReturnEmptyArrayRatherThanNull: returning null for this byte-Arrays is OK.
+            @SuppressWarnings("PMD.ReturnEmptyArrayRatherThanNull")
             public byte[] transform(final String key) {
                 if (key != null) {
                     for (Connector connector : ELConnectorWrapper.this.connectors) {

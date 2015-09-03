@@ -101,6 +101,8 @@ public class JNDIConnector extends AbstractConnector {
     private Boolean isJNDIAvailable;
 
     /** {@inheritDoc} */
+    // SuppressWarnings PMD.ReturnEmptyArrayRatherThanNull: returning null for this byte-Arrays is OK.
+    @SuppressWarnings("PMD.ReturnEmptyArrayRatherThanNull")
     public byte[] getContent(final String key) {
         final Object obj = lookupInContext(key);
         if (obj == null) {

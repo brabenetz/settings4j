@@ -75,7 +75,7 @@ public class DefaultPropertiesLoader {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Add Property Connector '{}' to the Settings4j Repository.", CONNECTOR_NAME);
                 final Set<Entry<Object, Object>> entries = property.entrySet();
-                for (Entry<Object, Object> entry : entries) {
+                for (final Entry<Object, Object> entry : entries) {
                     LOG.debug("{} = {}", entry.getKey(), entry.getValue());
                 }
             }
@@ -93,7 +93,7 @@ public class DefaultPropertiesLoader {
         if (LOG.isDebugEnabled()) {
             final List<Connector> connectors = Settings4j.getConnectors();
             LOG.debug("Current Connectors are {}", connectors.size());
-            for (Connector connector : connectors) {
+            for (final Connector connector : connectors) {
                 LOG.debug("Connector: {}", connector.getName());
             }
 
@@ -107,10 +107,10 @@ public class DefaultPropertiesLoader {
             property.load(new ByteArrayInputStream(defaultProperties.getBytes("ISO-8859-1")));
         } catch (final UnsupportedEncodingException e) {
             // every JDK must have the ISO-8859-1 Charset...
-            throw new IllegalStateException(e.getMessage());
+            throw new IllegalStateException(e.getMessage(), e);
         } catch (final IOException e) {
             // IOException never happens in ByteArrayInputStream implementation...
-            throw new IllegalStateException(e.getMessage());
+            throw new IllegalStateException(e.getMessage(), e);
         }
         return property;
     }

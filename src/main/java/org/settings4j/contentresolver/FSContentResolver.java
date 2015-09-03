@@ -51,6 +51,8 @@ public class FSContentResolver implements ContentResolver {
     }
 
     /** {@inheritDoc} */
+    // SuppressWarnings PMD.ReturnEmptyArrayRatherThanNull: returning null for this byte-Arrays is OK.
+    @SuppressWarnings("PMD.ReturnEmptyArrayRatherThanNull")
     public byte[] getContent(final String key) {
         String normalizedKey = key;
         if (normalizedKey.startsWith(FILE_URL_PREFIX)) {

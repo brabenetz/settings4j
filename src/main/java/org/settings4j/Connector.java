@@ -48,7 +48,7 @@ public interface Connector {
     String getString(String key);
 
     /**
-     * return a byte[]-Value for the given key.
+     * return a byte[]-Value for the given key or <code>null</code> if no file-content for the key where found.
      * <p>
      * The concrete implementation can use the ContentResolver if required
      * </p>
@@ -103,7 +103,7 @@ public interface Connector {
      * &lt;/connector&gt;
      * --------------------------------------
      * </pre>
-     * 
+     *
      * @param connector
      *        the Connector to set.
      */

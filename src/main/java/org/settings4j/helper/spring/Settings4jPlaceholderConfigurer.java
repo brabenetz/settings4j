@@ -125,7 +125,7 @@ public class Settings4jPlaceholderConfigurer extends PropertyPlaceholderConfigur
         private final Properties props;
 
 
-        private Settings4jPlaceholderConfigurerResolver(final String prefix, final Properties props) {
+        public Settings4jPlaceholderConfigurerResolver(final String prefix, final Properties props) {
             this.prefix = prefix;
             this.props = props;
         }
@@ -136,5 +136,4 @@ public class Settings4jPlaceholderConfigurer extends PropertyPlaceholderConfigur
             return placeholderConfigurer.resolvePlaceholder(placeholderName, this.props);
         }
     }
-
 }

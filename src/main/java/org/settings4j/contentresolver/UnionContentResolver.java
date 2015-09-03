@@ -65,9 +65,11 @@ public class UnionContentResolver implements ContentResolver {
     }
 
     /** {@inheritDoc} */
+    // SuppressWarnings PMD.ReturnEmptyArrayRatherThanNull: returning null for this byte-Arrays is OK.
+    @SuppressWarnings("PMD.ReturnEmptyArrayRatherThanNull")
     public byte[] getContent(final String key) {
         byte[] result = null;
-        for (ContentResolver contentResolver : this.contentResolvers) {
+        for (final ContentResolver contentResolver : this.contentResolvers) {
             result = contentResolver.getContent(key);
             if (result != null) {
                 return result;

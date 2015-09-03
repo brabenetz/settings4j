@@ -28,6 +28,8 @@ package org.settings4j.connector;
 public abstract class AbstractPropertyConnector extends AbstractConnector {
 
     /** {@inheritDoc} */
+    // SuppressWarnings PMD.ReturnEmptyArrayRatherThanNull: returning null for this byte-Arrays is OK.
+    @SuppressWarnings("PMD.ReturnEmptyArrayRatherThanNull")
     public byte[] getContent(final String key) {
         final String path = getString(key);
         if (path != null && getContentResolver() != null) {
