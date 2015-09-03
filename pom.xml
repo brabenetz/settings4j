@@ -50,6 +50,12 @@
     <url>https://github.com/brabenetz/settings4j/issues</url>
   </issueManagement>
 
+  <ciManagement>
+    <system>Travis</system>
+    <url>https://travis-ci.org/brabenetz/settings4j</url>
+    <notifiers></notifiers>
+  </ciManagement>
+
   <distributionManagement>
     <repository>
       <id>sonatype-nexus-staging</id>
