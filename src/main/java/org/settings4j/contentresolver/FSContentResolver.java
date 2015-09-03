@@ -136,7 +136,7 @@ public class FSContentResolver implements ContentResolver {
                 this.rootFolder = newRootFolder;
                 LOG.info("Set RootPath for FSConntentResolver: {}", newRootFolder.getAbsolutePath());
             } catch (final IOException e) {
-                LOG.warn("cannot create rootFolder: {}!", rootFolderPath);
+                LOG.warn("cannot create rootFolder: {}!", rootFolderPath, e);
             }
         } else {
             this.rootFolder = newRootFolder;

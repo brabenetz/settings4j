@@ -87,9 +87,16 @@ public class JavaXMLBeansObjectResolver extends AbstractObjectResolver {
     protected Object contentToObject(final String key, final Properties properties, final byte[] content,
         final ContentResolver contentResolver) {
         final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(content);
-        final XMLDecoder encoder = new XMLDecoder(byteArrayInputStream);
-        encoder.setExceptionListener(new LogDecoderExceptionListener(key));
-        return encoder.readObject();
+        XMLDecoder encoder = null;
+        try {
+            encoder = new XMLDecoder(byteArrayInputStream);
+            encoder.setExceptionListener(new LogDecoderExceptionListener(key));
+            return encoder.readObject();
+        } finally {
+            if (encoder != null) {
+                encoder.close();
+            }
+        }
     }
 
     /**

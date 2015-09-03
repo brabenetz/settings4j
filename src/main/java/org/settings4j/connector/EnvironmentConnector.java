@@ -45,7 +45,7 @@ public class EnvironmentConnector extends AbstractPropertyConnector {
             }
             return envValue;
         } catch (final SecurityException e) {
-            LOG.info("Was not allowed to read environment value for key '{}'.", key);
+            LOG.info("Was not allowed to read environment value for key '{}'.", key, e);
             return def;
         } catch (final Throwable e) {
             LOG.warn("Exception reading environment value for key '{}': {}", key, e.getMessage());

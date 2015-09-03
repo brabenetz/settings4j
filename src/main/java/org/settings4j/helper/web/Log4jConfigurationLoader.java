@@ -89,7 +89,7 @@ public class Log4jConfigurationLoader {
         try {
             url = new URL(configLocation);
             log("found url: " + url);
-        } catch (final MalformedURLException ex) {
+        } catch (@SuppressWarnings("unused") final MalformedURLException ex) {
             // so, resource is not a URL:
             // attempt to get the resource from the class path
             log("attempt to get the resource from the class path.");

@@ -41,7 +41,7 @@ public class SystemPropertyConnector extends AbstractPropertyConnector {
         try {
             return System.getProperty(key, def);
         } catch (final SecurityException e) {
-            LOG.info("Was not allowed to read system property value for key '{}'.", key);
+            LOG.info("Was not allowed to read system property value for key '{}'.", key, e);
             return def;
         } catch (final Throwable e) { // MS-Java throws com.ms.security.SecurityExceptionEx
             LOG.warn("Exception reading system property value for key '{}': {}", key, e.getMessage());

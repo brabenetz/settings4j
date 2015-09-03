@@ -318,7 +318,7 @@ public class JNDIConnector extends AbstractConnector {
             Object obj = null;
             try {
                 obj = tmpCtx.lookup(path[i]);
-            } catch (final NameNotFoundException e) {
+            } catch (@SuppressWarnings("unused") final NameNotFoundException e) {
                 LOG.debug("obj is null and subcontext will be generated: {}", path[i]);
             }
 
