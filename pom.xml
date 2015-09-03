@@ -108,6 +108,7 @@
         <groupId>commons-configuration</groupId>
         <artifactId>commons-configuration</artifactId>
         <version>1.10</version>
+        <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
@@ -116,29 +117,22 @@
         <version>2.2</version>
       </dependency>
       <dependency>
-        <groupId>hsqldb</groupId>
-        <artifactId>hsqldb</artifactId>
-        <version>1.8.0.10</version>
-      </dependency>
-      <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>servlet-api</artifactId>
         <version>2.5</version>
+        <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>javax.transaction</groupId>
         <artifactId>jta</artifactId>
         <version>1.1</version>
-      </dependency>
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.12</version>
+        <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>log4j</groupId>
         <artifactId>log4j</artifactId>
         <version>1.2.17</version>
+        <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -152,24 +146,8 @@
         <version>3.1</version>
       </dependency>
       <dependency>
-        <groupId>org.hamcrest</groupId>
-        <artifactId>hamcrest-core</artifactId>
-        <version>1.3</version>
-      </dependency>
-      <dependency>
-        <groupId>org.hamcrest</groupId>
-        <artifactId>hamcrest-library</artifactId>
-        <version>1.3</version>
-      </dependency>
-      <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>1.7.12</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-log4j12</artifactId>
         <version>1.7.12</version>
       </dependency>
       <dependency>
@@ -177,6 +155,7 @@
         <artifactId>spring-beans</artifactId>
         <!-- springframework 4.0 requires JDK 6 -->
         <version>3.2.9.RELEASE</version>
+        <optional>true</optional>
       </dependency>
 
       <dependency>
@@ -184,40 +163,78 @@
         <artifactId>spring-core</artifactId>
         <!-- springframework 4.0 requires JDK 6 -->
         <version>3.2.9.RELEASE</version>
+        <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-jdbc</artifactId>
         <!-- springframework 4.0 requires JDK 6 -->
         <version>3.2.9.RELEASE</version>
+        <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-test</artifactId>
         <version>3.2.9.RELEASE</version>
+        <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-web</artifactId>
         <!-- springframework 4.0 requires JDK 6 -->
         <version>3.2.9.RELEASE</version>
+        <optional>true</optional>
       </dependency>
 
       <dependency>
         <groupId>taglibs</groupId>
         <artifactId>standard</artifactId>
         <version>1.1.2</version>
+        <optional>true</optional>
+      </dependency>
+      <dependency>
+        <groupId>hsqldb</groupId>
+        <artifactId>hsqldb</artifactId>
+        <version>1.8.0.10</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-core</artifactId>
+        <version>1.3</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-library</artifactId>
+        <version>1.3</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>1.7.12</version>
+        <scope>test</scope>
       </dependency>
 
       <dependency>
         <groupId>tomcat</groupId>
         <artifactId>naming-factory</artifactId>
         <version>5.5.23</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>tomcat</groupId>
         <artifactId>naming-resources</artifactId>
         <version>5.5.23</version>
+        <scope>test</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -228,16 +245,34 @@
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils</artifactId>
     </dependency>
+
+    <dependency>
+      <!-- required for org.settings4j.helper.configuration.* -->
+      <groupId>commons-configuration</groupId>
+      <artifactId>commons-configuration</artifactId>
+      <optional>true</optional>
+    </dependency>
     <dependency>
       <!-- Needed for FSContentResolver -->
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
     </dependency>
     <dependency>
+      <!-- servlet-api for org.settings4j.helper.web.DefaultPropertiesLoaderListener -->
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <!-- log4j for org.settings4j.helper.web.Log4jConfigurationLoaderListener -->
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
       <!-- required for LazyMap in Expression Languages like ${connectors.string['xyz']} -->
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-collections4</artifactId>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -247,49 +282,30 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
-
-    <dependency>
-      <!-- required for org.settings4j.helper.configuration.* -->
-      <groupId>commons-configuration</groupId>
-      <artifactId>commons-configuration</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <!-- servlet-api for org.settings4j.helper.web.DefaultPropertiesLoaderListener -->
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <!-- log4j for org.settings4j.helper.web.Log4jConfigurationLoaderListener -->
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <scope>provided</scope>
-    </dependency>
     <dependency>
       <!-- required for org.settings4j.helper.spring.* -->
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
-      <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
 
     <dependency>
       <!-- required for org.settings4j.helper.spring.* -->
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
-      <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <!-- required for org.settings4j.helper.spring.Settings4jContextLoaderListener -->
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-      <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <!-- taglibs-standard is used to interpret Expression Language like ${...} -->
       <groupId>taglibs</groupId>
       <artifactId>standard</artifactId>
-      <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
 
     <dependency>
