@@ -103,18 +103,34 @@
           </exclusion>
         </exclusions>
       </dependency>
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <!-- commons-io 2.4 requires JDK 6 -->
+        <version>2.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-collections4</artifactId>
+        <version>4.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <!-- commons-lang3 3.2+ requires JDK 6 -->
+        <version>3.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.12</version>
+      </dependency>
 
       <dependency>
         <groupId>commons-configuration</groupId>
         <artifactId>commons-configuration</artifactId>
         <version>1.10</version>
         <optional>true</optional>
-      </dependency>
-      <dependency>
-        <groupId>commons-io</groupId>
-        <artifactId>commons-io</artifactId>
-        <!-- commons-io 2.4 requires JDK 6 -->
-        <version>2.2</version>
       </dependency>
       <dependency>
         <groupId>javax.servlet</groupId>
@@ -133,22 +149,6 @@
         <artifactId>log4j</artifactId>
         <version>1.2.17</version>
         <optional>true</optional>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-collections4</artifactId>
-        <version>4.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-lang3</artifactId>
-        <!-- commons-lang3 3.2+ requires JDK 6 -->
-        <version>3.1</version>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>1.7.12</version>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
@@ -245,29 +245,10 @@
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils</artifactId>
     </dependency>
-
-    <dependency>
-      <!-- required for org.settings4j.helper.configuration.* -->
-      <groupId>commons-configuration</groupId>
-      <artifactId>commons-configuration</artifactId>
-      <optional>true</optional>
-    </dependency>
     <dependency>
       <!-- Needed for FSContentResolver -->
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
-    </dependency>
-    <dependency>
-      <!-- servlet-api for org.settings4j.helper.web.DefaultPropertiesLoaderListener -->
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <!-- log4j for org.settings4j.helper.web.Log4jConfigurationLoaderListener -->
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <optional>true</optional>
     </dependency>
     <dependency>
       <!-- required for LazyMap in Expression Languages like ${connectors.string['xyz']} -->
@@ -281,6 +262,25 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <!-- required for org.settings4j.helper.configuration.* -->
+      <groupId>commons-configuration</groupId>
+      <artifactId>commons-configuration</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <!-- servlet-api for org.settings4j.helper.web.DefaultPropertiesLoaderListener -->
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <!-- log4j for org.settings4j.helper.web.Log4jConfigurationLoaderListener -->
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <!-- required for org.settings4j.helper.spring.* -->
@@ -370,7 +370,7 @@
           <version>2.4.0</version>
           <configuration>
             <predefinedSortOrder>recommended_2008_06</predefinedSortOrder>
-            <sortDependencies>scope,groupId,artifactId</sortDependencies>
+            <sortDependencies>scope,optional,groupId,artifactId</sortDependencies>
             <sortPlugins>groupId,artifactId</sortPlugins>
             <createBackupFile>false</createBackupFile>
             <lineSeparator>\r\n</lineSeparator>
