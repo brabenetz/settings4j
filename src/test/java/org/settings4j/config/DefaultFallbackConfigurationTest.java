@@ -22,17 +22,11 @@ import org.settings4j.test.TestUtils;
 
 import junit.framework.TestCase;
 
-/**
- * TestCases for {@link Settings4j}.
- * <p>
- * Checkstyle:OFF MagicNumber
- * </p>
- */
-public class TestDefaultFallbackConfiguration extends TestCase {
+public class DefaultFallbackConfigurationTest extends TestCase {
 
     /** General Logger for this Class. */
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory
-        .getLogger(TestDefaultFallbackConfiguration.class);
+        .getLogger(DefaultFallbackConfigurationTest.class);
 
     /** {@inheritDoc} */
     @Override

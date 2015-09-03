@@ -66,7 +66,7 @@ public class ClasspathConnector extends AbstractConnector {
 
         } catch (final UnsupportedEncodingException e) {
             // should never occure with "UTF-8"
-            LOG.error("Charset not found: " + this.charset, e);
+            LOG.error("Charset not found: {}", this.charset, e);
             return null;
         }
     }

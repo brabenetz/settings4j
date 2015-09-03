@@ -205,7 +205,7 @@ public class JNDIConnector extends AbstractConnector {
                 this.isJNDIAvailable = Boolean.FALSE;
             } catch (final NamingException e) {
                 LOG.info("JNDI Context is available but {}", e.getMessage());
-                LOG.debug("NamingException in isJNDIAvailable: " + e.getMessage(), e);
+                LOG.debug("NamingException in isJNDIAvailable: {}", e.getMessage(), e);
                 this.isJNDIAvailable = Boolean.TRUE;
             }
         }
@@ -243,7 +243,7 @@ public class JNDIConnector extends AbstractConnector {
             LOG.info("Maybe no JNDI-Context available.");
             LOG.debug(e.getMessage(), e);
         } catch (final NamingException e) {
-            LOG.debug("cannot lookup key: " + key + " (" + normalizedKey + ")", e);
+            LOG.debug("cannot lookup key: {} ({})", key, normalizedKey, e);
             if (withPrefix) {
                 result = lookupInContext(key, false);
             }
@@ -252,7 +252,7 @@ public class JNDIConnector extends AbstractConnector {
                 try {
                     ctx.close();
                 } catch (final NamingException e) {
-                    LOG.info("cannot close context: " + key + " (" + normalizedKey + ")", e);
+                    LOG.info("cannot close context: {} ({})", key, normalizedKey, e);
                 }
             }
         }
@@ -296,7 +296,7 @@ public class JNDIConnector extends AbstractConnector {
                 try {
                     ctx.close();
                 } catch (final NamingException e) {
-                    LOG.info("cannot close context: " + key, e);
+                    LOG.info("cannot close context: {}", key, e);
                 }
             }
         }
@@ -349,14 +349,17 @@ public class JNDIConnector extends AbstractConnector {
 
         normalizeKey = normalizeKey.replace('\\', '/');
 
-        if (normalizeKey.startsWith("/")) {
+        if (startsWithSlash(normalizeKey)) {
             normalizeKey = normalizeKey.substring(1);
         }
         if (withPrefix) {
             return this.contextPathPrefix + normalizeKey;
-        } else {
-            return normalizeKey;
         }
+        return normalizeKey;
+    }
+
+    private boolean startsWithSlash(final String normalizeKey) {
+        return normalizeKey.charAt(0) == '/';
     }
 
     public String getContextPathPrefix() {

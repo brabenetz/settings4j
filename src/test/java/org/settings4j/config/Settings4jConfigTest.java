@@ -38,7 +38,7 @@ import org.settings4j.test.TestUtils;
  * Checkstyle:OFF MagicNumber
  * </p>
  */
-public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
+public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
 
     /**
      * Test parsing of defaultsettings4j.xml (FALLBACK-Configuration).
@@ -187,9 +187,9 @@ public class TestSettings4jConfig extends AbstractTestSettings4jConfig {
 
         final Settings4jInstance settings = settingsRepository.getSettings();
 
-        final Map result1 = (Map) settings.getObject(objectKey);
+        final Map<?, ?> result1 = (Map<?, ?>) settings.getObject(objectKey);
         assertNotNull(result1);
-        final Map result2 = (Map) settings.getObject(objectKey);
+        final Map<?, ?> result2 = (Map<?, ?>) settings.getObject(objectKey);
         if (mustBeTheSame) {
             assertTrue(result1 == result2);
         } else {

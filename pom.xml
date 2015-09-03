@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.settings4j</groupId>
@@ -85,7 +85,7 @@
     <maven.compile.target>1.5</maven.compile.target>
     <pmd-config-location>${basedir}/src/config/pmd5-rulesets.xml</pmd-config-location>
 
-    <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <project.reporting.sourceEncoding>UTF-8</project.reporting.sourceEncoding>
   </properties>
@@ -436,6 +436,104 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-eclipse-plugin</artifactId>
+          <version>2.10</version>
+          <configuration>
+            <!-- See: http://maven.apache.org/plugins/maven-eclipse-plugin/eclipse-mojo.html -->
+            <downloadSources>true</downloadSources>
+            <downloadJavadocs>true</downloadJavadocs>
+            <additionalBuildcommands>
+              <buildCommand>
+                <name>net.sf.eclipsecs.core.CheckstyleBuilder</name>
+              </buildCommand>
+              <buildCommand>
+                <name>net.sourceforge.pmd.eclipse.plugin.pmdBuilder</name>
+              </buildCommand>
+              <buildCommand>
+                <name>edu.umd.cs.findbugs.plugin.eclipse.findbugsBuilder</name>
+              </buildCommand>
+              <buildCommand>
+                <name>org.eclipse.m2e.core.maven2Builder</name>
+              </buildCommand>
+            </additionalBuildcommands>
+            <additionalProjectnatures>
+              <projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
+              <projectnature>net.sourceforge.pmd.eclipse.plugin.pmdNature</projectnature>
+              <projectnature>edu.umd.cs.findbugs.plugin.eclipse.findbugsNature</projectnature>
+              <projectnature>org.eclipse.m2e.core.maven2Nature</projectnature>
+            </additionalProjectnatures>
+            <additionalConfig>
+              <file>
+                <name>.checkstyle</name>
+                <content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+  <fileset-config file-format-version="1.2.0" simple-config="true">
+      <local-check-config name="${project.artifactId}-checkstyle" location="src/config/checkstyle.xml" type="project" description="CheckStyle-Configuration for ${project.artifactId}">
+          <property name="checkstyle.header.file" value="${checkstyle-config-header-location}" />
+          <additional-data name="protect-config-file" value="false" />
+      </local-check-config>
+      <fileset name="Alle" enabled="true" check-config-name="${project.artifactId}-checkstyle" local="true">
+          <file-match-pattern match-pattern="src/." include-pattern="true" />
+      </fileset>
+    <filter name="FileTypesFilter" enabled="true">
+      <filter-data value="java" />
+    </filter>
+  </fileset-config>]]></content>
+              </file>
+              <file>
+                <name>.pmd</name>
+                <content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+  <pmd>
+      <useProjectRuleSet>true</useProjectRuleSet>
+      <ruleSetFile>${basedir}/src/config/pmd5-rulesets.xml</ruleSetFile>
+      <includeDerivedFiles>false</includeDerivedFiles>
+      <violationsAsErrors>true</violationsAsErrors>
+  </pmd>]]></content>
+              </file>
+              <file>
+                <name>.classpath</name>
+                <content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" output="target/classes" path="src/main/java">
+    <attributes>
+      <attribute name="optional" value="true"/>
+      <attribute name="maven.pomderived" value="true"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5">
+    <attributes>
+      <attribute name="maven.pomderived" value="true"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+    <attributes>
+      <attribute name="maven.pomderived" value="true"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+    <attributes>
+      <attribute name="maven.pomderived" value="true"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="src" output="target/test-classes" path="src/test/java">
+    <attributes>
+      <attribute name="optional" value="true"/>
+      <attribute name="maven.pomderived" value="true"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
+    <attributes>
+      <attribute name="maven.pomderived" value="true"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="output" path="target/classes"/>
+</classpath>
+]]></content>
+              </file>
+            </additionalConfig>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
           <version>1.4.1</version>
           <executions>
@@ -709,63 +807,6 @@
     </pluginManagement>
 
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <artifactId>maven-eclipse-plugin</artifactId>
-        <version>2.10</version>
-        <configuration>
-          <!-- See: http://maven.apache.org/plugins/maven-eclipse-plugin/eclipse-mojo.html -->
-          <downloadSources>true</downloadSources>
-          <downloadJavadocs>true</downloadJavadocs>
-          <additionalBuildcommands>
-            <buildCommand>
-              <name>net.sf.eclipsecs.core.CheckstyleBuilder</name>
-            </buildCommand>
-            <buildCommand>
-              <name>net.sourceforge.pmd.eclipse.plugin.pmdBuilder</name>
-            </buildCommand>
-            <buildCommand>
-              <name>edu.umd.cs.findbugs.plugin.eclipse.findbugsBuilder</name>
-            </buildCommand>
-          </additionalBuildcommands>
-          <additionalProjectnatures>
-            <projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
-            <projectnature>net.sourceforge.pmd.eclipse.plugin.pmdNature</projectnature>
-            <projectnature>edu.umd.cs.findbugs.plugin.eclipse.findbugsNature</projectnature>
-          </additionalProjectnatures>
-          <additionalConfig>
-            <file>
-              <name>.checkstyle</name>
-              <content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<fileset-config file-format-version="1.2.0" simple-config="true">
-    <local-check-config name="${project.artifactId}-checkstyle" location="src/config/checkstyle.xml" type="project" description="CheckStyle-Configuration for ${project.artifactId}">
-        <property name="checkstyle.header.file" value="${checkstyle-config-header-location}" />
-        <additional-data name="protect-config-file" value="false" />
-    </local-check-config>
-    <fileset name="Alle" enabled="true" check-config-name="${project.artifactId}-checkstyle" local="true">
-        <file-match-pattern match-pattern="src/." include-pattern="true" />
-    </fileset>
-	<filter name="FileTypesFilter" enabled="true">
-		<filter-data value="java" />
-	</filter>
-</fileset-config>]]></content>
-            </file>
-            <file>
-              <name>.pmd</name>
-              <content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<pmd>
-    <useProjectRuleSet>true</useProjectRuleSet>
-    <ruleSetFile>${basedir}/src/config/pmd5-rulesets.xml</ruleSetFile>
-    <includeDerivedFiles>false</includeDerivedFiles>
-    <violationsAsErrors>true</violationsAsErrors>
-</pmd>]]></content>
-            </file>
-          </additionalConfig>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>

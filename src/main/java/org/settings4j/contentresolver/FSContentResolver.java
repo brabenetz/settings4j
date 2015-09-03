@@ -119,8 +119,7 @@ public class FSContentResolver implements ContentResolver {
     public File getRootFolder() {
         if (this.rootFolder == null) {
             this.rootFolder = new File(".");
-            LOG.info("FSContentResolver.rootFolder is null. " //
-                + "The RootPath Folder will be used: " + this.rootFolder.getAbsolutePath());
+            LOG.info("FSContentResolver.rootFolder is null. The RootPath Folder will be used: {}", this.rootFolder.getAbsolutePath());
         }
         return this.rootFolder;
     }

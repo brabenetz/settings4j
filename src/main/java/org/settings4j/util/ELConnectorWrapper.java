@@ -4,15 +4,15 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  *****************************************************************************/
 
 package org.settings4j.util;
@@ -31,7 +31,7 @@ import org.settings4j.Connector;
  * <B>Example:</B><br>
  * <code>${connectors.string['xyz']}</code> returns the first founded Value in all Connectors:
  * <code>connector.getString("xyz");</code>
- * 
+ *
  * @author Harald.Brabenetz
  */
 public class ELConnectorWrapper {
@@ -40,10 +40,10 @@ public class ELConnectorWrapper {
 
     /**
      * The list of all connectors, where Values can be searched.
-     * 
+     *
      * @param connectors a array of Connectors which will be processed in Sequence.
      */
-    public ELConnectorWrapper(final Connector[] connectors) {
+    public ELConnectorWrapper(final Connector... connectors) {
         super();
         this.connectors = connectors;
     }
@@ -51,15 +51,14 @@ public class ELConnectorWrapper {
     /**
      * Usage: <code>${connectors.string['xyz']}</code> returns the first founded Value in all Connectors:
      * <code>connector.getString("xyz");</code>.
-     * 
+     *
      * @return the first founded Value in all connectors
      */
     public Map<String, String> getString() {
         final Transformer<String, String> transformer = new Transformer<String, String>() {
 
-            public String transform(final String input) {
-                if (input != null) {
-                    final String key = input.toString();
+            public String transform(final String key) {
+                if (key != null) {
                     for (Connector connector : ELConnectorWrapper.this.connectors) {
                         final String result = connector.getString(key);
                         if (result != null) {
@@ -76,15 +75,14 @@ public class ELConnectorWrapper {
     /**
      * Usage: <code>${connectors.content['xyz']}</code> returns the first founded Value in all Connectors:
      * <code>connector.getContent("xyz");</code>.
-     * 
+     *
      * @return the first founded Value in all connectors
      */
     public Map<String, byte[]> getContent() {
         final Transformer<String, byte[]> transformer = new Transformer<String, byte[]>() {
 
-            public byte[] transform(final String input) {
-                if (input != null) {
-                    final String key = input.toString();
+            public byte[] transform(final String key) {
+                if (key != null) {
                     for (Connector connector : ELConnectorWrapper.this.connectors) {
                         final byte[] result = connector.getContent(key);
                         if (result != null) {
@@ -101,15 +99,14 @@ public class ELConnectorWrapper {
     /**
      * Usage: <code>${connectors.object['xyz']}</code> returns the first founded Value in all Connectors:
      * <code>connector.getObject("xyz");</code>.
-     * 
+     *
      * @return the first founded Value in all connectors
      */
     public Map<String, Object> getObject() {
         final Transformer<String, Object> transformer = new Transformer<String, Object>() {
 
-            public Object transform(final String input) {
-                if (input != null) {
-                    final String key = input.toString();
+            public Object transform(final String key) {
+                if (key != null) {
                     for (Connector connector : ELConnectorWrapper.this.connectors) {
                         final Object result = connector.getObject(key);
                         if (result != null) {

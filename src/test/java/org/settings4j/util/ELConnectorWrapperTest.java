@@ -50,7 +50,7 @@ public class ELConnectorWrapperTest extends TestCase {
         unionObjectResolver.addObjectResolver(new JavaXMLBeansObjectResolver());
         classpathConnector.setObjectResolver(unionObjectResolver);
 
-        ELConnectorWrapper connectorWrapper = new ELConnectorWrapper(new ClasspathConnector[]{classpathConnector});
+        ELConnectorWrapper connectorWrapper = new ELConnectorWrapper(classpathConnector);
 
         // SpringConfigObjectResolver
         result = connectorWrapper.getObject().get("org/settings4j/objectresolver/testSpring1");
