@@ -9,6 +9,8 @@
 
 # Settings for Java
 
+[![Join the chat at https://gitter.im/brabenetz/settings4j](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/brabenetz/settings4j?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Settings4j provides you with a lightweight Java library that allows programmers not to worry
 about the location where the configuration settings are stored.
 
