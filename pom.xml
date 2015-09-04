@@ -600,10 +600,10 @@
               <version>5.6</version>
             </docletArtifact>
             <additionalparam>-inferrel -inferdep -quiet -hide java.*
-            -collpackages java.util.* -qualify
-            -postfixpackage
-            -nodefontsize 9
-            -nodefontpackagesize 7</additionalparam>
+              -collpackages java.util.* -qualify
+              -postfixpackage
+              -nodefontsize 9
+              -nodefontpackagesize 7</additionalparam>
             <maxmemory>256m</maxmemory>
           </configuration>
         </plugin>
@@ -772,24 +772,8 @@
             <sectionDelimiter>===============================================================</sectionDelimiter>
             <licenseName>apache_v2</licenseName>
             <verbose>false</verbose>
+            <generateBundle>true</generateBundle>
           </configuration>
-          <executions>
-            <execution>
-              <id>first</id>
-              <goals>
-                <goal>update-file-header</goal>
-              </goals>
-              <phase>process-sources</phase>
-              <configuration>
-                <!-- 
-                <roots>
-                  <root>src/main/java</root>
-                  <root>src/test</root>
-                </roots>
-                 -->
-              </configuration>
-            </execution>
-          </executions>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -830,6 +814,31 @@
           </configuration>
         </plugin>
         <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <versionRange>[1.0.0,)</versionRange>
+                    <goals>
+                      <goal>update-file-header</goal>
+                      <goal>update-project-license</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore></ignore>
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
+        <plugin>
           <groupId>org.eluder.coveralls</groupId>
           <artifactId>coveralls-maven-plugin</artifactId>
           <version>4.0.0</version>
@@ -849,6 +858,20 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>animal-sniffer-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>first</id>
+            <goals>
+              <goal>update-file-header</goal>
+              <goal>update-project-license</goal>
+            </goals>
+            <phase>process-sources</phase>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.eluder.coveralls</groupId>
@@ -912,10 +935,6 @@
             </reports>
           </reportSet>
         </reportSets>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>license-maven-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
