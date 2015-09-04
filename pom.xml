@@ -795,6 +795,11 @@
                 The Apache Software License, Version 2.0</licenseMerge>
             </licenseMerges>
             <excludedScopes>test,provided</excludedScopes>
+            <roots>
+              <root>src/main/java</root>
+              <root>src/main/resources</root>
+              <root>src/test</root>
+            </roots>
           </configuration>
         </plugin>
         <plugin>
