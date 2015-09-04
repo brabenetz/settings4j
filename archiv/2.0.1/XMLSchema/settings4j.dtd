@@ -42,7 +42,7 @@ cached - default value is false; If true, then this connector will be wrapped
      with the org.settings4j.connector.CachedConnectorWrapper implementation.
 -->
 <!ELEMENT connector (param*,
-      contentResolver-ref?, objectResolver-ref?, connector-ref*)>
+      contentResolver-ref?, objectResolver-ref?, connector-ref*, filter?)>
 <!ATTLIST connector
   name 		CDATA 	#REQUIRED
   class 	CDATA	#REQUIRED
