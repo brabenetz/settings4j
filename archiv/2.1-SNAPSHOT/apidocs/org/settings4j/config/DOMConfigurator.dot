@@ -71,20 +71,10 @@ digraph G {
 	c2130:p -> c2146:p [taillabel="", label="", headlabel="*", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.config.DOMConfigurator NAVASSOC org.settings4j.Settings4jRepository
 	c2130:p -> c2142:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
-	// org.settings4j.config.DOMConfigurator DEPEND org.w3c.dom.Document
-	c2130:p -> c2189:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Settings4jInstance
-	c2130:p -> c2143:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// org.settings4j.config.DOMConfigurator DEPEND org.w3c.dom.Element
-	c2130:p -> c2190:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Filter
 	c2130:p -> c2147:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Connector
 	c2130:p -> c2152:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Connector
-	c2130:p -> c2152:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.ObjectResolver
-	c2130:p -> c2146:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Connector
 	c2130:p -> c2152:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Connector
@@ -95,6 +85,18 @@ digraph G {
 	c2130:p -> c2152:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Settings4jRepository
 	c2130:p -> c2142:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.config.DOMConfigurator DEPEND org.w3c.dom.Document
+	c2130:p -> c2189:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.config.DOMConfigurator DEPEND org.w3c.dom.Element
+	c2130:p -> c2190:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Connector
+	c2130:p -> c2152:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Settings4jInstance
+	c2130:p -> c2143:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.ObjectResolver
+	c2130:p -> c2146:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Connector
+	c2130:p -> c2152:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.w3c.dom.Document
 	c2189 [label=<<table title="org.w3c.dom.Document" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://download.oracle.com/javase/1.5.0/docs/api/org/w3c/dom/Document.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

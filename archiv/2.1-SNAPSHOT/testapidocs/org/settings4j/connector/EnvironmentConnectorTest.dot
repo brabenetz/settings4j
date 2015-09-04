@@ -10,15 +10,15 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.connector.EnvironmentConnectorTest
-	c586 [label=<<table title="org.settings4j.connector.EnvironmentConnectorTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./EnvironmentConnectorTest.html">
+	c613 [label=<<table title="org.settings4j.connector.EnvironmentConnectorTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./EnvironmentConnectorTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> EnvironmentConnectorTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./EnvironmentConnectorTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.connector.EnvironmentConnectorTest extends junit.framework.TestCase
-	c604:p -> c586:p [dir=back,arrowtail=empty];
+	c631:p -> c613:p [dir=back,arrowtail=empty];
 	// junit.framework.TestCase
-	c604 [label=<<table title="junit.framework.TestCase" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://api.dpml.net/junit/3.8.1/junit/framework/TestCase.html">
+	c631 [label=<<table title="junit.framework.TestCase" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://api.dpml.net/junit/3.8.1/junit/framework/TestCase.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="arial italic"> TestCase </font></td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> junit.framework </font></td></tr>

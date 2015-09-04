@@ -1,8 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="./ConfigurationToConnectorAdapterTest.html" title="org.settings4j.helper.configuration.ConfigurationToConnectorAdapterTest" alt="" coords="305,17,535,41"/>
-<area shape="rect" id="node1" href="./ConfigurationToConnectorAdapterTest.html" title="&lt;TABLE&gt;" alt="" coords="295,5,545,53"/>
+<area shape="rect" id="node1_0" href="./ConfigurationToConnectorAdapterTest.html" title="org.settings4j.helper.configuration.ConfigurationToConnectorAdapterTest" alt="" coords="280,17,509,41"/>
+<area shape="rect" id="node1" href="./ConfigurationToConnectorAdapterTest.html" title="&lt;TABLE&gt;" alt="" coords="269,5,520,53"/>
 <area shape="rect" id="node3" href="null" title="&lt;TABLE&gt;" alt="" coords="5,108,192,156"/>
-<area shape="rect" id="node5" href="null" title="&lt;TABLE&gt;" alt="" coords="216,108,411,156"/>
-<area shape="rect" id="node7" href="null" title="&lt;TABLE&gt;" alt="" coords="435,108,621,156"/>
-<area shape="rect" id="node9" href="null" title="&lt;TABLE&gt;" alt="" coords="645,101,800,163"/>
+<area shape="rect" id="node5" href="null" title="&lt;TABLE&gt;" alt="" coords="216,108,387,156"/>
+<area shape="rect" id="node7" href="null" title="&lt;TABLE&gt;" alt="" coords="411,101,565,163"/>
+<area shape="rect" id="node9" href="null" title="&lt;TABLE&gt;" alt="" coords="589,108,784,156"/>
 </map>

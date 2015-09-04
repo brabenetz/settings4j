@@ -88,6 +88,8 @@ digraph G {
 	c1273:p -> c1295:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Connector
 	c1273:p -> c1295:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Connector
+	c1273:p -> c1295:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.connector.FilteredConnectorWrapper DEPEND org.settings4j.Connector
 	c1279:p -> c1295:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.connector.CachedConnectorWrapper DEPEND org.settings4j.Connector

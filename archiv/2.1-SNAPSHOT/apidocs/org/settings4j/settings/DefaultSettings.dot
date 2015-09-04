@@ -45,9 +45,9 @@ digraph G {
 	c2426:p -> c2403:p [taillabel="", label="", headlabel="*", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.settings.DefaultSettings NAVASSOC org.settings4j.Connector
 	c2426:p -> c2403:p [taillabel="", label="", headlabel="*", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
-	// org.settings4j.settings.DefaultSettings DEPEND org.settings4j.Connector
-	c2426:p -> c2403:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.settings.DefaultSettings DEPEND org.settings4j.ConnectorPosition
 	c2426:p -> c2402:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.settings.DefaultSettings DEPEND org.settings4j.Connector
+	c2426:p -> c2403:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

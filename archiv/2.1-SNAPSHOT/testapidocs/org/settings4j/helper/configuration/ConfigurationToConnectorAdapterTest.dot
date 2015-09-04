@@ -17,28 +17,28 @@ digraph G {
 		</table>>, URL="./ConfigurationToConnectorAdapterTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.helper.configuration.ConfigurationToConnectorAdapterTest DEPEND org.apache.commons.configuration.XMLConfiguration
 	c397:p -> c425:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// org.settings4j.helper.configuration.ConfigurationToConnectorAdapterTest DEPEND org.apache.commons.configuration.HierarchicalINIConfiguration
-	c397:p -> c428:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.helper.configuration.ConfigurationToConnectorAdapterTest DEPEND org.apache.commons.configuration.PropertiesConfiguration
-	c397:p -> c432:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c397:p -> c429:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.helper.configuration.ConfigurationToConnectorAdapterTest DEPEND org.settings4j.Settings4jRepository
+	c397:p -> c430:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.helper.configuration.ConfigurationToConnectorAdapterTest DEPEND org.apache.commons.configuration.HierarchicalINIConfiguration
 	c397:p -> c433:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.apache.commons.configuration.PropertiesConfiguration
-	c432 [label=<<table title="org.apache.commons.configuration.PropertiesConfiguration" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c429 [label=<<table title="org.apache.commons.configuration.PropertiesConfiguration" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> PropertiesConfiguration </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.apache.commons.configuration </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.apache.commons.configuration.HierarchicalINIConfiguration
-	c428 [label=<<table title="org.apache.commons.configuration.HierarchicalINIConfiguration" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c433 [label=<<table title="org.apache.commons.configuration.HierarchicalINIConfiguration" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> HierarchicalINIConfiguration </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.apache.commons.configuration </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.Settings4jRepository
-	c433 [label=<<table title="org.settings4j.Settings4jRepository" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c430 [label=<<table title="org.settings4j.Settings4jRepository" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Settings4jRepository </td></tr>

@@ -9,35 +9,35 @@ digraph G {
 	node [fontname="arial",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
-	// org.settings4j.config.TestSettings4jMappingConfig
-	c289 [label=<<table title="org.settings4j.config.TestSettings4jMappingConfig" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TestSettings4jMappingConfig.html">
+	// org.settings4j.config.Settings4jMappingConfigTest
+	c289 [label=<<table title="org.settings4j.config.Settings4jMappingConfigTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Settings4jMappingConfigTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> TestSettings4jMappingConfig </td></tr>
+<tr><td align="center" balign="center"> Settings4jMappingConfigTest </td></tr>
 		</table></td></tr>
-		</table>>, URL="./TestSettings4jMappingConfig.html", fontname="arial", fontcolor="black", fontsize=9.0];
-	// org.settings4j.config.TestSettings4jFilterConfig
-	c291 [label=<<table title="org.settings4j.config.TestSettings4jFilterConfig" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TestSettings4jFilterConfig.html">
+		</table>>, URL="./Settings4jMappingConfigTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
+	// org.settings4j.config.Settings4jFilterConfigTest
+	c291 [label=<<table title="org.settings4j.config.Settings4jFilterConfigTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Settings4jFilterConfigTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> TestSettings4jFilterConfig </td></tr>
+<tr><td align="center" balign="center"> Settings4jFilterConfigTest </td></tr>
 		</table></td></tr>
-		</table>>, URL="./TestSettings4jFilterConfig.html", fontname="arial", fontcolor="black", fontsize=9.0];
-	// org.settings4j.config.TestSettings4jConfig
-	c294 [label=<<table title="org.settings4j.config.TestSettings4jConfig" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./TestSettings4jConfig.html">
+		</table>>, URL="./Settings4jFilterConfigTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
+	// org.settings4j.config.Settings4jConfigTest
+	c294 [label=<<table title="org.settings4j.config.Settings4jConfigTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Settings4jConfigTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> TestSettings4jConfig </td></tr>
+<tr><td align="center" balign="center"> Settings4jConfigTest </td></tr>
 		</table></td></tr>
-		</table>>, URL="./TestSettings4jConfig.html", fontname="arial", fontcolor="black", fontsize=9.0];
+		</table>>, URL="./Settings4jConfigTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.config.AbstractTestSettings4jConfig
 	c297 [label=<<table title="org.settings4j.config.AbstractTestSettings4jConfig" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./AbstractTestSettings4jConfig.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="arial italic"> AbstractTestSettings4jConfig </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractTestSettings4jConfig.html", fontname="arial", fontcolor="black", fontsize=9.0];
-	//org.settings4j.config.TestSettings4jMappingConfig extends org.settings4j.config.AbstractTestSettings4jConfig
+	//org.settings4j.config.Settings4jMappingConfigTest extends org.settings4j.config.AbstractTestSettings4jConfig
 	c297:p -> c289:p [dir=back,arrowtail=empty];
-	//org.settings4j.config.TestSettings4jFilterConfig extends org.settings4j.config.AbstractTestSettings4jConfig
+	//org.settings4j.config.Settings4jFilterConfigTest extends org.settings4j.config.AbstractTestSettings4jConfig
 	c297:p -> c291:p [dir=back,arrowtail=empty];
-	//org.settings4j.config.TestSettings4jConfig extends org.settings4j.config.AbstractTestSettings4jConfig
+	//org.settings4j.config.Settings4jConfigTest extends org.settings4j.config.AbstractTestSettings4jConfig
 	c297:p -> c294:p [dir=back,arrowtail=empty];
 	//org.settings4j.config.AbstractTestSettings4jConfig extends junit.framework.TestCase
 	c357:p -> c297:p [dir=back,arrowtail=empty];

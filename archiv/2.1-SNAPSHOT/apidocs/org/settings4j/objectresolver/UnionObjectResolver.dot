@@ -35,9 +35,9 @@ digraph G {
 	c4488:p -> c4509:p [dir=back,arrowtail=empty,style=dashed];
 	// org.settings4j.objectresolver.UnionObjectResolver NAVASSOC org.settings4j.ObjectResolver
 	c4509:p -> c4488:p [taillabel="", label="", headlabel="*", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
-	// org.settings4j.objectresolver.UnionObjectResolver DEPEND org.settings4j.ObjectResolver
-	c4509:p -> c4488:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.objectresolver.UnionObjectResolver DEPEND org.settings4j.ContentResolver
 	c4509:p -> c4490:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.objectresolver.UnionObjectResolver DEPEND org.settings4j.ObjectResolver
+	c4509:p -> c4488:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

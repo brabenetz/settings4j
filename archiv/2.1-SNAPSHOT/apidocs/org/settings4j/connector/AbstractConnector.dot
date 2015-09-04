@@ -87,11 +87,11 @@ digraph G {
 	c713:p -> c733:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.connector.ClasspathConnector DEPEND org.settings4j.ContentResolver
 	c720:p -> c733:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.connector.AbstractConnector DEPEND org.settings4j.ContentResolver
+	c724:p -> c733:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.connector.AbstractConnector DEPEND org.settings4j.Connector
 	c724:p -> c740:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.connector.AbstractConnector DEPEND org.settings4j.ObjectResolver
 	c724:p -> c731:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// org.settings4j.connector.AbstractConnector DEPEND org.settings4j.ContentResolver
-	c724:p -> c733:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

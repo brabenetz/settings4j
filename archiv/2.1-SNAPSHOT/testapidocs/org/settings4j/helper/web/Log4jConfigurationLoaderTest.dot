@@ -10,24 +10,24 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.helper.web.Log4jConfigurationLoaderTest
-	c801 [label=<<table title="org.settings4j.helper.web.Log4jConfigurationLoaderTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Log4jConfigurationLoaderTest.html">
+	c828 [label=<<table title="org.settings4j.helper.web.Log4jConfigurationLoaderTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Log4jConfigurationLoaderTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Log4jConfigurationLoaderTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Log4jConfigurationLoaderTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.helper.web.Log4jConfigurationLoaderTest extends junit.framework.TestCase
-	c811:p -> c801:p [dir=back,arrowtail=empty];
+	c838:p -> c828:p [dir=back,arrowtail=empty];
 	// org.settings4j.helper.web.Log4jConfigurationLoaderTest DEPEND org.springframework.mock.web.MockServletContext
-	c801:p -> c812:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c828:p -> c839:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// junit.framework.TestCase
-	c811 [label=<<table title="junit.framework.TestCase" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://api.dpml.net/junit/3.8.1/junit/framework/TestCase.html">
+	c838 [label=<<table title="junit.framework.TestCase" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://api.dpml.net/junit/3.8.1/junit/framework/TestCase.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="arial italic"> TestCase </font></td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> junit.framework </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="http://api.dpml.net/junit/3.8.1/junit/framework/TestCase.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.springframework.mock.web.MockServletContext
-	c812 [label=<<table title="org.springframework.mock.web.MockServletContext" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c839 [label=<<table title="org.springframework.mock.web.MockServletContext" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MockServletContext </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.springframework.mock.web </font></td></tr>

@@ -10,15 +10,15 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.connector.PreferencesConnectorTest
-	c819 [label=<<table title="org.settings4j.connector.PreferencesConnectorTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PreferencesConnectorTest.html">
+	c846 [label=<<table title="org.settings4j.connector.PreferencesConnectorTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PreferencesConnectorTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> PreferencesConnectorTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./PreferencesConnectorTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.connector.PreferencesConnectorTest extends junit.framework.TestCase
-	c839:p -> c819:p [dir=back,arrowtail=empty];
+	c866:p -> c846:p [dir=back,arrowtail=empty];
 	// junit.framework.TestCase
-	c839 [label=<<table title="junit.framework.TestCase" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://api.dpml.net/junit/3.8.1/junit/framework/TestCase.html">
+	c866 [label=<<table title="junit.framework.TestCase" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://api.dpml.net/junit/3.8.1/junit/framework/TestCase.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="arial italic"> TestCase </font></td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> junit.framework </font></td></tr>

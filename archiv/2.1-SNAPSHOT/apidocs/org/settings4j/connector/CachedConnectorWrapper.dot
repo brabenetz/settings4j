@@ -43,11 +43,11 @@ digraph G {
 	c1050:p -> c1037:p [dir=back,arrowtail=empty,style=dashed];
 	// org.settings4j.connector.CachedConnectorWrapper NAVASSOC org.settings4j.Connector
 	c1037:p -> c1050:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	// org.settings4j.connector.CachedConnectorWrapper DEPEND org.settings4j.ContentResolver
+	c1037:p -> c1046:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.connector.CachedConnectorWrapper DEPEND org.settings4j.Connector
 	c1037:p -> c1050:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.connector.CachedConnectorWrapper DEPEND org.settings4j.ObjectResolver
 	c1037:p -> c1044:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// org.settings4j.connector.CachedConnectorWrapper DEPEND org.settings4j.ContentResolver
-	c1037:p -> c1046:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

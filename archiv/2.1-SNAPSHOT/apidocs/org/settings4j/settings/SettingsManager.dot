@@ -31,9 +31,9 @@ digraph G {
 <tr><td align="center" balign="center"> SettingsManager </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SettingsManager.html", fontname="arial", fontcolor="black", fontsize=9.0];
-	// org.settings4j.settings.SettingsManager DEPEND org.settings4j.Settings4jInstance
-	c4270:p -> c4241:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.settings.SettingsManager DEPEND org.settings4j.Settings4jRepository
 	c4270:p -> c4240:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.settings.SettingsManager DEPEND org.settings4j.Settings4jInstance
+	c4270:p -> c4241:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 
