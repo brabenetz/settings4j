@@ -134,24 +134,28 @@
         <groupId>commons-configuration</groupId>
         <artifactId>commons-configuration</artifactId>
         <version>1.10</version>
+        <scope>provided</scope>
         <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>servlet-api</artifactId>
         <version>2.5</version>
+        <scope>provided</scope>
         <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>javax.transaction</groupId>
         <artifactId>jta</artifactId>
         <version>1.1</version>
+        <scope>provided</scope>
         <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>log4j</groupId>
         <artifactId>log4j</artifactId>
         <version>1.2.17</version>
+        <scope>provided</scope>
         <optional>true</optional>
       </dependency>
       <dependency>
@@ -159,6 +163,7 @@
         <artifactId>spring-beans</artifactId>
         <!-- springframework 4.0 requires JDK 6 -->
         <version>3.2.9.RELEASE</version>
+        <scope>provided</scope>
         <optional>true</optional>
       </dependency>
 
@@ -167,6 +172,7 @@
         <artifactId>spring-core</artifactId>
         <!-- springframework 4.0 requires JDK 6 -->
         <version>3.2.9.RELEASE</version>
+        <scope>provided</scope>
         <optional>true</optional>
       </dependency>
       <dependency>
@@ -174,12 +180,14 @@
         <artifactId>spring-jdbc</artifactId>
         <!-- springframework 4.0 requires JDK 6 -->
         <version>3.2.9.RELEASE</version>
+        <scope>provided</scope>
         <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-test</artifactId>
         <version>3.2.9.RELEASE</version>
+        <scope>provided</scope>
         <optional>true</optional>
       </dependency>
       <dependency>
@@ -187,6 +195,7 @@
         <artifactId>spring-web</artifactId>
         <!-- springframework 4.0 requires JDK 6 -->
         <version>3.2.9.RELEASE</version>
+        <scope>provided</scope>
         <optional>true</optional>
       </dependency>
 
@@ -194,6 +203,7 @@
         <groupId>taglibs</groupId>
         <artifactId>standard</artifactId>
         <version>1.1.2</version>
+        <scope>provided</scope>
         <optional>true</optional>
       </dependency>
       <dependency>
@@ -272,24 +282,28 @@
       <!-- required for org.settings4j.helper.configuration.* -->
       <groupId>commons-configuration</groupId>
       <artifactId>commons-configuration</artifactId>
+      <scope>provided</scope>
       <optional>true</optional>
     </dependency>
     <dependency>
       <!-- servlet-api for org.settings4j.helper.web.DefaultPropertiesLoaderListener -->
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
+      <scope>provided</scope>
       <optional>true</optional>
     </dependency>
     <dependency>
       <!-- log4j for org.settings4j.helper.web.Log4jConfigurationLoaderListener -->
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
+      <scope>provided</scope>
       <optional>true</optional>
     </dependency>
     <dependency>
       <!-- required for org.settings4j.helper.spring.* -->
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
+      <scope>provided</scope>
       <optional>true</optional>
     </dependency>
 
@@ -297,18 +311,21 @@
       <!-- required for org.settings4j.helper.spring.* -->
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
+      <scope>provided</scope>
       <optional>true</optional>
     </dependency>
     <dependency>
       <!-- required for org.settings4j.helper.spring.Settings4jContextLoaderListener -->
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
+      <scope>provided</scope>
       <optional>true</optional>
     </dependency>
     <dependency>
       <!-- taglibs-standard is used to interpret Expression Language like ${...} -->
       <groupId>taglibs</groupId>
       <artifactId>standard</artifactId>
+      <scope>provided</scope>
       <optional>true</optional>
     </dependency>
 
@@ -773,6 +790,11 @@
             <licenseName>apache_v2</licenseName>
             <verbose>false</verbose>
             <generateBundle>true</generateBundle>
+            <licenseMerges>
+              <licenseMerge>Apache License, Version 2.0|
+                The Apache Software License, Version 2.0</licenseMerge>
+            </licenseMerges>
+            <excludedScopes>test,provided</excludedScopes>
           </configuration>
         </plugin>
         <plugin>
@@ -828,6 +850,7 @@
                     <goals>
                       <goal>update-file-header</goal>
                       <goal>update-project-license</goal>
+                      <goal>add-third-party</goal>
                     </goals>
                   </pluginExecutionFilter>
                   <action>
@@ -868,6 +891,7 @@
             <goals>
               <goal>update-file-header</goal>
               <goal>update-project-license</goal>
+              <goal>add-third-party</goal>
             </goals>
             <phase>process-sources</phase>
           </execution>
