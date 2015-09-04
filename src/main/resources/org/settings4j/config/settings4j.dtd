@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
- Licensed to the Apache Software Foundation (ASF) under one or more
- contributor license agreements.  See the NOTICE file distributed with
- this work for additional information regarding copyright ownership.
- The ASF licenses this file to You under the Apache License, Version 2.0
- (the "License"); you may not use this file except in compliance with
- the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
--->
+  #%L
+  settings4j
+  ===============================================================
+  Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+  ===============================================================
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
 
 <!-- A configuration element consists of following elements:
 + connector - The Implementation where the Settings could come from. A settings4j.xml without connector makes no sense.
@@ -42,7 +45,7 @@ cached - default value is false; If true, then this connector will be wrapped
      with the org.settings4j.connector.CachedConnectorWrapper implementation.
 -->
 <!ELEMENT connector (param*,
-      contentResolver-ref?, objectResolver-ref?, connector-ref*)>
+      contentResolver-ref?, objectResolver-ref?, connector-ref*, filter?)>
 <!ATTLIST connector
   name     CDATA   #REQUIRED
   class    CDATA  #REQUIRED

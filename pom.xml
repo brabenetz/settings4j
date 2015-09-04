@@ -12,6 +12,11 @@
   <url>http://settings4j.org</url>
   <inceptionYear>2008</inceptionYear>
 
+  <organization>
+    <name>Brabenetz Harald, Austria</name>
+    <url>http://brabenetz.net</url>
+  </organization>
+
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -760,6 +765,34 @@
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
+          <artifactId>license-maven-plugin</artifactId>
+          <version>1.8</version>
+          <configuration>
+            <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+            <sectionDelimiter>===============================================================</sectionDelimiter>
+            <licenseName>apache_v2</licenseName>
+            <verbose>false</verbose>
+          </configuration>
+          <executions>
+            <execution>
+              <id>first</id>
+              <goals>
+                <goal>update-file-header</goal>
+              </goals>
+              <phase>process-sources</phase>
+              <configuration>
+                <!-- 
+                <roots>
+                  <root>src/main/java</root>
+                  <root>src/test</root>
+                </roots>
+                 -->
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
           <artifactId>taglist-maven-plugin</artifactId>
           <version>2.4</version>
           <configuration>
@@ -879,6 +912,10 @@
             </reports>
           </reportSet>
         </reportSets>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>license-maven-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>

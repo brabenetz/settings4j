@@ -1,28 +1,28 @@
-/* ***************************************************************************
- * Copyright (c) 2008 Brabenetz Harald, Austria.
- *
+/*
+ * #%L
+ * settings4j
+ * ===============================================================
+ * Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+ * ===============================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * 
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
- *****************************************************************************/
-
+ * #L%
+ */
 package org.settings4j.connector;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-
-import junit.framework.TestCase;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -32,6 +32,8 @@ import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.contentresolver.FSContentResolver;
 import org.settings4j.contentresolver.UnionContentResolver;
 
+import junit.framework.TestCase;
+
 public class SystemPropertyConnectorTest extends TestCase {
 
     /** General Logger for this Class. */
@@ -40,6 +42,7 @@ public class SystemPropertyConnectorTest extends TestCase {
     private File testDir;
 
     /** {@inheritDoc} */
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         this.testDir = (new File("test/ConnectorTest/".toLowerCase())).getAbsoluteFile();
@@ -47,6 +50,7 @@ public class SystemPropertyConnectorTest extends TestCase {
     }
 
     /** {@inheritDoc} */
+    @Override
     protected void tearDown() throws Exception {
         FileUtils.deleteDirectory(new File("test"));
         super.tearDown();
