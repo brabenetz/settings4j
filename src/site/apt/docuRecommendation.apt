@@ -1,3 +1,22 @@
+~~~
+~~ #%L
+~~ settings4j
+~~ ===============================================================
+~~ Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+~~ ===============================================================
+~~ Licensed under the Apache License, Version 2.0 (the "License");
+~~ you may not use this file except in compliance with the License.
+~~ You may obtain a copy of the License at
+~~ 
+~~      http://www.apache.org/licenses/LICENSE-2.0
+~~ 
+~~ Unless required by applicable law or agreed to in writing, software
+~~ distributed under the License is distributed on an "AS IS" BASIS,
+~~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~~ See the License for the specific language governing permissions and
+~~ limitations under the License.
+~~ #L%
+~~~
                                     ------------------
                                     Recommendation
                                     ------------------
@@ -20,17 +39,6 @@
    Use unique and meaningful names for your Keys (like your package-Name) e.g.: "com/mycompany/myapp/myKeyForNumberFormatting"
    
    Or at least your AppName:  e.g.: "MyPowerApp/myKeyForTheFormularToSolvingEveryThing"
-
-{Customized settings4j.xml}
-
-   settings4j.xml (accurate to log4j.xml) must be availabel inside the classpath.
-   But DO NOT put it into the resulting JAR of a Sub-Library.
-
-	 * On Webapps it could be placed on the Server (e.g.: %TOMCAT_HOME%/common/classes/).
-	
-	 * On commandline apps it should be placed on the FileSystem which is included into the classpath (e.g.: -cp ./config/ )
-
-	 * For UnitTests, you can but it into /src/test/resources/ (Maven Folder Structure)
 
 {What SHOULD be configured with Settings4j}
    

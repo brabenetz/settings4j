@@ -1,19 +1,22 @@
-/* ***************************************************************************
- * Copyright (c) 2008 Brabenetz Harald, Austria.
- *
+/*
+ * #%L
+ * settings4j
+ * ===============================================================
+ * Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+ * ===============================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *****************************************************************************/
+ * #L%
+ */
 package org.settings4j.connector;
 
 import java.util.Properties;
@@ -101,6 +104,8 @@ public class JNDIConnector extends AbstractConnector {
     private Boolean isJNDIAvailable;
 
     /** {@inheritDoc} */
+    // SuppressWarnings PMD.ReturnEmptyArrayRatherThanNull: returning null for this byte-Arrays is OK.
+    @SuppressWarnings("PMD.ReturnEmptyArrayRatherThanNull")
     public byte[] getContent(final String key) {
         final Object obj = lookupInContext(key);
         if (obj == null) {
@@ -205,7 +210,7 @@ public class JNDIConnector extends AbstractConnector {
                 this.isJNDIAvailable = Boolean.FALSE;
             } catch (final NamingException e) {
                 LOG.info("JNDI Context is available but {}", e.getMessage());
-                LOG.debug("NamingException in isJNDIAvailable: " + e.getMessage(), e);
+                LOG.debug("NamingException in isJNDIAvailable: {}", e.getMessage(), e);
                 this.isJNDIAvailable = Boolean.TRUE;
             }
         }
@@ -243,7 +248,7 @@ public class JNDIConnector extends AbstractConnector {
             LOG.info("Maybe no JNDI-Context available.");
             LOG.debug(e.getMessage(), e);
         } catch (final NamingException e) {
-            LOG.debug("cannot lookup key: " + key + " (" + normalizedKey + ")", e);
+            LOG.debug("cannot lookup key: {} ({})", key, normalizedKey, e);
             if (withPrefix) {
                 result = lookupInContext(key, false);
             }
@@ -252,7 +257,7 @@ public class JNDIConnector extends AbstractConnector {
                 try {
                     ctx.close();
                 } catch (final NamingException e) {
-                    LOG.info("cannot close context: " + key + " (" + normalizedKey + ")", e);
+                    LOG.info("cannot close context: {} ({})", key, normalizedKey, e);
                 }
             }
         }
@@ -296,7 +301,7 @@ public class JNDIConnector extends AbstractConnector {
                 try {
                     ctx.close();
                 } catch (final NamingException e) {
-                    LOG.info("cannot close context: " + key, e);
+                    LOG.info("cannot close context: {}", key, e);
                 }
             }
         }
@@ -349,14 +354,17 @@ public class JNDIConnector extends AbstractConnector {
 
         normalizeKey = normalizeKey.replace('\\', '/');
 
-        if (normalizeKey.startsWith("/")) {
+        if (startsWithSlash(normalizeKey)) {
             normalizeKey = normalizeKey.substring(1);
         }
         if (withPrefix) {
             return this.contextPathPrefix + normalizeKey;
-        } else {
-            return normalizeKey;
         }
+        return normalizeKey;
+    }
+
+    private boolean startsWithSlash(final String normalizeKey) {
+        return normalizeKey.charAt(0) == '/';
     }
 
     public String getContextPathPrefix() {

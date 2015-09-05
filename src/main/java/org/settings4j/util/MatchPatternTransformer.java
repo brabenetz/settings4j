@@ -1,20 +1,22 @@
-/* ***************************************************************************
- * Copyright (c) 2008 Brabenetz Harald, Austria.
- *
+/*
+ * #%L
+ * settings4j
+ * ===============================================================
+ * Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+ * ===============================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * 
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
- *****************************************************************************/
-
+ * #L%
+ */
 package org.settings4j.util;
 
 import java.util.regex.Matcher;
@@ -25,10 +27,10 @@ import org.apache.commons.collections4.Transformer;
 /**
  * This Transformer implements the function for a {@link org.apache.commons.collections4.map.LazyMap}
  * with Key=String (=RegEx) and Value=Boolean (=Result).
- * 
+ *
  * <pre>
  * Example:
- * 
+ *
  * &lt;%
  * request.setAttribute("matchPatternMap", LazyMap.decorate(new HashMap(), new MatchPatternTransformer("testString")));
  * %&gt;
@@ -42,7 +44,7 @@ import org.apache.commons.collections4.Transformer;
  *   &lt;/body&gt;
  * &lt;html&gt;
  * </pre>
- * 
+ *
  * @see java.util.regex.Pattern
  * @author Harald.Brabenetz
  */
@@ -63,10 +65,9 @@ public class MatchPatternTransformer implements Transformer<String, Boolean> {
 
 
     /** {@inheritDoc} */
-    public Boolean transform(final String input) {
+    public Boolean transform(final String patternString) {
         Boolean result = Boolean.FALSE;
-        if (input != null) {
-            final String patternString = input.toString();
+        if (patternString != null) {
             try {
                 final Pattern pattern = Pattern.compile(patternString);
                 final Matcher matcher = pattern.matcher(this.compareValue);
@@ -78,8 +79,7 @@ public class MatchPatternTransformer implements Transformer<String, Boolean> {
                     LOG.debug("FALSE - do not found '{}' in '{}'", patternString, this.compareValue);
                 }
             } catch (final Exception e) {
-                LOG.warn("Cann't matche Pattern '" + patternString + "' with compareValue '" + this.compareValue + "'",
-                    e);
+                LOG.warn("Cann't matche Pattern '{}' with compareValue '{}'", patternString, this.compareValue, e);
                 result = Boolean.FALSE;
             }
         }

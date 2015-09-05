@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
- Licensed to the Apache Software Foundation (ASF) under one or more
- contributor license agreements.  See the NOTICE file distributed with
- this work for additional information regarding copyright ownership.
- The ASF licenses this file to You under the Apache License, Version 2.0
- (the "License"); you may not use this file except in compliance with
- the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
--->
+  #%L
+  settings4j
+  ===============================================================
+  Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+  ===============================================================
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
 
 <!-- A configuration element consists of following elements:
 + connector - The Implementation where the Settings could come from. A settings4j.xml without connector makes no sense.
@@ -42,10 +45,10 @@ cached - default value is false; If true, then this connector will be wrapped
      with the org.settings4j.connector.CachedConnectorWrapper implementation.
 -->
 <!ELEMENT connector (param*,
-      contentResolver-ref?, objectResolver-ref?, connector-ref*)>
+      contentResolver-ref?, objectResolver-ref?, connector-ref*, filter?)>
 <!ATTLIST connector
-  name 		CDATA 	#REQUIRED
-  class 	CDATA	#REQUIRED
+  name     CDATA   #REQUIRED
+  class    CDATA  #REQUIRED
   cached (true|false) "false"
 >
 
@@ -54,7 +57,7 @@ ref - The refernece to a connector element
 -->
 <!ELEMENT connector-ref EMPTY>
 <!ATTLIST connector-ref
-  ref CDATA #REQUIRED
+  ref  CDATA #REQUIRED
 >
 
 <!-- A contentResolver-ref element consists of following Attributes:
@@ -62,7 +65,7 @@ ref - The refernece to a contentResolver element
 -->
 <!ELEMENT contentResolver-ref EMPTY>
 <!ATTLIST contentResolver-ref
-  ref CDATA #REQUIRED
+  ref  CDATA #REQUIRED
 >
 
 <!-- A objectResolver-ref element consists of following Attributes:
@@ -70,7 +73,7 @@ ref - The refernece to a objectResolver element
 -->
 <!ELEMENT objectResolver-ref EMPTY>
 <!ATTLIST objectResolver-ref
-  ref CDATA #REQUIRED
+  ref  CDATA #REQUIRED
 >
 
 <!-- A param element consists of following Attributes:
@@ -87,8 +90,8 @@ If you use the Expression Language, you have the following implicied Objects:
 -->
 <!ELEMENT param EMPTY>
 <!ATTLIST param
-  name		CDATA   #REQUIRED
-  value		CDATA	#REQUIRED
+  name     CDATA   #REQUIRED
+  value    CDATA  #REQUIRED
 >
 
 
@@ -104,8 +107,8 @@ class - The implementation class of this org.settings4j.ContentResolver interfac
 -->
 <!ELEMENT contentResolver (param*, contentResolver-ref*)>
 <!ATTLIST contentResolver
-  name 		CDATA 	#REQUIRED
-  class 	CDATA	#REQUIRED
+  name     CDATA   #REQUIRED
+  class    CDATA  #REQUIRED
 >
 
 <!-- A objectResolver element consists of following elements:
@@ -123,8 +126,8 @@ cached - default value is false; If true, the Objects will be cached per default
 -->
 <!ELEMENT objectResolver (param*, objectResolver-ref*)>
 <!ATTLIST objectResolver
-  name 		CDATA 	#REQUIRED
-  class 	CDATA	#REQUIRED
+  name     CDATA   #REQUIRED
+  class    CDATA  #REQUIRED
   cached (true|false) "false"
 >
 
@@ -132,8 +135,8 @@ cached - default value is false; If true, the Objects will be cached per default
 -->
 <!ELEMENT mapping (entry*)>
 <!ATTLIST mapping
-  name 		CDATA 	#REQUIRED
-  class 	CDATA   "java.util.HashMap"	
+  name     CDATA   #REQUIRED
+  class    CDATA   "java.util.HashMap"  
 >
 
 <!-- 
@@ -147,15 +150,15 @@ but you must only define/configure one DataSource under "global/DataSource".
 -->
 <!ELEMENT entry EMPTY>
 <!ATTLIST entry
-  key 		CDATA 	#REQUIRED
-  ref-key 	CDATA 	#REQUIRED
+  key       CDATA   #REQUIRED
+  ref-key   CDATA   #REQUIRED
 >
 
 <!-- 
 -->
 <!ELEMENT filter (include*, exclude*)>
 <!ATTLIST filter
-  class 	CDATA   "org.settings4j.settings.DefaultFilter"	
+  class   CDATA   "org.settings4j.settings.DefaultFilter"  
 >
 
 <!-- 
@@ -164,7 +167,7 @@ Example:
 -->
 <!ELEMENT include EMPTY>
 <!ATTLIST include
-  pattern 		CDATA 	#REQUIRED
+  pattern     CDATA   #REQUIRED
 >
 
 <!-- 
@@ -173,5 +176,5 @@ Example:
 -->
 <!ELEMENT exclude EMPTY>
 <!ATTLIST exclude
-  pattern 		CDATA 	#REQUIRED
+  pattern     CDATA   #REQUIRED
 >

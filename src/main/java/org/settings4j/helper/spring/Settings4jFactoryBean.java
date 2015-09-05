@@ -1,19 +1,22 @@
-/* ***************************************************************************
- * Copyright (c) 2008 Brabenetz Harald, Austria.
- *
+/*
+ * #%L
+ * settings4j
+ * ===============================================================
+ * Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+ * ===============================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *****************************************************************************/
+ * #L%
+ */
 package org.settings4j.helper.spring;
 
 import org.settings4j.Settings4j;
@@ -30,18 +33,18 @@ import org.springframework.beans.factory.InitializingBean;
  * e.g.: System.setProperty("env/MyVariable", "Hallo World");<br>
  * OR with JNDI-Context OR in a Classpath-File under "classpath:env/MyVariable" Or with a custom {@link org.settings4j.Connector}-Implementation.
  * </p>
- * 
+ *
  * <pre>
  *  &lt;bean id="MyConfigurableValue" class="org.settings4j.helper.spring.Settings4jFactoryBean"&gt;
  *      &lt;property name="key"&gt;&lt;value&gt;<b>env/MyVariable</b>&lt;/value&gt;&lt;/property&gt;
  *  &lt;/bean&gt;
  * </pre>
- * 
+ *
  * <h2>More complex SpringBean Example:</h2>
  * <p>
  * This Example shows how a Hibernate SessionFactory can optional customized with additional HibernateProperties.
  * </p>
- * 
+ *
  * <pre>
  *  &lt;bean id="hibernateProperties"
  *      class="org.springframework.beans.factory.config.PropertiesFactoryBean"&gt;
@@ -71,13 +74,13 @@ import org.springframework.beans.factory.InitializingBean;
  *
  * @author Harald.Brabenetz
  */
-public class Settings4jFactoryBean implements FactoryBean, InitializingBean {
+public class Settings4jFactoryBean implements FactoryBean<Object>, InitializingBean {
 
     private String key;
     private boolean singleton = true;
     private Object singletonObject;
     private Object defaultObject;
-    private Class expectedType;
+    private Class<?> expectedType;
 
     public String getKey() {
         return this.key;
@@ -103,7 +106,7 @@ public class Settings4jFactoryBean implements FactoryBean, InitializingBean {
      *
      * @param expectedType the expected {@link Class}.
      */
-    public void setExpectedType(final Class expectedType) {
+    public void setExpectedType(final Class<?> expectedType) {
         this.expectedType = expectedType;
     }
 
@@ -112,7 +115,7 @@ public class Settings4jFactoryBean implements FactoryBean, InitializingBean {
      *
      * @return the type that the configured object is supposed to be assignable to.
      */
-    public Class getExpectedType() {
+    public Class<?> getExpectedType() {
         return this.expectedType;
     }
 
@@ -135,7 +138,7 @@ public class Settings4jFactoryBean implements FactoryBean, InitializingBean {
     }
 
     /** {@inheritDoc} */
-    public Class getObjectType() {
+    public Class<?> getObjectType() {
         final Object obj = getObject();
         if (obj != null) {
             return obj.getClass();

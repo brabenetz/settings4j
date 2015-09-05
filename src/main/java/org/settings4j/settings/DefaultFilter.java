@@ -1,19 +1,22 @@
-/* ***************************************************************************
- * Copyright (c) 2008 Brabenetz Harald, Austria.
- *
+/*
+ * #%L
+ * settings4j
+ * ===============================================================
+ * Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+ * ===============================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * 
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
- *****************************************************************************/
+ * #L%
+ */
 package org.settings4j.settings;
 
 import java.util.ArrayList;
@@ -24,7 +27,7 @@ import org.settings4j.Filter;
 
 /**
  * The Default Implementation uses the RegEx-{@link Pattern} Expressions to evaluate the includes and excludes.
- * 
+ *
  * @author Harald.Brabenetz
  */
 public class DefaultFilter implements Filter {
@@ -41,7 +44,7 @@ public class DefaultFilter implements Filter {
             final Pattern p = Pattern.compile(pattern);
             this.excludePatterns.add(p);
         } catch (final Exception e) {
-            LOG.warn("cannnot compile Pattern-String '" + pattern + "'" + e.getMessage(), e);
+            LOG.warn("cannnot compile Pattern-String '{}': {}", pattern, e.getMessage(), e);
         }
     }
 
@@ -51,7 +54,7 @@ public class DefaultFilter implements Filter {
             final Pattern p = Pattern.compile(pattern);
             this.includePatterns.add(p);
         } catch (final Exception e) {
-            LOG.warn("cannnot compile Pattern-String '" + pattern + "'" + e.getMessage(), e);
+            LOG.warn("cannnot compile Pattern-String '{}': {}", pattern, e.getMessage(), e);
         }
     }
 

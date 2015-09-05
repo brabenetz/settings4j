@@ -1,26 +1,29 @@
-/* ***************************************************************************
- * Copyright (c) 2008 Brabenetz Harald, Austria.
- *
+/*
+ * #%L
+ * settings4j
+ * ===============================================================
+ * Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+ * ===============================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *****************************************************************************/
-
+ * #L%
+ */
 package org.settings4j.connector;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.Validate;
 import org.settings4j.Connector;
 import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
@@ -47,51 +50,40 @@ public class CachedConnectorWrapper implements Connector {
      */
     public CachedConnectorWrapper(final Connector targetConnector) {
         super();
+        Validate.notNull(targetConnector, "CachedConnectorWrapper needs a Connector Object");
         this.targetConnector = targetConnector;
     }
 
     /** {@inheritDoc} */
     public byte[] getContent(final String key) {
-        byte[] result = this.cachedContents.get(key);
-        if (result != null) {
-            return result;
+        if (this.cachedContents.containsKey(key)) {
+            return this.cachedContents.get(key);
         }
 
-        result = this.targetConnector.getContent(key);
-
-        if (result != null) {
-            this.cachedContents.put(key, result);
-        }
+        final byte[] result = this.targetConnector.getContent(key);
+        this.cachedContents.put(key, result);
         return result;
     }
 
     /** {@inheritDoc} */
     public Object getObject(final String key) {
-        Object result = this.cachedObjects.get(key);
-        if (result != null) {
-            return result;
+        if (this.cachedObjects.containsKey(key)) {
+            return this.cachedObjects.get(key);
         }
 
-        result = this.targetConnector.getObject(key);
-
-        if (result != null) {
-            this.cachedObjects.put(key, result);
-        }
+        final Object result = this.targetConnector.getObject(key);
+        this.cachedObjects.put(key, result);
         return result;
     }
 
     /** {@inheritDoc} */
     public String getString(final String key) {
-        String result = this.cachedStrings.get(key);
-        if (result != null) {
-            return result;
+        if (this.cachedStrings.containsKey(key)) {
+            return this.cachedStrings.get(key);
         }
 
-        result = this.targetConnector.getString(key);
-
-        if (result != null) {
-            this.cachedStrings.put(key, result);
-        }
+        final String result = this.targetConnector.getString(key);
+        this.cachedStrings.put(key, result);
         return result;
     }
 

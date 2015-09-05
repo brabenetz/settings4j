@@ -1,19 +1,22 @@
-/* ***************************************************************************
- * Copyright (c) 2008 Brabenetz Harald, Austria.
- *
+/*
+ * #%L
+ * settings4j
+ * ===============================================================
+ * Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+ * ===============================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *****************************************************************************/
+ * #L%
+ */
 package org.settings4j.contentresolver;
 
 import java.io.File;
@@ -51,30 +54,39 @@ public class FSContentResolver implements ContentResolver {
     }
 
     /** {@inheritDoc} */
+    // SuppressWarnings PMD.ReturnEmptyArrayRatherThanNull: returning null for this byte-Arrays is OK.
+    @SuppressWarnings("PMD.ReturnEmptyArrayRatherThanNull")
     public byte[] getContent(final String key) {
         String normalizedKey = key;
         if (normalizedKey.startsWith(FILE_URL_PREFIX)) {
             normalizedKey = normalizedKey.substring(FILE_URL_PREFIX.length());
         }
 
-        File file = new File(normalizedKey);
+        if (isUnixRoot(normalizedKey) || isWindowsRoot(normalizedKey)) {
+            // try to read it as full qualified path.
+            final byte[] content = getContent(new File(normalizedKey));
+            if (content != null) {
+                return content;
+            }
+        }
+
+        final byte[] content = getContent(new File(getRootFolder(), normalizedKey));
+        if (content != null) {
+            return content;
+        }
+        return null;
+    }
+
+    private byte[] getContent(final File file) {
+        byte[] content = null;
         if (file.exists()) {
             try {
-                return FileUtils.readFileToByteArray(file);
+                content = FileUtils.readFileToByteArray(file);
             } catch (final IOException e) {
                 LOG.info(e.getMessage(), e);
             }
-        } else {
-            file = new File(getRootFolder(), normalizedKey);
-            if (file.exists()) {
-                try {
-                    return FileUtils.readFileToByteArray(file);
-                } catch (final IOException e) {
-                    LOG.info(e.getMessage(), e);
-                }
-            }
         }
-        return null;
+        return content;
     }
 
 
@@ -92,20 +104,25 @@ public class FSContentResolver implements ContentResolver {
             normalizedKey = key;
         }
 
-        File file;
-
-        if (normalizedKey.startsWith("/")) {
+        if (isUnixRoot(normalizedKey) || isWindowsRoot(normalizedKey)) {
             // Unix-Root
-            file = new File(normalizedKey);
-        } else if (normalizedKey.indexOf(':') >= 0) {
-            // Windows-Root
-            file = new File(normalizedKey);
-        } else {
-            file = new File(getRootFolder(), normalizedKey);
+            throw new IllegalArgumentException(String.format(
+                "The FSContentResolver can only store content relative to '%s' and not an absolute URL like '%s'.",
+                getRootFolder().getCanonicalPath(), key));
         }
+
+        final File file = new File(getRootFolder(), normalizedKey);
         LOG.debug("Store content in: {}", file.getAbsolutePath());
 
         FileUtils.writeByteArrayToFile(file, value);
+    }
+
+    private boolean isWindowsRoot(final String normalizedKey) {
+        return normalizedKey.indexOf(':') >= 0;
+    }
+
+    private boolean isUnixRoot(final String normalizedKey) {
+        return normalizedKey.startsWith("/");
     }
 
     /**
@@ -119,8 +136,7 @@ public class FSContentResolver implements ContentResolver {
     public File getRootFolder() {
         if (this.rootFolder == null) {
             this.rootFolder = new File(".");
-            LOG.info("FSContentResolver.rootFolder is null. " //
-                + "The RootPath Folder will be used: " + this.rootFolder.getAbsolutePath());
+            LOG.info("FSContentResolver.rootFolder is null. The RootPath Folder will be used: {}", this.rootFolder.getAbsolutePath());
         }
         return this.rootFolder;
     }
@@ -134,9 +150,10 @@ public class FSContentResolver implements ContentResolver {
             try {
                 FileUtils.forceMkdir(newRootFolder);
                 this.rootFolder = newRootFolder;
-                LOG.info("Set RootPath for FSConntentResolver: {}", newRootFolder.getAbsolutePath());
+                LOG.info("Unable to create RootFolder for FSConntentResolver: {}", newRootFolder.getAbsolutePath());
             } catch (final IOException e) {
                 LOG.warn("cannot create rootFolder: {}!", rootFolderPath, e);
+                throw new IllegalArgumentException(String.format("Unable to create RootFolder: '%s'!", rootFolderPath), e);
             }
         } else {
             this.rootFolder = newRootFolder;

@@ -1,19 +1,22 @@
-/* ***************************************************************************
- * Copyright (c) 2008 Brabenetz Harald, Austria.
- *
+/*
+ * #%L
+ * settings4j
+ * ===============================================================
+ * Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+ * ===============================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *****************************************************************************/
+ * #L%
+ */
 package org.settings4j.config;
 
 import java.beans.PropertyDescriptor;
@@ -60,6 +63,9 @@ import org.xml.sax.SAXException;
  * @author Harald.Brabenetz
  */
 public class DOMConfigurator {
+
+    private static final String LOG_DEBUG_CONNECTOR_REF = "{} is only parsed for the RegularExpression Context " //
+        + "or init-Method. See org.settings4j.Connector.addConnector(Connector) Javadoc.";
 
     /** General Logger for this Class. */
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DOMConfigurator.class);
@@ -108,7 +114,6 @@ public class DOMConfigurator {
 
     private static final String DOCUMENT_BUILDER_FACTORY_KEY = "javax.xml.parsers.DocumentBuilderFactory";
 
-
     // key: ConnectorName, value: Connector
     private final Map<String, Connector> connectorBag;
     // key: contentResolver-Name, value: ContentResolver
@@ -122,7 +127,9 @@ public class DOMConfigurator {
 
     /**
      * Configure the given Settings4jRepository with an XMl-configuration (see settings4j.dtd).
-     * @param repository The Repository to configure.
+     *
+     * @param repository
+     *        The Repository to configure.
      */
     public DOMConfigurator(final Settings4jRepository repository) {
         super();
@@ -135,9 +142,12 @@ public class DOMConfigurator {
     /**
      * Sets a parameter based from configuration file content.
      *
-     * @param elem param element, may not be null.
-     * @param propSetter property setter, may not be null.
-     * @param props properties
+     * @param elem
+     *        param element, may not be null.
+     * @param propSetter
+     *        property setter, may not be null.
+     * @param props
+     *        properties
      */
     private void setParameter(final Element elem, final Object bean, final Connector[] connectors) {
         final String name = elem.getAttribute(NAME_ATTR);
@@ -153,20 +163,23 @@ public class DOMConfigurator {
             }
             PropertyUtils.setProperty(bean, name, value);
         } catch (final IllegalAccessException e) {
-            LOG.warn("Cannnot set Property: " + name, e);
+            LOG.warn("Cannnot set Property: {}", name, e);
         } catch (final InvocationTargetException e) {
-            LOG.warn("Cannnot set Property: " + name, e);
+            LOG.warn("Cannnot set Property: {}", name, e);
         } catch (final NoSuchMethodException e) {
-            LOG.warn("Cannnot set Property: " + name, e);
+            LOG.warn("Cannnot set Property: {}", name, e);
         }
     }
 
     /**
      * A static version of {@link #doConfigure(URL)}.
      *
-     * @param url The location of the configuration file.
-     * @param repository the Repository to configure.
-     * @throws FactoryConfigurationError if {@link DocumentBuilderFactory#newInstance()} throws an exception.
+     * @param url
+     *        The location of the configuration file.
+     * @param repository
+     *        the Repository to configure.
+     * @throws FactoryConfigurationError
+     *         if {@link DocumentBuilderFactory#newInstance()} throws an exception.
      */
     public static void configure(//
         final URL url, final Settings4jRepository repository) throws FactoryConfigurationError {
@@ -174,7 +187,8 @@ public class DOMConfigurator {
     }
 
     /**
-     * @param url The location of the configuration file.
+     * @param url
+     *        The location of the configuration file.
      */
     public void doConfigure(final URL url) {
         final ParseAction action = new ParseAction() {
@@ -216,15 +230,16 @@ public class DOMConfigurator {
             parse(doc.getDocumentElement());
         } catch (final Exception e) {
             // I know this is miserable...
-            LOG.error("Could not parse " + action.toString() + ".", e);
+            LOG.error("Could not parse {}.", action.toString(), e);
         }
     }
 
     /**
-     * Used internally to configure the settings4j framework by parsing a DOM tree of XML elements based on <a
-     * href="doc-files/settings4j.dtd">settings4j.dtd</a>.
+     * Used internally to configure the settings4j framework by parsing a DOM tree of XML elements based on
+     * <a href="doc-files/settings4j.dtd">settings4j.dtd</a>.
      *
-     * @param element The XML {@link #CONFIGURATION_TAG} Element.
+     * @param element
+     *        The XML {@link #CONFIGURATION_TAG} Element.
      */
     protected void parse(final Element element) {
 
@@ -245,13 +260,13 @@ public class DOMConfigurator {
     /**
      * Used internally to parse an Filter element.
      *
-     * @param filterElement the XML-Element for Filter.
+     * @param filterElement
+     *        the XML-Element for Filter.
      * @return the Filter-Object
      */
     protected Filter parseFilter(final Element filterElement) {
 
         Filter filter;
-
 
         String className = filterElement.getAttribute(CLASS_ATTR);
         if (StringUtils.isEmpty(className)) {
@@ -260,11 +275,11 @@ public class DOMConfigurator {
 
         LOG.debug("Desired Connector class: [{}]", className);
         try {
-            final Class clazz = loadClass(className);
-            final Constructor constructor = clazz.getConstructor();
+            final Class<?> clazz = loadClass(className);
+            final Constructor<?> constructor = clazz.getConstructor();
             filter = (Filter) constructor.newInstance();
         } catch (final Exception oops) {
-            LOG.error("Could not retrieve connector [filter: " + className + "]. Reported error follows.", oops);
+            LOG.error("Could not retrieve connector [filter: {}]. Reported error follows.", className, oops);
             return null;
         }
 
@@ -299,7 +314,8 @@ public class DOMConfigurator {
     /**
      * Used internally to parse an connector element.
      *
-     * @param connectorElement The XML Connector Element
+     * @param connectorElement
+     *        The XML Connector Element
      * @return the Connector Object.
      */
     protected Connector parseConnector(final Element connectorElement) {
@@ -309,21 +325,20 @@ public class DOMConfigurator {
 
         final String className = connectorElement.getAttribute(CLASS_ATTR);
 
-
         LOG.debug("Desired Connector class: [{}]", className);
         try {
-            final Class clazz = loadClass(className);
-            final Constructor constructor = clazz.getConstructor();
+            final Class<?> clazz = loadClass(className);
+            final Constructor<?> constructor = clazz.getConstructor();
             connector = (Connector) constructor.newInstance();
         } catch (final Exception oops) {
-            LOG.error("Could not retrieve connector [" + connectorName + "]. Reported error follows.", oops);
+            LOG.error("Could not retrieve connector [{}]. Reported error follows.", connectorName, oops);
             return null;
         }
 
         connector.setName(connectorName);
 
         final Connector[] subConnectors = getConnectors(connectorElement);
-        for (Connector subConnector : subConnectors) {
+        for (final Connector subConnector : subConnectors) {
             connector.addConnector(subConnector);
         }
 
@@ -344,9 +359,7 @@ public class DOMConfigurator {
                     final String tagName = currentElement.getTagName();
 
                     if (tagName.equals(CONNECTOR_REF_TAG)) {
-                        LOG.debug("{} is only parsed for the RegularExpression Context " //
-                            + "or init-Method. See org.settings4j.Connector.addConnector(Connector) Javadoc.", //
-                            CONNECTOR_REF_TAG);
+                        LOG.debug(LOG_DEBUG_CONNECTOR_REF, CONNECTOR_REF_TAG);
                     } else if (tagName.equals(CONTENT_RESOLVER_REF_TAG)) {
                         final Element contentResolverRef = (Element) currentNode;
                         final ContentResolver contentResolver = findContentResolverByReference(contentResolverRef);
@@ -368,8 +381,7 @@ public class DOMConfigurator {
                 }
             }
 
-            final Boolean cached = (Boolean) subst(connectorElement.getAttribute(CACHED_ATTR), subConnectors,
-                Boolean.class);
+            final Boolean cached = (Boolean) subst(connectorElement.getAttribute(CACHED_ATTR), subConnectors, Boolean.class);
             if (cached != null && cached.booleanValue()) {
                 connector = new CachedConnectorWrapper(connector);
             }
@@ -387,8 +399,10 @@ public class DOMConfigurator {
     /**
      * Only logs out unrecognized Elements.
      *
-     * @param instance instance, may be null.
-     * @param element element, may not be null.
+     * @param instance
+     *        instance, may be null.
+     * @param element
+     *        element, may not be null.
      */
     private static void quietParseUnrecognizedElement(final Object instance, final Element element) {
         String elementName = "UNKNOWN";
@@ -407,7 +421,8 @@ public class DOMConfigurator {
     /**
      * Return all referenced connectors from Child-Nodes {@link #CONNECTOR_REF_TAG}.
      *
-     * @param connectorsElement The XML Connectors Element
+     * @param connectorsElement
+     *        The XML Connectors Element
      * @return the Connectors Objects as Array.
      */
     protected Connector[] getConnectors(final Element connectorsElement) {
@@ -434,12 +449,13 @@ public class DOMConfigurator {
         return connectors.toArray(new Connector[connectors.size()]);
     }
 
-
     /**
      * Used internally to parse the children of a settings element.
      *
-     * @param settingsElement The XML Settings Element
-     * @param settings _The Settings Object do apply the values.
+     * @param settingsElement
+     *        The XML Settings Element
+     * @param settings
+     *        _The Settings Object do apply the values.
      */
     protected void parseChildrenOfSettingsElement(final Element settingsElement, final Settings4jInstance settings) {
 
@@ -479,7 +495,7 @@ public class DOMConfigurator {
                 tagName = currentElement.getTagName();
 
                 if (tagName.equals(MAPPING_TAG)) {
-                    final Map mapping = parseMapping(currentElement);
+                    final Map<String, String> mapping = parseMapping(currentElement);
                     if (mapping != null) {
                         settings.setMapping(mapping);
                     }
@@ -498,12 +514,13 @@ public class DOMConfigurator {
         }
     }
 
-
     /**
      * Used internally to parse connectors by IDREF name.
      *
-     * @param doc The whole XML configuration.
-     * @param connectorName The Connector-Name, to search for.
+     * @param doc
+     *        The whole XML configuration.
+     * @param connectorName
+     *        The Connector-Name, to search for.
      * @return the Connector instance.
      */
     protected Connector findConnectorByName(final Document doc, final String connectorName) {
@@ -528,7 +545,8 @@ public class DOMConfigurator {
     /**
      * Used internally to parse connectors by IDREF element.
      *
-     * @param connectorRef The Element with the {@link #REF_ATTR} - Attribute.
+     * @param connectorRef
+     *        The Element with the {@link #REF_ATTR} - Attribute.
      * @return the Connector instance.
      */
     protected Connector findConnectorByReference(final Element connectorRef) {
@@ -537,11 +555,11 @@ public class DOMConfigurator {
         return findConnectorByName(doc, connectorName);
     }
 
-
     /**
      * Used internally to parse an objectResolver element.
      *
-     * @param objectResolverElement The XML Object resolver Element.
+     * @param objectResolverElement
+     *        The XML Object resolver Element.
      * @return The ObjectResolver instance.
      */
     protected ObjectResolver parseObjectResolver(final Element objectResolverElement) {
@@ -551,19 +569,17 @@ public class DOMConfigurator {
 
         final String className = objectResolverElement.getAttribute(CLASS_ATTR);
 
-
         LOG.debug("Desired ObjectResolver class: [{}]", className);
         try {
-            final Class clazz = loadClass(className);
-            final Constructor constructor = clazz.getConstructor();
+            final Class<?> clazz = loadClass(className);
+            final Constructor<?> constructor = clazz.getConstructor();
             objectResolver = (ObjectResolver) constructor.newInstance();
         } catch (final Exception oops) {
-            LOG.error("Could not retrieve objectResolver [" + objectResolverName + "]. Reported error follows.", oops);
+            LOG.error("Could not retrieve objectResolver [{}]. Reported error follows.", objectResolverName, oops);
             return null;
         } catch (final NoClassDefFoundError e) {
-            LOG.warn("The ObjectResolver '" + objectResolverName
-                + "' cannot be created. There are not all required Libraries inside the Classpath: " + e.getMessage(),
-                e);
+            LOG.warn("The ObjectResolver '{}' cannot be created. There are not all required Libraries inside the Classpath: {}", objectResolverName,
+                e.getMessage(), e);
             return null;
         }
 
@@ -586,11 +602,8 @@ public class DOMConfigurator {
                     final Element currentElement = (Element) currentNode;
                     final String tagName = currentElement.getTagName();
 
-
                     if (tagName.equals(CONNECTOR_REF_TAG)) {
-                        LOG.debug("{} is only parsed for the RegularExpression Context. " //
-                            + "See org.settings4j.Connector.addConnector(Connector) Javadoc.", //
-                            CONNECTOR_REF_TAG);
+                        LOG.debug(LOG_DEBUG_CONNECTOR_REF, CONNECTOR_REF_TAG);
                     } else if (tagName.equals(OBJECT_RESOLVER_REF_TAG)) {
                         final Element objectResolverRef = (Element) currentNode;
                         final ObjectResolver subObjectResolver = findObjectResolverByReference(objectResolverRef);
@@ -607,7 +620,7 @@ public class DOMConfigurator {
                 }
             }
 
-            String isCachedValue = objectResolverElement.getAttribute(CACHED_ATTR);
+            final String isCachedValue = objectResolverElement.getAttribute(CACHED_ATTR);
             final Boolean isCached = (Boolean) subst(isCachedValue, null, Boolean.class);
             if (BooleanUtils.isTrue(isCached)) {
                 if (objectResolver instanceof AbstractObjectResolver) {
@@ -626,15 +639,15 @@ public class DOMConfigurator {
         return objectResolver;
     }
 
-
     /**
      * Used internally to parse an mapping element.
      *
-     * @param mappingElement The XML Mapping Element.
+     * @param mappingElement
+     *        The XML Mapping Element.
      * @return the Map instance (Key = String; Value = String).
      */
     @SuppressWarnings("unchecked")
-    protected Map parseMapping(final Element mappingElement) {
+    protected Map<String, String> parseMapping(final Element mappingElement) {
         final String mappingName = mappingElement.getAttribute(NAME_ATTR);
 
         Map<String, String> mapping;
@@ -646,16 +659,14 @@ public class DOMConfigurator {
 
         LOG.debug("Desired Map class: [{}]", className);
         try {
-            final Class clazz = loadClass(className);
-            final Constructor constructor = clazz.getConstructor();
+            final Class<?> clazz = loadClass(className);
+            final Constructor<?> constructor = clazz.getConstructor();
             mapping = (Map<String, String>) constructor.newInstance();
-        } catch (final Exception oops) {
-            LOG.error("Could not retrieve mapping [" + mappingName + "]. Reported error follows.", oops);
+        } catch (final Exception e) {
+            LOG.error("Could not retrieve mapping [{}]. Reported error follows.", mappingName, e);
             return null;
         } catch (final NoClassDefFoundError e) {
-            LOG.warn("The Mapping '" + mappingName
-                + "' cannot be created. There are not all required Libraries inside the Classpath: " + e.getMessage(),
-                e);
+            LOG.warn("The Mapping '{}' cannot be created. There are not all required Libraries inside the Classpath: {}", mappingName, e.getMessage(), e);
             return null;
         }
 
@@ -688,11 +699,11 @@ public class DOMConfigurator {
         return mapping;
     }
 
-
     /**
      * Used internally to parse an contentResolver element.
      *
-     * @param contentResolverElement The ContentResolver Element.
+     * @param contentResolverElement
+     *        The ContentResolver Element.
      * @return the ContentResolver instance.
      */
     protected ContentResolver parseContentResolver(final Element contentResolverElement) {
@@ -702,19 +713,17 @@ public class DOMConfigurator {
 
         final String className = contentResolverElement.getAttribute(CLASS_ATTR);
 
-
         LOG.debug("Desired ContentResolver class: [{}]", className);
         try {
-            final Class clazz = loadClass(className);
-            final Constructor constructor = clazz.getConstructor();
+            final Class<?> clazz = loadClass(className);
+            final Constructor<?> constructor = clazz.getConstructor();
             contentResolver = (ContentResolver) constructor.newInstance();
         } catch (final Exception e) {
-            LOG.error("Could not retrieve contentResolver [" + contentResolverName + "]. " //
-                + "Reported error follows.", e);
+            LOG.error("Could not retrieve contentResolver [{}]. Reported error follows.", contentResolverName, e);
             return null;
         } catch (final NoClassDefFoundError e) {
-            LOG.warn("The ContentResolver '" + contentResolverName + "' cannot be created. " //
-                + "There are not all required Libraries inside the Classpath: " + e.getMessage(), e);
+            LOG.warn("The ContentResolver '{}' cannot be created. There are not all required Libraries inside the Classpath: {}", contentResolverName,
+                e.getMessage(), e);
             return null;
         }
 
@@ -738,9 +747,7 @@ public class DOMConfigurator {
                     final String tagName = currentElement.getTagName();
 
                     if (tagName.equals(CONNECTOR_REF_TAG)) {
-                        LOG.debug("{} is only parsed for the RegularExpression Context. " //
-                            + "See org.settings4j.Connector.addConnector(Connector) Javadoc.", //
-                            CONNECTOR_REF_TAG);
+                        LOG.debug(LOG_DEBUG_CONNECTOR_REF, CONNECTOR_REF_TAG);
                     } else if (tagName.equals(CONTENT_RESOLVER_REF_TAG)) {
                         final Element contentResolverRef = (Element) currentNode;
                         final ContentResolver subContentResolver = findContentResolverByReference(contentResolverRef);
@@ -768,8 +775,10 @@ public class DOMConfigurator {
     /**
      * Used internally to parse contentResolvers by IDREF name.
      *
-     * @param doc XML Document of the whole settings4j.xml.
-     * @param contentResolverName the contentResolver Name to search for.
+     * @param doc
+     *        XML Document of the whole settings4j.xml.
+     * @param contentResolverName
+     *        the contentResolver Name to search for.
      * @return the ContentResolver instance.
      */
     protected ContentResolver findContentResolverByName(final Document doc, final String contentResolverName) {
@@ -791,12 +800,13 @@ public class DOMConfigurator {
         return contentResolver;
     }
 
-
     /**
      * Used internally to parse objectResolvers by IDREF name.
      *
-     * @param doc XML Document of the whole settings4j.xml.
-     * @param objectResolverName the ObjectResolver Name to search for.
+     * @param doc
+     *        XML Document of the whole settings4j.xml.
+     * @param objectResolverName
+     *        the ObjectResolver Name to search for.
      * @return the ObjectResolver instance.
      */
     protected ObjectResolver findObjectResolverByName(final Document doc, final String objectResolverName) {
@@ -821,7 +831,8 @@ public class DOMConfigurator {
     /**
      * Used internally to parse objectResolvers by IDREF element.
      *
-     * @param objectResolverRef The Element with the {@link #REF_ATTR}.
+     * @param objectResolverRef
+     *        The Element with the {@link #REF_ATTR}.
      * @return the ObjectResolver instance.
      */
     protected ObjectResolver findObjectResolverByReference(final Element objectResolverRef) {
@@ -830,11 +841,11 @@ public class DOMConfigurator {
         return findObjectResolverByName(doc, objectResolverName);
     }
 
-
     /**
      * Used internally to parse contentResolvers by IDREF element.
      *
-     * @param contentResolverRef The Element with the {@link #REF_ATTR}.
+     * @param contentResolverRef
+     *        The Element with the {@link #REF_ATTR}.
      * @return the ContentResolver instance.
      */
     protected ContentResolver findContentResolverByReference(final Element contentResolverRef) {
@@ -843,9 +854,7 @@ public class DOMConfigurator {
         return findContentResolverByName(doc, contentResolverName);
     }
 
-
-    private static Element getElementByNameAttr(final Document doc, final String nameAttrValue,
-        final String elementTagName) {
+    private static Element getElementByNameAttr(final Document doc, final String nameAttrValue, final String elementTagName) {
         // Doesn't work on DOM Level 1 :
         // Element element = doc.getElementById(nameAttrValue);
 
@@ -865,7 +874,6 @@ public class DOMConfigurator {
         return element;
     }
 
-
     /**
      * @author Harald.Brabenetz
      */
@@ -876,23 +884,28 @@ public class DOMConfigurator {
     /**
      * This function will replace expressions like ${connectors.string['']}.
      *
-     * @param value The value or Expression.
-     * @param connectors required for validating Expression like ${connectors.string['']}
+     * @param value
+     *        The value or Expression.
+     * @param connectors
+     *        required for validating Expression like ${connectors.string['']}
      * @return the String-Value of the given value or Expression
      */
-    protected String subst(final String value, final Connector[] connectors) {
+    protected String subst(final String value, final Connector... connectors) {
         return (String) subst(value, connectors, String.class);
     }
 
     /**
      * This function will replace expressions like ${connectors.object['']} or simply ${true}.
      *
-     * @param value The value or Expression.
-     * @param clazz The expected {@link Class}.
-     * @param connectors required for validating Expression like ${connectors.string['']}
+     * @param value
+     *        The value or Expression.
+     * @param clazz
+     *        The expected {@link Class}.
+     * @param connectors
+     *        required for validating Expression like ${connectors.string['']}
      * @return the Object-Value of the given value or Expression.
      */
-    protected Object subst(final String value, final Connector[] connectors, final Class clazz) {
+    protected Object subst(final String value, final Connector[] connectors, final Class<?> clazz) {
         if (StringUtils.isEmpty(value)) {
             return null;
         }
@@ -903,18 +916,10 @@ public class DOMConfigurator {
                 if (connectors != null) {
                     // Expression like ${connectors.object['...']} or ${connectors.string['...']}
                     context.put("connectors", new ELConnectorWrapper(connectors));
-
-                    // Expression like ${connector.FsConnector.object['...']} or
-                    // ${connector.ClassPathConnector.string['...']}
-                    final Map<String, ELConnectorWrapper> connectorMap = new HashMap<String, ELConnectorWrapper>();
-                    for (Connector connector : connectors) {
-                        connectorMap.put(connector.getName(), new ELConnectorWrapper(new Connector[] {connector}));
-                    }
-                    context.put("connector", connectorMap);
+                    context.put("connector", createConnectorMapForExpressions(connectors));
                 }
                 context.put("env", System.getenv());
-                final Object result = ExpressionLanguageUtil.evaluateExpressionLanguage(value, context, clazz);
-                return result;
+                return ExpressionLanguageUtil.evaluateExpressionLanguage(value, context, clazz);
             } catch (final Exception e) {
                 LOG.error(e.getMessage(), e);
                 return null;
@@ -926,9 +931,18 @@ public class DOMConfigurator {
         } else if (clazz.equals(Boolean.class)) {
             return BooleanUtils.toBooleanObject(value.trim());
         } else {
-            throw new UnsupportedOperationException("The following Type is not supported now: " + clazz
-                + "; found value: " + value);
+            throw new UnsupportedOperationException("The following Type is not supported now: " + clazz + "; found value: " + value);
         }
+    }
+
+    private Map<String, ELConnectorWrapper> createConnectorMapForExpressions(final Connector... connectors) {
+        // Expression like ${connector.FsConnector.object['...']} or
+        // ${connector.ClassPathConnector.string['...']}
+        final Map<String, ELConnectorWrapper> connectorMap = new HashMap<String, ELConnectorWrapper>();
+        for (final Connector connector : connectors) {
+            connectorMap.put(connector.getName(), new ELConnectorWrapper(connector));
+        }
+        return connectorMap;
     }
 
     /**
@@ -946,7 +960,7 @@ public class DOMConfigurator {
         this.expressionAttributes.put(key, value);
     }
 
-    private static Class loadClass(final String clazz) throws ClassNotFoundException {
+    private static Class<?> loadClass(final String clazz) throws ClassNotFoundException {
         return ClasspathContentResolver.getClassLoader().loadClass(clazz);
     }
 }

@@ -1,19 +1,22 @@
-/* ***************************************************************************
- * Copyright (c) 2008 Brabenetz Harald, Austria.
- *
+/*
+ * #%L
+ * settings4j
+ * ===============================================================
+ * Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+ * ===============================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *****************************************************************************/
+ * #L%
+ */
 package org.settings4j;
 
 import java.util.List;
@@ -167,7 +170,7 @@ public interface Settings4jInstance {
      *
      * @return the Mappings of this Settings-Object (without inheritances)
      */
-    Map getMapping();
+    Map<String, String> getMapping();
 
     /**
      * Set the mapping for this Settings-Object without inheritance.
@@ -190,7 +193,7 @@ public interface Settings4jInstance {
      * @param mapping
      *        The Mapping between available settings to used settings.
      */
-    void setMapping(Map mapping);
+    void setMapping(Map<String, String> mapping);
 
     /**
      * Return a List off {@link Connector} who can be used with this {@link Settings4jInstance} instance.

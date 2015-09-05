@@ -1,19 +1,22 @@
-/* ***************************************************************************
- * Copyright (c) 2008 Brabenetz Harald, Austria.
- *
+/*
+ * #%L
+ * settings4j
+ * ===============================================================
+ * Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+ * ===============================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *****************************************************************************/
+ * #L%
+ */
 package org.settings4j.helper.web;
 
 import java.io.ByteArrayInputStream;
@@ -75,7 +78,7 @@ public class DefaultPropertiesLoader {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Add Property Connector '{}' to the Settings4j Repository.", CONNECTOR_NAME);
                 final Set<Entry<Object, Object>> entries = property.entrySet();
-                for (Entry<Object, Object> entry : entries) {
+                for (final Entry<Object, Object> entry : entries) {
                     LOG.debug("{} = {}", entry.getKey(), entry.getValue());
                 }
             }
@@ -93,7 +96,7 @@ public class DefaultPropertiesLoader {
         if (LOG.isDebugEnabled()) {
             final List<Connector> connectors = Settings4j.getConnectors();
             LOG.debug("Current Connectors are {}", connectors.size());
-            for (Connector connector : connectors) {
+            for (final Connector connector : connectors) {
                 LOG.debug("Connector: {}", connector.getName());
             }
 
@@ -107,10 +110,10 @@ public class DefaultPropertiesLoader {
             property.load(new ByteArrayInputStream(defaultProperties.getBytes("ISO-8859-1")));
         } catch (final UnsupportedEncodingException e) {
             // every JDK must have the ISO-8859-1 Charset...
-            throw new IllegalStateException(e.getMessage());
+            throw new IllegalStateException(e.getMessage(), e);
         } catch (final IOException e) {
             // IOException never happens in ByteArrayInputStream implementation...
-            throw new IllegalStateException(e.getMessage());
+            throw new IllegalStateException(e.getMessage(), e);
         }
         return property;
     }

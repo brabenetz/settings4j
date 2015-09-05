@@ -1,19 +1,22 @@
-/* ***************************************************************************
- * Copyright (c) 2008 Brabenetz Harald, Austria.
- *
+/*
+ * #%L
+ * settings4j
+ * ===============================================================
+ * Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+ * ===============================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *****************************************************************************/
+ * #L%
+ */
 package org.settings4j.settings;
 
 import java.util.ArrayList;
@@ -41,7 +44,7 @@ public class DefaultSettings implements Settings4jInstance {
 
     private final List<Connector> connectors = Collections.synchronizedList(new ArrayList<Connector>());
     private final Map<String, Connector> connectorMap = Collections.synchronizedMap(new HashMap<String, Connector>());
-    private Map mapping;
+    private Map<String, String> mapping;
 
     /** {@inheritDoc} */
     public List<Connector> getConnectors() {
@@ -140,7 +143,7 @@ public class DefaultSettings implements Settings4jInstance {
      * @return The key which must be configured for the given Key.
      */
     private String mappedKey(final String key) {
-        final String mappedKey = (String) this.getMapping().get(key);
+        final String mappedKey = this.getMapping().get(key);
         if (StringUtils.isEmpty(mappedKey)) {
             return key;
         }
@@ -150,15 +153,15 @@ public class DefaultSettings implements Settings4jInstance {
     }
 
     /** {@inheritDoc} */
-    public Map getMapping() {
+    public Map<String, String> getMapping() {
         if (this.mapping == null) {
-            this.mapping = new HashMap();
+            this.mapping = new HashMap<String, String>();
         }
         return this.mapping;
     }
 
     /** {@inheritDoc} */
-    public void setMapping(final Map mapping) {
+    public void setMapping(final Map<String, String> mapping) {
         this.mapping = mapping;
     }
 

@@ -1,0 +1,8 @@
+
+Lists of 6 third-party dependencies.
+     (Apache License, Version 2.0) Apache Commons BeanUtils (commons-beanutils:commons-beanutils:1.9.2 - http://commons.apache.org/proper/commons-beanutils/)
+     (Apache License, Version 2.0) Commons IO (commons-io:commons-io:2.2 - http://commons.apache.org/io/)
+     (Apache License, Version 2.0) Commons Logging (commons-logging:commons-logging:1.1.1 - http://commons.apache.org/logging)
+     (Apache License, Version 2.0) Apache Commons Collections (org.apache.commons:commons-collections4:4.0 - http://commons.apache.org/proper/commons-collections/)
+     (Apache License, Version 2.0) Commons Lang (org.apache.commons:commons-lang3:3.1 - http://commons.apache.org/lang/)
+     (MIT License) SLF4J API Module (org.slf4j:slf4j-api:1.7.12 - http://www.slf4j.org)

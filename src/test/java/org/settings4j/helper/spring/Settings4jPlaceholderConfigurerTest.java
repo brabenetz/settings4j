@@ -1,21 +1,26 @@
-/* ***************************************************************************
- * Copyright (c) 2008 Brabenetz Harald, Austria.
- *
+/*
+ * #%L
+ * settings4j
+ * ===============================================================
+ * Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+ * ===============================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *****************************************************************************/
-
+ * #L%
+ */
 package org.settings4j.helper.spring;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 import java.util.Map;
 import java.util.Properties;
@@ -23,11 +28,11 @@ import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Before;
+import org.junit.Test;
 import org.settings4j.connector.PreferencesConnector;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.objectresolver.SpringConfigObjectResolver;
-
-import junit.framework.TestCase;
 
 
 /**
@@ -35,7 +40,7 @@ import junit.framework.TestCase;
  *
  * @author brabenetz
  */
-public class Settings4jPlaceholderConfigurerTest extends TestCase {
+public class Settings4jPlaceholderConfigurerTest {
 
 
     private static final String SYSTEM_PROPERTY_TEST_1 = "a/b/test-1";
@@ -43,9 +48,8 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
     private static final String SYSTEM_PROPERTY_TEST_3 = "a/b/test-3";
     private static final String PREF_UNITTEST_NODE = "org/settings4j/unittest";
 
-    /** {@inheritDoc} */
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         removeUnitTestNode(Preferences.userRoot());
         removeUnitTestNode(Preferences.systemRoot());
         Properties props = System.getProperties();
@@ -67,21 +71,23 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
      * See /src/test/resources/org/settings4j/helper/spring/Settings4jPlaceholderConfigurerHappyPath
      * </p>
      */
+    @Test
     public void testHappyPath() {
         // Example system-Config
         System.setProperty("org/settings4j/helper/spring/test1", "Hallo World");
 
         // load the example Spring-Config
-        final Map result = (Map) getObjectFromSpringConfig(//
+        final Map<?, ?> result = (Map<?, ?>) getObjectFromSpringConfig(//
             "org/settings4j/helper/spring/Settings4jPlaceholderConfigurerHappyPath");
 
         // validate Result
-        assertEquals("Hallo World", result.get("MapEntry1"));
+        assertThat(result.get("MapEntry1"), is((Object) "Hallo World"));
     }
 
     /**
      * TestCase for the complex use case in Spring configuration with prefix and default values.
      */
+    @Test
     public void testHappyPathComplex() {
         // Example system-Config
         System.setProperty("org/settings4j/unittest/testPlaceholderConfigurerHappyPathComplex/test1", "Hallo World");
@@ -90,14 +96,14 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
             "org/settings4j/unittest/testPlaceholderConfigurerHappyPathComplex/test2", "Hallo World 2");
 
         // load the example Spring-Config
-        final Map result = (Map) getObjectFromSpringConfig(//
+        final Map<?, ?> result = (Map<?, ?>) getObjectFromSpringConfig(//
             "org/settings4j/helper/spring/Settings4jPlaceholderConfigurerHappyPathComplex");
 
         // validate Result
-        assertEquals("Hallo World", result.get("MapEntry1"));
-        assertEquals("Hallo World 2", result.get("MapEntry2"));
-        assertEquals("Third Test", result.get("MapEntry3"));
-        assertEquals("Fourth Test", result.get("MapEntry4"));
+        assertThat(result.get("MapEntry1"), is((Object) "Hallo World"));
+        assertThat(result.get("MapEntry2"), is((Object) "Hallo World 2"));
+        assertThat(result.get("MapEntry3"), is((Object) "Third Test"));
+        assertThat(result.get("MapEntry4"), is((Object) "Fourth Test"));
 
     }
 
@@ -106,6 +112,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
      * <p>
      * In this use case no spring application context is required.
      */
+    @Test
     public void testParseStringValueSimple() {
 
         // prepare SystemProperties
@@ -118,7 +125,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
         String result = Settings4jPlaceholderConfigurer.parseStringValue(strVal);
 
         // validate result
-        assertEquals("value-1,\nvalue-2", result);
+        assertThat(result, is("value-1,\nvalue-2"));
     }
 
     /**
@@ -127,6 +134,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
      * In this use case no spring application context is required.
      * </p>
      */
+    @Test
     public void testParseStringValueSimpleWithPlaceholders() {
 
         // prepare SystemProperties
@@ -139,7 +147,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
         String result = Settings4jPlaceholderConfigurer.parseStringValue(strVal, "a/b/");
 
         // validate result
-        assertEquals("value-1,\nvalue-2", result);
+        assertThat(result, is("value-1,\nvalue-2"));
     }
 
 
@@ -149,6 +157,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
      * In this use case no spring application context is required.
      * </p>
      */
+    @Test
     public void testParseStringValueWithDefaultProperties() {
 
         // prepare SystemProperties
@@ -163,7 +172,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
         String result = Settings4jPlaceholderConfigurer.parseStringValue(strVal, StringUtils.EMPTY, props);
 
         // validate result
-        assertEquals("value-1a,\nvalue-2b,\nvalue-3b", result);
+        assertThat(result, is("value-1a,\nvalue-2b,\nvalue-3b"));
     }
 
     /**
@@ -172,6 +181,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
      * In this use case no spring application context is required.
      * </p>
      */
+    @Test
     public void testParseStringValueWithDefaultPropertiesAndPrefix() {
 
         // prepare SystemProperties
@@ -186,7 +196,7 @@ public class Settings4jPlaceholderConfigurerTest extends TestCase {
         String result = Settings4jPlaceholderConfigurer.parseStringValue(strVal, "a/b/", props);
 
         // validate result
-        assertEquals("value-1a,\nvalue-2b,\nvalue-3b", result);
+        assertThat(result, is("value-1a,\nvalue-2b,\nvalue-3b"));
     }
 
     private Properties createDefaultProperties() {

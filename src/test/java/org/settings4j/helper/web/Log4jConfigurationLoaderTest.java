@@ -1,27 +1,33 @@
-/* ***************************************************************************
- * Copyright (c) 2012 Brabenetz Harald, Austria.
- *
+/*
+ * #%L
+ * settings4j
+ * ===============================================================
+ * Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+ * ===============================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * 
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
- *****************************************************************************/
-
+ * #L%
+ */
 package org.settings4j.helper.web;
 
-import junit.framework.TestCase;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.helpers.Loader;
 import org.apache.log4j.xml.DOMConfigurator;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.settings4j.test.InMemoryLog4jAppender;
 import org.settings4j.test.TestUtils;
 import org.springframework.mock.web.MockServletContext;
@@ -29,10 +35,10 @@ import org.springframework.mock.web.MockServletContext;
 
 /**
  * TEstSuite for {@link DefaultPropertiesLoader}.
- * 
+ *
  * @author brabenetz
  */
-public class Log4jConfigurationLoaderTest extends TestCase {
+public class Log4jConfigurationLoaderTest {
 
     /** General Logger for this Class. */
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(Log4jConfigurationLoaderTest.class);
@@ -41,15 +47,14 @@ public class Log4jConfigurationLoaderTest extends TestCase {
     private static final String LOG4J_CONFIG_XML = "org/settings4j/helper/web/log4j-Config1.xml";
     private static final String LOG4J_CONFIG2_XML = "org/settings4j/helper/web/log4j-Config2.xml";
     private static final String LOG4J_CONFIG3_XML = //
-    "file:./src/test/resources/org/settings4j/helper/web/log4j-Config3.xml";
+        "file:./src/test/resources/org/settings4j/helper/web/log4j-Config3.xml";
     private static final String LOG4J_CONFIG4_CORRUPT_XML = "org/settings4j/helper/web/log4j-Config4-corrupt.xml";
 
     private static final String LOG4J_CONFIG_KEY = "myDummyKey";
     private static final String LOG4J_DOCUMENT_BUILDER_FACTORY = "javax.xml.parsers.DocumentBuilderFactory";
 
-    /** {@inheritDoc} */
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         TestUtils.reconfigureSettings4jWithDefaultConfig();
 
         // clearProperties
@@ -60,9 +65,8 @@ public class Log4jConfigurationLoaderTest extends TestCase {
         DOMConfigurator.configure(Loader.getResource("org/settings4j/helper/web/log4j-Config-Default.xml"));
     }
 
-    /** {@inheritDoc} */
-    @Override
-    protected void tearDown() throws Exception {
+    @After
+    public void tearDown() throws Exception {
         System.clearProperty(LOG4J_CONFIG_KEY);
         System.clearProperty(LOG4J_DOCUMENT_BUILDER_FACTORY);
         DOMConfigurator.configure(Loader.getResource("log4j.xml"));
@@ -73,6 +77,7 @@ public class Log4jConfigurationLoaderTest extends TestCase {
      * The normal usage of the DefaultPropertiesLoader: Load default Properties from ServletContext and add Connector to
      * Settings4j.
      */
+    @Test
     public void testInitLog4jConfigurationEmptyProperties() {
         new Log4jConfigurationLoader().initLog4jConfiguration(new MockServletContext());
 
@@ -83,8 +88,8 @@ public class Log4jConfigurationLoaderTest extends TestCase {
         LOG.info("test");
 
         // validate Result
-        assertEquals(1, InMemoryLog4jAppender.linesSize());
-        assertEquals("[CONFIG-DEFAULT]  INFO test", InMemoryLog4jAppender.linesGet(0).toString().trim());
+        assertThat(InMemoryLog4jAppender.linesSize(), is(1));
+        assertThat(InMemoryLog4jAppender.linesGet(0).toString().trim(), is("[CONFIG-DEFAULT]  INFO test"));
 
     }
 
@@ -92,6 +97,7 @@ public class Log4jConfigurationLoaderTest extends TestCase {
      * The normal usage of the DefaultPropertiesLoader: Load default Properties from ServletContext and add Connector to
      * Settings4j.
      */
+    @Test
     public void testInitLog4jConfigurationEmptyLog4jPath() {
         // Prepare servletContext with Default Properties as InitParameter.
         initLog4jConfigurationHappyPath(null);
@@ -103,8 +109,8 @@ public class Log4jConfigurationLoaderTest extends TestCase {
         LOG.info("test");
 
         // validate Result
-        assertEquals(1, InMemoryLog4jAppender.linesSize());
-        assertEquals("[CONFIG-DEFAULT]  INFO test", InMemoryLog4jAppender.linesGet(0).toString().trim());
+        assertThat(InMemoryLog4jAppender.linesSize(), is(1));
+        assertThat(InMemoryLog4jAppender.linesGet(0).toString().trim(), is("[CONFIG-DEFAULT]  INFO test"));
 
     }
 
@@ -112,6 +118,7 @@ public class Log4jConfigurationLoaderTest extends TestCase {
      * The normal usage of the DefaultPropertiesLoader: Load default Properties from ServletContext and add Connector to
      * Settings4j.
      */
+    @Test
     public void testInitLog4jConfigurationHappypathDefault() {
 
         // Prepare servletContext with Default Properties as InitParameter.
@@ -121,8 +128,8 @@ public class Log4jConfigurationLoaderTest extends TestCase {
         LOG.info("test");
 
         // validate Result
-        assertEquals(1, InMemoryLog4jAppender.linesSize());
-        assertEquals("[CONFIG1]  INFO test", InMemoryLog4jAppender.linesGet(0).toString().trim());
+        assertThat(InMemoryLog4jAppender.linesSize(), is(1));
+        assertThat(InMemoryLog4jAppender.linesGet(0).toString().trim(), is("[CONFIG1]  INFO test"));
 
     }
 
@@ -130,6 +137,7 @@ public class Log4jConfigurationLoaderTest extends TestCase {
      * The normal usage of the DefaultPropertiesLoader: Load default Properties from ServletContext and add Connector to
      * Settings4j.
      */
+    @Test
     public void testInitLog4jConfigurationHappypathCustom() {
 
         System.setProperty(LOG4J_CONFIG_KEY, LOG4J_CONFIG2_XML); // custom Config.
@@ -140,8 +148,8 @@ public class Log4jConfigurationLoaderTest extends TestCase {
         LOG.info("test");
 
         // validate Result
-        assertEquals(1, InMemoryLog4jAppender.linesSize());
-        assertEquals("[CONFIG2]  INFO test", InMemoryLog4jAppender.linesGet(0).toString().trim());
+        assertThat(InMemoryLog4jAppender.linesSize(), is(1));
+        assertThat(InMemoryLog4jAppender.linesGet(0).toString().trim(), is("[CONFIG2]  INFO test"));
 
     }
 
@@ -149,6 +157,7 @@ public class Log4jConfigurationLoaderTest extends TestCase {
      * The normal usage of the DefaultPropertiesLoader: Load default Properties from ServletContext and add Connector to
      * Settings4j.
      */
+    @Test
     public void testInitLog4jConfigurationHappypathCustomFile() {
 
         System.setProperty(LOG4J_CONFIG_KEY, LOG4J_CONFIG3_XML); // custom Config.
@@ -159,8 +168,8 @@ public class Log4jConfigurationLoaderTest extends TestCase {
         LOG.info("test");
 
         // validate Result
-        assertEquals(1, InMemoryLog4jAppender.linesSize());
-        assertEquals("[CONFIG3]  INFO test", InMemoryLog4jAppender.linesGet(0).toString().trim());
+        assertThat(InMemoryLog4jAppender.linesSize(), is(1));
+        assertThat(InMemoryLog4jAppender.linesGet(0).toString().trim(), is("[CONFIG3]  INFO test"));
 
     }
 
@@ -168,6 +177,7 @@ public class Log4jConfigurationLoaderTest extends TestCase {
      * The normal usage of the DefaultPropertiesLoader: Load default Properties from ServletContext and add Connector to
      * Settings4j.
      */
+    @Test
     public void testInitLog4jConfigurationInvalideLog4jFactory() {
 
         System.setProperty(LOG4J_DOCUMENT_BUILDER_FACTORY, "NotExistintg"); //
@@ -178,8 +188,8 @@ public class Log4jConfigurationLoaderTest extends TestCase {
         LOG.info("test");
 
         // validate Result
-        assertEquals(1, InMemoryLog4jAppender.linesSize());
-        assertEquals("[CONFIG-DEFAULT]  INFO test", InMemoryLog4jAppender.linesGet(0).toString().trim());
+        assertThat(InMemoryLog4jAppender.linesSize(), is(1));
+        assertThat(InMemoryLog4jAppender.linesGet(0).toString().trim(), is("[CONFIG-DEFAULT]  INFO test"));
 
     }
 
@@ -187,6 +197,7 @@ public class Log4jConfigurationLoaderTest extends TestCase {
      * The normal usage of the DefaultPropertiesLoader: Load default Properties from ServletContext and add Connector to
      * Settings4j.
      */
+    @Test
     public void testInitLog4jConfigurationInvalideClasspathFile() {
 
         System.setProperty(LOG4J_CONFIG_KEY, "notExisitng.xml"); // custom Config.
@@ -197,8 +208,8 @@ public class Log4jConfigurationLoaderTest extends TestCase {
         LOG.info("test");
 
         // validate Result
-        assertEquals(1, InMemoryLog4jAppender.linesSize());
-        assertEquals("[CONFIG-DEFAULT]  INFO test", InMemoryLog4jAppender.linesGet(0).toString().trim());
+        assertThat(InMemoryLog4jAppender.linesSize(), is(1));
+        assertThat(InMemoryLog4jAppender.linesGet(0).toString().trim(), is("[CONFIG-DEFAULT]  INFO test"));
 
     }
 
@@ -206,6 +217,7 @@ public class Log4jConfigurationLoaderTest extends TestCase {
      * The normal usage of the DefaultPropertiesLoader: Load default Properties from ServletContext and add Connector to
      * Settings4j.
      */
+    @Test
     public void testInitLog4jConfigurationInvalideUrl() {
 
         System.setProperty(LOG4J_CONFIG_KEY, "file:notExisitng.xml"); // custom Config.
@@ -216,8 +228,8 @@ public class Log4jConfigurationLoaderTest extends TestCase {
         LOG.info("test");
 
         // validate Result
-        assertEquals(1, InMemoryLog4jAppender.linesSize());
-        assertEquals("[CONFIG-DEFAULT]  INFO test", InMemoryLog4jAppender.linesGet(0).toString().trim());
+        assertThat(InMemoryLog4jAppender.linesSize(), is(1));
+        assertThat(InMemoryLog4jAppender.linesGet(0).toString().trim(), is("[CONFIG-DEFAULT]  INFO test"));
 
     }
 
@@ -225,6 +237,7 @@ public class Log4jConfigurationLoaderTest extends TestCase {
      * The normal usage of the DefaultPropertiesLoader: Load default Properties from ServletContext and add Connector to
      * Settings4j.
      */
+    @Test
     public void testInitLog4jConfigurationCorruptXml() {
 
         System.setProperty(LOG4J_CONFIG_KEY, LOG4J_CONFIG4_CORRUPT_XML); // custom Config.
@@ -235,8 +248,8 @@ public class Log4jConfigurationLoaderTest extends TestCase {
         LOG.info("test");
 
         // validate Result
-        assertEquals(1, InMemoryLog4jAppender.linesSize());
-        assertEquals("[CONFIG-DEFAULT]  INFO test", InMemoryLog4jAppender.linesGet(0).toString().trim());
+        assertThat(InMemoryLog4jAppender.linesSize(), is(1));
+        assertThat(InMemoryLog4jAppender.linesGet(0).toString().trim(), is("[CONFIG-DEFAULT]  INFO test"));
 
     }
 
@@ -244,6 +257,7 @@ public class Log4jConfigurationLoaderTest extends TestCase {
      * The normal usage of the DefaultPropertiesLoader: Load default Properties from ServletContext and add Connector to
      * Settings4j.
      */
+    @Test
     public void testInitLog4jConfigurationlog4jProperty() {
 
         System.setProperty(LOG4J_CONFIG_KEY, LOG4J_CONFIG1_PROPERTIES); // custom Config.
@@ -254,8 +268,8 @@ public class Log4jConfigurationLoaderTest extends TestCase {
         LOG.info("test");
 
         // validate Result
-        assertEquals(1, InMemoryLog4jAppender.linesSize());
-        assertEquals("[CONFIG-PROPERTIES]  INFO test", InMemoryLog4jAppender.linesGet(0).toString().trim());
+        assertThat(InMemoryLog4jAppender.linesSize(), is(1));
+        assertThat(InMemoryLog4jAppender.linesGet(0).toString().trim(), is("[CONFIG-PROPERTIES]  INFO test"));
 
     }
 
@@ -273,7 +287,7 @@ public class Log4jConfigurationLoaderTest extends TestCase {
     }
 
     private MockServletContext prepareServletContext(final String log4DefaultConfiguration,
-            final String log4ConfigurationKey) {
+        final String log4ConfigurationKey) {
         final StringBuffer propertiesString = new StringBuffer();
         if (StringUtils.isNotEmpty(log4DefaultConfiguration)) {
             propertiesString.append(log4ConfigurationKey);

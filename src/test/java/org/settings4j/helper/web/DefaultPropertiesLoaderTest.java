@@ -1,24 +1,31 @@
-/* ***************************************************************************
- * Copyright (c) 2008 Brabenetz Harald, Austria.
- *
+/*
+ * #%L
+ * settings4j
+ * ===============================================================
+ * Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+ * ===============================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * 
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
- *****************************************************************************/
-
+ * #L%
+ */
 package org.settings4j.helper.web;
 
-import junit.framework.TestCase;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 
+import org.junit.Before;
+import org.junit.Test;
 import org.settings4j.Connector;
 import org.settings4j.Settings4j;
 import org.springframework.mock.web.MockServletContext;
@@ -26,18 +33,18 @@ import org.springframework.mock.web.MockServletContext;
 
 /**
  * TEstSuite for {@link DefaultPropertiesLoader}.
- * 
+ *
  * @author brabenetz
  */
-public class DefaultPropertiesLoaderTest extends TestCase {
+public class DefaultPropertiesLoaderTest {
 
     /** General Logger for this Class. */
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DefaultPropertiesLoaderTest.class);
 
     private static final int DEFAULT_CONNECTOR_COUNT = 4;
 
-    /** {@inheritDoc} */
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         final Connector webXmlConnector = Settings4j.getSettingsRepository().getSettings().getConnector(
             DefaultPropertiesLoader.CONNECTOR_NAME);
 
@@ -54,6 +61,7 @@ public class DefaultPropertiesLoaderTest extends TestCase {
      * The normal usage of the DefaultPropertiesLoader: Load default Properties from ServletContext and add Connector to
      * Settings4j.
      */
+    @Test
     public void testInitDefaultPropertiesHappypath() {
 
         // Prepare servletContext with Default Properties as InitParameter.
@@ -63,12 +71,12 @@ public class DefaultPropertiesLoaderTest extends TestCase {
         System.setProperty("test5", "newValue5");
 
         // validate pre-requirements
-        assertEquals(DEFAULT_CONNECTOR_COUNT, Settings4j.getConnectors().size());
-        assertNull(Settings4j.getString("test1"));
-        assertNull(Settings4j.getString("test2"));
-        assertNull(Settings4j.getString("test3"));
-        assertNull(Settings4j.getString("a/b/test4"));
-        assertEquals("newValue5", Settings4j.getString("test5"));
+        assertThat(Settings4j.getConnectors(), hasSize(DEFAULT_CONNECTOR_COUNT));
+        assertThat(Settings4j.getString("test1"), is(nullValue()));
+        assertThat(Settings4j.getString("test2"), is(nullValue()));
+        assertThat(Settings4j.getString("test3"), is(nullValue()));
+        assertThat(Settings4j.getString("a/b/test4"), is(nullValue()));
+        assertThat(Settings4j.getString("test5"), is("newValue5"));
 
         // start test: initDefaultProperties from ServletContext initParameter
         final DefaultPropertiesLoader defaultPropertiesLoader = new DefaultPropertiesLoader();
@@ -76,23 +84,24 @@ public class DefaultPropertiesLoaderTest extends TestCase {
 
 
         // validate Result
-        assertEquals(DEFAULT_CONNECTOR_COUNT + 1, Settings4j.getConnectors().size());
-        assertEquals("value1", Settings4j.getString("test1"));
-        assertEquals("value2", Settings4j.getString("test2"));
-        assertEquals("value3", Settings4j.getString("test3"));
-        assertEquals("value4", Settings4j.getString("a/b/test4"));
-        assertEquals("newValue5", Settings4j.getString("test5")); // from SystemPropertyConnector
+        assertThat(Settings4j.getConnectors(), hasSize(DEFAULT_CONNECTOR_COUNT + 1));
+        assertThat(Settings4j.getString("test1"), is("value1"));
+        assertThat(Settings4j.getString("test2"), is("value2"));
+        assertThat(Settings4j.getString("test3"), is("value3"));
+        assertThat(Settings4j.getString("a/b/test4"), is("value4"));
+        assertThat(Settings4j.getString("test5"), is("newValue5")); // from SystemPropertyConnector
     }
 
     /**
      * Check if duplicate Call only adds one Connector.
      */
+    @Test
     public void testMulitbleInitDefaultProperties() {
 
         // Prepare servletContext with Default Properties as InitParameter.
         final MockServletContext servletContext = prepareServletContext();
 
-        assertEquals(DEFAULT_CONNECTOR_COUNT, Settings4j.getConnectors().size());
+        assertThat(Settings4j.getConnectors(), hasSize(DEFAULT_CONNECTOR_COUNT));
 
         // start test one time: initDefaultProperties from ServletContext initParameter
         new DefaultPropertiesLoader().initDefaultProperties(servletContext);
@@ -101,7 +110,7 @@ public class DefaultPropertiesLoaderTest extends TestCase {
         new DefaultPropertiesLoader().initDefaultProperties(servletContext);
 
         // validate Result (connector should only be one time added)
-        assertEquals(DEFAULT_CONNECTOR_COUNT + 1, Settings4j.getConnectors().size());
+        assertThat(Settings4j.getConnectors(), hasSize(DEFAULT_CONNECTOR_COUNT + 1));
 
 
     }
@@ -109,18 +118,19 @@ public class DefaultPropertiesLoaderTest extends TestCase {
     /**
      * Check if the Call without InitParameter doesn't add a Connector.
      */
+    @Test
     public void testInitDefaultPropertiesWithoutInitParameter() {
 
         // Prepare servletContext without InitParameter.
         final MockServletContext servletContext = new MockServletContext();
 
-        assertEquals(DEFAULT_CONNECTOR_COUNT, Settings4j.getConnectors().size());
+        assertThat(Settings4j.getConnectors(), hasSize(DEFAULT_CONNECTOR_COUNT));
 
         // start test one time: initDefaultProperties from ServletContext initParameter
         new DefaultPropertiesLoader().initDefaultProperties(servletContext);
 
         // validate Result (no connector should be added)
-        assertEquals(DEFAULT_CONNECTOR_COUNT, Settings4j.getConnectors().size());
+        assertThat(Settings4j.getConnectors(), hasSize(DEFAULT_CONNECTOR_COUNT));
 
 
     }
