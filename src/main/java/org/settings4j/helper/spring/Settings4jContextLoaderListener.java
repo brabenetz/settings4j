@@ -31,7 +31,7 @@ import org.springframework.web.context.ContextLoaderListener;
  * <p>
  * Example Configuration could look like the following:
  * </p>
- * 
+ *
  * <pre>
  * web.xml
  * --------------------------------------
@@ -58,7 +58,7 @@ import org.springframework.web.context.ContextLoaderListener;
  * Start tomcat with <code>-Dcom/myCompany/myApp/appContextSecurity=file:.../applicationContext-security-alwaysAdmin.xml</code><br>
  * Or configured a JNDI Value:
  * </p>
- * 
+ *
  * <pre>
  * TOMCAT context.xml
  * --------------------------------------
@@ -68,12 +68,12 @@ import org.springframework.web.context.ContextLoaderListener;
  *
  * --------------------------------------
  * </pre>
- * 
+ *
  * <h3>Default Values</h3>
  * <p>
  * It is recommended to use this in combination with {@link org.settings4j.helper.web.DefaultPropertiesLoader}:
  * </p>
- * 
+ *
  * <pre>
  * web.xml
  * --------------------------------------
@@ -100,7 +100,9 @@ import org.springframework.web.context.ContextLoaderListener;
  * </pre>
  *
  * @author brabenetz
+ * @deprecated use Spring Profiles instead
  */
+@Deprecated
 public class Settings4jContextLoaderListener extends ContextLoaderListener {
 
     /** {@inheritDoc} */
