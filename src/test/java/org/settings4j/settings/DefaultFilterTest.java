@@ -19,13 +19,20 @@
  */
 package org.settings4j.settings;
 
+import static org.hamcrest.Matchers.containsString;
+
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * TestCases for {@link DefaultFilter}.
  */
 public class DefaultFilterTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void testDefaultFilterInclude() {
@@ -37,11 +44,27 @@ public class DefaultFilterTest {
     }
 
     @Test
+    public void testDefaultFilterIncludeInvalidExpression() {
+        this.thrown.expect(IllegalArgumentException.class);
+        this.thrown.expectMessage(containsString("cannot compile include filter pattern '(('"));
+
+        new DefaultFilter().addInclude("((");
+    }
+
+    @Test
     public void testDefaultFilterExclude() {
         final DefaultFilter defaultFilter = new DefaultFilter();
         defaultFilter.addExclude("org/settings4j/config/testConfigFilter1\\.txt");
 
         Assert.assertFalse(defaultFilter.isValid("org/settings4j/config/testConfigFilter1.txt"));
         Assert.assertTrue(defaultFilter.isValid("xyz"));
+    }
+
+    @Test
+    public void testDefaultFilterExcludeInvalidExpression() {
+        this.thrown.expect(IllegalArgumentException.class);
+        this.thrown.expectMessage(containsString("cannot compile exclude filter pattern '(('"));
+
+        new DefaultFilter().addExclude("((");
     }
 }

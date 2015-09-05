@@ -32,9 +32,6 @@ import org.settings4j.Filter;
  */
 public class DefaultFilter implements Filter {
 
-    /** General Logger for this Class. */
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DefaultFilter.class);
-
     private final List<Pattern> includePatterns = new ArrayList<Pattern>();
     private final List<Pattern> excludePatterns = new ArrayList<Pattern>();
 
@@ -43,8 +40,8 @@ public class DefaultFilter implements Filter {
         try {
             final Pattern p = Pattern.compile(pattern);
             this.excludePatterns.add(p);
-        } catch (final Exception e) {
-            LOG.warn("cannnot compile Pattern-String '{}': {}", pattern, e.getMessage(), e);
+        } catch (final RuntimeException e) {
+            throw new IllegalArgumentException(String.format("cannot compile exclude filter pattern '%s': %s", pattern, e.getMessage()), e);
         }
     }
 
@@ -53,8 +50,8 @@ public class DefaultFilter implements Filter {
         try {
             final Pattern p = Pattern.compile(pattern);
             this.includePatterns.add(p);
-        } catch (final Exception e) {
-            LOG.warn("cannnot compile Pattern-String '{}': {}", pattern, e.getMessage(), e);
+        } catch (final RuntimeException e) {
+            throw new IllegalArgumentException(String.format("cannot compile include filter pattern '%s': %s", pattern, e.getMessage()), e);
         }
     }
 
