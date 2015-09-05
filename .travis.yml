@@ -21,4 +21,4 @@ addons:
     branch_pattern: code-quality
     
 after_success:
-  - mvn clean cobertura:cobertura coveralls:report
+  - mvn clean cobertura:cobertura findbugs:findbugs coveralls:report
