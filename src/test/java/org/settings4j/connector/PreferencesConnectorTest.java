@@ -19,25 +19,29 @@
  */
 package org.settings4j.connector;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
+
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
+import org.junit.Before;
+import org.junit.Test;
 import org.settings4j.Settings4j;
 
-import junit.framework.TestCase;
-
 /**
- * Test Suite for {@link PreferencesConnector}. Checkstyle:OFF .*
+ * Test Suite for {@link PreferencesConnector}.
  *
  * @author brabenetz
  */
-public class PreferencesConnectorTest extends TestCase {
+public class PreferencesConnectorTest {
 
 
     private static final String PREF_UNITTEST_NODE = "org/settings4j/unittest";
 
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         removeUnitTestNode(Preferences.userRoot());
         removeUnitTestNode(Preferences.systemRoot());
     }
@@ -51,6 +55,7 @@ public class PreferencesConnectorTest extends TestCase {
      * @throws BackingStoreException
      *         in case of an error.
      */
+    @Test
     public void testSmokeTest() throws BackingStoreException {
 
         final Preferences myModulePrefs = Preferences.userRoot().node("com/myapp/mymodule");
@@ -60,11 +65,11 @@ public class PreferencesConnectorTest extends TestCase {
         final String myValue = myModulePrefs.get("myKey", null);
 
         // validate Result
-        assertEquals("myNewValue", myValue);
+        assertThat(myValue, is("myNewValue"));
 
         // remove node
         myModulePrefs.removeNode();
-        assertEquals(false, Preferences.userRoot().nodeExists("com/myapp/mymodule"));
+        assertThat(Preferences.userRoot().nodeExists("com/myapp/mymodule"), is(false));
     }
 
     private void removeUnitTestNode(final Preferences userRoot) throws BackingStoreException {
@@ -73,49 +78,55 @@ public class PreferencesConnectorTest extends TestCase {
         }
     }
 
+    @Test
     public void testSaveSuccessSlash() {
         final PreferencesConnector connector = new PreferencesConnector();
         connector.setString(PREF_UNITTEST_NODE + "/testSaveSuccessSlash", "test");
 
-        assertEquals("test", Preferences.userRoot().node(PREF_UNITTEST_NODE).get("testSaveSuccessSlash", null));
+        assertThat(Preferences.userRoot().node(PREF_UNITTEST_NODE).get("testSaveSuccessSlash", null), is("test"));
     }
 
+    @Test
     public void testSaveSuccessBackslash() {
         final PreferencesConnector connector = new PreferencesConnector();
         connector.setString(PREF_UNITTEST_NODE + "\\testSaveSuccessBackslash", "test");
 
-        assertEquals("test", Preferences.userRoot().node(PREF_UNITTEST_NODE).get("testSaveSuccessBackslash", null));
+        assertThat(Preferences.userRoot().node(PREF_UNITTEST_NODE).get("testSaveSuccessBackslash", null), is("test"));
     }
 
+    @Test
     public void testReadSuccess() {
         Preferences.userRoot().node(PREF_UNITTEST_NODE).put("testReadSuccess", "test");
 
         final PreferencesConnector connector = new PreferencesConnector();
 
-        assertEquals("test", connector.getString(PREF_UNITTEST_NODE + "/testReadSuccess"));
+        assertThat(connector.getString(PREF_UNITTEST_NODE + "/testReadSuccess"), is("test"));
     }
 
+    @Test
     public void testReadFail() {
         final PreferencesConnector connector = new PreferencesConnector();
 
-        assertNull(connector.getString(PREF_UNITTEST_NODE + "/testReadFailDoesntExist"));
-        assertNull(connector.getString("testReadFailDoesntExist"));
+        assertThat(connector.getString(PREF_UNITTEST_NODE + "/testReadFailDoesntExist"), is(nullValue()));
+        assertThat(connector.getString("testReadFailDoesntExist"), is(nullValue()));
     }
 
+    @Test
     public void testRoundup() {
         final PreferencesConnector connector = new PreferencesConnector();
 
-        assertNull(connector.getString(PREF_UNITTEST_NODE + "/testRoundup"));
+        assertThat(connector.getString(PREF_UNITTEST_NODE + "/testRoundup"), is(nullValue()));
         // 1. save
         connector.setString(PREF_UNITTEST_NODE + "/testRoundup", "test");
         // 2. read
-        assertEquals("test", connector.getString(PREF_UNITTEST_NODE + "/testRoundup"));
+        assertThat(connector.getString(PREF_UNITTEST_NODE + "/testRoundup"), is("test"));
     }
 
+    @Test
     public void testFormularExample() {
         final PreferencesConnector connector = new PreferencesConnector();
         connector.setString("com/mycompany/mycalculation/my-formula", "a * a - 2");
 
-        assertEquals("a * a - 2", Settings4j.getString("com/mycompany/mycalculation/my-formula"));
+        assertThat(Settings4j.getString("com/mycompany/mycalculation/my-formula"), is("a * a - 2"));
     }
 }

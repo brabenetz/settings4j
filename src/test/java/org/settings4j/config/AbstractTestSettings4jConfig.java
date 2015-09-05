@@ -20,26 +20,44 @@
 package org.settings4j.config;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
+import org.junit.Before;
 import org.settings4j.test.TestUtils;
-
-import junit.framework.TestCase;
 
 /**
  * Abstract Class for TestCases .
- * <p>
- * Checkstyle:OFF MagicNumber
- * </p>
  */
-public abstract class AbstractTestSettings4jConfig extends TestCase {
+public abstract class AbstractTestSettings4jConfig {
 
     /** General Logger for this Class. */
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(AbstractTestSettings4jConfig.class);
 
-    /** {@inheritDoc} */
-    @Override
-    protected void setUp() throws Exception {
+    /**
+     * delete test and tmp folder.
+     *
+     * @throws Exception
+     *         in case of an error
+     */
+    @Before
+    public void setUp() throws Exception {
+        deleteTestWorkingDirectories();
+    }
+
+    /**
+     * delete test and tmp folder.
+     *
+     * @throws Exception
+     *         in case of an error
+     */
+    @After
+    public void tearDown() throws Exception {
+        deleteTestWorkingDirectories();
+    }
+
+    private void deleteTestWorkingDirectories() throws IOException {
         final File tmpFolder = TestUtils.getTmpFolder();
         LOG.info("Use temporary Folder: {}", tmpFolder.getAbsolutePath());
         FileUtils.deleteDirectory(tmpFolder);
@@ -47,17 +65,6 @@ public abstract class AbstractTestSettings4jConfig extends TestCase {
         final File testFolder = TestUtils.getTestFolder();
         LOG.info("Use test Folder: {}", testFolder.getAbsolutePath());
         FileUtils.deleteDirectory(testFolder);
-        super.setUp();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected void tearDown() throws Exception {
-        final File tmpFolder = TestUtils.getTmpFolder();
-        FileUtils.deleteDirectory(tmpFolder);
-        final File testFolder = TestUtils.getTestFolder();
-        FileUtils.deleteDirectory(testFolder);
-        super.tearDown();
     }
 
 }

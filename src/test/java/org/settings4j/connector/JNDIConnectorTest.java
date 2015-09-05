@@ -21,6 +21,7 @@ package org.settings4j.connector;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 
 import java.io.File;
@@ -29,15 +30,17 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.settings4j.Constants;
 import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.contentresolver.FSContentResolver;
 import org.settings4j.contentresolver.UnionContentResolver;
 
-import junit.framework.TestCase;
-
-public class JNDIConnectorTest extends TestCase {
+public class JNDIConnectorTest {
 
     /** General Logger for this Class. */
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(JNDIConnectorTest.class);
@@ -45,29 +48,26 @@ public class JNDIConnectorTest extends TestCase {
     private final String charset = "UTF-8";
     private File testDir;
 
-    /** {@inheritDoc} */
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         this.testDir = (new File("test/ConnectorTest/".toLowerCase()));
         FileUtils.forceMkdir(this.testDir);
         removeJNDIContextProperties();
     }
 
-    /** {@inheritDoc} */
-    @Override
-    protected void tearDown() throws Exception {
+    @After
+    public void tearDown() throws Exception {
         FileUtils.deleteDirectory(new File("test"));
         removeJNDIContextProperties();
-        super.tearDown();
     }
 
     /**
      * SmokeTest: tests if the {@link #setTomcatJNDIContextProperties()} works which is required for all other
      * TestCases.
-     * 
+     *
      * @throws Exception in case of an error
      */
+    @Test
     public void testSmokeTest() throws Exception {
         LOG.info("START: testJNDIConnectorWithoutJNDI");
         // Set JNDI Tomcat Configs
@@ -82,10 +82,11 @@ public class JNDIConnectorTest extends TestCase {
         final Context envCtx = (Context) new InitialContext().lookup("java:/comp/env");
         final Object testValue = envCtx.lookup("testKey");
 
-        assertEquals("testValue", testValue);
+        assertThat(testValue, is((Object) "testValue"));
 
     }
 
+    @Test
     public void testJNDIConnectorWithoutJNDI() throws Exception {
         LOG.info("START: testJNDIConnectorWithoutJNDI");
 
@@ -98,32 +99,32 @@ public class JNDIConnectorTest extends TestCase {
         connector = new JNDIConnector();
 
         // test
-        assertNull(connector.getIsJNDIAvailable());
-        assertFalse(connector.isJNDIAvailable());
-        assertNotNull(connector.getIsJNDIAvailable());
-        assertFalse(connector.isJNDIAvailable());
+        assertThat(connector.getIsJNDIAvailable(), is(nullValue()));
+        Assert.assertFalse(connector.isJNDIAvailable());
+        assertThat(connector.getIsJNDIAvailable(), is(notNullValue()));
+        Assert.assertFalse(connector.isJNDIAvailable());
 
         resultString = connector.getString("helloWorldPath");
-        assertNull(resultString);
+        assertThat(resultString, is(nullValue()));
 
         resultContent = connector.getContent("helloWorldPath");
-        assertNull(resultContent);
+        assertThat(resultContent, is(nullValue()));
 
         resultObject = connector.getObject("helloWorldPath");
-        assertNull(resultObject);
+        assertThat(resultObject, is(nullValue()));
 
         // No Exception if JNDIContext not available
         saveStatus = connector.setObject("helloWorldPath", this.testDir.getAbsolutePath() + "/test.txt");
         resultString = connector.getString("helloWorldPath");
-        assertNull(resultString);
+        assertThat(resultString, is(nullValue()));
 
         // No Exception if JNDIContext not available
         saveStatus = connector.setObject("helloWorldPath", this.testDir.getAbsolutePath() + "/test.txt");
-        assertEquals(Constants.SETTING_NOT_POSSIBLE, saveStatus);
+        assertThat(saveStatus, is(Constants.SETTING_NOT_POSSIBLE));
 
         // No Exception if JNDIContext not available
         saveStatus = connector.setObject("helloWorldPath", this.testDir.getAbsolutePath() + "/test.txt");
-        assertEquals(Constants.SETTING_NOT_POSSIBLE, saveStatus);
+        assertThat(saveStatus, is(Constants.SETTING_NOT_POSSIBLE));
 
 
         // add contentResolver
@@ -136,17 +137,18 @@ public class JNDIConnectorTest extends TestCase {
 
 
         resultString = connector.getString("helloWorldPath");
-        assertNull(resultString);
+        assertThat(resultString, is(nullValue()));
 
         resultContent = connector.getContent("helloWorldPath");
-        assertNull(resultContent);
+        assertThat(resultContent, is(nullValue()));
 
         resultObject = connector.getObject("helloWorldPath");
-        assertNull(resultObject);
+        assertThat(resultObject, is(nullValue()));
 
 
     }
 
+    @Test
     public void testJNDIConnectorWithCustomJNDIProperties() throws Exception {
         LOG.info("START: testJNDIConnectorWithJNDI");
         // Remove default JNDI Tomcat Configs
@@ -159,8 +161,8 @@ public class JNDIConnectorTest extends TestCase {
 
         // the value should be found with or without prefix.
         connector.rebindToContext("java:comp/env/myTestKey1", "myTestValue1");
-        
-        
+
+
         // start Test and validation
         assertThat(connector.getString("myTestKey1"), is("myTestValue1"));
         assertThat(connector.getString("java:comp/env/myTestKey1"), is("myTestValue1"));
@@ -169,7 +171,7 @@ public class JNDIConnectorTest extends TestCase {
 
     }
 
-
+    @Test
     public void testJNDIConnectorWithJNDI() throws Exception {
         LOG.info("START: testJNDIConnectorWithJNDI");
         // Set JNDI Tomcat Configs
@@ -186,39 +188,39 @@ public class JNDIConnectorTest extends TestCase {
         connector = new JNDIConnector();
 
         resultString = connector.getString("helloWorldPath");
-        assertNull(resultString);
+        assertThat(resultString, is(nullValue()));
 
         resultContent = connector.getContent("helloWorldPath");
-        assertNull(resultContent);
+        assertThat(resultContent, is(nullValue()));
 
         resultObject = connector.getObject("helloWorldPath");
-        assertNull(resultObject);
+        assertThat(resultObject, is(nullValue()));
 
         // set the PATH into the JNDI-Context
         saveStatus = connector.setObject("helloWorldPath", testTextPath);
-        assertEquals(Constants.SETTING_SUCCESS, saveStatus);
+        assertThat(saveStatus, is(Constants.SETTING_SUCCESS));
         resultString = connector.getString("helloWorldPath");
-        assertEquals(testTextPath, resultString);
+        assertThat(resultString, is(testTextPath));
 
         // if no ContentResolver is available. the value will be stored directly into the JNDI-Context
         saveStatus = connector.setObject("helloWorldPath", "Hello World".getBytes(this.charset));
-        assertEquals(Constants.SETTING_SUCCESS, saveStatus);
+        assertThat(saveStatus, is(Constants.SETTING_SUCCESS));
         // The String-Value cannot read a byte[]
         resultString = connector.getString("helloWorldPath");
-        assertNull(resultString);
+        assertThat(resultString, is(nullValue()));
         // The Content-Value should be the same
         resultContent = connector.getContent("helloWorldPath");
-        assertNotNull(resultContent);
-        assertEquals("Hello World", new String(resultContent, this.charset));
+        assertThat(resultContent, is(notNullValue()));
+        assertThat(new String(resultContent, this.charset), is("Hello World"));
 
 
         // No Exception if JNDIContext not available
         saveStatus = connector.setObject("helloWorldPath", testTextPath);
-        assertEquals(Constants.SETTING_SUCCESS, saveStatus);
+        assertThat(saveStatus, is(Constants.SETTING_SUCCESS));
         resultString = connector.getString("helloWorldPath");
-        assertEquals(testTextPath, resultString);
+        assertThat(resultString, is(testTextPath));
         resultObject = connector.getObject("helloWorldPath");
-        assertEquals(testTextPath, resultObject);
+        assertThat(resultObject, is((Object) testTextPath));
 
         // if no ObjectResolver is available. the value will be stored directly into the JNDI-Context
         final ContentResolver contentResolver = new UnionContentResolver();
@@ -231,27 +233,28 @@ public class JNDIConnectorTest extends TestCase {
 
         // set the PATH into the JNDI-Context
         saveStatus = connector.setObject("helloWorldPath", testTextPath);
-        assertEquals(Constants.SETTING_SUCCESS, saveStatus);
+        assertThat(saveStatus, is(Constants.SETTING_SUCCESS));
         resultString = connector.getString("helloWorldPath");
-        assertEquals(testTextPath, resultString);
+        assertThat(resultString, is(testTextPath));
 
         // Store the content into the file on the file system.
         // And save the Path in the JNDI Context.
         FileUtils.writeStringToFile(new File(testTextPath), "Hello World FileContent");
         saveStatus = connector.setObject("helloWorldPath", testTextPath);
 
-        assertEquals(Constants.SETTING_SUCCESS, saveStatus);
+        assertThat(saveStatus, is(Constants.SETTING_SUCCESS));
         // The String-Value should be the text-File Path.
         resultString = connector.getString("helloWorldPath");
-        assertEquals(testTextPath, resultString);
+        assertThat(resultString, is(testTextPath));
         // The Content-Value should be content of the file.
         resultContent = connector.getContent("helloWorldPath");
-        assertNotNull(resultContent);
-        assertEquals("Hello World FileContent", new String(resultContent, this.charset));
+        assertThat(resultContent, is(notNullValue()));
+        assertThat(new String(resultContent, this.charset), is("Hello World FileContent"));
 
 
     }
 
+    @Test
     public void testJNDIConnectorWithJNDIAndPathPrefix() throws Exception {
         LOG.info("START: testJNDIConnectorWithJNDIAndPathPrefix");
         // Set JNDI Tomcat Configs
@@ -261,14 +264,15 @@ public class JNDIConnectorTest extends TestCase {
         // the value shopould be found with or without prefix.
         connector.rebindToContext("java:comp/env/myTestKey1", "myTestValue1");
         connector.rebindToContext("myTestKey2", "myTestValue2");
-        
-        
+
+
         // start Test and validation
         assertThat(connector.getString("myTestKey1"), is("myTestValue1"));
         assertThat(connector.getString("myTestKey2"), is("myTestValue2"));
-        
+
     }
 
+    @Test
     public void testJNDIConnectorIsAvailable() throws Exception {
         LOG.info("START: testJNDIConnectorIsAvailable");
         JNDIConnector connector;
@@ -276,32 +280,32 @@ public class JNDIConnectorTest extends TestCase {
         connector = new JNDIConnector();
 
         // JNDIContext not available
-        assertNull(connector.getIsJNDIAvailable());
-        assertFalse(connector.isJNDIAvailable()); // will set the boolean Flag
-        assertNotNull(connector.getIsJNDIAvailable());
-        assertFalse(connector.isJNDIAvailable());
+        assertThat(connector.getIsJNDIAvailable(), is(nullValue()));
+        Assert.assertFalse(connector.isJNDIAvailable()); // will set the boolean Flag
+        assertThat(connector.getIsJNDIAvailable(), is(notNullValue()));
+        Assert.assertFalse(connector.isJNDIAvailable());
 
         // Set JNDI Tomcat Configs (Enable JNDI Context)
         setTomcatJNDIContextProperties();
 
         // JNDI-Connector is disabled:
         connector.setObject("irgendwas", "Something to create parent Context");
-        assertNull(connector.getObject("irgendwas"));
+        assertThat(connector.getObject("irgendwas"), is(nullValue()));
 
         // reset boolean Flag
         connector.setIsJNDIAvailable(null);
 
         // JNDIContext is now available
-        assertNull(connector.getIsJNDIAvailable());
-        assertTrue(connector.isJNDIAvailable()); // will set the boolean Flag again
-        assertNotNull(connector.getIsJNDIAvailable());
-        assertTrue(connector.isJNDIAvailable());
+        assertThat(connector.getIsJNDIAvailable(), is(nullValue()));
+        Assert.assertTrue(connector.isJNDIAvailable()); // will set the boolean Flag
+        assertThat(connector.getIsJNDIAvailable(), is(notNullValue()));
+        Assert.assertTrue(connector.isJNDIAvailable());
 
 
         // test setObject and getObject.
-        assertNull(connector.getObject("irgendwas"));
+        assertThat(connector.getObject("irgendwas"), is(nullValue()));
         connector.setObject("irgendwas", "Something to test");
-        assertEquals("Something to test", connector.getObject("irgendwas"));
+        assertThat(connector.getObject("irgendwas"), is((Object) "Something to test"));
 
     }
 

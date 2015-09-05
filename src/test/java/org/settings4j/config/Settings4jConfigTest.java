@@ -19,6 +19,12 @@
  */
 package org.settings4j.config;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
+
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,6 +34,8 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
+import org.junit.Test;
 import org.settings4j.Connector;
 import org.settings4j.Settings4jInstance;
 import org.settings4j.Settings4jRepository;
@@ -36,15 +44,13 @@ import org.settings4j.test.TestUtils;
 
 /**
  * TestCases for {@link Settings4jInstance}.
- * <p>
- * Checkstyle:OFF MagicNumber
- * </p>
  */
 public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
 
     /**
      * Test parsing of defaultsettings4j.xml (FALLBACK-Configuration).
      */
+    @Test
     public void testDefaultSettings4jConfig() {
         final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository(SettingsManager.DEFAULT_FALLBACK_CONFIGURATION_FILE);
@@ -53,25 +59,26 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
 
         // the rootSettings have four Connectors
         final int expectedConnectorSize = 4;
-        assertEquals(expectedConnectorSize, settings.getConnectors().size());
+        assertThat(settings.getConnectors(), hasSize(expectedConnectorSize));
 
         // check if there is no Exception thrown:
-        assertNull(settings.getString("xyz"));
-        assertNull(settings.getContent("xyz"));
-        assertNull(settings.getObject("xyz"));
+        assertThat(settings.getString("xyz"), is(nullValue()));
+        assertThat(settings.getContent("xyz"), is(nullValue()));
+        assertThat(settings.getObject("xyz"), is(nullValue()));
 
-        assertEquals(expectedConnectorSize, settings.getConnectors().size());
+        assertThat(settings.getConnectors(), hasSize(expectedConnectorSize));
     }
 
     /**
      * test corrupt config  xml file.
      *
      */
+    @Test
     public void testCorruptConfig() {
         final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigCorrupt.xml");
 
-        assertEquals(0, settingsRepository.getSettings().getConnectors().size());
+        assertThat(settingsRepository.getSettings().getConnectors(), hasSize(0));
     }
 
 
@@ -80,6 +87,7 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
      *
      * @throws Exception in case of an error.
      */
+    @Test
     public void testFSConfigTempFolder() throws Exception {
         final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigFSTempfolder.xml");
@@ -89,25 +97,25 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
         final Settings4jInstance settings = settingsRepository.getSettings();
         final File tmpFolder = TestUtils.getTmpFolder();
         final File fileXyz = new File(tmpFolder, "xyz");
-        assertFalse(fileXyz.exists());
+        Assert.assertFalse(fileXyz.exists());
         FileUtils.writeStringToFile(fileXyz, "abc", "UTF-8");
-        assertTrue(fileXyz.exists());
+        Assert.assertTrue(fileXyz.exists());
 
         FileUtils.writeStringToFile(new File(tmpFolder, "xyz2"), "abc2", "UTF-8");
 
         // every settings have read access to the same FSConnector.
-        assertEquals("abc", settings.getString("xyz"));
-        assertEquals("abc2", settings.getString("xyz2"));
+        assertThat(settings.getString("xyz"), is("abc"));
+        assertThat(settings.getString("xyz2"), is("abc2"));
 
-        assertEquals(2, settings.getConnectors().size());
+        assertThat(settings.getConnectors(), hasSize(2));
 
         Connector connector;
         connector = settings.getConnector("FSConnector");
-        assertNotNull(connector);
+        assertThat(connector, is(notNullValue()));
         connector = settings.getConnector("SystemPropertyConnector");
-        assertNotNull(connector);
+        assertThat(connector, is(notNullValue()));
         connector = settings.getConnector("nichtVorhanden");
-        assertNull(connector);
+        assertThat(connector, is(nullValue()));
 
     }
 
@@ -116,6 +124,7 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
      *
      * @throws Exception in case of an error.
      */
+    @Test
     public void testFSConfigTestFolder() throws Exception {
         final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigFSTestfolder.xml");
@@ -125,22 +134,23 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
         final Settings4jInstance settings = settingsRepository.getSettings();
         final File testFolder = TestUtils.getTestFolder();
         final File fileXyz = new File(testFolder, "xyz");
-        assertFalse(fileXyz.exists());
+        Assert.assertFalse(fileXyz.exists());
         FileUtils.writeStringToFile(fileXyz, "abc", "UTF-8");
-        assertTrue(fileXyz.exists());
+        Assert.assertTrue(fileXyz.exists());
 
         FileUtils.writeStringToFile(new File(testFolder, "xyz2"), "abc2", "UTF-8");
 
         // every settings have read access to the same FSConnector.
-        assertEquals("abc", settings.getString("xyz"));
-        assertEquals("abc2", settings.getString("xyz2"));
+        assertThat(settings.getString("xyz"), is("abc"));
+        assertThat(settings.getString("xyz2"), is("abc2"));
 
-        assertEquals(1, settings.getConnectors().size());
+        assertThat(settings.getConnectors(), hasSize(1));
     }
 
     /**
      * Test ObjectReolver with cached Connector.
      */
+    @Test
     public void testObjectResolverConfig() {
 
 
@@ -153,6 +163,7 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
     /**
      * Test ObjectReolver with cached Connector.
      */
+    @Test
     public void testObjectResolverConfig1() {
 
 
@@ -165,6 +176,7 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
     /**
      * Test ObjectReolver with cached ObjectReolver.
      */
+    @Test
     public void testObjectResolverConfig2() {
 
         testCaching("org/settings4j/config/testConfigObjectResolver2.xml", //
@@ -175,6 +187,7 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
     /**
      * Test ObjectReolver with cached Object-Property-config.
      */
+    @Test
     public void testObjectResolverConfig3() {
 
         testCaching("org/settings4j/config/testConfigObjectResolver-nocaching.xml", //
@@ -190,12 +203,12 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
         final Settings4jInstance settings = settingsRepository.getSettings();
 
         final Map<?, ?> result1 = (Map<?, ?>) settings.getObject(objectKey);
-        assertNotNull(result1);
+        assertThat(result1, is(notNullValue()));
         final Map<?, ?> result2 = (Map<?, ?>) settings.getObject(objectKey);
         if (mustBeTheSame) {
-            assertTrue(result1 == result2);
+            Assert.assertTrue(result1 == result2);
         } else {
-            assertTrue(result1 != result2);
+            Assert.assertTrue(result1 != result2);
         }
     }
 
@@ -204,6 +217,7 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
      *
      * @throws Exception if an error occurs.
      */
+    @Test
     public void testObjectResolverConfig4Spring() throws Exception {
 
         final Settings4jRepository settingsRepository = TestUtils
@@ -217,7 +231,7 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
 
         // the propety-file "org/settings4j/objectresolver/test1.properties must exists"
         final DataSource dataSource = (DataSource) settings1.getObject(key1);
-        assertNotNull(dataSource);
+        assertThat(dataSource, is(notNullValue()));
 
         // test DataSource
         Connection conn = null;
@@ -243,7 +257,7 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
             pstmt.execute();
             pstmt.close();
 
-            assertEquals("Hello World", result);
+            assertThat(result, is("Hello World"));
 
         } finally {
             if (conn != null) {
@@ -255,6 +269,7 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
     /**
      * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromContent(byte[])}.
      */
+    @Test
     public void testPropertyFileConfig() {
         final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFile.xml");
@@ -262,14 +277,14 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
         final Settings4jInstance settings = settingsRepository.getSettings();
 
         // every settings have read access to the same FSConnector.
-        assertEquals("Value from Property-File", settings.getString("xyz"));
-
-        assertEquals(2, settings.getConnectors().size());
+        assertThat(settings.getString("xyz"), is("Value from Property-File"));
+        assertThat(settings.getConnectors(), hasSize(2));
     }
 
     /**
      * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromPath(String)} with classpath url.
      */
+    @Test
     public void testPropertyFileConfigFromPath1() {
         final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFileFromPath1.xml");
@@ -277,14 +292,14 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
         final Settings4jInstance settings = settingsRepository.getSettings();
 
         // every settings have read access to the same FSConnector.
-        assertEquals("Value from Property-File", settings.getString("xyz"));
-
-        assertEquals(1, settings.getConnectors().size());
+        assertThat(settings.getString("xyz"), is("Value from Property-File"));
+        assertThat(settings.getConnectors(), hasSize(1));
     }
 
     /**
      * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromPath(String)} with filepath url.
      */
+    @Test
     public void testPropertyFileConfigFromPath2() {
         final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFileFromPath2.xml");
@@ -292,34 +307,35 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
         final Settings4jInstance settings = settingsRepository.getSettings();
 
         // every settings have read access to the same FSConnector.
-        assertEquals("Value from Property-File", settings.getString("xyz"));
-
-        assertEquals(1, settings.getConnectors().size());
+        assertThat(settings.getString("xyz"), is("Value from Property-File"));
+        assertThat(settings.getConnectors(), hasSize(1));
     }
 
     /**
      * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromPath(String)} with empty String.
      */
+    @Test
     public void testPropertyFileConfigFromPathException1() {
         final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFileFromPathException1.xml");
 
         final Settings4jInstance settings = settingsRepository.getSettings();
 
-        assertNull(settings.getString("xyz"));
-        assertEquals(1, settings.getConnectors().size());
+        assertThat(settings.getString("xyz"), is(nullValue()));
+        assertThat(settings.getConnectors(), hasSize(1));
     }
 
     /**
      * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromPath(String)} without prefix.
      */
+    @Test
     public void testPropertyFileConfigFromPathException2() {
         final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFileFromPathException2.xml");
 
         final Settings4jInstance settings = settingsRepository.getSettings();
 
-        assertNull(settings.getString("xyz"));
-        assertEquals(1, settings.getConnectors().size());
+        assertThat(settings.getString("xyz"), is(nullValue()));
+        assertThat(settings.getConnectors(), hasSize(1));
     }
 }

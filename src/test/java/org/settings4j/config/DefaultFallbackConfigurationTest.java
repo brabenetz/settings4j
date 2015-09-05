@@ -19,50 +19,52 @@
  */
 package org.settings4j.config;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.settings4j.Settings4j;
 import org.settings4j.test.TestUtils;
 
-import junit.framework.TestCase;
-
-public class DefaultFallbackConfigurationTest extends TestCase {
+public class DefaultFallbackConfigurationTest {
 
     /** General Logger for this Class. */
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory
         .getLogger(DefaultFallbackConfigurationTest.class);
 
-    /** {@inheritDoc} */
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         TestUtils.reconfigureSettings4jWithDefaultConfig();
-        super.setUp();
         System.setProperty("testDefaultProperty", "HelloWorld");
     }
 
-    /** {@inheritDoc} */
-    @Override
-    protected void tearDown() throws Exception {
+    @After
+    public void tearDown() throws Exception {
         System.clearProperty("testDefaultProperty");
-        super.tearDown();
     }
 
     /**
      * Test parsing of defaultsettings4j.xml (FALLBACK-Configuration).
      */
+    @Test
     public void testDefaultSettings4jConfig() {
 
         LOG.debug(//
             "#### AFTER THE FOLLOWING LINE SETTINGS4J WILL BE " //
             + "CONFIGURED THE FIRST TIME WITH THE FALLBACK-FILE #####");
-        assertEquals("HelloWorld", Settings4j.getString("testDefaultProperty"));
+        assertThat(Settings4j.getString("testDefaultProperty"), is("HelloWorld"));
         LOG.debug("#### FINISH CONFIGURATION #####");
 
         // check if there is no Exception thrown:
-        assertNull(Settings4j.getString("xyz"));
-        assertNull(Settings4j.getContent("xyz"));
-        assertNull(Settings4j.getObject("xyz"));
+        assertThat(Settings4j.getString("xyz"), is(nullValue()));
+        assertThat(Settings4j.getContent("xyz"), is(nullValue()));
+        assertThat(Settings4j.getObject("xyz"), is(nullValue()));
 
         // the Default settings Configuration is readonly
         final int expectedConnectors = 4;
-        assertEquals(expectedConnectors, Settings4j.getConnectors().size());
+        assertThat(Settings4j.getConnectors().size(), is(expectedConnectors));
     }
 }

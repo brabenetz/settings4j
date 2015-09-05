@@ -19,6 +19,10 @@
  */
 package org.settings4j.config;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+
+import org.junit.Test;
 import org.settings4j.Settings4jInstance;
 import org.settings4j.Settings4jRepository;
 import org.settings4j.test.TestUtils;
@@ -28,6 +32,7 @@ public class Settings4jFilterConfigTest extends AbstractTestSettings4jConfig {
     /** General Logger for this Class. */
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(Settings4jFilterConfigTest.class);
 
+    @Test
     public void testMapping() {
         LOG.debug("run TestSettings4jMappingConfig.testMapping");
         final Settings4jRepository settingsRepository = TestUtils
@@ -40,8 +45,8 @@ public class Settings4jFilterConfigTest extends AbstractTestSettings4jConfig {
         final String config1 = settings.getString("org/settings4j/config/testConfigFilter1.txt");
         final String config2 = settings.getString("org/settings4j/config/testConfigFilter2.txt");
 
-        assertEquals("testConfig1 System Property", config1);
-        assertEquals("testConfig2 TextFile", config2);
+        assertThat(config1, is("testConfig1 System Property"));
+        assertThat(config2, is("testConfig2 TextFile"));
 
     }
 }

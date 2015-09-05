@@ -19,29 +19,29 @@
  */
 package org.settings4j.settings;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * TestCases for {@link DefaultFilter}.
- * <p>
- * Checkstyle:OFF MagicNumber
- * </p>
  */
-public class DefaultFilterTest extends TestCase {
+public class DefaultFilterTest {
 
+    @Test
     public void testDefaultFilterInclude() {
         final DefaultFilter defaultFilter = new DefaultFilter();
         defaultFilter.addInclude("org/settings4j/config/testConfigFilter1\\.txt");
 
-        assertTrue(defaultFilter.isValid("org/settings4j/config/testConfigFilter1.txt"));
-        assertFalse(defaultFilter.isValid("xyz"));
+        Assert.assertTrue(defaultFilter.isValid("org/settings4j/config/testConfigFilter1.txt"));
+        Assert.assertFalse(defaultFilter.isValid("xyz"));
     }
 
+    @Test
     public void testDefaultFilterExclude() {
         final DefaultFilter defaultFilter = new DefaultFilter();
         defaultFilter.addExclude("org/settings4j/config/testConfigFilter1\\.txt");
 
-        assertFalse(defaultFilter.isValid("org/settings4j/config/testConfigFilter1.txt"));
-        assertTrue(defaultFilter.isValid("xyz"));
+        Assert.assertFalse(defaultFilter.isValid("org/settings4j/config/testConfigFilter1.txt"));
+        Assert.assertTrue(defaultFilter.isValid("xyz"));
     }
 }

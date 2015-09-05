@@ -19,30 +19,32 @@
  */
 package org.settings4j.util;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+
 import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.junit.Assert;
+import org.junit.Test;
 import org.settings4j.connector.ClasspathConnector;
 import org.settings4j.objectresolver.JavaXMLBeansObjectResolver;
 import org.settings4j.objectresolver.SpringConfigObjectResolver;
 import org.settings4j.objectresolver.UnionObjectResolver;
 
-import junit.framework.TestCase;
-
 /**
  * TestCases for {@link ELConnectorWrapper}.
- * <p>
- * Checkstyle:OFF MagicNumber
- * </p>
  *
  * @author Harald.Brabenetz
  */
-public class ELConnectorWrapperTest extends TestCase {
+public class ELConnectorWrapperTest {
 
     /**
      * TestCase for {@link ELConnectorWrapper#getObject()}.
      */
+    @Test
     public void testGetObject() {
         Object result;
         ClasspathConnector classpathConnector = new ClasspathConnector();
@@ -56,18 +58,18 @@ public class ELConnectorWrapperTest extends TestCase {
 
         // SpringConfigObjectResolver
         result = connectorWrapper.getObject().get("org/settings4j/objectresolver/testSpring1");
-        assertNotNull(result);
-        assertTrue(result instanceof DataSource);
+        assertThat(result, is(notNullValue()));
+        Assert.assertTrue(result instanceof DataSource);
 
         // JavaXMLBeansObjectResolver
         result = connectorWrapper.getObject().get("org/settings4j/objectresolver/test1");
-        assertNotNull(result);
-        assertTrue(result instanceof Map);
+        assertThat(result, is(notNullValue()));
+        Assert.assertTrue(result instanceof Map);
 
         // with classpath prefix
         result = connectorWrapper.getObject().get("classpath:org/settings4j/objectresolver/testSpring1");
-        assertNotNull(result);
-        assertTrue(result instanceof DataSource);
+        assertThat(result, is(notNullValue()));
+        Assert.assertTrue(result instanceof DataSource);
 
 
 

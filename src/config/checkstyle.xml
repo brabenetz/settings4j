@@ -73,7 +73,7 @@
         <!--     name="headerFile"                                  -->
         <!--     value="${basedir}/java.header"/>                   -->
         <property name="headerFile" value="${checkstyle.header.file}"/>
-        <property name="ignoreLines" value="2"/>
+        <property name="ignoreLines" value="5,10,12"/>
         <property name="fileExtensions" value="java"/>
     </module>
 

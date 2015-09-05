@@ -19,32 +19,37 @@
  */
 package org.settings4j.contentresolver;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
+
+import org.junit.Test;
 import org.settings4j.ContentResolver;
 
-import junit.framework.TestCase;
+public class ClasspathContentResolverTest {
 
-public class ClasspathContentResolverTest extends TestCase {
-
+    @Test
     public void testReadHelloWorldTxt() throws Exception {
         final ContentResolver contentResolver = new ClasspathContentResolver();
         byte[] content = contentResolver.getContent("org/settings4j/contentresolver/HelloWorld.txt");
-        assertNotNull(content);
-        assertEquals("Hello World", new String(content, "UTF-8"));
+        assertThat(content, is(notNullValue()));
+        assertThat(new String(content, "UTF-8"), is("Hello World"));
 
         content = contentResolver.getContent("classpath:org/settings4j/contentresolver/HelloWorld.txt");
-        assertNotNull(content);
-        assertEquals("Hello World", new String(content, "UTF-8"));
+        assertThat(content, is(notNullValue()));
+        assertThat(new String(content, "UTF-8"), is("Hello World"));
 
         content = contentResolver.getContent("classpath:/org/settings4j/contentresolver/HelloWorld.txt");
-        assertNotNull(content);
-        assertEquals("Hello World", new String(content, "UTF-8"));
+        assertThat(content, is(notNullValue()));
+        assertThat(new String(content, "UTF-8"), is("Hello World"));
 
 
         content = contentResolver.getContent("classpath:laksjdhalksdhfa");
-        assertNull(content);
+        assertThat(content, is(nullValue()));
 
         content = contentResolver.getContent("/org/settings4j/contentresolver/HelloWorld.txt");
-        assertNotNull(content);
-        assertEquals("Hello World", new String(content, "UTF-8"));
+        assertThat(content, is(notNullValue()));
+        assertThat(new String(content, "UTF-8"), is("Hello World"));
     }
 }

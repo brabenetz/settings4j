@@ -19,16 +19,22 @@
  */
 package org.settings4j.contentresolver;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import junit.framework.TestCase;
-
-public class FSContentResolverTest extends TestCase {
+public class FSContentResolverTest {
 
     /** General Logger for this Class. */
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(FSContentResolverTest.class);
@@ -37,23 +43,18 @@ public class FSContentResolverTest extends TestCase {
 
     private File testDir;
 
-    /** {@inheritDoc} */
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        // testDir = (new File("test/" + System.currentTimeMillis() + "-" + (int)(Math.random()*1000) +
-        // "/ContentResolverTest/".toLowerCase())).getAbsoluteFile();
+    @Before
+    public void setUp() throws Exception {
         this.testDir = (new File("test/ContentResolverTest/".toLowerCase())).getAbsoluteFile();
         FileUtils.forceMkdir(this.testDir);
     }
 
-    /** {@inheritDoc} */
-    @Override
-    protected void tearDown() throws Exception {
+    @After
+    public void tearDown() throws Exception {
         FileUtils.deleteDirectory(new File("test"));
-        super.tearDown();
     }
 
+    @Test
     public void testReadHelloWorldTxt() throws Exception {
         // Copy the required Test-file to the Temp-Path
         final InputStream helloWorldIS = this.getClass().getClassLoader()
@@ -70,26 +71,27 @@ public class FSContentResolverTest extends TestCase {
         contentResolver.setRootFolderPath(this.testDir.getAbsolutePath());
 
         byte[] content = contentResolver.getContent("org/settings4j/contentresolver/HelloWorld.txt");
-        assertNotNull(content);
-        assertEquals("Hello World", new String(content, "UTF-8"));
+        assertThat(content, is(notNullValue()));
+        assertThat(new String(content, "UTF-8"), is("Hello World"));
 
         content = contentResolver.getContent("file:org/settings4j/contentresolver/HelloWorld.txt");
-        assertNotNull(content);
-        assertEquals("Hello World", new String(content, "UTF-8"));
+        assertThat(content, is(notNullValue()));
+        assertThat(new String(content, "UTF-8"), is("Hello World"));
 
         content = contentResolver.getContent("file:/org/settings4j/contentresolver/HelloWorld.txt");
-        assertNotNull(content);
-        assertEquals("Hello World", new String(content, "UTF-8"));
+        assertThat(content, is(notNullValue()));
+        assertThat(new String(content, "UTF-8"), is("Hello World"));
 
 
         content = contentResolver.getContent("file:laksjdhalksdhfa");
-        assertNull(content);
+        assertThat(content, is(nullValue()));
 
         content = contentResolver.getContent("/org/settings4j/contentresolver/HelloWorld.txt");
-        assertNotNull(content);
-        assertEquals("Hello World", new String(content, "UTF-8"));
+        assertThat(content, is(notNullValue()));
+        assertThat(new String(content, "UTF-8"), is("Hello World"));
     }
 
+    @Test
     public void testWriteHelloWorldTxt() throws Exception {
 
         FileUtils.deleteDirectory(new File(this.testDir.getCanonicalPath() + "/org"));
@@ -103,10 +105,10 @@ public class FSContentResolverTest extends TestCase {
         contentResolver.setRootFolderPath(this.testDir.getAbsolutePath());
 
         byte[] content = contentResolver.getContent("org/settings4j/contentresolver/HelloWorld.txt");
-        assertNull(content);
+        assertThat(content, is(nullValue()));
 
         content = contentResolver.getContent("file:org/settings4j/contentresolver/HelloWorld.txt");
-        assertNull(content);
+        assertThat(content, is(nullValue()));
 
         // store value;
         FileUtils.writeByteArrayToFile(new File(this.testDir.getAbsolutePath()
@@ -114,19 +116,19 @@ public class FSContentResolverTest extends TestCase {
 
 
         content = contentResolver.getContent("org/settings4j/contentresolver/HelloWorld.txt");
-        assertNotNull(content);
-        assertEquals("Hello World", new String(content, "UTF-8"));
+        assertThat(content, is(notNullValue()));
+        assertThat(new String(content, "UTF-8"), is("Hello World"));
 
         content = contentResolver.getContent("file:org/settings4j/contentresolver/HelloWorld.txt");
-        assertNotNull(content);
-        assertEquals("Hello World", new String(content, "UTF-8"));
+        assertThat(content, is(notNullValue()));
+        assertThat(new String(content, "UTF-8"), is("Hello World"));
 
 
         content = contentResolver.getContent("file:laksjdhalksdhfa");
-        assertNull(content);
+        assertThat(content, is(nullValue()));
 
         content = contentResolver.getContent("/org/settings4j/contentresolver/HelloWorld.txt");
-        assertNotNull(content);
-        assertEquals("Hello World", new String(content, "UTF-8"));
+        assertThat(content, is(notNullValue()));
+        assertThat(new String(content, "UTF-8"), is("Hello World"));
     }
 }

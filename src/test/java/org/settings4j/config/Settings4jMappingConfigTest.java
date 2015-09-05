@@ -19,6 +19,10 @@
  */
 package org.settings4j.config;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+
+import org.junit.Test;
 import org.settings4j.Settings4jInstance;
 import org.settings4j.Settings4jRepository;
 import org.settings4j.test.TestUtils;
@@ -28,6 +32,7 @@ public class Settings4jMappingConfigTest extends AbstractTestSettings4jConfig {
     /** General Logger for this Class. */
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(Settings4jMappingConfigTest.class);
 
+    @Test
     public void testMapping() {
         LOG.debug("run TestSettings4jMappingConfig.testMapping");
         final Settings4jRepository settingsRepository = TestUtils
@@ -41,8 +46,8 @@ public class Settings4jMappingConfigTest extends AbstractTestSettings4jConfig {
         final String moduleXWS = mycompanySeetings.getString("com/mycompany/moduleX/webserviceXY");
         final String moduleYWS = mycompanySeetings.getString("com/mycompany/moduleY/webserviceXY");
 
-        assertEquals(webservice, moduleXWS);
-        assertEquals(webservice, moduleYWS);
+        assertThat(moduleXWS, is(webservice));
+        assertThat(moduleYWS, is(webservice));
 
     }
 }

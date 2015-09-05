@@ -26,14 +26,12 @@ import static org.hamcrest.Matchers.nullValue;
 
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
 /**
- * Test Suite for {@link PreferencesConnector}. Checkstyle:OFF .*
- * 
+ * Test Suite for {@link PreferencesConnector}.
+ *
  * @author brabenetz
  */
-public class EnvironmentConnectorTest extends TestCase {
+public class EnvironmentConnectorTest {
 
     @Test
     public void testReadSuccess() {

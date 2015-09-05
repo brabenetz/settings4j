@@ -19,6 +19,10 @@
  */
 package org.settings4j.objectresolver;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,31 +31,29 @@ import java.sql.ResultSet;
 import javax.sql.DataSource;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 
-import junit.framework.TestCase;
-
-public class SpringConfigObjectResolverTest extends TestCase {
+public class SpringConfigObjectResolverTest {
 
     private File testDir;
 
-    /** {@inheritDoc} */
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         FileUtils.deleteDirectory(new File("test"));
         this.testDir = (new File("test/JavaXMLBeans/".toLowerCase())).getAbsoluteFile();
         FileUtils.forceMkdir(this.testDir);
     }
 
-    /** {@inheritDoc} */
-    @Override
-    protected void tearDown() throws Exception {
+    @After
+    public void tearDown() throws Exception {
         FileUtils.deleteDirectory(new File("test"));
-        super.tearDown();
     }
 
+    @Test
     public void testSpringContext1() throws Exception {
         final SpringConfigObjectResolver objectResolver = new SpringConfigObjectResolver();
 
@@ -61,10 +63,10 @@ public class SpringConfigObjectResolverTest extends TestCase {
         final String key = "org/settings4j/objectresolver/testSpring1";
 
         final byte[] springFileContent = contentResolver.getContent(key);
-        assertNotNull(springFileContent);
+        assertThat(springFileContent, is(notNullValue()));
 
         final DataSource hsqlDS = (DataSource) objectResolver.getObject(key, contentResolver);
-        assertNotNull(hsqlDS);
+        assertThat(hsqlDS, is(notNullValue()));
 
         // test DataSource
         Connection conn = null;
@@ -80,7 +82,7 @@ public class SpringConfigObjectResolverTest extends TestCase {
             pstmt.close();
 
             pstmt = conn.prepareStatement("select * from test");
-            final ResultSet rs = pstmt.executeQuery(); 
+            final ResultSet rs = pstmt.executeQuery();
             rs.next();
             final String result = rs.getString(1);
             rs.close();
@@ -90,7 +92,7 @@ public class SpringConfigObjectResolverTest extends TestCase {
             pstmt.execute();
             pstmt.close();
 
-            assertEquals("Hello World", result);
+            assertThat(result, is("Hello World"));
 
         } finally {
             if (conn != null) {
