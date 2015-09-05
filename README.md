@@ -6,7 +6,7 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/55e50d658c0f62001b000180/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55e50d658c0f62001b000180)
 [![Maven site](https://img.shields.io/badge/Maven-site-blue.svg)](http://settings4j.org/archiv/current/)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.settings4j/settings4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.settings4j/settings4j)
-[![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)](https://github.com/brabenetz/settings4j/blob/master/LICENSE.txt)
+[![License: Apache 2.0](https://img.shields.io/badge/license-Apache_2.0-brightgreen.svg)](https://github.com/brabenetz/settings4j/blob/master/LICENSE.txt)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/brabenetz/settings4j?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # Settings for Java
@@ -48,9 +48,13 @@ The Default Configuration works in the following Order to get Configuration-Valu
 
 With Settings4j, your Operation can decide how the application should be configured.
 
+See http://settings4j.org
+
 ## You are not happy with the default setting4j config?
 
 Simply put your own settings4j.xml into the root-classpath or configure it manual in Java.
+
+See http://settings4j.org/archiv/current/config.html
 
 ## You use Spring?
 
@@ -71,10 +75,12 @@ simply configure Settings4jPlaceholderConfigurer and your "@Value" Annotations w
 ```
 (Works also with Spring Java Based Configuration)
 
+See http://settings4j.org/archiv/current/configSpringPlaceholder.html
+
 ## License
 
 This project is licensed under Apache License, Version 2.0.
 
-See http://settings4j.org/archiv/current/license.html
+See https://github.com/brabenetz/settings4j/blob/master/LICENSE.txt
 
 

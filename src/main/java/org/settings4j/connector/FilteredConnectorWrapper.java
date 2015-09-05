@@ -19,6 +19,7 @@
  */
 package org.settings4j.connector;
 
+import org.apache.commons.lang3.Validate;
 import org.settings4j.Connector;
 import org.settings4j.ContentResolver;
 import org.settings4j.Filter;
@@ -26,7 +27,7 @@ import org.settings4j.ObjectResolver;
 
 /**
  * Wrapper to add a {@link Filter} which is used before the given {@link Connector} is called.
- * 
+ *
  * @author Harald.Brabenetz
  */
 public class FilteredConnectorWrapper implements Connector {
@@ -40,12 +41,8 @@ public class FilteredConnectorWrapper implements Connector {
      */
     public FilteredConnectorWrapper(final Connector targetConnector, final Filter filter) {
         super();
-        if (targetConnector == null) {
-            throw new IllegalArgumentException("FilteredConnectorWrapper needs a Connector Object");
-        }
-        if (filter == null) {
-            throw new IllegalArgumentException("FilteredConnectorWrapper needs a Filter Object");
-        }
+        Validate.notNull(targetConnector, "FilteredConnectorWrapper needs a Connector Object");
+        Validate.notNull(filter, "FilteredConnectorWrapper needs a Filter Object");
         this.targetConnector = targetConnector;
         this.filter = filter;
     }

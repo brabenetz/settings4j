@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.Validate;
 import org.settings4j.Connector;
 import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
@@ -49,51 +50,40 @@ public class CachedConnectorWrapper implements Connector {
      */
     public CachedConnectorWrapper(final Connector targetConnector) {
         super();
+        Validate.notNull(targetConnector, "CachedConnectorWrapper needs a Connector Object");
         this.targetConnector = targetConnector;
     }
 
     /** {@inheritDoc} */
     public byte[] getContent(final String key) {
-        byte[] result = this.cachedContents.get(key);
-        if (result != null) {
-            return result;
+        if (this.cachedContents.containsKey(key)) {
+            return this.cachedContents.get(key);
         }
 
-        result = this.targetConnector.getContent(key);
-
-        if (result != null) {
-            this.cachedContents.put(key, result);
-        }
+        final byte[] result = this.targetConnector.getContent(key);
+        this.cachedContents.put(key, result);
         return result;
     }
 
     /** {@inheritDoc} */
     public Object getObject(final String key) {
-        Object result = this.cachedObjects.get(key);
-        if (result != null) {
-            return result;
+        if (this.cachedObjects.containsKey(key)) {
+            return this.cachedObjects.get(key);
         }
 
-        result = this.targetConnector.getObject(key);
-
-        if (result != null) {
-            this.cachedObjects.put(key, result);
-        }
+        final Object result = this.targetConnector.getObject(key);
+        this.cachedObjects.put(key, result);
         return result;
     }
 
     /** {@inheritDoc} */
     public String getString(final String key) {
-        String result = this.cachedStrings.get(key);
-        if (result != null) {
-            return result;
+        if (this.cachedStrings.containsKey(key)) {
+            return this.cachedStrings.get(key);
         }
 
-        result = this.targetConnector.getString(key);
-
-        if (result != null) {
-            this.cachedStrings.put(key, result);
-        }
+        final String result = this.targetConnector.getString(key);
+        this.cachedStrings.put(key, result);
         return result;
     }
 

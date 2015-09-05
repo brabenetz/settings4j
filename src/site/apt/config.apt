@@ -1,0 +1,116 @@
+~~~
+~~ #%L
+~~ settings4j
+~~ ===============================================================
+~~ Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+~~ ===============================================================
+~~ Licensed under the Apache License, Version 2.0 (the "License");
+~~ you may not use this file except in compliance with the License.
+~~ You may obtain a copy of the License at
+~~ 
+~~      http://www.apache.org/licenses/LICENSE-2.0
+~~ 
+~~ Unless required by applicable law or agreed to in writing, software
+~~ distributed under the License is distributed on an "AS IS" BASIS,
+~~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~~ See the License for the specific language governing permissions and
+~~ limitations under the License.
+~~ #L%
+~~~
+                                    ------------------
+                                    Default Configuration
+                                    ------------------
+                                    Brabenetz Harald
+                                    ------------------
+                                    11-05-2008
+                                    ------------------
+
+{Overview}
+
+
+	The Default Configuration works in the following Order to get Configuration-Values:
+	
+    [[]] Lookup in System.getProperty(...)
+    
+    [[]] Lookup in JNDI Context
+    
+    [[]] Lookup in Preferences.userRoot() and then Preferences.systemRoot()
+    
+    [[]] Lookup in Classpath
+	
+	[]
+	
+	The First found value will be returned.\
+	If no Value where Found, NULL will be returned.
+
+{Configuration}
+
+	The complete default configuration can be found there: {{./XMLSchema/defaultsettings4j.xml}}
+
+	The XML Schema Definition can be found there: {{./XMLSchema/settings4j.dtd}}
+
+{Customization}
+	
+	Simply put your own settings4j.xml into the root-classpath or configure it manual in Java.
+	
+* {Settings4j XML Configuration}
+
+   settings4j.xml (accurate to log4j.xml) must be availabel inside the classpath.
+
+   * On Webapps it could be placed on the Server (e.g.: %TOMCAT_HOME%/common/classes/).
+  
+   * On commandline apps it should be placed on the FileSystem which is included into the classpath (e.g.: -cp ./config/ )
+
+   * For UnitTests, you can but it into /src/test/resources/ (Maven Folder Structure)
+   
+* {Settings4j Java Configuration}
+
+** {Add Custom Connector}
+  
+  An Example code to add a custom Connector could looks like the following:
+
++------------------------------------------------------------------
+public void initSettings4j() {
+   String connectorName = "myConnector";
+   Connector connector = Settings4j.getSettings().getConnector(connectorName);
+   if (connector == null) {
+       MyConnector myConnector = new MyConnector(...);
+ 
+       // add the connecter after the last SystemPropertyConnector or add it as first connector.
+       Settings4j.getSettings().addConnector(myConnector, //
+          ConnectorPositions.firstValid(//
+             ConnectorPositions.afterLast(SystemPropertyConnector.class), //
+             ConnectorPositions.atFirst() // if no SystemPropertyConnector is configured.
+             )//
+          );
+   }
+}
++------------------------------------------------------------------
+
+** {Load custom XML config URL}
+
+  In case you are not happy to place your settings4j.xml into the classpath, You can configure Settings4j from any URL you want:  
+
++------------------------------------------------------------------
+String configLocation = "file:.../mySettings4j.xml";
+URL url = new URL(configLocation);
+Settings4j.getSettingsRepository().resetConfiguration();
+DOMConfigurator.configure(url, Settings4j.getSettingsRepository());
++------------------------------------------------------------------
+
+** {Customization with Spring Placeholder}
+
+  If you use the {{{./configSpringPlaceholder.html}Spring-Placeholder}} for Settings4j, you must
+  use a <<depends-on>> attribute to be sure that the initialization runs first:
+  
++--------------
+<beans>
+  <bean class="org.settings4j.helper.spring.Settings4jPlaceholderConfigurer" depends-on="initSettings4j"/>
+  
+  <!-- InitSettings4j.initSettings4j() will add the custom converter to the Settings4j instance. -->
+  <bean id="initSettings4j" class="com.myProject.InitSettings4j" init-method="initSettings4j"/>
+</beans>
++--------------
+
+	
+	

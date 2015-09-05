@@ -41,7 +41,7 @@
 			<item name="Archiv" href="http://settings4j.org/archiv/" />
 		</menu>
 		<menu name="Settings4j Config">
-			<item name="DefaultConfig" href="configDefault.html" />
+			<item name="Config" href="config.html" />
 			<item name="Filter" href="configFilter.html" />
 			<item name="Mappings" href="configMappings.html" />
 			<item name="Caching" href="configCache.html" />

@@ -40,17 +40,6 @@
    
    Or at least your AppName:  e.g.: "MyPowerApp/myKeyForTheFormularToSolvingEveryThing"
 
-{Customized settings4j.xml}
-
-   settings4j.xml (accurate to log4j.xml) must be availabel inside the classpath.
-   But DO NOT put it into the resulting JAR of a Sub-Library.
-
-	 * On Webapps it could be placed on the Server (e.g.: %TOMCAT_HOME%/common/classes/).
-	
-	 * On commandline apps it should be placed on the FileSystem which is included into the classpath (e.g.: -cp ./config/ )
-
-	 * For UnitTests, you can but it into /src/test/resources/ (Maven Folder Structure)
-
 {What SHOULD be configured with Settings4j}
    
    <<Applikation>> specific configurations like third part Server adresses.
