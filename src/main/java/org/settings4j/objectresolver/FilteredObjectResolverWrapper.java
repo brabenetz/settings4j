@@ -19,13 +19,14 @@
  */
 package org.settings4j.objectresolver;
 
+import org.apache.commons.lang3.Validate;
 import org.settings4j.ContentResolver;
 import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
 
 /**
  * Wrapper to add a {@link Filter} which is used before the given {@link ObjectResolver} is called.
- * 
+ *
  * @author Harald.Brabenetz
  */
 public class FilteredObjectResolverWrapper implements ObjectResolver {
@@ -34,18 +35,14 @@ public class FilteredObjectResolverWrapper implements ObjectResolver {
     private final Filter filter;
 
     /**
-     * 
+     *
      * @param targetObjectResolver The ObjectResolver where the settings should be read if the Filter allows it.
      * @param filter the {@link Filter} which defines if an key should be read from the given ObjectResolver.
      */
     public FilteredObjectResolverWrapper(final ObjectResolver targetObjectResolver, final Filter filter) {
         super();
-        if (targetObjectResolver == null) {
-            throw new IllegalArgumentException("FilteredConnectorWrapper needs a ObjectResolver Object");
-        }
-        if (filter == null) {
-            throw new IllegalArgumentException("FilteredConnectorWrapper needs a Filter Object");
-        }
+        Validate.notNull(targetObjectResolver, "FilteredObjectResolverWrapper needs a ObjectResolver Object");
+        Validate.notNull(filter, "FilteredObjectResolverWrapper needs a Filter Object");
         this.targetObjectResolver = targetObjectResolver;
         this.filter = filter;
     }
