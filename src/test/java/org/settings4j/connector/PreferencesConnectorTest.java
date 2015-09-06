@@ -27,6 +27,7 @@ import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -130,6 +131,7 @@ public class PreferencesConnectorTest {
     }
 
     @Test
+    @Ignore("Dosen't run Travis-CI: Cannot set System-Preferences.")
     public void testRoundupWithSystemPreferences() {
         final PreferencesConnector connector = new PreferencesConnector();
 
@@ -141,6 +143,7 @@ public class PreferencesConnectorTest {
     }
 
     @Test
+    @Ignore("Dosen't run Travis-CI: Cannot set System-Preferences.")
     public void testRoundupWithUserAndSystemPreferences() {
         final PreferencesConnector connector = new PreferencesConnector();
 

@@ -50,16 +50,24 @@ public class PreferencesConnector extends AbstractPropertyConnector {
 
     private final Preferences userPrefs;
 
-
     /**
      * Default Constructor initialize the User and System {@link Preferences}.
      */
     public PreferencesConnector() {
-        super();
-        this.systemPrefs = Preferences.systemRoot();
-        this.userPrefs = Preferences.userRoot();
+        this(Preferences.systemRoot(), Preferences.userRoot());
     }
 
+    /**
+     * @param systemPrefs
+     *        {@link Preferences#systemRoot()}
+     * @param userPrefs
+     *        {@link Preferences#userRoot()}
+     */
+    protected PreferencesConnector(final Preferences systemPrefs, final Preferences userPrefs) {
+        super();
+        this.systemPrefs = systemPrefs;
+        this.userPrefs = userPrefs;
+    }
 
     /** {@inheritDoc} */
     @Override
