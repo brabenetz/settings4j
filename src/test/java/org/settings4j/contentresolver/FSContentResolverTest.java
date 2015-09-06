@@ -52,7 +52,7 @@ public class FSContentResolverTest {
 
     @Before
     public void setUp() throws Exception {
-        this.testDir = (new File("test/ContentResolverTest/".toLowerCase())).getAbsoluteFile();
+        this.testDir = new File("target/test/" + getClass().getSimpleName() + "/".toLowerCase()).getAbsoluteFile();
     }
 
     @After

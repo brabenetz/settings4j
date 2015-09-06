@@ -19,6 +19,10 @@
  */
 package org.settings4j.contentresolver;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.ArrayUtils;
 import org.settings4j.ContentResolver;
 
 /**
@@ -43,7 +47,8 @@ public class UnionContentResolver implements ContentResolver {
     /**
      * Constructor with the first {@link ContentResolver}.
      *
-     * @param contentResolver with the first ContentResolver.
+     * @param contentResolver
+     *        with the first ContentResolver.
      */
     public UnionContentResolver(final ContentResolver contentResolver) {
         super();
@@ -80,4 +85,9 @@ public class UnionContentResolver implements ContentResolver {
         }
         return result;
     }
+
+    public ContentResolver[] getContentResolvers() {
+        return ArrayUtils.clone(this.contentResolvers);
+    }
+
 }
