@@ -145,10 +145,14 @@ public class FSConnector extends AbstractConnector {
 
     @Override
     protected ContentResolver getContentResolver() {
-        if (this.unionContentResolver.getContentResolvers().length > 1) {
+        if (hasCustomContentResolver()) {
             return this.unionContentResolver.getContentResolvers()[1];
         }
         return null;
+    }
+
+    private boolean hasCustomContentResolver() {
+        return this.unionContentResolver.getContentResolvers().length > 1;
     }
     /**
      * return the root of this FileSystem ContenResolver.
