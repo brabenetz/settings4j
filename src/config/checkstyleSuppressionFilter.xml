@@ -28,5 +28,5 @@
 	<!-- VisibilityModifier: JUnit member Field from Type ExternalResource with Rule-Annotations must be public. -->
 	<!-- MagicNumber: Make no sense in unitTests. e.g.: assert a List Size with an expected magic number. -->
 	<!-- Javadoc: for UnitTests Method names should be self-explanatory. -->
-    <suppress files=".*Test\.java" checks="Javadoc|JavadocMethod|MagicNumberCheck|VisibilityModifier"/>
+    <suppress files=".*Test\.java" checks="Javadoc|JavadocMethod|MagicNumberCheck|VisibilityModifier|MethodName"/>
 </suppressions>

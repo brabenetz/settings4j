@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,7 +27,10 @@ import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.settings4j.Settings4j;
 
 /**
@@ -37,8 +40,12 @@ import org.settings4j.Settings4j;
  */
 public class PreferencesConnectorTest {
 
-
     private static final String PREF_UNITTEST_NODE = "org/settings4j/unittest";
+
+    private static final String PREF_ROOT_ENTRY = "testRoundup";
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void setUp() throws Exception {
@@ -76,6 +83,7 @@ public class PreferencesConnectorTest {
         if (userRoot.nodeExists(PREF_UNITTEST_NODE)) {
             userRoot.node(PREF_UNITTEST_NODE).removeNode();
         }
+        userRoot.remove(PREF_ROOT_ENTRY);
     }
 
     @Test
@@ -112,7 +120,7 @@ public class PreferencesConnectorTest {
     }
 
     @Test
-    public void testRoundup() {
+    public void testRoundupWithUserPreferences() {
         final PreferencesConnector connector = new PreferencesConnector();
 
         assertThat(connector.getString(PREF_UNITTEST_NODE + "/testRoundup"), is(nullValue()));
@@ -120,6 +128,67 @@ public class PreferencesConnectorTest {
         connector.setString(PREF_UNITTEST_NODE + "/testRoundup", "test");
         // 2. read
         assertThat(connector.getString(PREF_UNITTEST_NODE + "/testRoundup"), is("test"));
+    }
+
+    @Test
+    @Ignore("Dosen't run Travis-CI: Cannot set System-Preferences.")
+    public void testRoundupWithSystemPreferences() {
+        final PreferencesConnector connector = new PreferencesConnector();
+
+        assertThat(connector.getString(PREF_UNITTEST_NODE + "/testRoundup"), is(nullValue()));
+        // 1. save
+        connector.setSystemString(PREF_UNITTEST_NODE + "/testRoundup", "test");
+        // 2. read
+        assertThat(connector.getString(PREF_UNITTEST_NODE + "/testRoundup"), is("test"));
+    }
+
+    @Test
+    @Ignore("Dosen't run Travis-CI: Cannot set System-Preferences.")
+    public void testRoundupWithUserAndSystemPreferences() {
+        final PreferencesConnector connector = new PreferencesConnector();
+
+        assertThat(connector.getString(PREF_UNITTEST_NODE + "/testRoundup"), is(nullValue()));
+        // 1. save
+        connector.setString(PREF_UNITTEST_NODE + "/testRoundup", "testUser");
+        connector.setSystemString(PREF_UNITTEST_NODE + "/testRoundup", "testSystem");
+        // 2. read
+        assertThat(connector.getString(PREF_UNITTEST_NODE + "/testRoundup"), is("testUser"));
+    }
+
+    @Test
+    public void testRoundupWithRootPath() {
+        final PreferencesConnector connector = new PreferencesConnector();
+
+        assertThat(connector.getString(PREF_ROOT_ENTRY), is(nullValue()));
+        // 1. save
+        connector.setString(PREF_ROOT_ENTRY, "test");
+        // 2. read
+        assertThat(connector.getString(PREF_ROOT_ENTRY), is("test"));
+    }
+
+    @Test
+    public void testRoundupWithSlashAtStart() {
+        final PreferencesConnector connector = new PreferencesConnector();
+
+        // assertThat(connector.getString("/testRoundup"), is(nullValue()));
+        // 1. save
+        connector.setString("/" + PREF_ROOT_ENTRY, "test");
+        // 2. read
+        assertThat(connector.getString("/" + PREF_ROOT_ENTRY), is("test"));
+    }
+
+    @Test
+    public void testSetStringWithNullKey() {
+        this.thrown.expect(NullPointerException.class);
+        final PreferencesConnector connector = new PreferencesConnector();
+        connector.setString(null, "test");
+    }
+
+    @Test
+    public void testGetStringWithNullKey() {
+        this.thrown.expect(NullPointerException.class);
+        final PreferencesConnector connector = new PreferencesConnector();
+        connector.getString(null);
     }
 
     @Test

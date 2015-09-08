@@ -34,9 +34,12 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  * <p>
  * See configuration Example: {@link Settings4jContextLoaderListener}.
  * </p>
+ * TODO brabenetz 05. Sep. 2015 : remove this Class with Release 2.1.
  *
  * @author brabenetz
+ * @deprecated use Spring Profiles instead. (Will be remove with 2.1)
  */
+@Deprecated
 public class Settings4jContextLoader extends ContextLoader {
 
     /** General Logger for this Class. */
@@ -53,6 +56,9 @@ public class Settings4jContextLoader extends ContextLoader {
     /** {@inheritDoc} */
     @Override
     protected void customizeContext(final ServletContext servletContext, final ConfigurableWebApplicationContext wac) {
+        final String warnMsg = "Settings4jContextLoader, Settings4jContextLoaderListener will be removed in feature releases. Use Spring Profiles instead.";
+        servletContext.log("WARNING: " + warnMsg);
+        LOG.warn(warnMsg);
         if (wac instanceof XmlWebApplicationContext) {
             // be sure that the DefaultPropertiesLoader is initialized:
             createDefaultPropertiesLoader().initDefaultProperties(servletContext);

@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,6 +22,8 @@ package org.settings4j.connector;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.IllegalCharsetNameException;
 
 import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.FSContentResolver;
@@ -34,12 +36,26 @@ import org.settings4j.contentresolver.UnionContentResolver;
  */
 public class FSConnector extends AbstractConnector {
 
-    /** General Logger for this Class. */
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(FSConnector.class);
-
-    private final FSContentResolver fsContentResolver = new FSContentResolver();
-    private ContentResolver unionContentResolver = new UnionContentResolver(this.fsContentResolver);
+    private final FSContentResolver fsContentResolver;
+    private UnionContentResolver unionContentResolver;
     private String charset = "UTF-8";
+
+    /** Default Constructor (e.g. use in settings4j.xml). */
+    public FSConnector() {
+        this(new FSContentResolver());
+    }
+
+    /**
+     * protected Constructor for extensions and Unit-Tests.
+     *
+     * @param fsContentResolver
+     *        {@link FSContentResolver}
+     */
+    protected FSConnector(final FSContentResolver fsContentResolver) {
+        super();
+        this.fsContentResolver = fsContentResolver;
+        this.unionContentResolver = new UnionContentResolver(this.fsContentResolver);
+    }
 
     /** {@inheritDoc} */
     public byte[] getContent(final String key) {
@@ -60,15 +76,14 @@ public class FSConnector extends AbstractConnector {
         try {
             final byte[] content = getContent(key);
             if (content != null) {
+                // TODO brabenetz 06. Sep. 2015 : With Settings4j-2.1 and JDK 6: use new String(byte[], Charset) instead. (and remove ExceptionHandling)
                 return new String(this.fsContentResolver.getContent(key), this.charset);
             }
             // else
             return null;
 
         } catch (final UnsupportedEncodingException e) {
-            // should never occure with "UTF-8"
-            LOG.error("Charset not found: {}", this.charset, e);
-            return null;
+            throw new UnsupportedOperationException(String.format("Charset not found: %s", this.charset), e);
         }
     }
 
@@ -88,10 +103,10 @@ public class FSConnector extends AbstractConnector {
      */
     public void setString(final String key, final String value) throws IOException {
         try {
+            // TODO brabenetz 06. Sep. 2015 : With Settings4j-2.1 and JDK 6: use String.getBytes(Charset) instead. (and remove ExceptionHandling)
             setContent(key, value.getBytes(this.charset));
         } catch (final UnsupportedEncodingException e) {
-            // should never occure with "UTF-8"
-            LOG.error("Charset not found: {}", this.charset, e);
+            throw new UnsupportedOperationException(String.format("Charset not found: %s", this.charset), e);
         }
     }
 
@@ -99,7 +114,16 @@ public class FSConnector extends AbstractConnector {
         return this.charset;
     }
 
+    /**
+     * @param charset
+     *        a valid {@link Charset}
+     * @see Charset#isSupported(String)
+     */
     public void setCharset(final String charset) {
+        if (!Charset.isSupported(charset)) {
+            throw new IllegalCharsetNameException(
+                String.format("IllegalCharsetName: '%s'. See: http://docs.oracle.com/javase/8/docs/api/java/nio/charset/StandardCharsets.html", charset));
+        }
         this.charset = charset;
     }
 
@@ -119,6 +143,17 @@ public class FSConnector extends AbstractConnector {
         this.unionContentResolver.addContentResolver(contentResolver);
     }
 
+    @Override
+    protected ContentResolver getContentResolver() {
+        if (hasCustomContentResolver()) {
+            return this.unionContentResolver.getContentResolvers()[1];
+        }
+        return null;
+    }
+
+    private boolean hasCustomContentResolver() {
+        return this.unionContentResolver.getContentResolvers().length > 1;
+    }
     /**
      * return the root of this FileSystem ContenResolver.
      * <p>

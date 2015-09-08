@@ -37,7 +37,7 @@
     </developer>
   </developers>
 
-  <contributors></contributors>
+  <contributors />
 
   <prerequisites>
     <maven>3.1.0</maven>
@@ -58,7 +58,7 @@
   <ciManagement>
     <system>Travis</system>
     <url>https://travis-ci.org/brabenetz/settings4j</url>
-    <notifiers></notifiers>
+    <notifiers />
   </ciManagement>
 
   <distributionManagement>
@@ -517,37 +517,37 @@
 <classpath>
   <classpathentry kind="src" output="target/classes" path="src/main/java">
     <attributes>
-      <attribute name="optional" value="true"/>
-      <attribute name="maven.pomderived" value="true"/>
+      <attribute name="optional" value="true" />
+      <attribute name="maven.pomderived" value="true" />
     </attributes>
   </classpathentry>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5">
     <attributes>
-      <attribute name="maven.pomderived" value="true"/>
+      <attribute name="maven.pomderived" value="true" />
     </attributes>
   </classpathentry>
   <classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
     <attributes>
-      <attribute name="maven.pomderived" value="true"/>
+      <attribute name="maven.pomderived" value="true" />
     </attributes>
   </classpathentry>
   <classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
     <attributes>
-      <attribute name="maven.pomderived" value="true"/>
+      <attribute name="maven.pomderived" value="true" />
     </attributes>
   </classpathentry>
   <classpathentry kind="src" output="target/test-classes" path="src/test/java">
     <attributes>
-      <attribute name="optional" value="true"/>
-      <attribute name="maven.pomderived" value="true"/>
+      <attribute name="optional" value="true" />
+      <attribute name="maven.pomderived" value="true" />
     </attributes>
   </classpathentry>
   <classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
     <attributes>
-      <attribute name="maven.pomderived" value="true"/>
+      <attribute name="maven.pomderived" value="true" />
     </attributes>
   </classpathentry>
-  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="output" path="target/classes" />
 </classpath>]]></content>
               </file>
             </additionalConfig>
@@ -656,10 +656,10 @@
           <artifactId>maven-release-plugin</artifactId>
           <version>2.5.2</version>
           <configuration>
-            <mavenExecutorId>forked-path</mavenExecutorId>
-            <useReleaseProfile>false</useReleaseProfile>
-            <!-- add source, javadoc and pgp sign artifacts -->
-            <arguments>-Psonatype-oss-release,gpg</arguments>
+            <preparationGoals>sortpom:sort clean verify</preparationGoals>
+            <goals>deploy</goals>
+            <releaseProfiles>sonatype-oss-release,gpg</releaseProfiles>
+            <pushChanges>false</pushChanges>
           </configuration>
         </plugin>
         <plugin>
@@ -860,7 +860,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore></ignore>
+                    <ignore />
                   </action>
                 </pluginExecution>
               </pluginExecutions>
@@ -896,7 +896,6 @@
             <id>first</id>
             <goals>
               <goal>update-file-header</goal>
-              <goal>update-project-license</goal>
               <goal>add-third-party</goal>
             </goals>
             <phase>process-sources</phase>
@@ -927,10 +926,10 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
       </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-javadoc-plugin</artifactId>
-        </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jxr-plugin</artifactId>

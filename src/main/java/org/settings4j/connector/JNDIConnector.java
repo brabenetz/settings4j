@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,6 +29,7 @@ import javax.naming.NoInitialContextException;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.settings4j.Constants;
 
 /**
@@ -107,6 +108,7 @@ public class JNDIConnector extends AbstractConnector {
     // SuppressWarnings PMD.ReturnEmptyArrayRatherThanNull: returning null for this byte-Arrays is OK.
     @SuppressWarnings("PMD.ReturnEmptyArrayRatherThanNull")
     public byte[] getContent(final String key) {
+        Validate.notNull(key);
         final Object obj = lookupInContext(key);
         if (obj == null) {
             return null;
@@ -131,6 +133,7 @@ public class JNDIConnector extends AbstractConnector {
 
     /** {@inheritDoc} */
     public Object getObject(final String key) {
+        Validate.notNull(key);
         final Object obj = lookupInContext(key);
 
         // if obj is a String and an Object resolver is available
@@ -147,12 +150,12 @@ public class JNDIConnector extends AbstractConnector {
 
     /** {@inheritDoc} */
     public String getString(final String key) {
+        Validate.notNull(key);
         final Object obj = lookupInContext(key);
         try {
             return (String) obj;
         } catch (final ClassCastException e) {
-            LOG.warn("Wrong Type: {} for Key: {}", obj.getClass().getName(), key);
-            LOG.debug(e.getMessage(), e);
+            logInfoButExceptionDebug(String.format("Wrong Type: %s for Key: %s", obj.getClass().getName(), key), e);
             return null;
         }
     }
@@ -209,8 +212,7 @@ public class JNDIConnector extends AbstractConnector {
                 LOG.info("No JNDI Context available! JNDIConnector will be disabled: {}", e.getMessage());
                 this.isJNDIAvailable = Boolean.FALSE;
             } catch (final NamingException e) {
-                LOG.info("JNDI Context is available but {}", e.getMessage());
-                LOG.debug("NamingException in isJNDIAvailable: {}", e.getMessage(), e);
+                logInfoButExceptionDebug(String.format("JNDI Context is available but %s", e.getMessage()), e);
                 this.isJNDIAvailable = Boolean.TRUE;
             }
         }
@@ -245,23 +247,32 @@ public class JNDIConnector extends AbstractConnector {
             ctx = getJNDIContext();
             result = ctx.lookup(normalizedKey);
         } catch (final NoInitialContextException e) {
-            LOG.info("Maybe no JNDI-Context available.");
-            LOG.debug(e.getMessage(), e);
+            logInfoButExceptionDebug(String.format("Maybe no JNDI-Context available. %s", e.getMessage()), e);
         } catch (final NamingException e) {
             LOG.debug("cannot lookup key: {} ({})", key, normalizedKey, e);
             if (withPrefix) {
                 result = lookupInContext(key, false);
             }
         } finally {
-            if (ctx != null) {
-                try {
-                    ctx.close();
-                } catch (final NamingException e) {
-                    LOG.info("cannot close context: {} ({})", key, normalizedKey, e);
-                }
-            }
+            closeQuietly(ctx);
         }
         return result;
+    }
+
+    /**
+     * Calls {@link InitialContext#close()} with null-checks and Exception handling: log exception with log level info.
+     * 
+     * @param ctx
+     *        the InitialContextto close ( )
+     */
+    protected void closeQuietly(final InitialContext ctx) {
+        if (ctx != null) {
+            try {
+                ctx.close();
+            } catch (final NamingException e) {
+                LOG.info("cannot close context: {}", ctx, e);
+            }
+        }
     }
 
     /**
@@ -286,24 +297,14 @@ public class JNDIConnector extends AbstractConnector {
             ctx.rebind(key, value);
             result = Constants.SETTING_SUCCESS;
         } catch (final NoInitialContextException e) {
-            LOG.info("Maybe no JNDI-Context available.");
-            LOG.debug(e.getMessage(), e);
+            logInfoButExceptionDebug(String.format("Maybe no JNDI-Context available. %s", e.getMessage()), e);
         } catch (final NamingException e) {
             // the JNDI-Context from TOMCAT is readonly
             // if you try to write it, The following Exception will be thrown:
             // javax.naming.NamingException: Context is read only
-            LOG.info("cannot bind key: '{}'. {}", key, e.getMessage());
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("cannot bind key: " + key, e);
-            }
+            logInfoButExceptionDebug(String.format("cannot bind key: '%s'. %s", key, e.getMessage()), e);
         } finally {
-            if (ctx != null) {
-                try {
-                    ctx.close();
-                } catch (final NamingException e) {
-                    LOG.info("cannot close context: {}", key, e);
-                }
-            }
+            closeQuietly(ctx);
         }
         return result;
     }
@@ -344,9 +345,7 @@ public class JNDIConnector extends AbstractConnector {
     }
 
     private String normalizeKey(final String key, final boolean withPrefix) {
-        if (key == null) {
-            return null;
-        }
+        Validate.notNull(key);
         String normalizeKey = key;
         if (normalizeKey.startsWith(this.contextPathPrefix)) {
             return normalizeKey;
@@ -383,4 +382,14 @@ public class JNDIConnector extends AbstractConnector {
         this.isJNDIAvailable = isJNDIAvailable;
     }
 
+    /**
+     * @param message
+     *        The message.
+     * @param exc
+     *        {@link Exception}
+     */
+    protected void logInfoButExceptionDebug(final String message, final Exception exc) {
+        LOG.info(message);
+        LOG.debug(message, exc);
+    }
 }

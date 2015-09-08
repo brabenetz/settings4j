@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,6 +22,7 @@ package org.settings4j.connector;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
+import org.apache.commons.lang3.Validate;
 
 /**
  * Connector which uses the {@link Preferences} feature of Java.
@@ -49,20 +50,29 @@ public class PreferencesConnector extends AbstractPropertyConnector {
 
     private final Preferences userPrefs;
 
-
     /**
      * Default Constructor initialize the User and System {@link Preferences}.
      */
     public PreferencesConnector() {
-        super();
-        this.systemPrefs = Preferences.systemRoot();
-        this.userPrefs = Preferences.userRoot();
+        this(Preferences.systemRoot(), Preferences.userRoot());
     }
 
+    /**
+     * @param systemPrefs
+     *        {@link Preferences#systemRoot()}
+     * @param userPrefs
+     *        {@link Preferences#userRoot()}
+     */
+    protected PreferencesConnector(final Preferences systemPrefs, final Preferences userPrefs) {
+        super();
+        this.systemPrefs = systemPrefs;
+        this.userPrefs = userPrefs;
+    }
 
     /** {@inheritDoc} */
     @Override
     protected String getProperty(final String keyPath, final String defaultValue) {
+        Validate.notNull(keyPath);
         final String normalizedKey = normalizeKey(keyPath);
         final String path = getPath(normalizedKey);
         final String key = getKey(normalizedKey);
@@ -117,6 +127,7 @@ public class PreferencesConnector extends AbstractPropertyConnector {
      * @param value - The new Value
      */
     public void setString(final String keyPath, final String value) {
+        Validate.notNull(keyPath);
         final String normalizedKey = normalizeKey(keyPath);
         final String path = getPath(normalizedKey);
         final String key = getKey(normalizedKey);
@@ -130,6 +141,7 @@ public class PreferencesConnector extends AbstractPropertyConnector {
      * @param value - The new Value
      */
     public void setSystemString(final String keyPath, final String value) {
+        Validate.notNull(keyPath);
         final String normalizedKey = normalizeKey(keyPath);
         final String path = getPath(normalizedKey);
         final String key = getKey(normalizedKey);
@@ -167,11 +179,8 @@ public class PreferencesConnector extends AbstractPropertyConnector {
         return key;
     }
 
-
     private String normalizeKey(final String key) {
-        if (key == null) {
-            return null;
-        }
+        Validate.notNull(key);
         String normalizeKey = key;
 
         normalizeKey = normalizeKey.replace('\\', '/');

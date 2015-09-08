@@ -26,10 +26,25 @@
     <author email="brabenetz@users.sourceforge.net">Harald Brabenetz</author>
   </properties>
   <body>
-    <release version="2.1" date="2015-" description="settings4j 2.1 - ">
+    <release version="2.1" date="2015-" description="settings4j 2.1 - Requires JDK 6 or above.">
       <!-- <action dev="brabenetz" type="fix" issue="1">Bugfix 1</action> -->
     </release>
-    <release version="2.0.2" date="2015-09-??" description="settings4j 2.0.2 - migration to GitHub, update dependency versions; no feature changes">
+    <release version="2.0.2" date="2015-09-08" description="settings4j 2.0.2 - migration to GitHub; No feature changes">
+      <action dev="brabenetz" type="update" date="2014-09-06">
+        update JUnit Tests: replace old JUnit 3.x style with JUnit 4 style.
+      </action>
+      <action dev="brabenetz" type="update" date="2014-09-05">
+        improve TestCoverage
+      </action>
+      <action dev="brabenetz" type="update" date="2014-09-04">
+        add animal-sniffer-maven-plugin for JDK5 compatible check.
+      </action>
+      <action dev="brabenetz" type="update" date="2014-09-03">
+        update JavaDoc for Java 8 validation
+      </action>
+      <action dev="brabenetz" type="update" date="2014-09-02">
+        update dependency- and plugin-versions.
+      </action>
       <action dev="brabenetz" type="update" date="2014-08-30">
         migrate sources to GitHub and update pom.xml.
       </action>

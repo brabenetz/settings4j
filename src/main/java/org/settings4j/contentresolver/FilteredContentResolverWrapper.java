@@ -19,12 +19,13 @@
  */
 package org.settings4j.contentresolver;
 
+import org.apache.commons.lang3.Validate;
 import org.settings4j.ContentResolver;
 import org.settings4j.Filter;
 
 /**
  * Wrapper to add a {@link Filter} which is used before the given {@link ContentResolver} is called.
- * 
+ *
  * @author Harald.Brabenetz
  *
  */
@@ -40,12 +41,8 @@ public class FilteredContentResolverWrapper implements ContentResolver {
      */
     public FilteredContentResolverWrapper(final ContentResolver targetContentResolver, final Filter filter) {
         super();
-        if (targetContentResolver == null) {
-            throw new IllegalArgumentException("FilteredConnectorWrapper needs a ContentResolver Object");
-        }
-        if (filter == null) {
-            throw new IllegalArgumentException("FilteredConnectorWrapper needs a Filter Object");
-        }
+        Validate.notNull(targetContentResolver, "FilteredContentResolverWrapper needs a ContentResolver Object");
+        Validate.notNull(filter, "FilteredContentResolverWrapper needs a Filter Object");
         this.targetContentResolver = targetContentResolver;
         this.filter = filter;
     }
