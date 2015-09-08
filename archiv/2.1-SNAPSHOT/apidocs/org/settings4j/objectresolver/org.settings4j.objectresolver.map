@@ -1,12 +1,12 @@
 <map id="G" name="G">
 <area shape="rect" id="node1_0" href="./UnionObjectResolver.html" title="org.settings4j.objectresolver.UnionObjectResolver" alt="" coords="16,17,152,41"/>
 <area shape="rect" id="node1" href="./UnionObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="5,5,163,53"/>
-<area shape="rect" id="node2_1" href="./SpringConfigObjectResolver.html" title="org.settings4j.objectresolver.SpringConfigObjectResolver" alt="" coords="46,113,221,137"/>
-<area shape="rect" id="node2" href="./SpringConfigObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="35,101,231,149"/>
-<area shape="rect" id="node3_2" href="./JavaXMLBeansObjectResolver.html" title="org.settings4j.objectresolver.JavaXMLBeansObjectResolver" alt="" coords="267,113,453,137"/>
-<area shape="rect" id="node3" href="./JavaXMLBeansObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="256,101,464,149"/>
-<area shape="rect" id="node4_3" href="./FilteredObjectResolverWrapper.html" title="org.settings4j.objectresolver.FilteredObjectResolverWrapper" alt="" coords="341,17,531,41"/>
-<area shape="rect" id="node4" href="./FilteredObjectResolverWrapper.html" title="&lt;TABLE&gt;" alt="" coords="330,5,542,53"/>
-<area shape="rect" id="node5_4" href="./AbstractObjectResolver.html" title="org.settings4j.objectresolver.AbstractObjectResolver" alt="" coords="198,17,295,41"/>
-<area shape="rect" id="node5" href="./AbstractObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="187,5,306,53"/>
+<area shape="rect" id="node2_1" href="./SpringConfigObjectResolver.html" title="org.settings4j.objectresolver.SpringConfigObjectResolver" alt="" coords="71,113,246,137"/>
+<area shape="rect" id="node2" href="./SpringConfigObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="61,101,257,149"/>
+<area shape="rect" id="node3_2" href="./JavaXMLBeansObjectResolver.html" title="org.settings4j.objectresolver.JavaXMLBeansObjectResolver" alt="" coords="292,113,479,137"/>
+<area shape="rect" id="node3" href="./JavaXMLBeansObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="281,101,489,149"/>
+<area shape="rect" id="node4_3" href="./FilteredObjectResolverWrapper.html" title="org.settings4j.objectresolver.FilteredObjectResolverWrapper" alt="" coords="393,17,583,41"/>
+<area shape="rect" id="node4" href="./FilteredObjectResolverWrapper.html" title="&lt;TABLE&gt;" alt="" coords="382,5,594,53"/>
+<area shape="rect" id="node5_4" href="./AbstractObjectResolver.html" title="org.settings4j.objectresolver.AbstractObjectResolver" alt="" coords="197,17,347,41"/>
+<area shape="rect" id="node5" href="./AbstractObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="187,5,357,53"/>
 </map>

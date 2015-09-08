@@ -1,6 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="./SpringConfigObjectResolverTest.html" title="org.settings4j.objectresolver.SpringConfigObjectResolverTest" alt="" coords="15,113,214,137"/>
-<area shape="rect" id="node1" href="./SpringConfigObjectResolverTest.html" title="&lt;TABLE&gt;" alt="" coords="5,101,225,149"/>
-<area shape="rect" id="node2_1" href="http://api.dpml.net/junit/3.8.1/junit/framework/TestCase.html" title="junit.framework.TestCase" alt="" coords="81,11,148,47"/>
-<area shape="rect" id="node2" href="http://api.dpml.net/junit/3.8.1/junit/framework/TestCase.html" title="&lt;TABLE&gt;" alt="" coords="71,5,159,53"/>
+<area shape="rect" id="node1_0" href="./SpringConfigObjectResolverTest.html" title="org.settings4j.objectresolver.SpringConfigObjectResolverTest" alt="" coords="15,17,214,41"/>
+<area shape="rect" id="node1" href="./SpringConfigObjectResolverTest.html" title="&lt;TABLE&gt;" alt="" coords="5,5,225,53"/>
 </map>

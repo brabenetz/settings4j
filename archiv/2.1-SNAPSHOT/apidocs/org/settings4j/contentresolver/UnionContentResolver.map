@@ -1,6 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="../ContentResolver.html" title="org.settings4j.ContentResolver" alt="" coords="33,11,143,61"/>
-<area shape="rect" id="node1" href="../ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="22,5,154,67"/>
-<area shape="rect" id="node2_1" href="./UnionContentResolver.html" title="org.settings4j.contentresolver.UnionContentResolver" alt="" coords="16,127,160,151"/>
-<area shape="rect" id="node2" href="./UnionContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="5,115,171,163"/>
+<area shape="rect" id="node1_0" href="../connector/FSConnector.html" title="org.settings4j.connector.FSConnector" alt="" coords="16,11,115,47"/>
+<area shape="rect" id="node1" href="../connector/FSConnector.html" title="&lt;TABLE&gt;" alt="" coords="5,5,125,53"/>
+<area shape="rect" id="node3_1" href="../ContentResolver.html" title="org.settings4j.ContentResolver" alt="" coords="102,107,213,157"/>
+<area shape="rect" id="node3" href="../ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="91,101,223,163"/>
+<area shape="rect" id="node4_2" href="./UnionContentResolver.html" title="org.settings4j.contentresolver.UnionContentResolver" alt="" coords="85,223,229,247"/>
+<area shape="rect" id="node4" href="./UnionContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="75,211,240,259"/>
+<area shape="rect" id="node2_3" href="../connector/ClasspathConnector.html" title="org.settings4j.connector.ClasspathConnector" alt="" coords="183,11,316,47"/>
+<area shape="rect" id="node2" href="../connector/ClasspathConnector.html" title="&lt;TABLE&gt;" alt="" coords="172,5,327,53"/>
 </map>

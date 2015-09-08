@@ -1,6 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="./DefaultFallbackConfigurationTest.html" title="org.settings4j.config.DefaultFallbackConfigurationTest" alt="" coords="15,113,217,137"/>
-<area shape="rect" id="node1" href="./DefaultFallbackConfigurationTest.html" title="&lt;TABLE&gt;" alt="" coords="5,101,227,149"/>
-<area shape="rect" id="node2_1" href="http://api.dpml.net/junit/3.8.1/junit/framework/TestCase.html" title="junit.framework.TestCase" alt="" coords="75,11,157,47"/>
-<area shape="rect" id="node2" href="http://api.dpml.net/junit/3.8.1/junit/framework/TestCase.html" title="&lt;TABLE&gt;" alt="" coords="64,5,168,53"/>
+<area shape="rect" id="node1_0" href="./DefaultFallbackConfigurationTest.html" title="org.settings4j.config.DefaultFallbackConfigurationTest" alt="" coords="15,17,217,41"/>
+<area shape="rect" id="node1" href="./DefaultFallbackConfigurationTest.html" title="&lt;TABLE&gt;" alt="" coords="5,5,227,53"/>
 </map>

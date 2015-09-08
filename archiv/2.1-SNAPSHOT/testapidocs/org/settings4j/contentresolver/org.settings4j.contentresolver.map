@@ -1,6 +1,9 @@
 <map id="G" name="G">
 <area shape="rect" id="node1_0" href="./FSContentResolverTest.html" title="org.settings4j.contentresolver.FSContentResolverTest" alt="" coords="16,17,165,41"/>
 <area shape="rect" id="node1" href="./FSContentResolverTest.html" title="&lt;TABLE&gt;" alt="" coords="5,5,176,53"/>
-<area shape="rect" id="node2_1" href="./ClasspathContentResolverTest.html" title="org.settings4j.contentresolver.ClasspathContentResolverTest" alt="" coords="211,17,403,41"/>
-<area shape="rect" id="node2" href="./ClasspathContentResolverTest.html" title="&lt;TABLE&gt;" alt="" coords="200,5,413,53"/>
+<area shape="rect" id="node2_1" href="./FilteredContentResolverWrapperTest.html" title="org.settings4j.contentresolver.FilteredContentResolverWrapperTest" alt="" coords="211,17,434,41"/>
+<area shape="rect" id="node2" href="./FilteredContentResolverWrapperTest.html" title="&lt;TABLE&gt;" alt="" coords="201,5,445,53"/>
+<area shape="rect" id="node5" href="null" title="&lt;TABLE&gt;" alt="" coords="213,101,433,149"/>
+<area shape="rect" id="node3_2" href="./ClasspathContentResolverTest.html" title="org.settings4j.contentresolver.ClasspathContentResolverTest" alt="" coords="480,17,672,41"/>
+<area shape="rect" id="node3" href="./ClasspathContentResolverTest.html" title="&lt;TABLE&gt;" alt="" coords="469,5,683,53"/>
 </map>

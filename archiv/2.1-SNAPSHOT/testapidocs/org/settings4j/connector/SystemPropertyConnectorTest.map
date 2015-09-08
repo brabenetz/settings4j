@@ -1,6 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="./SystemPropertyConnectorTest.html" title="org.settings4j.connector.SystemPropertyConnectorTest" alt="" coords="15,113,201,137"/>
-<area shape="rect" id="node1" href="./SystemPropertyConnectorTest.html" title="&lt;TABLE&gt;" alt="" coords="5,101,211,149"/>
-<area shape="rect" id="node2_1" href="http://api.dpml.net/junit/3.8.1/junit/framework/TestCase.html" title="junit.framework.TestCase" alt="" coords="75,11,141,47"/>
-<area shape="rect" id="node2" href="http://api.dpml.net/junit/3.8.1/junit/framework/TestCase.html" title="&lt;TABLE&gt;" alt="" coords="64,5,152,53"/>
+<area shape="rect" id="node1_0" href="./SystemPropertyConnectorTest.html" title="org.settings4j.connector.SystemPropertyConnectorTest" alt="" coords="15,17,201,41"/>
+<area shape="rect" id="node1" href="./SystemPropertyConnectorTest.html" title="&lt;TABLE&gt;" alt="" coords="5,5,211,53"/>
 </map>
