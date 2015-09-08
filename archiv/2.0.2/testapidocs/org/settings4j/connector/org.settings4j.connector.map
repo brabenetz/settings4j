@@ -1,0 +1,22 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./SystemPropertyConnectorTest.html" title="org.settings4j.connector.SystemPropertyConnectorTest" alt="" coords="15,17,201,41"/>
+<area shape="rect" id="node1" href="./SystemPropertyConnectorTest.html" title="&lt;TABLE&gt;" alt="" coords="5,5,211,53"/>
+<area shape="rect" id="node2_1" href="./PreferencesConnectorTest.html" title="org.settings4j.connector.PreferencesConnectorTest" alt="" coords="246,17,413,41"/>
+<area shape="rect" id="node2" href="./PreferencesConnectorTest.html" title="&lt;TABLE&gt;" alt="" coords="235,5,423,53"/>
+<area shape="rect" id="node3_2" href="./JNDIConnectorTest.html" title="org.settings4j.connector.JNDIConnectorTest" alt="" coords="458,17,585,41"/>
+<area shape="rect" id="node3" href="./JNDIConnectorTest.html" title="&lt;TABLE&gt;" alt="" coords="447,5,595,53"/>
+<area shape="rect" id="node4_3" href="./FSConnectorTest.html" title="org.settings4j.connector.FSConnectorTest" alt="" coords="631,17,745,41"/>
+<area shape="rect" id="node4" href="./FSConnectorTest.html" title="&lt;TABLE&gt;" alt="" coords="620,5,756,53"/>
+<area shape="rect" id="node10" href="null" title="&lt;TABLE&gt;" alt="" coords="632,101,744,149"/>
+<area shape="rect" id="node5_4" href="./FilteredConnectorWrapperTest.html" title="org.settings4j.connector.FilteredConnectorWrapperTest" alt="" coords="791,17,979,41"/>
+<area shape="rect" id="node5" href="./FilteredConnectorWrapperTest.html" title="&lt;TABLE&gt;" alt="" coords="781,5,990,53"/>
+<area shape="rect" id="node12" href="null" title="&lt;TABLE&gt;" alt="" coords="793,101,978,149"/>
+<area shape="rect" id="node6_5" href="./EnvironmentConnectorTest.html" title="org.settings4j.connector.EnvironmentConnectorTest" alt="" coords="1025,17,1194,41"/>
+<area shape="rect" id="node6" href="./EnvironmentConnectorTest.html" title="&lt;TABLE&gt;" alt="" coords="1014,5,1205,53"/>
+<area shape="rect" id="node7_6" href="./ClasspathConnectorTest.html" title="org.settings4j.connector.ClasspathConnectorTest" alt="" coords="1240,17,1397,41"/>
+<area shape="rect" id="node7" href="./ClasspathConnectorTest.html" title="&lt;TABLE&gt;" alt="" coords="1229,5,1408,53"/>
+<area shape="rect" id="node14" href="null" title="&lt;TABLE&gt;" alt="" coords="1241,101,1396,149"/>
+<area shape="rect" id="node8_7" href="./CachedConnectorWrapperTest.html" title="org.settings4j.connector.CachedConnectorWrapperTest" alt="" coords="1443,17,1632,41"/>
+<area shape="rect" id="node8" href="./CachedConnectorWrapperTest.html" title="&lt;TABLE&gt;" alt="" coords="1432,5,1643,53"/>
+<area shape="rect" id="node16" href="null" title="&lt;TABLE&gt;" alt="" coords="1444,101,1631,149"/>
+</map>

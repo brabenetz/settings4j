@@ -1,0 +1,18 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./config/DOMConfigurator.html" title="org.settings4j.config.DOMConfigurator" alt="" coords="15,11,129,47"/>
+<area shape="rect" id="node1" href="./config/DOMConfigurator.html" title="&lt;TABLE&gt;" alt="" coords="5,5,139,53"/>
+<area shape="rect" id="node5_1" href="./ObjectResolver.html" title="org.settings4j.ObjectResolver" alt="" coords="310,107,413,146"/>
+<area shape="rect" id="node5" href="./ObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="299,102,423,151"/>
+<area shape="rect" id="node2_2" href="./connector/FilteredConnectorWrapper.html" title="org.settings4j.connector.FilteredConnectorWrapper" alt="" coords="174,11,338,47"/>
+<area shape="rect" id="node2" href="./connector/FilteredConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="163,5,349,53"/>
+<area shape="rect" id="node3_3" href="./connector/CachedConnectorWrapper.html" title="org.settings4j.connector.CachedConnectorWrapper" alt="" coords="384,11,549,47"/>
+<area shape="rect" id="node3" href="./connector/CachedConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="373,5,560,53"/>
+<area shape="rect" id="node4_4" href="./connector/AbstractConnector.html" title="org.settings4j.connector.AbstractConnector" alt="" coords="595,11,701,47"/>
+<area shape="rect" id="node4" href="./connector/AbstractConnector.html" title="&lt;TABLE&gt;" alt="" coords="585,5,711,53"/>
+<area shape="rect" id="node6_5" href="./objectresolver/UnionObjectResolver.html" title="org.settings4j.objectresolver.UnionObjectResolver" alt="" coords="84,206,220,242"/>
+<area shape="rect" id="node6" href="./objectresolver/UnionObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="73,200,231,248"/>
+<area shape="rect" id="node7_6" href="./objectresolver/FilteredObjectResolverWrapper.html" title="org.settings4j.objectresolver.FilteredObjectResolverWrapper" alt="" coords="266,206,457,242"/>
+<area shape="rect" id="node7" href="./objectresolver/FilteredObjectResolverWrapper.html" title="&lt;TABLE&gt;" alt="" coords="255,200,467,248"/>
+<area shape="rect" id="node8_7" href="./objectresolver/AbstractObjectResolver.html" title="org.settings4j.objectresolver.AbstractObjectResolver" alt="" coords="503,206,631,242"/>
+<area shape="rect" id="node8" href="./objectresolver/AbstractObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="492,200,641,248"/>
+</map>

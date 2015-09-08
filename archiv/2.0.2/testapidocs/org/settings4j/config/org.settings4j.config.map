@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./Settings4jMappingConfigTest.html" title="org.settings4j.config.Settings4jMappingConfigTest" alt="" coords="16,113,197,137"/>
+<area shape="rect" id="node1" href="./Settings4jMappingConfigTest.html" title="&lt;TABLE&gt;" alt="" coords="5,101,208,149"/>
+<area shape="rect" id="node2_1" href="./Settings4jFilterConfigTest.html" title="org.settings4j.config.Settings4jFilterConfigTest" alt="" coords="243,113,405,137"/>
+<area shape="rect" id="node2" href="./Settings4jFilterConfigTest.html" title="&lt;TABLE&gt;" alt="" coords="233,101,415,149"/>
+<area shape="rect" id="node3_2" href="./Settings4jConfigTest.html" title="org.settings4j.config.Settings4jConfigTest" alt="" coords="451,113,584,137"/>
+<area shape="rect" id="node3" href="./Settings4jConfigTest.html" title="&lt;TABLE&gt;" alt="" coords="440,101,595,149"/>
+<area shape="rect" id="node4_3" href="./DefaultFallbackConfigurationTest.html" title="org.settings4j.config.DefaultFallbackConfigurationTest" alt="" coords="458,17,659,41"/>
+<area shape="rect" id="node4" href="./DefaultFallbackConfigurationTest.html" title="&lt;TABLE&gt;" alt="" coords="447,5,670,53"/>
+<area shape="rect" id="node5_4" href="./AbstractTestSettings4jConfig.html" title="org.settings4j.config.AbstractTestSettings4jConfig" alt="" coords="235,17,413,41"/>
+<area shape="rect" id="node5" href="./AbstractTestSettings4jConfig.html" title="&lt;TABLE&gt;" alt="" coords="225,5,423,53"/>
+</map>
