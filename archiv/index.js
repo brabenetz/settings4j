@@ -8,7 +8,7 @@ $(document).ready(function() {
 	"use strict";
 	
 	$.getJSON( "https://api.github.com/repos/brabenetz/settings4j/contents/archiv?ref=gh-pages", function( data ) {
-		$("#versionLinks").append(creatlistItem("current"));
+		$("#versionLinks").append(creatlistItem("latest"));
 		$.each( data, function( index, fileOrFolder ) {
 			if (fileOrFolder.type === 'dir') {
 				$("#versionLinks").append(creatlistItem(fileOrFolder.name));
