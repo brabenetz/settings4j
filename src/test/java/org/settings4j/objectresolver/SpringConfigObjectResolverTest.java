@@ -72,7 +72,7 @@ public class SpringConfigObjectResolverTest {
         Connection conn = null;
         try {
             conn = hsqlDS.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement("create Table test ( name VARCHAR )");
+            PreparedStatement pstmt = conn.prepareStatement("create Table test ( name VARCHAR(255) )");
             pstmt.execute();
             pstmt.close();
 

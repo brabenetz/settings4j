@@ -237,7 +237,7 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
         Connection conn = null;
         try {
             conn = dataSource.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement("create Table test ( name VARCHAR )");
+            PreparedStatement pstmt = conn.prepareStatement("create Table test ( name VARCHAR(255) )");
             pstmt.execute();
             pstmt.close();
 
