@@ -10,13 +10,13 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.helper.web.Log4jConfigurationLoaderTest
-	c218 [label=<<table title="org.settings4j.helper.web.Log4jConfigurationLoaderTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Log4jConfigurationLoaderTest.html">
+	c225 [label=<<table title="org.settings4j.helper.web.Log4jConfigurationLoaderTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Log4jConfigurationLoaderTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Log4jConfigurationLoaderTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Log4jConfigurationLoaderTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.helper.web.DefaultPropertiesLoaderTest
-	c219 [label=<<table title="org.settings4j.helper.web.DefaultPropertiesLoaderTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultPropertiesLoaderTest.html">
+	c226 [label=<<table title="org.settings4j.helper.web.DefaultPropertiesLoaderTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultPropertiesLoaderTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultPropertiesLoaderTest </td></tr>
 		</table></td></tr>

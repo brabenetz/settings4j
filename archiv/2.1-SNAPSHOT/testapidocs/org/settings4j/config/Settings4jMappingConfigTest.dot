@@ -10,18 +10,18 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.config.Settings4jMappingConfigTest
-	c1363 [label=<<table title="org.settings4j.config.Settings4jMappingConfigTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Settings4jMappingConfigTest.html">
+	c1435 [label=<<table title="org.settings4j.config.Settings4jMappingConfigTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Settings4jMappingConfigTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Settings4jMappingConfigTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Settings4jMappingConfigTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.config.AbstractTestSettings4jConfig
-	c1367 [label=<<table title="org.settings4j.config.AbstractTestSettings4jConfig" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractTestSettings4jConfig.html">
+	c1439 [label=<<table title="org.settings4j.config.AbstractTestSettings4jConfig" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractTestSettings4jConfig.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="arial italic"> AbstractTestSettings4jConfig </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractTestSettings4jConfig.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.config.Settings4jMappingConfigTest extends org.settings4j.config.AbstractTestSettings4jConfig
-	c1367:p -> c1363:p [dir=back,arrowtail=empty];
+	c1439:p -> c1435:p [dir=back,arrowtail=empty];
 }
 

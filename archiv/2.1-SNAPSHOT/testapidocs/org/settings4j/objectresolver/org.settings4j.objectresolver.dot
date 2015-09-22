@@ -10,27 +10,27 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.objectresolver.SpringConfigObjectResolverTest
-	c252 [label=<<table title="org.settings4j.objectresolver.SpringConfigObjectResolverTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SpringConfigObjectResolverTest.html">
+	c260 [label=<<table title="org.settings4j.objectresolver.SpringConfigObjectResolverTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SpringConfigObjectResolverTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SpringConfigObjectResolverTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SpringConfigObjectResolverTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.objectresolver.JavaXMLBeansObjectResolverTest
-	c253 [label=<<table title="org.settings4j.objectresolver.JavaXMLBeansObjectResolverTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./JavaXMLBeansObjectResolverTest.html">
+	c261 [label=<<table title="org.settings4j.objectresolver.JavaXMLBeansObjectResolverTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./JavaXMLBeansObjectResolverTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> JavaXMLBeansObjectResolverTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./JavaXMLBeansObjectResolverTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.objectresolver.FilteredObjectResolverWrapperTest
-	c254 [label=<<table title="org.settings4j.objectresolver.FilteredObjectResolverWrapperTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./FilteredObjectResolverWrapperTest.html">
+	c262 [label=<<table title="org.settings4j.objectresolver.FilteredObjectResolverWrapperTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./FilteredObjectResolverWrapperTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FilteredObjectResolverWrapperTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./FilteredObjectResolverWrapperTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.objectresolver.FilteredObjectResolverWrapperTest NAVASSOC org.settings4j.objectresolver.FilteredObjectResolverWrapper
-	c254:p -> c261:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c262:p -> c269:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.objectresolver.FilteredObjectResolverWrapper
-	c261 [label=<<table title="org.settings4j.objectresolver.FilteredObjectResolverWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c269 [label=<<table title="org.settings4j.objectresolver.FilteredObjectResolverWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FilteredObjectResolverWrapper </td></tr>
 		</table></td></tr>

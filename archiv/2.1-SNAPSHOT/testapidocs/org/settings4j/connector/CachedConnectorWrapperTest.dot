@@ -10,17 +10,17 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.connector.CachedConnectorWrapperTest
-	c461 [label=<<table title="org.settings4j.connector.CachedConnectorWrapperTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CachedConnectorWrapperTest.html">
+	c475 [label=<<table title="org.settings4j.connector.CachedConnectorWrapperTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CachedConnectorWrapperTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CachedConnectorWrapperTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CachedConnectorWrapperTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.connector.CachedConnectorWrapperTest NAVASSOC org.settings4j.connector.CachedConnectorWrapper
-	c461:p -> c481:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c475:p -> c495:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.connector.CachedConnectorWrapperTest NAVASSOC org.settings4j.Connector
-	c461:p -> c482:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c475:p -> c496:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.Connector
-	c482 [label=<<table title="org.settings4j.Connector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c496 [label=<<table title="org.settings4j.Connector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Connector </td></tr>
@@ -28,7 +28,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.connector.CachedConnectorWrapper
-	c481 [label=<<table title="org.settings4j.connector.CachedConnectorWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c495 [label=<<table title="org.settings4j.connector.CachedConnectorWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CachedConnectorWrapper </td></tr>
 		</table></td></tr>

@@ -83,11 +83,11 @@ digraph G {
 	c715:p -> c735:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.connector.ClasspathConnector DEPEND org.settings4j.ContentResolver
 	c722:p -> c735:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// org.settings4j.connector.AbstractConnector DEPEND org.settings4j.ObjectResolver
-	c726:p -> c733:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// org.settings4j.connector.AbstractConnector DEPEND org.settings4j.Connector
-	c726:p -> c742:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.connector.AbstractConnector DEPEND org.settings4j.ContentResolver
 	c726:p -> c735:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.connector.AbstractConnector DEPEND org.settings4j.Connector
+	c726:p -> c742:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.connector.AbstractConnector DEPEND org.settings4j.ObjectResolver
+	c726:p -> c733:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

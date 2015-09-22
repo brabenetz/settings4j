@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.settings.DefaultFilterTest
-	c288 [label=<<table title="org.settings4j.settings.DefaultFilterTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultFilterTest.html">
+	c297 [label=<<table title="org.settings4j.settings.DefaultFilterTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultFilterTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultFilterTest </td></tr>
 		</table></td></tr>

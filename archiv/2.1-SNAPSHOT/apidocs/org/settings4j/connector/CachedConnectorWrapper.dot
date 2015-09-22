@@ -43,11 +43,11 @@ digraph G {
 	c1051:p -> c1038:p [dir=back,arrowtail=empty,style=dashed];
 	// org.settings4j.connector.CachedConnectorWrapper NAVASSOC org.settings4j.Connector
 	c1038:p -> c1051:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
-	// org.settings4j.connector.CachedConnectorWrapper DEPEND org.settings4j.ObjectResolver
-	c1038:p -> c1045:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// org.settings4j.connector.CachedConnectorWrapper DEPEND org.settings4j.Connector
-	c1038:p -> c1051:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.connector.CachedConnectorWrapper DEPEND org.settings4j.ContentResolver
 	c1038:p -> c1047:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.connector.CachedConnectorWrapper DEPEND org.settings4j.Connector
+	c1038:p -> c1051:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.connector.CachedConnectorWrapper DEPEND org.settings4j.ObjectResolver
+	c1038:p -> c1045:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

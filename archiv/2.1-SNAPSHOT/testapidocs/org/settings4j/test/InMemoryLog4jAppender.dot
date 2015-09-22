@@ -10,24 +10,24 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.test.InMemoryLog4jAppender
-	c1113 [label=<<table title="org.settings4j.test.InMemoryLog4jAppender" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./InMemoryLog4jAppender.html">
+	c1145 [label=<<table title="org.settings4j.test.InMemoryLog4jAppender" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./InMemoryLog4jAppender.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> InMemoryLog4jAppender </td></tr>
 		</table></td></tr>
 		</table>>, URL="./InMemoryLog4jAppender.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.test.InMemoryLog4jAppender extends org.apache.log4j.AppenderSkeleton
-	c1123:p -> c1113:p [dir=back,arrowtail=empty];
+	c1155:p -> c1145:p [dir=back,arrowtail=empty];
 	// org.settings4j.test.InMemoryLog4jAppender DEPEND org.apache.log4j.spi.LoggingEvent
-	c1113:p -> c1132:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c1145:p -> c1164:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.apache.log4j.AppenderSkeleton
-	c1123 [label=<<table title="org.apache.log4j.AppenderSkeleton" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c1155 [label=<<table title="org.apache.log4j.AppenderSkeleton" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="arial italic"> AppenderSkeleton </font></td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.apache.log4j </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.apache.log4j.spi.LoggingEvent
-	c1132 [label=<<table title="org.apache.log4j.spi.LoggingEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c1164 [label=<<table title="org.apache.log4j.spi.LoggingEvent" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LoggingEvent </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.apache.log4j.spi </font></td></tr>

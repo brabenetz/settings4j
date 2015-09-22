@@ -245,7 +245,7 @@
 <a class="jxr_linenumber" name="L237" href="#L237">237</a>         Connection conn = <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L238" href="#L238">238</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L239" href="#L239">239</a>             conn = dataSource.getConnection();
-<a class="jxr_linenumber" name="L240" href="#L240">240</a>             PreparedStatement pstmt = conn.prepareStatement(<span class="jxr_string">"create Table test ( name VARCHAR )"</span>);
+<a class="jxr_linenumber" name="L240" href="#L240">240</a>             PreparedStatement pstmt = conn.prepareStatement(<span class="jxr_string">"create Table test ( name VARCHAR(255) )"</span>);
 <a class="jxr_linenumber" name="L241" href="#L241">241</a>             pstmt.execute();
 <a class="jxr_linenumber" name="L242" href="#L242">242</a>             pstmt.close();
 <a class="jxr_linenumber" name="L243" href="#L243">243</a> 
