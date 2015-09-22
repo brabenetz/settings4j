@@ -1,4 +1,6 @@
 /.project
 /.settings/
+/archiv/latest
+/archiv/current
 /archiv/latest/*
 /archiv/current/*
