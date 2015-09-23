@@ -67,7 +67,6 @@
         <ribbonOrientation>right</ribbonOrientation>
         <ribbonColor>black</ribbonColor>
       </gitHub>
-      <facebookLike />
     </fluidoSkin>
   </custom>
 </project>
