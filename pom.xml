@@ -28,7 +28,7 @@
     <developer>
       <id>brabenetz</id>
       <name>Harald Brabenetz</name>
-      <email>brabenetz(at)gmx.net</email>
+      <email>brabenetz@gmx.net</email>
       <roles>
         <role>Developer</role>
       </roles>
@@ -421,6 +421,7 @@
             <xmlPath>${basedir}/src/site/changes.xml</xmlPath>
             <issueLinkTemplatePerSystem>
               <default>https://github.com/brabenetz/settings4j/issues/%ISSUE%</default>
+              <maven-site>./%ISSUE%.html</maven-site>
             </issueLinkTemplatePerSystem>
           </configuration>
         </plugin>
