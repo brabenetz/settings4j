@@ -73,16 +73,16 @@ digraph G {
 	c2131:p -> c2143:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Filter
 	c2131:p -> c2148:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Connector
+	c2131:p -> c2153:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.config.DOMConfigurator DEPEND org.w3c.dom.Element
 	c2131:p -> c2190:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.config.DOMConfigurator DEPEND org.w3c.dom.Document
+	c2131:p -> c2191:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.ContentResolver
 	c2131:p -> c2149:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Connector
 	c2131:p -> c2153:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Connector
-	c2131:p -> c2153:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// org.settings4j.config.DOMConfigurator DEPEND org.w3c.dom.Document
-	c2131:p -> c2191:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Connector
 	c2131:p -> c2153:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Connector

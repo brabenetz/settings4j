@@ -16,7 +16,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./JavaXMLBeansObjectResolverTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.objectresolver.JavaXMLBeansObjectResolverTest DEPEND org.settings4j.ContentResolver
-	c1223:p -> c1233:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c1223:p -> c1231:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.objectresolver.JavaXMLBeansObjectResolverTest DEPEND org.settings4j.contentresolver.FSContentResolver
 	c1223:p -> c1234:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.contentresolver.FSContentResolver
@@ -27,7 +27,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.ContentResolver
-	c1233 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c1231 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ContentResolver </td></tr>
