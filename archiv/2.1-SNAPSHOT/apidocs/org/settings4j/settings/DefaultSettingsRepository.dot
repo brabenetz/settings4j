@@ -43,9 +43,9 @@ digraph G {
 	c2516:p -> c2547:p [dir=back,arrowtail=empty,style=dashed];
 	// org.settings4j.settings.DefaultSettingsRepository NAVASSOC org.settings4j.Settings4jInstance
 	c2547:p -> c2517:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
-	// org.settings4j.settings.DefaultSettingsRepository DEPEND org.settings4j.Settings4jInstance
-	c2547:p -> c2517:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.settings.DefaultSettingsRepository DEPEND org.settings4j.Settings4jFactory
 	c2547:p -> c2518:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.settings.DefaultSettingsRepository DEPEND org.settings4j.Settings4jInstance
+	c2547:p -> c2517:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

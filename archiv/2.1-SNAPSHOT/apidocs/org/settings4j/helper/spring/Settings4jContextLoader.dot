@@ -24,10 +24,10 @@ digraph G {
 		</table>>, URL="../web/DefaultPropertiesLoader.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.helper.spring.Settings4jContextLoader extends org.springframework.web.context.ContextLoader
 	c3787:p -> c3759:p [dir=back,arrowtail=empty];
-	// org.settings4j.helper.spring.Settings4jContextLoader DEPEND org.settings4j.helper.web.DefaultPropertiesLoader
-	c3759:p -> c3764:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.helper.spring.Settings4jContextLoader DEPEND org.springframework.web.context.ConfigurableWebApplicationContext
 	c3759:p -> c3788:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.helper.spring.Settings4jContextLoader DEPEND org.settings4j.helper.web.DefaultPropertiesLoader
+	c3759:p -> c3764:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.springframework.web.context.ContextLoader
 	c3787 [label=<<table title="org.springframework.web.context.ContextLoader" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

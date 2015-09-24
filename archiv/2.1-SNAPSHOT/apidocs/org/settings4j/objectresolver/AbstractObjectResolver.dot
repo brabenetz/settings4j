@@ -53,9 +53,9 @@ digraph G {
 	c868:p -> c848:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.objectresolver.JavaXMLBeansObjectResolver DEPEND org.settings4j.ContentResolver
 	c869:p -> c848:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// org.settings4j.objectresolver.AbstractObjectResolver DEPEND org.settings4j.ContentResolver
-	c871:p -> c848:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.objectresolver.AbstractObjectResolver DEPEND org.settings4j.ObjectResolver
 	c871:p -> c846:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.objectresolver.AbstractObjectResolver DEPEND org.settings4j.ContentResolver
+	c871:p -> c848:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 
