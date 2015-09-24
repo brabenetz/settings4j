@@ -36,23 +36,17 @@ public class EnvironmentConnector extends AbstractPropertyConnector {
      * Very similar to <code>System.getenv</code> except that the {@link SecurityException} is hidden.
      *
      * @param key The key to search for.
-     * @param def The default value to return.
      * @return the string value of the Environment variable, or the default value if there is no property with that key.
      */
-    @Override
-    protected String getProperty(final String key, final String def) {
+    public String getString(final String key) {
         try {
-            final String envValue = System.getenv(key);
-            if (envValue == null) {
-                return def;
-            }
-            return envValue;
+            return System.getenv(key);
         } catch (final SecurityException e) {
             LOG.info("Was not allowed to read environment value for key '{}'.", key, e);
-            return def;
+            return null;
         } catch (final Throwable e) {
             LOG.warn("Exception reading environment value for key '{}': {}", key, e.getMessage());
-            return def;
+            return null;
         }
     }
 }

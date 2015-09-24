@@ -122,9 +122,8 @@ public class PropertyFileConnector extends AbstractPropertyConnector {
     private URL propertyFileFolderUrl;
 
     /** {@inheritDoc} */
-    @Override
-    protected String getProperty(final String key, final String def) {
-        return this.property.getProperty(key, def);
+    public String getString(final String key) {
+        return this.property.getProperty(key, null);
     }
 
     public void setProperty(final Properties property) {

@@ -52,18 +52,4 @@ public abstract class AbstractPropertyConnector extends AbstractConnector {
         return null;
 
     }
-
-    /** {@inheritDoc} */
-    public String getString(final String key) {
-        return getProperty(key, null);
-    }
-
-    /**
-     * Very similar to <code>System.getProperty</code> except that the {@link SecurityException} is hidden.
-     *
-     * @param key The key to search for.
-     * @param defaultValue The default value to return.
-     * @return the string value of the system property, or the default value if there is no property with that key.
-     */
-    protected abstract String getProperty(String key, String defaultValue);
 }

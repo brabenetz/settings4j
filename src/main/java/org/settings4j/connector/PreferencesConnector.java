@@ -70,15 +70,14 @@ public class PreferencesConnector extends AbstractPropertyConnector {
     }
 
     /** {@inheritDoc} */
-    @Override
-    protected String getProperty(final String keyPath, final String defaultValue) {
+    public String getString(final String keyPath) {
         Validate.notNull(keyPath);
         final String normalizedKey = normalizeKey(keyPath);
         final String path = getPath(normalizedKey);
         final String key = getKey(normalizedKey);
-        String value = getPreferenceValue(path, key, defaultValue, this.userPrefs);
+        String value = getPreferenceValue(path, key, this.userPrefs);
         if (value == null) {
-            value = getPreferenceValue(path, key, defaultValue, this.systemPrefs);
+            value = getPreferenceValue(path, key, this.systemPrefs);
         }
         return value;
     }
@@ -99,24 +98,23 @@ public class PreferencesConnector extends AbstractPropertyConnector {
      *
      * @param path the preferences path (placeholder part before '/')
      * @param key the preferences key (placeholder part after '/')
-     * @param defaultValue the default Value.
      * @param preferences the Preferences to resolve against
      * @return the value for the placeholder, or <code>null</code> if none found
      */
-    protected String getPreferenceValue(final String path, final String key, final String defaultValue,
+    protected String getPreferenceValue(final String path, final String key,
         final Preferences preferences) {
         if (path != null) {
             // Do not create the node if it does not exist...
             try {
                 if (preferences.nodeExists(path)) {
-                    return preferences.node(path).get(key, defaultValue);
+                    return preferences.node(path).get(key, null);
                 }
-                return defaultValue;
+                return null;
             } catch (final BackingStoreException e) {
                 throw new RuntimeException("Cannot access specified node path [" + path + "]", e);
             }
         }
-        return preferences.get(key, defaultValue);
+        return preferences.get(key, null);
     }
 
 
@@ -165,7 +163,7 @@ public class PreferencesConnector extends AbstractPropertyConnector {
         }
         try {
             preferences.flush();
-        } catch (BackingStoreException e) {
+        } catch (final BackingStoreException e) {
             throw new RuntimeException("Cannot access specified node path [" + path + "]", e);
         }
     }
