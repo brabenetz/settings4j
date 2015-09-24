@@ -22,50 +22,50 @@
 
 <settings4j:configuration xmlns:settings4j='http://settings4j.org/'>
 
-	<connector name="SystemPropertyConnector"
-		class="org.settings4j.connector.SystemPropertyConnector">
-		<contentResolver-ref ref="DefaultContentResolver" />
-		<objectResolver-ref ref="DefaultObjectResolver" />
-	</connector>
-	
-	<connector name="JNDIConnector"
-		class="org.settings4j.connector.JNDIConnector">
-		<contentResolver-ref ref="DefaultContentResolver" />
-		<objectResolver-ref ref="DefaultObjectResolver" />
-	</connector>
-	
-	<connector name="PreferencesConnector"
-		class="org.settings4j.connector.PreferencesConnector">
-		<contentResolver-ref ref="DefaultContentResolver" />
-		<objectResolver-ref ref="DefaultObjectResolver" />
-	</connector>
-	
-	<connector name="ClasspathConnector" class="org.settings4j.connector.ClasspathConnector" >
-		<objectResolver-ref ref="DefaultObjectResolver" />
-	</connector>
+  <connector name="SystemPropertyConnector" class="org.settings4j.connector.SystemPropertyConnector">
+    <contentResolver-ref ref="DefaultContentResolver" />
+    <objectResolver-ref ref="DefaultObjectResolver" />
+  </connector>
 
-	<contentResolver name="DefaultContentResolver" class="org.settings4j.contentresolver.UnionContentResolver">
-		<contentResolver-ref ref="ClasspathContentResolver" />
-		<contentResolver-ref ref="FilesystemContentResolver" />
-	</contentResolver>
+  <connector name="JNDIConnector" class="org.settings4j.connector.JNDIConnector">
+    <contentResolver-ref ref="DefaultContentResolver" />
+    <objectResolver-ref ref="DefaultObjectResolver" />
+  </connector>
 
-	<contentResolver name="ClasspathContentResolver"
-		class="org.settings4j.contentresolver.ClasspathContentResolver">
-	</contentResolver>
+  <connector name="EnvironmentConnector" class="org.settings4j.connector.EnvironmentConnector">
+    <contentResolver-ref ref="DefaultContentResolver" />
+    <objectResolver-ref ref="DefaultObjectResolver" />
+  </connector>
 
-	<contentResolver name="FilesystemContentResolver"
-		class="org.settings4j.contentresolver.FSContentResolver">
-	</contentResolver>
+  <connector name="PreferencesConnector" class="org.settings4j.connector.PreferencesConnector">
+    <contentResolver-ref ref="DefaultContentResolver" />
+    <objectResolver-ref ref="DefaultObjectResolver" />
+  </connector>
 
-	<objectResolver name="DefaultObjectResolver" class="org.settings4j.objectresolver.UnionObjectResolver">
-		<objectResolver-ref ref="JavaXMLBeansObjectResolver" />
-		<objectResolver-ref ref="SpringConfigObjectResolver" />
-	</objectResolver>
-	
-	<objectResolver name="JavaXMLBeansObjectResolver" class="org.settings4j.objectresolver.JavaXMLBeansObjectResolver">
-	</objectResolver>
-	
-	<objectResolver name="SpringConfigObjectResolver" class="org.settings4j.objectresolver.SpringConfigObjectResolver">
-	</objectResolver>
-	
+  <connector name="ClasspathConnector" class="org.settings4j.connector.ClasspathConnector">
+    <objectResolver-ref ref="DefaultObjectResolver" />
+  </connector>
+
+  <contentResolver name="DefaultContentResolver" class="org.settings4j.contentresolver.UnionContentResolver">
+    <contentResolver-ref ref="ClasspathContentResolver" />
+    <contentResolver-ref ref="FilesystemContentResolver" />
+  </contentResolver>
+
+  <contentResolver name="ClasspathContentResolver" class="org.settings4j.contentresolver.ClasspathContentResolver">
+  </contentResolver>
+
+  <contentResolver name="FilesystemContentResolver" class="org.settings4j.contentresolver.FSContentResolver">
+  </contentResolver>
+
+  <objectResolver name="DefaultObjectResolver" class="org.settings4j.objectresolver.UnionObjectResolver">
+    <objectResolver-ref ref="JavaXMLBeansObjectResolver" />
+    <objectResolver-ref ref="SpringConfigObjectResolver" />
+  </objectResolver>
+
+  <objectResolver name="JavaXMLBeansObjectResolver" class="org.settings4j.objectresolver.JavaXMLBeansObjectResolver">
+  </objectResolver>
+
+  <objectResolver name="SpringConfigObjectResolver" class="org.settings4j.objectresolver.SpringConfigObjectResolver">
+  </objectResolver>
+
 </settings4j:configuration>

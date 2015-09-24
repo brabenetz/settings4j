@@ -63,7 +63,7 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
         final Settings4jInstance settings = settingsRepository.getSettings();
 
         // the rootSettings have four Connectors
-        final int expectedConnectorSize = 4;
+        final int expectedConnectorSize = 5;
         assertThat(settings.getConnectors(), hasSize(expectedConnectorSize));
 
         // check if there is no Exception thrown:

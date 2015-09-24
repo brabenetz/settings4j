@@ -64,7 +64,7 @@ public class DefaultFallbackConfigurationTest {
         assertThat(Settings4j.getObject("xyz"), is(nullValue()));
 
         // the Default settings Configuration is readonly
-        final int expectedConnectors = 4;
+        final int expectedConnectors = 5;
         assertThat(Settings4j.getConnectors().size(), is(expectedConnectors));
     }
 }

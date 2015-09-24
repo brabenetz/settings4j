@@ -28,6 +28,18 @@
   <body>
     <release version="2.1" date="2015-??" description="settings4j 2.1 - Requires JDK 6 or above.">
       <!-- <action dev="brabenetz" type="fix" issue="1">Bugfix 1</action> -->
+      <action dev="brabenetz" type="update" date="2014-09-24">
+        update default settings4j.xml: add EnvironmentConnector before PreferencesConnector.
+      </action>
+      <action dev="brabenetz" type="update" date="2014-09-24">
+        update minimum requirement to JDK 6.
+      </action>
+      <action dev="brabenetz" type="remove" date="2014-09-24">
+        remove deprecated method: PropertyFileConnector.setPropertyFromContent(...)
+      </action>
+      <action dev="brabenetz" type="remove" date="2014-09-24">
+        remove deprecated classe: Settings4jContextLoader, Settings4jContextLoaderListener
+      </action>
     </release>
     <release version="2.0.3" date="2015-09-24" description="settings4j 2.0.3 - improved PropertyFileConnector">
       <action dev="brabenetz" type="update" date="2014-09-24">
