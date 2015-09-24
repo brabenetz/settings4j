@@ -19,6 +19,8 @@
  */
 package org.settings4j.connector;
 
+import java.util.Locale;
+
 /**
  * The Environment variable implementation of an {@link org.settings4j.Connector}.
  * <p>
@@ -40,6 +42,16 @@ public class EnvironmentConnector extends AbstractPropertyConnector {
      */
     @Override
     public String getString(final String key) {
+        final String value = getEnv(key);
+        if (value == null) {
+            final String uppercaseKey = key.toUpperCase(Locale.ENGLISH).replaceAll("\\W", "_");
+            LOG.debug("Try to find value for KEY: {}", uppercaseKey);
+            return getEnv(uppercaseKey);
+        }
+        return value;
+    }
+
+    private String getEnv(final String key) {
         try {
             return System.getenv(key);
         } catch (final SecurityException e) {

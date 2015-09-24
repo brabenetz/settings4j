@@ -34,6 +34,8 @@
     
     [[]] Lookup in JNDI Context
     
+    [[]] Lookup in System.getenv(String) (since settings4j-2.1)
+    
     [[]] Lookup in Preferences.userRoot() and then Preferences.systemRoot()
     
     [[]] Lookup in Classpath

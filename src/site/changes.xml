@@ -32,6 +32,9 @@
         update default settings4j.xml: add EnvironmentConnector before PreferencesConnector.
       </action>
       <action dev="brabenetz" type="update" date="2014-09-24">
+        improve EnvironmentConnector: Also check for the UpperCase version of the key.
+      </action>
+      <action dev="brabenetz" type="update" date="2014-09-24">
         update minimum requirement to JDK 6.
       </action>
       <action dev="brabenetz" type="remove" date="2014-09-24">
