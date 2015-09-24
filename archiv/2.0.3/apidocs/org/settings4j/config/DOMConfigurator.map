@@ -1,0 +1,20 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./DOMConfigurator.html" title="org.settings4j.config.DOMConfigurator" alt="" coords="777,17,890,41"/>
+<area shape="rect" id="node1" href="./DOMConfigurator.html" title="&lt;TABLE&gt;" alt="" coords="766,5,901,53"/>
+<area shape="rect" id="node2_1" href="../Settings4jRepository.html" title="org.settings4j.Settings4jRepository" alt="" coords="16,107,149,157"/>
+<area shape="rect" id="node2" href="../Settings4jRepository.html" title="&lt;TABLE&gt;" alt="" coords="5,101,160,163"/>
+<area shape="rect" id="node3_2" href="../Settings4jInstance.html" title="org.settings4j.Settings4jInstance" alt="" coords="195,107,317,157"/>
+<area shape="rect" id="node3" href="../Settings4jInstance.html" title="&lt;TABLE&gt;" alt="" coords="185,101,327,163"/>
+<area shape="rect" id="node4_3" href="../ObjectResolver.html" title="org.settings4j.ObjectResolver" alt="" coords="362,107,465,157"/>
+<area shape="rect" id="node4" href="../ObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="351,101,475,163"/>
+<area shape="rect" id="node5_4" href="../Filter.html" title="org.settings4j.Filter" alt="" coords="511,107,591,157"/>
+<area shape="rect" id="node5" href="../Filter.html" title="&lt;TABLE&gt;" alt="" coords="500,101,601,163"/>
+<area shape="rect" id="node6_5" href="../ContentResolver.html" title="org.settings4j.ContentResolver" alt="" coords="637,107,747,157"/>
+<area shape="rect" id="node6" href="../ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="626,101,758,163"/>
+<area shape="rect" id="node7_6" href="../Connector.html" title="org.settings4j.Connector" alt="" coords="793,107,873,157"/>
+<area shape="rect" id="node7" href="../Connector.html" title="&lt;TABLE&gt;" alt="" coords="783,101,884,163"/>
+<area shape="rect" id="node15_7" href="http://download.oracle.com/javase/1.5.0/docs/api/org/w3c/dom/Element.html" title="org.w3c.dom.Element" alt="" coords="919,107,999,157"/>
+<area shape="rect" id="node15" href="http://download.oracle.com/javase/1.5.0/docs/api/org/w3c/dom/Element.html" title="&lt;TABLE&gt;" alt="" coords="908,101,1009,163"/>
+<area shape="rect" id="node21_8" href="http://download.oracle.com/javase/1.5.0/docs/api/org/w3c/dom/Document.html" title="org.w3c.dom.Document" alt="" coords="1044,107,1124,157"/>
+<area shape="rect" id="node21" href="http://download.oracle.com/javase/1.5.0/docs/api/org/w3c/dom/Document.html" title="&lt;TABLE&gt;" alt="" coords="1033,101,1135,163"/>
+</map>

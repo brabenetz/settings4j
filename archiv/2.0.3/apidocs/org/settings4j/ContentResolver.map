@@ -1,0 +1,34 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./config/DOMConfigurator.html" title="org.settings4j.config.DOMConfigurator" alt="" coords="195,107,309,143"/>
+<area shape="rect" id="node1" href="./config/DOMConfigurator.html" title="&lt;TABLE&gt;" alt="" coords="185,101,319,149"/>
+<area shape="rect" id="node7_1" href="./ContentResolver.html" title="org.settings4j.ContentResolver" alt="" coords="994,203,1105,242"/>
+<area shape="rect" id="node7" href="./ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="983,198,1115,247"/>
+<area shape="rect" id="node2_2" href="./connector/FSConnector.html" title="org.settings4j.connector.FSConnector" alt="" coords="1772,107,1871,143"/>
+<area shape="rect" id="node2" href="./connector/FSConnector.html" title="&lt;TABLE&gt;" alt="" coords="1761,101,1881,149"/>
+<area shape="rect" id="node8_3" href="./contentresolver/UnionContentResolver.html" title="org.settings4j.contentresolver.UnionContentResolver" alt="" coords="977,302,1121,338"/>
+<area shape="rect" id="node8" href="./contentresolver/UnionContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="967,296,1132,344"/>
+<area shape="rect" id="node9_4" href="./contentresolver/FSContentResolver.html" title="org.settings4j.contentresolver.FSContentResolver" alt="" coords="1411,302,1554,338"/>
+<area shape="rect" id="node9" href="./contentresolver/FSContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="1401,296,1565,344"/>
+<area shape="rect" id="node3_5" href="./connector/FilteredConnectorWrapper.html" title="org.settings4j.connector.FilteredConnectorWrapper" alt="" coords="354,107,518,143"/>
+<area shape="rect" id="node3" href="./connector/FilteredConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="343,101,529,149"/>
+<area shape="rect" id="node4_6" href="./connector/ClasspathConnector.html" title="org.settings4j.connector.ClasspathConnector" alt="" coords="16,107,149,143"/>
+<area shape="rect" id="node4" href="./connector/ClasspathConnector.html" title="&lt;TABLE&gt;" alt="" coords="5,101,160,149"/>
+<area shape="rect" id="node11_7" href="./contentresolver/ClasspathContentResolver.html" title="org.settings4j.contentresolver.ClasspathContentResolver" alt="" coords="764,302,932,338"/>
+<area shape="rect" id="node11" href="./contentresolver/ClasspathContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="753,296,943,344"/>
+<area shape="rect" id="node5_8" href="./connector/CachedConnectorWrapper.html" title="org.settings4j.connector.CachedConnectorWrapper" alt="" coords="564,107,729,143"/>
+<area shape="rect" id="node5" href="./connector/CachedConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="553,101,740,149"/>
+<area shape="rect" id="node6_9" href="./connector/AbstractConnector.html" title="org.settings4j.connector.AbstractConnector" alt="" coords="1672,11,1752,47"/>
+<area shape="rect" id="node6" href="./connector/AbstractConnector.html" title="&lt;TABLE&gt;" alt="" coords="1661,5,1763,53"/>
+<area shape="rect" id="node10_10" href="./contentresolver/FilteredContentResolverWrapper.html" title="org.settings4j.contentresolver.FilteredContentResolverWrapper" alt="" coords="1167,302,1366,338"/>
+<area shape="rect" id="node10" href="./contentresolver/FilteredContentResolverWrapper.html" title="&lt;TABLE&gt;" alt="" coords="1157,296,1377,344"/>
+<area shape="rect" id="node12_11" href="./objectresolver/UnionObjectResolver.html" title="org.settings4j.objectresolver.UnionObjectResolver" alt="" coords="775,107,911,143"/>
+<area shape="rect" id="node12" href="./objectresolver/UnionObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="764,101,921,149"/>
+<area shape="rect" id="node13_12" href="./objectresolver/SpringConfigObjectResolver.html" title="org.settings4j.objectresolver.SpringConfigObjectResolver" alt="" coords="1477,107,1651,143"/>
+<area shape="rect" id="node13" href="./objectresolver/SpringConfigObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="1466,101,1662,149"/>
+<area shape="rect" id="node14_13" href="./objectresolver/JavaXMLBeansObjectResolver.html" title="org.settings4j.objectresolver.JavaXMLBeansObjectResolver" alt="" coords="956,107,1143,143"/>
+<area shape="rect" id="node14" href="./objectresolver/JavaXMLBeansObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="945,101,1153,149"/>
+<area shape="rect" id="node15_14" href="./objectresolver/FilteredObjectResolverWrapper.html" title="org.settings4j.objectresolver.FilteredObjectResolverWrapper" alt="" coords="1189,107,1379,143"/>
+<area shape="rect" id="node15" href="./objectresolver/FilteredObjectResolverWrapper.html" title="&lt;TABLE&gt;" alt="" coords="1178,101,1390,149"/>
+<area shape="rect" id="node16_15" href="./objectresolver/AbstractObjectResolver.html" title="org.settings4j.objectresolver.AbstractObjectResolver" alt="" coords="1353,11,1503,47"/>
+<area shape="rect" id="node16" href="./objectresolver/AbstractObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="1343,5,1513,53"/>
+</map>

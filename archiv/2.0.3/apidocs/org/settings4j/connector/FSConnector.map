@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./FSConnector.html" title="org.settings4j.connector.FSConnector" alt="" coords="16,113,107,137"/>
+<area shape="rect" id="node1" href="./FSConnector.html" title="&lt;TABLE&gt;" alt="" coords="5,101,117,149"/>
+<area shape="rect" id="node3_1" href="../ContentResolver.html" title="org.settings4j.ContentResolver" alt="" coords="110,203,221,253"/>
+<area shape="rect" id="node3" href="../ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="99,197,231,259"/>
+<area shape="rect" id="node4_2" href="../contentresolver/UnionContentResolver.html" title="org.settings4j.contentresolver.UnionContentResolver" alt="" coords="72,313,216,349"/>
+<area shape="rect" id="node4" href="../contentresolver/UnionContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="61,307,227,355"/>
+<area shape="rect" id="node5_3" href="../contentresolver/FSContentResolver.html" title="org.settings4j.contentresolver.FSContentResolver" alt="" coords="262,313,405,349"/>
+<area shape="rect" id="node5" href="../contentresolver/FSContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="251,307,415,355"/>
+<area shape="rect" id="node2_4" href="./AbstractConnector.html" title="org.settings4j.connector.AbstractConnector" alt="" coords="106,17,227,41"/>
+<area shape="rect" id="node2" href="./AbstractConnector.html" title="&lt;TABLE&gt;" alt="" coords="95,5,238,53"/>
+</map>

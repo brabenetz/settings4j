@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./CachedConnectorWrapper.html" title="org.settings4j.connector.CachedConnectorWrapper" alt="" coords="277,17,443,41"/>
+<area shape="rect" id="node1" href="./CachedConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="267,5,453,53"/>
+<area shape="rect" id="node2_1" href="../ObjectResolver.html" title="org.settings4j.ObjectResolver" alt="" coords="15,107,118,157"/>
+<area shape="rect" id="node2" href="../ObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="5,101,129,163"/>
+<area shape="rect" id="node3_2" href="../ContentResolver.html" title="org.settings4j.ContentResolver" alt="" coords="163,107,274,157"/>
+<area shape="rect" id="node3" href="../ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="153,101,285,163"/>
+<area shape="rect" id="node4_3" href="../Connector.html" title="org.settings4j.Connector" alt="" coords="320,107,400,157"/>
+<area shape="rect" id="node4" href="../Connector.html" title="&lt;TABLE&gt;" alt="" coords="309,101,411,163"/>
+</map>

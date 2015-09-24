@@ -1,0 +1,24 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./SystemPropertyConnector.html" title="org.settings4j.connector.SystemPropertyConnector" alt="" coords="191,209,353,233"/>
+<area shape="rect" id="node1" href="./SystemPropertyConnector.html" title="&lt;TABLE&gt;" alt="" coords="181,197,363,245"/>
+<area shape="rect" id="node2_1" href="./PropertyFileConnector.html" title="org.settings4j.connector.PropertyFileConnector" alt="" coords="399,209,540,233"/>
+<area shape="rect" id="node2" href="./PropertyFileConnector.html" title="&lt;TABLE&gt;" alt="" coords="388,197,551,245"/>
+<area shape="rect" id="node3_2" href="./PreferencesConnector.html" title="org.settings4j.connector.PreferencesConnector" alt="" coords="586,209,729,233"/>
+<area shape="rect" id="node3" href="./PreferencesConnector.html" title="&lt;TABLE&gt;" alt="" coords="575,197,739,245"/>
+<area shape="rect" id="node4_3" href="./JNDIConnector.html" title="org.settings4j.connector.JNDIConnector" alt="" coords="15,113,118,137"/>
+<area shape="rect" id="node4" href="./JNDIConnector.html" title="&lt;TABLE&gt;" alt="" coords="5,101,129,149"/>
+<area shape="rect" id="node5_4" href="./FSConnector.html" title="org.settings4j.connector.FSConnector" alt="" coords="164,113,255,137"/>
+<area shape="rect" id="node5" href="./FSConnector.html" title="&lt;TABLE&gt;" alt="" coords="153,101,265,149"/>
+<area shape="rect" id="node6_5" href="./FilteredConnectorWrapper.html" title="org.settings4j.connector.FilteredConnectorWrapper" alt="" coords="394,17,558,41"/>
+<area shape="rect" id="node6" href="./FilteredConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="383,5,569,53"/>
+<area shape="rect" id="node7_6" href="./EnvironmentConnector.html" title="org.settings4j.connector.EnvironmentConnector" alt="" coords="774,209,919,233"/>
+<area shape="rect" id="node7" href="./EnvironmentConnector.html" title="&lt;TABLE&gt;" alt="" coords="763,197,930,245"/>
+<area shape="rect" id="node8_7" href="./ClasspathConnector.html" title="org.settings4j.connector.ClasspathConnector" alt="" coords="300,113,433,137"/>
+<area shape="rect" id="node8" href="./ClasspathConnector.html" title="&lt;TABLE&gt;" alt="" coords="289,101,444,149"/>
+<area shape="rect" id="node9_8" href="./CachedConnectorWrapper.html" title="org.settings4j.connector.CachedConnectorWrapper" alt="" coords="604,17,769,41"/>
+<area shape="rect" id="node9" href="./CachedConnectorWrapper.html" title="&lt;TABLE&gt;" alt="" coords="593,5,780,53"/>
+<area shape="rect" id="node10_9" href="./AbstractPropertyConnector.html" title="org.settings4j.connector.AbstractPropertyConnector" alt="" coords="479,113,646,137"/>
+<area shape="rect" id="node10" href="./AbstractPropertyConnector.html" title="&lt;TABLE&gt;" alt="" coords="469,101,657,149"/>
+<area shape="rect" id="node11_10" href="./AbstractConnector.html" title="org.settings4j.connector.AbstractConnector" alt="" coords="227,17,349,41"/>
+<area shape="rect" id="node11" href="./AbstractConnector.html" title="&lt;TABLE&gt;" alt="" coords="217,5,359,53"/>
+</map>
