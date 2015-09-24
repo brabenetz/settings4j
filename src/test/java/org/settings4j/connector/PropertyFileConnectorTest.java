@@ -20,18 +20,24 @@
 package org.settings4j.connector;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PropertyFileConnectorTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void testReadPropertyFromFilePath() throws IOException {
@@ -70,4 +76,15 @@ public class PropertyFileConnectorTest {
         assertThat(connector.getPropertyFileFolderUrl().toExternalForm() + "pom.properties",
             is(Thread.currentThread().getContextClassLoader().getResource("META-INF/maven/org.slf4j/slf4j-api/pom.properties").toExternalForm()));
     }
+
+    @Test
+    public void testReadPropertyFromClasspathWhichDoesnotExist() {
+        this.thrown.expect(NullPointerException.class);
+        this.thrown.expectMessage(containsString("classpath:/NotExisting.properties"));
+
+        final PropertyFileConnector connector = new PropertyFileConnector();
+        connector.setResolveRelativePaths(true);
+        connector.setPropertyFromPath("classpath:/NotExisting.properties");
+    }
+
 }

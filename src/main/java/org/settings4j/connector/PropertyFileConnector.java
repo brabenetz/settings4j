@@ -29,6 +29,7 @@ import java.util.Set;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.contentresolver.FSContentResolver;
 
@@ -143,7 +144,8 @@ public class PropertyFileConnector extends AbstractPropertyConnector {
         resolveRelativePaths();
     }
 
-    private void setPropertyFromContentInternal(final byte[] content) {
+    private void setPropertyFromContentInternal(final byte[] content, final String propertyPath) {
+        Validate.notNull(content, "No Property-File found for path: '%s'", propertyPath);
         final Properties tmpProperty = new Properties();
         try {
             tmpProperty.load(new ByteArrayInputStream(content));
@@ -161,12 +163,13 @@ public class PropertyFileConnector extends AbstractPropertyConnector {
         if (StringUtils.isEmpty(propertyPath)) {
             throw new IllegalArgumentException("The Property Path cannot be empty");
         }
-
         if (propertyPath.startsWith(FSContentResolver.FILE_URL_PREFIX)) {
-            setPropertyFromContentInternal(new FSContentResolver().getContent(propertyPath));
+            final byte[] content = new FSContentResolver().getContent(propertyPath);
+            setPropertyFromContentInternal(content, propertyPath);
             this.propertyFileFolderUrl = getParentFolderUrlFromFile(propertyPath);
         } else if (propertyPath.startsWith(ClasspathContentResolver.CLASSPATH_URL_PREFIX)) {
-            setPropertyFromContentInternal(new ClasspathContentResolver().getContent(propertyPath));
+            final byte[] content = new ClasspathContentResolver().getContent(propertyPath);
+            setPropertyFromContentInternal(content, propertyPath);
             this.propertyFileFolderUrl = getParentFolderUrlFromClasspath(propertyPath);
         } else {
             throw new IllegalArgumentException("The Property Path must start with 'file:' or 'classpath:'. " //
@@ -178,6 +181,7 @@ public class PropertyFileConnector extends AbstractPropertyConnector {
 
     private static URL getParentFolderUrlFromClasspath(final String propertyPath) {
         final URL resource = ClasspathContentResolver.getResource(propertyPath);
+        Validate.notNull(resource, "The URL for '%s' was null", propertyPath);
         final String fullPathNoEndSeparator = FilenameUtils.getFullPathNoEndSeparator(resource.toExternalForm());
         return createURL(fullPathNoEndSeparator + "/");
     }
