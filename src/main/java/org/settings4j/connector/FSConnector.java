@@ -23,8 +23,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
-import java.nio.charset.IllegalCharsetNameException;
 
+import org.apache.commons.io.Charsets;
 import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.FSContentResolver;
 import org.settings4j.contentresolver.UnionContentResolver;
@@ -38,7 +38,7 @@ public class FSConnector extends AbstractConnector {
 
     private final FSContentResolver fsContentResolver;
     private UnionContentResolver unionContentResolver;
-    private String charset = "UTF-8";
+    private Charset charset = Charsets.UTF_8;
 
     /** Default Constructor (e.g. use in settings4j.xml). */
     public FSConnector() {
@@ -73,18 +73,12 @@ public class FSConnector extends AbstractConnector {
 
     @Override
     public String getString(final String key) {
-        try {
-            final byte[] content = getContent(key);
-            if (content != null) {
-                // TODO brabenetz 06. Sep. 2015 : With Settings4j-2.1 and JDK 6: use new String(byte[], Charset) instead. (and remove ExceptionHandling)
-                return new String(this.fsContentResolver.getContent(key), this.charset);
-            }
-            // else
-            return null;
-
-        } catch (final UnsupportedEncodingException e) {
-            throw new UnsupportedOperationException(String.format("Charset not found: %s", this.charset), e);
+        final byte[] content = getContent(key);
+        if (content != null) {
+            return new String(this.fsContentResolver.getContent(key), this.charset);
         }
+        // else
+        return null;
     }
 
     /**
@@ -103,7 +97,6 @@ public class FSConnector extends AbstractConnector {
      */
     public void setString(final String key, final String value) throws IOException {
         try {
-            // TODO brabenetz 06. Sep. 2015 : With Settings4j-2.1 and JDK 6: use String.getBytes(Charset) instead. (and remove ExceptionHandling)
             setContent(key, value.getBytes(this.charset));
         } catch (final UnsupportedEncodingException e) {
             throw new UnsupportedOperationException(String.format("Charset not found: %s", this.charset), e);
@@ -111,7 +104,7 @@ public class FSConnector extends AbstractConnector {
     }
 
     public String getCharset() {
-        return this.charset;
+        return this.charset.name();
     }
 
     /**
@@ -120,11 +113,7 @@ public class FSConnector extends AbstractConnector {
      * @see Charset#isSupported(String)
      */
     public void setCharset(final String charset) {
-        if (!Charset.isSupported(charset)) {
-            throw new IllegalCharsetNameException(
-                String.format("IllegalCharsetName: '%s'. See: http://docs.oracle.com/javase/8/docs/api/java/nio/charset/StandardCharsets.html", charset));
-        }
-        this.charset = charset;
+        this.charset = Charset.forName(charset);
     }
 
     /**
