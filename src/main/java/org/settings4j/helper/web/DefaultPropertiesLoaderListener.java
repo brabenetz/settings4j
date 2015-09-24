@@ -50,13 +50,13 @@ import javax.servlet.ServletContextListener;
  */
 public class DefaultPropertiesLoaderListener implements ServletContextListener {
 
-    /** {@inheritDoc} */
+    @Override
     public void contextInitialized(final ServletContextEvent event) {
         new DefaultPropertiesLoader().initDefaultProperties(event.getServletContext());
     }
 
 
-    /** {@inheritDoc} */
+    @Override
     public void contextDestroyed(final ServletContextEvent event) {
         // do nothing
     }

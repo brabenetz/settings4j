@@ -64,17 +64,16 @@ public class InMemoryLog4jAppender extends AppenderSkeleton {
         return LINES.get(index);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void close() {
         LINES.clear();
     }
 
-    /** {@inheritDoc} */
+    @Override
     public boolean requiresLayout() {
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void append(final LoggingEvent event) {
         final String message = this.layout.format(event);

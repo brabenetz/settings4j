@@ -42,7 +42,7 @@ public class ConnectorPositionFirstValid implements ConnectorPosition {
         this.connectorPositions = connectorPosition;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public int getPosition(final List<Connector> connectors) {
         for (final ConnectorPosition connectorPosition : this.connectorPositions) {
             final int position = connectorPosition.getPosition(connectors);

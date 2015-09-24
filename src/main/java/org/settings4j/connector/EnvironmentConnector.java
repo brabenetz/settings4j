@@ -38,6 +38,7 @@ public class EnvironmentConnector extends AbstractPropertyConnector {
      * @param key The key to search for.
      * @return the string value of the Environment variable, or the default value if there is no property with that key.
      */
+    @Override
     public String getString(final String key) {
         try {
             return System.getenv(key);

@@ -160,6 +160,7 @@ public class JavaXMLBeansObjectResolverTest {
         assertThat(liste.get(0), is("testValue1"));
 
         @SuppressWarnings("unchecked")
+        final
         Map<String, Object> result2 = (Map<String, Object>) objectResolver.getObject(key, contentResolver);
         // this Object is cached! The two Objects must be the same.
         Assert.assertTrue(result == result2);
@@ -193,6 +194,7 @@ public class JavaXMLBeansObjectResolverTest {
         // this Object is cached, and the ObjectResolver doesn't know that the content was changed from contentResolver!
         // The OLD Object must be returned.
         @SuppressWarnings("unchecked")
+        final
         Map<String, Object> result3 = (Map<String, Object>) objectResolver.getObject(key, contentResolver);
         Assert.assertTrue(result3 == result);
         assertThat(result.get("irgendwasNeues"), is(result3.get("irgendwasNeues")));
@@ -255,7 +257,7 @@ public class JavaXMLBeansObjectResolverTest {
             this.obj = obj;
         }
 
-        /** {@inheritDoc} */
+        @Override
         public void exceptionThrown(final Exception e) {
             LOG.warn("Ignore error on encoding Object from type: " + this.obj.getClass().getName() + "! "
                 + e.getClass().getName() + ": '" + e.getMessage() + "'. Set Loglevel DEBUG for more informations.");

@@ -129,7 +129,7 @@ public class Settings4jFactoryBean implements FactoryBean<Object>, InitializingB
         this.defaultObject = defaultObject;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Object getObject() {
         if (this.singleton) {
             return this.singletonObject;
@@ -137,7 +137,7 @@ public class Settings4jFactoryBean implements FactoryBean<Object>, InitializingB
         return getSettings4jObject();
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Class<?> getObjectType() {
         final Object obj = getObject();
         if (obj != null) {
@@ -146,12 +146,12 @@ public class Settings4jFactoryBean implements FactoryBean<Object>, InitializingB
         return getExpectedType();
     }
 
-    /** {@inheritDoc} */
+    @Override
     public boolean isSingleton() {
         return this.singleton;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void afterPropertiesSet() {
         if (this.singleton) {
             this.singletonObject = getSettings4jObject();

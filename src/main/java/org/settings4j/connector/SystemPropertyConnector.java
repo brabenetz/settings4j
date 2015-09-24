@@ -32,7 +32,7 @@ public class SystemPropertyConnector extends AbstractPropertyConnector {
     /** General Logger for this Class. */
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(SystemPropertyConnector.class);
 
-    /** {@inheritDoc} */
+    @Override
     public String getString(final String key) {
         try {
             return System.getProperty(key, null);

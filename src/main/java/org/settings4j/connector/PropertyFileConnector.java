@@ -118,7 +118,6 @@ public class PropertyFileConnector extends AbstractPropertyConnector {
     private boolean resolveRelativePaths;
     private URL propertyFileFolderUrl;
 
-    /** {@inheritDoc} */
     @Override
     public String getString(final String key) {
         return this.property.getProperty(key, null);

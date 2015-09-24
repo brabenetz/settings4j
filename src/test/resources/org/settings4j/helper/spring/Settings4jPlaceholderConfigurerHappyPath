@@ -5,10 +5,10 @@
     <bean class="org.settings4j.helper.spring.Settings4jPlaceholderConfigurer" />
     
     <bean id="org.settings4j.helper.spring.Settings4jPlaceholderConfigurerHappyPath" class="java.util.HashMap">
-    	<constructor-arg>
-    		<map>
-    			<entry key="MapEntry1"><value>${org/settings4j/helper/spring/test1}</value></entry>
-    		</map>
-    	</constructor-arg>
+      <constructor-arg>
+        <map>
+          <entry key="MapEntry1"><value>${org/settings4j/helper/spring/test1}</value></entry>
+        </map>
+      </constructor-arg>
     </bean>
 </beans>

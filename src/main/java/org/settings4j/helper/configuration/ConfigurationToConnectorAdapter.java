@@ -64,7 +64,7 @@ public class ConfigurationToConnectorAdapter extends AbstractPropertyConnector {
         this.setName(name);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public String getString(final String key) {
         return this.configuration.getString(key);
     }

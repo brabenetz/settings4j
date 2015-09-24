@@ -47,12 +47,12 @@ public class FilteredObjectResolverWrapper implements ObjectResolver {
         this.filter = filter;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void addObjectResolver(final ObjectResolver objectResolver) {
         this.targetObjectResolver.addObjectResolver(objectResolver);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Object getObject(final String key, final ContentResolver contentResolver) {
         if (!this.filter.isValid(key)) {
             return null;

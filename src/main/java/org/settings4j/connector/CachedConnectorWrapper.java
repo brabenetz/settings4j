@@ -54,7 +54,7 @@ public class CachedConnectorWrapper implements Connector {
         this.targetConnector = targetConnector;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public byte[] getContent(final String key) {
         if (this.cachedContents.containsKey(key)) {
             return this.cachedContents.get(key);
@@ -65,7 +65,7 @@ public class CachedConnectorWrapper implements Connector {
         return result;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Object getObject(final String key) {
         if (this.cachedObjects.containsKey(key)) {
             return this.cachedObjects.get(key);
@@ -76,7 +76,7 @@ public class CachedConnectorWrapper implements Connector {
         return result;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public String getString(final String key) {
         if (this.cachedStrings.containsKey(key)) {
             return this.cachedStrings.get(key);
@@ -100,32 +100,32 @@ public class CachedConnectorWrapper implements Connector {
      * Delegating Methodes:
      */
 
-    /** {@inheritDoc} */
+    @Override
     public void addConnector(final Connector connector) {
         this.targetConnector.addConnector(connector);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void setContentResolver(final ContentResolver contentResolver) {
         this.targetConnector.setContentResolver(contentResolver);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void setObjectResolver(final ObjectResolver objectResolver) {
         this.targetConnector.setObjectResolver(objectResolver);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void init() {
         this.targetConnector.init();
     }
 
-    /** {@inheritDoc} */
+    @Override
     public String getName() {
         return this.targetConnector.getName();
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void setName(final String name) {
         this.targetConnector.setName(name);
     }

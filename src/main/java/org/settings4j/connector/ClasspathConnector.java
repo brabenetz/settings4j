@@ -58,12 +58,12 @@ public class ClasspathConnector extends AbstractConnector {
         this.unionContentResolver = new UnionContentResolver(this.classpathContentResolver);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public byte[] getContent(final String key) {
         return this.classpathContentResolver.getContent(key);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Object getObject(final String key) {
         if (getObjectResolver() != null) {
             return getObjectResolver().getObject(key, this.unionContentResolver);
@@ -73,7 +73,7 @@ public class ClasspathConnector extends AbstractConnector {
 
     }
 
-    /** {@inheritDoc} */
+    @Override
     public String getString(final String key) {
         try {
             final byte[] content = getContent(key);
@@ -105,7 +105,6 @@ public class ClasspathConnector extends AbstractConnector {
         this.charset = charset;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setContentResolver(final ContentResolver contentResolver) {
         this.unionContentResolver = new UnionContentResolver(this.classpathContentResolver);

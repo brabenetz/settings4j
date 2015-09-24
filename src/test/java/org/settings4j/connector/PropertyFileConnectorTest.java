@@ -40,9 +40,9 @@ public class PropertyFileConnectorTest {
         connector.setResolveRelativePaths(true);
         assertThat(connector.getString("xyz"), is("Value from Property-File"));
         assertThat(connector.getString("someRelativePath"),
-            is(new File("./src/test/resources/org/settings4j/connector/test.xml").getCanonicalFile().toURL().toExternalForm()));
+            is(new File("./src/test/resources/org/settings4j/connector/test.xml").getCanonicalFile().toURI().toURL().toExternalForm()));
         assertThat(connector.getString("someRelativeSiblingPath"),
-            is(new File("./src/test/resources/org/settings4j/test1/test.xml").getCanonicalFile().toURL().toExternalForm()));
+            is(new File("./src/test/resources/org/settings4j/test1/test.xml").getCanonicalFile().toURI().toURL().toExternalForm()));
         assertThat(connector.getString("someNormalWindowsPath"), is(new URL("file:C:/test.xml").toExternalForm()));
         assertThat(connector.getString("someNormalUnixPath"), is(new URL("file:/test.xml").toExternalForm()));
     }
@@ -54,9 +54,9 @@ public class PropertyFileConnectorTest {
         connector.setPropertyFromPath("classpath:/org/settings4j/connector/propertyFile.properties");
         assertThat(connector.getString("xyz"), is("Value from Property-File"));
         assertThat(connector.getString("someRelativePath"),
-            is(new File("./target/test-classes/org/settings4j/connector/test.xml").getCanonicalFile().toURL().toExternalForm()));
+            is(new File("./target/test-classes/org/settings4j/connector/test.xml").getCanonicalFile().toURI().toURL().toExternalForm()));
         assertThat(connector.getString("someRelativeSiblingPath"),
-            is(new File("./target/test-classes/org/settings4j/test1/test.xml").getCanonicalFile().toURL().toExternalForm()));
+            is(new File("./target/test-classes/org/settings4j/test1/test.xml").getCanonicalFile().toURI().toURL().toExternalForm()));
         assertThat(connector.getString("someNormalWindowsPath"), is(new URL("file:C:/test.xml").toExternalForm()));
         assertThat(connector.getString("someNormalUnixPath"), is(new URL("file:/test.xml").toExternalForm()));
     }

@@ -48,12 +48,12 @@ public class FSContentResolver implements ContentResolver {
 
     private File rootFolder;
 
-    /** {@inheritDoc} */
+    @Override
     public void addContentResolver(final ContentResolver contentResolver) {
         throw new UnsupportedOperationException("FSContentResolver cannot add other ContentResolvers");
     }
 
-    /** {@inheritDoc} */
+    @Override
     // SuppressWarnings PMD.ReturnEmptyArrayRatherThanNull: returning null for this byte-Arrays is OK.
     @SuppressWarnings("PMD.ReturnEmptyArrayRatherThanNull")
     public byte[] getContent(final String key) {

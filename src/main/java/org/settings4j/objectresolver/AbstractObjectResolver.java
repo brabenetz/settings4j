@@ -51,12 +51,12 @@ public abstract class AbstractObjectResolver implements ObjectResolver {
 
     private boolean cached;
 
-    /** {@inheritDoc} */
+    @Override
     public void addObjectResolver(final ObjectResolver objectResolver) {
         throw new UnsupportedOperationException(this.getClass().getName() + " cannot add other ObjectResolvers");
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Object getObject(final String key, final ContentResolver contentResolver) {
 
         Object result = this.cachedObjects.get(key);

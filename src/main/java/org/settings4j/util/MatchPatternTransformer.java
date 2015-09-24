@@ -63,8 +63,7 @@ public class MatchPatternTransformer implements Transformer<String, Boolean> {
         this.compareValue = compareValue;
     }
 
-
-    /** {@inheritDoc} */
+    @Override
     public Boolean transform(final String patternString) {
         Boolean result = Boolean.FALSE;
         if (patternString != null) {

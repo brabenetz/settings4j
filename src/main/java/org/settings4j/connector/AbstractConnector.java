@@ -29,7 +29,7 @@ import org.settings4j.ObjectResolver;
 
 /**
  * Basic Connector implementations like getter and Setter of contentResolver, objectResolver.
- * 
+ *
  * @author Harald.Brabenetz
  *
  */
@@ -44,7 +44,7 @@ public abstract class AbstractConnector implements Connector {
         return Collections.unmodifiableList(this.connectors);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void addConnector(final Connector connector) {
         this.connectors.add(connector);
     }
@@ -53,6 +53,7 @@ public abstract class AbstractConnector implements Connector {
         return this.contentResolver;
     }
 
+    @Override
     public void setContentResolver(final ContentResolver contentResolver) {
         this.contentResolver = contentResolver;
     }
@@ -61,19 +62,22 @@ public abstract class AbstractConnector implements Connector {
         return this.objectResolver;
     }
 
+    @Override
     public void setObjectResolver(final ObjectResolver objectResolver) {
         this.objectResolver = objectResolver;
     }
 
+    @Override
     public String getName() {
         return this.name;
     }
 
+    @Override
     public void setName(final String name) {
         this.name = name;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void init() {
         // Overwrite this methode if you want do something after all properties are set.
         // by default there is nothing to do

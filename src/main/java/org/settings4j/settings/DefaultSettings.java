@@ -46,22 +46,22 @@ public class DefaultSettings implements Settings4jInstance {
     private final Map<String, Connector> connectorMap = Collections.synchronizedMap(new HashMap<String, Connector>());
     private Map<String, String> mapping;
 
-    /** {@inheritDoc} */
+    @Override
     public List<Connector> getConnectors() {
         return Collections.unmodifiableList(this.connectors);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Connector getConnector(final String connectorName) {
         return this.connectorMap.get(connectorName);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void addConnector(final Connector connector) {
         addConnector(connector, ConnectorPositions.atLast());
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void addConnector(final Connector connector, final ConnectorPosition position) {
         final int pos = position.getPosition(this.connectors);
         Validate.isTrue(pos != ConnectorPosition.UNKNOWN_POSITION,
@@ -73,13 +73,13 @@ public class DefaultSettings implements Settings4jInstance {
 
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void removeAllConnectors() {
         this.connectors.clear();
         this.connectorMap.clear();
     }
 
-    /** {@inheritDoc} */
+    @Override
     public byte[] getContent(final String key) {
         final String mappedKey = mappedKey(key);
         byte[] result = null;
@@ -93,7 +93,7 @@ public class DefaultSettings implements Settings4jInstance {
         return result;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Object getObject(final String key) {
         final String mappedKey = mappedKey(key);
         Object result = null;
@@ -107,7 +107,7 @@ public class DefaultSettings implements Settings4jInstance {
         return result;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public String getString(final String key) {
         final String mappedKey = mappedKey(key);
         String result = null;
@@ -152,7 +152,7 @@ public class DefaultSettings implements Settings4jInstance {
 
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Map<String, String> getMapping() {
         if (this.mapping == null) {
             this.mapping = new HashMap<String, String>();
@@ -160,7 +160,7 @@ public class DefaultSettings implements Settings4jInstance {
         return this.mapping;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void setMapping(final Map<String, String> mapping) {
         this.mapping = mapping;
     }

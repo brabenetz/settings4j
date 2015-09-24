@@ -52,7 +52,7 @@ public class UnionContentResolver implements ContentResolver {
         addContentResolverInternal(contentResolver);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void addContentResolver(final ContentResolver contentResolver) {
         synchronized (this) {
             addContentResolverInternal(contentResolver);
@@ -69,7 +69,7 @@ public class UnionContentResolver implements ContentResolver {
         this.contentResolvers = contentResolversNew;
     }
 
-    /** {@inheritDoc} */
+    @Override
     // SuppressWarnings PMD.ReturnEmptyArrayRatherThanNull: returning null for this byte-Arrays is OK.
     @SuppressWarnings("PMD.ReturnEmptyArrayRatherThanNull")
     public byte[] getContent(final String key) {

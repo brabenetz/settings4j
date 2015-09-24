@@ -47,12 +47,12 @@ public class FilteredContentResolverWrapper implements ContentResolver {
         this.filter = filter;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void addContentResolver(final ContentResolver contentResolver) {
         this.targetContentResolver.addContentResolver(contentResolver);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public byte[] getContent(final String key) {
         if (!this.filter.isValid(key)) {
             return null;

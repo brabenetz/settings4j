@@ -46,11 +46,12 @@ public class DefaultSettingsRepository implements Settings4jRepository {
 
     private Settings4jInstance settings;
 
+    @Override
     public Settings4jInstance getSettings() {
         return getSettings(DEFAULT_FACTORY);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Settings4jInstance getSettings(final Settings4jFactory factory) {
         if (this.settings == null) {
             this.settings = factory.makeNewSettingsInstance();
@@ -58,7 +59,7 @@ public class DefaultSettingsRepository implements Settings4jRepository {
         return this.settings;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public int getConnectorCount() {
         if (this.settings == null) {
             return 0;
@@ -67,7 +68,7 @@ public class DefaultSettingsRepository implements Settings4jRepository {
         return this.settings.getConnectors().size();
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void resetConfiguration() {
         this.settings.removeAllConnectors();
     }

@@ -45,13 +45,12 @@ public class ClasspathContentResolver implements ContentResolver {
     /** Pseudo URL prefix for loading from the class path: "classpath:". */
     public static final String CLASSPATH_URL_PREFIX = "classpath:";
 
-
-    /** {@inheritDoc} */
+    @Override
     public void addContentResolver(final ContentResolver contentResolver) {
         throw new UnsupportedOperationException("ClasspathContentResolver cannot add other ContentResolvers");
     }
 
-    /** {@inheritDoc} */
+    @Override
     public byte[] getContent(final String key) {
         final String normalizedKey = normalizeKey(key);
 

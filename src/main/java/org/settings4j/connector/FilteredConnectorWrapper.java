@@ -47,12 +47,12 @@ public class FilteredConnectorWrapper implements Connector {
         this.filter = filter;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void addConnector(final Connector connector) {
         this.targetConnector.addConnector(connector);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public byte[] getContent(final String key) {
         if (!this.filter.isValid(key)) {
             return null;
@@ -60,12 +60,12 @@ public class FilteredConnectorWrapper implements Connector {
         return this.targetConnector.getContent(key);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public String getName() {
         return this.targetConnector.getName();
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Object getObject(final String key) {
         if (!this.filter.isValid(key)) {
             return null;
@@ -73,7 +73,7 @@ public class FilteredConnectorWrapper implements Connector {
         return this.targetConnector.getObject(key);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public String getString(final String key) {
         if (!this.filter.isValid(key)) {
             return null;
@@ -81,22 +81,22 @@ public class FilteredConnectorWrapper implements Connector {
         return this.targetConnector.getString(key);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void init() {
         this.targetConnector.init();
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void setContentResolver(final ContentResolver contentResolver) {
         this.targetConnector.setContentResolver(contentResolver);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void setName(final String name) {
         this.targetConnector.setName(name);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void setObjectResolver(final ObjectResolver objectResolver) {
         this.targetConnector.setObjectResolver(objectResolver);
     }

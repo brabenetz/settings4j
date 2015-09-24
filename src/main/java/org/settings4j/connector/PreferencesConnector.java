@@ -69,7 +69,7 @@ public class PreferencesConnector extends AbstractPropertyConnector {
         this.userPrefs = userPrefs;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public String getString(final String keyPath) {
         Validate.notNull(keyPath);
         final String normalizedKey = normalizeKey(keyPath);
