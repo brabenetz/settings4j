@@ -1,0 +1,97 @@
+~~~
+~~ #%L
+~~ settings4j
+~~ ===============================================================
+~~ Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+~~ ===============================================================
+~~ Licensed under the Apache License, Version 2.0 (the "License");
+~~ you may not use this file except in compliance with the License.
+~~ You may obtain a copy of the License at
+~~ 
+~~      http://www.apache.org/licenses/LICENSE-2.0
+~~ 
+~~ Unless required by applicable law or agreed to in writing, software
+~~ distributed under the License is distributed on an "AS IS" BASIS,
+~~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~~ See the License for the specific language governing permissions and
+~~ limitations under the License.
+~~ #L%
+~~~
+                                    ------------------
+                                    Custom Connectors
+                                    ------------------
+                                    Brabenetz Harald
+                                    ------------------
+                                    23-09-2015
+                                    ------------------
+
+{Overview}
+
+
+	In {{{./config.html}Default Config}} you can see how do configure some of the existing Connectors from the {{{./apidocs/org/settings4j/connector/package-summary.html}Connector Package}}
+	
+	On this page you will see how do write your own connector.
+	
+	You can implement the Connector Interface directly, but it is recommended to extend one of the following two abstract classes:
+	
+  * AbstractPropertyConnector:
+    The simplest way to implement your Connector. You only must implement the method <String getString(final String key)>.
+    
+  * AbstractConnector: 
+     You can implement <getString()>, <getContent()> and <getObject()> separately.
+  
+  []
+  
+
+[./apidocs/org/settings4j/connector/org.settings4j.connector.png] Connector Package Graph
+
+   
+{AbstractPropertyConnector}
+
+  The AbstractPropertyConnector is the simplest way to implement your Connector.
+  
+  The AbstractPropertyConnector extends the {{AbstractConnector}} by implementing the <getContent()> and <getObject()> method
+  by resolving the found value from <getString()> with the given Content- and Object-Resolver.
+  
+  The most important direct implementations are the PropertyFileConnector and the SystemPropertyConnector:
+
+[./apidocs/org/settings4j/connector/AbstractPropertyConnector.png] AbstractPropertyConnector Graph
+
+  You only must implement the method <String getString(final String key)>.\
+  Returning <null> means that no value for the given key where found and the next Connector in the setting4j-chain will be called.
+
++------------------------------------------------------------------------
+public class MySimpleConnector extends AbstractPropertyConnector {
+    public String getString(final String key) {
+        return null;
+    }
+}
++------------------------------------------------------------------------
+   
+{AbstractConnector}
+
+  The AbstractConnector implements the basic features of the Connector Interface: name, contentResolver, objectResolver, and the reference to other connectors.
+  
+  The most important direct implementations are the JNDIConnector and the ClasspathConnector:
+
+[./apidocs/org/settings4j/connector/AbstractConnector.png] AbstractConnector Graph
+
+  You can implement <getString()>, <getContent()> and <getObject()>.\
+  Returning <null> means that no value for the given key where found and the next Connector in the setting4j-chain will be called.
+  
++------------------------------------------------------------------------
+public class MyComplexConnector extends AbstractConnector {
+    public String getString(final String key) {
+        return null;
+    }
+    public byte[] getContent(final String key) {
+        return null;
+    }
+    public Object getObject(final String key) {
+        return null;
+    }
+}
++------------------------------------------------------------------------
+  
+
+
