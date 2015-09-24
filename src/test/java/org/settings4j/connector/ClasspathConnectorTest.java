@@ -25,7 +25,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 
 import java.io.File;
-import java.nio.charset.IllegalCharsetNameException;
+import java.nio.charset.UnsupportedCharsetException;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
@@ -92,7 +92,7 @@ public class ClasspathConnectorTest {
         assertThat(this.cpConnector.getObject(TEST_KEY), is(nullValue()));
 
         // second Test with Object Resolver but returns null
-        ObjectResolver objResolver = Mockito.mock(ObjectResolver.class);
+        final ObjectResolver objResolver = Mockito.mock(ObjectResolver.class);
         this.cpConnector.setObjectResolver(objResolver);
         assertThat(this.cpConnector.getObject(TEST_KEY), is(nullValue()));
 
@@ -118,7 +118,7 @@ public class ClasspathConnectorTest {
 
     @Test
     public void testSetContentResolver() throws Exception {
-        ContentResolver contentResolver = new ClasspathContentResolver();
+        final ContentResolver contentResolver = new ClasspathContentResolver();
         assertThat(this.cpConnector.getContentResolver(), is(nullValue()));
 
         // run Test
@@ -142,8 +142,8 @@ public class ClasspathConnectorTest {
 
     @Test
     public void testSetCharsetShouldThrowIllegalCharsetNameException() throws Exception {
-        this.thrown.expect(IllegalCharsetNameException.class);
-        this.thrown.expectMessage(containsString("'xyz'"));
+        this.thrown.expect(UnsupportedCharsetException.class);
+        this.thrown.expectMessage(containsString("xyz"));
         // run test
         this.cpConnector.setCharset("xyz");
     }

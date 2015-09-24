@@ -19,10 +19,9 @@
  */
 package org.settings4j.connector;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
-import java.nio.charset.IllegalCharsetNameException;
 
+import org.apache.commons.io.Charsets;
 import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.contentresolver.UnionContentResolver;
@@ -39,7 +38,7 @@ public class ClasspathConnector extends AbstractConnector {
 
     private final ClasspathContentResolver classpathContentResolver;
     private UnionContentResolver unionContentResolver;
-    private String charset = "UTF-8";
+    private Charset charset = Charsets.UTF_8;
 
     /** Default Constructor (e.g. use in settings4j.xml). */
     public ClasspathConnector() {
@@ -75,21 +74,15 @@ public class ClasspathConnector extends AbstractConnector {
 
     @Override
     public String getString(final String key) {
-        try {
-            final byte[] content = getContent(key);
-            if (content != null) {
-                // TODO brabenetz 06. Sep. 2015 : With Settings4j-2.1 and JDK 6: use new String(byte[], Charset) instead. (and remove ExceptionHandling)
-                return new String(this.classpathContentResolver.getContent(key), this.charset);
-            }
-            return null;
-
-        } catch (final UnsupportedEncodingException e) {
-            throw new UnsupportedOperationException(String.format("Charset not found: %s", this.charset), e);
+        final byte[] content = getContent(key);
+        if (content != null) {
+            return new String(this.classpathContentResolver.getContent(key), this.charset);
         }
+        return null;
     }
 
     public String getCharset() {
-        return this.charset;
+        return this.charset.name();
     }
 
     /**
@@ -98,11 +91,7 @@ public class ClasspathConnector extends AbstractConnector {
      * @see Charset#isSupported(String)
      */
     public void setCharset(final String charset) {
-        if (!Charset.isSupported(charset)) {
-            throw new IllegalCharsetNameException(
-                String.format("IllegalCharsetName: '%s'. See: http://docs.oracle.com/javase/8/docs/api/java/nio/charset/StandardCharsets.html", charset));
-        }
-        this.charset = charset;
+        this.charset = Charset.forName(charset);
     }
 
     @Override
