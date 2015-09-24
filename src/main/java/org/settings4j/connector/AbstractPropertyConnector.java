@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,9 +20,9 @@
 package org.settings4j.connector;
 
 /**
- * Basic Implementation of {@link org.settings4j.Connector}s whiche are Property-related.
+ * Basic Implementation of {@link org.settings4j.Connector}s which are Property-String-related.
  * <p>
- * Only #getProperty(String, String) must be implemented. Example implementations are {@link PropertyFileConnector} or {@link SystemPropertyConnector}.
+ * Only #getString(String) must be implemented. Example implementations are {@link PropertyFileConnector} or {@link SystemPropertyConnector}.
  * </p>
  *
  * @author Harald.Brabenetz
