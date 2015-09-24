@@ -54,13 +54,13 @@ import org.apache.log4j.LogManager;
  */
 public class Log4jConfigurationLoaderListener implements ServletContextListener {
 
-    /** {@inheritDoc} */
+    @Override
     public void contextInitialized(final ServletContextEvent event) {
         new Log4jConfigurationLoader().initLog4jConfiguration(event.getServletContext());
     }
 
 
-    /** {@inheritDoc} */
+    @Override
     public void contextDestroyed(final ServletContextEvent event) {
         LogManager.shutdown();
     }

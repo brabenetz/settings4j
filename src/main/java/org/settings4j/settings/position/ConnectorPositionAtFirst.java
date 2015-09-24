@@ -31,7 +31,7 @@ import org.settings4j.ConnectorPosition;
  */
 public class ConnectorPositionAtFirst implements ConnectorPosition {
 
-    /** {@inheritDoc} */
+    @Override
     public int getPosition(final List<Connector> connectors) {
         return 0;
     }

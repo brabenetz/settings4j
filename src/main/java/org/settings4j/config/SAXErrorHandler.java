@@ -33,17 +33,17 @@ public class SAXErrorHandler implements ErrorHandler {
     /** General Logger for this Class. */
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(SAXErrorHandler.class);
 
-    /** {@inheritDoc} */
+    @Override
     public void error(final SAXParseException ex) {
         emitMessage("Continuable parsing error ", ex);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void fatalError(final SAXParseException ex) {
         emitMessage("Fatal parsing error ", ex);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void warning(final SAXParseException ex) {
         emitMessage("Parsing warning ", ex);
     }

@@ -41,7 +41,7 @@ public class DefaultPropertiesLoaderTest {
     /** General Logger for this Class. */
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DefaultPropertiesLoaderTest.class);
 
-    private static final int DEFAULT_CONNECTOR_COUNT = 4;
+    private static final int DEFAULT_CONNECTOR_COUNT = 5;
 
     @Before
     public void setUp() throws Exception {

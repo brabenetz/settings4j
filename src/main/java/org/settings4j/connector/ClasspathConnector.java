@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -58,12 +58,12 @@ public class ClasspathConnector extends AbstractConnector {
         this.unionContentResolver = new UnionContentResolver(this.classpathContentResolver);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public byte[] getContent(final String key) {
         return this.classpathContentResolver.getContent(key);
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Object getObject(final String key) {
         if (getObjectResolver() != null) {
             return getObjectResolver().getObject(key, this.unionContentResolver);
@@ -73,7 +73,7 @@ public class ClasspathConnector extends AbstractConnector {
 
     }
 
-    /** {@inheritDoc} */
+    @Override
     public String getString(final String key) {
         try {
             final byte[] content = getContent(key);
@@ -105,7 +105,6 @@ public class ClasspathConnector extends AbstractConnector {
         this.charset = charset;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setContentResolver(final ContentResolver contentResolver) {
         this.unionContentResolver = new UnionContentResolver(this.classpathContentResolver);

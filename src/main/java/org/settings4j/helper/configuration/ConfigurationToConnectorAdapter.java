@@ -29,7 +29,7 @@ import org.settings4j.connector.AbstractPropertyConnector;
  * <p>
  * Create a {@link org.apache.commons.configuration.XMLConfiguration} instance and add it to the Settings4j instance as Connector.
  * </p>
- * 
+ *
  * <pre>
  * String connectorName = "myCommonsConfigXmlConfigConnector";
  * Connector connector =  Settings4j.getSettings().getConnector(connectorName);
@@ -65,8 +65,8 @@ public class ConfigurationToConnectorAdapter extends AbstractPropertyConnector {
     }
 
     @Override
-    protected String getProperty(final String key, final String defaultValue) {
-        return this.configuration.getString(key, defaultValue);
+    public String getString(final String key) {
+        return this.configuration.getString(key);
     }
 
     public Configuration getConfiguration() {

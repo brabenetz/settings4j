@@ -34,7 +34,7 @@ public class UnionObjectResolver implements ObjectResolver {
 
     private ObjectResolver[] objectResolvers = new ObjectResolver[0];
 
-    /** {@inheritDoc} */
+    @Override
     public void addObjectResolver(final ObjectResolver objectResolver) {
 
         final ObjectResolver[] objectResolversNew = new ObjectResolver[this.objectResolvers.length + 1];
@@ -46,7 +46,7 @@ public class UnionObjectResolver implements ObjectResolver {
         this.objectResolvers = objectResolversNew;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Object getObject(final String key, final ContentResolver contentResolver) {
 
         Object result = null;

@@ -46,6 +46,11 @@ import org.settings4j.test.TestUtils;
  * TestCases for {@link Settings4jInstance}.
  */
 public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
+    private static final String KEY_FILE_PROPERTY_PATH = "org/settings4j/junit/filePropertyPath";
+
+    public void teardown() {
+        System.clearProperty(KEY_FILE_PROPERTY_PATH);
+    }
 
     /**
      * Test parsing of defaultsettings4j.xml (FALLBACK-Configuration).
@@ -58,7 +63,7 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
         final Settings4jInstance settings = settingsRepository.getSettings();
 
         // the rootSettings have four Connectors
-        final int expectedConnectorSize = 4;
+        final int expectedConnectorSize = 5;
         assertThat(settings.getConnectors(), hasSize(expectedConnectorSize));
 
         // check if there is no Exception thrown:
@@ -237,7 +242,7 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
         Connection conn = null;
         try {
             conn = dataSource.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement("create Table test ( name VARCHAR )");
+            PreparedStatement pstmt = conn.prepareStatement("create Table test ( name VARCHAR(255) )");
             pstmt.execute();
             pstmt.close();
 
@@ -267,10 +272,11 @@ public class Settings4jConfigTest extends AbstractTestSettings4jConfig {
     }
 
     /**
-     * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromContent(byte[])}.
+     * test {@link org.settings4j.connector.PropertyFileConnector#setPropertyFromPath(String)}.
      */
     @Test
     public void testPropertyFileConfig() {
+        System.setProperty(KEY_FILE_PROPERTY_PATH, "classpath:org/settings4j/config/propertyFile.properties");
         final Settings4jRepository settingsRepository = TestUtils
             .getConfiguredSettingsRepository("org/settings4j/config/testConfigPropertyFile.xml");
 

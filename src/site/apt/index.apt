@@ -46,8 +46,10 @@
 	* You can use SystemProperties on startup
 	
 	* You can store *.property and *.xml into the Classpath/FileSystem
-	
+
 	* You can get your Settings from a JNDI Context
+
+	* You can get your Settings from Environment variables. 
 	
 	* You can get your Settings from the Preferences (System or User)
 	
@@ -188,6 +190,26 @@ startup.bat
 +--------------------------------------------
 
 	In this Example <<<Settings4j.getString("com/mycompany/mycalculation/my-formula")>>> returnes "a + a * a".
+
+** {Environment variables}
+
+  Since Settings4j-2.1 also Environment variables will be checked per default.
+  
+  The EnvironmentConnector will first check if a value for the exact key exist (e.g.: <System.getenv('com/mycompany/mycalculation/my-formula')>)\
+  At Second, if no value where found, a Upper-Case variant of the Key will be checked (e.g.: <System.getenv('COM_MYCOMPANY_MYCALCULATION_MY_FORMULA')>).
+  Non-word character (everything beside a-z, A-Z, _ , 0-9) will be replaced by an underscore. 
+
+*** {Environment variables Windows}
+  
+  In Windows you can set Environment Variables via the Control Panel:
+
+[./images/indexEnvironmentWindows.png] Windows Environment variables
+
+*** {Environment variables Linux}
+
+  Under Linux you can set Environment variables per command line with <export>
+
+[./images/indexEnvironmentLinux.png] Linux Environment variables
 
 ** {Preferences}
 

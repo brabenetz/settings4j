@@ -42,7 +42,7 @@ public class ConnectorPositionAfterLastClass implements ConnectorPosition {
         this.connectorClass = connectorClass;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public int getPosition(final List<Connector> connectors) {
         int pos = 0;
         int lastPos = UNKNOWN_POSITION;

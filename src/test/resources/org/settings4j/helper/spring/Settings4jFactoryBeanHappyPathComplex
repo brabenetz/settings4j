@@ -3,20 +3,19 @@
 
 <beans>
     
-    <bean id="hibernateProperties"
-	    class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-	    <property name="locations">
-	        <list>
-	            <value>classpath:org/settings4j/helper/spring/DefaultHibernate.properties</value>
-			    <bean class="org.settings4j.helper.spring.Settings4jFactoryBean">
-			        <property name="key"><value>Spring.HappyPathComplexTest</value></property>
-			        <property name="defaultObject">
-			        	<value>classpath:org/settings4j/helper/spring/DefaultHibernate.properties</value>
-			        </property>
-			    </bean>
-	        </list>
-	    </property>
-	</bean>
+    <bean id="hibernateProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+      <property name="locations">
+          <list>
+              <value>classpath:org/settings4j/helper/spring/DefaultHibernate.properties</value>
+          <bean class="org.settings4j.helper.spring.Settings4jFactoryBean">
+              <property name="key"><value>Spring.HappyPathComplexTest</value></property>
+              <property name="defaultObject">
+                <value>classpath:org/settings4j/helper/spring/DefaultHibernate.properties</value>
+              </property>
+          </bean>
+          </list>
+      </property>
+  </bean>
     
     <bean id="org.settings4j.helper.spring.Settings4jFactoryBeanHappyPathComplex" class="org.settings4j.helper.spring.DummySessionFactory">
         <property name="hibernateProperties" ref="hibernateProperties" />

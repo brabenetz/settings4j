@@ -36,7 +36,7 @@ public class Settings4jEntityResolver implements EntityResolver {
     /** General Logger for this Class. */
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(Settings4jEntityResolver.class);
 
-    /** {@inheritDoc} */
+    @Override
     public InputSource resolveEntity(final String publicId, final String systemId) {
         if (systemId.endsWith("settings4j.dtd")) {
             final Class<?> clazz = getClass();

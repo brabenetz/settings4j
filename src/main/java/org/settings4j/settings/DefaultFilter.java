@@ -35,7 +35,7 @@ public class DefaultFilter implements Filter {
     private final List<Pattern> includePatterns = new ArrayList<Pattern>();
     private final List<Pattern> excludePatterns = new ArrayList<Pattern>();
 
-    /** {@inheritDoc} */
+    @Override
     public void addExclude(final String pattern) {
         try {
             final Pattern p = Pattern.compile(pattern);
@@ -45,7 +45,7 @@ public class DefaultFilter implements Filter {
         }
     }
 
-    /** {@inheritDoc} */
+    @Override
     public void addInclude(final String pattern) {
         try {
             final Pattern p = Pattern.compile(pattern);
@@ -55,7 +55,7 @@ public class DefaultFilter implements Filter {
         }
     }
 
-    /** {@inheritDoc} */
+    @Override
     public boolean isValid(final String key) {
         // if exclude match, return always false.
         for (final Pattern pattern : this.excludePatterns) {

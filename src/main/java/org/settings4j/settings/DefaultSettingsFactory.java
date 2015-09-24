@@ -30,7 +30,7 @@ import org.settings4j.Settings4jInstance;
  */
 public class DefaultSettingsFactory implements Settings4jFactory {
 
-    /** {@inheritDoc} */
+    @Override
     public Settings4jInstance makeNewSettingsInstance() {
         return new DefaultSettings();
     }

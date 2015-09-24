@@ -84,7 +84,6 @@ public class JavaXMLBeansObjectResolver extends AbstractObjectResolver {
     /** General Logger for this Class. */
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(JavaXMLBeansObjectResolver.class);
 
-    /** {@inheritDoc} */
     @Override
     protected Object contentToObject(final String key, final Properties properties, final byte[] content,
         final ContentResolver contentResolver) {
@@ -119,7 +118,7 @@ public class JavaXMLBeansObjectResolver extends AbstractObjectResolver {
             this.key = key;
         }
 
-        /** {@inheritDoc} */
+        @Override
         public void exceptionThrown(final Exception e) {
             LOG.warn(//
                 "Ignore error on decoding Object from key: {}! {}: {}; Set Loglevel DEBUG for more informations.", //

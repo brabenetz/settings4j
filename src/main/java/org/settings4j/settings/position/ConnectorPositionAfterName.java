@@ -42,7 +42,7 @@ public class ConnectorPositionAfterName implements ConnectorPosition {
         this.connectorName = connectorName;
     }
 
-    /** {@inheritDoc} */
+    @Override
     public int getPosition(final List<Connector> connectors) {
         int pos = 0;
         for (final Connector connector : connectors) {

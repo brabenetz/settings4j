@@ -20,20 +20,19 @@
 <project name="Settings4j library">
 	<publishDate position="left" format="dd. MMM yyyy HH:mm" />
 	<bannerLeft>
-		<name>GitHub</name>
-		<src>images/github-logo-37px.png</src>
-		<href>https://github.com/brabenetz/settings4j</href>
-	</bannerLeft>
-	<bannerRight>
 		<name>Settings4j</name>
 		<src>images/settings4j-logo-37px.png</src>
 		<href>http://settings4j.org</href>
-	</bannerRight>
+	</bannerLeft>
+  <bannerRight>
+    <name>GitHub</name>
+    <src>images/github-logo-37px.png</src>
+    <href>https://github.com/brabenetz/settings4j</href>
+  </bannerRight>
 	<body>
 		<menu name="Settings4j Library">
 			<item name="Overview" href="index.html" />
 			<item name="Download" href="download.html" />
-			<item name="Roadmap" href="roadmap.html" />
 			<item name="Changes" href="changes-report.html" />
 			<item name="Logging" href="logging.html" />
 			<item name="Recommendation" href="docuRecommendation.html" />
@@ -41,7 +40,8 @@
 			<item name="Archiv" href="http://settings4j.org/archiv/" />
 		</menu>
 		<menu name="Settings4j Config">
-			<item name="Config" href="config.html" />
+      <item name="Config" href="config.html" />
+      <item name="Custom Connector" href="customConnector.html" />
 			<item name="Filter" href="configFilter.html" />
 			<item name="Mappings" href="configMappings.html" />
 			<item name="Caching" href="configCache.html" />
@@ -53,4 +53,20 @@
 		</menu>
 		<menu ref="reports" />
 	</body>
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-fluido-skin</artifactId>
+    <version>1.4</version>
+  </skin>
+  <custom>
+    <fluidoSkin>
+      <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+      <googleSearch/>
+      <gitHub>
+        <projectId>brabenetz/settings4j</projectId>
+        <ribbonOrientation>right</ribbonOrientation>
+        <ribbonColor>black</ribbonColor>
+      </gitHub>
+    </fluidoSkin>
+  </custom>
 </project>

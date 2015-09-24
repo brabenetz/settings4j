@@ -44,6 +44,7 @@ public final class ExpressionLanguageUtil {
         /**
          * Resolves the specified variable within the given context. Returns null if the variable is not found.
          **/
+        @Override
         public Object resolveVariable(final String pName, final Object simpleMap) {
             final Map<?, ?> ctx = (Map<?, ?>) simpleMap;
             return ctx.get(pName);

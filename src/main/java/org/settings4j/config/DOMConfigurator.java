@@ -193,6 +193,7 @@ public class DOMConfigurator {
     public void doConfigure(final URL url) {
         final ParseAction action = new ParseAction() {
 
+            @Override
             public Document parse(final DocumentBuilder parser) throws SAXException, IOException {
                 return parser.parse(url.toString());
             }

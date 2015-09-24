@@ -26,8 +26,31 @@
     <author email="brabenetz@users.sourceforge.net">Harald Brabenetz</author>
   </properties>
   <body>
-    <release version="2.1" date="2015-" description="settings4j 2.1 - Requires JDK 6 or above.">
+    <release version="2.1" date="2015-??" description="settings4j 2.1 - Requires JDK 6 or above.">
       <!-- <action dev="brabenetz" type="fix" issue="1">Bugfix 1</action> -->
+      <action dev="brabenetz" type="update" date="2014-09-24">
+        update default settings4j.xml: add EnvironmentConnector before PreferencesConnector.
+      </action>
+      <action dev="brabenetz" type="update" date="2014-09-24">
+        improve EnvironmentConnector: Also check for the UpperCase version of the key.
+      </action>
+      <action dev="brabenetz" type="update" date="2014-09-24">
+        update minimum requirement to JDK 6.
+      </action>
+      <action dev="brabenetz" type="remove" date="2014-09-24">
+        remove deprecated method: PropertyFileConnector.setPropertyFromContent(...)
+      </action>
+      <action dev="brabenetz" type="remove" date="2014-09-24">
+        remove deprecated classe: Settings4jContextLoader, Settings4jContextLoaderListener
+      </action>
+    </release>
+    <release version="2.0.3" date="2015-09-24" description="settings4j 2.0.3 - improved PropertyFileConnector">
+      <action dev="brabenetz" type="update" date="2014-09-24">
+        Refactor AbstractPropertyConnector: replace abstract method getProperty(String, String) by getString(String) from the Connector interface.
+      </action>
+      <action dev="brabenetz" type="update" date="2014-09-20">
+        Improve PropertyFileConnector: Add parameter "resolveRelativePaths"
+      </action>
     </release>
     <release version="2.0.2" date="2015-09-08" description="settings4j 2.0.2 - migration to GitHub; No feature changes">
       <action dev="brabenetz" type="update" date="2014-09-06">
@@ -155,6 +178,11 @@
       <action dev="brabenetz" type="add">Simple Default fall back Configuration if no settings4j.xml is found.</action>
       <action dev="brabenetz" type="add">Hirachical Structure in settings4j.xml like log4j</action>
       <action dev="brabenetz" type="add">Main Connector-Implementations: for SystemProperties, Classpath, JNDI-Context, PropertyFile</action>
+    </release>
+    <release version="0.0.1-alpha" date="2008-03" description="The beginning">
+      <action dev="brabenetz" type="add" system="maven-site" issue="roadmapTheBeginning">
+       The beginning
+      </action>
     </release>
   </body>
 </document>

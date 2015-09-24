@@ -20,16 +20,16 @@
 package org.settings4j.connector;
 
 /**
- * Basic Implementation of {@link org.settings4j.Connector}s whiche are Property-related.
+ * Basic Implementation of {@link org.settings4j.Connector}s which are Property-String-related.
  * <p>
- * Only #getProperty(String, String) must be implemented. Example implementations are {@link PropertyFileConnector} or {@link SystemPropertyConnector}.
+ * Only #getString(String) must be implemented. Example implementations are {@link PropertyFileConnector} or {@link SystemPropertyConnector}.
  * </p>
  *
  * @author Harald.Brabenetz
  */
 public abstract class AbstractPropertyConnector extends AbstractConnector {
 
-    /** {@inheritDoc} */
+    @Override
     // SuppressWarnings PMD.ReturnEmptyArrayRatherThanNull: returning null for this byte-Arrays is OK.
     @SuppressWarnings("PMD.ReturnEmptyArrayRatherThanNull")
     public byte[] getContent(final String key) {
@@ -42,7 +42,7 @@ public abstract class AbstractPropertyConnector extends AbstractConnector {
 
     }
 
-    /** {@inheritDoc} */
+    @Override
     public Object getObject(final String key) {
         final String path = getString(key);
         if (path != null && getObjectResolver() != null) {
@@ -52,18 +52,4 @@ public abstract class AbstractPropertyConnector extends AbstractConnector {
         return null;
 
     }
-
-    /** {@inheritDoc} */
-    public String getString(final String key) {
-        return getProperty(key, null);
-    }
-
-    /**
-     * Very similar to <code>System.getProperty</code> except that the {@link SecurityException} is hidden.
-     *
-     * @param key The key to search for.
-     * @param defaultValue The default value to return.
-     * @return the string value of the system property, or the default value if there is no property with that key.
-     */
-    protected abstract String getProperty(String key, String defaultValue);
 }

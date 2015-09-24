@@ -44,7 +44,6 @@ public class Settings4jPlaceholderConfigurer extends PropertyPlaceholderConfigur
         this.prefix = prefix;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected String resolvePlaceholder(final String placeholder, final Properties props) {
 
@@ -133,6 +132,7 @@ public class Settings4jPlaceholderConfigurer extends PropertyPlaceholderConfigur
             this.props = props;
         }
 
+        @Override
         public String resolvePlaceholder(final String placeholderName) {
             final Settings4jPlaceholderConfigurer placeholderConfigurer = new Settings4jPlaceholderConfigurer();
             placeholderConfigurer.setPrefix(this.prefix);
