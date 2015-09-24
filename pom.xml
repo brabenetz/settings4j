@@ -109,8 +109,7 @@
       <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
-        <!-- commons-io 2.4 requires JDK 6 -->
-        <version>2.2</version>
+        <version>2.4</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -120,8 +119,7 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <!-- commons-lang3 3.2+ requires JDK 6 -->
-        <version>3.1</version>
+        <version>3.4</version>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
@@ -138,7 +136,7 @@
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
-        <!-- javax.servlet-api-3.1.0 requires JDK 6 -->
+        <!-- javax.servlet-api-3.1.0 requires JDK 7 -->
         <version>3.0.1</version>
         <scope>provided</scope>
         <optional>true</optional>
@@ -160,39 +158,35 @@
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-beans</artifactId>
-        <!-- springframework 4.0 requires JDK 6 -->
-        <version>3.2.9.RELEASE</version>
+        <version>4.2.1.RELEASE</version>
         <scope>provided</scope>
         <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-core</artifactId>
-        <!-- springframework 4.0 requires JDK 6 -->
-        <version>3.2.9.RELEASE</version>
+        <version>4.2.1.RELEASE</version>
         <scope>provided</scope>
         <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-jdbc</artifactId>
-        <!-- springframework 4.0 requires JDK 6 -->
-        <version>3.2.9.RELEASE</version>
+        <version>4.2.1.RELEASE</version>
         <scope>provided</scope>
         <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-test</artifactId>
-        <version>3.2.9.RELEASE</version>
+        <version>4.2.1.RELEASE</version>
         <scope>provided</scope>
         <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-web</artifactId>
-        <!-- springframework 4.0 requires JDK 6 -->
-        <version>3.2.9.RELEASE</version>
+        <version>4.2.1.RELEASE</version>
         <scope>provided</scope>
         <optional>true</optional>
       </dependency>
@@ -225,7 +219,6 @@
         <groupId>org.hsqldb</groupId>
         <artifactId>hsqldb</artifactId>
         <version>2.3.3</version>
-        <classifier>jdk5</classifier>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -346,7 +339,6 @@
     <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
-      <classifier>jdk5</classifier>
       <scope>test</scope>
     </dependency>
     <dependency>
