@@ -22,10 +22,10 @@
 <settings4j:configuration xmlns:settings4j='http://settings4j.org/'>
 
   <connector name="PropertyFileConnector" class="org.settings4j.connector.PropertyFileConnector">
-    <param name="propertyFromContent" value="${connectors.content['org/settings4j/config/propertyFile.properties']}" />
-    <connector-ref ref="ClasspathConnector" />
+    <param name="propertyFromPath" value="${connectors.string['org/settings4j/junit/filePropertyPath']}" />
+    <connector-ref ref="SystemPropertyConnector" />
   </connector>
 
-  <connector name="ClasspathConnector" class="org.settings4j.connector.ClasspathConnector" />
+  <connector name="SystemPropertyConnector" class="org.settings4j.connector.SystemPropertyConnector" />
 
 </settings4j:configuration>

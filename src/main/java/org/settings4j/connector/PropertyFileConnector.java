@@ -60,7 +60,7 @@ import org.settings4j.contentresolver.FSContentResolver;
  * &lt;settings4j:configuration xmlns:settings4j='http://settings4j.org/'&gt;
  *
  *     &lt;connector name="PropertyFileConnector" class="org.settings4j.connector.PropertyFileConnector"&gt;
- *         &lt;param  name="propertyFromPath" value="${connectors.content['myAppConfig']}" /&gt;
+ *         &lt;param  name="propertyFromPath" value="${connectors.string['myAppConfig']}" /&gt;
  *         &lt;connector-ref ref="SystemPropertyConnector" /&gt;
  *         &lt;connector-ref ref="JNDIConnector" /&gt;
  *     &lt;/connector&gt;
@@ -95,7 +95,7 @@ import org.settings4j.contentresolver.FSContentResolver;
  *     &lt;connector name="SystemPropertyConnector" class="org.settings4j.connector.SystemPropertyConnector"/&gt;
  *
  *     &lt;connector name="PropertyFileConnector" class="org.settings4j.connector.PropertyFileConnector"&gt;
- *         &lt;param  name="propertyFromPath" value="${connectors.content['myAppConfig']}" /&gt;
+ *         &lt;param  name="propertyFromPath" value="${connectors.string['myAppConfig']}" /&gt;
  *         &lt;param  name="resolveRelativePaths" value="true /&gt;
  *         &lt;connector-ref ref="SystemPropertyConnector" /&gt;
  *     &lt;/connector&gt;
@@ -113,15 +113,13 @@ import org.settings4j.contentresolver.FSContentResolver;
  */
 public class PropertyFileConnector extends AbstractPropertyConnector {
 
-    /** General Logger for this Class. */
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(PropertyFileConnector.class);
-
     private Properties property = new Properties();
 
     private boolean resolveRelativePaths;
     private URL propertyFileFolderUrl;
 
     /** {@inheritDoc} */
+    @Override
     public String getString(final String key) {
         return this.property.getProperty(key, null);
     }
@@ -144,17 +142,6 @@ public class PropertyFileConnector extends AbstractPropertyConnector {
     public void setResolveRelativePaths(final boolean resolveRelativePaths) {
         this.resolveRelativePaths = resolveRelativePaths;
         resolveRelativePaths();
-    }
-
-    /**
-     * @param content
-     *        The byte[] Content of a Property-File.
-     * @deprecated will be removed with Settings4j-2.1. Please use setPropertyFromPath instead.
-     */
-    @Deprecated
-    public void setPropertyFromContent(final byte[] content) {
-        LOG.warn("PropertyFileConnector.setPropertyFromContent is deprected and  will be removed with Settings4j-2.1. Please use setPropertyFromPath instead.");
-        setPropertyFromContentInternal(content);
     }
 
     private void setPropertyFromContentInternal(final byte[] content) {
@@ -199,7 +186,7 @@ public class PropertyFileConnector extends AbstractPropertyConnector {
     private static URL getParentFolderUrlFromFile(final String propertyPath) {
         final File propertyFile = new File(StringUtils.removeStart(propertyPath, FSContentResolver.FILE_URL_PREFIX));
         try {
-            return propertyFile.getParentFile().toURL();
+            return propertyFile.getParentFile().toURI().toURL();
         } catch (final IOException e) {
             throw new IllegalArgumentException(e);
         }
