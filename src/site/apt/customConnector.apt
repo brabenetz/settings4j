@@ -58,7 +58,7 @@
 [./apidocs/org/settings4j/connector/AbstractPropertyConnector.png] AbstractPropertyConnector Graph
 
   You only must implement the method <String getString(final String key)>.\
-  Returning <null> means that no value for the given key where found and the next Connector in the setting4j-chain will be called.
+  Returning <null> means that no value for the given key where found and the next Connector in the settings4j-chain will be called.
 
 +------------------------------------------------------------------------
 public class MySimpleConnector extends AbstractPropertyConnector {
@@ -77,7 +77,7 @@ public class MySimpleConnector extends AbstractPropertyConnector {
 [./apidocs/org/settings4j/connector/AbstractConnector.png] AbstractConnector Graph
 
   You can implement <getString()>, <getContent()> and <getObject()>.\
-  Returning <null> means that no value for the given key where found and the next Connector in the setting4j-chain will be called.
+  Returning <null> means that no value for the given key where found and the next Connector in the settings4j-chain will be called.
   
 +------------------------------------------------------------------------
 public class MyComplexConnector extends AbstractConnector {
