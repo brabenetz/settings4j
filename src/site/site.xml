@@ -47,7 +47,6 @@
 			<item name="Caching" href="configCache.html" />
 			<item name="Spring Placeholder" href="configSpringPlaceholder.html" />
 			<item name="Spring Object Factory" href="configSpringObjectFactory.html" />
-			<item name="Spring Context Web" href="configSpringContextWebXml.html" />
 			<item name="Web Default Configs" href="configWebDefaultConfig.html" />
 			<item name="Web Log4j Config" href="configWebLog4jConfig.html" />
 		</menu>
@@ -56,7 +55,7 @@
   <skin>
     <groupId>org.apache.maven.skins</groupId>
     <artifactId>maven-fluido-skin</artifactId>
-    <version>1.4</version>
+    <version>1.5</version>
   </skin>
   <custom>
     <fluidoSkin>
