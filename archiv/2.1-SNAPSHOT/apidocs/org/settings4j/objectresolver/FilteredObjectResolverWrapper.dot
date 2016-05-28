@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.ObjectResolver
-	c3069 [label=<<table title="org.settings4j.ObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ObjectResolver.html">
+	c2964 [label=<<table title="org.settings4j.ObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ObjectResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ObjectResolver </td></tr>
@@ -18,7 +18,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../ObjectResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.Filter
-	c3070 [label=<<table title="org.settings4j.Filter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../Filter.html">
+	c2965 [label=<<table title="org.settings4j.Filter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../Filter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Filter </td></tr>
@@ -26,7 +26,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../Filter.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.ContentResolver
-	c3071 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
+	c2966 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ContentResolver </td></tr>
@@ -34,20 +34,20 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../ContentResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.objectresolver.FilteredObjectResolverWrapper
-	c3093 [label=<<table title="org.settings4j.objectresolver.FilteredObjectResolverWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FilteredObjectResolverWrapper.html">
+	c2986 [label=<<table title="org.settings4j.objectresolver.FilteredObjectResolverWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FilteredObjectResolverWrapper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FilteredObjectResolverWrapper </td></tr>
 		</table></td></tr>
 		</table>>, URL="./FilteredObjectResolverWrapper.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.objectresolver.FilteredObjectResolverWrapper implements org.settings4j.ObjectResolver
-	c3069:p -> c3093:p [dir=back,arrowtail=empty,style=dashed];
+	c2964:p -> c2986:p [dir=back,arrowtail=empty,style=dashed];
 	// org.settings4j.objectresolver.FilteredObjectResolverWrapper NAVASSOC org.settings4j.ObjectResolver
-	c3093:p -> c3069:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c2986:p -> c2964:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.objectresolver.FilteredObjectResolverWrapper NAVASSOC org.settings4j.Filter
-	c3093:p -> c3070:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c2986:p -> c2965:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.objectresolver.FilteredObjectResolverWrapper DEPEND org.settings4j.ObjectResolver
-	c3093:p -> c3069:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c2986:p -> c2964:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.objectresolver.FilteredObjectResolverWrapper DEPEND org.settings4j.ContentResolver
-	c3093:p -> c3071:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c2986:p -> c2966:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

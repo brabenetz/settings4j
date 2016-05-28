@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.connector.ClasspathConnector
-	c1098 [label=<<table title="org.settings4j.connector.ClasspathConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ClasspathConnector.html">
+	c1062 [label=<<table title="org.settings4j.connector.ClasspathConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ClasspathConnector.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ClasspathConnector </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ClasspathConnector.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.connector.AbstractConnector
-	c1101 [label=<<table title="org.settings4j.connector.AbstractConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractConnector.html">
+	c1065 [label=<<table title="org.settings4j.connector.AbstractConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractConnector.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="arial italic"> AbstractConnector </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractConnector.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.ContentResolver
-	c1108 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
+	c1072 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ContentResolver </td></tr>
@@ -30,42 +30,42 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../ContentResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.contentresolver.UnionContentResolver
-	c1113 [label=<<table title="org.settings4j.contentresolver.UnionContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../contentresolver/UnionContentResolver.html">
+	c1077 [label=<<table title="org.settings4j.contentresolver.UnionContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../contentresolver/UnionContentResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UnionContentResolver </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.contentresolver </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../contentresolver/UnionContentResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.contentresolver.ClasspathContentResolver
-	c1116 [label=<<table title="org.settings4j.contentresolver.ClasspathContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../contentresolver/ClasspathContentResolver.html">
+	c1080 [label=<<table title="org.settings4j.contentresolver.ClasspathContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../contentresolver/ClasspathContentResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ClasspathContentResolver </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.contentresolver </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../contentresolver/ClasspathContentResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.connector.ClasspathConnector extends org.settings4j.connector.AbstractConnector
-	c1101:p -> c1098:p [dir=back,arrowtail=empty];
+	c1065:p -> c1062:p [dir=back,arrowtail=empty];
 	//org.settings4j.contentresolver.UnionContentResolver implements org.settings4j.ContentResolver
-	c1108:p -> c1113:p [dir=back,arrowtail=empty,style=dashed];
+	c1072:p -> c1077:p [dir=back,arrowtail=empty,style=dashed];
 	//org.settings4j.contentresolver.ClasspathContentResolver implements org.settings4j.ContentResolver
-	c1108:p -> c1116:p [dir=back,arrowtail=empty,style=dashed];
+	c1072:p -> c1080:p [dir=back,arrowtail=empty,style=dashed];
 	// org.settings4j.connector.ClasspathConnector NAVASSOC org.settings4j.contentresolver.ClasspathContentResolver
-	c1098:p -> c1116:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c1062:p -> c1080:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.connector.ClasspathConnector NAVASSOC org.settings4j.contentresolver.UnionContentResolver
-	c1098:p -> c1113:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c1062:p -> c1077:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.connector.AbstractConnector NAVASSOC org.settings4j.ContentResolver
-	c1101:p -> c1108:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c1065:p -> c1072:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.contentresolver.UnionContentResolver NAVASSOC org.settings4j.ContentResolver
-	c1113:p -> c1108:p [taillabel="", label="", headlabel="*", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c1077:p -> c1072:p [taillabel="", label="", headlabel="*", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.connector.ClasspathConnector DEPEND org.settings4j.ContentResolver
-	c1098:p -> c1108:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c1062:p -> c1072:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.connector.AbstractConnector DEPEND org.settings4j.ContentResolver
-	c1101:p -> c1108:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c1065:p -> c1072:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.contentresolver.UnionContentResolver DEPEND org.settings4j.ContentResolver
-	c1113:p -> c1108:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c1077:p -> c1072:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.contentresolver.UnionContentResolver DEPEND org.settings4j.ContentResolver
-	c1113:p -> c1108:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c1077:p -> c1072:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.contentresolver.ClasspathContentResolver DEPEND org.settings4j.ContentResolver
-	c1116:p -> c1108:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c1080:p -> c1072:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

@@ -16,26 +16,26 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./ClasspathConnectorTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.connector.ClasspathConnectorTest NAVASSOC org.settings4j.connector.ClasspathConnector
-	c509:p -> c532:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c509:p -> c533:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.connector.ClasspathConnectorTest NAVASSOC org.settings4j.contentresolver.ClasspathContentResolver
-	c509:p -> c535:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c509:p -> c536:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.connector.ClasspathConnectorTest NAVASSOC org.junit.rules.ExpectedException
-	c509:p -> c543:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c509:p -> c544:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.connector.ClasspathConnector
-	c532 [label=<<table title="org.settings4j.connector.ClasspathConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c533 [label=<<table title="org.settings4j.connector.ClasspathConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ClasspathConnector </td></tr>
 		</table></td></tr>
 		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.junit.rules.ExpectedException
-	c543 [label=<<table title="org.junit.rules.ExpectedException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://junit.org/javadoc/latest/org/junit/rules/ExpectedException.html">
+	c544 [label=<<table title="org.junit.rules.ExpectedException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ExpectedException </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.junit.rules </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="http://junit.org/javadoc/latest/org/junit/rules/ExpectedException.html", fontname="arial", fontcolor="black", fontsize=9.0];
+		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.contentresolver.ClasspathContentResolver
-	c535 [label=<<table title="org.settings4j.contentresolver.ClasspathContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c536 [label=<<table title="org.settings4j.contentresolver.ClasspathContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ClasspathContentResolver </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.contentresolver </font></td></tr>

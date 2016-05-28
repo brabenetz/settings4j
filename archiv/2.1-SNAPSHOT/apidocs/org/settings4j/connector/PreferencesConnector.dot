@@ -10,18 +10,18 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.connector.PreferencesConnector
-	c3484 [label=<<table title="org.settings4j.connector.PreferencesConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PreferencesConnector.html">
+	c3365 [label=<<table title="org.settings4j.connector.PreferencesConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PreferencesConnector.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> PreferencesConnector </td></tr>
 		</table></td></tr>
 		</table>>, URL="./PreferencesConnector.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.connector.AbstractPropertyConnector
-	c3491 [label=<<table title="org.settings4j.connector.AbstractPropertyConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractPropertyConnector.html">
+	c3372 [label=<<table title="org.settings4j.connector.AbstractPropertyConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractPropertyConnector.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="arial italic"> AbstractPropertyConnector </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractPropertyConnector.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.connector.PreferencesConnector extends org.settings4j.connector.AbstractPropertyConnector
-	c3491:p -> c3484:p [dir=back,arrowtail=empty];
+	c3372:p -> c3365:p [dir=back,arrowtail=empty];
 }
 

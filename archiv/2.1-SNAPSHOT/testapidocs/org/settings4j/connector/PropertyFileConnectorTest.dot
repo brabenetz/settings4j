@@ -10,10 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.connector.PropertyFileConnectorTest
-	c1309 [label=<<table title="org.settings4j.connector.PropertyFileConnectorTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PropertyFileConnectorTest.html">
+	c1318 [label=<<table title="org.settings4j.connector.PropertyFileConnectorTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PropertyFileConnectorTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> PropertyFileConnectorTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./PropertyFileConnectorTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
+	// org.settings4j.connector.PropertyFileConnectorTest NAVASSOC org.junit.rules.ExpectedException
+	c1318:p -> c1345:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	// org.junit.rules.ExpectedException
+	c1345 [label=<<table title="org.junit.rules.ExpectedException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ExpectedException </td></tr>
+<tr><td align="center" balign="center"><font point-size="7.0"> org.junit.rules </font></td></tr>
+		</table></td></tr>
+		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=9.0];
 }
 

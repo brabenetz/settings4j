@@ -3,10 +3,10 @@
 <area shape="rect" id="node1" href="./FSConnector.html" title="&lt;TABLE&gt;" alt="" coords="5,101,117,149"/>
 <area shape="rect" id="node3_1" href="../ContentResolver.html" title="org.settings4j.ContentResolver" alt="" coords="110,203,221,253"/>
 <area shape="rect" id="node3" href="../ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="99,197,231,259"/>
-<area shape="rect" id="node4_2" href="../contentresolver/UnionContentResolver.html" title="org.settings4j.contentresolver.UnionContentResolver" alt="" coords="73,313,217,349"/>
-<area shape="rect" id="node4" href="../contentresolver/UnionContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="63,307,228,355"/>
-<area shape="rect" id="node5_3" href="../contentresolver/FSContentResolver.html" title="org.settings4j.contentresolver.FSContentResolver" alt="" coords="263,313,388,349"/>
-<area shape="rect" id="node5" href="../contentresolver/FSContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="252,307,399,355"/>
+<area shape="rect" id="node4_2" href="../contentresolver/UnionContentResolver.html" title="org.settings4j.contentresolver.UnionContentResolver" alt="" coords="72,313,216,349"/>
+<area shape="rect" id="node4" href="../contentresolver/UnionContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="61,307,227,355"/>
+<area shape="rect" id="node5_3" href="../contentresolver/FSContentResolver.html" title="org.settings4j.contentresolver.FSContentResolver" alt="" coords="262,313,405,349"/>
+<area shape="rect" id="node5" href="../contentresolver/FSContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="251,307,415,355"/>
 <area shape="rect" id="node2_4" href="./AbstractConnector.html" title="org.settings4j.connector.AbstractConnector" alt="" coords="114,17,219,41"/>
 <area shape="rect" id="node2" href="./AbstractConnector.html" title="&lt;TABLE&gt;" alt="" coords="103,5,230,53"/>
 </map>

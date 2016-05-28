@@ -10,13 +10,13 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.connector.CachedConnectorWrapper
-	c1038 [label=<<table title="org.settings4j.connector.CachedConnectorWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CachedConnectorWrapper.html">
+	c1004 [label=<<table title="org.settings4j.connector.CachedConnectorWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./CachedConnectorWrapper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CachedConnectorWrapper </td></tr>
 		</table></td></tr>
 		</table>>, URL="./CachedConnectorWrapper.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.ObjectResolver
-	c1045 [label=<<table title="org.settings4j.ObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ObjectResolver.html">
+	c1011 [label=<<table title="org.settings4j.ObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ObjectResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ObjectResolver </td></tr>
@@ -24,7 +24,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../ObjectResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.ContentResolver
-	c1047 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
+	c1013 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ContentResolver </td></tr>
@@ -32,7 +32,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../ContentResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.Connector
-	c1051 [label=<<table title="org.settings4j.Connector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../Connector.html">
+	c1017 [label=<<table title="org.settings4j.Connector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../Connector.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Connector </td></tr>
@@ -40,14 +40,14 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../Connector.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.connector.CachedConnectorWrapper implements org.settings4j.Connector
-	c1051:p -> c1038:p [dir=back,arrowtail=empty,style=dashed];
+	c1017:p -> c1004:p [dir=back,arrowtail=empty,style=dashed];
 	// org.settings4j.connector.CachedConnectorWrapper NAVASSOC org.settings4j.Connector
-	c1038:p -> c1051:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
-	// org.settings4j.connector.CachedConnectorWrapper DEPEND org.settings4j.Connector
-	c1038:p -> c1051:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// org.settings4j.connector.CachedConnectorWrapper DEPEND org.settings4j.ContentResolver
-	c1038:p -> c1047:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c1004:p -> c1017:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.connector.CachedConnectorWrapper DEPEND org.settings4j.ObjectResolver
-	c1038:p -> c1045:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c1004:p -> c1011:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.connector.CachedConnectorWrapper DEPEND org.settings4j.Connector
+	c1004:p -> c1017:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.connector.CachedConnectorWrapper DEPEND org.settings4j.ContentResolver
+	c1004:p -> c1013:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

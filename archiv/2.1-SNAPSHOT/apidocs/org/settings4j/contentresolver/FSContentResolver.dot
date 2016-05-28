@@ -10,14 +10,14 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.connector.FSConnector
-	c2814 [label=<<table title="org.settings4j.connector.FSConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../connector/FSConnector.html">
+	c2717 [label=<<table title="org.settings4j.connector.FSConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../connector/FSConnector.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FSConnector </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.connector </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../connector/FSConnector.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.ContentResolver
-	c2827 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
+	c2730 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ContentResolver </td></tr>
@@ -25,18 +25,18 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../ContentResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.contentresolver.FSContentResolver
-	c2833 [label=<<table title="org.settings4j.contentresolver.FSContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FSContentResolver.html">
+	c2736 [label=<<table title="org.settings4j.contentresolver.FSContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FSContentResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FSContentResolver </td></tr>
 		</table></td></tr>
 		</table>>, URL="./FSContentResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.contentresolver.FSContentResolver implements org.settings4j.ContentResolver
-	c2827:p -> c2833:p [dir=back,arrowtail=empty,style=dashed];
+	c2730:p -> c2736:p [dir=back,arrowtail=empty,style=dashed];
 	// org.settings4j.connector.FSConnector NAVASSOC org.settings4j.contentresolver.FSContentResolver
-	c2814:p -> c2833:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c2717:p -> c2736:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.connector.FSConnector DEPEND org.settings4j.ContentResolver
-	c2814:p -> c2827:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c2717:p -> c2730:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.contentresolver.FSContentResolver DEPEND org.settings4j.ContentResolver
-	c2833:p -> c2827:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c2736:p -> c2730:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

@@ -23,11 +23,11 @@ under the License.
     <link>http://settings4j.org</link>
     <description>settings4j - Checkstyle report</description>
     <language>en-us</language>
-    <copyright>&#169;2008 - 2015 Brabenetz Harald, Austria</copyright>
+    <copyright>&#169;2008 - 2016 Brabenetz Harald, Austria</copyright>
     <item>
-      <title>File: 61,
+      <title>File: 59,
              Errors: 0,
-             Warnings: 0,
+             Warnings: 2,
              Infos: 0
       </title>
             <link>http://settings4j.org/checkstyle.html</link>
@@ -61,20 +61,6 @@ under the License.
                           <tr>
                 <td>
                   <a href="http://settings4j.org/checkstyle.html#org.settings4j.helper.web.Log4jConfigurationLoader.java">org/settings4j/helper/web/Log4jConfigurationLoader.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.helper.spring.Settings4jContextLoaderListener.java">org/settings4j/helper/spring/Settings4jContextLoaderListener.java</a>
                 </td>
                 <td>
                   0
@@ -256,20 +242,6 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://settings4j.org/checkstyle.html#org.settings4j.helper.spring.Settings4jContextLoader.java">org/settings4j/helper/spring/Settings4jContextLoader.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="http://settings4j.org/checkstyle.html#org.settings4j.util.MatchPatternTransformer.java">org/settings4j/util/MatchPatternTransformer.java</a>
                 </td>
                 <td>
@@ -360,7 +332,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0
@@ -584,7 +556,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  0
+                  1
                 </td>
                 <td>
                   0

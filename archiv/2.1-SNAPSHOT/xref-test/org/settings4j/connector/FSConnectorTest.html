@@ -33,7 +33,7 @@
 <a class="jxr_linenumber" name="L25" href="#L25">25</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.hamcrest.Matchers.nullValue;
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>  
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">import</strong> java.io.File;
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> java.nio.charset.IllegalCharsetNameException;
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> java.nio.charset.UnsupportedCharsetException;
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>  
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">import</strong> org.apache.commons.io.FileUtils;
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> org.junit.After;
@@ -101,7 +101,7 @@
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>          assertThat(<strong class="jxr_keyword">this</strong>.fsConnector.getObject(TEST_KEY), is(nullValue()));
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>  
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>          <em class="jxr_comment">// second Test with Object Resolver but returns null</em>
-<a class="jxr_linenumber" name="L96" href="#L96">96</a>          ObjectResolver objResolver = Mockito.mock(ObjectResolver.<strong class="jxr_keyword">class</strong>);
+<a class="jxr_linenumber" name="L96" href="#L96">96</a>          <strong class="jxr_keyword">final</strong> ObjectResolver objResolver = Mockito.mock(ObjectResolver.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>          <strong class="jxr_keyword">this</strong>.fsConnector.setObjectResolver(objResolver);
 <a class="jxr_linenumber" name="L98" href="#L98">98</a>          assertThat(<strong class="jxr_keyword">this</strong>.fsConnector.getObject(TEST_KEY), is(nullValue()));
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>  
@@ -147,7 +147,7 @@
 <a class="jxr_linenumber" name="L139" href="#L139">139</a> 
 <a class="jxr_linenumber" name="L140" href="#L140">140</a>     @Test
 <a class="jxr_linenumber" name="L141" href="#L141">141</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testSetContentResolver() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="L142" href="#L142">142</a>         ContentResolver contentResolver = <strong class="jxr_keyword">new</strong> ClasspathContentResolver();
+<a class="jxr_linenumber" name="L142" href="#L142">142</a>         <strong class="jxr_keyword">final</strong> ContentResolver contentResolver = <strong class="jxr_keyword">new</strong> ClasspathContentResolver();
 <a class="jxr_linenumber" name="L143" href="#L143">143</a>         assertThat(<strong class="jxr_keyword">this</strong>.fsConnector.getContentResolver(), is(nullValue()));
 <a class="jxr_linenumber" name="L144" href="#L144">144</a> 
 <a class="jxr_linenumber" name="L145" href="#L145">145</a>         <em class="jxr_comment">// run Test</em>
@@ -193,14 +193,14 @@
 <a class="jxr_linenumber" name="L185" href="#L185">185</a> 
 <a class="jxr_linenumber" name="L186" href="#L186">186</a>     @Test
 <a class="jxr_linenumber" name="L187" href="#L187">187</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testSetCharsetShouldThrowIllegalCharsetNameException() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="L188" href="#L188">188</a>         <strong class="jxr_keyword">this</strong>.thrown.expect(IllegalCharsetNameException.<strong class="jxr_keyword">class</strong>);
-<a class="jxr_linenumber" name="L189" href="#L189">189</a>         <strong class="jxr_keyword">this</strong>.thrown.expectMessage(containsString(<span class="jxr_string">"'xyz'"</span>));
+<a class="jxr_linenumber" name="L188" href="#L188">188</a>         <strong class="jxr_keyword">this</strong>.thrown.expect(UnsupportedCharsetException.<strong class="jxr_keyword">class</strong>);
+<a class="jxr_linenumber" name="L189" href="#L189">189</a>         <strong class="jxr_keyword">this</strong>.thrown.expectMessage(containsString(<span class="jxr_string">"xyz"</span>));
 <a class="jxr_linenumber" name="L190" href="#L190">190</a>         <em class="jxr_comment">// run test</em>
 <a class="jxr_linenumber" name="L191" href="#L191">191</a>         <strong class="jxr_keyword">this</strong>.fsConnector.setCharset(<span class="jxr_string">"xyz"</span>);
 <a class="jxr_linenumber" name="L192" href="#L192">192</a>     }
 <a class="jxr_linenumber" name="L193" href="#L193">193</a> }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2008&#x2013;2015 <a href="http://brabenetz.net">Brabenetz Harald, Austria</a>. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2008&#x2013;2016 <a href="http://brabenetz.net">Brabenetz Harald, Austria</a>. All rights reserved.</div>
 </body>
 </html>

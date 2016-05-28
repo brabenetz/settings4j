@@ -10,26 +10,26 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.connector.AbstractPropertyConnector
-	c1222 [label=<<table title="org.settings4j.connector.AbstractPropertyConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../connector/AbstractPropertyConnector.html">
+	c1182 [label=<<table title="org.settings4j.connector.AbstractPropertyConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../connector/AbstractPropertyConnector.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="arial italic"> AbstractPropertyConnector </font></td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.connector </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../../connector/AbstractPropertyConnector.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.helper.configuration.ConfigurationToConnectorAdapter
-	c1239 [label=<<table title="org.settings4j.helper.configuration.ConfigurationToConnectorAdapter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ConfigurationToConnectorAdapter.html">
+	c1199 [label=<<table title="org.settings4j.helper.configuration.ConfigurationToConnectorAdapter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ConfigurationToConnectorAdapter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ConfigurationToConnectorAdapter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ConfigurationToConnectorAdapter.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.helper.configuration.ConfigurationToConnectorAdapter extends org.settings4j.connector.AbstractPropertyConnector
-	c1222:p -> c1239:p [dir=back,arrowtail=empty];
+	c1182:p -> c1199:p [dir=back,arrowtail=empty];
 	// org.settings4j.helper.configuration.ConfigurationToConnectorAdapter NAVASSOC org.apache.commons.configuration.Configuration
-	c1239:p -> c1271:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c1199:p -> c1229:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.helper.configuration.ConfigurationToConnectorAdapter DEPEND org.apache.commons.configuration.Configuration
-	c1239:p -> c1271:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c1199:p -> c1229:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.apache.commons.configuration.Configuration
-	c1271 [label=<<table title="org.apache.commons.configuration.Configuration" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c1229 [label=<<table title="org.apache.commons.configuration.Configuration" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Configuration </td></tr>

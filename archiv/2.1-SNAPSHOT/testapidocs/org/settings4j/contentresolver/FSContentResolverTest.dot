@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.contentresolver.FSContentResolverTest
-	c989 [label=<<table title="org.settings4j.contentresolver.FSContentResolverTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FSContentResolverTest.html">
+	c998 [label=<<table title="org.settings4j.contentresolver.FSContentResolverTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FSContentResolverTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FSContentResolverTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./FSContentResolverTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.contentresolver.FSContentResolverTest NAVASSOC org.junit.rules.ExpectedException
-	c989:p -> c1007:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c998:p -> c1016:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.junit.rules.ExpectedException
-	c1007 [label=<<table title="org.junit.rules.ExpectedException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://junit.org/javadoc/latest/org/junit/rules/ExpectedException.html">
+	c1016 [label=<<table title="org.junit.rules.ExpectedException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ExpectedException </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.junit.rules </font></td></tr>
 		</table></td></tr>
-		</table>>, URL="http://junit.org/javadoc/latest/org/junit/rules/ExpectedException.html", fontname="arial", fontcolor="black", fontsize=9.0];
+		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=9.0];
 }
 

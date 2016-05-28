@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.Filter
-	c2211 [label=<<table title="org.settings4j.Filter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../Filter.html">
+	c2139 [label=<<table title="org.settings4j.Filter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../Filter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Filter </td></tr>
@@ -18,12 +18,12 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../Filter.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.settings.DefaultFilter
-	c2240 [label=<<table title="org.settings4j.settings.DefaultFilter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultFilter.html">
+	c2166 [label=<<table title="org.settings4j.settings.DefaultFilter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultFilter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultFilter </td></tr>
 		</table></td></tr>
 		</table>>, URL="./DefaultFilter.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.settings.DefaultFilter implements org.settings4j.Filter
-	c2211:p -> c2240:p [dir=back,arrowtail=empty,style=dashed];
+	c2139:p -> c2166:p [dir=back,arrowtail=empty,style=dashed];
 }
 

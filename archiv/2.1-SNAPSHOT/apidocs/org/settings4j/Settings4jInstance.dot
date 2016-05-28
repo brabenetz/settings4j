@@ -10,58 +10,58 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.config.DOMConfigurator
-	c4043 [label=<<table title="org.settings4j.config.DOMConfigurator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./config/DOMConfigurator.html">
+	c3784 [label=<<table title="org.settings4j.config.DOMConfigurator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./config/DOMConfigurator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DOMConfigurator </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.config </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./config/DOMConfigurator.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.Settings4jInstance
-	c4056 [label=<<table title="org.settings4j.Settings4jInstance" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Settings4jInstance.html">
+	c3797 [label=<<table title="org.settings4j.Settings4jInstance" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./Settings4jInstance.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Settings4jInstance </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Settings4jInstance.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.settings.SettingsManager
-	c4085 [label=<<table title="org.settings4j.settings.SettingsManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./settings/SettingsManager.html">
+	c3824 [label=<<table title="org.settings4j.settings.SettingsManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./settings/SettingsManager.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SettingsManager </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.settings </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./settings/SettingsManager.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.settings.DefaultSettingsRepository
-	c4086 [label=<<table title="org.settings4j.settings.DefaultSettingsRepository" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./settings/DefaultSettingsRepository.html">
+	c3825 [label=<<table title="org.settings4j.settings.DefaultSettingsRepository" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./settings/DefaultSettingsRepository.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultSettingsRepository </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.settings </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./settings/DefaultSettingsRepository.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.settings.DefaultSettingsFactory
-	c4087 [label=<<table title="org.settings4j.settings.DefaultSettingsFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./settings/DefaultSettingsFactory.html">
+	c3826 [label=<<table title="org.settings4j.settings.DefaultSettingsFactory" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./settings/DefaultSettingsFactory.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultSettingsFactory </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.settings </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./settings/DefaultSettingsFactory.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.settings.DefaultSettings
-	c4088 [label=<<table title="org.settings4j.settings.DefaultSettings" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./settings/DefaultSettings.html">
+	c3827 [label=<<table title="org.settings4j.settings.DefaultSettings" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./settings/DefaultSettings.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultSettings </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.settings </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./settings/DefaultSettings.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.settings.DefaultSettings implements org.settings4j.Settings4jInstance
-	c4056:p -> c4088:p [dir=back,arrowtail=empty,style=dashed];
+	c3797:p -> c3827:p [dir=back,arrowtail=empty,style=dashed];
 	// org.settings4j.settings.DefaultSettingsRepository NAVASSOC org.settings4j.Settings4jInstance
-	c4086:p -> c4056:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c3825:p -> c3797:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.Settings4jInstance
-	c4043:p -> c4056:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c3784:p -> c3797:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.settings.SettingsManager DEPEND org.settings4j.Settings4jInstance
-	c4085:p -> c4056:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c3824:p -> c3797:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.settings.DefaultSettingsRepository DEPEND org.settings4j.Settings4jInstance
-	c4086:p -> c4056:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c3825:p -> c3797:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.settings.DefaultSettingsFactory DEPEND org.settings4j.Settings4jInstance
-	c4087:p -> c4056:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c3826:p -> c3797:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

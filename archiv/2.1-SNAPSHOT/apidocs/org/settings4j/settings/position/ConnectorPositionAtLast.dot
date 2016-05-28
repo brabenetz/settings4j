@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.ConnectorPosition
-	c1664 [label=<<table title="org.settings4j.ConnectorPosition" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../ConnectorPosition.html">
+	c1610 [label=<<table title="org.settings4j.ConnectorPosition" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../../ConnectorPosition.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ConnectorPosition </td></tr>
@@ -18,12 +18,12 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../../ConnectorPosition.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.settings.position.ConnectorPositionAtLast
-	c1694 [label=<<table title="org.settings4j.settings.position.ConnectorPositionAtLast" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ConnectorPositionAtLast.html">
+	c1638 [label=<<table title="org.settings4j.settings.position.ConnectorPositionAtLast" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ConnectorPositionAtLast.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ConnectorPositionAtLast </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ConnectorPositionAtLast.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.settings.position.ConnectorPositionAtLast implements org.settings4j.ConnectorPosition
-	c1664:p -> c1694:p [dir=back,arrowtail=empty,style=dashed];
+	c1610:p -> c1638:p [dir=back,arrowtail=empty,style=dashed];
 }
 

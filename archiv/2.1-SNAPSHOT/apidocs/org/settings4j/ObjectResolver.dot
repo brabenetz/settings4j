@@ -10,88 +10,88 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.config.DOMConfigurator
-	c3420 [label=<<table title="org.settings4j.config.DOMConfigurator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./config/DOMConfigurator.html">
+	c3303 [label=<<table title="org.settings4j.config.DOMConfigurator" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./config/DOMConfigurator.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DOMConfigurator </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.config </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./config/DOMConfigurator.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.connector.FilteredConnectorWrapper
-	c3426 [label=<<table title="org.settings4j.connector.FilteredConnectorWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./connector/FilteredConnectorWrapper.html">
+	c3309 [label=<<table title="org.settings4j.connector.FilteredConnectorWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./connector/FilteredConnectorWrapper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FilteredConnectorWrapper </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.connector </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./connector/FilteredConnectorWrapper.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.connector.CachedConnectorWrapper
-	c3429 [label=<<table title="org.settings4j.connector.CachedConnectorWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./connector/CachedConnectorWrapper.html">
+	c3312 [label=<<table title="org.settings4j.connector.CachedConnectorWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./connector/CachedConnectorWrapper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> CachedConnectorWrapper </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.connector </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./connector/CachedConnectorWrapper.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.connector.AbstractConnector
-	c3431 [label=<<table title="org.settings4j.connector.AbstractConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./connector/AbstractConnector.html">
+	c3314 [label=<<table title="org.settings4j.connector.AbstractConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./connector/AbstractConnector.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="arial italic"> AbstractConnector </font></td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.connector </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./connector/AbstractConnector.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.ObjectResolver
-	c3436 [label=<<table title="org.settings4j.ObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ObjectResolver.html">
+	c3319 [label=<<table title="org.settings4j.ObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ObjectResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ObjectResolver </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ObjectResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.objectresolver.UnionObjectResolver
-	c3457 [label=<<table title="org.settings4j.objectresolver.UnionObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./objectresolver/UnionObjectResolver.html">
+	c3338 [label=<<table title="org.settings4j.objectresolver.UnionObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./objectresolver/UnionObjectResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UnionObjectResolver </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.objectresolver </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./objectresolver/UnionObjectResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.objectresolver.FilteredObjectResolverWrapper
-	c3460 [label=<<table title="org.settings4j.objectresolver.FilteredObjectResolverWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./objectresolver/FilteredObjectResolverWrapper.html">
+	c3341 [label=<<table title="org.settings4j.objectresolver.FilteredObjectResolverWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./objectresolver/FilteredObjectResolverWrapper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FilteredObjectResolverWrapper </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.objectresolver </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./objectresolver/FilteredObjectResolverWrapper.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.objectresolver.AbstractObjectResolver
-	c3461 [label=<<table title="org.settings4j.objectresolver.AbstractObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./objectresolver/AbstractObjectResolver.html">
+	c3342 [label=<<table title="org.settings4j.objectresolver.AbstractObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./objectresolver/AbstractObjectResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="arial italic"> AbstractObjectResolver </font></td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.objectresolver </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./objectresolver/AbstractObjectResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.objectresolver.UnionObjectResolver implements org.settings4j.ObjectResolver
-	c3436:p -> c3457:p [dir=back,arrowtail=empty,style=dashed];
+	c3319:p -> c3338:p [dir=back,arrowtail=empty,style=dashed];
 	//org.settings4j.objectresolver.FilteredObjectResolverWrapper implements org.settings4j.ObjectResolver
-	c3436:p -> c3460:p [dir=back,arrowtail=empty,style=dashed];
+	c3319:p -> c3341:p [dir=back,arrowtail=empty,style=dashed];
 	//org.settings4j.objectresolver.AbstractObjectResolver implements org.settings4j.ObjectResolver
-	c3436:p -> c3461:p [dir=back,arrowtail=empty,style=dashed];
+	c3319:p -> c3342:p [dir=back,arrowtail=empty,style=dashed];
 	// org.settings4j.config.DOMConfigurator NAVASSOC org.settings4j.ObjectResolver
-	c3420:p -> c3436:p [taillabel="", label="", headlabel="*", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c3303:p -> c3319:p [taillabel="", label="", headlabel="*", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.connector.AbstractConnector NAVASSOC org.settings4j.ObjectResolver
-	c3431:p -> c3436:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c3314:p -> c3319:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.objectresolver.UnionObjectResolver NAVASSOC org.settings4j.ObjectResolver
-	c3457:p -> c3436:p [taillabel="", label="", headlabel="*", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c3338:p -> c3319:p [taillabel="", label="", headlabel="*", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.objectresolver.FilteredObjectResolverWrapper NAVASSOC org.settings4j.ObjectResolver
-	c3460:p -> c3436:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c3341:p -> c3319:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.config.DOMConfigurator DEPEND org.settings4j.ObjectResolver
-	c3420:p -> c3436:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c3303:p -> c3319:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.connector.FilteredConnectorWrapper DEPEND org.settings4j.ObjectResolver
-	c3426:p -> c3436:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c3309:p -> c3319:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.connector.CachedConnectorWrapper DEPEND org.settings4j.ObjectResolver
-	c3429:p -> c3436:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c3312:p -> c3319:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.connector.AbstractConnector DEPEND org.settings4j.ObjectResolver
-	c3431:p -> c3436:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c3314:p -> c3319:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.objectresolver.UnionObjectResolver DEPEND org.settings4j.ObjectResolver
-	c3457:p -> c3436:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c3338:p -> c3319:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.objectresolver.FilteredObjectResolverWrapper DEPEND org.settings4j.ObjectResolver
-	c3460:p -> c3436:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c3341:p -> c3319:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.objectresolver.AbstractObjectResolver DEPEND org.settings4j.ObjectResolver
-	c3461:p -> c3436:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c3342:p -> c3319:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

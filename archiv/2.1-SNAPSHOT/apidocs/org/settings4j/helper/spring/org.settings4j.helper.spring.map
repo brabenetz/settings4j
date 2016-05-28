@@ -3,10 +3,6 @@
 <area shape="rect" id="node1" href="./Settings4jPlaceholderConfigurer.html" title="&lt;TABLE&gt;" alt="" coords="5,5,224,53"/>
 <area shape="rect" id="node2_1" href="./Settings4jFactoryBean.html" title="org.settings4j.helper.spring.Settings4jFactoryBean" alt="" coords="259,17,400,41"/>
 <area shape="rect" id="node2" href="./Settings4jFactoryBean.html" title="&lt;TABLE&gt;" alt="" coords="248,5,411,53"/>
-<area shape="rect" id="node3_2" href="./Settings4jContextLoaderListener.html" title="org.settings4j.helper.spring.Settings4jContextLoaderListener" alt="" coords="446,17,645,41"/>
-<area shape="rect" id="node3" href="./Settings4jContextLoaderListener.html" title="&lt;TABLE&gt;" alt="" coords="435,5,655,53"/>
-<area shape="rect" id="node4_3" href="./Settings4jContextLoader.html" title="org.settings4j.helper.spring.Settings4jContextLoader" alt="" coords="690,17,843,41"/>
-<area shape="rect" id="node4" href="./Settings4jContextLoader.html" title="&lt;TABLE&gt;" alt="" coords="679,5,854,53"/>
-<area shape="rect" id="node5_4" href="./ByteArrayXMLApplicationContext.html" title="org.settings4j.helper.spring.ByteArrayXMLApplicationContext" alt="" coords="889,17,1082,41"/>
-<area shape="rect" id="node5" href="./ByteArrayXMLApplicationContext.html" title="&lt;TABLE&gt;" alt="" coords="878,5,1093,53"/>
+<area shape="rect" id="node3_2" href="./ByteArrayXMLApplicationContext.html" title="org.settings4j.helper.spring.ByteArrayXMLApplicationContext" alt="" coords="446,17,639,41"/>
+<area shape="rect" id="node3" href="./ByteArrayXMLApplicationContext.html" title="&lt;TABLE&gt;" alt="" coords="435,5,650,53"/>
 </map>

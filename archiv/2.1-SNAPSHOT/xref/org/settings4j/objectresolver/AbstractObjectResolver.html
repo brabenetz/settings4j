@@ -59,12 +59,12 @@
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>  
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> cached;
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>  
-<a class="jxr_linenumber" name="L54" href="#L54">54</a>      <em class="jxr_javadoccomment">/** {@inheritDoc} */</em>
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>      @Override
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> addObjectResolver(<strong class="jxr_keyword">final</strong> <a href="../../../org/settings4j/ObjectResolver.html">ObjectResolver</a> objectResolver) {
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>          <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> UnsupportedOperationException(<strong class="jxr_keyword">this</strong>.getClass().getName() + <span class="jxr_string">" cannot add other ObjectResolvers"</span>);
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>      }
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>  
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>      <em class="jxr_javadoccomment">/** {@inheritDoc} */</em>
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>      @Override
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>      <strong class="jxr_keyword">public</strong> Object getObject(<strong class="jxr_keyword">final</strong> String key, <strong class="jxr_keyword">final</strong> <a href="../../../org/settings4j/ContentResolver.html">ContentResolver</a> contentResolver) {
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>  
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>          Object result = <strong class="jxr_keyword">this</strong>.cachedObjects.get(key);
@@ -171,6 +171,6 @@
 <a class="jxr_linenumber" name="L163" href="#L163">163</a> }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2008&#x2013;2015 <a href="http://brabenetz.net">Brabenetz Harald, Austria</a>. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2008&#x2013;2016 <a href="http://brabenetz.net">Brabenetz Harald, Austria</a>. All rights reserved.</div>
 </body>
 </html>

@@ -10,13 +10,13 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.connector.FilteredConnectorWrapper
-	c2937 [label=<<table title="org.settings4j.connector.FilteredConnectorWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FilteredConnectorWrapper.html">
+	c2836 [label=<<table title="org.settings4j.connector.FilteredConnectorWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FilteredConnectorWrapper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FilteredConnectorWrapper </td></tr>
 		</table></td></tr>
 		</table>>, URL="./FilteredConnectorWrapper.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.ObjectResolver
-	c2947 [label=<<table title="org.settings4j.ObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ObjectResolver.html">
+	c2846 [label=<<table title="org.settings4j.ObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ObjectResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ObjectResolver </td></tr>
@@ -24,7 +24,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../ObjectResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.Filter
-	c2948 [label=<<table title="org.settings4j.Filter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../Filter.html">
+	c2847 [label=<<table title="org.settings4j.Filter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../Filter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Filter </td></tr>
@@ -32,7 +32,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../Filter.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.ContentResolver
-	c2949 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
+	c2848 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ContentResolver </td></tr>
@@ -40,7 +40,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../ContentResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.Connector
-	c2953 [label=<<table title="org.settings4j.Connector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../Connector.html">
+	c2852 [label=<<table title="org.settings4j.Connector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../Connector.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Connector </td></tr>
@@ -48,16 +48,16 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../Connector.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.connector.FilteredConnectorWrapper implements org.settings4j.Connector
-	c2953:p -> c2937:p [dir=back,arrowtail=empty,style=dashed];
+	c2852:p -> c2836:p [dir=back,arrowtail=empty,style=dashed];
 	// org.settings4j.connector.FilteredConnectorWrapper NAVASSOC org.settings4j.Connector
-	c2937:p -> c2953:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c2836:p -> c2852:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.connector.FilteredConnectorWrapper NAVASSOC org.settings4j.Filter
-	c2937:p -> c2948:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
-	// org.settings4j.connector.FilteredConnectorWrapper DEPEND org.settings4j.Connector
-	c2937:p -> c2953:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// org.settings4j.connector.FilteredConnectorWrapper DEPEND org.settings4j.ContentResolver
-	c2937:p -> c2949:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c2836:p -> c2847:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.connector.FilteredConnectorWrapper DEPEND org.settings4j.ObjectResolver
-	c2937:p -> c2947:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c2836:p -> c2846:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.connector.FilteredConnectorWrapper DEPEND org.settings4j.Connector
+	c2836:p -> c2852:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	// org.settings4j.connector.FilteredConnectorWrapper DEPEND org.settings4j.ContentResolver
+	c2836:p -> c2848:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

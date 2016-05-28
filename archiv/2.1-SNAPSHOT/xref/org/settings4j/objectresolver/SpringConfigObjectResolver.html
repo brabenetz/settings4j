@@ -98,26 +98,25 @@
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>  
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String PROPERTY_BEAN_REF = <span class="jxr_string">"bean-ref"</span>;
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>  
-<a class="jxr_linenumber" name="L93" href="#L93">93</a>      <em class="jxr_javadoccomment">/** {@inheritDoc} */</em>
-<a class="jxr_linenumber" name="L94" href="#L94">94</a>      @Override
-<a class="jxr_linenumber" name="L95" href="#L95">95</a>      <strong class="jxr_keyword">protected</strong> Object contentToObject(<strong class="jxr_keyword">final</strong> String key, <strong class="jxr_keyword">final</strong> Properties properties, <strong class="jxr_keyword">final</strong> byte[] content,
-<a class="jxr_linenumber" name="L96" href="#L96">96</a>          <strong class="jxr_keyword">final</strong> <a href="../../../org/settings4j/ContentResolver.html">ContentResolver</a> contentResolver) {
-<a class="jxr_linenumber" name="L97" href="#L97">97</a>  
-<a class="jxr_linenumber" name="L98" href="#L98">98</a>          String beanRef = properties.getProperty(PROPERTY_BEAN_REF);
-<a class="jxr_linenumber" name="L99" href="#L99">99</a>          <strong class="jxr_keyword">if</strong> (StringUtils.isEmpty(beanRef)) {
-<a class="jxr_linenumber" name="L100" href="#L100">100</a>             beanRef = key.replace('/', '.');
-<a class="jxr_linenumber" name="L101" href="#L101">101</a>         }
-<a class="jxr_linenumber" name="L102" href="#L102">102</a> 
-<a class="jxr_linenumber" name="L103" href="#L103">103</a>         <strong class="jxr_keyword">final</strong> Object result = ByteArrayXMLApplicationContext.getBean(content, beanRef);
-<a class="jxr_linenumber" name="L104" href="#L104">104</a>         <strong class="jxr_keyword">if</strong> (result == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L105" href="#L105">105</a>             LOG.warn(<span class="jxr_string">"SpringContext-Object with ID '{}' for Key '{}' is null!"</span>, beanRef, key);
-<a class="jxr_linenumber" name="L106" href="#L106">106</a>         }
-<a class="jxr_linenumber" name="L107" href="#L107">107</a>         <strong class="jxr_keyword">return</strong> result;
-<a class="jxr_linenumber" name="L108" href="#L108">108</a>     }
-<a class="jxr_linenumber" name="L109" href="#L109">109</a> 
-<a class="jxr_linenumber" name="L110" href="#L110">110</a> }
+<a class="jxr_linenumber" name="L93" href="#L93">93</a>      @Override
+<a class="jxr_linenumber" name="L94" href="#L94">94</a>      <strong class="jxr_keyword">protected</strong> Object contentToObject(<strong class="jxr_keyword">final</strong> String key, <strong class="jxr_keyword">final</strong> Properties properties, <strong class="jxr_keyword">final</strong> byte[] content,
+<a class="jxr_linenumber" name="L95" href="#L95">95</a>          <strong class="jxr_keyword">final</strong> <a href="../../../org/settings4j/ContentResolver.html">ContentResolver</a> contentResolver) {
+<a class="jxr_linenumber" name="L96" href="#L96">96</a>  
+<a class="jxr_linenumber" name="L97" href="#L97">97</a>          String beanRef = properties.getProperty(PROPERTY_BEAN_REF);
+<a class="jxr_linenumber" name="L98" href="#L98">98</a>          <strong class="jxr_keyword">if</strong> (StringUtils.isEmpty(beanRef)) {
+<a class="jxr_linenumber" name="L99" href="#L99">99</a>              beanRef = key.replace('/', '.');
+<a class="jxr_linenumber" name="L100" href="#L100">100</a>         }
+<a class="jxr_linenumber" name="L101" href="#L101">101</a> 
+<a class="jxr_linenumber" name="L102" href="#L102">102</a>         <strong class="jxr_keyword">final</strong> Object result = ByteArrayXMLApplicationContext.getBean(content, beanRef);
+<a class="jxr_linenumber" name="L103" href="#L103">103</a>         <strong class="jxr_keyword">if</strong> (result == <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L104" href="#L104">104</a>             LOG.warn(<span class="jxr_string">"SpringContext-Object with ID '{}' for Key '{}' is null!"</span>, beanRef, key);
+<a class="jxr_linenumber" name="L105" href="#L105">105</a>         }
+<a class="jxr_linenumber" name="L106" href="#L106">106</a>         <strong class="jxr_keyword">return</strong> result;
+<a class="jxr_linenumber" name="L107" href="#L107">107</a>     }
+<a class="jxr_linenumber" name="L108" href="#L108">108</a> 
+<a class="jxr_linenumber" name="L109" href="#L109">109</a> }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2008&#x2013;2015 <a href="http://brabenetz.net">Brabenetz Harald, Austria</a>. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2008&#x2013;2016 <a href="http://brabenetz.net">Brabenetz Harald, Austria</a>. All rights reserved.</div>
 </body>
 </html>

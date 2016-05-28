@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.ContentResolver
-	c4308 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
+	c4041 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ContentResolver </td></tr>
@@ -18,22 +18,22 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../ContentResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.objectresolver.SpringConfigObjectResolver
-	c4328 [label=<<table title="org.settings4j.objectresolver.SpringConfigObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SpringConfigObjectResolver.html">
+	c4059 [label=<<table title="org.settings4j.objectresolver.SpringConfigObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./SpringConfigObjectResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SpringConfigObjectResolver </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SpringConfigObjectResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.objectresolver.AbstractObjectResolver
-	c4331 [label=<<table title="org.settings4j.objectresolver.AbstractObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractObjectResolver.html">
+	c4062 [label=<<table title="org.settings4j.objectresolver.AbstractObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractObjectResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="arial italic"> AbstractObjectResolver </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractObjectResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.objectresolver.SpringConfigObjectResolver extends org.settings4j.objectresolver.AbstractObjectResolver
-	c4331:p -> c4328:p [dir=back,arrowtail=empty];
+	c4062:p -> c4059:p [dir=back,arrowtail=empty];
 	// org.settings4j.objectresolver.SpringConfigObjectResolver DEPEND org.settings4j.ContentResolver
-	c4328:p -> c4308:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c4059:p -> c4041:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.objectresolver.AbstractObjectResolver DEPEND org.settings4j.ContentResolver
-	c4331:p -> c4308:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c4062:p -> c4041:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.contentresolver.FilteredContentResolverWrapperTest
-	c1060 [label=<<table title="org.settings4j.contentresolver.FilteredContentResolverWrapperTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FilteredContentResolverWrapperTest.html">
+	c1069 [label=<<table title="org.settings4j.contentresolver.FilteredContentResolverWrapperTest" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FilteredContentResolverWrapperTest.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FilteredContentResolverWrapperTest </td></tr>
 		</table></td></tr>
 		</table>>, URL="./FilteredContentResolverWrapperTest.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.contentresolver.FilteredContentResolverWrapperTest NAVASSOC org.settings4j.contentresolver.FilteredContentResolverWrapper
-	c1060:p -> c1077:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c1069:p -> c1086:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.contentresolver.FilteredContentResolverWrapperTest NAVASSOC org.settings4j.ContentResolver
-	c1060:p -> c1078:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c1069:p -> c1087:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.contentresolver.FilteredContentResolverWrapperTest NAVASSOC org.settings4j.Filter
-	c1060:p -> c1079:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c1069:p -> c1088:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.ContentResolver
-	c1078 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c1087 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ContentResolver </td></tr>
@@ -30,7 +30,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.Filter
-	c1079 [label=<<table title="org.settings4j.Filter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c1088 [label=<<table title="org.settings4j.Filter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Filter </td></tr>
@@ -38,7 +38,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="null", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.contentresolver.FilteredContentResolverWrapper
-	c1077 [label=<<table title="org.settings4j.contentresolver.FilteredContentResolverWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c1086 [label=<<table title="org.settings4j.contentresolver.FilteredContentResolverWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FilteredContentResolverWrapper </td></tr>
 		</table></td></tr>

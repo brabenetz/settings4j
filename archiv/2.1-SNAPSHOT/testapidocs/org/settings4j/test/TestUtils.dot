@@ -10,15 +10,15 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.test.TestUtils
-	c1595 [label=<<table title="org.settings4j.test.TestUtils" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TestUtils.html">
+	c1605 [label=<<table title="org.settings4j.test.TestUtils" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./TestUtils.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> TestUtils </td></tr>
 		</table></td></tr>
 		</table>>, URL="./TestUtils.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.test.TestUtils DEPEND org.settings4j.Settings4jRepository
-	c1595:p -> c1600:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c1605:p -> c1610:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.Settings4jRepository
-	c1600 [label=<<table title="org.settings4j.Settings4jRepository" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
+	c1610 [label=<<table title="org.settings4j.Settings4jRepository" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Settings4jRepository </td></tr>

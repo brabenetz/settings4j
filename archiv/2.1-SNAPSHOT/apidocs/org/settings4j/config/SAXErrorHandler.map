@@ -1,8 +1,8 @@
 <map id="G" name="G">
 <area shape="rect" id="node1_0" href="./SAXErrorHandler.html" title="org.settings4j.config.SAXErrorHandler" alt="" coords="23,127,135,151"/>
 <area shape="rect" id="node1" href="./SAXErrorHandler.html" title="&lt;TABLE&gt;" alt="" coords="12,115,145,163"/>
-<area shape="rect" id="node5_1" href="http://download.oracle.com/javase/1.5.0/docs/api/org/xml/sax/SAXParseException.html" title="org.xml.sax.SAXParseException" alt="" coords="15,217,142,253"/>
-<area shape="rect" id="node5" href="http://download.oracle.com/javase/1.5.0/docs/api/org/xml/sax/SAXParseException.html" title="&lt;TABLE&gt;" alt="" coords="5,211,153,259"/>
-<area shape="rect" id="node2_2" href="http://download.oracle.com/javase/1.5.0/docs/api/org/xml/sax/ErrorHandler.html" title="org.xml.sax.ErrorHandler" alt="" coords="34,11,123,61"/>
-<area shape="rect" id="node2" href="http://download.oracle.com/javase/1.5.0/docs/api/org/xml/sax/ErrorHandler.html" title="&lt;TABLE&gt;" alt="" coords="23,5,134,67"/>
+<area shape="rect" id="node5_1" href="http://download.oracle.com/javase/1.6.0/docs/api/org/xml/sax/SAXParseException.html" title="org.xml.sax.SAXParseException" alt="" coords="15,217,142,253"/>
+<area shape="rect" id="node5" href="http://download.oracle.com/javase/1.6.0/docs/api/org/xml/sax/SAXParseException.html" title="&lt;TABLE&gt;" alt="" coords="5,211,153,259"/>
+<area shape="rect" id="node2_2" href="http://download.oracle.com/javase/1.6.0/docs/api/org/xml/sax/ErrorHandler.html" title="org.xml.sax.ErrorHandler" alt="" coords="34,11,123,61"/>
+<area shape="rect" id="node2" href="http://download.oracle.com/javase/1.6.0/docs/api/org/xml/sax/ErrorHandler.html" title="&lt;TABLE&gt;" alt="" coords="23,5,134,67"/>
 </map>

@@ -10,19 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.connector.FSConnector
-	c2753 [label=<<table title="org.settings4j.connector.FSConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FSConnector.html">
+	c2658 [label=<<table title="org.settings4j.connector.FSConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FSConnector.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FSConnector </td></tr>
 		</table></td></tr>
 		</table>>, URL="./FSConnector.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.connector.AbstractConnector
-	c2759 [label=<<table title="org.settings4j.connector.AbstractConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractConnector.html">
+	c2664 [label=<<table title="org.settings4j.connector.AbstractConnector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractConnector.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="arial italic"> AbstractConnector </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractConnector.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.ContentResolver
-	c2766 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
+	c2671 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ContentResolver </td></tr>
@@ -30,42 +30,42 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../ContentResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.contentresolver.UnionContentResolver
-	c2771 [label=<<table title="org.settings4j.contentresolver.UnionContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../contentresolver/UnionContentResolver.html">
+	c2676 [label=<<table title="org.settings4j.contentresolver.UnionContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../contentresolver/UnionContentResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UnionContentResolver </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.contentresolver </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../contentresolver/UnionContentResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.contentresolver.FSContentResolver
-	c2772 [label=<<table title="org.settings4j.contentresolver.FSContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../contentresolver/FSContentResolver.html">
+	c2677 [label=<<table title="org.settings4j.contentresolver.FSContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../contentresolver/FSContentResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FSContentResolver </td></tr>
 <tr><td align="center" balign="center"><font point-size="7.0"> org.settings4j.contentresolver </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="../contentresolver/FSContentResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.connector.FSConnector extends org.settings4j.connector.AbstractConnector
-	c2759:p -> c2753:p [dir=back,arrowtail=empty];
+	c2664:p -> c2658:p [dir=back,arrowtail=empty];
 	//org.settings4j.contentresolver.UnionContentResolver implements org.settings4j.ContentResolver
-	c2766:p -> c2771:p [dir=back,arrowtail=empty,style=dashed];
+	c2671:p -> c2676:p [dir=back,arrowtail=empty,style=dashed];
 	//org.settings4j.contentresolver.FSContentResolver implements org.settings4j.ContentResolver
-	c2766:p -> c2772:p [dir=back,arrowtail=empty,style=dashed];
+	c2671:p -> c2677:p [dir=back,arrowtail=empty,style=dashed];
 	// org.settings4j.connector.FSConnector NAVASSOC org.settings4j.contentresolver.FSContentResolver
-	c2753:p -> c2772:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c2658:p -> c2677:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.connector.FSConnector NAVASSOC org.settings4j.contentresolver.UnionContentResolver
-	c2753:p -> c2771:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c2658:p -> c2676:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.connector.AbstractConnector NAVASSOC org.settings4j.ContentResolver
-	c2759:p -> c2766:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c2664:p -> c2671:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.contentresolver.UnionContentResolver NAVASSOC org.settings4j.ContentResolver
-	c2771:p -> c2766:p [taillabel="", label="", headlabel="*", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c2676:p -> c2671:p [taillabel="", label="", headlabel="*", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.connector.FSConnector DEPEND org.settings4j.ContentResolver
-	c2753:p -> c2766:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c2658:p -> c2671:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.connector.AbstractConnector DEPEND org.settings4j.ContentResolver
-	c2759:p -> c2766:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c2664:p -> c2671:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.contentresolver.UnionContentResolver DEPEND org.settings4j.ContentResolver
-	c2771:p -> c2766:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c2676:p -> c2671:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.contentresolver.UnionContentResolver DEPEND org.settings4j.ContentResolver
-	c2771:p -> c2766:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c2676:p -> c2671:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.contentresolver.FSContentResolver DEPEND org.settings4j.ContentResolver
-	c2772:p -> c2766:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c2677:p -> c2671:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

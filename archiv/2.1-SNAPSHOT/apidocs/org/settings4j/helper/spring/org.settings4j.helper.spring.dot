@@ -10,31 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.helper.spring.Settings4jPlaceholderConfigurer
-	c335 [label=<<table title="org.settings4j.helper.spring.Settings4jPlaceholderConfigurer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Settings4jPlaceholderConfigurer.html">
+	c325 [label=<<table title="org.settings4j.helper.spring.Settings4jPlaceholderConfigurer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Settings4jPlaceholderConfigurer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Settings4jPlaceholderConfigurer </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Settings4jPlaceholderConfigurer.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.helper.spring.Settings4jFactoryBean
-	c336 [label=<<table title="org.settings4j.helper.spring.Settings4jFactoryBean" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Settings4jFactoryBean.html">
+	c326 [label=<<table title="org.settings4j.helper.spring.Settings4jFactoryBean" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Settings4jFactoryBean.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> Settings4jFactoryBean </td></tr>
 		</table></td></tr>
 		</table>>, URL="./Settings4jFactoryBean.html", fontname="arial", fontcolor="black", fontsize=9.0];
-	// org.settings4j.helper.spring.Settings4jContextLoaderListener
-	c337 [label=<<table title="org.settings4j.helper.spring.Settings4jContextLoaderListener" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Settings4jContextLoaderListener.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> Settings4jContextLoaderListener </td></tr>
-		</table></td></tr>
-		</table>>, URL="./Settings4jContextLoaderListener.html", fontname="arial", fontcolor="black", fontsize=9.0];
-	// org.settings4j.helper.spring.Settings4jContextLoader
-	c338 [label=<<table title="org.settings4j.helper.spring.Settings4jContextLoader" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./Settings4jContextLoader.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> Settings4jContextLoader </td></tr>
-		</table></td></tr>
-		</table>>, URL="./Settings4jContextLoader.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.helper.spring.ByteArrayXMLApplicationContext
-	c339 [label=<<table title="org.settings4j.helper.spring.ByteArrayXMLApplicationContext" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ByteArrayXMLApplicationContext.html">
+	c327 [label=<<table title="org.settings4j.helper.spring.ByteArrayXMLApplicationContext" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ByteArrayXMLApplicationContext.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ByteArrayXMLApplicationContext </td></tr>
 		</table></td></tr>

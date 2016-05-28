@@ -1,6 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="./JNDIConnector.html" title="org.settings4j.connector.JNDIConnector" alt="" coords="15,113,118,137"/>
-<area shape="rect" id="node1" href="./JNDIConnector.html" title="&lt;TABLE&gt;" alt="" coords="5,101,129,149"/>
-<area shape="rect" id="node2_1" href="./AbstractConnector.html" title="org.settings4j.connector.AbstractConnector" alt="" coords="27,17,107,41"/>
-<area shape="rect" id="node2" href="./AbstractConnector.html" title="&lt;TABLE&gt;" alt="" coords="16,5,117,53"/>
+<area shape="rect" id="node1_0" href="./JNDIConnector.html" title="org.settings4j.connector.JNDIConnector" alt="" coords="17,113,119,137"/>
+<area shape="rect" id="node1" href="./JNDIConnector.html" title="&lt;TABLE&gt;" alt="" coords="6,101,130,149"/>
+<area shape="rect" id="node2_1" href="./AbstractConnector.html" title="org.settings4j.connector.AbstractConnector" alt="" coords="15,17,121,41"/>
+<area shape="rect" id="node2" href="./AbstractConnector.html" title="&lt;TABLE&gt;" alt="" coords="5,5,131,53"/>
 </map>

@@ -1,6 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="./PreferencesConnector.html" title="org.settings4j.connector.PreferencesConnector" alt="" coords="27,113,170,137"/>
-<area shape="rect" id="node1" href="./PreferencesConnector.html" title="&lt;TABLE&gt;" alt="" coords="17,101,181,149"/>
-<area shape="rect" id="node2_1" href="./AbstractPropertyConnector.html" title="org.settings4j.connector.AbstractPropertyConnector" alt="" coords="15,17,182,41"/>
-<area shape="rect" id="node2" href="./AbstractPropertyConnector.html" title="&lt;TABLE&gt;" alt="" coords="5,5,193,53"/>
+<area shape="rect" id="node1_0" href="./PreferencesConnector.html" title="org.settings4j.connector.PreferencesConnector" alt="" coords="17,113,159,137"/>
+<area shape="rect" id="node1" href="./PreferencesConnector.html" title="&lt;TABLE&gt;" alt="" coords="6,101,170,149"/>
+<area shape="rect" id="node2_1" href="./AbstractPropertyConnector.html" title="org.settings4j.connector.AbstractPropertyConnector" alt="" coords="16,17,160,41"/>
+<area shape="rect" id="node2" href="./AbstractPropertyConnector.html" title="&lt;TABLE&gt;" alt="" coords="5,5,171,53"/>
 </map>

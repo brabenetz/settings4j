@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.Filter
-	c3009 [label=<<table title="org.settings4j.Filter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../Filter.html">
+	c2906 [label=<<table title="org.settings4j.Filter" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../Filter.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> Filter </td></tr>
@@ -18,7 +18,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../Filter.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.ContentResolver
-	c3010 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
+	c2907 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ContentResolver </td></tr>
@@ -26,18 +26,18 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../ContentResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.contentresolver.FilteredContentResolverWrapper
-	c3017 [label=<<table title="org.settings4j.contentresolver.FilteredContentResolverWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FilteredContentResolverWrapper.html">
+	c2914 [label=<<table title="org.settings4j.contentresolver.FilteredContentResolverWrapper" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./FilteredContentResolverWrapper.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> FilteredContentResolverWrapper </td></tr>
 		</table></td></tr>
 		</table>>, URL="./FilteredContentResolverWrapper.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.contentresolver.FilteredContentResolverWrapper implements org.settings4j.ContentResolver
-	c3010:p -> c3017:p [dir=back,arrowtail=empty,style=dashed];
+	c2907:p -> c2914:p [dir=back,arrowtail=empty,style=dashed];
 	// org.settings4j.contentresolver.FilteredContentResolverWrapper NAVASSOC org.settings4j.ContentResolver
-	c3017:p -> c3010:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c2914:p -> c2907:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.contentresolver.FilteredContentResolverWrapper NAVASSOC org.settings4j.Filter
-	c3017:p -> c3009:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+	c2914:p -> c2906:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
 	// org.settings4j.contentresolver.FilteredContentResolverWrapper DEPEND org.settings4j.ContentResolver
-	c3017:p -> c3010:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c2914:p -> c2907:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 

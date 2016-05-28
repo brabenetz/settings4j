@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// org.settings4j.ContentResolver
-	c3193 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
+	c3084 [label=<<table title="org.settings4j.ContentResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../ContentResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> ContentResolver </td></tr>
@@ -18,22 +18,22 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../ContentResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.objectresolver.JavaXMLBeansObjectResolver
-	c3214 [label=<<table title="org.settings4j.objectresolver.JavaXMLBeansObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./JavaXMLBeansObjectResolver.html">
+	c3103 [label=<<table title="org.settings4j.objectresolver.JavaXMLBeansObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./JavaXMLBeansObjectResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> JavaXMLBeansObjectResolver </td></tr>
 		</table></td></tr>
 		</table>>, URL="./JavaXMLBeansObjectResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	// org.settings4j.objectresolver.AbstractObjectResolver
-	c3216 [label=<<table title="org.settings4j.objectresolver.AbstractObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractObjectResolver.html">
+	c3105 [label=<<table title="org.settings4j.objectresolver.AbstractObjectResolver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AbstractObjectResolver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="arial italic"> AbstractObjectResolver </font></td></tr>
 		</table></td></tr>
 		</table>>, URL="./AbstractObjectResolver.html", fontname="arial", fontcolor="black", fontsize=9.0];
 	//org.settings4j.objectresolver.JavaXMLBeansObjectResolver extends org.settings4j.objectresolver.AbstractObjectResolver
-	c3216:p -> c3214:p [dir=back,arrowtail=empty];
+	c3105:p -> c3103:p [dir=back,arrowtail=empty];
 	// org.settings4j.objectresolver.JavaXMLBeansObjectResolver DEPEND org.settings4j.ContentResolver
-	c3214:p -> c3193:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c3103:p -> c3084:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 	// org.settings4j.objectresolver.AbstractObjectResolver DEPEND org.settings4j.ContentResolver
-	c3216:p -> c3193:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c3105:p -> c3084:p [taillabel="", label="", headlabel="", fontname="arial", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
 }
 
