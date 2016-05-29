@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  #%L
+  settings4j
+  ===============================================================
+  Copyright (C) 2008 - 2015 Brabenetz Harald, Austria
+  ===============================================================
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
+
+<!-- A configuration element consists of following elements:
++ connector - The Implementation where the Settings could come from. A settings4j.xml without connector makes no sense.
+* settings - The Settings in a Hirachical Structure (Connectors are inherited). In most cases the root-element is enough
+* root - The root-"Settings" definition
+* contentResolver - The Implementation to resolve a Key to a byte[] - Content
+* objectResolver - The Implementation to converte the content from a ContentResolver to an Object.
+-->
+<!ELEMENT settings4j:configuration (connector+, contentResolver*, objectResolver*, mapping*)>
+<!ATTLIST settings4j:configuration
+  xmlns:settings4j              CDATA #FIXED "http://settings4j.org/"
+>
+
+<!-- A connector element consists of following elements:
+* param - Use The Setter-Implementation of this connector-Bean to set a value
+? contentResolver-ref - The Reference to a contentResolver element. This can also be an UnionContentResolver
+? objectResolver-ref - The Reference to an objectResolver element. This can also be an UnionObjectResolver
+* connector-ref - The Reference to one or more connector elements
+
+And following Attributes:
+
+name - The name of this Connector (is used by the connector-ref element)
+class - The implementation class of this org.settings4j.Connector interface
+cached - default value is false; If true, then this connector will be wrapped
+     with the org.settings4j.connector.CachedConnectorWrapper implementation.
+-->
+<!ELEMENT connector (param*,
+      contentResolver-ref?, objectResolver-ref?, connector-ref*, filter?)>
+<!ATTLIST connector
+  name 		CDATA 	#REQUIRED
+  class 	CDATA	#REQUIRED
+  cached (true|false) "false"
+>
+
+<!-- A connector-ref element consists of following Attributes:
+ref - The refernece to a connector element
+-->
+<!ELEMENT connector-ref EMPTY>
+<!ATTLIST connector-ref
+  ref CDATA #REQUIRED
+>
+
+<!-- A contentResolver-ref element consists of following Attributes:
+ref - The refernece to a contentResolver element
+-->
+<!ELEMENT contentResolver-ref EMPTY>
+<!ATTLIST contentResolver-ref
+  ref CDATA #REQUIRED
+>
+
+<!-- A objectResolver-ref element consists of following Attributes:
+ref - The refernece to a objectResolver element
+-->
+<!ELEMENT objectResolver-ref EMPTY>
+<!ATTLIST objectResolver-ref
+  ref CDATA #REQUIRED
+>
+
+<!-- A param element consists of following Attributes:
+name - the name off the Property. The Setter must be implemented. e.g.: "path" => public void setPath(String path);
+value - the value for the Setter
+
+The Expression Language (JSP 2.0) can also be used (required standard.jar)
+If you use the Expression Language, you have the following implicied Objects:
+"env" - The Envirenments: System.getenv().
+    Usage ${env['...']} e.g.:  ${env['TOMCAT_HOME']} or ${env.TOMCAT_HOME}
+"connectors" - The connectors of the parent-Element (settings, connector, objectresolver, contentresolver).
+    Usage: ${connectors.object['...']} or ${connectors.string['...']}
+    See also: org.settings4j.util.ELConnectorWrapper
+-->
+<!ELEMENT param EMPTY>
+<!ATTLIST param
+  name		CDATA   #REQUIRED
+  value		CDATA	#REQUIRED
+>
+
+
+<!-- A contentResolver element consists of following elements:
+* param - Use The Setter-Implementation of this contentResolver-Bean to set a value
+* connector-ref - The Reference to one or more connector elements
+
+And following Attributes:
+
+name - The name of this ContentResolver (is used by the contentResolver-ref element)
+class - The implementation class of this org.settings4j.ContentResolver interface
+
+-->
+<!ELEMENT contentResolver (param*, contentResolver-ref*)>
+<!ATTLIST contentResolver
+  name 		CDATA 	#REQUIRED
+  class 	CDATA	#REQUIRED
+>
+
+<!-- A objectResolver element consists of following elements:
+* param - Use The Setter-Implementation of this objectResolver-Bean to set a value
+* connector-ref - The Reference to one or more connector elements
+
+And following Attributes:
+
+name - The name of this ObjectResolver (is used by the objecrresolver-ref element)
+class - The implementation class of this org.settings4j.ObjectResolver interface
+cached - default value is false; If true, the Objects will be cached per default.
+    This "cached" attribute works only with an Implementation from AbstractObjectResolver
+    The value of the "cached" attribute can be overwriten with an Object-specific configuration. (key + ".properties")
+    See also AbstractObjectResolver
+-->
+<!ELEMENT objectResolver (param*, objectResolver-ref*)>
+<!ATTLIST objectResolver
+  name 		CDATA 	#REQUIRED
+  class 	CDATA	#REQUIRED
+  cached (true|false) "false"
+>
+
+<!-- 
+-->
+<!ELEMENT mapping (entry*)>
+<!ATTLIST mapping
+  name 		CDATA 	#REQUIRED
+  class 	CDATA   "java.util.HashMap"	
+>
+
+<!-- 
+Example:
+<entry key="com/mycompany/mymoduleX/DataSource" key-ref="global/DataSource" />
+<entry key="com/mycompany/mymoduleY/DataSource" key-ref="global/DataSource" />
+
+Every Module needs a Datasource under difernt keys,
+but you must only define/configure one DataSource under "global/DataSource".
+
+-->
+<!ELEMENT entry EMPTY>
+<!ATTLIST entry
+  key 		CDATA 	#REQUIRED
+  ref-key 	CDATA 	#REQUIRED
+>
+
+<!-- 
+-->
+<!ELEMENT filter (include*, exclude*)>
+<!ATTLIST filter
+  class 	CDATA   "org.settings4j.settings.DefaultFilter"	
+>
+
+<!-- 
+Example:
+<include pattern="com/mycompany/mymoduleX/.*" />
+-->
+<!ELEMENT include EMPTY>
+<!ATTLIST include
+  pattern 		CDATA 	#REQUIRED
+>
+
+<!-- 
+Example:
+<exclude pattern="com/mycompany/mymoduleX/.*" />
+-->
+<!ELEMENT exclude EMPTY>
+<!ATTLIST exclude
+  pattern 		CDATA 	#REQUIRED
+>

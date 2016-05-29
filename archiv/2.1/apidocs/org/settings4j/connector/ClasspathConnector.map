@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ClasspathConnector.html" title="org.settings4j.connector.ClasspathConnector" alt="" coords="16,113,149,137"/>
+<area shape="rect" id="node1" href="./ClasspathConnector.html" title="&lt;TABLE&gt;" alt="" coords="5,101,160,149"/>
+<area shape="rect" id="node3_1" href="../ContentResolver.html" title="org.settings4j.ContentResolver" alt="" coords="131,203,242,253"/>
+<area shape="rect" id="node3" href="../ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="121,197,253,259"/>
+<area shape="rect" id="node4_2" href="../contentresolver/UnionContentResolver.html" title="org.settings4j.contentresolver.UnionContentResolver" alt="" coords="89,313,233,349"/>
+<area shape="rect" id="node4" href="../contentresolver/UnionContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="79,307,244,355"/>
+<area shape="rect" id="node5_3" href="../contentresolver/ClasspathContentResolver.html" title="org.settings4j.contentresolver.ClasspathContentResolver" alt="" coords="279,313,447,349"/>
+<area shape="rect" id="node5" href="../contentresolver/ClasspathContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="268,307,457,355"/>
+<area shape="rect" id="node2_4" href="./AbstractConnector.html" title="org.settings4j.connector.AbstractConnector" alt="" coords="157,17,262,41"/>
+<area shape="rect" id="node2" href="./AbstractConnector.html" title="&lt;TABLE&gt;" alt="" coords="146,5,273,53"/>
+</map>

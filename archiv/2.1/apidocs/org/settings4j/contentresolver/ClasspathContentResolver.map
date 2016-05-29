@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../connector/ClasspathConnector.html" title="org.settings4j.connector.ClasspathConnector" alt="" coords="85,11,219,47"/>
+<area shape="rect" id="node1" href="../connector/ClasspathConnector.html" title="&lt;TABLE&gt;" alt="" coords="75,5,229,53"/>
+<area shape="rect" id="node2_1" href="../ContentResolver.html" title="org.settings4j.ContentResolver" alt="" coords="45,107,155,157"/>
+<area shape="rect" id="node2" href="../ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="34,101,166,163"/>
+<area shape="rect" id="node3_2" href="./ClasspathContentResolver.html" title="org.settings4j.contentresolver.ClasspathContentResolver" alt="" coords="16,223,184,247"/>
+<area shape="rect" id="node3" href="./ClasspathContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="5,211,195,259"/>
+</map>

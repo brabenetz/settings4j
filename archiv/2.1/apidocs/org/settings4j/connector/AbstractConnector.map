@@ -1,0 +1,18 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./JNDIConnector.html" title="org.settings4j.connector.JNDIConnector" alt="" coords="15,120,118,144"/>
+<area shape="rect" id="node1" href="./JNDIConnector.html" title="&lt;TABLE&gt;" alt="" coords="5,108,129,156"/>
+<area shape="rect" id="node2_1" href="./FSConnector.html" title="org.settings4j.connector.FSConnector" alt="" coords="164,120,255,144"/>
+<area shape="rect" id="node2" href="./FSConnector.html" title="&lt;TABLE&gt;" alt="" coords="153,108,265,156"/>
+<area shape="rect" id="node7_2" href="../ContentResolver.html" title="org.settings4j.ContentResolver" alt="" coords="543,216,654,267"/>
+<area shape="rect" id="node7" href="../ContentResolver.html" title="&lt;TABLE&gt;" alt="" coords="533,211,665,272"/>
+<area shape="rect" id="node3_3" href="./ClasspathConnector.html" title="org.settings4j.connector.ClasspathConnector" alt="" coords="300,120,433,144"/>
+<area shape="rect" id="node3" href="./ClasspathConnector.html" title="&lt;TABLE&gt;" alt="" coords="289,108,444,156"/>
+<area shape="rect" id="node4_4" href="./AbstractPropertyConnector.html" title="org.settings4j.connector.AbstractPropertyConnector" alt="" coords="479,120,623,144"/>
+<area shape="rect" id="node4" href="./AbstractPropertyConnector.html" title="&lt;TABLE&gt;" alt="" coords="468,108,633,156"/>
+<area shape="rect" id="node5_5" href="./AbstractConnector.html" title="org.settings4j.connector.AbstractConnector" alt="" coords="667,17,773,41"/>
+<area shape="rect" id="node5" href="./AbstractConnector.html" title="&lt;TABLE&gt;" alt="" coords="657,5,783,53"/>
+<area shape="rect" id="node6_6" href="../ObjectResolver.html" title="org.settings4j.ObjectResolver" alt="" coords="669,107,771,157"/>
+<area shape="rect" id="node6" href="../ObjectResolver.html" title="&lt;TABLE&gt;" alt="" coords="658,101,782,163"/>
+<area shape="rect" id="node8_7" href="../Connector.html" title="org.settings4j.Connector" alt="" coords="892,107,972,157"/>
+<area shape="rect" id="node8" href="../Connector.html" title="&lt;TABLE&gt;" alt="" coords="881,101,983,163"/>
+</map>
