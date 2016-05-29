@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.settings4j</groupId>
   <artifactId>settings4j</artifactId>
-  <version>2.1-SNAPSHOT</version>
+  <version>2.1</version>
   <packaging>jar</packaging>
   <name>settings4j</name>
 
@@ -36,7 +36,7 @@
     </developer>
   </developers>
 
-  <contributors />
+  <contributors></contributors>
 
   <prerequisites>
     <maven>3.1.0</maven>
@@ -45,7 +45,7 @@
   <scm>
     <connection>scm:git:git@github.com:brabenetz/settings4j.git</connection>
     <developerConnection>scm:git:git@github.com:brabenetz/settings4j.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>settings4j-2.1</tag>
     <url>https://github.com/brabenetz/settings4j</url>
   </scm>
 
@@ -57,7 +57,7 @@
   <ciManagement>
     <system>Travis</system>
     <url>https://travis-ci.org/brabenetz/settings4j</url>
-    <notifiers />
+    <notifiers></notifiers>
   </ciManagement>
 
   <distributionManagement>
@@ -856,7 +856,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore />
+                    <ignore></ignore>
                   </action>
                 </pluginExecution>
               </pluginExecutions>
