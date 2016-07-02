@@ -26,7 +26,7 @@
     <author email="brabenetz@users.sourceforge.net">Harald Brabenetz</author>
   </properties>
   <body>
-    <release version="2.1" date="2016-??" description="settings4j 2.1 - Requires JDK 6 or above.">
+    <release version="2.1" date="2016-05-30" description="settings4j 2.1 - Requires JDK 6 or above.">
       <action dev="brabenetz" type="update" date="2016-05-29">
         update dependency and plugin versions.
       </action>
