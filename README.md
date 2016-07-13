@@ -6,6 +6,7 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/55e50d658c0f62001b000180/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55e50d658c0f62001b000180)
 [![Maven site](https://img.shields.io/badge/Maven-site-blue.svg)](http://settings4j.org/archiv/latest/)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.settings4j/settings4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.settings4j/settings4j)
+[![Javadocs](http://www.javadoc.io/badge/org.settings4j/settings4j.svg)](http://www.javadoc.io/doc/org.settings4j/settings4j)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache_2.0-brightgreen.svg)](https://github.com/brabenetz/settings4j/blob/master/LICENSE.txt)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/brabenetz/settings4j?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
