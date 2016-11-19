@@ -19,18 +19,18 @@
  */
 package org.settings4j.contentresolver;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.settings4j.ContentResolver;
 import org.settings4j.Filter;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FilteredContentResolverWrapperTest {
@@ -65,7 +65,6 @@ public class FilteredContentResolverWrapperTest {
     public void testGetContentFiltered() {
         // prepare
         Mockito.when(this.filter.isValid(TEST_KEY)).thenReturn(false);
-        Mockito.when(this.targetContentResolver.getContent(TEST_KEY)).thenReturn(TEST_VALUE_CONTENT);
 
         // test
         assertThat(this.filteredContentResolverWrapper.getContent(TEST_KEY), is(nullValue()));

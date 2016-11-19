@@ -19,16 +19,7 @@
  */
 package org.settings4j.connector;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
-
-import java.io.File;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-
+import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Assert;
@@ -39,6 +30,14 @@ import org.settings4j.ContentResolver;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.contentresolver.FSContentResolver;
 import org.settings4j.contentresolver.UnionContentResolver;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+
+import java.io.File;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class JNDIConnectorTest {
 
@@ -239,7 +238,7 @@ public class JNDIConnectorTest {
 
         // Store the content into the file on the file system.
         // And save the Path in the JNDI Context.
-        FileUtils.writeStringToFile(new File(testTextPath), "Hello World FileContent");
+        FileUtils.writeStringToFile(new File(testTextPath), "Hello World FileContent", Charsets.UTF_8);
         saveStatus = connector.setObject("helloWorldPath", testTextPath);
 
         assertThat(saveStatus, is(Constants.SETTING_SUCCESS));

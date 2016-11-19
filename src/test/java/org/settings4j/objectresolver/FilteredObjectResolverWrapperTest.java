@@ -19,19 +19,19 @@
  */
 package org.settings4j.objectresolver;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.settings4j.Filter;
 import org.settings4j.ObjectResolver;
 import org.settings4j.contentresolver.ClasspathContentResolver;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FilteredObjectResolverWrapperTest {
@@ -68,7 +68,6 @@ public class FilteredObjectResolverWrapperTest {
         // prepare
         ClasspathContentResolver contentResolver = new ClasspathContentResolver();
         Mockito.when(this.filter.isValid(TEST_KEY)).thenReturn(false);
-        Mockito.when(this.targetObjectResolver.getObject(TEST_KEY, contentResolver)).thenReturn(TEST_VALUE_OBJECT);
 
         // test
         assertThat(this.filteredObjectResolverWrapper.getObject(TEST_KEY, contentResolver), is(nullValue()));

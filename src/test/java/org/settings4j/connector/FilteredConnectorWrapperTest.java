@@ -19,20 +19,20 @@
  */
 package org.settings4j.connector;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.settings4j.Connector;
 import org.settings4j.Filter;
 import org.settings4j.contentresolver.ClasspathContentResolver;
 import org.settings4j.objectresolver.JavaXMLBeansObjectResolver;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FilteredConnectorWrapperTest {
@@ -97,7 +97,6 @@ public class FilteredConnectorWrapperTest {
     public void testGetContentFiltered() {
         // prepare
         Mockito.when(this.filter.isValid(TEST_KEY)).thenReturn(false);
-        Mockito.when(this.targetConnector.getContent(TEST_KEY)).thenReturn(TEST_VALUE_CONTENT);
 
         // test
         assertThat(this.filteredConnectorWrapper.getContent(TEST_KEY), is(nullValue()));
@@ -123,7 +122,6 @@ public class FilteredConnectorWrapperTest {
     public void testGetObjectFiltered() {
         // prepare
         Mockito.when(this.filter.isValid(TEST_KEY)).thenReturn(false);
-        Mockito.when(this.targetConnector.getObject(TEST_KEY)).thenReturn(TEST_VALUE_OBJECT);
 
         // test
         assertThat(this.filteredConnectorWrapper.getObject(TEST_KEY), is(nullValue()));

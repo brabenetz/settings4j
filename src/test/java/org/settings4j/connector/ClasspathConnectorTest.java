@@ -19,14 +19,6 @@
  */
 package org.settings4j.connector;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
-
-import java.io.File;
-import java.nio.charset.UnsupportedCharsetException;
-
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -35,13 +27,20 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.settings4j.ContentResolver;
 import org.settings4j.ObjectResolver;
 import org.settings4j.contentresolver.ClasspathContentResolver;
+
+import java.io.File;
+import java.nio.charset.UnsupportedCharsetException;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClasspathConnectorTest {
@@ -97,7 +96,7 @@ public class ClasspathConnectorTest {
         assertThat(this.cpConnector.getObject(TEST_KEY), is(nullValue()));
 
         // third Test
-        Mockito.when(objResolver.getObject(Matchers.eq(TEST_KEY), Matchers.any(ContentResolver.class))).thenReturn(TEST_VALUE_OBJECT);
+        Mockito.when(objResolver.getObject(eq(TEST_KEY), any(ContentResolver.class))).thenReturn(TEST_VALUE_OBJECT);
         assertThat(this.cpConnector.getObject(TEST_KEY), is(TEST_VALUE_OBJECT));
 
     }
