@@ -4,6 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/brabenetz/settings4j/badge.svg?branch=code-quality&service=github)](https://coveralls.io/github/brabenetz/settings4j?branch=code-quality)
 [![Coverity](https://scan.coverity.com/projects/6217/badge.svg)](https://scan.coverity.com/projects/brabenetz-settings4j)
 [![Dependency Status](https://www.versioneye.com/user/projects/55e50d658c0f62001b000180/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55e50d658c0f62001b000180)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a165f2b5d7b5490aaf1a35a161284d85)](https://www.codacy.com/app/brabenetz/settings4j?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=brabenetz/settings4j&amp;utm_campaign=Badge_Grade)
 [![Maven site](https://img.shields.io/badge/Maven-site-blue.svg)](http://settings4j.org/archiv/latest/)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.settings4j/settings4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.settings4j/settings4j)
 [![Javadocs](http://www.javadoc.io/badge/org.settings4j/settings4j.svg)](http://www.javadoc.io/doc/org.settings4j/settings4j)
