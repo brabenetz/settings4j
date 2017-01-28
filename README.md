@@ -1,5 +1,6 @@
 ![settings4jlogo](http://settings4j.org/archiv/latest/icon/settings4j-logo-64px.png)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a165f2b5d7b5490aaf1a35a161284d85)](https://www.codacy.com/app/brabenetz/settings4j?utm_source=github.com&utm_medium=referral&utm_content=brabenetz/settings4j&utm_campaign=badger)
 [![Build Status](https://secure.travis-ci.org/brabenetz/settings4j.png?branch=master)](http://travis-ci.org/brabenetz/settings4j)
 [![Coverage Status](https://coveralls.io/repos/brabenetz/settings4j/badge.svg?branch=code-quality&service=github)](https://coveralls.io/github/brabenetz/settings4j?branch=code-quality)
 [![Coverity](https://scan.coverity.com/projects/6217/badge.svg)](https://scan.coverity.com/projects/brabenetz-settings4j)
