@@ -15,5 +15,5 @@ It is not configurable like Settings4j, but you can configure your application i
  - OS environment variables.
  - application property or YAML Files.
 
-The old documentation of Settings4j can you find here:
+The old documentation of Settings4j can be found here:
 https://github.com/brabenetz/settings4j/blob/master/README_original.md
