@@ -1,6 +1,6 @@
 ![settings4jlogo](http://settings4j.org/archiv/latest/icon/settings4j-logo-64px.png)
 
-[![Status Deprecated](https://img.shields.io/badge/Status-Deprecated-red.svg)]
+[![Status Deprecated](https://img.shields.io/badge/Status-Deprecated-red.svg)](https://github.com/brabenetz/settings4j/blob/master/README.md)
 
 # DEPRECATED
 
