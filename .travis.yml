@@ -1,4 +1,6 @@
 language: java
+sudo: false
+dist: trusty
 
 # Coverity and coveralls should only run in "code-quality" branch (not on each submit)
 #env:
